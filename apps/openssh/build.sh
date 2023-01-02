@@ -3,7 +3,7 @@
 cd source || exit 1
 ./configure --host=arm-apple-darwin9 --prefix=/usr --sysconfdir=/etc/ssh --with-privsep-user=nobody --with-sandbox=no
 make -j4
-make DESTDIR=../package install
+make DESTDIR=../package install-nokeys
 )
 
 (
