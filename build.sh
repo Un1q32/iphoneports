@@ -1,4 +1,5 @@
 #!/bin/sh
+repodir=/home/joey/iosdev/oldworldordr.github.io
 appsdir="${0%/*}/apps"
 appsdir="$(cd "$appsdir" && pwd)"
 
@@ -83,10 +84,19 @@ fi
 
 cd "$appsdir" || exit 1
 
-if [ "$1" = "all" ]; then
-    for i in *; do
-        build "$i"
+if [ "$1" = "pkgall" ]; then
+    for app in *; do
+        build "$app"
+        find . -iname "*.deb" -exec cp {} "$repodir/debs" \;
+        "$repodir/update.sh"
     done
+elif [ "$1" = "all" ]; then
+    for app in *; do
+        build "$app"
+    done
+elif [ -d "$1" ]; then
+    build "$1"
+else
+    printf "ERROR: Package %s not found!\n" "$1"
+    exit 1
 fi
-
-[ -d "$1" ] && build "$1"
