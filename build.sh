@@ -69,9 +69,7 @@ fi
 
 if ! command -v ldid > /dev/null; then
     printf "ERROR: ldid not found!\n"
-fi
-
-if ! command -v dpkg-deb > /dev/null; then
+elif ! command -v dpkg-deb > /dev/null; then
     printf "ERROR: dpkg-deb not found!\n"
 fi
 
