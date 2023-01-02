@@ -35,6 +35,12 @@ build() {
     )
 }
 
+buildall() {
+    for app in "$appsdir"/*; do
+        build "$app"
+    done
+}
+
 if command -v arm-apple-darwin9-clang > /dev/null; then
     _CC=arm-apple-darwin9-clang
 elif command -v arm-apple-darwin9-gcc > /dev/null; then
@@ -76,21 +82,21 @@ fi
 export _CC _CXX
 
 if [ -z "$1" ]; then
-    printf "Usage: %s <package>\n" "${0##*/}"
+    printf "Usage: %s <all|pkgall|listpkgs|package>\n" "${0##*/}"
     exit 1
 fi
 
 cd "$appsdir" || exit 1
 
 if [ "$1" = "pkgall" ]; then
-    for app in *; do
-        build "$app"
-        find . -iname "*.deb" -exec cp {} "$repodir/debs" \;
-        "$repodir/update.sh"
-    done
+    buildall
+    find . -iname "*.deb" -exec cp {} "$repodir/debs" \;
+    "$repodir/update.sh"
 elif [ "$1" = "all" ]; then
-    for app in *; do
-        build "$app"
+    buildall
+elif [ "$1" = "listpkgs" ]; then
+    for app in "$appsdir"/*; do
+        printf "%s\n" "${app##*/}"
     done
 elif [ -d "$1" ]; then
     build "$1"
