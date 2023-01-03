@@ -57,7 +57,6 @@ buildall() {
     for pkg in "$pkgdir"/*; do
         build "$pkg" "$1"
         printf "%s\n" "${pkg##*/}" >> /tmp/.builtpkgs
-        cat /tmp/.builtpkgs
     done
     rm /tmp/.builtpkgs
 }
