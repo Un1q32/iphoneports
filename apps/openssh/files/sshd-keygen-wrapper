@@ -1,7 +1,0 @@
-#!/bin/sh
-
-[ -f /etc/ssh/ssh_host_rsa_key ] || ssh-keygen -q -t rsa -f /etc/ssh/ssh_host_rsa_key -n ''
-[ -f /etc/ssh/ssh_host_ecdsa_key ] || ssh-keygen -q -t ecdsa -f /etc/ssh/ssh_host_ecdsa_key -n ''
-[ -f /etc/ssh/ssh_host_ed25519_key ] || ssh-keygen -q -t ed25519 -f /etc/ssh/ssh_host_ed25519_key -n ''
-
-exec /usr/sbin/sshd "$@"

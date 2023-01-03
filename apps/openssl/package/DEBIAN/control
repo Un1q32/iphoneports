@@ -1,8 +1,0 @@
-Package: openssl
-Priority: standard
-Section: Security
-Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
-Architecture: iphoneos-arm
-Version: 1.1.1s
-Description: SSL library and cryptographic tools
-Name: OpenSSL
