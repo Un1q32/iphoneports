@@ -1,9 +1,19 @@
 #!/bin/sh
 repodir=/home/joey/iosdev/oldworldordr.github.io
-appsdir="${0%/*}/apps"
-appsdir="$(cd "$appsdir" && pwd)"
+pkgdir="${0%/*}/pkg"
+pkgdir="$(cd "$pkgdir" && pwd)"
 
-applypatches() {
+hasbeenbuilt() {
+    while read -r pkg; do
+        if [ "$pkg" = "$1" ]; then
+            return 1
+        else
+            continue
+        fi
+    done < /tmp/.builtpkgs
+}
+
+pkglypatches() {
     if [ -d patches ]; then
         for patch in patches/*.patch; do
             echo "Applying patch $patch"
@@ -15,10 +25,14 @@ applypatches() {
 includedeps() {
     if [ -f dependencies.txt ]; then
         while read -r dep; do
-            if [ -d "$appsdir/$dep" ]; then
+            if [ -d "$pkgdir/$dep" ]; then
+                if [ "$1" = "-r" ] && hasbeenbuilt "$dep" || ! [ -d "$pkgdir/$dep/package/usr/include" ]; then
+                    printf "Building dependency %s\n" "$dep"
+                    build "$dep"
+                fi
                 printf "Including dependency %s\n" "$dep"
-                export CFLAGS="$CFLAGS -I$appsdir/$dep/package/usr/include"
-                export LDFLAGS="$LDFLAGS -L$appsdir/$dep/package/usr/lib"
+                export CFLAGS="$CFLAGS -I$pkgdir/$dep/package/usr/include"
+                export LDFLAGS="$LDFLAGS -L$pkgdir/$dep/package/usr/lib"
             fi
         done < dependencies.txt
     fi
@@ -29,16 +43,18 @@ build() {
     printf "Building %s...\n" "$1"
     cd "$1" || exit 1
     ./fetch.sh
-    applypatches
-    includedeps
+    pkglypatches
+    includedeps "$2"
     ./build.sh
     )
 }
 
 buildall() {
-    for app in "$appsdir"/*; do
-        build "$app"
+    for pkg in "$pkgdir"/*; do
+        build "$pkg" "$1"
+        printf "%s\n" "$pkg" >> /tmp/.builtpkgs
     done
+    rm /tmp/.builtpkgs
 }
 
 if command -v arm-apple-darwin9-clang > /dev/null; then
@@ -86,20 +102,20 @@ if [ -z "$1" ]; then
     exit 1
 fi
 
-cd "$appsdir" || exit 1
+cd "$pkgdir" || exit 1
 
 if [ "$1" = "pkgall" ]; then
-    buildall
+    buildall "$2"
     find . -iname "*.deb" -exec cp {} "$repodir/debs" \;
     "$repodir/update.sh"
 elif [ "$1" = "all" ]; then
-    buildall
+    buildall "$2"
 elif [ "$1" = "listpkgs" ]; then
-    for app in "$appsdir"/*; do
-        printf "%s\n" "${app##*/}"
+    for pkg in "$pkgdir"/*; do
+        printf "%s\n" "${pkg##*/}"
     done
 elif [ -d "$1" ]; then
-    build "$1"
+    build "$@"
 else
     printf "ERROR: Package %s not found!\n" "$1"
     exit 1
