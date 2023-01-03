@@ -118,6 +118,10 @@ elif [ "$1" = "listpkgs" ]; then
     for pkg in "$pkgdir"/*; do
         printf "%s\n" "${pkg##*/}"
     done
+elif [ "$1" = "pkg" ]; then
+    build "$2" "$3"
+    cp "$1/*.deb" "$repodir/debs"
+    "$repodir/update.sh"
 elif [ -d "$1" ]; then
     build "$@"
 else
