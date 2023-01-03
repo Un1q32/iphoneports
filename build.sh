@@ -1,22 +1,24 @@
 #!/bin/sh
 repodir=/home/joey/iosdev/oldworldordr.github.io
-pkgdir="${0%/*}/pkg"
+pkgdir="${0%/*}/pkgs"
 pkgdir="$(cd "$pkgdir" && pwd)"
 
 hasbeenbuilt() {
     while read -r pkg; do
         if [ "$pkg" = "$1" ]; then
-            return 1
-        else
-            continue
+            if [ -d "$pkgdir/$pkg/package/usr/include" ] || [ -d "$pkgdir/$pkg/package/usr/lib" ]; then
+                return 0
+            else
+                return 1
+            fi
         fi
     done < /tmp/.builtpkgs
 }
 
-pkglypatches() {
+applypatches() {
     if [ -d patches ]; then
         for patch in patches/*.patch; do
-            echo "Applying patch $patch"
+            printf "Applying patch %s\n" "${patch##*/}"
             patch -p1 < "$patch"
         done
     fi
@@ -26,9 +28,11 @@ includedeps() {
     if [ -f dependencies.txt ]; then
         while read -r dep; do
             if [ -d "$pkgdir/$dep" ]; then
-                if [ "$1" = "-r" ] && hasbeenbuilt "$dep" || ! [ -d "$pkgdir/$dep/package/usr/include" ]; then
+                if [ "$1" = "-r" ] && ! hasbeenbuilt "$dep"; then
                     printf "Building dependency %s\n" "$dep"
+                    cd "$pkgdir" || exit 1
                     build "$dep"
+                    printf "%s\n" "$dep" >> /tmp/.builtpkgs
                 fi
                 printf "Including dependency %s\n" "$dep"
                 export CFLAGS="$CFLAGS -I$pkgdir/$dep/package/usr/include"
@@ -40,10 +44,10 @@ includedeps() {
 
 build() {
     (
-    printf "Building %s...\n" "$1"
+    printf "Building %s...\n" "${1##*/}"
     cd "$1" || exit 1
     ./fetch.sh
-    pkglypatches
+    applypatches
     includedeps "$2"
     ./build.sh
     )
@@ -52,7 +56,8 @@ build() {
 buildall() {
     for pkg in "$pkgdir"/*; do
         build "$pkg" "$1"
-        printf "%s\n" "$pkg" >> /tmp/.builtpkgs
+        printf "%s\n" "${pkg##*/}" >> /tmp/.builtpkgs
+        cat /tmp/.builtpkgs
     done
     rm /tmp/.builtpkgs
 }
