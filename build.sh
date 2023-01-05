@@ -2,17 +2,23 @@
 repodir=/home/joey/iosdev/oldworldordr.github.io
 pkgdir="${0%/*}/pkgs"
 pkgdir="$(cd "$pkgdir" && pwd)"
+export TERM=xterm-256color
+printf "\n" > /tmp/.builtpkgs
 
 hasbeenbuilt() {
     while read -r pkg; do
-        if [ "$pkg" = "$1" ]; then
-            if [ -d "$pkgdir/$pkg/package/usr/include" ] || [ -d "$pkgdir/$pkg/package/usr/lib" ]; then
-                return 0
-            else
-                return 1
-            fi
+        if [ "$pkg" = "$1" ] && { [ -d "$pkgdir/$pkg/package/usr/include" ] || [ -d "$pkgdir/$pkg/package/usr/lib" ]; }; then
+            return=0
+        else
+            return=1
         fi
     done < /tmp/.builtpkgs
+
+    if [ "$return" -eq 0 ]; then
+        return 0
+    else
+        return 1
+    fi
 }
 
 applypatches() {
@@ -30,7 +36,6 @@ includedeps() {
             if [ -d "$pkgdir/$dep" ]; then
                 if [ "$1" = "-r" ] && ! hasbeenbuilt "$dep"; then
                     printf "Building dependency %s\n" "$dep"
-                    cd "$pkgdir" || exit 1
                     build "$dep"
                     printf "%s\n" "$dep" >> /tmp/.builtpkgs
                 fi
@@ -45,18 +50,19 @@ includedeps() {
 build() {
     (
     printf "Building %s...\n" "${1##*/}"
-    cd "$1" || exit 1
+    cd "$pkgdir/$1" || exit 1
+    includedeps "$2"
     ./fetch.sh
     applypatches
-    includedeps "$2"
     ./build.sh
     )
 }
 
 buildall() {
     for pkg in "$pkgdir"/*; do
-        build "$pkg" "$1"
-        printf "%s\n" "${pkg##*/}" >> /tmp/.builtpkgs
+        pkg="${pkg##*/}"
+        build "$pkg" -r || { printf "Failed to build %s\n" "$pkg"; exit 1; }
+        printf "%s\n" "$pkg" >> /tmp/.builtpkgs
     done
     rm /tmp/.builtpkgs
 }
@@ -102,27 +108,33 @@ fi
 export _CC _CXX
 
 if [ -z "$1" ]; then
-    printf "Usage: %s <all|pkgall|listpkgs|package>\n" "${0##*/}"
+    cat << EOF
+Usage: build.sh <pkg|all|pkgall|listpkgs>
+Usage: build.sh <package name>
+    <package name>      - Build a single package
+    pkg <package name>  - Build a single package and add it to the repo
+    all                 - Build all packages
+    pkgall              - Build all packages and add them to the repo
+    listpkgs            - List all packages
+EOF
     exit 1
 fi
 
-cd "$pkgdir" || exit 1
-
 if [ "$1" = "pkgall" ]; then
-    buildall "$2"
+    buildall
     find . -iname "*.deb" -exec cp {} "$repodir/debs" \;
     "$repodir/update.sh"
 elif [ "$1" = "all" ]; then
-    buildall "$2"
+    buildall
 elif [ "$1" = "listpkgs" ]; then
     for pkg in "$pkgdir"/*; do
         printf "%s\n" "${pkg##*/}"
     done
 elif [ "$1" = "pkg" ]; then
     build "$2" "$3"
-    cp "$1/*.deb" "$repodir/debs"
+    find "$pkgdir/$2" -iname "*.deb" -exec cp {} "$repodir/debs" \;
     "$repodir/update.sh"
-elif [ -d "$1" ]; then
+elif [ -d "$pkgdir/$1" ]; then
     build "$@"
 else
     printf "ERROR: Package %s not found!\n" "$1"

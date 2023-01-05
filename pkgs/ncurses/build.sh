@@ -1,11 +1,11 @@
 #!/bin/sh
 (
 cd source || exit 1
-./configure --host=arm-apple-darwin9 --prefix=/usr --sysconfdir=/etc --with-default-terminfo-dir=/usr/share/terminfo --with-shared
+./configure --host=arm-apple-darwin9 --prefix=/usr --sysconfdir=/etc --with-default-terminfo-dir=/usr/share/terminfo --with-shared --without-normal --without-debug --enable-sigwinch --disable-mixed-case --enable-termcap
 make -j4
 make DESTDIR=../../package install
 make clean
-./configure --host=arm-apple-darwin9 --prefix=/usr --sysconfdir=/etc --with-default-terminfo-dir=/usr/share/terminfo --with-shared --disable-overwrite --enable-widec
+./configure --host=arm-apple-darwin9 --prefix=/usr --sysconfdir=/etc --with-default-terminfo-dir=/usr/share/terminfo --with-shared --without-normal --without-debug --enable-sigwinch --disable-mixed-case --enable-termcap --disable-overwrite --enable-widec
 make -j4
 make DESTDIR=../../package install
 )

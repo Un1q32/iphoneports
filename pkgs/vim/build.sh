@@ -7,6 +7,8 @@ make -j4
 make DESTDIR="$dir/package" STRIP=arm-apple-darwin9-strip install
 )
 
+[ -d package ] || exit 1
+
 (
 cd package || exit 1
 rm -rf usr/share/man

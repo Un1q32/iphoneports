@@ -1,0 +1,9 @@
+Package: nano
+Priority: standard
+Section: Text_Editors
+Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
+Architecture: iphoneos-arm
+Version: 7.1
+Depends: ncurses
+Description: completely free, modern clone of Pico
+Tag: purpose::console

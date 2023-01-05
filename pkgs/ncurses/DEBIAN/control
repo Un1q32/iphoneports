@@ -3,6 +3,6 @@ Priority: required
 Section: System
 Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
 Architecture: iphoneos-arm
-Version: 5.9-1
+Version: 5.9-2
 Description: feature-complete terminal library
 Name: New Curses
