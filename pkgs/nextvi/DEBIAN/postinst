@@ -1,0 +1,6 @@
+#!/bin/sh
+if [ -f /usr/share/zsh/5.9/functions/_vi ]; then
+    printf "Removing zsh vi completion file... "
+    rm -f /usr/share/zsh/5.9/functions/_vi
+    printf "done\n"
+fi
