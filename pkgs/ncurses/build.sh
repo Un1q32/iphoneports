@@ -1,11 +1,11 @@
 #!/bin/sh
 (
 cd source || exit 1
-./configure --sysconfdir=/etc --with-default-terminfo-dir=/usr/share/terminfo --with-shared --without-normal --without-debug --enable-sigwinch --disable-mixed-case --enable-termcap "$_CONFFLAGS"
+./configure --host="$_TARGET" --prefix=/usr --sysconfdir=/etc --with-default-terminfo-dir=/usr/share/terminfo --with-shared --without-normal --without-debug --enable-sigwinch --disable-mixed-case --enable-termcap CC="$_CC" CXX="$_CXX"
 make -j4
 make DESTDIR=../../package install
 make clean
-./configure --sysconfdir=/etc --with-default-terminfo-dir=/usr/share/terminfo --with-shared --without-normal --without-debug --enable-sigwinch --disable-mixed-case --enable-termcap --disable-overwrite --enable-widec "$_CONFFLAGS"
+./configure --host="$_TARGET" --prefix=/usr --sysconfdir=/etc --with-default-terminfo-dir=/usr/share/terminfo --with-shared --without-normal --without-debug --enable-sigwinch --disable-mixed-case --enable-termcap --disable-overwrite --enable-widec CC="$_CC" CXX="$_CXX"
 make -j4
 make DESTDIR=../../package install
 )

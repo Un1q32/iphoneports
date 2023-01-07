@@ -1,11 +1,10 @@
 #!/bin/sh
 (
 cd source || exit 1
-./configure "$_CONFFLAGS" --sysconfdir=/etc
+./configure --host="$_TARGET" --prefix=/usr --sysconfdir=/etc CC="$_CC" CXX="$_CXX"
 make -j4
 make DESTDIR=../../package install
 )
-
 
 (
 for nanorc in files/syntax/*.nanorc; do

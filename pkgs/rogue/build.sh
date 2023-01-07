@@ -1,7 +1,7 @@
 #!/bin/sh
 (
 cd source || exit 1
-./configure --sysconfdir=/etc "$_CONFFLAGS"
+./configure --host="$_TARGET" --prefix=/usr --sysconfdir=/etc CC="$_CC" CXX="$_CXX"
 make -j4
 make DESTDIR=../package install
 )

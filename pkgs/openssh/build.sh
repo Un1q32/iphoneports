@@ -1,7 +1,7 @@
 #!/bin/sh
 (
 cd source || exit 1
-./configure --sysconfdir=/etc/ssh --with-privsep-user=nobody --with-sandbox=no "$_CONFFLAGS"
+./configure --host="$_TARGET" --prefix=/usr --sysconfdir=/etc/ssh --with-privsep-user=nobody --with-sandbox=no CC="$_CC" CXX="$_CXX"
 make -j4
 make DESTDIR=../package install-nokeys
 )

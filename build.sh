@@ -114,9 +114,7 @@ elif ! command -v dpkg-deb > /dev/null; then
     printf "ERROR: dpkg-deb not found!\n"
 fi
 
-_CONFFLAGS="--host=$_TARGET --prefix=/usr CC=$_CC CXX=$_CXX STRIP=$_STRIP"
-
-export _CC _CXX _STRIP _TARGET _CONFFLAGS
+export _CC _CXX _STRIP _TARGET
 
 if [ -z "$1" ]; then
     cat << EOF
