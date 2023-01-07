@@ -43,12 +43,12 @@ includedeps() {
                 if [ "$1" = "-r" ] && ! hasbeenbuilt "$dep"; then
                     printf "Building dependency %s\n" "$dep"
                     build "$dep"
-                    hasbeenbuilt "$dep" || { printf "Failed to build dependency %s\n" "$dep"; rm /tmp/.builtpkgs; exit 1; }
+                    [ -d "$_PKGDIR/$dep/package/usr/include" ] || [ -d "$_PKGDIR/$dep/package/usr/lib" ] || { printf "Failed to build dependency %s\n" "$dep"; rm /tmp/.builtpkgs; exit 1; }
                     printf "%s\n" "$dep" >> /tmp/.builtpkgs
                 fi
                 printf "Including dependency %s\n" "$dep"
-                cp -r "$_PKGDIR/$dep/package/usr/include" "$_BSROOT/sdk/usr/include"
-                cp -r "$_PKGDIR/$dep/package/usr/lib" "$_BSROOT/sdk/usr/lib"
+                cp -r "$_PKGDIR/$dep/package/usr/include" "$_SDKPATH/usr/include"
+                cp -r "$_PKGDIR/$dep/package/usr/lib" "$_SDKPATH/usr/lib"
             fi
         done < dependencies.txt
     fi
