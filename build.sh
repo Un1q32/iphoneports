@@ -93,11 +93,11 @@ if [ -z "$1" ]; then
     cat << EOF
 Usage: build.sh <pkg|all|pkgall|listpkgs>
 Usage: build.sh <package name>
-    <package name>      - Build a single package
-    pkg <package name>  - Build a single package and add it to the repo
-    all                 - Build all packages
-    pkgall              - Build all packages and add them to the repo
-    listpkgs            - List all packages
+    <package name>          - Build a single package
+    pkg <package name>      - Build a single package and add it to the repo
+    all                     - Build all packages
+    pkgall                  - Build all packages and add them to the repo
+    listpkgs                - List all packages
 EOF
     exit 1
 fi
