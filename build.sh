@@ -5,8 +5,7 @@ _REPODIR="$HOME/iosdev/oldworldordr.github.io"
 _PKGDIR="${0%/*}/pkgs"
 _PKGDIR="$(cd "$_PKGDIR" && pwd)"
 _BSROOT="$_PKGDIR/.."
-_SDKPATH="$_BSROOT/sdk"
-export _PKGDIR _BSROOT _SDKPATH _REPODIR _SDK _TARGET
+export _PKGDIR _BSROOT _REPODIR _SDK _TARGET
 export TERM=xterm-256color
 printf "\n" > /tmp/.builtpkgs
 
@@ -46,6 +45,7 @@ includedeps() {
                     printf "%s\n" "$dep" >> /tmp/.builtpkgs
                 fi
                 printf "Including dependency %s\n" "$dep"
+                export _SDKPATH="$_BSROOT/sdk"
                 cp -r "$_SDK" "$_SDKPATH"
                 cp -r "$_PKGDIR/$dep/package/usr/include" "$_SDKPATH/usr/include"
                 cp -r "$_PKGDIR/$dep/package/usr/lib" "$_SDKPATH/usr/lib"

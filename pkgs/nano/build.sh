@@ -1,7 +1,7 @@
 #!/bin/sh
 (
 cd source || exit 1
-./configure --host="$_TARGET" --prefix=/usr --sysconfdir=/etc CC="$_CC" CXX="$_CXX"
+./configure --host="$_TARGET" --prefix=/usr --sysconfdir=/etc
 make -j4
 make DESTDIR="$_PKGDIR/nano/package" install
 )
@@ -12,7 +12,7 @@ for nanorc in files/syntax/*.nanorc; do
 done
 cp files/nanorc package/etc
 cd package || exit 1
-"$_STRIP" -x usr/bin/nano
+"$_TARGET-strip" -x usr/bin/nano
 ldid -S usr/bin/nano
 )
 

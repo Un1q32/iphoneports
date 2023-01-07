@@ -9,11 +9,11 @@ make DESTDIR="$_PKGDIR/openssl/package" install_sw install_ssldirs
 (
 cd package || exit 1
 rm -rf usr/share
-"$_STRIP" -x usr/bin/openssl
+"$_TARGET-strip" -x usr/bin/openssl
 ldid -S usr/bin/openssl
 for i in usr/lib/*.dylib; do
     if [ -f "$i" ]; then
-        "$_STRIP" -x "$i"
+        "$_TARGET-strip" -x "$i"
     fi
 done
 )

@@ -1,7 +1,7 @@
 #!/bin/sh
 (
 cd source || exit 1
-./configure --host="$_TARGET" --prefix=/usr --sysconfdir=/etc/ssh --with-privsep-user=nobody --with-sandbox=no CC="$_CC" CXX="$_CXX"
+./configure --host="$_TARGET" --prefix=/usr --sysconfdir=/etc/ssh --with-privsep-user=nobody --with-sandbox=no
 make -j4
 make DESTDIR="$_PKGDIR/openssh/package" install-nokeys
 )
@@ -9,9 +9,9 @@ make DESTDIR="$_PKGDIR/openssh/package" install-nokeys
 (
 cd package || exit 1
 rm -rf usr/share
-"$_STRIP" -x usr/bin/*
-"$_STRIP" -x usr/sbin/*
-"$_STRIP" -x usr/libexec/*
+"$_TARGET-strip" -x usr/bin/*
+"$_TARGET-strip" -x usr/sbin/*
+"$_TARGET-strip" -x usr/libexec/*
 ldid -S usr/bin/*
 ldid -S usr/sbin/*
 ldid -S usr/libexec/*
