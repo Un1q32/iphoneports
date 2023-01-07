@@ -5,7 +5,8 @@ _REPODIR="$HOME/iosdev/oldworldordr.github.io"
 _PKGDIR="${0%/*}/pkgs"
 _PKGDIR="$(cd "$_PKGDIR" && pwd)"
 _BSROOT="$_PKGDIR/.."
-export _PKGDIR _BSROOT _REPODIR _SDK _TARGET
+_ENTITLEMENTS="$_BSROOT/entitlements.plist"
+export _PKGDIR _BSROOT _REPODIR _SDK _TARGET _ENTITLEMENTS
 export TERM=xterm-256color
 printf "\n" > /tmp/.builtpkgs
 

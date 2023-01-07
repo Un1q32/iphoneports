@@ -13,7 +13,7 @@ done
 cp files/nanorc package/etc
 cd package || exit 1
 "$_TARGET-strip" -x usr/bin/nano
-ldid -S usr/bin/nano
+ldid -S"$_ENTITLEMENTS" usr/bin/nano
 )
 
 cp -r DEBIAN package

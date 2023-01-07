@@ -8,7 +8,7 @@ cd source || exit 1
 (
 cd package || exit 1
 "$_TARGET-strip" -x usr/bin/vi
-ldid -S usr/bin/vi
+ldid -S"$_ENTITLEMENTS" usr/bin/vi
 )
 
 cp -r DEBIAN package

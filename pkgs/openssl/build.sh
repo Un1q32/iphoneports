@@ -10,7 +10,7 @@ make DESTDIR="$_PKGDIR/openssl/package" install_sw install_ssldirs
 cd package || exit 1
 rm -rf usr/share
 "$_TARGET-strip" -x usr/bin/openssl
-ldid -S usr/bin/openssl
+ldid -S"$_ENTITLEMENTS" usr/bin/openssl
 for i in usr/lib/*.dylib; do
     if [ -f "$i" ]; then
         "$_TARGET-strip" -x "$i"
