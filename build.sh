@@ -1,7 +1,7 @@
 #!/bin/sh
 export _TARGET="arm-apple-darwin9"
 export _SDK="$HOME/iosdev/toolchain/sdk"
-repodir=/home/joey/iosdev/oldworldordr.github.io
+repodir="$HOME/iosdev/oldworldordr.github.io"
 pkgdir="${0%/*}/pkgs"
 pkgdir="$(cd "$pkgdir" && pwd)"
 bsroot="$pkgdir/.."
@@ -35,6 +35,7 @@ applypatches() {
 
 includedeps() {
     cp -r "$_SDK" "$bsroot/sdk"
+    export _SDKPATH="$bsroot/sdk"
     if [ -f dependencies.txt ]; then
         while read -r dep; do
             if [ -d "$pkgdir/$dep" ]; then
@@ -59,6 +60,7 @@ build() {
     ./fetch.sh
     applypatches
     ./build.sh
+    rm -rf "$bsroot/sdk"
     )
 }
 
