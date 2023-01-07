@@ -2,15 +2,16 @@
 export _TARGET="arm-apple-darwin9"
 export _SDK="$HOME/iosdev/toolchain/sdk"
 repodir="$HOME/iosdev/oldworldordr.github.io"
-pkgdir="${0%/*}/pkgs"
-pkgdir="$(cd "$pkgdir" && pwd)"
-bsroot="$pkgdir/.."
+_PKGDIR="${0%/*}/pkgs"
+_PKGDIR="$(cd "$_PKGDIR" && pwd)"
+_BSROOT="$_PKGDIR/.."
+export _PKGDIR _BSROOT
 export TERM=xterm-256color
 printf "\n" > /tmp/.builtpkgs
 
 hasbeenbuilt() {
     while read -r pkg; do
-        if [ "$pkg" = "$1" ] && { [ -d "$pkgdir/$pkg/package/usr/include" ] || [ -d "$pkgdir/$pkg/package/usr/lib" ]; }; then
+        if [ "$pkg" = "$1" ] && { [ -d "$_PKGDIR/$pkg/package/usr/include" ] || [ -d "$_PKGDIR/$pkg/package/usr/lib" ]; }; then
             return=0
         else
             return=1
@@ -34,11 +35,11 @@ applypatches() {
 }
 
 includedeps() {
-    cp -r "$_SDK" "$bsroot/sdk"
-    export _SDKPATH="$bsroot/sdk"
+    cp -r "$_SDK" "$_BSROOT/sdk"
+    export _SDKPATH="$_BSROOT/sdk"
     if [ -f dependencies.txt ]; then
         while read -r dep; do
-            if [ -d "$pkgdir/$dep" ]; then
+            if [ -d "$_PKGDIR/$dep" ]; then
                 if [ "$1" = "-r" ] && ! hasbeenbuilt "$dep"; then
                     printf "Building dependency %s\n" "$dep"
                     build "$dep"
@@ -46,8 +47,8 @@ includedeps() {
                     printf "%s\n" "$dep" >> /tmp/.builtpkgs
                 fi
                 printf "Including dependency %s\n" "$dep"
-                cp -r "$pkgdir/$dep/package/usr/include" "$bsroot/sdk/usr/include"
-                cp -r "$pkgdir/$dep/package/usr/lib" "$bsroot/sdk/usr/lib"
+                cp -r "$_PKGDIR/$dep/package/usr/include" "$_BSROOT/sdk/usr/include"
+                cp -r "$_PKGDIR/$dep/package/usr/lib" "$_BSROOT/sdk/usr/lib"
             fi
         done < dependencies.txt
     fi
@@ -56,17 +57,17 @@ includedeps() {
 build() {
     (
     printf "Building %s...\n" "${1##*/}"
-    cd "$pkgdir/$1" || exit 1
+    cd "$_PKGDIR/$1" || exit 1
     includedeps "$2"
     ./fetch.sh
     applypatches
     ./build.sh
-    rm -rf "$bsroot/sdk"
+    rm -rf "$_BSROOT/sdk"
     )
 }
 
 buildall() {
-    for pkg in "$pkgdir"/*; do
+    for pkg in "$_PKGDIR"/*; do
         pkg="${pkg##*/}"
         build "$pkg" -r || { printf "Failed to build %s\n" "$pkg"; exit 1; }
         printf "%s\n" "$pkg" >> /tmp/.builtpkgs
@@ -136,14 +137,14 @@ if [ "$1" = "pkgall" ]; then
 elif [ "$1" = "all" ]; then
     buildall
 elif [ "$1" = "listpkgs" ]; then
-    for pkg in "$pkgdir"/*; do
+    for pkg in "$_PKGDIR"/*; do
         printf "%s\n" "${pkg##*/}"
     done
 elif [ "$1" = "pkg" ]; then
     build "$2" "$3"
-    find "$pkgdir/$2" -iname "*.deb" -exec cp {} "$repodir/debs" \;
+    find "$_PKGDIR/$2" -iname "*.deb" -exec cp {} "$repodir/debs" \;
     "$repodir/update.sh"
-elif [ -d "$pkgdir/$1" ]; then
+elif [ -d "$_PKGDIR/$1" ]; then
     build "$@"
 else
     printf "ERROR: Package %s not found!\n" "$1"

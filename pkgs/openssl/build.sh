@@ -3,7 +3,7 @@
 cd source || exit 1
 ./Configure ios-cross --prefix=/usr --openssldir=/usr/lib/ssl CROSS_COMPILE="$_TARGET"-
 make CNF_CFLAGS=-fno-common -j4
-make DESTDIR=../package install_sw install_ssldirs
+make DESTDIR="$_PKGDIR/openssl/package" install_sw install_ssldirs
 )
 
 (
