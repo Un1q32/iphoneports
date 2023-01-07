@@ -43,6 +43,7 @@ includedeps() {
                     printf "Building dependency %s\n" "$dep"
                     build "$dep"
                     printf "%s\n" "$dep" >> /tmp/.builtpkgs
+                    hasbeenbuilt "$dep" || { printf "Failed to build dependency %s\n" "$dep"; exit 1; }
                 fi
                 printf "Including dependency %s\n" "$dep"
                 cp -r "$pkgdir/$dep/package/usr/include" "$bsroot/sdk/usr/include"
