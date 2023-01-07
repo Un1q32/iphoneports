@@ -1,7 +1,7 @@
 #!/bin/sh
 (
 cd source || exit 1
-./Configure ios-cross --prefix=/usr --openssldir=/usr/lib/ssl CROSS_COMPILE=arm-apple-darwin9-
+./Configure ios-cross --prefix=/usr --openssldir=/usr/lib/ssl CROSS_COMPILE="$_TARGET"-
 make CNF_CFLAGS=-fno-common -j4
 make DESTDIR=../package install_sw install_ssldirs
 )
@@ -9,11 +9,11 @@ make DESTDIR=../package install_sw install_ssldirs
 (
 cd package || exit 1
 rm -rf usr/share
-arm-apple-darwin9-strip -x usr/bin/openssl
+"$_STRIP" -x usr/bin/openssl
 ldid -S usr/bin/openssl
 for i in usr/lib/*.dylib; do
     if [ -f "$i" ]; then
-        arm-apple-darwin9-strip -x "$i"
+        "$_STRIP" -x "$i"
     fi
 done
 )

@@ -1,4 +1,5 @@
 #!/bin/sh
+export _TARGET="arm-apple-darwin9"
 repodir=/home/joey/iosdev/oldworldordr.github.io
 pkgdir="${0%/*}/pkgs"
 pkgdir="$(cd "$pkgdir" && pwd)"
@@ -67,32 +68,34 @@ buildall() {
     rm /tmp/.builtpkgs
 }
 
-if command -v arm-apple-darwin9-clang > /dev/null; then
-    _CC=arm-apple-darwin9-clang
-elif command -v arm-apple-darwin9-gcc > /dev/null; then
-    _CC=arm-apple-darwin9-gcc
-elif command -v arm-apple-darwin9-cc > /dev/null; then
-    _CC=arm-apple-darwin9-cc
+if command -v "$_TARGET"-clang > /dev/null; then
+    _CC="$_TARGET"-clang
+elif command -v "$_TARGET"-gcc > /dev/null; then
+    _CC="$_TARGET"-gcc
+elif command -v "$_TARGET"-cc > /dev/null; then
+    _CC="$_TARGET"-cc
 else
     printf "ERROR: No valid C compiler found!\n"
     exit 1
 fi
 
-if command -v arm-apple-darwin9-clang++ > /dev/null; then
-    _CXX=arm-apple-darwin9-clang++
-elif command -v arm-apple-darwin9-g++ > /dev/null; then
-    _CXX=arm-apple-darwin9-g++
-elif command -v arm-apple-darwin9-c++ > /dev/null; then
-    _CXX=arm-apple-darwin9-c++
+if command -v "$_TARGET"-clang++ > /dev/null; then
+    _CXX="$_TARGET"-clang++
+elif command -v "$_TARGET"-g++ > /dev/null; then
+    _CXX="$_TARGET"-g++
+elif command -v "$_TARGET"-c++ > /dev/null; then
+    _CXX="$_TARGET"-c++
 else
     printf "ERROR: No valid C++ compiler found!\n"
     exit 1
 fi
 
-if command -v arm-apple-darwin9-strip > /dev/null; then
-    if arm-apple-darwin9-strip --version 2> /dev/null | grep -q "GNU"; then
+if command -v "$_TARGET"-strip > /dev/null; then
+    if "$_TARGET"-strip --version 2> /dev/null | grep -q "GNU"; then
         printf "ERROR: GNU/LLVM strip is not supported!\n"
         exit 1
+    else
+        _STRIP="$_TARGET"-strip
     fi
 else
     printf "ERROR: No valid strip command found!\n"
@@ -105,7 +108,9 @@ elif ! command -v dpkg-deb > /dev/null; then
     printf "ERROR: dpkg-deb not found!\n"
 fi
 
-export _CC _CXX
+_CONFFLAGS="--host=$_TARGET --prefix=/usr CC=$_CC CXX=$_CXX STRIP=$_STRIP"
+
+export _CC _CXX _STRIP _TARGET _CONFFLAGS
 
 if [ -z "$1" ]; then
     cat << EOF

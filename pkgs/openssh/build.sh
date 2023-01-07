@@ -1,7 +1,7 @@
 #!/bin/sh
 (
 cd source || exit 1
-./configure --host=arm-apple-darwin9 --prefix=/usr --sysconfdir=/etc/ssh --with-privsep-user=nobody --with-sandbox=no
+./configure --sysconfdir=/etc/ssh --with-privsep-user=nobody --with-sandbox=no "$_CONFFLAGS"
 make -j4
 make DESTDIR=../package install-nokeys
 )
@@ -9,9 +9,9 @@ make DESTDIR=../package install-nokeys
 (
 cd package || exit 1
 rm -rf usr/share
-arm-apple-darwin9-strip -x usr/bin/*
-arm-apple-darwin9-strip -x usr/sbin/*
-arm-apple-darwin9-strip -x usr/libexec/*
+"$_STRIP" -x usr/bin/*
+"$_STRIP" -x usr/sbin/*
+"$_STRIP" -x usr/libexec/*
 ldid -S usr/bin/*
 ldid -S usr/sbin/*
 ldid -S usr/libexec/*

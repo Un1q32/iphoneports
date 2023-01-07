@@ -1,7 +1,7 @@
 #!/bin/sh
 (
 cd source || exit 1
-./configure --host=arm-apple-darwin9 --prefix=/usr --sysconfdir=/etc
+./configure --sysconfdir=/etc "$_CONFFLAGS"
 make -j4
 make DESTDIR=../package install
 )
@@ -11,7 +11,7 @@ make DESTDIR=../package install
 rm packagerogue.scr
 cd package || exit 1
 rm -rf usr/share
-arm-apple-darwin9-strip -x usr/bin/rogue
+"$_STRIP" -x usr/bin/rogue
 ldid -S usr/bin/rogue
 )
 

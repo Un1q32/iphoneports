@@ -2,12 +2,12 @@
 (
 mkdir -p package/usr/bin
 cd source || exit 1
-arm-apple-darwin9-clang -pedantic -std=c99 -D_POSIX_C_SOURCE=200809L -D_DARWIN_C_SOURCE -O2 vi.c -o ../package/usr/bin/vi
+"$_CC" -pedantic -std=c99 -D_POSIX_C_SOURCE=200809L -D_DARWIN_C_SOURCE -O2 vi.c -o ../package/usr/bin/vi
 )
 
 (
 cd package || exit 1
-arm-apple-darwin9-strip -x usr/bin/vi
+"$_STRIP" -x usr/bin/vi
 ldid -S usr/bin/vi
 )
 

@@ -1,7 +1,7 @@
 #!/bin/sh
 (
 cd source || exit 1
-./configure --host=arm-apple-darwin9 --prefix=/usr --sysconfdir=/etc
+./configure "$_CONFFLAGS" --sysconfdir=/etc
 make -j4
 make DESTDIR=../../package install
 )
@@ -13,7 +13,7 @@ for nanorc in files/syntax/*.nanorc; do
 done
 cp files/nanorc package/etc
 cd package || exit 1
-arm-apple-darwin9-strip -x usr/bin/nano
+"$_STRIP" -x usr/bin/nano
 ldid -S usr/bin/nano
 )
 
