@@ -1,8 +1,10 @@
 #!/bin/sh
 export _TARGET="arm-apple-darwin9"
+export _SDK="$HOME/iosdev/toolchain/sdk"
 repodir=/home/joey/iosdev/oldworldordr.github.io
 pkgdir="${0%/*}/pkgs"
 pkgdir="$(cd "$pkgdir" && pwd)"
+bsroot="$pkgdir/.."
 export TERM=xterm-256color
 printf "\n" > /tmp/.builtpkgs
 
@@ -32,6 +34,7 @@ applypatches() {
 }
 
 includedeps() {
+    cp -r "$_SDK" "$bsroot/sdk"
     if [ -f dependencies.txt ]; then
         while read -r dep; do
             if [ -d "$pkgdir/$dep" ]; then
@@ -41,8 +44,8 @@ includedeps() {
                     printf "%s\n" "$dep" >> /tmp/.builtpkgs
                 fi
                 printf "Including dependency %s\n" "$dep"
-                export CFLAGS="$CFLAGS -I$pkgdir/$dep/package/usr/include"
-                export LDFLAGS="$LDFLAGS -L$pkgdir/$dep/package/usr/lib"
+                cp -r "$pkgdir/$dep/package/usr/include" "$bsroot/sdk/usr/include"
+                cp -r "$pkgdir/$dep/package/usr/lib" "$bsroot/sdk/usr/lib"
             fi
         done < dependencies.txt
     fi
