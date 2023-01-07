@@ -75,47 +75,17 @@ buildall() {
     rm /tmp/.builtpkgs
 }
 
-if command -v "$_TARGET"-clang > /dev/null; then
-    _CC="$_TARGET"-clang
-elif command -v "$_TARGET"-gcc > /dev/null; then
-    _CC="$_TARGET"-gcc
-elif command -v "$_TARGET"-cc > /dev/null; then
-    _CC="$_TARGET"-cc
-else
-    printf "ERROR: No valid C compiler found!\n"
-    exit 1
-fi
-
-if command -v "$_TARGET"-clang++ > /dev/null; then
-    _CXX="$_TARGET"-clang++
-elif command -v "$_TARGET"-g++ > /dev/null; then
-    _CXX="$_TARGET"-g++
-elif command -v "$_TARGET"-c++ > /dev/null; then
-    _CXX="$_TARGET"-c++
-else
-    printf "ERROR: No valid C++ compiler found!\n"
-    exit 1
-fi
-
-if command -v "$_TARGET"-strip > /dev/null; then
-    if "$_TARGET"-strip --version 2> /dev/null | grep -q "GNU"; then
-        printf "ERROR: GNU/LLVM strip is not supported!\n"
+for dep in "$_TARGET-clang" "$_TARGET-clang++" "$_TARGET-gcc" "$_TARGET-g++" "$_TARGET-cc" "$_TARGET-c++" "$_TARGET-strip" curl ldid make patch dpkg-deb; do
+    if ! command -v "$dep" > /dev/null; then
+        printf "Missing dependency %s\n" "$dep"
         exit 1
-    else
-        _STRIP="$_TARGET"-strip
     fi
-else
-    printf "ERROR: No valid strip command found!\n"
+done
+
+if "$_TARGET"-strip --version 2> /dev/null | grep -q "GNU"; then
+    printf "ERROR: GNU/LLVM strip is not supported!\n"
     exit 1
 fi
-
-if ! command -v ldid > /dev/null; then
-    printf "ERROR: ldid not found!\n"
-elif ! command -v dpkg-deb > /dev/null; then
-    printf "ERROR: dpkg-deb not found!\n"
-fi
-
-export _CC _CXX _STRIP _TARGET
 
 if [ -z "$1" ]; then
     cat << EOF
