@@ -47,6 +47,7 @@ includedeps() {
                 fi
                 printf "Including dependency %s\n" "$dep"
                 export _SDKPATH="$_BSROOT/sdk"
+                rm -rf "$_SDKPATH"
                 cp -r "$_SDK" "$_SDKPATH"
                 cp -r "$_PKGDIR/$dep/package/usr/include" "$_SDKPATH/usr/include"
                 cp -r "$_PKGDIR/$dep/package/usr/lib" "$_SDKPATH/usr/lib"
