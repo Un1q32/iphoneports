@@ -1,11 +1,12 @@
 #!/bin/sh
-export _TARGET="arm-apple-darwin9"
-export _SDK="$HOME/iosdev/toolchain/sdk"
-repodir="$HOME/iosdev/oldworldordr.github.io"
+_TARGET="arm-apple-darwin9"
+_SDK="$HOME/iosdev/toolchain/sdk"
+_REPODIR="$HOME/iosdev/oldworldordr.github.io"
 _PKGDIR="${0%/*}/pkgs"
 _PKGDIR="$(cd "$_PKGDIR" && pwd)"
 _BSROOT="$_PKGDIR/.."
-export _PKGDIR _BSROOT
+_SDKPATH="$_BSROOT/sdk"
+export _PKGDIR _BSROOT _SDKPATH _REPODIR _SDK _TARGET
 export TERM=xterm-256color
 printf "\n" > /tmp/.builtpkgs
 
@@ -35,8 +36,6 @@ applypatches() {
 }
 
 includedeps() {
-    cp -r "$_SDK" "$_BSROOT/sdk"
-    export _SDKPATH="$_BSROOT/sdk"
     if [ -f dependencies.txt ]; then
         while read -r dep; do
             if [ -d "$_PKGDIR/$dep" ]; then
@@ -47,6 +46,7 @@ includedeps() {
                     printf "%s\n" "$dep" >> /tmp/.builtpkgs
                 fi
                 printf "Including dependency %s\n" "$dep"
+                cp -r "$_SDK" "$_SDKPATH"
                 cp -r "$_PKGDIR/$dep/package/usr/include" "$_SDKPATH/usr/include"
                 cp -r "$_PKGDIR/$dep/package/usr/lib" "$_SDKPATH/usr/lib"
             fi
@@ -62,7 +62,7 @@ build() {
     ./fetch.sh
     applypatches
     ./build.sh
-    rm -rf "$_BSROOT/sdk"
+    rm -rf "$_SDKPATH"
     )
 }
 
@@ -132,8 +132,8 @@ fi
 
 if [ "$1" = "pkgall" ]; then
     buildall
-    find . -iname "*.deb" -exec cp {} "$repodir/debs" \;
-    "$repodir/update.sh"
+    find . -iname "*.deb" -exec cp {} "$_REPODIR/debs" \;
+    "$_REPODIR/update.sh"
 elif [ "$1" = "all" ]; then
     buildall
 elif [ "$1" = "listpkgs" ]; then
@@ -142,8 +142,8 @@ elif [ "$1" = "listpkgs" ]; then
     done
 elif [ "$1" = "pkg" ]; then
     build "$2" "$3"
-    find "$_PKGDIR/$2" -iname "*.deb" -exec cp {} "$repodir/debs" \;
-    "$repodir/update.sh"
+    find "$_PKGDIR/$2" -iname "*.deb" -exec cp {} "$_REPODIR/debs" \;
+    "$_REPODIR/update.sh"
 elif [ -d "$_PKGDIR/$1" ]; then
     build "$@"
 else
