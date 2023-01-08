@@ -10,6 +10,7 @@ make DESTDIR="$_PKGDIR/nano/package" install
 for nanorc in files/syntax/*.nanorc; do
     cp -a "$nanorc" package/usr/share/nano/
 done
+mkdir package/etc
 cp files/nanorc package/etc
 cd package || exit 1
 "$_TARGET-strip" -x usr/bin/nano
