@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 _TARGET="arm-apple-darwin9"
 _SDK="$HOME/iosdev/toolchain/sdk"
 _REPODIR="$HOME/iosdev/oldworldordr.github.io"
@@ -12,17 +12,10 @@ printf "\n" > /tmp/.builtpkgs
 hasbeenbuilt() {
     while read -r pkg; do
         if [ "$pkg" = "$1" ] && { [ "$2" = "dryrun" ] || [ -d "$_PKGDIR/$1/package/usr/include" ] || [ -d "$_PKGDIR/$1/package/usr/lib" ]; }; then
-            return=0
-        else
-            return=1
+            return 0
         fi
     done < /tmp/.builtpkgs
-
-    if [ "$return" -eq 0 ]; then
-        return 0
-    else
-        return 1
-    fi
+    return 1
 }
 
 applypatches() {
@@ -79,7 +72,7 @@ buildall() {
         build "$pkg" rebuild "$1" || { printf "Failed to build %s\n" "$pkg"; exit 1; }
         printf "%s\n" "$pkg" >> /tmp/.builtpkgs
     done
-    rm /tmp/.builtpkgs
+    # rm /tmp/.builtpkgs
 }
 
 for dep in "$_TARGET-clang" "$_TARGET-clang++" "$_TARGET-gcc" "$_TARGET-g++" "$_TARGET-cc" "$_TARGET-c++" "$_TARGET-strip" curl ldid make patch dpkg-deb; do
