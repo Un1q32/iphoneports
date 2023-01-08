@@ -76,7 +76,7 @@ buildall() {
     rm /tmp/.builtpkgs
 }
 
-for dep in "$_TARGET-clang" "$_TARGET-clang++" "$_TARGET-gcc" "$_TARGET-g++" "$_TARGET-cc" "$_TARGET-c++" "$_TARGET-strip" curl ldid make patch dpkg-deb; do
+for dep in "$_TARGET-clang" "$_TARGET-clang++" "$_TARGET-gcc" "$_TARGET-g++" "$_TARGET-cc" "$_TARGET-c++" "$_TARGET-strip" ldid patch dpkg-deb; do
     if ! command -v "$dep" > /dev/null; then
         printf "Missing dependency %s\n" "$dep"
         exit 1
