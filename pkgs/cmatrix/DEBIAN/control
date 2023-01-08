@@ -1,9 +1,9 @@
-Package: hexedit
-Version: 1.6
+Package: cmatrix
+Version: 2.0
 Architecture: iphoneos-arm
 Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
 Depends: ncurses
-Section: Text_Editors
+Section: Utilities
 Priority: optional
-Description: View and edit files in hexadecimal or in ASCII
+Description: Terminal screen saver based on the movie "The Matrix".
 Tag: purpose::console
