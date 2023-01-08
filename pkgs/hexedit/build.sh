@@ -1,13 +1,15 @@
 #!/bin/sh
 (
 cd source || exit 1
+./autogen.sh
 ./configure --host="$_TARGET" --prefix=/usr
 make -j4
-make DESTDIR="$_PKGDIR/nano/package" install
+make DESTDIR="$_PKGDIR/hexedit/package" install
 )
 
 (
 cd package || exit 1
+rm -rf usr/share
 "$_TARGET-strip" -x usr/bin/hexedit
 ldid -S"$_BSROOT/entitlements.plist" usr/bin/hexedit
 )
