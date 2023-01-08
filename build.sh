@@ -11,7 +11,7 @@ printf "\n" > /tmp/.builtpkgs
 
 hasbeenbuilt() {
     while read -r pkg; do
-        if [ "$pkg" = "$1" ] && { [ -d "$_PKGDIR/$1/package/usr/include" ] || [ -d "$_PKGDIR/$1/package/usr/lib" ]; }; then
+        if [ "$pkg" = "$1" ] && { [ "$2" = "dryrun" ] || [ -d "$_PKGDIR/$1/package/usr/include" ] || [ -d "$_PKGDIR/$1/package/usr/lib" ]; }; then
             return=0
         else
             return=1
@@ -38,9 +38,9 @@ includedeps() {
     if [ -f dependencies.txt ]; then
         while read -r dep; do
             if [ -d "$_PKGDIR/$dep" ]; then
-                if [ "$1" = "-r" ] && ! hasbeenbuilt "$dep"; then
+                if [ "$1" = "rebuild" ] && ! hasbeenbuilt "$dep" "$2"; then
                     printf "Building dependency %s\n" "$dep"
-                    build "$dep" -r "$2"
+                    build "$dep" rebuild "$2"
                     if ! [ "$2" = "dryrun" ]; then
                         [ -d "$_PKGDIR/$dep/package/usr/include" ] || [ -d "$_PKGDIR/$dep/package/usr/lib" ] || { printf "Failed to build dependency %s\n" "$dep"; rm /tmp/.builtpkgs; exit 1; }
                     fi
@@ -76,7 +76,7 @@ build() {
 buildall() {
     for pkg in "$_PKGDIR"/*; do
         pkg="${pkg##*/}"
-        build "$pkg" -r "$1" || { printf "Failed to build %s\n" "$pkg"; exit 1; }
+        build "$pkg" rebuild "$1" || { printf "Failed to build %s\n" "$pkg"; exit 1; }
         printf "%s\n" "$pkg" >> /tmp/.builtpkgs
     done
     rm /tmp/.builtpkgs
