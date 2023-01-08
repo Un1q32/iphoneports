@@ -91,7 +91,7 @@ fi
 if [ -z "$1" ]; then
     cat << EOF
 Usage: build.sh <option>
-    <package name> [-r]     - Build a single package
+    <package name> [-r]     - Build a single package, specify -r to rebuild dependencies
     pkg <package name> [-r] - Build a single package and add it to the repo
     all                     - Build all packages
     pkgall                  - Build all packages and add them to the repo
