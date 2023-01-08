@@ -7,7 +7,7 @@ _PKGDIR="$(cd "$_PKGDIR" && pwd)"
 _BSROOT="$_PKGDIR/.."
 export _PKGDIR _BSROOT _REPODIR _SDK _TARGET
 export TERM=xterm-256color
-printf "\n" > /tmp/.builtpkgs
+printf "" > /tmp/.builtpkgs
 
 hasbeenbuilt() {
     while read -r pkg; do
@@ -54,6 +54,7 @@ includedeps() {
 
 build() {
     (
+    hasbeenbuilt "$1" "$3" && return 0
     printf "Building %s...\n" "${1##*/}"
     cd "$_PKGDIR/$1" || exit 1
     includedeps "$2" "$3"
