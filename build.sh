@@ -1,18 +1,17 @@
-#!/bin/sh
+#!/bin/bash
 _TARGET="arm-apple-darwin9"
 _SDK="$HOME/iosdev/toolchain/sdk"
 _REPODIR="$HOME/iosdev/oldworldordr.github.io"
 _PKGDIR="${0%/*}/pkgs"
 _PKGDIR="$(cd "$_PKGDIR" && pwd)"
 _BSROOT="$_PKGDIR/.."
-_ENTITLEMENTS="$_BSROOT/entitlements.plist"
-export _PKGDIR _BSROOT _REPODIR _SDK _TARGET _ENTITLEMENTS
+export _PKGDIR _BSROOT _REPODIR _SDK _TARGET
 export TERM=xterm-256color
 printf "\n" > /tmp/.builtpkgs
 
 hasbeenbuilt() {
     while read -r pkg; do
-        if [ "$pkg" = "$1" ] && { [ -d "$_PKGDIR/$pkg/package/usr/include" ] || [ -d "$_PKGDIR/$pkg/package/usr/lib" ]; }; then
+        if [ "$pkg" = "$1" ] && { [ -d "$_PKGDIR/$1/package/usr/include" ] || [ -d "$_PKGDIR/$1/package/usr/lib" ]; }; then
             return=0
         else
             return=1
@@ -41,16 +40,20 @@ includedeps() {
             if [ -d "$_PKGDIR/$dep" ]; then
                 if [ "$1" = "-r" ] && ! hasbeenbuilt "$dep"; then
                     printf "Building dependency %s\n" "$dep"
-                    build "$dep"
-                    [ -d "$_PKGDIR/$dep/package/usr/include" ] || [ -d "$_PKGDIR/$dep/package/usr/lib" ] || { printf "Failed to build dependency %s\n" "$dep"; rm /tmp/.builtpkgs; exit 1; }
+                    build "$dep" -r "$2"
+                    if ! [ "$2" = "dryrun" ]; then
+                        [ -d "$_PKGDIR/$dep/package/usr/include" ] || [ -d "$_PKGDIR/$dep/package/usr/lib" ] || { printf "Failed to build dependency %s\n" "$dep"; rm /tmp/.builtpkgs; exit 1; }
+                    fi
                     printf "%s\n" "$dep" >> /tmp/.builtpkgs
                 fi
                 printf "Including dependency %s\n" "$dep"
-                export _SDKPATH="$_BSROOT/sdk"
-                rm -rf "$_SDKPATH"
-                cp -r "$_SDK" "$_BSROOT"
-                cp -r "$_PKGDIR/$dep/package/usr/include" "$_SDKPATH/usr"
-                cp -r "$_PKGDIR/$dep/package/usr/lib" "$_SDKPATH/usr"
+                if ! [ "$2" = "dryrun" ]; then
+                    export _SDKPATH="$_BSROOT/sdk"
+                    rm -rf "$_SDKPATH"
+                    cp -r "$_SDK" "$_BSROOT"
+                    cp -r "$_PKGDIR/$dep/package/usr/include" "$_SDKPATH/usr"
+                    cp -r "$_PKGDIR/$dep/package/usr/lib" "$_SDKPATH/usr"
+                fi
             fi
         done < dependencies.txt
     fi
@@ -60,10 +63,12 @@ build() {
     (
     printf "Building %s...\n" "${1##*/}"
     cd "$_PKGDIR/$1" || exit 1
-    includedeps "$2"
-    ./fetch.sh
-    applypatches
-    ./build.sh
+    includedeps "$2" "$3"
+    if ! [ "$3" = "dryrun" ]; then
+        ./fetch.sh
+        applypatches
+        ./build.sh
+    fi
     rm -rf "$_SDKPATH"
     )
 }
@@ -71,7 +76,7 @@ build() {
 buildall() {
     for pkg in "$_PKGDIR"/*; do
         pkg="${pkg##*/}"
-        build "$pkg" -r || { printf "Failed to build %s\n" "$pkg"; exit 1; }
+        build "$pkg" -r "$1" || { printf "Failed to build %s\n" "$pkg"; exit 1; }
         printf "%s\n" "$pkg" >> /tmp/.builtpkgs
     done
     rm /tmp/.builtpkgs
@@ -97,6 +102,7 @@ Usage: build.sh <package name>
     pkg <package name>      - Build a single package and add it to the repo
     all                     - Build all packages
     pkgall                  - Build all packages and add them to the repo
+    dryrun                  - Pretend to build all packages
     listpkgs                - List all packages
 EOF
     exit 1
@@ -118,6 +124,8 @@ elif [ "$1" = "pkg" ]; then
     "$_REPODIR/update.sh"
 elif [ -d "$_PKGDIR/$1" ]; then
     build "$@"
+elif [ "$1" = dryrun ]; then
+    buildall dryrun
 else
     printf "ERROR: Package %s not found!\n" "$1"
     exit 1

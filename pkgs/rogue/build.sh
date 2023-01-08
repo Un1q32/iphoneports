@@ -12,7 +12,7 @@ rm packagerogue.scr
 cd package || exit 1
 rm -rf usr/share
 "$_TARGET-strip" -x usr/bin/rogue
-ldid -S"$_ENTITLEMENTS" usr/bin/rogue
+ldid -S"$_BSROOT/entitlements.plist" usr/bin/rogue
 )
 
 cp -r DEBIAN package

@@ -13,8 +13,8 @@ cd package || exit 1
 rm -rf usr/share/man
 rm -rf usr/share/icons
 rm -rf usr/share/applications
-ldid -S"$_ENTITLEMENTS" usr/bin/vim
-ldid -S"$_ENTITLEMENTS" usr/bin/xxd
+ldid -S"$_BSROOT/entitlements.plist" usr/bin/vim
+ldid -S"$_BSROOT/entitlements.plist" usr/bin/xxd
 )
 
 cp -r DEBIAN package
