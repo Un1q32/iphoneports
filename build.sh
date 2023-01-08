@@ -90,10 +90,9 @@ fi
 
 if [ -z "$1" ]; then
     cat << EOF
-Usage: build.sh <pkg|all|pkgall|listpkgs>
-Usage: build.sh <package name>
-    <package name>          - Build a single package
-    pkg <package name>      - Build a single package and add it to the repo
+Usage: build.sh <option>
+    <package name> [-r]     - Build a single package
+    pkg <package name> [-r] - Build a single package and add it to the repo
     all                     - Build all packages
     pkgall                  - Build all packages and add them to the repo
     dryrun                  - Pretend to build all packages
