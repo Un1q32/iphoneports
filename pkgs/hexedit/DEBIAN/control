@@ -1,0 +1,9 @@
+Package: hexedit
+Version: 1.6
+Architecture: iphoneos-arm
+Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
+Depends: ncurses
+Section: Text_Editors
+Priority: standard
+Description: View and edit files in hexadecimal or in ASCII
+Tag: purpose::console
