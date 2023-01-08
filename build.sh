@@ -72,7 +72,7 @@ buildall() {
         build "$pkg" rebuild "$1" || { printf "Failed to build %s\n" "$pkg"; exit 1; }
         printf "%s\n" "$pkg" >> /tmp/.builtpkgs
     done
-    # rm /tmp/.builtpkgs
+    rm /tmp/.builtpkgs
 }
 
 for dep in "$_TARGET-clang" "$_TARGET-clang++" "$_TARGET-gcc" "$_TARGET-g++" "$_TARGET-cc" "$_TARGET-c++" "$_TARGET-strip" curl ldid make patch dpkg-deb; do
