@@ -1,12 +1,20 @@
 #!/bin/sh
-_TARGET="arm-apple-darwin9"
+case "$*" in
+    *--target=*)
+        _args="$*"
+        _TARGET="${_args#*--target=}"
+        ;;
+    *)
+        _TARGET="arm-apple-darwin9"
+        ;;
+esac
 _SDK="$HOME/iosdev/toolchain/sdk"
 _REPODIR="$HOME/iosdev/oldworldordr.github.io"
 _PKGDIR="${0%/*}/pkgs"
 _PKGDIR="$(cd "$_PKGDIR" && pwd)"
 _BSROOT="$_PKGDIR/.."
 export _PKGDIR _BSROOT _REPODIR _SDK _TARGET
-export TERM=xterm-256color
+export TERM="xterm-256color"
 printf "" > /tmp/.builtpkgs
 
 hasbeenbuilt() {
@@ -91,7 +99,7 @@ fi
 
 if [ -z "$1" ]; then
     cat << EOF
-Usage: build.sh <option>
+Usage: build.sh <option> [--target=tripple]
     <package name> [-r]     - Build a single package, specify -r to rebuild dependencies
     pkg <package name> [-r] - Build a single package and add it to the repo
     all                     - Build all packages
