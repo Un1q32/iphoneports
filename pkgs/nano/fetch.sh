@@ -6,4 +6,5 @@ printf "Unpacking source...\n"
 tar -xf source.tar.gz
 rm source.tar.gz
 mv nano-7.1 source
+rm -rf files/syntax
 git clone https://github.com/scopatz/nanorc files/syntax
