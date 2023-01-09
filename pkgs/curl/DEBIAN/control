@@ -1,0 +1,10 @@
+Package: curl
+Priority: standard
+Section: Networking
+Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
+Architecture: iphoneos-arm
+Version: 7.87.0
+Depends: openssl
+Description: flexible multi-protocol file transfers
+Name: cURL
+Homepage: http://curl.haxx.se/
