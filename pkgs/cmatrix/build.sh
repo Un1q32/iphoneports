@@ -4,7 +4,7 @@ cd source || exit 1
 autoreconf -fi
 ./configure --host="$_TARGET" --prefix=/usr --without-fonts
 make -j4
-make DESTDIR="$_PKGDIR/cmatrix/package" install
+make DESTDIR="$_PKGROOT/package" install
 )
 
 (

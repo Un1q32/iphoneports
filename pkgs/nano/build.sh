@@ -3,7 +3,7 @@
 cd source || exit 1
 ./configure --host="$_TARGET" --prefix=/usr --sysconfdir=/etc
 make -j4
-make DESTDIR="$_PKGDIR/nano/package" install
+make DESTDIR="$_PKGROOT/package" install
 )
 
 (

@@ -56,7 +56,8 @@ build() {
     (
     hasbeenbuilt "$1" "$3" && return 0
     printf "Building %s...\n" "${1##*/}"
-    cd "$_PKGDIR/$1" || exit 1
+    export _PKGROOT="$_PKGDIR/$1"
+    cd "$_PKGROOT" || exit 1
     includedeps "$2" "$3"
     if ! [ "$3" = "dryrun" ]; then
         ./fetch.sh

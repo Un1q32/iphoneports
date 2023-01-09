@@ -4,7 +4,7 @@ cd source || exit 1
 ./autogen.sh
 ./configure --host="$_TARGET" --prefix=/usr
 make -j4
-make DESTDIR="$_PKGDIR/hexedit/package" install
+make DESTDIR="$_PKGROOT/package" install
 )
 
 (

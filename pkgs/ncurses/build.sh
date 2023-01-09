@@ -3,11 +3,11 @@
 cd source || exit 1
 ./configure --host="$_TARGET" --prefix=/usr --sysconfdir=/etc --with-default-terminfo-dir=/usr/share/terminfo --with-shared --without-normal --without-debug --enable-sigwinch --disable-mixed-case --enable-termcap
 make -j4
-make DESTDIR="$_PKGDIR/ncurses/package" install
+make DESTDIR="$_PKGROOT/package" install
 make clean
 ./configure --host="$_TARGET" --prefix=/usr --sysconfdir=/etc --with-default-terminfo-dir=/usr/share/terminfo --with-shared --without-normal --without-debug --enable-sigwinch --disable-mixed-case --enable-termcap --disable-overwrite --enable-widec
 make -j4
-make DESTDIR="$_PKGDIR/ncurses/package" install
+make DESTDIR="$_PKGROOT/package" install
 )
 
 (
