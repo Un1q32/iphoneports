@@ -8,7 +8,12 @@ case "$*" in
         _TARGET="arm-apple-darwin9"
         ;;
 esac
-_SDK="$("$_TARGET-sdkpath")"
+if command -v "$_TARGET-sdkpath" > /dev/null; then
+    _SDK="$("$_TARGET-sdkpath")"
+else
+    printf "ERROR: Missing dependency: %s-sdkpath\n" "$_TARGET"
+    exit 1
+fi
 _REPODIR="$HOME/iosdev/oldworldordr.github.io"
 _PKGDIR="${0%/*}/pkgs"
 _PKGDIR="$(cd "$_PKGDIR" && pwd)"
@@ -87,7 +92,7 @@ buildall() {
 
 for dep in "$_TARGET-clang" "$_TARGET-clang++" "$_TARGET-gcc" "$_TARGET-g++" "$_TARGET-cc" "$_TARGET-c++" "$_TARGET-strip" ldid patch dpkg-deb; do
     if ! command -v "$dep" > /dev/null; then
-        printf "Missing dependency %s\n" "$dep"
+        printf "ERROR: Missing dependency %s\n" "$dep"
         exit 1
     fi
 done
