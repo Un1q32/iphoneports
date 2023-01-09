@@ -8,7 +8,7 @@ case "$*" in
         _TARGET="arm-apple-darwin9"
         ;;
 esac
-_SDK="$HOME/iosdev/toolchain/sdk"
+_SDK="$("$_TARGET-sdkpath")"
 _REPODIR="$HOME/iosdev/oldworldordr.github.io"
 _PKGDIR="${0%/*}/pkgs"
 _PKGDIR="$(cd "$_PKGDIR" && pwd)"
