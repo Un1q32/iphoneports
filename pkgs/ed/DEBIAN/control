@@ -1,0 +1,8 @@
+Package: ed
+Priority: important
+Section: Text_Editors
+Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
+Architecture: iphoneos-arm
+Version: 1.18
+Description: A POSIX-compliant line-oriented text editor
+Tag: purpose::console
