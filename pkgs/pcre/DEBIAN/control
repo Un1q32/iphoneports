@@ -1,0 +1,8 @@
+Package: pcre
+Priority: required
+Section: Development
+Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
+Architecture: iphoneos-arm
+Version: 8.45
+Pre-Depends: dpkg (>= 1.14.25-8)
+Description: Perl-compatible regular expressions
