@@ -1,0 +1,8 @@
+Package: wget
+Priority: important
+Section: Networking
+Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
+Architecture: iphoneos-arm
+Version: 1.21.3
+Depends: openssl, pcre
+Description: Network utility to retrieve files from the Web

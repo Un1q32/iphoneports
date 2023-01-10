@@ -15,9 +15,9 @@ else
     exit 1
 fi
 _REPODIR="$HOME/iosdev/oldworldordr.github.io"
-_PKGDIR="${0%/*}/pkgs"
-_PKGDIR="$(cd "$_PKGDIR" && pwd)"
-_BSROOT="$_PKGDIR/.."
+_BSROOT="${0%/*}"
+_BSROOT="$(cd "$_BSROOT" && pwd)"
+_PKGDIR="$_BSROOT/pkgs"
 export _PKGDIR _BSROOT _REPODIR _SDK _TARGET
 export TERM="xterm-256color"
 printf "" > /tmp/.builtpkgs
@@ -42,6 +42,9 @@ applypatches() {
 
 includedeps() {
     if [ -f dependencies.txt ]; then
+        export _SDKPATH="$_BSROOT/sdk"
+        rm -rf "$_SDKPATH"
+        cp -r "$_SDK" "$_BSROOT"
         while read -r dep; do
             if [ -d "$_PKGDIR/$dep" ]; then
                 if [ "$1" = "-r" ] && ! hasbeenbuilt "$dep" "$2"; then
@@ -54,9 +57,6 @@ includedeps() {
                 fi
                 printf "Including dependency %s\n" "$dep"
                 if ! [ "$2" = "dryrun" ]; then
-                    export _SDKPATH="$_BSROOT/sdk"
-                    rm -rf "$_SDKPATH"
-                    cp -r "$_SDK" "$_BSROOT"
                     cp -r "$_PKGDIR/$dep/package/usr/include" "$_SDKPATH/usr"
                     cp -r "$_PKGDIR/$dep/package/usr/lib" "$_SDKPATH/usr"
                 fi
