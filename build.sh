@@ -111,12 +111,6 @@ buildall() {
     rm /tmp/.builtpkgs
 }
 
-
-# if "$_TARGET"-strip --version 2> /dev/null | grep -q "GNU"; then
-#     printf "ERROR: GNU/LLVM strip is not supported!\n"
-#     exit 1
-# fi
-
 if [ -z "$1" ]; then
     cat << EOF
 Usage: build.sh <option> [--target=tripple]
