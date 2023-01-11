@@ -1,4 +1,5 @@
 #!/bin/sh
+#shellcheck disable=SC2185
 case "$*" in
     *--target=*)
         _args="$*"
@@ -58,7 +59,7 @@ printf "" > /tmp/.builtpkgs
 
 hasbeenbuilt() {
     while read -r pkg; do
-        if [ "$pkg" = "$1" ] && { [ "$2" = "dryrun" ] || [ -d "$_PKGDIR/$1/package/usr/include" ] || [ -d "$_PKGDIR/$1/package/usr/lib" ]; }; then
+        if [ "$pkg" = "$1" ] && { ! { [ "$2" = "dependency" ] && ! { [ -d "$_PKGDIR/$1/package/usr/include" ] || [ -d "$_PKGDIR/$1/package/usr/lib" ]; }; } || [ "$3" = "dryrun" ]; }; then
             return 0
         fi
     done < /tmp/.builtpkgs
@@ -77,11 +78,13 @@ applypatches() {
 includedeps() {
     if [ -f dependencies.txt ]; then
         export _SDKPATH="$_BSROOT/sdk"
-        rm -rf "$_SDKPATH"
-        cp -r "$_SDK" "$_BSROOT"
+        if ! [ "$2" = "dryrun" ]; then
+            rm -rf "$_SDKPATH"
+            cp -r "$_SDK" "$_BSROOT"
+        fi
         while read -r dep; do
             if [ -d "$_PKGDIR/$dep" ]; then
-                if [ "$1" = "-r" ] && ! hasbeenbuilt "$dep" "$2"; then
+                if [ "$1" = "-r" ] && ! hasbeenbuilt "$dep" dependency "$2"; then
                     printf "Building dependency %s\n" "$dep"
                     build "$dep" -r "$2"
                     if ! [ "$2" = "dryrun" ]; then
@@ -101,7 +104,7 @@ includedeps() {
 
 build() {
     (
-    hasbeenbuilt "$1" "$3" && return 0
+    hasbeenbuilt "$1" - "$3" && return 0
     printf "Building %s...\n" "${1##*/}"
     export _PKGROOT="$_PKGDIR/$1"
     cd "$_PKGROOT" || exit 1
