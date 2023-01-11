@@ -8,16 +8,37 @@ case "$*" in
         _TARGET="arm-apple-darwin9"
         ;;
 esac
-if command -v "$_TARGET-sdkpath" > /dev/null; then
-    _SDK="$("$_TARGET-sdkpath")"
+
+for dep in "$_TARGET-clang" "$_TARGET-clang++" "$_TARGET-gcc" "$_TARGET-g++" "$_TARGET-cc" "$_TARGET-c++" "$_TARGET-strip" "$_TARGET-sdkpath" ldid patch dpkg-deb; do
+    if ! command -v "$dep" > /dev/null; then
+        printf "ERROR: Missing dependency %s\n" "$dep"
+        exit 1
+    fi
+done
+
+_strip_version=$("$_TARGET-strip")
+case "$_strip_version" in
+    *GNU*) printf "ERROR: GNU strip is not supported\n"; exit 1;;
+esac
+
+if command -v gmake > /dev/null; then
+    _MAKE="gmake"
+elif command -v make > /dev/null; then
+    _make_version="$(make --version)"
+    case "$_make_version" in
+        *GNU*) _MAKE="make" ;;
+        *) printf "ERROR: Non-GNU make detected. Please install GNU make.\n" ;;
+    esac
 else
-    printf "ERROR: Missing dependency: %s-sdkpath\n" "$_TARGET"
+    printf "ERROR: No make detected. Please install GNU make.\n"
     exit 1
 fi
+
 _REPODIR="$HOME/iosdev/oldworldordr.github.io"
 _BSROOT="${0%/*}"
 _BSROOT="$(cd "$_BSROOT" && pwd)"
 _PKGDIR="$_BSROOT/pkgs"
+_SDK="$("$_TARGET-sdkpath")"
 export _PKGDIR _BSROOT _REPODIR _SDK _TARGET
 export TERM="xterm-256color"
 printf "" > /tmp/.builtpkgs
@@ -90,17 +111,11 @@ buildall() {
     rm /tmp/.builtpkgs
 }
 
-for dep in "$_TARGET-clang" "$_TARGET-clang++" "$_TARGET-gcc" "$_TARGET-g++" "$_TARGET-cc" "$_TARGET-c++" "$_TARGET-strip" ldid patch dpkg-deb; do
-    if ! command -v "$dep" > /dev/null; then
-        printf "ERROR: Missing dependency %s\n" "$dep"
-        exit 1
-    fi
-done
 
-if "$_TARGET"-strip --version 2> /dev/null | grep -q "GNU"; then
-    printf "ERROR: GNU/LLVM strip is not supported!\n"
-    exit 1
-fi
+# if "$_TARGET"-strip --version 2> /dev/null | grep -q "GNU"; then
+#     printf "ERROR: GNU/LLVM strip is not supported!\n"
+#     exit 1
+# fi
 
 if [ -z "$1" ]; then
     cat << EOF
