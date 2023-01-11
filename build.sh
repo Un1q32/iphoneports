@@ -52,7 +52,7 @@ _BSROOT="${0%/*}"
 _BSROOT="$(cd "$_BSROOT" && pwd)"
 _PKGDIR="$_BSROOT/pkgs"
 _SDK="$("$_TARGET-sdkpath")"
-export _PKGDIR _BSROOT _REPODIR _SDK _TARGET
+export _PKGDIR _BSROOT _REPODIR _SDK _TARGET _MAKE _FIND
 export TERM="xterm-256color"
 printf "" > /tmp/.builtpkgs
 
