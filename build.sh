@@ -16,7 +16,7 @@ for dep in "$_TARGET-clang" "$_TARGET-clang++" "$_TARGET-gcc" "$_TARGET-g++" "$_
     fi
 done
 
-_strip_version=$("$_TARGET-strip")
+_strip_version=$("$_TARGET-strip" --version 2> /dev/null)
 case "$_strip_version" in
     *GNU*) printf "ERROR: GNU strip is not supported\n"; exit 1;;
 esac
