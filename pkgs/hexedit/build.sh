@@ -3,8 +3,8 @@
 cd source || exit 1
 ./autogen.sh
 ./configure --host="$_TARGET" --prefix=/usr
-make -j4
-make DESTDIR="$_PKGROOT/package" install
+"$_MAKE" -j4
+"$_MAKE" DESTDIR="$_PKGROOT/package" install
 )
 
 (

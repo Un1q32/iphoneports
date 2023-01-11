@@ -2,7 +2,7 @@
 (
 cd source || exit 1
 ./configure --host="$_TARGET" --prefix=/usr --sysconfdir=/etc --bindir=/bin --with-installed-readline
-make -j4
+"$_MAKE" -j4
 mkdir -p "$_PKGROOT"/package/bin
 cp bash "$_PKGROOT"/package/bin
 )

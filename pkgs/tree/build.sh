@@ -1,7 +1,7 @@
 #!/bin/sh
 (
 cd source || exit 1
-make PREFIX=/usr CC="$_TARGET-clang" -j4
+"$_MAKE" PREFIX=/usr CC="$_TARGET-clang" -j4
 mkdir -p "$_PKGROOT"/package/usr/bin
 cp tree "$_PKGROOT"/package/usr/bin
 )

@@ -2,8 +2,8 @@
 (
 cd source || exit 1
 ./configure --host="$_TARGET" --prefix=/usr --sysconfdir=/etc
-make -j4
-make DESTDIR="$_PKGROOT/package" install
+"$_MAKE" -j4
+"$_MAKE" DESTDIR="$_PKGROOT/package" install
 )
 
 (

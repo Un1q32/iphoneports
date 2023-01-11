@@ -3,8 +3,10 @@
 cd source || exit 1
 autoreconf -fi
 ./configure --host="$_TARGET" --prefix=/usr
-make -j4
-make DESTDIR="$_PKGROOT/package" install
+"$_MAKE" -j4
+mkdir -p "$_PKGROOT/package/usr/bin"
+cp bc/bc "$_PKGROOT/package/usr/bin"
+cp dc/dc "$_PKGROOT/package/usr/bin"
 )
 
 (
