@@ -34,6 +34,19 @@ else
     exit 1
 fi
 
+if command -v gfind > /dev/null; then
+    _FIND="gfind"
+elif command -v find > /dev/null; then
+    _find_version="$(find --version)"
+    case "$_find_version" in
+        *GNU*) _FIND="find" ;;
+        *) printf "ERROR: Non-GNU find detected. Please install GNU find.\n" ;;
+    esac
+else
+    printf "ERROR: No find detected. Please install GNU find.\n"
+    exit 1
+fi
+
 _REPODIR="$HOME/iosdev/oldworldordr.github.io"
 _BSROOT="${0%/*}"
 _BSROOT="$(cd "$_BSROOT" && pwd)"
@@ -126,7 +139,7 @@ fi
 
 if [ "$1" = "pkgall" ]; then
     buildall
-    find . -iname "*.deb" -exec cp {} "$_REPODIR/debs" \;
+    "$_FIND" . -iname "*.deb" -exec cp {} "$_REPODIR/debs" \;
     "$_REPODIR/update.sh"
 elif [ "$1" = "all" ]; then
     buildall
@@ -136,7 +149,7 @@ elif [ "$1" = "listpkgs" ]; then
     done
 elif [ "$1" = "pkg" ]; then
     build "$2" "$3"
-    find "$_PKGDIR/$2" -iname "*.deb" -exec cp {} "$_REPODIR/debs" \;
+    "$_FIND" "$_PKGDIR/$2" -iname "*.deb" -exec cp {} "$_REPODIR/debs" \;
     "$_REPODIR/update.sh"
 elif [ -d "$_PKGDIR/$1" ]; then
     build "$@"
