@@ -87,7 +87,7 @@ index ec4bf59..c670f5b 100644
 diff --git a/m4/cc_for_build.m4 b/m4/cc_for_build.m4
 new file mode 100644
 index 0000000..c62ffad
---- /dev/null
+--- bc/source/m4/cc_for_build.m4
 +++ bc/source/m4/cc_for_build.m4
 @@ -0,0 +1,77 @@
 +# ===========================================================================
