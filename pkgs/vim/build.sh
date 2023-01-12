@@ -6,8 +6,6 @@ vim_cv_memcpy_handles_overlap=set vim_cv_bcopy_handles_overlap=set vim_cv_memmov
 "$_MAKE" DESTDIR="$_PKGROOT/package" STRIP="$_TARGET-strip" install
 )
 
-[ -d package ] || exit 1
-
 (
 cd package || exit 1
 rm -rf usr/share/man
@@ -18,4 +16,4 @@ ldid -S"$_BSROOT/entitlements.plist" usr/bin/xxd
 )
 
 cp -r DEBIAN package
-dpkg-deb -b --root-owner-group -Zgzip package vim-9.0.1157.deb
+dpkg-deb -b --root-owner-group -Zgzip package vim-9.0.1182.deb
