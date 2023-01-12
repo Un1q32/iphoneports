@@ -8,7 +8,7 @@ case "$*" in
         _TARGET="arm-apple-darwin9" ;;
 esac
 
-for dep in "$_TARGET-clang" "$_TARGET-clang++" "$_TARGET-gcc" "$_TARGET-g++" "$_TARGET-cc" "$_TARGET-c++" "$_TARGET-strip" "$_TARGET-sdkpath" ldid patch dpkg-deb; do
+for dep in "$_TARGET-clang" "$_TARGET-clang++" "$_TARGET-gcc" "$_TARGET-g++" "$_TARGET-cc" "$_TARGET-c++" "$_TARGET-strip" "$_TARGET-sdkpath" ldid patch dpkg-deb mv cp; do
     if ! command -v "$dep" > /dev/null; then
         printf "ERROR: Missing dependency %s\n" "$dep"
         exit 1
@@ -131,8 +131,7 @@ buildall() {
 }
 
 if [ -z "$1" ]; then
-    cat << EOF
-Usage: build.sh <option> [--target=tripple] [--no-tmpfs]
+    printf "Usage: build.sh <option> [--target=tripple] [--no-tmpfs]
     <package name> [-r]     - Build a single package, specify -r to rebuild dependencies
     pkg <package name> [-r] - Build a single package and add it to the repo
     all                     - Build all packages
@@ -140,8 +139,7 @@ Usage: build.sh <option> [--target=tripple] [--no-tmpfs]
     dryrun                  - Pretend to build all packages
     listpkgs                - List all packages
     --target                - Specify a target other than arm-apple-darwin9
-    --no-tmpfs              - Do not use tmpfs for temporary sdks (use if you have limited RAM)
-EOF
+    --no-tmpfs              - Do not use tmpfs for temporary sdks (use if you have limited RAM)\n"
     exit 1
 fi
 
