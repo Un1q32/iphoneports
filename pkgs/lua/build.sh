@@ -1,8 +1,8 @@
 #!/bin/sh
 (
 cd source || exit 1
-"$_MAKE" PLAT=macosx INSTALL_TOP=/usr CC=arm-apple-darwin9-clang RANLIB=arm-apple-darwin9-ranlib
-"$_MAKE" PLAT=macosx INSTALL_TOP="$_PKGROOT/package/usr" CC=arm-apple-darwin9-clang RANLIB=arm-apple-darwin9-ranlib install
+"$_MAKE" PLAT=macosx INSTALL_TOP=/usr CC="$_TARGET-clang" RANLIB="$_TARGET-ranlib"
+"$_MAKE" PLAT=macosx INSTALL_TOP="$_PKGROOT/package/usr" CC="$_TARGET-clang" RANLIB="$_TARGET-ranlib" install
 )
 
 (
