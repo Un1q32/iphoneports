@@ -1,7 +1,7 @@
 diff --git a/ex.c b/ex.c
 index b20009c..78c6629 100644
---- nextvi/source/ex.c
-+++ nextvi/source/ex.c
+--- source/ex.c
++++ source/ex.c
 @@ -407,6 +407,19 @@ static int ec_edit(char *loc, char *cmd, char *arg)
  		ex_show(msg);
  	} else

@@ -1,4 +1,5 @@
 source
 package
 sdk
+sdk.tmp
 *.deb

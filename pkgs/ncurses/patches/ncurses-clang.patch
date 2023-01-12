@@ -1,6 +1,6 @@
 diff -ruNp source.orig/c++/cursesf.h source/c++/cursesf.h
---- ncurses/source.orig/c++/cursesf.h	2005-08-13 21:08:24.000000000 +0300
-+++ ncurses/source/c++/cursesf.h	2011-04-03 18:29:29.000000000 +0300
+--- source.orig/c++/cursesf.h	2005-08-13 21:08:24.000000000 +0300
++++ source/c++/cursesf.h	2011-04-03 18:29:29.000000000 +0300
 @@ -681,7 +681,7 @@ public:
  		   const T* p_UserData = STATIC_CAST(T*)(0),
  		   bool with_frame=FALSE,
@@ -20,8 +20,8 @@ diff -ruNp source.orig/c++/cursesf.h source/c++/cursesf.h
        if (form)
  	set_user (const_cast<void *>(p_UserData));
 diff -ruNp source.orig/c++/cursesm.h source/c++/cursesm.h
---- ncurses/source.orig/c++/cursesm.h	2005-08-13 21:10:36.000000000 +0300
-+++ ncurses/source/c++/cursesm.h	2011-04-03 18:31:42.000000000 +0300
+--- source.orig/c++/cursesm.h	2005-08-13 21:10:36.000000000 +0300
++++ source/c++/cursesm.h	2011-04-03 18:31:42.000000000 +0300
 @@ -639,7 +639,7 @@ public:
  		   const T* p_UserData = STATIC_CAST(T*)(0),
  		   bool with_frame=FALSE,

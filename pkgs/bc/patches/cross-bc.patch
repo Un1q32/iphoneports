@@ -6,8 +6,8 @@ Date:   Tue Oct 17 10:51:34 2017 -0400
 
 diff --git a/bc/Makefile.am b/bc/Makefile.am
 index d9d412e..fdef633 100644
---- bc/source/bc/Makefile.am
-+++ bc/source/bc/Makefile.am
+--- source/bc/Makefile.am
++++ source/bc/Makefile.am
 @@ -17,6 +17,7 @@ MAINTAINERCLEANFILES = Makefile.in bc.c bc.h scan.c \
  
  AM_CPPFLAGS = -I$(srcdir) -I$(srcdir)/../h
@@ -43,8 +43,8 @@ index d9d412e..fdef633 100644
  	rm -f ./fbc ./global.o
 diff --git a/configure.ac b/configure.ac
 index fc74573..5cabb73 100644
---- bc/source/configure.ac
-+++ bc/source/configure.ac
+--- source/configure.ac
++++ source/configure.ac
 @@ -20,6 +20,7 @@ m4_define([dc_version], 1.4.1)
  
  AC_INIT([bc],[bc_version])
@@ -63,8 +63,8 @@ index fc74573..5cabb73 100644
  AM_PROG_LEX
 diff --git a/lib/Makefile.am b/lib/Makefile.am
 index ec4bf59..c670f5b 100644
---- bc/source/lib/Makefile.am
-+++ bc/source/lib/Makefile.am
+--- source/lib/Makefile.am
++++ source/lib/Makefile.am
 @@ -1,5 +1,5 @@
  ## Process this file with automake to produce Makefile.in
 -noinst_LIBRARIES = libbc.a
@@ -87,8 +87,8 @@ index ec4bf59..c670f5b 100644
 diff --git a/m4/cc_for_build.m4 b/m4/cc_for_build.m4
 new file mode 100644
 index 0000000..c62ffad
---- bc/source/m4/cc_for_build.m4
-+++ bc/source/m4/cc_for_build.m4
+--- source/m4/cc_for_build.m4
++++ source/m4/cc_for_build.m4
 @@ -0,0 +1,77 @@
 +# ===========================================================================
 +#     https://www.gnu.org/software/autoconf-archive/ax_cc_for_build.html

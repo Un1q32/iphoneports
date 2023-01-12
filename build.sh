@@ -3,11 +3,9 @@
 case "$*" in
     *--target=*)
         _args="$*"
-        _TARGET="${_args#*--target=}"
-        ;;
+        _TARGET="${_args#*--target=}" ;;
     *)
-        _TARGET="arm-apple-darwin9"
-        ;;
+        _TARGET="arm-apple-darwin9" ;;
 esac
 
 for dep in "$_TARGET-clang" "$_TARGET-clang++" "$_TARGET-gcc" "$_TARGET-g++" "$_TARGET-cc" "$_TARGET-c++" "$_TARGET-strip" "$_TARGET-sdkpath" ldid patch dpkg-deb; do
@@ -76,7 +74,10 @@ applypatches() {
 }
 
 includedeps() {
-    export _SDKPATH="$_BSROOT/sdk"
+    case "$*" in
+        *--no-tmpfs*) export _SDKPATH="$_BSROOT/sdk" ;;
+        *) export _SDKPATH="/tmp/sdk" ;;
+    esac
     if ! [ "$2" = "dryrun" ]; then
         rm -rf "$_SDKPATH"
         cp -r "$_SDK" "$_SDKPATH"
@@ -131,7 +132,7 @@ buildall() {
 
 if [ -z "$1" ]; then
     cat << EOF
-Usage: build.sh <option> [--target=tripple]
+Usage: build.sh <option> [--target=tripple] [--no-tmpfs]
     <package name> [-r]     - Build a single package, specify -r to rebuild dependencies
     pkg <package name> [-r] - Build a single package and add it to the repo
     all                     - Build all packages
