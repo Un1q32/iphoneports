@@ -46,12 +46,11 @@ else
     exit 1
 fi
 
-_REPODIR="$HOME/iosdev/oldworldordr.github.io"
 _BSROOT="${0%/*}"
 _BSROOT="$(cd "$_BSROOT" && pwd)"
 _PKGDIR="$_BSROOT/pkgs"
 _SDK="$("$_TARGET-sdkpath")"
-export _PKGDIR _BSROOT _REPODIR _SDK _TARGET _MAKE _FIND
+export _PKGDIR _BSROOT _SDK _TARGET _MAKE _FIND
 export TERM="xterm-256color"
 printf "" > /tmp/.builtpkgs
 
@@ -145,8 +144,7 @@ fi
 
 if [ "$1" = "pkgall" ]; then
     buildall
-    "$_FIND" . -iname "*.deb" -exec cp {} "$_REPODIR/debs" \;
-    "$_REPODIR/update.sh"
+    "$_FIND" . -iname "*.deb" -exec cp {} "$_BSROOT/debs" \;
 elif [ "$1" = "all" ]; then
     buildall
 elif [ "$1" = "listpkgs" ]; then
@@ -155,8 +153,7 @@ elif [ "$1" = "listpkgs" ]; then
     done
 elif [ "$1" = "pkg" ]; then
     build "$2" "$3"
-    "$_FIND" "$_PKGDIR/$2" -iname "*.deb" -exec cp {} "$_REPODIR/debs" \;
-    "$_REPODIR/update.sh"
+    "$_FIND" "$_PKGDIR/$2" -iname "*.deb" -exec cp {} "$_BSROOT/debs" \;
 elif [ -d "$_PKGDIR/$1" ]; then
     build "$@"
 elif [ "$1" = dryrun ]; then
