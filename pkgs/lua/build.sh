@@ -10,6 +10,7 @@ cd package || exit 1
 rm -rf usr/man
 "$_TARGET-strip" -x usr/bin/lua
 "$_TARGET-strip" -x usr/bin/luac
+"$_TARGET-strip" -x usr/lib/liblua.a
 ldid -S"$_BSROOT/entitlements.plist" usr/bin/lua
 ldid -S"$_BSROOT/entitlements.plist" usr/bin/luac
 )
