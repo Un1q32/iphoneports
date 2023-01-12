@@ -79,7 +79,7 @@ includedeps() {
     export _SDKPATH="$_BSROOT/sdk"
     if ! [ "$2" = "dryrun" ]; then
         rm -rf "$_SDKPATH"
-        cp -r "$_SDK" "$_BSROOT"
+        cp -r "$_SDK" "$_SDKPATH"
     fi
     if [ -f dependencies.txt ]; then
         while read -r dep; do
