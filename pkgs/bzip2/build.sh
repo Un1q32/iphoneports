@@ -10,7 +10,6 @@ mv usr/bin .
 rm -rf usr/man
 "$_TARGET-strip" -x bin/bzip2
 "$_TARGET-strip" -x bin/bzip2recover
-"$_TARGET-strip" -x usr/lib/libbz2.a
 ldid -S"$_BSROOT/entitlements.plist" bin/bzip2
 ldid -S"$_BSROOT/entitlements.plist" bin/bzip2recover
 )
