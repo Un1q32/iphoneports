@@ -76,12 +76,12 @@ applypatches() {
 }
 
 includedeps() {
+    if ! [ "$2" = "dryrun" ]; then
+        rm -rf "$_SDKPATH"
+        cp -r "$_SDK" "$_BSROOT"
+    fi
     if [ -f dependencies.txt ]; then
         export _SDKPATH="$_BSROOT/sdk"
-        if ! [ "$2" = "dryrun" ]; then
-            rm -rf "$_SDKPATH"
-            cp -r "$_SDK" "$_BSROOT"
-        fi
         while read -r dep; do
             if [ -d "$_PKGDIR/$dep" ]; then
                 if [ "$1" = "-r" ] || ! hasbeenbuilt "$dep" dependency "$2"; then
