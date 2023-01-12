@@ -139,6 +139,8 @@ Usage: build.sh <option> [--target=tripple] [--no-tmpfs]
     pkgall                  - Build all packages and add them to the repo
     dryrun                  - Pretend to build all packages
     listpkgs                - List all packages
+    --target                - Specify a target other than arm-apple-darwin9
+    --no-tmpfs              - Do not use tmpfs for temporary sdks (use if you have limited RAM)
 EOF
     exit 1
 fi
