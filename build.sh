@@ -70,7 +70,7 @@ applypatches() {
     if [ -d patches ]; then
         for patch in patches/*; do
             printf "Applying patch %s\n" "${patch##*/}"
-            patch -p1 < "$patch"
+            patch -p0 < "$patch"
         done
     fi
 }
