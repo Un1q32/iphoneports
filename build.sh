@@ -84,7 +84,7 @@ includedeps() {
         fi
         while read -r dep; do
             if [ -d "$_PKGDIR/$dep" ]; then
-                if [ "$1" = "-r" ] && ! hasbeenbuilt "$dep" dependency "$2"; then
+                if [ "$1" = "-r" ] || ! hasbeenbuilt "$dep" dependency "$2"; then
                     printf "Building dependency %s\n" "$dep"
                     build "$dep" -r "$2"
                     if ! [ "$2" = "dryrun" ]; then
