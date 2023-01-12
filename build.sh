@@ -29,7 +29,7 @@ elif command -v make > /dev/null; then
         *) printf "ERROR: Non-GNU make detected. Please install GNU make.\n" ;;
     esac
 else
-    printf "ERROR: No make detected. Please install GNU make.\n"
+    printf "ERROR: No make command detected. Please install GNU make.\n"
     exit 1
 fi
 
@@ -42,7 +42,7 @@ elif command -v find > /dev/null; then
         *) printf "ERROR: Non-GNU find detected. Please install GNU find.\n" ;;
     esac
 else
-    printf "ERROR: No find detected. Please install GNU find.\n"
+    printf "ERROR: No find command detected. Please install GNU find.\n"
     exit 1
 fi
 
