@@ -8,7 +8,7 @@ case "$*" in
         _TARGET="arm-apple-darwin9" ;;
 esac
 
-for dep in "$_TARGET-clang" "$_TARGET-clang++" "$_TARGET-gcc" "$_TARGET-g++" "$_TARGET-cc" "$_TARGET-c++" "$_TARGET-strip" "$_TARGET-sdkpath" ldid patch dpkg-deb mv cp; do
+for dep in "$_TARGET-clang" "$_TARGET-clang++" "$_TARGET-gcc" "$_TARGET-g++" "$_TARGET-cc" "$_TARGET-c++" "$_TARGET-strip" "$_TARGET-sdkpath" ldid dpkg-deb mv cp; do
     if ! command -v "$dep" > /dev/null; then
         printf "ERROR: Missing dependency %s\n" "$dep"
         exit 1
@@ -30,6 +30,19 @@ elif command -v make > /dev/null; then
     esac
 else
     printf "ERROR: No make command detected. Please install GNU make.\n"
+    exit 1
+fi
+
+if command -v gpatch > /dev/null; then
+    _PATCH="gpatch"
+elif command -v make > /dev/null; then
+    _patch_version="$(patch --version)"
+    case "$_patch_version" in
+        *GNU*) _PATCH="patch" ;;
+        *) printf "ERROR: Non-GNU patch detected. Please install GNU patch.\n" ;;
+    esac
+else
+    printf "ERROR: No patch command detected. Please install GNU patch.\n"
     exit 1
 fi
 
@@ -67,7 +80,7 @@ applypatches() {
     if [ -d patches ]; then
         for patch in patches/*; do
             printf "Applying patch %s\n" "${patch##*/}"
-            patch -p0 < "$patch"
+            "$_PATCH" -p0 < "$patch"
         done
     fi
 }
