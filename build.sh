@@ -86,7 +86,9 @@ includedeps() {
             if [ -d "$_PKGDIR/$dep" ]; then
                 if [ "$1" = "-r" ] || ! hasbeenbuilt "$dep" dependency "$2"; then
                     printf "Building dependency %s\n" "$dep"
+                    mv "$_SDKPATH" "$_SDKPATH.tmp"
                     build "$dep" -r "$2"
+                    mv "$_SDKPATH.tmp" "$_SDKPATH"
                     if ! [ "$2" = "dryrun" ]; then
                         [ -d "$_PKGDIR/$dep/package/usr/include" ] || [ -d "$_PKGDIR/$dep/package/usr/lib" ] || { printf "Failed to build dependency %s\n" "$dep"; rm /tmp/.builtpkgs; exit 1; }
                     fi
