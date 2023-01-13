@@ -1,5 +1,7 @@
 #!/bin/sh
 #shellcheck disable=SC2185
+
+# check target
 case "$*" in
     *--target=*)
         _args="$*"
@@ -8,6 +10,7 @@ case "$*" in
         _TARGET="arm-apple-darwin9" ;;
 esac
 
+# check for dependencies
 for dep in "$_TARGET-clang" "$_TARGET-clang++" "$_TARGET-gcc" "$_TARGET-g++" "$_TARGET-cc" "$_TARGET-c++" "$_TARGET-strip" "$_TARGET-sdkpath" ldid dpkg-deb mv cp; do
     if ! command -v "$dep" > /dev/null; then
         printf "ERROR: Missing dependency %s\n" "$dep"
@@ -15,11 +18,13 @@ for dep in "$_TARGET-clang" "$_TARGET-clang++" "$_TARGET-gcc" "$_TARGET-g++" "$_
     fi
 done
 
+# check for apple strip
 _strip_version=$("$_TARGET-strip" --version 2> /dev/null)
 case "$_strip_version" in
     *GNU*) printf "ERROR: GNU strip is not supported\n"; exit 1;;
 esac
 
+# check for gnu make
 if command -v gmake > /dev/null; then
     _MAKE="gmake"
 elif command -v make > /dev/null; then
@@ -33,6 +38,7 @@ else
     exit 1
 fi
 
+# check for gnu patch
 if command -v gpatch > /dev/null; then
     _PATCH="gpatch"
 elif command -v make > /dev/null; then
@@ -46,6 +52,7 @@ else
     exit 1
 fi
 
+# check for gnu find
 if command -v gfind > /dev/null; then
     _FIND="gfind"
 elif command -v find > /dev/null; then
@@ -59,21 +66,39 @@ else
     exit 1
 fi
 
+# assign environment variables
 _BSROOT="${0%/*}"
 _BSROOT="$(cd "$_BSROOT" && pwd)"
 _PKGDIR="$_BSROOT/pkgs"
 _SDK="$("$_TARGET-sdkpath")"
 export _PKGDIR _BSROOT _SDK _TARGET _MAKE _FIND
 export TERM="xterm-256color"
-printf "" > /tmp/.builtpkgs
 
+# check if a required build dependency is missing
+# we rebuild if the return code is 1
+# rebuild if $_PKGDIR/$1/package/usr/include and $_PKGDIR/$1/package/usr/lib are both missing
+# if $2 = dryrun, then we rebuild the first time this function is run, but not again until the next time the script is run, even if the package is missing
+# check what packages are already built this run by adding them to the _BUILTPKGS variable
 hasbeenbuilt() {
-    while read -r pkg; do
-        if [ "$pkg" = "$1" ] && { ! { [ "$2" = "dependency" ] && ! { [ -d "$_PKGDIR/$1/package/usr/include" ] || [ -d "$_PKGDIR/$1/package/usr/lib" ]; }; } || [ "$3" = "dryrun" ]; }; then
-            return 0
+    if [ "$2" = "dryrun" ]; then
+        if [ -z "$_BUILTPKGS" ]; then
+            _BUILTPKGS="$1"
+            return 1
+        else
+            for pkg in $_BUILTPKGS; do
+                if [ "$pkg" = "$1" ]; then
+                    return 0
+                fi
+            done
+            _BUILTPKGS="$_BUILTPKGS $1"
+            return 1
         fi
-    done < /tmp/.builtpkgs
-    return 1
+    fi
+    if [ -d "$_PKGDIR/$1/package/usr/include" ] && [ -d "$_PKGDIR/$1/package/usr/lib" ]; then
+        return 0
+    else
+        return 1
+    fi
 }
 
 applypatches() {
@@ -97,15 +122,14 @@ includedeps() {
     if [ -f dependencies.txt ]; then
         while read -r dep; do
             if [ -d "$_PKGDIR/$dep" ]; then
-                if [ "$1" = "-r" ] || ! hasbeenbuilt "$dep" dependency "$2"; then
+                if [ "$1" = "-r" ] || ! hasbeenbuilt "$dep" "$2"; then
                     printf "Building dependency %s\n" "$dep"
-                    mv "$_SDKPATH" "$_SDKPATH.tmp"
-                    build "$dep" -r "$2"
-                    mv "$_SDKPATH.tmp" "$_SDKPATH"
+                    [ "$2" = "dryrun" ] || mv "$_SDKPATH" "$_SDKPATH.tmp"
+                    build "$dep" "$1" "$2"
+                    [ "$2" = "dryrun" ] || mv "$_SDKPATH.tmp" "$_SDKPATH"
                     if ! [ "$2" = "dryrun" ]; then
-                        [ -d "$_PKGDIR/$dep/package/usr/include" ] || [ -d "$_PKGDIR/$dep/package/usr/lib" ] || { printf "Failed to build dependency %s\n" "$dep"; rm /tmp/.builtpkgs; exit 1; }
+                        [ -d "$_PKGDIR/$dep/package/usr/include" ] || [ -d "$_PKGDIR/$dep/package/usr/lib" ] || { printf "Failed to build dependency %s\n" "$dep"; exit 1; }
                     fi
-                    printf "%s\n" "$dep" >> /tmp/.builtpkgs
                 fi
                 printf "Including dependency %s\n" "$dep"
                 if ! [ "$2" = "dryrun" ]; then
@@ -119,7 +143,7 @@ includedeps() {
 
 build() {
     (
-    hasbeenbuilt "$1" - "$3" && return 0
+    hasbeenbuilt "$1" "$3" && return 0
     printf "Building %s...\n" "${1##*/}"
     export _PKGROOT="$_PKGDIR/$1"
     cd "$_PKGROOT" || exit 1
@@ -138,9 +162,7 @@ buildall() {
     for pkg in "$_PKGDIR"/*; do
         pkg="${pkg##*/}"
         build "$pkg" -r "$1" || { printf "Failed to build %s\n" "$pkg"; exit 1; }
-        printf "%s\n" "$pkg" >> /tmp/.builtpkgs
     done
-    rm /tmp/.builtpkgs
 }
 
 if [ -z "$1" ]; then
