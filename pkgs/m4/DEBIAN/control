@@ -1,0 +1,8 @@
+Package: m4
+Priority: important
+Section: Scripting
+Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
+Architecture: iphoneos-arm
+Version: 1.4.19
+Description: The GNU macro processor
+Tag: purpose::console
