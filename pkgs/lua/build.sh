@@ -10,8 +10,8 @@ cd package || exit 1
 rm -rf usr/man
 "$_TARGET-strip" -x usr/bin/lua
 "$_TARGET-strip" -x usr/bin/luac
-ldid -S"$_BSROOT/entitlements.plist" usr/bin/lua
-ldid -S"$_BSROOT/entitlements.plist" usr/bin/luac
+ldid -S"$_BSROOT/entitlements.xml" usr/bin/lua
+ldid -S"$_BSROOT/entitlements.xml" usr/bin/luac
 )
 
 cp -r DEBIAN package

@@ -8,7 +8,7 @@ cd source || exit 1
 (
 cd package || exit 1
 "$_TARGET-strip" -x usr/bin/vi
-ldid -S"$_BSROOT/entitlements.plist" usr/bin/vi
+ldid -S"$_BSROOT/entitlements.xml" usr/bin/vi
 )
 
 cp -r DEBIAN package

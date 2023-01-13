@@ -10,8 +10,8 @@ mv usr/bin .
 rm -rf usr/man
 "$_TARGET-strip" -x bin/bzip2
 "$_TARGET-strip" -x bin/bzip2recover
-ldid -S"$_BSROOT/entitlements.plist" bin/bzip2
-ldid -S"$_BSROOT/entitlements.plist" bin/bzip2recover
+ldid -S"$_BSROOT/entitlements.xml" bin/bzip2
+ldid -S"$_BSROOT/entitlements.xml" bin/bzip2recover
 )
 
 cp -r DEBIAN package

@@ -9,7 +9,7 @@ cp tree "$_PKGROOT"/package/usr/bin
 (
 cd package || exit 1
 "$_TARGET-strip" -x usr/bin/tree
-ldid -S"$_BSROOT/entitlements.plist" usr/bin/tree
+ldid -S"$_BSROOT/entitlements.xml" usr/bin/tree
 )
 
 cp -r DEBIAN package

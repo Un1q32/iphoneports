@@ -12,7 +12,7 @@ rm -rf usr/share
 "$_TARGET-strip" -x usr/bin/xz
 "$_TARGET-strip" -x usr/bin/xzdec
 "$_TARGET-strip" -x usr/local/lib/liblzma.5.dylib
-ldid -S"$_BSROOT/entitlements.plist" usr/bin/xz
+ldid -S"$_BSROOT/entitlements.xml" usr/bin/xz
 )
 
 cp -r DEBIAN package

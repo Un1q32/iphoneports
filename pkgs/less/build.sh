@@ -17,9 +17,9 @@ cd package || exit 1
 "$_TARGET-strip" -x usr/bin/less
 "$_TARGET-strip" -x usr/bin/lessecho
 "$_TARGET-strip" -x usr/bin/lesskey
-ldid -S"$_BSROOT/entitlements.plist" usr/bin/less
-ldid -S"$_BSROOT/entitlements.plist" usr/bin/lessecho
-ldid -S"$_BSROOT/entitlements.plist" usr/bin/lesskey
+ldid -S"$_BSROOT/entitlements.xml" usr/bin/less
+ldid -S"$_BSROOT/entitlements.xml" usr/bin/lessecho
+ldid -S"$_BSROOT/entitlements.xml" usr/bin/lesskey
 )
 
 cp -r DEBIAN package

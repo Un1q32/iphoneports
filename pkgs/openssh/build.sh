@@ -12,9 +12,9 @@ rm -rf usr/share
 "$_TARGET-strip" -x usr/bin/*
 "$_TARGET-strip" -x usr/sbin/*
 "$_TARGET-strip" -x usr/libexec/*
-ldid -S"$_BSROOT/entitlements.plist" usr/bin/*
-ldid -S"$_BSROOT/entitlements.plist" usr/sbin/*
-ldid -S"$_BSROOT/entitlements.plist" usr/libexec/*
+ldid -S"$_BSROOT/entitlements.xml" usr/bin/*
+ldid -S"$_BSROOT/entitlements.xml" usr/sbin/*
+ldid -S"$_BSROOT/entitlements.xml" usr/libexec/*
 chmod 4711 usr/libexec/ssh-keysign
 )
 

@@ -14,8 +14,8 @@ rm -rf usr/share
 "$_TARGET-strip" -x usr/lib/libpcre.1.dylib
 "$_TARGET-strip" -x usr/lib/libpcrecpp.0.dylib
 "$_TARGET-strip" -x usr/lib/libpcreposix.0.dylib
-ldid -S"$_BSROOT/entitlements.plist" usr/bin/pcretest
-ldid -S"$_BSROOT/entitlements.plist" usr/bin/pcregrep
+ldid -S"$_BSROOT/entitlements.xml" usr/bin/pcretest
+ldid -S"$_BSROOT/entitlements.xml" usr/bin/pcregrep
 )
 
 cp -r DEBIAN package

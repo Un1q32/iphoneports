@@ -9,7 +9,7 @@ cd source || exit 1
 (
 cd package || exit 1
 "$_TARGET-strip" -x usr/bin/wget
-ldid -S"$_BSROOT/entitlements.plist" usr/bin/wget
+ldid -S"$_BSROOT/entitlements.xml" usr/bin/wget
 )
 
 cp -r DEBIAN package

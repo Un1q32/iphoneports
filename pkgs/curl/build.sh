@@ -11,7 +11,7 @@ cd package || exit 1
 rm -rf usr/share/man
 "$_TARGET-strip" -x usr/bin/curl
 "$_TARGET-strip" -x usr/lib/libcurl.4.dylib
-ldid -S"$_BSROOT/entitlements.plist" usr/bin/curl
+ldid -S"$_BSROOT/entitlements.xml" usr/bin/curl
 )
 
 cp -r DEBIAN package

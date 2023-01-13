@@ -16,7 +16,7 @@ rm usr/bin/tabs
 rm -rf usr/man
 for i in tic tput tset toe clear infocmp; do
     "$_TARGET-strip" -x usr/bin/$i
-    ldid -S"$_BSROOT/entitlements.plist" usr/bin/$i
+    ldid -S"$_BSROOT/entitlements.xml" usr/bin/$i
 done
 for i in usr/lib/*.dylib; do
     if [ -f "$i" ]; then

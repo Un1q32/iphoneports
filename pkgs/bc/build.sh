@@ -14,8 +14,8 @@ cd package || exit 1
 rm -rf usr/share
 "$_TARGET-strip" -x usr/bin/bc
 "$_TARGET-strip" -x usr/bin/dc
-ldid -S"$_BSROOT/entitlements.plist" usr/bin/bc
-ldid -S"$_BSROOT/entitlements.plist" usr/bin/dc
+ldid -S"$_BSROOT/entitlements.xml" usr/bin/bc
+ldid -S"$_BSROOT/entitlements.xml" usr/bin/dc
 )
 
 cp -r DEBIAN package

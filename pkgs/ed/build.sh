@@ -9,7 +9,7 @@ cd source || exit 1
 (
 cd package || exit 1
 "$_TARGET-strip" -x usr/bin/ed
-ldid -S"$_BSROOT/entitlements.plist" usr/bin/ed
+ldid -S"$_BSROOT/entitlements.xml" usr/bin/ed
 )
 
 cp -r DEBIAN package

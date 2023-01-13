@@ -12,7 +12,7 @@ cp sed/sed ../package/usr/bin/sed
 cd package || exit 1
 ln -s ../usr/bin/sed bin/sed
 "$_TARGET-strip" -x usr/bin/sed
-ldid -S"$_BSROOT/entitlements.plist" usr/bin/sed
+ldid -S"$_BSROOT/entitlements.xml" usr/bin/sed
 )
 
 cp -r DEBIAN package
