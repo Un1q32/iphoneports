@@ -93,6 +93,7 @@ includedeps() {
     if ! [ "$2" = "dryrun" ]; then
         rm -rf "$_SDKPATH"
         cp -r "$_SDK" "$_SDKPATH"
+        [ -d "$_PKGDIR/$dep/sdk" ] && cp -r "$_PKGDIR/$dep/sdk"/* "$_SDKPATH"
     fi
     if [ -f dependencies.txt ]; then
         while read -r dep; do
