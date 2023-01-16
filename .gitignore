@@ -2,4 +2,5 @@ source
 package
 sdk
 sdk.tmp
+.builtpkgs
 *.deb

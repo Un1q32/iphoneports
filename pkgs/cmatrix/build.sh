@@ -4,7 +4,8 @@ cd source || exit 1
 autoreconf -fi
 ./configure --host="$_TARGET" --prefix=/usr --without-fonts
 "$_MAKE" -j4
-cp cmatrix "$_PKGROOT/usr/bin"
+mkdir -p "$_PKGROOT/package/usr/bin"
+cp cmatrix "$_PKGROOT/package/usr/bin"
 )
 
 (

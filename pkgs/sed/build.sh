@@ -3,9 +3,9 @@
 cd source || exit 1
 ./configure --host="$_TARGET" --prefix=/usr
 "$_MAKE" -j4
-mkdir -p ../package/usr/bin
-mkdir -p ../package/bin
-cp sed/sed ../package/usr/bin/sed
+mkdir -p "$_PKGROOT/package/usr/bin"
+mkdir -p "$_PKGROOT/package/bin"
+cp sed/sed "$_PKGROOT/package/usr/bin/sed"
 )
 
 (
