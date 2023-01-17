@@ -1,0 +1,135 @@
+#!/usr/bin/env lua
+local posix = require("posix")
+-- Error function
+function error(msg)
+    print("\27[31mERROR:\27[0m "..msg)
+    os.exit(1)
+end
+
+-- If no arguments are given, print usage and exit
+if #arg == 0 or arg[1] == "-h" or arg[1] == "--help" then
+    print("Usage: build <option> [--target=tripple] [--no-tmpfs]")
+    print("    <package name> [-r]     - Build a single package, specify -r to rebuild dependencies")
+    print("    pkg <package name> [-r] - Build a single package and add it to the repo")
+    print("    all                     - Build all packages")
+    print("    pkgall                  - Build all packages and add them to the repo")
+    print("    dryrun                  - Pretend to build all packages")
+    print("    listpkgs                - List all packages")
+    print("    --target                - Specify a target other than arm-apple-darwin9")
+    print("    --no-tmpfs              - Do not use /tmp for anything (use if you have limited RAM)")
+    print("    --help | -h             - Print this help message")
+    os.exit(1)
+end
+
+-- set BSROOT variable to the directory of this script
+BSROOT = arg[0]:match("(.+)/")
+PKGDIR = BSROOT.."/pkgs"
+
+-- If --target is specified, set the target, else use arm-apple-darwin9
+for i, v in ipairs(arg) do
+    if v:sub(1, 9) == "--target=" then
+        TARGET = v:sub(10)
+        table.remove(arg, i)
+        break
+    end
+end
+TARGET = TARGET or "arm-apple-darwin9"
+
+-- If --no-tmpfs is specified, set TMP to the directory of the script, else use /tmp
+for i, v in ipairs(arg) do
+    if v == "--no-tmpfs" then
+        TMP = BSROOT
+        table.remove(arg, i)
+        break
+    end
+end
+TMP = TMP or "/tmp"
+
+-- Check for target dependencies in path
+for _, v in ipairs({TARGET.."-clang", TARGET.."-clang++", TARGET.."-gcc", TARGET.."-g++", TARGET.."-cc", TARGET.."-c++", TARGET.."-strip", TARGET.."-sdkpath", "ldid", "dpkg-deb", "grep"}) do
+    if not os.execute("command -v "..v.." > /dev/null") then
+        error("Dependency not found: "..v.."")
+    end
+end
+
+-- Make sure strip isnt the GNU version
+local strip_version = io.popen(TARGET.."-strip --version 2> /dev/null"):read("*a")
+if strip_version:find("GNU") then
+    error("GNU strip is not supported")
+end
+
+-- Make sure make is GNU make
+if os.execute("command -v gmake > /dev/null") then
+    MAKE = "gmake"
+else os.execute("command -v make > /dev/null")
+    local make_version = io.popen("make --version 2> /dev/null"):read("*a")
+    if make_version:find("GNU") then
+        MAKE = "make"
+    end
+end
+
+-- Make sure patch is GNU patch
+if os.execute("command -v gpatch > /dev/null") then
+    PATCH = "gpatch"
+else os.execute("command -v patch > /dev/null")
+    local patch_version = io.popen("patch --version 2> /dev/null"):read("*a")
+    if patch_version:find("GNU") then
+        PATCH = "patch"
+    end
+end
+
+-- Make sure find is GNU find
+if os.execute("command -v gfind > /dev/null") then
+    FIND = "gfind"
+else os.execute("command -v find > /dev/null")
+    local find_version = io.popen("find --version 2> /dev/null"):read("*a")
+    if find_version:find("GNU") then
+        FIND = "find"
+    end
+end
+
+-- Run SDKPATH to get the SDK path
+SDKPATH = io.popen(TARGET.."-sdkpath"):read("*a")
+
+-- export some variables
+-- _BSROOT is the directory of the script
+-- _PKGDIR is _BSROOT/pkgs
+-- _TARGET is the target
+-- TERM is set to xterm-256color
+posix.setenv("_BSROOT", BSROOT, true)
+posix.setenv("_PKGDIR", PKGDIR, true)
+posix.setenv("_TARGET", TARGET, true)
+posix.setenv("TERM", "xterm-256color", true)
+
+-- Cleanup temporary files from previous runs
+os.execute("> "..TMP.."/.builtpkgs")
+os.execute("rm -rf "..TMP.."/sdk")
+os.execute("rm -rf "..TMP.."/sdk.bak")
+
+-- hasbeenbuilt function
+-- Checks if a package has been built
+-- Returns true if it has, false if it hasn't
+-- If the package has been built, it is added to the .builtpkgs file
+-- Check if a package has been built by checking if it is in the .builtpkgs file, and if the pkgdir/<package name>/package directory exists
+-- The first argument is the package name to check
+-- The second argument is dryrun if it is a dryrun, nil if it isn't
+function hasbeenbuilt(pkg, dryrun)
+    local f = io.open(TMP.."/.builtpkgs", "r")
+    local builtpkgs = f:read("*a")
+    f:close()
+    if builtpkgs:find(pkg) then
+        if posix.stat(PKGDIR.."/"..pkg.."/package") and not dryrun then
+            return true
+        end
+    end
+    return false
+end
+
+-- includedeps function
+-- Build an SDK with all dependencies defined in the packages dependencies.txt file
+-- We run hasbeenbuilt on each dependency, and if it hasn't been built, we build it
+-- When we build dependencies, rename sdk to sdk.bak, build the dependency, and then copy sdk.bak to sdk
+-- If the package directory has a folder named sdk, add it to TMP/sdk, this allows us to add custom headers and libraries to the SDK
+-- The first argument is -r if we should rebuilt already built dependencies, nil if we shouldn't
+-- The second argument is dryrun if it is a dryrun, nil if it isn't
+-- This function is always called inside the package directory
