@@ -11,8 +11,8 @@ error() {
 }
 
 # If no arguments are specified, print usage info
-if [ -z "$1" ]; then
-    printf "Usage: build.sh <option> [--target=tripple] [--no-tmpfs]
+if [ -z "$1" ] || [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
+    printf "Usage: build.sh <option> [--target=tripple] [--no-tmpfs] [-h, --help]
     <package name> [-r]     - Build a single package, specify -r to rebuild dependencies
     pkg <package name> [-r] - Build a single package and add it to the repo
     all                     - Build all packages
@@ -20,7 +20,8 @@ if [ -z "$1" ]; then
     dryrun                  - Pretend to build all packages
     listpkgs                - List all packages
     --target                - Specify a target other than arm-apple-darwin9
-    --no-tmpfs              - Do not use /tmp for anything (use if you have limited RAM)\n"
+    --no-tmpfs              - Do not use /tmp for anything (use if you have limited RAM)
+    -h, --help              - Print this help message\n"
     exit 1
 fi
 
@@ -103,7 +104,7 @@ case "$*" in
 esac
 
 # Cleanup temporary files from previous runs
-printf "" > "$_TMP/.builtpkgs"
+true > "$_TMP/.builtpkgs"
 rm -rf "$_TMP/sdk"
 rm -rf "$_TMP/sdk.bak"
 
