@@ -88,7 +88,12 @@ else
 fi
 
 # Assign environment variables
-_BSROOT="${0%/*}"
+# if $0 doesn't contain any slashes, assume it's in the current directory
+if [ "${0%/*}" = "$0" ]; then
+    _BSROOT="."
+else
+    _BSROOT="${0%/*}"
+fi
 _BSROOT="$(cd "$_BSROOT" && pwd)"
 _PKGDIR="$_BSROOT/pkgs"
 _SDK="$("$_TARGET-sdkpath")"
