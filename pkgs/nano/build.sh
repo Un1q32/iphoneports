@@ -18,4 +18,4 @@ ldid -S"$_BSROOT/entitlements.xml" usr/bin/nano
 )
 
 cp -r DEBIAN package
-dpkg-deb -b --root-owner-group -Zgzip package nano-7.1.deb
+dpkg-deb -b --root-owner-group -Zgzip package nano-7.2.deb

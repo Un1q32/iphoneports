@@ -243,7 +243,7 @@ elif [ "$1" = "pkg" ]; then
     depcheck
     build "$2" "$3"
     "$_FIND" "$_PKGDIR/$2" -iname "*.deb" -exec cp {} "$_BSROOT/debs" \;
-elif [ "$1" = dryrun ]; then
+elif [ "$1" = "dryrun" ]; then
     buildall dryrun
 elif [ -d "$_PKGDIR/$1" ]; then
     depcheck

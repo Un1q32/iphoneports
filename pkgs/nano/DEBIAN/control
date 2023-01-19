@@ -3,7 +3,7 @@ Priority: standard
 Section: Text_Editors
 Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
 Architecture: iphoneos-arm
-Version: 7.1
+Version: 7.2
 Depends: ncurses
 Description: completely free, modern clone of Pico
 Tag: purpose::console
