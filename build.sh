@@ -2,14 +2,6 @@
 # Stop shellcheck from complaining about the find --version not specifying a path
 # shellcheck disable=SC2185
 
-# Error functions
-_red=$(tput setaf 1)
-_end=$(tput sgr0)
-error() {
-    printf "%sERROR:%s %s %s\n" "$_red" "$_end" "$1" "$2"
-    exit 1
-}
-
 # If no arguments are specified, print usage info
 if [ -z "$1" ] || [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
     printf "Usage: build.sh <option> [--target=tripple] [--no-tmpfs] [-h, --help]
@@ -22,8 +14,21 @@ if [ -z "$1" ] || [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
     --target                - Specify a target other than arm-apple-darwin9
     --no-tmpfs              - Do not use /tmp for anything (use if you have limited RAM)
     -h, --help              - Print this help message\n"
-    exit 1
+
+    if [ -z "$1" ]; then
+        exit 1
+    else
+        exit 0
+    fi
 fi
+
+# Error functions
+_red=$(tput setaf 1)
+_end=$(tput sgr0)
+error() {
+    printf "%sERROR:%s %s %s\n" "$_red" "$_end" "$1" "$2"
+    exit 1
+}
 
 # Check target
 case "$*" in
@@ -34,59 +39,6 @@ case "$*" in
         _TARGET="arm-apple-darwin9" ;;
 esac
 
-
-# Check for dependencies
-for dep in "$_TARGET-clang" "$_TARGET-clang++" "$_TARGET-gcc" "$_TARGET-g++" "$_TARGET-cc" "$_TARGET-c++" "$_TARGET-strip" "$_TARGET-sdkpath" ldid dpkg-deb mv cp; do
-    if ! command -v "$dep" > /dev/null; then
-        error "Missing dependency:" "$dep"
-    fi
-done
-
-# Check for Apple strip
-_strip_version=$("$_TARGET-strip" --version 2> /dev/null)
-case "$_strip_version" in
-    *GNU*) error "GNU strip is not supported."
-esac
-
-# Check for GNU make
-if command -v gmake > /dev/null; then
-    _MAKE="gmake"
-elif command -v make > /dev/null; then
-    _make_version="$(make --version)"
-    case "$_make_version" in
-        *GNU*) _MAKE="make" ;;
-        *) error "Non-GNU make detected. Please install GNU make." ;;
-    esac
-else
-    error "No make command detected. Please install GNU make."
-fi
-
-# Check for GNU patch
-if command -v gpatch > /dev/null; then
-    _PATCH="gpatch"
-elif command -v make > /dev/null; then
-    _patch_version="$(patch --version)"
-    case "$_patch_version" in
-        *GNU*) _PATCH="patch" ;;
-        *) error "Non-GNU patch detected. Please install GNU patch." ;;
-    esac
-else
-    error "No patch command detected. Please install GNU patch."
-fi
-
-# Check for GNU find
-if command -v gfind > /dev/null; then
-    _FIND="gfind"
-elif command -v find > /dev/null; then
-    _find_version="$(find --version)"
-    case "$_find_version" in
-        *GNU*) _FIND="find" ;;
-        *) error "Non-GNU find detected. Please install GNU find." ;;
-    esac
-else
-    error "No find command detected. Please install GNU find."
-fi
-
 # Assign environment variables
 # if $0 doesn't contain any slashes, assume it's in the current directory
 if [ "${0%/*}" = "$0" ]; then
@@ -96,8 +48,7 @@ else
 fi
 _BSROOT="$(cd "$_BSROOT" && pwd)"
 _PKGDIR="$_BSROOT/pkgs"
-_SDK="$("$_TARGET-sdkpath")"
-export _PKGDIR _BSROOT _SDK _TARGET _MAKE _FIND
+export _PKGDIR _BSROOT _TARGET
 export TERM="xterm-256color"
 
 # Decide where to put temporary files
@@ -112,6 +63,63 @@ esac
 true > "$_TMP/.builtpkgs"
 rm -rf "$_TMP/sdk"
 rm -rf "$_TMP/sdk.bak"
+
+# Check for dependencies
+depcheck() {
+    for dep in "$_TARGET-clang" "$_TARGET-clang++" "$_TARGET-gcc" "$_TARGET-g++" "$_TARGET-cc" "$_TARGET-c++" "$_TARGET-strip" "$_TARGET-sdkpath" ldid dpkg-deb mv cp; do
+        if ! command -v "$dep" > /dev/null; then
+            error "Missing dependency:" "$dep"
+        fi
+    done
+
+    # Check for Apple strip
+    _strip_version=$("$_TARGET-strip" --version 2> /dev/null)
+    case "$_strip_version" in
+        *GNU*) error "GNU strip is not supported."
+    esac
+
+    # Check for GNU make
+    if command -v gmake > /dev/null; then
+        _MAKE="gmake"
+    elif command -v make > /dev/null; then
+        _make_version="$(make --version)"
+        case "$_make_version" in
+            *GNU*) _MAKE="make" ;;
+            *) error "Non-GNU make detected. Please install GNU make." ;;
+        esac
+    else
+        error "No make command detected. Please install GNU make."
+    fi
+
+    # Check for GNU patch
+    if command -v gpatch > /dev/null; then
+        _PATCH="gpatch"
+    elif command -v make > /dev/null; then
+        _patch_version="$(patch --version)"
+        case "$_patch_version" in
+            *GNU*) _PATCH="patch" ;;
+            *) error "Non-GNU patch detected. Please install GNU patch." ;;
+        esac
+    else
+        error "No patch command detected. Please install GNU patch."
+    fi
+
+    # Check for GNU find
+    if command -v gfind > /dev/null; then
+        _FIND="gfind"
+    elif command -v find > /dev/null; then
+        _find_version="$(find --version)"
+        case "$_find_version" in
+            *GNU*) _FIND="find" ;;
+            *) error "Non-GNU find detected. Please install GNU find." ;;
+        esac
+    else
+        error "No find command detected. Please install GNU find."
+    fi
+
+    _SDK="$("$_TARGET-sdkpath")"
+    export _MAKE _PATCH _FIND _SDK
+}
 
 # Main build function
 # First check if the package is already built, if it has then skip it
@@ -183,13 +191,13 @@ applypatches() {
 # First argument is -r to rebuild dependencies
 # Second argument is dryrun to not actually build
 includedeps() {
-    if [ -d "$_SDK" ]; then
-        if ! [ "$2" = "dryrun" ]; then
+    if ! [ "$2" = "dryrun" ]; then
+        if [ -d "$_SDK" ]; then
             export _SDKPATH="$_TMP/sdk"
             cp -ar "$_SDK" "$_SDKPATH"
+        else
+            error "SDK not found"
         fi
-    else
-        error "SDK not found"
     fi
 
     if [ -f dependencies.txt ]; then
@@ -221,21 +229,25 @@ includedeps() {
 
 # Parse arguments
 if [ "$1" = "pkgall" ]; then
+    depcheck
     buildall
     "$_FIND" . -iname "*.deb" -exec cp {} "$_BSROOT/debs" \;
 elif [ "$1" = "all" ]; then
+    depcheck
     buildall
 elif [ "$1" = "listpkgs" ]; then
     for pkg in "$_PKGDIR"/*; do
         printf "%s\n" "${pkg##*/}"
     done
 elif [ "$1" = "pkg" ]; then
+    depcheck
     build "$2" "$3"
     "$_FIND" "$_PKGDIR/$2" -iname "*.deb" -exec cp {} "$_BSROOT/debs" \;
-elif [ -d "$_PKGDIR/$1" ]; then
-    build "$@"
 elif [ "$1" = dryrun ]; then
     buildall dryrun
+elif [ -d "$_PKGDIR/$1" ]; then
+    depcheck
+    build "$@"
 else
     error "Package not found:" "$1"
 fi
