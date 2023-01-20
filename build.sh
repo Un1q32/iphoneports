@@ -68,7 +68,7 @@ rm -rf "$_TMP/sdk.bak"
 
 # Check for dependencies
 depcheck() {
-    for dep in "$_TARGET-clang" "$_TARGET-clang++" "$_TARGET-gcc" "$_TARGET-g++" "$_TARGET-cc" "$_TARGET-c++" "$_TARGET-strip" "$_TARGET-sdkpath" ldid dpkg-deb mv; do
+    for dep in "$_TARGET-clang" "$_TARGET-clang++" "$_TARGET-gcc" "$_TARGET-g++" "$_TARGET-cc" "$_TARGET-c++" "$_TARGET-strip" "$_TARGET-sdkpath" ldid dpkg-deb mv rm; do
         if ! command -v "$dep" > /dev/null; then
             error "Missing dependency:" "$dep"
         fi
