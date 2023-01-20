@@ -1,9 +1,10 @@
 #!/bin/sh
+rm -f "$_TMP/sdk/usr/lib/libsandbox.1.dylib" "$_TMP/sdk/usr/lib/libsandbox.1.tbd" "$_TMP/sdk/usr/lib/libsandbox.dylib" "$_TMP/sdk/usr/lib/libsandbox.tbd"
 (
 cd source || exit 1
 ./configure --host="$_TARGET" --prefix=/usr --sysconfdir=/etc/ssh --with-privsep-user=nobody --with-sandbox=no
 "$_MAKE" -j4
-"$_MAKE" DESTDIR="$_PKGROOT/package" install-nokeys
+"$_MAKE" DESTDIR="$_PKGROOT/package" install-nokeys STRIP_OPT=
 )
 
 (
