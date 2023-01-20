@@ -2,11 +2,17 @@
 # Stop shellcheck from complaining about the find --version not specifying a path
 # shellcheck disable=SC2185
 
+# Uncomment to enable logging
+# true > /tmp/buildsh.log
+# exec 3>&1 4>&2
+# trap 'exec 2>&4 1>&3' 0 1 2 3
+# exec 1>/tmp/buildsh.log 2>&1
+
 # If no arguments are specified, print usage info
 if [ -z "$1" ] || [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
     printf "Usage: build.sh <option> [--target=tripple] [--no-tmpfs] [-h, --help]
-    <package name> [-r]     - Build a single package, specify -r to rebuild dependencies
-    pkg <package name> [-r] - Build a single package and add it to the repo
+    <package name>          - Build a single package
+    pkg <package name>      - Build a single package and add it to the repo
     all                     - Build all packages
     pkgall                  - Build all packages and add them to the repo
     dryrun                  - Pretend to build all packages
@@ -130,20 +136,19 @@ depcheck() {
 # Sixth run the build.sh script to build the package (skipped during dryrun)
 # Lastly remove the temporary sdk directory
 # First argument is the package name
-# Second argument is -r to rebuild dependencies
-# Third argument is dryrun to not actually build
+# Second argument is dryrun to not actually build
 build() {
     (
-    if ! [ "$2" = "-r" ] && hasbeenbuilt "$1" "$2" "$3"; then
+    if hasbeenbuilt "$1"; then
         exit 0
     fi
     cd "$_PKGDIR/$1" || exit 1
     export _PKGROOT="$_PKGDIR/$1"
-    includedeps "$2" "$3"
-    [ "$3" = "dryrun" ] || ./fetch.sh
-    [ "$3" = "dryrun" ] || applypatches
+    includedeps "$2"
+    [ "$2" = "dryrun" ] || ./fetch.sh
+    [ "$2" = "dryrun" ] || applypatches
     printf "Building %s\n" "$1"
-    [ "$3" = "dryrun" ] || ./build.sh
+    [ "$2" = "dryrun" ] || ./build.sh
     rm -rf "$_SDKPATH"
     printf "%s\n" "$1" >> "$_TMP/.builtpkgs"
     )
@@ -152,7 +157,7 @@ build() {
 # Build all packages
 buildall() {
     for pkg in "$_PKGDIR"/*; do
-        build "${pkg##*/}" -r "$1"
+        build "${pkg##*/}" "$1"
     done
 }
 
@@ -161,10 +166,9 @@ buildall() {
 # Return 1 if $_PKGDIR/$1/package is missing
 # if $2 = dryrun then we rebuild the first time this function is run, but not again until the next time the script is run, even if the package is missing
 # First argument is the package name
-# Second argument is dryrun to not actually build
 hasbeenbuilt() {
     while read -r pkg; do
-        if [ "$pkg" = "$1" ] && { [ "$2" = "dryrun" ] || [ -d "$_PKGDIR/$1/package" ]; }; then
+        if [ "$pkg" = "$1" ] && [ -d "$_PKGDIR/$1/package" ]; then
             return 0
         fi
     done < "$_TMP/.builtpkgs"
@@ -188,10 +192,9 @@ applypatches() {
 # When we do need to rebuild a dependency, we temporarily rename the sdk to sdk.bak, and then rename it back after we have rebuilt the dependency
 # If this is a dryrun, we don't actually build the dependency, or copy the sdk
 # If there is an sdk directory in the package folder, add it to the sdk. This allows us to add additional headers and libraries to the sdk per package
-# First argument is -r to rebuild dependencies
-# Second argument is dryrun to not actually build
+# First argument is dryrun to not actually build
 includedeps() {
-    if ! [ "$2" = "dryrun" ]; then
+    if ! [ "$1" = "dryrun" ]; then
         if [ -d "$_SDK" ]; then
             export _SDKPATH="$_TMP/sdk"
             cp -ar "$_SDK" "$_SDKPATH"
@@ -203,14 +206,14 @@ includedeps() {
     if [ -f dependencies.txt ]; then
         while read -r dep; do
             if [ -d "$_PKGDIR/$dep" ]; then
-                if ! hasbeenbuilt "$dep" "$2" || [ "$1" = "-r" ]; then
+                if ! hasbeenbuilt "$dep"; then
                     printf "Building dependency %s\n" "$dep"
-                    [ "$2" = "dryrun" ] || mv "$_SDKPATH" "$_SDKPATH.bak"
-                    build "$dep" "$1" "$2"
-                    [ "$2" = "dryrun" ] || mv "$_SDKPATH.bak" "$_SDKPATH"
+                    [ "$1" = "dryrun" ] || mv "$_SDKPATH" "$_SDKPATH.bak"
+                    build "$dep" "$1"
+                    [ "$1" = "dryrun" ] || mv "$_SDKPATH.bak" "$_SDKPATH"
                 fi
                 printf "Including dependency %s\n" "$dep"
-                if ! [ "$2" = "dryrun" ]; then
+                if ! [ "$1" = "dryrun" ]; then
                     [ -d "$_PKGDIR/$dep/package/usr/include" ] && cp -ar "$_PKGDIR/$dep/package/usr/include" "$_SDKPATH/usr"
                     [ -d "$_PKGDIR/$dep/package/usr/lib" ] && cp -ar "$_PKGDIR/$dep/package/usr/lib" "$_SDKPATH/usr"
                 fi
@@ -220,8 +223,8 @@ includedeps() {
         done < dependencies.txt
     fi
 
-    if [ -d sdk ]; then
-        if ! [ "$2" = "dryrun" ]; then
+    if ! [ "$1" = "dryrun" ]; then
+        if [ -d sdk ]; then
             cp -ar sdk/* "$_SDKPATH"
         fi
     fi
@@ -244,6 +247,7 @@ elif [ "$1" = "pkg" ]; then
     build "$2" "$3"
     "$_FIND" "$_PKGDIR/$2" -iname "*.deb" -exec cp {} "$_BSROOT/debs" \;
 elif [ "$1" = "dryrun" ]; then
+    printf "Dryrun\n"
     buildall dryrun
 elif [ -d "$_PKGDIR/$1" ]; then
     depcheck
