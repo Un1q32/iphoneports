@@ -15,6 +15,8 @@ if [ -z "$1" ] || [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
     pkg <package name>      - Build a single package and add it to the repo
     all                     - Build all packages
     pkgall                  - Build all packages and add them to the repo
+    clean                   - Clean a single package (remove build files)
+    cleanall                - Clean all packages (remove build files)
     dryrun                  - Pretend to build all packages
     listpkgs                - List all packages
     --target                - Specify a target other than arm-apple-darwin9
@@ -139,7 +141,7 @@ depcheck() {
 # Second argument is dryrun to not actually build
 build() {
     (
-    if hasbeenbuilt "$1"; then
+    if hasbeenbuilt "$1" "$2"; then
         exit 0
     fi
     cd "$_PKGDIR/$1" || exit 1
@@ -166,9 +168,10 @@ buildall() {
 # Return 1 if $_PKGDIR/$1/package is missing
 # if $2 = dryrun then we rebuild the first time this function is run, but not again until the next time the script is run, even if the package is missing
 # First argument is the package name
+# Second argument is dryrun to not actually build
 hasbeenbuilt() {
     while read -r pkg; do
-        if [ "$pkg" = "$1" ] && [ -d "$_PKGDIR/$1/package" ]; then
+        if [ "$pkg" = "$1" ] && { [ -d "$_PKGDIR/$1/package" ] || [ "$2" = "dryrun" ]; }; then
             return 0
         fi
     done < "$_TMP/.builtpkgs"
@@ -206,7 +209,7 @@ includedeps() {
     if [ -f dependencies.txt ]; then
         while read -r dep; do
             if [ -d "$_PKGDIR/$dep" ]; then
-                if ! hasbeenbuilt "$dep"; then
+                if ! hasbeenbuilt "$dep" "$1"; then
                     printf "Building dependency %s\n" "$dep"
                     [ "$1" = "dryrun" ] || mv "$_SDKPATH" "$_SDKPATH.bak"
                     build "$dep" "$1"
@@ -244,14 +247,17 @@ elif [ "$1" = "listpkgs" ]; then
     done
 elif [ "$1" = "pkg" ]; then
     depcheck
-    build "$2" "$3"
+    build "$2"
     "$_FIND" "$_PKGDIR/$2" -iname "*.deb" -exec cp {} "$_BSROOT/debs" \;
+elif [ "$1" = "clean" ]; then
+    rm -rf "$_PKGDIR/$2/package" "$_PKGDIR/$2/source"
+elif [ "$1" = "cleanall" ]; then
+    rm -rf "$_PKGDIR"/*/package "$_PKGDIR"/*/source
 elif [ "$1" = "dryrun" ]; then
-    printf "Dryrun\n"
     buildall dryrun
 elif [ -d "$_PKGDIR/$1" ]; then
     depcheck
-    build "$@"
+    build "$1"
 else
     error "Package not found:" "$1"
 fi
