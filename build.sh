@@ -2,12 +2,6 @@
 # Stop shellcheck from complaining about the find --version not specifying a path
 # shellcheck disable=SC2185
 
-# Uncomment to enable logging
-# true > /tmp/buildsh.log
-# exec 3>&1 4>&2
-# trap 'exec 2>&4 1>&3' 0 1 2 3
-# exec 1>/tmp/buildsh.log 2>&1
-
 # If no arguments are specified, print usage info
 if [ -z "$1" ] || [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
     printf "Usage: build.sh <option> [--target=tripple] [--no-tmpfs] [-h, --help]
@@ -31,10 +25,10 @@ if [ -z "$1" ] || [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
 fi
 
 # Error functions
-_red=$(tput setaf 1)
-_end=$(tput sgr0)
+_red='\033[1;31m'
+_end='\033[0m'
 error() {
-    printf "%sERROR:%s %s %s\n" "$_red" "$_end" "$1" "$2"
+    printf "${_red}ERROR:${_end} %s %s\n" "$1" "$2"
     exit 1
 }
 
