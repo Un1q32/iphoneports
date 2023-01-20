@@ -170,17 +170,22 @@ buildall() {
 # First argument is the package name
 # Second argument is dryrun to not actually build
 hasbeenbuilt() {
-    while read -r pkg; do
-        if [ "$pkg" = "$1" ] && { [ -d "$_PKGDIR/$1/package" ] || [ "$2" = "dryrun" ]; }; then
-            return 0
-        fi
-    done < "$_TMP/.builtpkgs"
+    if [ "$2" = "dryrun" ]; then
+        while read -r pkg; do
+            if [ "$pkg" = "$1" ]; then
+                return 0
+            fi
+        done < "$_TMP/.builtpkgs"
+    elif [ -d "$_PKGDIR/$1/package" ]; then
+        return 0
+    fi
     return 1
 }
 
 # Apply any patches found in the patches directory
 # Unused durring dryruns
 # This function is always run inside the package directory
+# This function does not take any arguments
 applypatches() {
     if [ -d patches ]; then
         for patch in patches/*; do
@@ -247,6 +252,7 @@ elif [ "$1" = "listpkgs" ]; then
     done
 elif [ "$1" = "pkg" ]; then
     depcheck
+    rm -rf "$_PKGDIR/$1/package" "$_PKGDIR/$1/source"
     build "$2"
     "$_FIND" "$_PKGDIR/$2" -iname "*.deb" -exec cp {} "$_BSROOT/debs" \;
 elif [ "$1" = "clean" ]; then
@@ -257,6 +263,7 @@ elif [ "$1" = "dryrun" ]; then
     buildall dryrun
 elif [ -d "$_PKGDIR/$1" ]; then
     depcheck
+    rm -rf "$_PKGDIR/$1/package" "$_PKGDIR/$1/source"
     build "$1"
 else
     error "Package not found:" "$1"
