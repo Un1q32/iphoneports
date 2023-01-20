@@ -241,10 +241,12 @@ includedeps() {
 # Parse arguments
 if [ "$1" = "pkgall" ]; then
     depcheck
+    rm -rf "$_PKGDIR"/*/package "$_PKGDIR"/*/source
     buildall
     "$_FIND" . -iname "*.deb" -exec cp {} "$_BSROOT/debs" \;
 elif [ "$1" = "all" ]; then
     depcheck
+    rm -rf "$_PKGDIR"/*/package "$_PKGDIR"/*/source
     buildall
 elif [ "$1" = "listpkgs" ]; then
     for pkg in "$_PKGDIR"/*; do
