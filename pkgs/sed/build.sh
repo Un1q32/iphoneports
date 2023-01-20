@@ -5,7 +5,7 @@ cd source || exit 1
 "$_MAKE" -j4
 mkdir -p "$_PKGROOT/package/usr/bin"
 mkdir -p "$_PKGROOT/package/bin"
-cp sed/sed "$_PKGROOT/package/usr/bin/sed"
+"$_CP" sed/sed "$_PKGROOT/package/usr/bin/sed"
 )
 
 (
@@ -15,5 +15,5 @@ ln -s ../usr/bin/sed bin/sed
 ldid -S"$_BSROOT/entitlements.xml" usr/bin/sed
 )
 
-cp -r DEBIAN package
+"$_CP" -r DEBIAN package
 dpkg-deb -b --root-owner-group -Zgzip package sed-4.9.deb

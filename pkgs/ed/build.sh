@@ -13,5 +13,5 @@ rm -rf usr
 ldid -S"$_BSROOT/entitlements.xml" bin/ed
 )
 
-cp -r DEBIAN package
+"$_CP" -r DEBIAN package
 dpkg-deb -b --root-owner-group -Zgzip package ed-1.19.deb

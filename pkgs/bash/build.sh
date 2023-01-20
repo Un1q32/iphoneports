@@ -4,7 +4,7 @@ cd source || exit 1
 ./configure --host="$_TARGET" --prefix=/usr --sysconfdir=/etc --bindir=/bin --with-installed-readline
 "$_MAKE" -j4
 mkdir -p "$_PKGROOT"/package/bin
-cp bash "$_PKGROOT"/package/bin
+"$_CP" bash "$_PKGROOT"/package/bin
 )
 
 (
@@ -14,5 +14,5 @@ ln -s bash bin/sh
 ldid -S"$_BSROOT/entitlements.xml" bin/bash
 )
 
-cp -r DEBIAN package
+"$_CP" -r DEBIAN package
 dpkg-deb -b --root-owner-group -Zgzip package bash-5.2.15.deb

@@ -12,5 +12,5 @@ cd package || exit 1
 ldid -S"$_BSROOT/entitlements.xml" usr/bin/wget
 )
 
-cp -r DEBIAN package
+"$_CP" -r DEBIAN package
 dpkg-deb -b --root-owner-group -Zgzip package wget-1.21.3.deb

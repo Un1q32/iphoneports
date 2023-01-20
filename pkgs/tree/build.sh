@@ -3,7 +3,7 @@
 cd source || exit 1
 "$_MAKE" PREFIX=/usr CC="$_TARGET-clang" -j4
 mkdir -p "$_PKGROOT"/package/usr/bin
-cp tree "$_PKGROOT"/package/usr/bin
+"$_CP" tree "$_PKGROOT"/package/usr/bin
 )
 
 (
@@ -12,5 +12,5 @@ cd package || exit 1
 ldid -S"$_BSROOT/entitlements.xml" usr/bin/tree
 )
 
-cp -r DEBIAN package
+"$_CP" -r DEBIAN package
 dpkg-deb -b --root-owner-group -Zgzip package tree-2.1.0.deb

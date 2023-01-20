@@ -5,9 +5,9 @@ cd source || exit 1
 "$_MAKE" -j4
 mkdir -p "$_PKGROOT/package/usr/bin"
 mkdir -p "$_PKGROOT/package/bin"
-cp less "$_PKGROOT/package/usr/bin"
-cp lessecho "$_PKGROOT/package/usr/bin"
-cp lesskey "$_PKGROOT/package/usr/bin"
+"$_CP" less "$_PKGROOT/package/usr/bin"
+"$_CP" lessecho "$_PKGROOT/package/usr/bin"
+"$_CP" lesskey "$_PKGROOT/package/usr/bin"
 ln -s less "$_PKGROOT/package/usr/bin/more"
 ln -s ../usr/bin/more "$_PKGROOT/package/bin/more"
 )
@@ -22,5 +22,5 @@ ldid -S"$_BSROOT/entitlements.xml" usr/bin/lessecho
 ldid -S"$_BSROOT/entitlements.xml" usr/bin/lesskey
 )
 
-cp -r DEBIAN package
+"$_CP" -r DEBIAN package
 dpkg-deb -b --root-owner-group -Zgzip package less-608.deb

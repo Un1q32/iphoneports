@@ -15,5 +15,5 @@ ldid -S"$_BSROOT/entitlements.xml" usr/bin/vim
 ldid -S"$_BSROOT/entitlements.xml" usr/bin/xxd
 )
 
-cp -r DEBIAN package
+"$_CP" -r DEBIAN package
 dpkg-deb -b --root-owner-group -Zgzip package vim-9.0.1222.deb

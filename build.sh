@@ -68,7 +68,7 @@ rm -rf "$_TMP/sdk.bak"
 
 # Check for dependencies
 depcheck() {
-    for dep in "$_TARGET-clang" "$_TARGET-clang++" "$_TARGET-gcc" "$_TARGET-g++" "$_TARGET-cc" "$_TARGET-c++" "$_TARGET-strip" "$_TARGET-sdkpath" ldid dpkg-deb mv cp; do
+    for dep in "$_TARGET-clang" "$_TARGET-clang++" "$_TARGET-gcc" "$_TARGET-g++" "$_TARGET-cc" "$_TARGET-c++" "$_TARGET-strip" "$_TARGET-sdkpath" ldid dpkg-deb mv; do
         if ! command -v "$dep" > /dev/null; then
             error "Missing dependency:" "$dep"
         fi
@@ -119,8 +119,21 @@ depcheck() {
         error "No find command detected. Please install GNU find."
     fi
 
+    # Check for GNU cp
+    if command -v gcp > /dev/null; then
+        _CP="gcp"
+    elif command -v cp > /dev/null; then
+        _cp_version="$(cp --version)"
+        case "$_cp_version" in
+            *GNU*) _CP="cp" ;;
+            *) error "Non-GNU cp detected. Please install GNU cp." ;;
+        esac
+    else
+        error "No cp command detected. Please install GNU cp."
+    fi
+
     _SDK="$("$_TARGET-sdkpath")"
-    export _MAKE _PATCH _FIND _SDK
+    export _MAKE _PATCH _FIND _SDK _CP
 }
 
 # Main build function
@@ -199,7 +212,7 @@ includedeps() {
     if ! [ "$1" = "dryrun" ]; then
         if [ -d "$_SDK" ]; then
             export _SDKPATH="$_TMP/sdk"
-            cp -ar "$_SDK" "$_SDKPATH"
+            "$_CP" -ar "$_SDK" "$_SDKPATH"
         else
             error "SDK not found"
         fi
@@ -216,8 +229,8 @@ includedeps() {
                 fi
                 printf "Including dependency %s\n" "$dep"
                 if ! [ "$1" = "dryrun" ]; then
-                    [ -d "$_PKGDIR/$dep/package/usr/include" ] && cp -ar "$_PKGDIR/$dep/package/usr/include" "$_SDKPATH/usr"
-                    [ -d "$_PKGDIR/$dep/package/usr/lib" ] && cp -ar "$_PKGDIR/$dep/package/usr/lib" "$_SDKPATH/usr"
+                    [ -d "$_PKGDIR/$dep/package/usr/include" ] && "$_CP" -ar "$_PKGDIR/$dep/package/usr/include" "$_SDKPATH/usr"
+                    [ -d "$_PKGDIR/$dep/package/usr/lib" ] && "$_CP" -ar "$_PKGDIR/$dep/package/usr/lib" "$_SDKPATH/usr"
                 fi
             else
                 error "Dependency not found:" "$dep"
@@ -227,7 +240,7 @@ includedeps() {
 
     if ! [ "$1" = "dryrun" ]; then
         if [ -d sdk ]; then
-            cp -ar sdk/* "$_SDKPATH"
+            "$_CP" -ar sdk/* "$_SDKPATH"
         fi
     fi
 }
@@ -237,7 +250,7 @@ if [ "$1" = "pkgall" ]; then
     depcheck
     rm -rf "$_PKGDIR"/*/package "$_PKGDIR"/*/source
     buildall
-    "$_FIND" . -iname "*.deb" -exec cp {} "$_BSROOT/debs" \;
+    "$_FIND" . -iname "*.deb" -exec "$_CP" {} "$_BSROOT/debs" \;
 elif [ "$1" = "all" ]; then
     depcheck
     rm -rf "$_PKGDIR"/*/package "$_PKGDIR"/*/source
@@ -250,7 +263,7 @@ elif [ "$1" = "pkg" ]; then
     depcheck
     rm -rf "$_PKGDIR/$1/package" "$_PKGDIR/$1/source"
     build "$2"
-    "$_FIND" "$_PKGDIR/$2" -iname "*.deb" -exec cp {} "$_BSROOT/debs" \;
+    "$_FIND" "$_PKGDIR/$2" -iname "*.deb" -exec "$_CP" {} "$_BSROOT/debs" \;
 elif [ "$1" = "clean" ]; then
     rm -rf "$_PKGDIR/$2/package" "$_PKGDIR/$2/source"
 elif [ "$1" = "cleanall" ]; then

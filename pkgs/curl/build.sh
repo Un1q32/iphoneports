@@ -14,5 +14,5 @@ rm -rf usr/share/man
 ldid -S"$_BSROOT/entitlements.xml" usr/bin/curl
 )
 
-cp -r DEBIAN package
+"$_CP" -r DEBIAN package
 dpkg-deb -b --root-owner-group -Zgzip package curl-7.87.0.deb

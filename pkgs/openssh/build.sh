@@ -19,8 +19,8 @@ ldid -S"$_BSROOT/entitlements.xml" usr/libexec/*
 chmod 4711 usr/libexec/ssh-keysign
 )
 
-cp -r DEBIAN package
-cp -r files/Library package
-cp files/sshd_config package/etc/ssh
-cp files/sshd-keygen-wrapper package/usr/libexec
+"$_CP" -r DEBIAN package
+"$_CP" -r files/Library package
+"$_CP" files/sshd_config package/etc/ssh
+"$_CP" files/sshd-keygen-wrapper package/usr/libexec
 dpkg-deb -b --root-owner-group -Zgzip package openssh-9.1p1.deb

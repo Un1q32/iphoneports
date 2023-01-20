@@ -18,7 +18,5 @@ for i in usr/lib/*.dylib; do
 done
 )
 
-cp -r DEBIAN package
+"$_CP" -r DEBIAN package
 dpkg-deb -b --root-owner-group -Zgzip package openssl-1.1.1s.deb
-
-echo "Done" >> /tmp/lmao

@@ -12,5 +12,5 @@ rm -rf usr/bin
 rm -rf usr/share
 )
 
-cp -r DEBIAN package
+"$_CP" -r DEBIAN package
 dpkg-deb -b --root-owner-group -Zgzip package readline-8.2.1.deb

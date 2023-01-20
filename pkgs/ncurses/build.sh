@@ -25,5 +25,5 @@ for i in usr/lib/*.dylib; do
 done
 )
 
-cp -r DEBIAN package
+"$_CP" -r DEBIAN package
 dpkg-deb -b --root-owner-group -Zgzip package ncurses-5.9.deb
