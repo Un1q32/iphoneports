@@ -1,0 +1,9 @@
+Package: grep
+Priority: important
+Section: Utilities
+Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
+Architecture: iphoneos-arm
+Version: 3.8
+Description: searches files for regular expressions
+Homepage: http://www.gnu.org/software/grep/
+Tag: purpose::console

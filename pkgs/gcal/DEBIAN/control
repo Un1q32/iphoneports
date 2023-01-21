@@ -5,6 +5,7 @@ Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
 Section: Utilities
 Priority: optional
 Depends: perl
+Homepage: http://www.gnu.org/software/gcal/
 Description: A program for calculating and printing calendars
 Tag: purpose::console
 Name: Gcal
