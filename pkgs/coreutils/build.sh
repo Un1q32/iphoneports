@@ -12,7 +12,7 @@ for i in [ b2sum base32 base64 basename basenc chcon chroot cksum comm csplit cu
     ln -s ../../bin/coreutils "$_PKGROOT/package/usr/bin/$i"
 done
 for i in chmod chown dir kill chgrp uname readlink stty ln date false ls echo vdir cat sleep mv rm mkdir pwd rmdir dd mknod mktemp true touch cp; do
-    ln -s coreutils "$_PKGROOT../package/bin/$i"
+    ln -s coreutils "$_PKGROOT/package/bin/$i"
 done
 "$_CP" -p ../files/su "$_PKGROOT/package/bin"
 )
