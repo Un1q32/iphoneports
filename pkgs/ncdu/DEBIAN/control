@@ -1,0 +1,10 @@
+Package: ncdu
+Priority: optional
+Section: Utilities
+Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
+Architecture: iphoneos-arm
+Version: 1.18
+Depends: ncurses
+Description: Disk usage analyzer with an ncurses interface
+Tag: purpose::console
+Name: NCurses Disk Usage
