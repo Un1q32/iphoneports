@@ -1,0 +1,10 @@
+Package: gzip
+Priority: required
+Section: Archiving
+Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
+Architecture: iphoneos-arm
+Version: 1.12
+Depends: grep, sed
+Description: the standard Unix compression algorithm
+Homepage: http://www.gzip.org/
+Tag: purpose::console
