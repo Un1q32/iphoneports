@@ -1,0 +1,10 @@
+Package: gawk
+Priority: important
+Section: Utilities
+Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
+Architecture: iphoneos-arm
+Version: 5.2.1
+Description: GNU's heavy-weight implementation of awk
+Name: Gawk
+Tag: purpose::console
+Depends: profile.d
