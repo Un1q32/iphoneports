@@ -1,0 +1,10 @@
+Package: diffutils
+Priority: important
+Section: Development
+Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
+Architecture: iphoneos-arm
+Version: 3.9
+Description: compare two files for differences
+Name: Diff Utilities
+Homepage: http://www.gnu.org/software/diffutils/
+Tag: purpose::console

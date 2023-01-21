@@ -1,0 +1,26 @@
+#!/bin/sh
+(
+cd source || exit 1
+./configure --host="$_TARGET" --prefix=/usr
+"$_MAKE" -j4
+mkdir -p "$_PKGROOT"/package/usr/bin
+"$_CP" src/diff "$_PKGROOT"/package/usr/bin
+"$_CP" src/diff3 "$_PKGROOT"/package/usr/bin
+"$_CP" src/sdiff "$_PKGROOT"/package/usr/bin
+"$_CP" src/cmp "$_PKGROOT"/package/usr/bin
+)
+
+(
+cd package || exit 1
+"$_TARGET-strip" -x usr/bin/diff
+"$_TARGET-strip" -x usr/bin/diff3
+"$_TARGET-strip" -x usr/bin/sdiff
+"$_TARGET-strip" -x usr/bin/cmp
+ldid -S"$_BSROOT/entitlements.xml" usr/bin/diff
+ldid -S"$_BSROOT/entitlements.xml" usr/bin/diff3
+ldid -S"$_BSROOT/entitlements.xml" usr/bin/sdiff
+ldid -S"$_BSROOT/entitlements.xml" usr/bin/cmp
+)
+
+"$_CP" -r DEBIAN package
+dpkg-deb -b --root-owner-group -Zgzip package diffutils-3.9.deb
