@@ -5,4 +5,5 @@ Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
 Architecture: iphoneos-arm
 Version: 1.4.19
 Description: The GNU macro processor
+Homepage: http://www.gnu.org/software/m4/
 Tag: purpose::console

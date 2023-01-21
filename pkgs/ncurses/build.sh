@@ -12,8 +12,7 @@ cd source || exit 1
 
 (
 cd package || exit 1
-rm usr/bin/tabs
-rm -rf usr/man
+rm -rf usr/man usr/bin/tabs
 for i in tic tput tset toe clear infocmp; do
     "$_TARGET-strip" -x usr/bin/$i
     ldid -S"$_BSROOT/entitlements.xml" usr/bin/$i

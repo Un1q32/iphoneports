@@ -8,9 +8,8 @@ cd source || exit 1
 
 
 (
-rm packagerogue.scr
 cd package || exit 1
-rm -rf usr/share
+rm -rf usr/share ../packagerogue.scr
 "$_TARGET-strip" -x usr/bin/rogue
 ldid -S"$_BSROOT/entitlements.xml" usr/bin/rogue
 )

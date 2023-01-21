@@ -8,10 +8,7 @@ cd source || exit 1
 
 (
 cd package || exit 1
-rm usr/bin/gawk-5.2.1
-rm usr/bin/gawkbug
-rm -rf usr/share/info
-rm -rf usr/share/man
+rm -rf usr/share/info usr/share/man usr/bin/gawk-5.2.1 usr/bin/gawkbug
 "$_TARGET-strip" -x usr/bin/gawk
 "$_TARGET-strip" -x usr/lib/gawk/*
 "$_TARGET-strip" -x usr/libexec/awk/*

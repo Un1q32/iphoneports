@@ -8,8 +8,7 @@ cd source || exit 1
 
 (
 cd package || exit 1
-rm -rf usr/bin
-rm -rf usr/share
+rm -rf usr/bin usr/share
 )
 
 "$_CP" -r DEBIAN package
