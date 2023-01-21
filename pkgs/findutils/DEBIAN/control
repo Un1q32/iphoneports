@@ -1,0 +1,11 @@
+Package: findutils
+Priority: important
+Section: Utilities
+Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
+Architecture: iphoneos-arm
+Version: 4.9.0
+Depends: bash, sed
+Description: indexes and searches filesystems
+Name: Find Utilities
+Homepage: http://www.gnu.org/software/findutils/
+Tag: purpose::console
