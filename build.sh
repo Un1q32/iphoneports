@@ -231,6 +231,8 @@ includedeps() {
                 if ! [ "$1" = "dryrun" ]; then
                     [ -d "$_PKGDIR/$dep/package/usr/include" ] && "$_CP" -ar "$_PKGDIR/$dep/package/usr/include" "$_SDKPATH/usr"
                     [ -d "$_PKGDIR/$dep/package/usr/lib" ] && "$_CP" -ar "$_PKGDIR/$dep/package/usr/lib" "$_SDKPATH/usr"
+                    [ -d "$_PKGDIR/$dep/package/usr/local/include" ] && mkdir -p "$_SDKPATH/usr/local" && "$_CP" -ar "$_PKGDIR/$dep/package/usr/local/include" "$_SDKPATH/usr/local"
+                    [ -d "$_PKGDIR/$dep/package/usr/local/lib" ] && mkdir -p "$_SDKPATH/usr/local" && "$_CP" -ar "$_PKGDIR/$dep/package/usr/local/lib" "$_SDKPATH/usr/local"
                 fi
             else
                 error "Dependency not found:" "$dep"
