@@ -13,6 +13,8 @@ rm -rf usr/share
 "$_TARGET-strip" -x usr/bin/xzdec
 "$_TARGET-strip" -x usr/local/lib/liblzma.5.dylib
 ldid -S"$_BSROOT/entitlements.xml" usr/bin/xz
+ldid -S"$_BSROOT/entitlements.xml" usr/bin/xzdec
+ldid -S"$_BSROOT/entitlements.xml" usr/local/lib/liblzma.5.dylib
 )
 
 "$_CP" -r DEBIAN package

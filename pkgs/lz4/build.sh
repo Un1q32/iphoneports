@@ -11,6 +11,7 @@ rm -rf usr/share
 "$_TARGET-strip" -x usr/bin/lz4
 "$_TARGET-strip" -x usr/lib/liblz4.1.9.4.dylib
 ldid -S"$_BSROOT/entitlements.xml" usr/bin/lz4
+ldid -S"$_BSROOT/entitlements.xml" usr/lib/liblz4.1.9.4.dylib
 )
 
 "$_CP" -r DEBIAN package

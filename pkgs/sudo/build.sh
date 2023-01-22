@@ -23,6 +23,7 @@ ldid -S"$_BSROOT/entitlements.xml" usr/bin/sudoreplay
 ldid -S"$_BSROOT/entitlements.xml" usr/sbin/sudo_logsrvd
 ldid -S"$_BSROOT/entitlements.xml" usr/sbin/sudo_sendlog
 ldid -S"$_BSROOT/entitlements.xml" usr/sbin/visudo
+ldid -S"$_BSROOT/entitlements.xml" usr/libexec/sudo/libsudo_util.0.dylib
 chmod 4755 usr/bin/sudo
 )
 

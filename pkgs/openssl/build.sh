@@ -10,12 +10,11 @@ cd source || exit 1
 cd package || exit 1
 rm -rf usr/share
 "$_TARGET-strip" -x usr/bin/openssl
+"$_TARGET-strip" -x usr/lib/libcrypto.1.1.dylib
+"$_TARGET-strip" -x usr/lib/libssl.1.1.dylib
 ldid -S"$_BSROOT/entitlements.xml" usr/bin/openssl
-for i in usr/lib/*.dylib; do
-    if [ -f "$i" ]; then
-        "$_TARGET-strip" -x "$i"
-    fi
-done
+ldid -S"$_BSROOT/entitlements.xml" usr/lib/libcrypto.1.1.dylib
+ldid -S"$_BSROOT/entitlements.xml" usr/lib/libssl.1.1.dylib
 )
 
 "$_CP" -r DEBIAN package

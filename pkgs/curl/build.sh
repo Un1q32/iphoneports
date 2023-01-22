@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/sh -x
 (
 cd source || exit 1
 ./configure --host="$_TARGET" --prefix=/usr --with-openssl
@@ -12,6 +12,7 @@ rm -rf usr/share/man
 "$_TARGET-strip" -x usr/bin/curl
 "$_TARGET-strip" -x usr/lib/libcurl.4.dylib
 ldid -S"$_BSROOT/entitlements.xml" usr/bin/curl
+ldid -S"$_BSROOT/entitlements.xml" usr/lib/libcurl.4.dylib
 )
 
 "$_CP" -r DEBIAN package

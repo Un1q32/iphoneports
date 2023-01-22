@@ -12,6 +12,7 @@ rm -rf usr/share/man
 "$_TARGET-strip" -x usr/bin/file
 "$_TARGET-strip" -x usr/lib/libmagic.1.dylib
 ldid -S"$_BSROOT/entitlements.xml" usr/bin/file
+ldid -S"$_BSROOT/entitlements.xml" usr/lib/libmagic.1.dylib
 )
 
 "$_CP" -r DEBIAN package

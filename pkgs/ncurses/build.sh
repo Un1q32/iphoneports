@@ -20,6 +20,7 @@ done
 for i in usr/lib/*.dylib; do
     if [ -f "$i" ]; then
         "$_TARGET-strip" -x "$i"
+        ldid -S"$_BSROOT/entitlements.xml" "$i"
     fi
 done
 )
