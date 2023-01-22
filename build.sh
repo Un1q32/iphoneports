@@ -263,7 +263,7 @@ elif [ "$1" = "listpkgs" ]; then
     done
 elif [ "$1" = "pkg" ]; then
     depcheck
-    rm -rf "$_PKGDIR/$1/package" "$_PKGDIR/$1/source"
+    rm -rf "$_PKGDIR/$2/package" "$_PKGDIR/$2/source"
     build "$2"
     "$_FIND" "$_PKGDIR/$2" -iname "*.deb" -exec "$_CP" {} "$_BSROOT/debs" \;
 elif [ "$1" = "clean" ]; then
