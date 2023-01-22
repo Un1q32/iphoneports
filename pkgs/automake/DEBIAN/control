@@ -1,0 +1,11 @@
+Package: automake
+Priority: optional
+Section: Development
+Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
+Architecture: iphoneos-arm
+Version: 1.16.5
+Depends: perl
+Description: automatically generate verbose makefiles
+Name: Automake
+Homepage: http://www.gnu.org/software/automake/
+Tag: purpose::console
