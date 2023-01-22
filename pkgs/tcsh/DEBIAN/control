@@ -1,0 +1,9 @@
+Package: tcsh
+Priority: optional
+Section: Terminal_Support
+Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
+Architecture: iphoneos-arm
+Version: 6.24.07
+Depends: ncurses
+Description: enhanced version of the BSD C Shell
+Name: TENEX C Shell
