@@ -20,6 +20,7 @@ done
 (
 cd package || exit 1
 "$_TARGET-strip" -x bin/coreutils
+"$_TARGET-strip" -x usr/libexec/libstdbuf.so
 ldid -S"$_BSROOT/entitlements.xml" bin/coreutils
 )
 
