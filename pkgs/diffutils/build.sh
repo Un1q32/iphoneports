@@ -3,11 +3,11 @@
 cd source || exit 1
 ./configure --host="$_TARGET" --prefix=/usr
 "$_MAKE" -j4
-mkdir -p "$_PKGROOT"/package/usr/bin
-"$_CP" src/diff "$_PKGROOT"/package/usr/bin
-"$_CP" src/diff3 "$_PKGROOT"/package/usr/bin
-"$_CP" src/sdiff "$_PKGROOT"/package/usr/bin
-"$_CP" src/cmp "$_PKGROOT"/package/usr/bin
+mkdir -p "$_PKGROOT/package/usr/bin"
+"$_CP" src/diff "$_PKGROOT/package/usr/bin"
+"$_CP" src/diff3 "$_PKGROOT/package/usr/bin"
+"$_CP" src/sdiff "$_PKGROOT/package/usr/bin"
+"$_CP" src/cmp "$_PKGROOT/package/usr/bin"
 )
 
 (

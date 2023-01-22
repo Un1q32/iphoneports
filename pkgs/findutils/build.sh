@@ -4,8 +4,8 @@ cd source || exit 1
 ./configure --host="$_TARGET" --prefix=/usr
 "$_MAKE" -j4
 mkdir -p "$_PKGROOT"/package/usr/bin
-"$_CP" find/find "$_PKGROOT"/package/usr/bin
-"$_CP" xargs/xargs "$_PKGROOT"/package/usr/bin
+"$_CP" find/find "$_PKGROOT/package/usr/bin"
+"$_CP" xargs/xargs "$_PKGROOT/package/usr/bin"
 )
 
 (
