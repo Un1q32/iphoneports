@@ -1,0 +1,3 @@
+openssl
+zstd
+lz4
