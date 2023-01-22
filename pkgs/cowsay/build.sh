@@ -1,10 +1,10 @@
 #!/bin/sh
 (
 cd source || exit 1
-mkdir -p "$_PKGROOT/package/usr/bin"
+mkdir -p "$_PKGROOT/package/usr/bin" "$_PKGROOT/package/usr/share/cowsay"
 cp cowsay "$_PKGROOT/package/usr/bin"
 cp -a cowthink "$_PKGROOT/package/usr/bin"
-cp -r share "$_PKGROOT/package/usr"
+cp -r share/cows "$_PKGROOT/package/usr/share/cowsay"
 )
 
 "$_CP" -r DEBIAN package
