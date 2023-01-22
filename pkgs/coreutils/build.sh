@@ -3,8 +3,8 @@
 cd source || exit 1
 ./configure --host="$_TARGET" --prefix=/usr --enable-single-binary=symlinks
 "$_MAKE" -j4
-mkdir -p "$_PKGROOT../package/bin"
-mkdir -p "$_PKGROOT../package/usr/bin"
+mkdir -p "$_PKGROOT/package/bin"
+mkdir -p "$_PKGROOT/package/usr/bin"
 mkdir -p "$_PKGROOT/package/usr/libexec"
 "$_CP" src/coreutils "$_PKGROOT/package/bin"
 "$_CP" src/libstdbuf.so "$_PKGROOT/package/usr/libexec"
