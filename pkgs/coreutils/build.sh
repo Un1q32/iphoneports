@@ -14,7 +14,8 @@ done
 for i in chmod chown dir kill chgrp uname readlink stty ln date false ls echo vdir cat sleep mv rm mkdir pwd rmdir dd mknod mktemp true touch cp; do
     ln -s coreutils "$_PKGROOT/package/bin/$i"
 done
-"$_CP" -p ../files/su "$_PKGROOT/package/bin"
+"$_CP" -a ../files/su "$_PKGROOT/package/bin"
+chmod 4555 "$_PKGROOT/package/bin/su"
 )
 
 (
