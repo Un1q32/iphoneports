@@ -5,10 +5,8 @@
 # If no arguments are specified, print usage info
 if [ -z "$1" ] || [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
     printf "Usage: build.sh <option> [--target=tripple] [--no-tmpfs] [-h, --help]
-    <package name>          - Build a single package
-    pkg <package name>      - Build a single package and add it to the repo
+    <pkg name>              - Build a single package
     all                     - Build all packages
-    pkgall                  - Build all packages and add them to the repo
     clean                   - Clean a single package (remove build files)
     cleanall                - Clean all packages (remove build files)
     dryrun                  - Pretend to build all packages
@@ -248,24 +246,15 @@ includedeps() {
 }
 
 # Parse arguments
-if [ "$1" = "pkgall" ]; then
+if [ "$1" = "all" ]; then
     depcheck
     rm -rf "$_PKGDIR"/*/package "$_PKGDIR"/*/source
     buildall
     "$_FIND" . -iname "*.deb" -exec "$_CP" {} "$_BSROOT/debs" \;
-elif [ "$1" = "all" ]; then
-    depcheck
-    rm -rf "$_PKGDIR"/*/package "$_PKGDIR"/*/source
-    buildall
 elif [ "$1" = "listpkgs" ]; then
     for pkg in "$_PKGDIR"/*; do
         printf "%s\n" "${pkg##*/}"
     done
-elif [ "$1" = "pkg" ]; then
-    depcheck
-    rm -rf "$_PKGDIR/$2/package" "$_PKGDIR/$2/source"
-    build "$2"
-    "$_FIND" "$_PKGDIR/$2" -iname "*.deb" -exec "$_CP" {} "$_BSROOT/debs" \;
 elif [ "$1" = "clean" ]; then
     rm -rf "$_PKGDIR/$2/package" "$_PKGDIR/$2/source"
 elif [ "$1" = "cleanall" ]; then
@@ -276,6 +265,7 @@ elif [ -d "$_PKGDIR/$1" ]; then
     depcheck
     rm -rf "$_PKGDIR/$1/package" "$_PKGDIR/$1/source"
     build "$1"
+    "$_FIND" "$_PKGDIR/$2" -iname "*.deb" -exec "$_CP" {} "$_BSROOT/debs" \;
 else
     error "Package not found:" "$1"
 fi
