@@ -265,7 +265,7 @@ elif [ -d "$_PKGDIR/$1" ]; then
     depcheck
     rm -rf "$_PKGDIR/$1/package" "$_PKGDIR/$1/source"
     build "$1"
-    "$_FIND" "$_PKGDIR/$2" -iname "*.deb" -exec "$_CP" {} "$_BSROOT/debs" \;
+    "$_FIND" "$_PKGDIR/$1" -iname "*.deb" -exec "$_CP" {} "$_BSROOT/debs" \;
 else
     error "Package not found:" "$1"
 fi
