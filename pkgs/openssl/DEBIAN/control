@@ -4,5 +4,6 @@ Section: Security
 Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
 Architecture: iphoneos-arm
 Version: 1.1.1s
+Depends: ca-certificates
 Description: SSL library and cryptographic tools
 Name: OpenSSL

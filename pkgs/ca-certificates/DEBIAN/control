@@ -1,0 +1,8 @@
+Package: ca-certificates
+Priority: standard
+Section: Networking
+Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
+Architecture: iphoneos-arm
+Version: 20221209-0219
+Depends: openssl
+Description: Certificates used for SSL operations
