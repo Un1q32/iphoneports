@@ -1,8 +1,8 @@
 #!/bin/sh
 (
 cd source || exit 1
-"$_MAKE" CC="$_TARGET-clang" RANLIB="$_TARGET-ranlib" PREFIX=/usr -j4
-"$_MAKE" DESTDIR="$_PKGROOT/package" PREFIX=/usr install
+"$_MAKE" CC="$_TARGET-clang" RANLIB="$_TARGET-ranlib" PREFIX=/usr TARGET_OS=Darwin -j4
+"$_MAKE" DESTDIR="$_PKGROOT/package" PREFIX=/usr TARGET_OS=Darwin install
 )
 
 (
