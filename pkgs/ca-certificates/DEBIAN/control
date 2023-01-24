@@ -1,6 +1,6 @@
 Package: ca-certificates
 Priority: standard
-Section: Networking
+Section: Security
 Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
 Architecture: iphoneos-arm
 Version: 20221209-0219
