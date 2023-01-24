@@ -32,6 +32,12 @@ ln -sf git usr/bin/git-upload-pack
 ldid -S"$_PKGROOT/entitlements.xml" usr/bin/git
 ldid -S"$_PKGROOT/entitlements.xml" usr/bin/git-shell
 ldid -S"$_PKGROOT/entitlements.xml" usr/bin/scalar
+ldid -S"$_PKGROOT/entitlements.xml" usr/libexec/git-core/git-remote-http
+ldid -S"$_PKGROOT/entitlements.xml" usr/libexec/git-core/git-sh-i18n--envsubst
+ldid -S"$_PKGROOT/entitlements.xml" usr/libexec/git-core/git-http-backend
+ldid -S"$_PKGROOT/entitlements.xml" usr/libexec/git-core/git-http-fetch
+ldid -S"$_PKGROOT/entitlements.xml" usr/libexec/git-core/git-imap-send
+ldid -S"$_PKGROOT/entitlements.xml" usr/libexec/git-core/git-daemon
 )
 
 "$_CP" -r DEBIAN package
