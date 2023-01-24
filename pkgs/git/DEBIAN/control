@@ -4,6 +4,6 @@ Section: Data_Storage
 Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
 Architecture: iphoneos-arm
 Version: 2.39.1
-Depends: curl, openssl
+Depends: curl, openssl, perl, grep
 Description: fast content-addressable filesystem
 Name: Git
