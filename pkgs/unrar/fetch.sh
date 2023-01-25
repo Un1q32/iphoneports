@@ -1,7 +1,7 @@
 #!/bin/sh
 rm -rf package source
 printf "Downloading source...\n"
-curl -L -# -o source.tar.gz https://www.rarlab.com/rar/unrarsrc-6.2.4.tar.gz
+curl -L -# -o source.tar.gz https://www.rarlab.com/rar/unrarsrc-6.2.5.tar.gz
 printf "Unpacking source...\n"
 tar -xf source.tar.gz
 rm source.tar.gz
