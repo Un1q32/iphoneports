@@ -3,8 +3,8 @@
 cd source || exit 1
 ./configure --host="$_TARGET" --prefix=/usr
 "$_MAKE" -j4
-mkdir -p "$_PKGROOT"/package/usr/bin
-"$_CP" src/patch "$_PKGROOT"/package/usr/bin
+mkdir -p "$_PKGROOT/package/usr/bin"
+"$_CP" src/patch "$_PKGROOT/package/usr/bin"
 )
 
 (
