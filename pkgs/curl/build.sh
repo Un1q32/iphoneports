@@ -1,4 +1,4 @@
-#!/bin/sh -x
+#!/bin/sh
 (
 cd source || exit 1
 ./configure --host="$_TARGET" --prefix=/usr --with-openssl --with-ca-fallback
