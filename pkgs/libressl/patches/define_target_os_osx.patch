@@ -1,0 +1,10 @@
+--- source/crypto/compat/getentropy_osx.c.orig	2023-01-28 17:37:26.156970128 -0500
++++ source/crypto/compat/getentropy_osx.c	2023-01-28 17:39:44.781554674 -0500
+@@ -20,6 +20,7 @@
+  * http://man.openbsd.org/getentropy.2
+  */
+ 
++#define TARGET_OS_OSX 0
+ #include <TargetConditionals.h>
+ #include <sys/types.h>
+ #include <sys/param.h>
