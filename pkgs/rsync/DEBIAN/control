@@ -6,4 +6,4 @@ Architecture: iphoneos-arm
 Version: 3.2.7
 Description: A fast and versatile file copying tool for remote and local files
 Homepage: http://www.samba.org/rsync/
-Depends: openssl, lz4, zstd
+Depends: libressl, lz4, zstd

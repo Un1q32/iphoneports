@@ -6,3 +6,6 @@ Architecture: iphoneos-arm
 Version: 3.7.0
 Description: Free version of the TLS/crypto stack forked from OpenSSL
 Name: LibreSSL
+Provides: openssl
+Replaces: openssl
+Conflicts: openssl

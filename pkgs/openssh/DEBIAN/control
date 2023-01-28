@@ -4,7 +4,7 @@ Section: Networking
 Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
 Architecture: iphoneos-arm
 Version: 9.1p1
-Depends: openssl
+Depends: libressl
 Description: secure remote access between machines
 Name: OpenSSH
 Depiction: http://cydia.saurik.com/info/openssh/
