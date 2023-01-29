@@ -17,6 +17,12 @@ rm -rf usr/local
 "$_TARGET-strip" -x usr/sbin/sudo_sendlog
 "$_TARGET-strip" -x usr/sbin/visudo
 "$_TARGET-strip" -x usr/libexec/sudo/libsudo_util.0.dylib
+"$_TARGET-strip" -x usr/libexec/sudo/audit_json.so
+"$_TARGET-strip" -x usr/libexec/sudo/group_file.so
+"$_TARGET-strip" -x usr/libexec/sudo/sudoers.so
+"$_TARGET-strip" -x usr/libexec/sudo/sudo_intercept.so
+"$_TARGET-strip" -x usr/libexec/sudo/sudo_noexec.so
+"$_TARGET-strip" -x usr/libexec/sudo/system_group.so
 ldid -S"$_BSROOT/entitlements.xml" usr/bin/sudo
 ldid -S"$_BSROOT/entitlements.xml" usr/bin/cvtsudoers
 ldid -S"$_BSROOT/entitlements.xml" usr/bin/sudoreplay
@@ -24,8 +30,24 @@ ldid -S"$_BSROOT/entitlements.xml" usr/sbin/sudo_logsrvd
 ldid -S"$_BSROOT/entitlements.xml" usr/sbin/sudo_sendlog
 ldid -S"$_BSROOT/entitlements.xml" usr/sbin/visudo
 ldid -S"$_BSROOT/entitlements.xml" usr/libexec/sudo/libsudo_util.0.dylib
+ldid -S"$_BSROOT/entitlements.xml" usr/libexec/sudo/audit_json.so
+ldid -S"$_BSROOT/entitlements.xml" usr/libexec/sudo/group_file.so
+ldid -S"$_BSROOT/entitlements.xml" usr/libexec/sudo/sudoers.so
+ldid -S"$_BSROOT/entitlements.xml" usr/libexec/sudo/sudo_intercept.so
+ldid -S"$_BSROOT/entitlements.xml" usr/libexec/sudo/sudo_noexec.so
+ldid -S"$_BSROOT/entitlements.xml" usr/libexec/sudo/system_group.so
 chmod 4755 usr/bin/sudo
 )
 
-"$_CP" -r DEBIAN package
-dpkg-deb -b --root-owner-group -Zgzip package sudo-1.9.12p2.deb
+case "$_TARGET" in
+    *64*)
+        debname="sudo-1.9.12p2-arm64.deb"
+        "$_CP" -r files/DEBIAN-arm64 package/DEBIAN
+    ;;
+    *)
+        debname="sudo-1.9.12p2.deb"
+        "$_CP" -r DEBIAN package
+    ;;
+esac
+
+dpkg-deb -b --root-owner-group -Zgzip package "$debname"
