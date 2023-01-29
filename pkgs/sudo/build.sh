@@ -1,7 +1,7 @@
 #!/bin/sh
 (
 cd source || exit 1
-ax_cv_check_cflags___static_libgcc=no ./configure --host="$_TARGET" --exec-prefix=/usr --sysconfdir=/etc --includedir=/usr/include --with-passprompt="Password:"
+ ./configure --host="$_TARGET" --exec-prefix=/usr --sysconfdir=/etc --includedir=/usr/include --with-passprompt="Password:" --with-env-editor ax_cv_check_cflags___static_libgcc=no
 "$_MAKE" -j4
 fakeroot "$_MAKE" DESTDIR="$_PKGROOT/package" install
 )
