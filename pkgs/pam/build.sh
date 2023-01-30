@@ -1,5 +1,2 @@
 #!/bin/sh
-(
-cd package || exit 1
-ln -s pam usr/include/security
-)
+ln -s pam package/usr/include/security
