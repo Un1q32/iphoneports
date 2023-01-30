@@ -256,9 +256,9 @@ elif [ "$1" = "listpkgs" ]; then
         printf "%s\n" "${pkg##*/}"
     done
 elif [ "$1" = "clean" ]; then
-    rm -rf "$_PKGDIR/$2/package" "$_PKGDIR/$2/source"
+    rm -rf "$_PKGDIR/$2/package" "$_PKGDIR/$2/source" "$_PKGDIR/$2"/*.deb "$_BSROOT/debs/$2"*.deb
 elif [ "$1" = "cleanall" ]; then
-    rm -rf "$_PKGDIR"/*/package "$_PKGDIR"/*/source
+    rm -rf "$_PKGDIR"/*/package "$_PKGDIR"/*/source "$_PKGDIR"/*/*.deb "$_BSROOT/debs"/*.deb
 elif [ "$1" = "dryrun" ]; then
     buildall dryrun
 elif [ -d "$_PKGDIR/$1" ]; then
