@@ -13,9 +13,13 @@ cd source || exit 1
 (
 cd package || exit 1
 rm -rf usr/man usr/bin/tabs
-for i in usr/share/terminfo/*; do
-    ln -s "${i##*/}" "usr/share/terminfo/$(printf "%s" "${i##*/}" | od -An -tx1 | tr -d ' ')"
+(
+cd usr/share/terminfo || exit 1
+for i in ?; do
+    x="$(printf %x \'"$i")"
+    ln -sn "$i" "$x"
 done
+)
 for i in tic tput tset toe clear infocmp; do
     "$_TARGET-strip" -x usr/bin/$i
     ldid -S"$_BSROOT/entitlements.xml" usr/bin/$i
