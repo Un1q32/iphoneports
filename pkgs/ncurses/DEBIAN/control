@@ -3,6 +3,6 @@ Priority: required
 Section: System
 Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
 Architecture: iphoneos-arm
-Version: 5.9-3
+Version: 5.9-4
 Description: System V Release 4.0 curses emulation library
 Name: New Curses

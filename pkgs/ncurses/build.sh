@@ -1,11 +1,11 @@
 #!/bin/sh
 (
 cd source || exit 1
-./configure --host="$_TARGET" --prefix=/usr --sysconfdir=/etc --with-default-terminfo-dir=/usr/share/terminfo --with-shared --without-normal --without-debug --enable-termcap
+./configure --host="$_TARGET" --prefix=/usr --sysconfdir=/etc --with-default-terminfo-dir=/usr/share/terminfo --with-shared --without-normal --without-debug --enable-termcap --enable-symlinks
 "$_MAKE" -j4
 "$_MAKE" DESTDIR="$_PKGROOT/package" install
 "$_MAKE" clean
-./configure --host="$_TARGET" --prefix=/usr --sysconfdir=/etc --with-default-terminfo-dir=/usr/share/terminfo --with-shared --without-normal --without-debug --enable-termcap --disable-overwrite --enable-widec
+./configure --host="$_TARGET" --prefix=/usr --sysconfdir=/etc --with-default-terminfo-dir=/usr/share/terminfo --with-shared --without-normal --without-debug --enable-termcap --enable-symlinks --disable-overwrite --enable-widec
 "$_MAKE" -j4
 "$_MAKE" DESTDIR="$_PKGROOT/package" install
 )
@@ -13,12 +13,15 @@ cd source || exit 1
 (
 cd package || exit 1
 rm -rf usr/man usr/bin/tabs
+for i in usr/share/terminfo/*; do
+    ln -s "${i##*/}" "usr/share/terminfo/$(printf "%s" "${i##*/}" | od -An -tx1 | tr -d ' ')"
+done
 for i in tic tput tset toe clear infocmp; do
     "$_TARGET-strip" -x usr/bin/$i
     ldid -S"$_BSROOT/entitlements.xml" usr/bin/$i
 done
 for i in usr/lib/*.dylib; do
-    if [ -f "$i" ]; then
+    if ! [ -h "$i" ]; then
         "$_TARGET-strip" -x "$i" -no_code_signature_warning
         ldid -S"$_BSROOT/entitlements.xml" "$i"
     fi
