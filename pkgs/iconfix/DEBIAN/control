@@ -1,0 +1,8 @@
+Package: io.github.oldworldordr.iconfix
+Name: iFile/MTerminal icon fix
+Version: 5.1
+Architecture: iphoneos-arm
+Depends: curl
+Description: A shell script that fixes the iFile and MTerminal icons on iOS 6 and below.
+Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
+Section: Utilities
