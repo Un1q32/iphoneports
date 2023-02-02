@@ -1,0 +1,18 @@
+#!/bin/sh
+(
+cd source || exit 1
+./autogen.sh
+./configure --host="$_TARGET" --prefix=/usr --disable-unicode --disable-linux-affinity
+"$_MAKE" -j4
+mkdir -p "$_PKGROOT"/package/usr/bin
+"$_CP" htop "$_PKGROOT"/package/usr/bin
+)
+
+(
+cd package || exit 1
+"$_TARGET-strip" -x usr/bin/htop
+ldid -S"$_BSROOT/entitlements.xml" usr/bin/htop
+)
+
+"$_CP" -r DEBIAN package
+dpkg-deb -b --root-owner-group -Zgzip package htop-3.0.2.deb
