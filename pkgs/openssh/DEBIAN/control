@@ -3,7 +3,7 @@ Priority: important
 Section: Networking
 Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
 Architecture: iphoneos-arm
-Version: 9.1p1
+Version: 9.2p1
 Depends: libressl
 Description: secure remote access between machines
 Name: OpenSSH

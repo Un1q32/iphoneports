@@ -23,4 +23,4 @@ chmod 4711 usr/libexec/ssh-keysign
 "$_CP" -r files/Library package
 "$_CP" files/sshd_config package/etc/ssh
 "$_CP" files/sshd-keygen-wrapper package/usr/libexec
-dpkg-deb -b --root-owner-group -Zgzip package openssh-9.1p1.deb
+dpkg-deb -b --root-owner-group -Zgzip package openssh-9.2p1.deb
