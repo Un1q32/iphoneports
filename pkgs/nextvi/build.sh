@@ -2,7 +2,7 @@
 (
 mkdir -p package/usr/bin
 cd source || exit 1
-"$_MAKE" CC="$_TARGET-clang" FLAGS="-std=c99 -O2" -j4
+"$_MAKE" CC="$_TARGET-clang" OS=Darwin -j4
 "$_CP" vi "$_PKGROOT/package/usr/bin"
 )
 
