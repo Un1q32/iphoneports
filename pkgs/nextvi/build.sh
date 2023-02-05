@@ -2,15 +2,15 @@
 (
 mkdir -p package/usr/bin
 cd source || exit 1
-"$_MAKE" CC="$_TARGET-clang" TARGET_DIR_BIN="$_PKGROOT/package/usr/bin" install -j4
+"$_MAKE" CC="$_TARGET-clang" FLAGS="-std=c99 -O2" -j4
+"$_CP" vi "$_PKGROOT/package/usr/bin"
 )
 
 (
 cd package || exit 1
+ln -s vi usr/bin/ex
 "$_TARGET-strip" -x usr/bin/vi
-"$_TARGET-strip" -x usr/bin/ex
 ldid -S"$_BSROOT/entitlements.xml" usr/bin/vi
-ldid -S"$_BSROOT/entitlements.xml" usr/bin/ex
 )
 
 "$_CP" -r DEBIAN package
