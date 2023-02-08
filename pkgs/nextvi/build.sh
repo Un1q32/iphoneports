@@ -2,14 +2,12 @@
 (
 mkdir -p package/usr/bin
 cd source || exit 1
-"$_MAKE" CC="$_TARGET-clang" OS=Darwin -j4
-"$_CP" vi "$_PKGROOT/package/usr/bin"
+"$_MAKE" CROSS_COMPILE="$_TARGET-" OS=Darwin PREFIX=/usr DESTDIR="$_PKGROOT/package" install -j4
 )
 
 (
 cd package || exit 1
-ln -s vi usr/bin/ex
-"$_TARGET-strip" -x usr/bin/vi
+ln -sf vi usr/bin/ex
 ldid -S"$_BSROOT/entitlements.xml" usr/bin/vi
 )
 

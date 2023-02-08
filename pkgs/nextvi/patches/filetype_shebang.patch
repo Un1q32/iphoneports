@@ -1,5 +1,5 @@
---- source/ex.c.orig	2023-02-04 19:43:46.324292239 -0500
-+++ source/ex.c	2023-02-04 19:43:14.913896382 -0500
+--- source/ex.c.orig
++++ source/ex.c
 @@ -414,6 +414,19 @@
  		ex_show("read failed");
  	else
