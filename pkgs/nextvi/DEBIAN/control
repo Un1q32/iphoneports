@@ -1,5 +1,5 @@
 Package: nextvi
-Version: 3
+Version: 4
 Architecture: iphoneos-arm
 Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
 Section: Text_Editors
@@ -8,4 +8,3 @@ Description: Next version of neatvi (a small vi/ex editor) for editing bidirecti
 Tag: purpose::console
 Name: NextVI
 Conflicts: nvi
-Replaces: vim

@@ -7,7 +7,7 @@ cd source || exit 1
 
 (
 cd package || exit 1
-ln -sf vi usr/bin/ex
+rm usr/bin/ex
 ldid -S"$_BSROOT/entitlements.xml" usr/bin/vi
 )
 
