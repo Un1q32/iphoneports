@@ -6,3 +6,4 @@ Architecture: iphoneos-arm
 Version: 1.0.4
 Description: File compressor using lzo lib
 Tag: purpose::console
+Depends: lzo

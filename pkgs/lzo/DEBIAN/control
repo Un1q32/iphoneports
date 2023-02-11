@@ -1,6 +1,6 @@
 Package: lzo
 Priority: optional
-Section: Archiving
+Section: Development
 Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
 Architecture: iphoneos-arm
 Version: 2.10
