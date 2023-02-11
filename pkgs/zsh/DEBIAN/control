@@ -4,7 +4,7 @@ Section: Terminal_Support
 Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
 Architecture: iphoneos-arm
 Version: 5.9
-Depends: ncurses
+Depends: ncurses, pcre
 Description: A very advanced and programmable command interpreter (shell) for UNIX
 Name: Z Shell
 Tag: purpose::console

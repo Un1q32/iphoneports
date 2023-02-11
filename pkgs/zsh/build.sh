@@ -1,7 +1,7 @@
 #!/bin/sh
 (
 cd source || exit 1
-./configure --host="$_TARGET" --prefix=/usr --sysconfdir=/etc --bindir=/bin
+./configure --host="$_TARGET" --prefix=/usr --sysconfdir=/etc --bindir=/bin --enable-pcre
 "$_MAKE" -j4
 "$_MAKE" DESTDIR="$_PKGROOT/package" install
 )

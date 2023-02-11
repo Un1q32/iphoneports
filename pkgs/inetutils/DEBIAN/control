@@ -1,0 +1,8 @@
+Package: inetutils
+Priority: standard
+Section: Networking
+Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
+Architecture: iphoneos-arm
+Version: 2.4
+Depends: ncurses, pam
+Description: A collection of common network programs

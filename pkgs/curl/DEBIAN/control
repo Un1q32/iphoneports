@@ -5,6 +5,6 @@ Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
 Architecture: iphoneos-arm
 Version: 7.87.0
 Depends: libressl
-Description: flexible multi-protocol file transfers
+Description: An URL retrieval utility and library
 Name: cURL
 Homepage: http://curl.haxx.se/
