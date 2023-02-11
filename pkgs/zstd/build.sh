@@ -9,10 +9,10 @@ cd source || exit 1
 cd package || exit 1
 rm -rf usr/share
 "$_TARGET-strip" -x usr/bin/zstd
-"$_TARGET-strip" -x usr/lib/libzstd.1.5.2.dylib
+"$_TARGET-strip" -x usr/lib/libzstd.1.5.4.dylib
 ldid -S"$_BSROOT/entitlements.xml" usr/bin/zstd
-ldid -S"$_BSROOT/entitlements.xml" usr/lib/libzstd.1.5.2.dylib
+ldid -S"$_BSROOT/entitlements.xml" usr/lib/libzstd.1.5.4.dylib
 )
 
 "$_CP" -r DEBIAN package
-dpkg-deb -b --root-owner-group -Zgzip package zstd-1.5.2.deb
+dpkg-deb -b --root-owner-group -Zgzip package zstd-1.5.4.deb
