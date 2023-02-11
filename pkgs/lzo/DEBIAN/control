@@ -1,0 +1,8 @@
+Package: lzo
+Priority: optional
+Section: Archiving
+Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
+Architecture: iphoneos-arm
+Version: 2.10
+Description: Portable lossless data compression library
+Tag: purpose::console
