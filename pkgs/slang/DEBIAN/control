@@ -1,0 +1,8 @@
+Package: slang
+Priority: optional
+Section: Development
+Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
+Architecture: iphoneos-arm
+Version: 2.3.3
+Description: S-Lang is a powerful interpreted language
+Tag: purpose::console

@@ -1,0 +1,9 @@
+Package: most
+Priority: important
+Section: Utilities
+Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
+Architecture: iphoneos-arm
+Version: 5.2.0
+Depends: slang
+Description: A terminal pager similar to 'more' and 'less'
+Tag: purpose::console

@@ -1,0 +1,8 @@
+Package: oniguruma
+Priority: optional
+Section: Development
+Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
+Architecture: iphoneos-arm
+Version: 6.9.8
+Description: a regular expressions library
+Tag: purpose::console
