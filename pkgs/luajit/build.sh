@@ -1,7 +1,7 @@
 #!/bin/sh
 (
 cd source || exit 1
-"$_MAKE" TARGET_SYS=Darwin HOST_CC="gcc -m32" CROSS="$_TARGET-" CCOPT=-O2 PREFIX=/usr DESTDIR="$_PKGROOT/package" install -j4
+"$_MAKE" TARGET_SYS=Darwin HOST_CC="gcc -m32" CROSS="$_TARGET-" CCOPT=-O2 PREFIX=/usr DESTDIR="$_PKGROOT/package" TARGET_CFLAGS="-DLUAJIT_ENABLE_JIT" MACOSX_DEPLOYMENT_TARGET=10.5 install -j4
 )
 
 (
