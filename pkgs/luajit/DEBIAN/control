@@ -1,0 +1,9 @@
+Package: luajit
+Name: LuaJIT
+Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
+Architecture: iphoneos-arm
+Description: Just-in-time compiler and drop-in replacement for Lua 5.1
+Section: Development
+Priority: optional
+Tag: purpose::console
+Version: 2.1.0-beta3
