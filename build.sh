@@ -104,19 +104,6 @@ depcheck() {
         error "No patch command detected. Please install GNU patch."
     fi
 
-    # Check for GNU find
-    if command -v gfind > /dev/null; then
-        _FIND="gfind"
-    elif command -v find > /dev/null; then
-        _find_version="$(find --version)"
-        case "$_find_version" in
-            *GNU*) _FIND="find" ;;
-            *) error "Non-GNU find detected. Please install GNU find." ;;
-        esac
-    else
-        error "No find command detected. Please install GNU find."
-    fi
-
     # Check for GNU cp
     if command -v gcp > /dev/null; then
         _CP="gcp"
@@ -250,7 +237,7 @@ if [ "$1" = "all" ]; then
     depcheck
     rm -rf "$_PKGDIR"/*/package "$_PKGDIR"/*/source
     buildall
-    "$_FIND" . -iname "*.deb" -exec "$_CP" {} "$_BSROOT/debs" \;
+    "$_CP" "$_PKGDIR"/*/*.deb "$_BSROOT/debs"
 elif [ "$1" = "listpkgs" ]; then
     for pkg in "$_PKGDIR"/*; do
         printf "%s\n" "${pkg##*/}"
@@ -265,7 +252,7 @@ elif [ -d "$_PKGDIR/$1" ]; then
     depcheck
     rm -rf "$_PKGDIR/$1/package" "$_PKGDIR/$1/source"
     build "$1"
-    "$_FIND" "$_PKGDIR/$1" -iname "*.deb" -exec "$_CP" {} "$_BSROOT/debs" \;
+    "$_CP" "$_PKGDIR/$1"/*.deb "$_BSROOT/debs"
 else
     error "Package not found:" "$1"
 fi
