@@ -235,7 +235,7 @@ if [ "$1" = "all" ]; then
     depcheck
     rm -rf "$_PKGDIR"/*/package "$_PKGDIR"/*/source
     buildall
-    "$_CP" "$_PKGDIR"/*/*.deb "$_BSROOT/debs"
+    "$_CP" -fl "$_PKGDIR"/*/*.deb "$_BSROOT/debs" 2>/dev/null
 elif [ "$1" = "listpkgs" ]; then
     for pkg in "$_PKGDIR"/*; do
         printf "%s\n" "${pkg##*/}"
@@ -250,7 +250,7 @@ elif [ -d "$_PKGDIR/$1" ]; then
     depcheck
     rm -rf "$_PKGDIR/$1/package" "$_PKGDIR/$1/source"
     build "$1"
-    "$_CP" "$_PKGDIR/$1"/*.deb "$_BSROOT/debs"
+    "$_CP" -fl "$_PKGDIR/$1"/*.deb "$_BSROOT/debs" 2>/dev/null
 else
     error "Package not found:" "$1"
 fi
