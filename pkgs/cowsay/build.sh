@@ -2,9 +2,9 @@
 (
 cd source || exit 1
 mkdir -p "$_PKGROOT/package/usr/bin" "$_PKGROOT/package/usr/share/cowsay"
-cp cowsay "$_PKGROOT/package/usr/bin"
-cp -a cowthink "$_PKGROOT/package/usr/bin"
-cp -r share/cows "$_PKGROOT/package/usr/share/cowsay"
+"$_CP" cowsay "$_PKGROOT/package/usr/bin"
+"$_CP" -a cowthink "$_PKGROOT/package/usr/bin"
+"$_CP" -r share/cows "$_PKGROOT/package/usr/share/cowsay"
 )
 
 "$_CP" -r DEBIAN package
