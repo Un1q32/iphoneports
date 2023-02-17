@@ -1,6 +1,4 @@
 #!/bin/sh
-# Stop shellcheck from complaining about the find --version not specifying a path
-# shellcheck disable=SC2185
 
 # If no arguments are specified, print usage info
 if [ -z "$1" ] || [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
@@ -118,7 +116,7 @@ depcheck() {
     fi
 
     _SDK="$("$_TARGET-sdkpath")"
-    export _MAKE _PATCH _FIND _SDK _CP
+    export _MAKE _PATCH _SDK _CP
 }
 
 # Main build function
