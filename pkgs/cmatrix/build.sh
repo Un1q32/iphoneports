@@ -3,7 +3,7 @@
 cd source || exit 1
 autoreconf -fi
 ./configure --host="$_TARGET" --prefix=/usr --without-fonts
-"$_MAKE" -j4
+"$_MAKE" -j8
 mkdir -p "$_PKGROOT/package/usr/bin"
 "$_CP" cmatrix "$_PKGROOT/package/usr/bin"
 )

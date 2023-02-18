@@ -2,7 +2,7 @@
 (
 cd source || exit 1
 ./configure --host="$_TARGET" --prefix=/usr --libdir=/usr/local/lib --disable-lzmadec --disable-lzmainfo --disable-lzma-links
-"$_MAKE" -j4
+"$_MAKE" -j8
 "$_MAKE" DESTDIR="$_PKGROOT/package" install
 )
 

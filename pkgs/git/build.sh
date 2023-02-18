@@ -2,7 +2,7 @@
 (
 cd source || exit 1
 ac_cv_snprintf_returns_bogus=y ac_cv_iconv_omits_bom=y ac_cv_fread_reads_directories=y ./configure --host="$_TARGET" --prefix=/usr
-"$_MAKE" -j4
+"$_MAKE" -j8
 "$_MAKE" DESTDIR="$_PKGROOT/package" install
 )
 

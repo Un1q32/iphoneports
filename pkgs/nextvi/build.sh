@@ -2,7 +2,7 @@
 (
 mkdir -p package/usr/bin
 cd source || exit 1
-"$_MAKE" CROSS_COMPILE="$_TARGET-" OS=Darwin PREFIX=/usr DESTDIR="$_PKGROOT/package" install -j4
+"$_MAKE" CROSS_COMPILE="$_TARGET-" OS=Darwin PREFIX=/usr DESTDIR="$_PKGROOT/package" install -j8
 )
 
 (

@@ -3,7 +3,7 @@
 cd source || exit 1
 ./autogen.sh
 ./configure --host="$_TARGET" --prefix=/usr --disable-unicode --disable-linux-affinity
-"$_MAKE" -j4
+"$_MAKE" -j8
 mkdir -p "$_PKGROOT"/package/usr/bin
 "$_CP" htop "$_PKGROOT"/package/usr/bin
 )

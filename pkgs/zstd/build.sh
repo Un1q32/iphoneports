@@ -1,7 +1,7 @@
 #!/bin/sh
 (
 cd source || exit 1
-"$_MAKE" CC="$_TARGET-clang" RANLIB="$_TARGET-ranlib" PREFIX=/usr UNAME=Darwin -j4
+"$_MAKE" CC="$_TARGET-clang" RANLIB="$_TARGET-ranlib" PREFIX=/usr UNAME=Darwin -j8
 "$_MAKE" DESTDIR="$_PKGROOT/package" PREFIX=/usr UNAME=Darwin install
 )
 

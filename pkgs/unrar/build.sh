@@ -1,7 +1,7 @@
 #!/bin/sh
 (
 cd source || exit 1
-"$_MAKE" CXX="$_TARGET-clang++" STRIP=true CXXFLAGS=-O2 LIBFLAGS= -j4
+"$_MAKE" CXX="$_TARGET-clang++" STRIP=true CXXFLAGS=-O2 LIBFLAGS= -j8
 mkdir -p "$_PKGROOT/package/usr/bin"
 "$_CP" unrar "$_PKGROOT/package/usr/bin"
 )

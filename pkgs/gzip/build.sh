@@ -2,7 +2,7 @@
 (
 cd source || exit 1
 ./configure --host="$_TARGET" --prefix=/usr --bindir=/bin
-"$_MAKE" -j4
+"$_MAKE" -j8
 mkdir -p "$_PKGROOT/package/bin"
 "$_CP" gzip "$_PKGROOT/package/bin"
 "$_CP" gunzip "$_PKGROOT/package/bin"

@@ -3,7 +3,7 @@
 cd source || exit 1
 ./autogen.sh
 ./configure --host="$_TARGET" --bindir=/bin
-"$_MAKE" -j4
+"$_MAKE" -j8
 mkdir -p "$_PKGROOT"/package/bin
 "$_CP" src/dash "$_PKGROOT"/package/bin
 )

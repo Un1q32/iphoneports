@@ -1,7 +1,7 @@
 #!/bin/sh
 (
 cd source || exit 1
-"$_MAKE" CC="$_TARGET-clang" RANLIB="$_TARGET-ranlib" PREFIX="$_PKGROOT/package/usr" libbz2.a bzip2 bzip2recover install -j4
+"$_MAKE" CC="$_TARGET-clang" RANLIB="$_TARGET-ranlib" PREFIX="$_PKGROOT/package/usr" libbz2.a bzip2 bzip2recover install -j8
 )
 
 (

@@ -2,7 +2,7 @@
 (
 cd source || exit 1
 ./configure --host="$_TARGET" --prefix=/usr
-"$_MAKE" -j4
+"$_MAKE" -j8
 mkdir -p "$_PKGROOT"/package/usr/bin
 "$_CP" src/m4 "$_PKGROOT"/package/usr/bin
 )

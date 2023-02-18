@@ -2,7 +2,7 @@
 (
 cd source || exit 1
 ./configure --prefix=/usr --bindir=/bin CC="$_TARGET-clang"
-"$_MAKE" -j4
+"$_MAKE" -j8
 "$_MAKE" DESTDIR="$_PKGROOT/package" install
 )
 

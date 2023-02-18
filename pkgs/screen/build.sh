@@ -3,7 +3,7 @@
 cd source || exit 1
 ./autogen.sh
 ./configure --host="$_TARGET" --prefix=/usr --sysconfdir=/etc
-"$_MAKE" -j4
+"$_MAKE" -j8
 "$_MAKE" DESTDIR="$_PKGROOT/package" install
 )
 

@@ -2,7 +2,7 @@
 (
 cd source || exit 1
 ./configure --host="$_TARGET" --prefix=/usr --sysconfdir=/etc
-"$_MAKE" -j4
+"$_MAKE" -j8
 "$_MAKE" DESTDIR="$_PKGROOT/package" install
 mkdir "$_PKGROOT/package/bin" "$_PKGROOT/package/sbin"
 ln -s ../usr/bin/ping "$_PKGROOT/package/bin/ping"
