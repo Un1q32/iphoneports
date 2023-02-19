@@ -1,7 +1,7 @@
 #!/bin/sh
 (
 cd source || exit 1
-./configure --host="$_TARGET" --prefix=/usr --with-openssl --with-ca-fallback
+./configure --host="$_TARGET" --prefix=/usr --with-openssl --with-ca-fallback --disable-static
 "$_MAKE" -j8
 "$_MAKE" DESTDIR="$_PKGROOT/package" install
 )

@@ -1,7 +1,7 @@
 #!/bin/sh
 (
 cd source || exit 1
-./configure --host="$_TARGET" --prefix=/usr --libdir=/usr/local/lib --disable-lzmadec --disable-lzmainfo --disable-lzma-links
+./configure --host="$_TARGET" --prefix=/usr --libdir=/usr/local/lib --disable-lzmadec --disable-lzmainfo --disable-lzma-links --disable-static
 "$_MAKE" -j8
 "$_MAKE" DESTDIR="$_PKGROOT/package" install
 )

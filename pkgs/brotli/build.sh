@@ -2,7 +2,7 @@
 (
 cd source || exit 1
 ./bootstrap
-./configure --host="$_TARGET" --prefix=/usr
+./configure --host="$_TARGET" --prefix=/usr --disable-static
 "$_MAKE" -j8
 "$_MAKE" DESTDIR="$_PKGROOT/package" install
 )
