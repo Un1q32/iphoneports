@@ -7,5 +7,5 @@ Description: XZ-format compression utilities
 Homepage: http://tukaani.org/xz/
 Section: Archiving
 Priority: optional
-Tag: purpose::console, role::hacker
-Version: 5.4.1
+Tag: purpose::console
+Version: 5.4.1-1

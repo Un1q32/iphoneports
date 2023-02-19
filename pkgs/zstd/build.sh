@@ -7,7 +7,7 @@ cd source || exit 1
 
 (
 cd package || exit 1
-rm -rf usr/share
+rm -rf usr/share usr/lib/libzstd.a
 "$_TARGET-strip" -x usr/bin/zstd
 "$_TARGET-strip" -x usr/lib/libzstd.1.5.4.dylib
 ldid -S"$_BSROOT/entitlements.xml" usr/bin/zstd

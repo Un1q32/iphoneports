@@ -7,7 +7,7 @@ cd source || exit 1
 
 (
 cd package || exit 1
-rm -rf usr/share
+rm -rf usr/share usr/lib/liblz4.a
 "$_TARGET-strip" -x usr/bin/lz4
 "$_TARGET-strip" -x usr/lib/liblz4.1.9.4.dylib
 ldid -S"$_BSROOT/entitlements.xml" usr/bin/lz4

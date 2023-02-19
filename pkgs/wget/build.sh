@@ -1,7 +1,7 @@
 #!/bin/sh
 (
 cd source || exit 1
-./configure --host="$_TARGET" --prefix=/usr --sysconfdir=/etc --with-ssl=openssl --without-zlib --disable-pcre2 --without-libpsl --disable-iri
+./configure --host="$_TARGET" --prefix=/usr --sysconfdir=/etc --with-ssl=openssl --disable-pcre2 --without-libpsl --disable-iri
 "$_MAKE" -j8
 "$_MAKE" DESTDIR="$_PKGROOT/package" install
 )
