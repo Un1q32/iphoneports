@@ -3,5 +3,5 @@ Priority: optional
 Section: Archiving
 Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
 Architecture: iphoneos-arm
-Version: 6.2.5
+Version: 6.2.6
 Description: de-compresses files in rar format

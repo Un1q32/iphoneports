@@ -16,4 +16,4 @@ ldid -S"$_BSROOT/entitlements.xml" usr/lib/libcurl.4.dylib
 )
 
 "$_CP" -r DEBIAN package
-dpkg-deb -b --root-owner-group -Zgzip package curl-7.88.0.deb
+dpkg-deb -b --root-owner-group -Zgzip package curl-7.88.1.deb

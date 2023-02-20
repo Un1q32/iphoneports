@@ -13,4 +13,4 @@ ldid -S"$_BSROOT/entitlements.xml" usr/bin/unrar
 )
 
 "$_CP" -r DEBIAN package
-dpkg-deb -b --root-owner-group -Zgzip package unrar-6.2.5.deb
+dpkg-deb -b --root-owner-group -Zgzip package unrar-6.2.6.deb
