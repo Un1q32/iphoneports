@@ -4,7 +4,7 @@ Priority: standard
 Section: Administration
 Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
 Architecture: iphoneos-arm
-Version: 1.9.13
+Version: 1.9.13p2
 Description: temporarily assume root priviledges
 Depends: firmware (>= 7.0)
 Tag: purpose::console
