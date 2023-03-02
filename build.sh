@@ -4,6 +4,7 @@
 if [ -z "$1" ] || [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
     printf "Usage: build.sh <option> [--target=tripple] [--no-tmpfs] [-h, --help]
     <pkg name>              - Build a single package
+    build <pkg names>       - Build all specified packages
     all                     - Build all packages
     clean                   - Clean a single package (remove build files)
     cleanall                - Clean all packages (remove build files)
@@ -20,11 +21,9 @@ if [ -z "$1" ] || [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
     fi
 fi
 
-# Error functions
-_red='\033[1;31m'
-_end='\033[0m'
+# Error function
 error() {
-    printf "${_red}ERROR:${_end} %s %s\n" "$1" "$2"
+    printf "\033[1;31mERROR:\033[0m %s %s\n" "$1" "$2"
     exit 1
 }
 
@@ -246,6 +245,17 @@ elif [ "$1" = "cleanall" ]; then
     rm -rf "$_PKGDIR"/*/package "$_PKGDIR"/*/source "$_PKGDIR"/*/*.deb "$_BSROOT/debs"/*.deb
 elif [ "$1" = "dryrun" ]; then
     buildall dryrun
+elif [ "$1" = "build" ]; then
+    depcheck
+    shift
+    for pkg in "$@"; do
+        [ -d "$_PKGDIR/$pkg" ] || error "Package not found:" "$pkg"
+    done
+    for pkg in "$@"; do
+        rm -rf "$_PKGDIR/$pkg/package" "$_PKGDIR/$pkg/source"
+        build "$pkg"
+        "$_CP" -fl "$_PKGDIR/$pkg"/*.deb "$_BSROOT/debs" 2>/dev/null
+    done
 elif [ -d "$_PKGDIR/$1" ]; then
     depcheck
     rm -rf "$_PKGDIR/$1/package" "$_PKGDIR/$1/source"
