@@ -29,11 +29,8 @@ error() {
 
 # Check target
 case "$*" in
-    *--target=*)
-        _args="$*"
-        _TARGET="${_args#*--target=}" ;;
-    *)
-        _TARGET="arm-apple-darwin9" ;;
+    *--target=*) _args="$*" ; _TARGET="${_args#*--target=}" ;;
+    *) _TARGET="arm-apple-darwin9" ;;
 esac
 
 # Assign environment variables
