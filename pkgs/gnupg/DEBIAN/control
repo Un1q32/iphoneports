@@ -1,0 +1,8 @@
+Package: gnupg
+Priority: required
+Section: Security
+Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
+Architecture: iphoneos-arm
+Version: 1.4.23
+Description: Legacy FOSS implementation of the OpenPGP standard
+Name: GNU Privacy Guard
