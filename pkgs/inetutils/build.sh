@@ -12,29 +12,29 @@ ln -s ../usr/bin/ping "$_PKGROOT/package/sbin/ping"
 (
 cd package || exit 1
 rm -rf usr/share
-"$_TARGET-strip" -x usr/bin/dnsdomainname
-"$_TARGET-strip" -x usr/bin/ftp
-"$_TARGET-strip" -x usr/bin/hostname
-"$_TARGET-strip" -x usr/bin/ifconfig
-"$_TARGET-strip" -x usr/bin/logger
-"$_TARGET-strip" -x usr/bin/ping
-"$_TARGET-strip" -x usr/bin/rcp
-"$_TARGET-strip" -x usr/bin/rexec
-"$_TARGET-strip" -x usr/bin/rlogin
-"$_TARGET-strip" -x usr/bin/rsh
-"$_TARGET-strip" -x usr/bin/telnet
-"$_TARGET-strip" -x usr/bin/tftp
-"$_TARGET-strip" -x usr/bin/traceroute
-"$_TARGET-strip" -x usr/bin/whois
-"$_TARGET-strip" -x usr/libexec/ftpd
-"$_TARGET-strip" -x usr/libexec/inetd
-"$_TARGET-strip" -x usr/libexec/rexecd
-"$_TARGET-strip" -x usr/libexec/rlogind
-"$_TARGET-strip" -x usr/libexec/rshd
-"$_TARGET-strip" -x usr/libexec/syslogd
-"$_TARGET-strip" -x usr/libexec/telnetd
-"$_TARGET-strip" -x usr/libexec/tftpd
-"$_TARGET-strip" -x usr/libexec/uucpd
+"$_TARGET-strip" usr/bin/dnsdomainname
+"$_TARGET-strip" usr/bin/ftp
+"$_TARGET-strip" usr/bin/hostname
+"$_TARGET-strip" usr/bin/ifconfig
+"$_TARGET-strip" usr/bin/logger
+"$_TARGET-strip" usr/bin/ping
+"$_TARGET-strip" usr/bin/rcp
+"$_TARGET-strip" usr/bin/rexec
+"$_TARGET-strip" usr/bin/rlogin
+"$_TARGET-strip" usr/bin/rsh
+"$_TARGET-strip" usr/bin/telnet
+"$_TARGET-strip" usr/bin/tftp
+"$_TARGET-strip" usr/bin/traceroute
+"$_TARGET-strip" usr/bin/whois
+"$_TARGET-strip" usr/libexec/ftpd
+"$_TARGET-strip" usr/libexec/inetd
+"$_TARGET-strip" usr/libexec/rexecd
+"$_TARGET-strip" usr/libexec/rlogind
+"$_TARGET-strip" usr/libexec/rshd
+"$_TARGET-strip" usr/libexec/syslogd
+"$_TARGET-strip" usr/libexec/telnetd
+"$_TARGET-strip" usr/libexec/tftpd
+"$_TARGET-strip" usr/libexec/uucpd
 ldid -S"$_BSROOT/entitlements.xml" usr/bin/dnsdomainname
 ldid -S"$_BSROOT/entitlements.xml" usr/bin/ftp
 ldid -S"$_BSROOT/entitlements.xml" usr/bin/hostname

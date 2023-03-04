@@ -12,10 +12,10 @@ ln -s bzdiff bin/bzcmp
 ln -s bzgrep bin/bzegrep
 ln -s bzgrep bin/bzfgrep
 ln -s bzmore bin/bzless
-"$_TARGET-strip" -x bin/bzip2
-"$_TARGET-strip" -x bin/bunzip2
-"$_TARGET-strip" -x bin/bzcat
-"$_TARGET-strip" -x bin/bzip2recover
+"$_TARGET-strip" bin/bzip2
+"$_TARGET-strip" bin/bunzip2
+"$_TARGET-strip" bin/bzcat
+"$_TARGET-strip" bin/bzip2recover
 ldid -S"$_BSROOT/entitlements.xml" bin/bzip2
 ldid -S"$_BSROOT/entitlements.xml" bin/bunzip2
 ldid -S"$_BSROOT/entitlements.xml" bin/bzcat

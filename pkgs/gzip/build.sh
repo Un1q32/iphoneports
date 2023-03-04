@@ -22,7 +22,7 @@ mkdir -p "$_PKGROOT/package/bin"
 (
 cd package || exit 1
 ln -s gunzip bin/uncompress
-"$_TARGET-strip" -x bin/gzip
+"$_TARGET-strip" bin/gzip
 ldid -S"$_BSROOT/entitlements.xml" bin/gzip
 )
 

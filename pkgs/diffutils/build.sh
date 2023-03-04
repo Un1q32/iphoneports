@@ -12,10 +12,10 @@ mkdir -p "$_PKGROOT/package/usr/bin"
 
 (
 cd package || exit 1
-"$_TARGET-strip" -x usr/bin/diff
-"$_TARGET-strip" -x usr/bin/diff3
-"$_TARGET-strip" -x usr/bin/sdiff
-"$_TARGET-strip" -x usr/bin/cmp
+"$_TARGET-strip" usr/bin/diff
+"$_TARGET-strip" usr/bin/diff3
+"$_TARGET-strip" usr/bin/sdiff
+"$_TARGET-strip" usr/bin/cmp
 ldid -S"$_BSROOT/entitlements.xml" usr/bin/diff
 ldid -S"$_BSROOT/entitlements.xml" usr/bin/diff3
 ldid -S"$_BSROOT/entitlements.xml" usr/bin/sdiff

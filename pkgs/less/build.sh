@@ -14,9 +14,9 @@ ln -s ../usr/bin/more "$_PKGROOT/package/bin/more"
 
 (
 cd package || exit 1
-"$_TARGET-strip" -x usr/bin/less
-"$_TARGET-strip" -x usr/bin/lessecho
-"$_TARGET-strip" -x usr/bin/lesskey
+"$_TARGET-strip" usr/bin/less
+"$_TARGET-strip" usr/bin/lessecho
+"$_TARGET-strip" usr/bin/lesskey
 ldid -S"$_BSROOT/entitlements.xml" usr/bin/less
 ldid -S"$_BSROOT/entitlements.xml" usr/bin/lessecho
 ldid -S"$_BSROOT/entitlements.xml" usr/bin/lesskey

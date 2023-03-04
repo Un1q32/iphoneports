@@ -10,12 +10,12 @@ fakeroot "$_MAKE" DESTDIR="$_PKGROOT/package" install
 "$_CP" files/sudoers package/etc/sudoers
 cd package || exit 1
 rm -rf usr/local
-"$_TARGET-strip" -x usr/bin/sudo
-"$_TARGET-strip" -x usr/bin/cvtsudoers
-"$_TARGET-strip" -x usr/bin/sudoreplay
-"$_TARGET-strip" -x usr/sbin/sudo_logsrvd
-"$_TARGET-strip" -x usr/sbin/sudo_sendlog
-"$_TARGET-strip" -x usr/sbin/visudo
+"$_TARGET-strip" usr/bin/sudo
+"$_TARGET-strip" usr/bin/cvtsudoers
+"$_TARGET-strip" usr/bin/sudoreplay
+"$_TARGET-strip" usr/sbin/sudo_logsrvd
+"$_TARGET-strip" usr/sbin/sudo_sendlog
+"$_TARGET-strip" usr/sbin/visudo
 "$_TARGET-strip" -x usr/libexec/sudo/libsudo_util.0.dylib
 "$_TARGET-strip" -x usr/libexec/sudo/audit_json.so
 "$_TARGET-strip" -x usr/libexec/sudo/group_file.so

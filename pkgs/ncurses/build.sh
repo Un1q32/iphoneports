@@ -21,7 +21,7 @@ for i in ?; do
 done
 )
 for i in tic tput tset toe clear infocmp; do
-    "$_TARGET-strip" -x usr/bin/$i
+    "$_TARGET-strip" usr/bin/$i
     ldid -S"$_BSROOT/entitlements.xml" usr/bin/$i
 done
 for i in usr/lib/*.dylib; do

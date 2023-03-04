@@ -10,8 +10,8 @@ mkdir -p "$_PKGROOT"/package/usr/bin
 
 (
 cd package || exit 1
-"$_TARGET-strip" -x usr/bin/find
-"$_TARGET-strip" -x usr/bin/xargs
+"$_TARGET-strip" usr/bin/find
+"$_TARGET-strip" usr/bin/xargs
 ldid -S"$_BSROOT/entitlements.xml" usr/bin/find
 ldid -S"$_BSROOT/entitlements.xml" usr/bin/xargs
 )

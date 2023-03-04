@@ -9,7 +9,7 @@ cd source || exit 1
 (
 cd package || exit 1
 rm -rf usr/share
-"$_TARGET-strip" -x usr/bin/make
+"$_TARGET-strip" usr/bin/make
 ldid -S"$_BSROOT/entitlements.xml" usr/bin/make
 )
 

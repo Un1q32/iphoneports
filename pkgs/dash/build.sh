@@ -10,7 +10,7 @@ mkdir -p "$_PKGROOT"/package/bin
 
 (
 cd package || exit 1
-"$_TARGET-strip" -x bin/dash
+"$_TARGET-strip" bin/dash
 ldid -S"$_BSROOT/entitlements.xml" bin/dash
 )
 "$_CP" -r DEBIAN package

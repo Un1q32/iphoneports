@@ -8,8 +8,8 @@ cd source || exit 1
 (
 cd package || exit 1
 rm -rf usr/man
-"$_TARGET-strip" -x usr/bin/lua
-"$_TARGET-strip" -x usr/bin/luac
+"$_TARGET-strip" usr/bin/lua
+"$_TARGET-strip" usr/bin/luac
 ldid -S"$_BSROOT/entitlements.xml" usr/bin/lua
 ldid -S"$_BSROOT/entitlements.xml" usr/bin/luac
 )

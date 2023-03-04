@@ -10,10 +10,10 @@ cd source || exit 1
 cd package || exit 1
 ln -s gcal usr/bin/cal
 rm -rf usr/share/info
-"$_TARGET-strip" -x usr/bin/gcal
-"$_TARGET-strip" -x usr/bin/gcal2txt
-"$_TARGET-strip" -x usr/bin/tcal
-"$_TARGET-strip" -x usr/bin/txt2gcal
+"$_TARGET-strip" usr/bin/gcal
+"$_TARGET-strip" usr/bin/gcal2txt
+"$_TARGET-strip" usr/bin/tcal
+"$_TARGET-strip" usr/bin/txt2gcal
 ldid -S"$_BSROOT/entitlements.xml" usr/bin/gcal
 ldid -S"$_BSROOT/entitlements.xml" usr/bin/gcal2txt
 ldid -S"$_BSROOT/entitlements.xml" usr/bin/tcal

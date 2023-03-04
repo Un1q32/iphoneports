@@ -9,7 +9,7 @@ cd source || exit 1
 (
 cd package || exit 1
 rm -rf usr/share/man
-"$_TARGET-strip" -x usr/bin/curl
+"$_TARGET-strip" usr/bin/curl
 "$_TARGET-strip" -x usr/lib/libcurl.4.dylib
 ldid -S"$_BSROOT/entitlements.xml" usr/bin/curl
 ldid -S"$_BSROOT/entitlements.xml" usr/lib/libcurl.4.dylib

@@ -8,8 +8,8 @@ cd source || exit 1
 (
 cd package || exit 1
 rm -rf usr/share
-"$_TARGET-strip" -x usr/bin/dos2unix
-"$_TARGET-strip" -x usr/bin/unix2dos
+"$_TARGET-strip" usr/bin/dos2unix
+"$_TARGET-strip" usr/bin/unix2dos
 ldid -S"$_BSROOT/entitlements.xml" usr/bin/dos2unix
 ldid -S"$_BSROOT/entitlements.xml" usr/bin/unix2dos
 )

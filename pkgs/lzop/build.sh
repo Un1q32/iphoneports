@@ -10,7 +10,7 @@ mkdir -p "$_PKGROOT/package/usr/bin"
 (
 cd package || exit 1
 rm -rf usr/share
-"$_TARGET-strip" -x usr/bin/lzop
+"$_TARGET-strip" usr/bin/lzop
 ldid -S"$_BSROOT/entitlements.xml" usr/bin/lzop
 )
 

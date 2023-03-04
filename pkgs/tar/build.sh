@@ -11,7 +11,7 @@ mkdir -p "$_PKGROOT/package/bin"
 (
 cd package || exit 1
 ln -s ../usr/bin/tar bin/tar
-"$_TARGET-strip" -x usr/bin/tar
+"$_TARGET-strip" usr/bin/tar
 ldid -S"$_BSROOT/entitlements.xml" usr/bin/tar
 )
 

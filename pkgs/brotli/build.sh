@@ -10,7 +10,7 @@ cd source || exit 1
 (
 cd package || exit 1
 rm -rf usr/share
-"$_TARGET-strip" -x usr/bin/brotli
+"$_TARGET-strip" usr/bin/brotli
 "$_TARGET-strip" -x usr/lib/libbrotlicommon.1.dylib
 "$_TARGET-strip" -x usr/lib/libbrotlidec.1.dylib
 "$_TARGET-strip" -x usr/lib/libbrotlienc.1.dylib

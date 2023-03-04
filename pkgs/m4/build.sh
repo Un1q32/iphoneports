@@ -9,7 +9,7 @@ mkdir -p "$_PKGROOT"/package/usr/bin
 
 (
 cd package || exit 1
-"$_TARGET-strip" -x usr/bin/m4
+"$_TARGET-strip" usr/bin/m4
 ldid -S"$_BSROOT/entitlements.xml" usr/bin/m4
 )
 

@@ -11,7 +11,7 @@ mkdir -p "$_PKGROOT/package/bin"
 (
 cd package || exit 1
 ln -s ../usr/bin/sed bin/sed
-"$_TARGET-strip" -x usr/bin/sed
+"$_TARGET-strip" usr/bin/sed
 ldid -S"$_BSROOT/entitlements.xml" usr/bin/sed
 )
 

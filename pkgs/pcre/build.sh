@@ -9,8 +9,8 @@ cd source || exit 1
 (
 cd package || exit 1
 rm -rf usr/share
-"$_TARGET-strip" -x usr/bin/pcretest
-"$_TARGET-strip" -x usr/bin/pcregrep
+"$_TARGET-strip" usr/bin/pcretest
+"$_TARGET-strip" usr/bin/pcregrep
 "$_TARGET-strip" -x usr/lib/libpcre.1.dylib
 "$_TARGET-strip" -x usr/lib/libpcrecpp.0.dylib
 "$_TARGET-strip" -x usr/lib/libpcreposix.0.dylib

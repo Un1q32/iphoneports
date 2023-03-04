@@ -20,7 +20,7 @@ chmod 4555 "$_PKGROOT/package/bin/su"
 
 (
 cd package || exit 1
-"$_TARGET-strip" -x bin/coreutils
+"$_TARGET-strip" bin/coreutils
 "$_TARGET-strip" -x usr/libexec/libstdbuf.so
 ldid -S"$_BSROOT/entitlements.xml" bin/coreutils
 ldid -S"$_BSROOT/entitlements.xml" usr/libexec/libstdbuf.so

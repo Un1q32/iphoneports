@@ -8,7 +8,7 @@ mkdir -p "$_PKGROOT"/package/usr/bin
 
 (
 cd package || exit 1
-"$_TARGET-strip" -x usr/bin/pstree
+"$_TARGET-strip" usr/bin/pstree
 ldid -S"$_BSROOT/entitlements.xml" usr/bin/pstree
 )
 

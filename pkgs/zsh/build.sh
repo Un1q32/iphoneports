@@ -11,7 +11,7 @@ mkdir -p "$_PKGROOT/package/etc"
 "$_CP" files/zprofile "$_PKGROOT/package/etc"
 cd package || exit 1
 rm -rf bin/zsh-5.9 usr/share/man
-"$_TARGET-strip" -x bin/zsh
+"$_TARGET-strip" bin/zsh
 ldid -S"$_BSROOT/entitlements.xml" bin/zsh
 )
 

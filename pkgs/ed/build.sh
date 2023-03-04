@@ -9,7 +9,7 @@ cd source || exit 1
 (
 cd package || exit 1
 rm -rf usr
-"$_TARGET-strip" -x bin/ed
+"$_TARGET-strip" bin/ed
 ldid -S"$_BSROOT/entitlements.xml" bin/ed
 )
 

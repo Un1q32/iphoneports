@@ -9,8 +9,8 @@ cd source || exit 1
 (
 cd package || exit 1
 rm -rf usr/share
-"$_TARGET-strip" -x usr/bin/openssl
-"$_TARGET-strip" -x usr/bin/ocspcheck
+"$_TARGET-strip" usr/bin/openssl
+"$_TARGET-strip" usr/bin/ocspcheck
 "$_TARGET-strip" -x usr/lib/libcrypto.50.dylib
 "$_TARGET-strip" -x usr/lib/libssl.53.dylib
 "$_TARGET-strip" -x usr/lib/libtls.26.dylib

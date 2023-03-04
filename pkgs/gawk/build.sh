@@ -9,9 +9,9 @@ cd source || exit 1
 (
 cd package || exit 1
 rm -rf usr/share/info usr/share/man usr/bin/gawk-5.2.1 usr/bin/gawkbug
-"$_TARGET-strip" -x usr/bin/gawk
+"$_TARGET-strip" usr/bin/gawk
+"$_TARGET-strip" usr/libexec/awk/*
 "$_TARGET-strip" -x usr/lib/gawk/*
-"$_TARGET-strip" -x usr/libexec/awk/*
 ldid -S"$_BSROOT/entitlements.xml" usr/bin/gawk
 ldid -S"$_BSROOT/entitlements.xml" usr/lib/gawk/*
 ldid -S"$_BSROOT/entitlements.xml" usr/libexec/awk/*

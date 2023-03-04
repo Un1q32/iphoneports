@@ -11,7 +11,7 @@ mkdir -p "$_PKGROOT/package/bin"
 (
 cd package || exit 1
 ln -s ../usr/bin/tcsh bin/tcsh
-"$_TARGET-strip" -x usr/bin/tcsh
+"$_TARGET-strip" usr/bin/tcsh
 ldid -S"$_BSROOT/entitlements.xml" usr/bin/tcsh
 )
 
