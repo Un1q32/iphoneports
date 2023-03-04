@@ -1,8 +1,0 @@
-Package: mono
-Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
-Architecture: iphoneos-arm
-Description: Open source ECMA CLI, C# and .NET implementation
-Section: Development
-Priority: optional
-Tag: purpose::console
-Version: 6.12.0.190
