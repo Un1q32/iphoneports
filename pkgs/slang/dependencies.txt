@@ -1,3 +1,0 @@
-pcre
-libpng
-oniguruma
