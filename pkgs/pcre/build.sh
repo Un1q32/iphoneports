@@ -1,7 +1,7 @@
 #!/bin/sh
 (
 cd source || exit 1
-./configure --host="$_TARGET" --prefix=/usr --sysconfdir=/etc --enable-utf --disable-static
+./configure --host="$_TARGET" --prefix=/usr --enable-utf --disable-static --enable-pcretest-libreadline
 "$_MAKE" -j8
 "$_MAKE" DESTDIR="$_PKGROOT/package" install
 )
