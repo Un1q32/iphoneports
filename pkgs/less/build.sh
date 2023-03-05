@@ -1,7 +1,7 @@
 #!/bin/sh
 (
 cd source || exit 1
-./configure --host="$_TARGET" --prefix=/usr
+./configure --host="$_TARGET" --prefix=/usr --with-regex=pcre2
 "$_MAKE" -j8
 mkdir -p "$_PKGROOT/package/usr/bin"
 mkdir -p "$_PKGROOT/package/bin"
