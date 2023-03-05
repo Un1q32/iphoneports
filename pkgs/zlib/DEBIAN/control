@@ -1,0 +1,9 @@
+Package: zlib
+Priority: required
+Section: Archiving
+Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
+Architecture: iphoneos-arm
+Version: 1.2.13
+Description: Compression library implementing the deflate compression method found in gzip and PKZIP
+Homepage: http://www.zlib.net/
+Tag: purpose::console
