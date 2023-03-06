@@ -4,8 +4,6 @@ Section: Archiving
 Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
 Architecture: iphoneos-arm
 Version: 1.34
-Depends: bzip2, gzip
-Description: tool for making tape archives
-Name: Tape Archive
+Description: A tool for making tape archives
 Homepage: http://www.gnu.org/software/tar/
 Tag: purpose::console
