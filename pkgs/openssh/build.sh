@@ -2,7 +2,7 @@
 rm -f "$_TMP/sdk/usr/lib/libsandbox."*
 (
 cd source || exit 1
-./configure --host="$_TARGET" --prefix=/usr --sysconfdir=/etc/ssh --with-privsep-user=nobody --with-sandbox=no
+./configure --host="$_TARGET" --prefix=/usr --sysconfdir=/etc/ssh --with-privsep-user=nobody --with-sandbox=no --with-zlib=/usr/local
 "$_MAKE" -j8
 "$_MAKE" DESTDIR="$_PKGROOT/package" install-nokeys STRIP_OPT=
 )
