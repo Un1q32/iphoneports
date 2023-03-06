@@ -1,4 +1,5 @@
 PKG_VERSION?=1.0.8
+COMPAT_VERSION?=1
 PREFIX?=/usr/local
 
 SHELL=/bin/sh
@@ -15,7 +16,7 @@ OBJS= blocksort.o  \
 	  bzlib.o
 
 all: $(OBJS)
-	$(CC) -shared -Wl,-install_name -Wl,libbz2.dylib -o libbz2.${PKG_VERSION}.dylib $(OBJS)
+	$(CC) -shared -Wl,-install_name -Wl,libbz2.dylib -o libbz2.${PKG_VERSION}.dylib -compatibility_version ${COMPAT_VERSION} -current_version ${PKG_VERSION} $(OBJS)
 	mkdir -p ${PREFIX}/lib
 	cp libbz2.${PKG_VERSION}.dylib ${PREFIX}/lib/
 	ln -s libbz2.${PKG_VERSION}.dylib ${PREFIX}/lib/libbz2.dylib
