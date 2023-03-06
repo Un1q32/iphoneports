@@ -1,4 +1,5 @@
 #!/bin/sh
+rm -f "$_TMP/sdk/usr/lib/libz."*
 (
 cd source || exit 1
 ./configure --host="$_TARGET" --prefix=/usr --sysconfdir=/etc --disable-md2man --disable-xxhash

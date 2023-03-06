@@ -1,5 +1,5 @@
 #!/bin/sh
-rm -f "$_TMP/sdk/usr/lib/libsandbox.1.dylib" "$_TMP/sdk/usr/lib/libsandbox.1.tbd" "$_TMP/sdk/usr/lib/libsandbox.dylib" "$_TMP/sdk/usr/lib/libsandbox.tbd"
+rm -f "$_TMP/sdk/usr/lib/libsandbox."*
 (
 cd source || exit 1
 ./configure --host="$_TARGET" --prefix=/usr --sysconfdir=/etc/ssh --with-privsep-user=nobody --with-sandbox=no
