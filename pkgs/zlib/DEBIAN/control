@@ -1,6 +1,6 @@
 Package: zlib
 Priority: required
-Section: Archiving
+Section: Development
 Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
 Architecture: iphoneos-arm
 Version: 1.2.13
