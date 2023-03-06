@@ -4,6 +4,6 @@ Section: Archiving
 Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
 Architecture: iphoneos-arm
 Version: 1.5.4-1
-Depends: lz4, xz-utils
+Depends: lz4, xz-utils, zlib
 Description: Zstandard - Fast real-time compression algorithm
 Tag: purpose::console
