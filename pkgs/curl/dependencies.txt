@@ -1,3 +1,4 @@
 libressl
 zstd
 brotli
+zlib

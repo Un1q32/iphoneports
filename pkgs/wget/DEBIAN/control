@@ -4,5 +4,5 @@ Section: Networking
 Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
 Architecture: iphoneos-arm
 Version: 1.21.3
-Depends: libressl, pcre
+Depends: libressl, pcre2
 Description: Network utility to retrieve files from the Web
