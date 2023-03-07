@@ -250,6 +250,8 @@ elif [ "$1" = "build" ]; then
     done
     for pkg in "$@"; do
         rm -rf "$_PKGDIR/$pkg/package" "$_PKGDIR/$pkg/source"
+    done
+    for pkg in "$@"; do
         build "$pkg"
         "$_CP" -fl "$_PKGDIR/$pkg"/*.deb "$_BSROOT/debs" 2>/dev/null
     done
