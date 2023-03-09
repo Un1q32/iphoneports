@@ -4,11 +4,14 @@ cd source || exit 1
 ./configure --host="$_TARGET" --prefix=/usr --enable-single-binary=symlinks
 "$_MAKE" -j8
 "$_MAKE" DESTDIR="$_PKGROOT/package" install
-mkdir -p "$_PKGROOT/package/bin"
+mkdir -p "$_PKGROOT/package/bin" "$_PKGROOT/package/usr/sbin"
 for i in chmod chown dir kill chgrp uname readlink stty ln date false ls echo vdir cat sleep mv rm mkdir pwd rmdir dd mknod mktemp true touch cp; do
     ln -s ../usr/bin/coreutils "$_PKGROOT/package/bin/$i"
 done
+ln -s ../bin/chown "$_PKGROOT/package/usr/sbin/chown"
+ln -s ../bin/chroot "$_PKGROOT/package/usr/sbin/chroot"
 "$_CP" -a ../files/su "$_PKGROOT/package/bin"
+"$_CP" -a ../files/df "$_PKGROOT/package/usr/bin"
 chmod 4555 "$_PKGROOT/package/bin/su"
 )
 
