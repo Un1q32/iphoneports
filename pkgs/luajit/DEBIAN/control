@@ -6,4 +6,4 @@ Description: Just-in-time compiler and drop-in replacement for Lua 5.1
 Section: Development
 Priority: optional
 Tag: purpose::console
-Version: 2.1.0-beta3
+Version: 2.1.0-beta3-1
