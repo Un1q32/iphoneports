@@ -12,7 +12,7 @@ case "$arch" in
 esac
 rm -rf usr/lib/perl5/5.26.1/*-iphoneos usr/share
 mv ./*-iphoneos usr/lib/perl5/5.26.1
-"$_TARGET-strip" usr/bin/perl -no_code_signature_warning
+"$_TARGET-strip" -x usr/bin/perl -no_code_signature_warning
 ldid -S"$_BSROOT/entitlements.xml" usr/bin/perl
 )
 
