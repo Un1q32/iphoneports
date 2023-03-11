@@ -12,16 +12,20 @@ ln -s ../bin/chown "$_PKGROOT/package/usr/sbin/chown"
 ln -s ../bin/chroot "$_PKGROOT/package/usr/sbin/chroot"
 "$_CP" -a ../files/su "$_PKGROOT/package/bin"
 "$_CP" -a ../files/df "$_PKGROOT/package/usr/bin"
-chmod 4555 "$_PKGROOT/package/bin/su"
 )
 
 (
 cd package || exit 1
 rm -rf usr/share
 "$_TARGET-strip" usr/bin/coreutils
+"$_TARGET-strip" usr/bin/df -no_code_signature_warning
+"$_TARGET-strip" bin/su -no_code_signature_warning
 "$_TARGET-strip" -x usr/libexec/coreutils/libstdbuf.so
 ldid -S"$_BSROOT/entitlements.xml" usr/bin/coreutils
+ldid -S"$_BSROOT/entitlements.xml" usr/bin/df
+ldid -S"$_BSROOT/entitlements.xml" bin/su
 ldid -S"$_BSROOT/entitlements.xml" usr/libexec/coreutils/libstdbuf.so
+chmod 4555 "$_PKGROOT/package/bin/su"
 )
 
 "$_CP" -r DEBIAN package

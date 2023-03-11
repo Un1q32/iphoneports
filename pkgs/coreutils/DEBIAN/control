@@ -4,7 +4,7 @@ Priority: required
 Section: Utilities
 Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
 Architecture: iphoneos-arm
-Version: 9.1-4
+Version: 9.1-5
 Replaces: shell-cmds (<< 118-5), coreutils, netatalk (<= 2.0.3-6)
 Provides: dirname, kill, mktemp, su, md5sum, sha1sum, coreutils
 Description: The basic file, shell and text manipulation utilities of the GNU operating system
