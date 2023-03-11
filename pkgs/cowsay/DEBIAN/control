@@ -1,9 +1,0 @@
-Package: cowsay
-Priority: optional
-Section: Utilities
-Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
-Architecture: iphoneos-arm
-Version: 3.7.0
-Depends: perl
-Description: Configurable talking cow
-Tag: purpose::console
