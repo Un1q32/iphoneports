@@ -8,14 +8,10 @@ vim_cv_memcpy_handles_overlap=set vim_cv_bcopy_handles_overlap=set vim_cv_memmov
 
 (
 cd package || exit 1
-rm -rf usr/share/man
-rm -rf usr/share/icons
-rm -rf usr/share/applications
+rm -rf usr/share/man usr/share/icons usr/share/applications usr/bin/xxd
 "$_TARGET-strip" usr/bin/vim
-"$_TARGET-strip" usr/bin/xxd
 ldid -S"$_BSROOT/entitlements.xml" usr/bin/vim
-ldid -S"$_BSROOT/entitlements.xml" usr/bin/xxd
 )
 
 "$_CP" -r DEBIAN package
-dpkg-deb -b --root-owner-group -Zgzip package vim-9.0.1376.deb
+dpkg-deb -b --root-owner-group -Zgzip package vim-9.0.1402.deb

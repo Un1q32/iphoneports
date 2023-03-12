@@ -5,4 +5,4 @@ Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
 Architecture: iphoneos-arm
 Version: 2.40
 Depends: adv-cmds
-Description: process forests are hard to see for the trees
+Description: Show ps output as a tree
