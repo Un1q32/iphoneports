@@ -7,5 +7,5 @@ Section: Terminal_Support
 Priority: required
 Homepage: http://www.gnu.org/software/bash/
 Description: The GNU Bourne Again shell
-Name: Bourne Again SHell
+Name: Bourne Again Shell
 Tag: purpose::console

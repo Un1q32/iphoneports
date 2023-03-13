@@ -1,9 +1,9 @@
-Package: dash
-Version: 0.5.12
+Package: mksh
+Version: 59c
 Architecture: iphoneos-arm
 Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
 Section: Terminal_Support
 Priority: optional
-Description: POSIX compliant shell that aims to be as small as possible
+Description: A free implementation of the Korn Shell programming language
 Tag: purpose::console
-Name: Debian Almquist Shell
+Name: MirBSD Korn Shell
