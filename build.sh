@@ -55,8 +55,7 @@ esac
 
 # Cleanup temporary files from previous runs
 true > "$_TMP/.builtpkgs"
-rm -rf "$_TMP/sdk"
-rm -rf "$_TMP/sdk.bak"
+rm -rf "$_TMP"/sdk*
 
 # Check for dependencies
 depcheck() {
@@ -202,9 +201,9 @@ includedeps() {
             if [ -d "$_PKGDIR/$dep" ]; then
                 if ! hasbeenbuilt "$dep" "$1"; then
                     printf "Building dependency %s\n" "$dep"
-                    [ "$1" = "dryrun" ] || mv "$_SDKPATH" "$_SDKPATH.bak"
+                    [ "$1" = "dryrun" ] || mv "$_SDKPATH" "$_SDKPATH.$dep.bak"
                     build "$dep" "$1"
-                    [ "$1" = "dryrun" ] || mv "$_SDKPATH.bak" "$_SDKPATH"
+                    [ "$1" = "dryrun" ] || mv "$_SDKPATH.$dep.bak" "$_SDKPATH"
                 fi
                 printf "Including dependency %s\n" "$dep"
                 if ! [ "$1" = "dryrun" ]; then
