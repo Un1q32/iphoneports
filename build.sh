@@ -1,37 +1,33 @@
 #!/bin/sh
 
 # If no arguments are specified, print usage info
-if [ -z "$1" ] || [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
-    printf "Usage: build.sh <option> [--target=tripple] [--no-tmpfs] [-h, --help]
-    <pkg name>              - Build a single package
-    build <pkg names>       - Build all specified packages
-    all                     - Build all packages
-    clean                   - Clean a single package (remove build files)
-    cleanall                - Clean all packages (remove build files)
-    dryrun                  - Pretend to build all packages
-    list                    - List all packages
-    --target                - Specify a target other than arm-apple-darwin9
-    --no-tmpfs              - Do not use /tmp for anything (use if you have limited RAM)
-    -h, --help              - Print this help message\n"
+case "$1" in
+    -h|*help)
+        printf "Usage: build.sh <option> [--target=tripple] [--no-tmpfs] [-h, --help]
+        <pkg name>              - Build a single package
+        build <pkg names>       - Build all specified packages
+        all                     - Build all packages
+        clean                   - Clean a single package (remove build files)
+        cleanall                - Clean all packages (remove build files)
+        dryrun                  - Pretend to build all packages
+        list                    - List all packages
+        --target                - Specify a target other than arm-apple-darwin9
+        --no-tmpfs              - Do not use /tmp for anything (use if you have limited RAM)
+        --help                  - Print this help message\n"
 
-    if [ -z "$1" ]; then
-        exit 1
-    else
-        exit 0
-    fi
-fi
+        if [ -z "$1" ]; then
+            exit 1
+        else
+            exit 0
+        fi
+    ;;
+esac
 
 # Error function
 error() {
     printf "\033[1;31mERROR:\033[0m %s %s\n" "$1" "$2"
     exit 1
 }
-
-# Check target
-case "$*" in
-    *--target=*) _args="$*" ; _TARGET="${_args#*--target=}" ;;
-    *) _TARGET="arm-apple-darwin9" ;;
-esac
 
 # Assign environment variables
 # if $0 doesn't contain any slashes, assume it's in the current directory
@@ -42,15 +38,19 @@ else
 fi
 _BSROOT="$(cd "$_BSROOT" && pwd)"
 _PKGDIR="$_BSROOT/pkgs"
-export _PKGDIR _BSROOT _TARGET
+export _PKGDIR _BSROOT
 export TERM="xterm-256color"
 
 # Decide where to put temporary files
 case "$*" in
-    *--no-tmpfs*)
-        export _TMP="$_BSROOT" ;;
-    *)
-        export _TMP="/tmp" ;;
+    *--no-tmpfs*) export _TMP="$_BSROOT" ;;
+    *) export _TMP="/tmp" ;;
+esac
+
+# Check target
+case "$*" in
+    *--target=*) _TARGET="$*" ; _TARGET="${_TARGET#*--target=}" ; export _TARGET="${_TARGET%% *}" ;;
+    *) export _TARGET="arm-apple-darwin9" ;;
 esac
 
 # Cleanup temporary files from previous runs
