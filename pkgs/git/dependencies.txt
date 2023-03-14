@@ -1,3 +1,4 @@
 libressl
 curl
 pcre2
+zlib

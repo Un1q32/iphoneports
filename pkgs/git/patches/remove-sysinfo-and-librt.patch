@@ -1,5 +1,5 @@
---- source/config.mak.uname.orig	2023-01-22 06:54:53.287348819 -0500
-+++ source/config.mak.uname	2023-01-22 06:55:19.647570030 -0500
+--- source/config.mak.uname.orig
++++ source/config.mak.uname
 @@ -55,12 +55,9 @@
  	HAVE_DEV_TTY = YesPlease
  	HAVE_CLOCK_GETTIME = YesPlease
