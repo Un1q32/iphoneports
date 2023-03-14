@@ -9,7 +9,7 @@ if [ -z "$1" ] || [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
     clean                   - Clean a single package (remove build files)
     cleanall                - Clean all packages (remove build files)
     dryrun                  - Pretend to build all packages
-    listpkgs                - List all packages
+    list                    - List all packages
     --target                - Specify a target other than arm-apple-darwin9
     --no-tmpfs              - Do not use /tmp for anything (use if you have limited RAM)
     -h, --help              - Print this help message\n"
@@ -232,7 +232,7 @@ if [ "$1" = "all" ]; then
     rm -rf "$_PKGDIR"/*/package "$_PKGDIR"/*/source
     buildall
     "$_CP" -fl "$_PKGDIR"/*/*.deb "$_BSROOT/debs" 2>/dev/null
-elif [ "$1" = "listpkgs" ]; then
+elif [ "$1" = "list" ]; then
     for pkg in "$_PKGDIR"/*; do
         printf "%s\n" "${pkg##*/}"
     done
