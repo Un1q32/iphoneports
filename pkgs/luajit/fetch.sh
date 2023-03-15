@@ -1,7 +1,7 @@
 #!/bin/sh
 rm -rf package source
 printf "Downloading source...\n"
-git clone https://luajit.org/git/luajit.git source
+git clone --depth 1 https://luajit.org/git/luajit.git source
 # curl -L -# -o source.tar.gz https://luajit.org/download/LuaJIT-2.1.0-beta3.tar.gz
 # printf "Unpacking source...\n"
 # tar -xf source.tar.gz
