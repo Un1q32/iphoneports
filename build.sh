@@ -182,7 +182,7 @@ applypatches() {
 
 # Build an SDK for the build by copying the SDK at $_SDK to /tmp/sdk (or $_BSROOT/sdk if --no-tmpfs is specified) and then adding the /usr/include and /usr/lib directories from any dependencies
 # We run hasbeenbuilt on each dependency to ensure that it has been built before we try to copy it
-# When we do need to rebuild a dependency, we temporarily rename the sdk to sdk.bak, and then rename it back after we have rebuilt the dependency
+# When we do need to rebuild a dependency, we temporarily rename the sdk to sdk.$dep.bak, and then rename it back after we have rebuilt the dependency
 # If this is a dryrun, we don't actually build the dependency, or copy the sdk
 # If there is an sdk directory in the package folder, add it to the sdk. This allows us to add additional headers and libraries to the sdk per package
 # First argument is dryrun to not actually build
