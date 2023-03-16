@@ -3,3 +3,4 @@ zstd
 brotli
 zlib
 libssh2
+nghttp2

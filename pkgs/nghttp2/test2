@@ -1,0 +1,1 @@
+--without-libcares --without-libev --without-cunit --without-jemalloc --without-mruby --without-neverbleed --without-libngtcp2 --without-libnghttp3 --without-libbpf

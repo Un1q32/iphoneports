@@ -1,0 +1,8 @@
+Package: nghttp2
+Priority: standard
+Section: Development
+Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
+Architecture: iphoneos-arm
+Version: 1.52.0
+Description: Framing layer of HTTP/2 is implemented as a reusable C library
+Tag: purpose::console
