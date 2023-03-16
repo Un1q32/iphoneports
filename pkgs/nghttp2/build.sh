@@ -1,7 +1,7 @@
 #!/bin/sh
 (
 cd source || exit 1
-./configure --host="$_TARGET" --prefix=/usr --disable-static --disable-examples --with-openssl --with-zlib --with-xml2 --without-systemd --without-jansson --without-libevent-openssl --without-libcares --without-libev
+./configure --host="$_TARGET" --prefix=/usr --disable-static --disable-examples --with-openssl --with-zlib --with-xml2 --without-systemd --without-jansson --without-libevent-openssl --without-libcares --without-libev --without-cunit --without-mruby --without-neverbleed --without-libbpf --without-libngtcp2 --without-libnghttp3
 "$_MAKE" -j8
 "$_MAKE" DESTDIR="$_PKGROOT/package" install
 )
