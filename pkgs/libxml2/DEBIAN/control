@@ -1,8 +1,8 @@
-Package: nghttp2
+Package: libxml2
 Priority: standard
 Section: Development
 Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
 Architecture: iphoneos-arm
-Version: 1.52.0
-Description: An implementation of HTTP/2 and its header compression algorithm HPACK in C.
+Version: 2.10.3
+Description: XML C parser and toolkit
 Tag: purpose::console
