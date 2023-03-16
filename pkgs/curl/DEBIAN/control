@@ -3,7 +3,7 @@ Priority: standard
 Section: Networking
 Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
 Architecture: iphoneos-arm
-Version: 7.88.1
+Version: 7.88.1-1
 Depends: libressl, zstd, brotli, zlib
 Description: An URL retrieval utility and library
 Name: cURL
