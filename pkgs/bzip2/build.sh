@@ -1,7 +1,7 @@
 #!/bin/sh
 (
 cd source || exit 1
-"$_MAKE" CC="$_TARGET-clang" PREFIX="$_PKGROOT/package/usr" BINDIR="$_PKGROOT/package/bin" LIBDIR="$_PKGROOT/package/usr/local/lib" install -j8
+"$_MAKE" CC="$_TARGET-clang" INSTALLNAMETOOL="$_TARGET-install_name_tool" DESTDIR="$_PKGROOT/package" PREFIX=/usr BINDIR=/bin LIBDIR=/usr/local/lib install -j8
 )
 
 (
