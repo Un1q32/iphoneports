@@ -9,6 +9,7 @@ cd source || exit 1
 (
 cd package || exit 1
 rm -rf usr/share
+"$_TARGET-install_name_tool" -change libbz2.dylib /usr/local/lib/libbz2.1.dylib usr/bin/pcre2grep
 "$_TARGET-strip" usr/bin/pcre2test
 "$_TARGET-strip" usr/bin/pcre2grep
 "$_TARGET-strip" -x usr/lib/libpcre2-8.0.dylib
