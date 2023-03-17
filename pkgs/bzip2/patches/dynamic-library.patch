@@ -18,7 +18,7 @@
  
  
  OBJS= blocksort.o  \
-@@ -35,22 +39,19 @@
+@@ -35,22 +39,18 @@
        decompress.o \
        bzlib.o
  
@@ -41,14 +41,13 @@
 -		$(RANLIB) libbz2.a ; \
 -	fi
 +libbz2: $(OBJS)
-+	rm -f libbz2.${PKG_VERSION}.dylib
-+	$(CC) -shared -Wl,-install_name -Wl,libbz2.dylib -o libbz2.${PKG_VERSION}.dylib -compatibility_version ${COMPAT_VERSION} -current_version ${PKG_VERSION} $(OBJS)
-+	ln -sf libbz2.${PKG_VERSION}.dylib libbz2.1.dylib
-+	ln -sf libbz2.${PKG_VERSION}.dylib libbz2.dylib
++	rm -f libbz2.1.dylib
++	$(CC) -shared -Wl,-install_name -Wl,libbz2.dylib -o libbz2.1.dylib -compatibility_version ${COMPAT_VERSION} -current_version ${PKG_VERSION} $(OBJS)
++	ln -sf libbz2.1.dylib libbz2.dylib
  
  check: test
  test: bzip2
-@@ -70,35 +71,37 @@
+@@ -70,35 +70,36 @@
  	@cat words3
  
  install: bzip2 bzip2recover
@@ -91,10 +90,9 @@
 -	cp -f bzdiff $(PREFIX)/bin/bzdiff
 -	ln -s -f $(PREFIX)/bin/bzdiff $(PREFIX)/bin/bzcmp
 -	chmod a+x $(PREFIX)/bin/bzdiff
-+	cp -f libbz2.${PKG_VERSION}.dylib $(LIBDIR)
-+	ln -s -f libbz2.${PKG_VERSION}.dylib $(LIBDIR)/libbz2.1.dylib
-+	ln -s -f libbz2.${PKG_VERSION}.dylib $(LIBDIR)/libbz2.dylib
-+	chmod a+r $(LIBDIR)/libbz2.${PKG_VERSION}.dylib
++	cp -f libbz2.1.dylib $(LIBDIR)
++	ln -s -f libbz2.1.dylib $(LIBDIR)/libbz2.dylib
++	chmod a+r $(LIBDIR)/libbz2.1.dylib
 +	cp -f bzgrep $(BINDIR)/bzgrep
 +	ln -s -f bzgrep $(BINDIR)/bzegrep
 +	ln -s -f bzgrep $(BINDIR)/bzfgrep
