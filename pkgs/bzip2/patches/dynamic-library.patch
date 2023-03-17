@@ -1,0 +1,110 @@
+--- source/Makefile.orig
++++ source/Makefile
+@@ -11,6 +11,8 @@
+ # This program is released under the terms of the license contained
+ # in the file LICENSE.
+ # ------------------------------------------------------------------
++PKG_VERSION=1.0.8
++COMPAT_VERSION=1.0.0
+ 
+ SHELL=/bin/sh
+ 
+@@ -25,6 +27,8 @@
+ 
+ # Where you want it installed when you do 'make install'
+ PREFIX=/usr/local
++BINDIR=$(PREFIX)/bin
++LIBDIR=$(PREFIX)/lib
+ 
+ 
+ OBJS= blocksort.o  \
+@@ -35,22 +39,19 @@
+       decompress.o \
+       bzlib.o
+ 
+-all: libbz2.a bzip2 bzip2recover test
++all: libbz2 bzip2 bzip2recover test
+ 
+-bzip2: libbz2.a bzip2.o
++bzip2: libbz2 bzip2.o
+ 	$(CC) $(CFLAGS) $(LDFLAGS) -o bzip2 bzip2.o -L. -lbz2
+ 
+ bzip2recover: bzip2recover.o
+ 	$(CC) $(CFLAGS) $(LDFLAGS) -o bzip2recover bzip2recover.o
+ 
+-libbz2.a: $(OBJS)
+-	rm -f libbz2.a
+-	$(AR) cq libbz2.a $(OBJS)
+-	@if ( test -f $(RANLIB) -o -f /usr/bin/ranlib -o \
+-		-f /bin/ranlib -o -f /usr/ccs/bin/ranlib ) ; then \
+-		echo $(RANLIB) libbz2.a ; \
+-		$(RANLIB) libbz2.a ; \
+-	fi
++libbz2: $(OBJS)
++	rm -f libbz2.${PKG_VERSION}.dylib
++	$(CC) -shared -Wl,-install_name -Wl,libbz2.dylib -o libbz2.${PKG_VERSION}.dylib -compatibility_version ${COMPAT_VERSION} -current_version ${PKG_VERSION} $(OBJS)
++	ln -sf libbz2.${PKG_VERSION}.dylib libbz2.1.dylib
++	ln -sf libbz2.${PKG_VERSION}.dylib libbz2.dylib
+ 
+ check: test
+ test: bzip2
+@@ -70,35 +71,37 @@
+ 	@cat words3
+ 
+ install: bzip2 bzip2recover
+-	if ( test ! -d $(PREFIX)/bin ) ; then mkdir -p $(PREFIX)/bin ; fi
+-	if ( test ! -d $(PREFIX)/lib ) ; then mkdir -p $(PREFIX)/lib ; fi
++	if ( test ! -d $(BINDIR) ) ; then mkdir -p $(BINDIR) ; fi
++	if ( test ! -d $(LIBDIR) ) ; then mkdir -p $(LIBDIR) ; fi
+ 	if ( test ! -d $(PREFIX)/man ) ; then mkdir -p $(PREFIX)/man ; fi
+ 	if ( test ! -d $(PREFIX)/man/man1 ) ; then mkdir -p $(PREFIX)/man/man1 ; fi
+ 	if ( test ! -d $(PREFIX)/include ) ; then mkdir -p $(PREFIX)/include ; fi
+-	cp -f bzip2 $(PREFIX)/bin/bzip2
+-	cp -f bzip2 $(PREFIX)/bin/bunzip2
+-	cp -f bzip2 $(PREFIX)/bin/bzcat
+-	cp -f bzip2recover $(PREFIX)/bin/bzip2recover
+-	chmod a+x $(PREFIX)/bin/bzip2
+-	chmod a+x $(PREFIX)/bin/bunzip2
+-	chmod a+x $(PREFIX)/bin/bzcat
+-	chmod a+x $(PREFIX)/bin/bzip2recover
++	cp -f bzip2 $(BINDIR)/bzip2
++	cp -f bzip2 $(BINDIR)/bunzip2
++	cp -f bzip2 $(BINDIR)/bzcat
++	cp -f bzip2recover $(BINDIR)/bzip2recover
++	chmod a+x $(BINDIR)/bzip2
++	chmod a+x $(BINDIR)/bunzip2
++	chmod a+x $(BINDIR)/bzcat
++	chmod a+x $(BINDIR)/bzip2recover
+ 	cp -f bzip2.1 $(PREFIX)/man/man1
+ 	chmod a+r $(PREFIX)/man/man1/bzip2.1
+ 	cp -f bzlib.h $(PREFIX)/include
+ 	chmod a+r $(PREFIX)/include/bzlib.h
+-	cp -f libbz2.a $(PREFIX)/lib
+-	chmod a+r $(PREFIX)/lib/libbz2.a
+-	cp -f bzgrep $(PREFIX)/bin/bzgrep
+-	ln -s -f $(PREFIX)/bin/bzgrep $(PREFIX)/bin/bzegrep
+-	ln -s -f $(PREFIX)/bin/bzgrep $(PREFIX)/bin/bzfgrep
+-	chmod a+x $(PREFIX)/bin/bzgrep
+-	cp -f bzmore $(PREFIX)/bin/bzmore
+-	ln -s -f $(PREFIX)/bin/bzmore $(PREFIX)/bin/bzless
+-	chmod a+x $(PREFIX)/bin/bzmore
+-	cp -f bzdiff $(PREFIX)/bin/bzdiff
+-	ln -s -f $(PREFIX)/bin/bzdiff $(PREFIX)/bin/bzcmp
+-	chmod a+x $(PREFIX)/bin/bzdiff
++	cp -f libbz2.${PKG_VERSION}.dylib $(LIBDIR)
++	ln -s -f libbz2.${PKG_VERSION}.dylib $(LIBDIR)/libbz2.1.dylib
++	ln -s -f libbz2.${PKG_VERSION}.dylib $(LIBDIR)/libbz2.dylib
++	chmod a+r $(LIBDIR)/libbz2.${PKG_VERSION}.dylib
++	cp -f bzgrep $(BINDIR)/bzgrep
++	ln -s -f bzgrep $(BINDIR)/bzegrep
++	ln -s -f bzgrep $(BINDIR)/bzfgrep
++	chmod a+x $(BINDIR)/bzgrep
++	cp -f bzmore $(BINDIR)/bzmore
++	ln -s -f bzmore $(BINDIR)/bzless
++	chmod a+x $(BINDIR)/bzmore
++	cp -f bzdiff $(BINDIR)/bzdiff
++	ln -s -f bzdiff $(BINDIR)/bzcmp
++	chmod a+x $(BINDIR)/bzdiff
+ 	cp -f bzgrep.1 bzmore.1 bzdiff.1 $(PREFIX)/man/man1
+ 	chmod a+r $(PREFIX)/man/man1/bzgrep.1
+ 	chmod a+r $(PREFIX)/man/man1/bzmore.1

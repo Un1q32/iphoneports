@@ -1,19 +1,12 @@
 #!/bin/sh
-"$_CP" files/Makefile-libbz2_dylib source
 (
 cd source || exit 1
-"$_MAKE" CC="$_TARGET-clang" RANLIB="$_TARGET-ranlib" PREFIX="$_PKGROOT/package/usr" install -j8
-"$_MAKE" -f Makefile-libbz2_dylib CC="$_TARGET-clang" RANLIB="$_TARGET-ranlib" PREFIX="$_PKGROOT/package/usr/local" -j8
+"$_MAKE" CC="$_TARGET-clang" PREFIX="$_PKGROOT/package/usr" BINDIR="$_PKGROOT/package/bin" LIBDIR="$_PKGROOT/package/usr/local/lib" install -j8
 )
 
 (
 cd package || exit 1
-mv usr/bin .
-rm -rf usr/man bin/bzcmp bin/bzegrep bin/bzfgrep bin/bzless usr/lib
-ln -s bzdiff bin/bzcmp
-ln -s bzgrep bin/bzegrep
-ln -s bzgrep bin/bzfgrep
-ln -s bzmore bin/bzless
+rm -rf usr/man
 "$_TARGET-strip" bin/bzip2
 "$_TARGET-strip" bin/bunzip2
 "$_TARGET-strip" bin/bzcat
