@@ -6,6 +6,6 @@ Depends: grep, sed
 Description: XZ-format compression utilities
 Homepage: http://tukaani.org/xz/
 Section: Archiving
-Priority: optional
+Priority: standard
 Tag: purpose::console
-Version: 5.4.1-2
+Version: 5.4.2
