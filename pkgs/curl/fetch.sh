@@ -1,8 +1,8 @@
 #!/bin/sh
 rm -rf package source
 printf "Downloading source...\n"
-curl -L -# -o source.tar.gz https://github.com/curl/curl/releases/download/curl-7_88_1/curl-7.88.1.tar.gz
+curl -L -# -o source.tar.xz https://curl.se/download/curl-8.0.0.tar.xz
 printf "Unpacking source...\n"
-tar -xf source.tar.gz
-rm source.tar.gz
-mv curl-7.88.1 source
+tar -xf source.tar.xz
+rm source.tar.xz
+mv curl-8.0.0 source
