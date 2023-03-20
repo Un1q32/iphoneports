@@ -1,0 +1,9 @@
+Package: libunistring
+Version: 1.1
+Architecture: iphoneos-arm
+Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
+Section: Development
+Priority: standard
+Homepage: http://www.gnu.org/software/libunistring/
+Description: Library for manipulating Unicode strings and C strings
+Tag: purpose::console
