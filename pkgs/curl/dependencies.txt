@@ -4,3 +4,5 @@ brotli
 zlib
 libssh2
 nghttp2
+libpsl
+libidn2
