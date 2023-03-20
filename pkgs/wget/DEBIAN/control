@@ -3,6 +3,6 @@ Priority: important
 Section: Networking
 Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
 Architecture: iphoneos-arm
-Version: 1.21.3
-Depends: libressl, pcre2, zlib
+Version: 1.21.3-1
+Depends: libressl, pcre2, zlib, libunistring, libpsl
 Description: Network utility to retrieve files from the Web
