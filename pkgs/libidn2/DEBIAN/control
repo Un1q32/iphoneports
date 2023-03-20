@@ -1,0 +1,10 @@
+Package: libidn2
+Version: 5.2.15
+Architecture: iphoneos-arm
+Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
+Depends: libunistring
+Section: Development
+Priority: standard
+Homepage: http://www.gnu.org/software/libidn/
+Description: A free software implementation of IDNA2008, Punycode and TR46
+Tag: purpose::console
