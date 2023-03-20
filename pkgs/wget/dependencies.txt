@@ -1,3 +1,5 @@
 libressl
 pcre2
 zlib
+libpsl
+libunistring
