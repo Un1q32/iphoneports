@@ -1,0 +1,8 @@
+Package: libpsl
+Version: 0.21.2
+Architecture: iphoneos-arm
+Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
+Section: Development
+Priority: standard
+Description: Public Suffix List library
+Tag: purpose::console
