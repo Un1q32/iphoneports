@@ -7,10 +7,10 @@ cd source || exit 1
 (
 cd package || exit 1
 rm -rf usr/man
-"$_TARGET-strip" bin/bzip2
-"$_TARGET-strip" bin/bunzip2
-"$_TARGET-strip" bin/bzcat
-"$_TARGET-strip" bin/bzip2recover
+"$_TARGET-strip" bin/bzip2 > /dev/null 2>1
+"$_TARGET-strip" bin/bunzip2 > /dev/null 2>1
+"$_TARGET-strip" bin/bzcat > /dev/null 2>1
+"$_TARGET-strip" bin/bzip2recover > /dev/null 2>1
 ldid -S"$_BSROOT/entitlements.xml" bin/bzip2
 ldid -S"$_BSROOT/entitlements.xml" bin/bunzip2
 ldid -S"$_BSROOT/entitlements.xml" bin/bzcat

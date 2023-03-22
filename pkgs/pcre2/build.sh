@@ -10,10 +10,10 @@ cd source || exit 1
 cd package || exit 1
 rm -rf usr/share
 "$_TARGET-install_name_tool" -change libbz2.dylib /usr/local/lib/libbz2.1.dylib usr/bin/pcre2grep
-"$_TARGET-strip" usr/bin/pcre2test
-"$_TARGET-strip" usr/bin/pcre2grep
-"$_TARGET-strip" usr/lib/libpcre2-8.0.dylib
-"$_TARGET-strip" usr/lib/libpcre2-posix.3.dylib
+"$_TARGET-strip" usr/bin/pcre2test > /dev/null 2>1
+"$_TARGET-strip" usr/bin/pcre2grep > /dev/null 2>1
+"$_TARGET-strip" usr/lib/libpcre2-8.0.dylib > /dev/null 2>1
+"$_TARGET-strip" usr/lib/libpcre2-posix.3.dylib > /dev/null 2>1
 ldid -S"$_BSROOT/entitlements.xml" usr/bin/pcre2test
 ldid -S"$_BSROOT/entitlements.xml" usr/bin/pcre2grep
 ldid -S"$_BSROOT/entitlements.xml" usr/lib/libpcre2-8.0.dylib

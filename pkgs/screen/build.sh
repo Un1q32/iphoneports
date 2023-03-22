@@ -11,7 +11,7 @@ cd source || exit 1
 cd package || exit 1
 rm -rf usr/share/info usr/share/man usr/bin/screen
 mv usr/bin/screen-4.9.0 usr/bin/screen
-"$_TARGET-strip" usr/bin/screen
+"$_TARGET-strip" usr/bin/screen > /dev/null 2>1
 ldid -S"$_BSROOT/entitlements.xml" usr/bin/screen
 )
 

@@ -10,19 +10,19 @@ fakeroot "$_MAKE" DESTDIR="$_PKGROOT/package" install
 "$_CP" files/sudoers package/etc/sudoers
 cd package || exit 1
 rm -rf usr/local
-"$_TARGET-strip" usr/bin/sudo
-"$_TARGET-strip" usr/bin/cvtsudoers
-"$_TARGET-strip" usr/bin/sudoreplay
-"$_TARGET-strip" usr/sbin/sudo_logsrvd
-"$_TARGET-strip" usr/sbin/sudo_sendlog
-"$_TARGET-strip" usr/sbin/visudo
-"$_TARGET-strip" usr/libexec/sudo/libsudo_util.0.dylib
-"$_TARGET-strip" usr/libexec/sudo/audit_json.so
-"$_TARGET-strip" usr/libexec/sudo/group_file.so
-"$_TARGET-strip" usr/libexec/sudo/sudoers.so
-"$_TARGET-strip" usr/libexec/sudo/sudo_intercept.so
-"$_TARGET-strip" usr/libexec/sudo/sudo_noexec.so
-"$_TARGET-strip" usr/libexec/sudo/system_group.so
+"$_TARGET-strip" usr/bin/sudo > /dev/null 2>1
+"$_TARGET-strip" usr/bin/cvtsudoers > /dev/null 2>1
+"$_TARGET-strip" usr/bin/sudoreplay > /dev/null 2>1
+"$_TARGET-strip" usr/sbin/sudo_logsrvd > /dev/null 2>1
+"$_TARGET-strip" usr/sbin/sudo_sendlog > /dev/null 2>1
+"$_TARGET-strip" usr/sbin/visudo > /dev/null 2>1
+"$_TARGET-strip" usr/libexec/sudo/libsudo_util.0.dylib > /dev/null 2>1
+"$_TARGET-strip" usr/libexec/sudo/audit_json.so > /dev/null 2>1
+"$_TARGET-strip" usr/libexec/sudo/group_file.so > /dev/null 2>1
+"$_TARGET-strip" usr/libexec/sudo/sudoers.so > /dev/null 2>1
+"$_TARGET-strip" usr/libexec/sudo/sudo_intercept.so > /dev/null 2>1
+"$_TARGET-strip" usr/libexec/sudo/sudo_noexec.so > /dev/null 2>1
+"$_TARGET-strip" usr/libexec/sudo/system_group.so > /dev/null 2>1
 ldid -S"$_BSROOT/entitlements.xml" usr/bin/sudo
 ldid -S"$_BSROOT/entitlements.xml" usr/bin/cvtsudoers
 ldid -S"$_BSROOT/entitlements.xml" usr/bin/sudoreplay

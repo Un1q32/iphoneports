@@ -9,9 +9,9 @@ cd source || exit 1
 (
 cd package || exit 1
 rm -rf usr/share/doc usr/share/gtk-doc usr/share/man
-"$_TARGET-strip" usr/bin/xmlcatalog
-"$_TARGET-strip" usr/bin/xmllint
-"$_TARGET-strip" usr/local/lib/libxml2.2.dylib
+"$_TARGET-strip" usr/bin/xmlcatalog > /dev/null 2>1
+"$_TARGET-strip" usr/bin/xmllint > /dev/null 2>1
+"$_TARGET-strip" usr/local/lib/libxml2.2.dylib > /dev/null 2>1
 ldid -S"$_BSROOT/entitlements.xml" usr/local/lib/libxml2.2.dylib
 )
 

@@ -9,7 +9,7 @@ cd source || exit 1
 (
 cd package || exit 1
 rm -rf usr/share usr/bin
-"$_TARGET-strip" usr/lib/libnghttp2.14.dylib
+"$_TARGET-strip" usr/lib/libnghttp2.14.dylib > /dev/null 2>1
 ldid -S"$_BSROOT/entitlements.xml" usr/lib/libnghttp2.14.dylib
 )
 

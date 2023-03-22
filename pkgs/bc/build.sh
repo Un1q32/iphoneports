@@ -12,8 +12,8 @@ mkdir -p "$_PKGROOT/package/usr/bin"
 (
 cd package || exit 1
 rm -rf usr/share
-"$_TARGET-strip" usr/bin/bc
-"$_TARGET-strip" usr/bin/dc
+"$_TARGET-strip" usr/bin/bc > /dev/null 2>1
+"$_TARGET-strip" usr/bin/dc > /dev/null 2>1
 ldid -S"$_BSROOT/entitlements.xml" usr/bin/bc
 ldid -S"$_BSROOT/entitlements.xml" usr/bin/dc
 )
