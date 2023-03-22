@@ -16,13 +16,13 @@ rm -rf usr/local
 "$_TARGET-strip" usr/sbin/sudo_logsrvd
 "$_TARGET-strip" usr/sbin/sudo_sendlog
 "$_TARGET-strip" usr/sbin/visudo
-"$_TARGET-strip" -x usr/libexec/sudo/libsudo_util.0.dylib
-"$_TARGET-strip" -x usr/libexec/sudo/audit_json.so
-"$_TARGET-strip" -x usr/libexec/sudo/group_file.so
-"$_TARGET-strip" -x usr/libexec/sudo/sudoers.so
-"$_TARGET-strip" -x usr/libexec/sudo/sudo_intercept.so
-"$_TARGET-strip" -x usr/libexec/sudo/sudo_noexec.so
-"$_TARGET-strip" -x usr/libexec/sudo/system_group.so
+"$_TARGET-strip" usr/libexec/sudo/libsudo_util.0.dylib
+"$_TARGET-strip" usr/libexec/sudo/audit_json.so
+"$_TARGET-strip" usr/libexec/sudo/group_file.so
+"$_TARGET-strip" usr/libexec/sudo/sudoers.so
+"$_TARGET-strip" usr/libexec/sudo/sudo_intercept.so
+"$_TARGET-strip" usr/libexec/sudo/sudo_noexec.so
+"$_TARGET-strip" usr/libexec/sudo/system_group.so
 ldid -S"$_BSROOT/entitlements.xml" usr/bin/sudo
 ldid -S"$_BSROOT/entitlements.xml" usr/bin/cvtsudoers
 ldid -S"$_BSROOT/entitlements.xml" usr/bin/sudoreplay

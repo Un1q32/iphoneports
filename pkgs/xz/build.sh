@@ -11,7 +11,7 @@ cd package || exit 1
 rm -rf usr/share
 "$_TARGET-strip" usr/bin/xz
 "$_TARGET-strip" usr/bin/xzdec
-"$_TARGET-strip" -x usr/local/lib/liblzma.5.dylib
+"$_TARGET-strip" usr/local/lib/liblzma.5.dylib
 ldid -S"$_BSROOT/entitlements.xml" usr/bin/xz
 ldid -S"$_BSROOT/entitlements.xml" usr/bin/xzdec
 ldid -S"$_BSROOT/entitlements.xml" usr/local/lib/liblzma.5.dylib

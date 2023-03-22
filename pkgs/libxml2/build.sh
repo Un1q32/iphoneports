@@ -11,7 +11,7 @@ cd package || exit 1
 rm -rf usr/share/doc usr/share/gtk-doc usr/share/man
 "$_TARGET-strip" usr/bin/xmlcatalog
 "$_TARGET-strip" usr/bin/xmllint
-"$_TARGET-strip" -x usr/local/lib/libxml2.2.dylib
+"$_TARGET-strip" usr/local/lib/libxml2.2.dylib
 ldid -S"$_BSROOT/entitlements.xml" usr/local/lib/libxml2.2.dylib
 )
 

@@ -9,7 +9,7 @@ cd source || exit 1
 (
 cd package || exit 1
 rm -rf usr/share
-"$_TARGET-strip" -x usr/lib/liblzo2.2.dylib
+"$_TARGET-strip" usr/lib/liblzo2.2.dylib
 ldid -S"$_BSROOT/entitlements.xml" usr/lib/liblzo2.2.dylib
 )
 

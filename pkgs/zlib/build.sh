@@ -9,7 +9,7 @@ CHOST="$_TARGET" ./configure --prefix=/usr --shared --libdir=/usr/local/lib
 (
 cd package || exit 1
 rm -rf usr/share usr/local/lib/libz.a
-"$_TARGET-strip" -x usr/local/lib/libz.1.2.13.dylib
+"$_TARGET-strip" usr/local/lib/libz.1.2.13.dylib
 ldid -S"$_BSROOT/entitlements.xml" usr/local/lib/libz.1.2.13.dylib
 )
 

@@ -10,7 +10,7 @@ cd source || exit 1
 cd package || exit 1
 rm -rf usr/share/man
 "$_TARGET-strip" usr/bin/file
-"$_TARGET-strip" -x usr/lib/libmagic.1.dylib
+"$_TARGET-strip" usr/lib/libmagic.1.dylib
 ldid -S"$_BSROOT/entitlements.xml" usr/bin/file
 ldid -S"$_BSROOT/entitlements.xml" usr/lib/libmagic.1.dylib
 )

@@ -11,9 +11,9 @@ cd package || exit 1
 rm -rf usr/share
 "$_TARGET-strip" usr/bin/openssl
 "$_TARGET-strip" usr/bin/ocspcheck
-"$_TARGET-strip" -x usr/lib/libcrypto.50.dylib
-"$_TARGET-strip" -x usr/lib/libssl.53.dylib
-"$_TARGET-strip" -x usr/lib/libtls.26.dylib
+"$_TARGET-strip" usr/lib/libcrypto.50.dylib
+"$_TARGET-strip" usr/lib/libssl.53.dylib
+"$_TARGET-strip" usr/lib/libtls.26.dylib
 ldid -S"$_BSROOT/entitlements.xml" usr/bin/openssl
 ldid -S"$_BSROOT/entitlements.xml" usr/bin/ocspcheck
 ldid -S"$_BSROOT/entitlements.xml" usr/lib/libcrypto.50.dylib

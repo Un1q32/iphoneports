@@ -10,7 +10,7 @@ cd source || exit 1
 cd package || exit 1
 rm -rf usr/share
 "$_TARGET-strip" usr/bin/idn2
-"$_TARGET-strip" -x usr/lib/libidn2.0.dylib
+"$_TARGET-strip" usr/lib/libidn2.0.dylib
 ldid -S"$_BSROOT/entitlements.xml" usr/bin/idn2
 ldid -S"$_BSROOT/entitlements.xml" usr/lib/libidn2.0.dylib
 )

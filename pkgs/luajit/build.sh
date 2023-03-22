@@ -9,7 +9,7 @@ cd package || exit 1
 rm -rf usr/share/man usr/lib/libluajit-5.1.a
 ln -sf luajit-2.1.0-beta3 usr/bin/luajit
 "$_TARGET-strip" usr/bin/luajit-2.1.0-beta3
-"$_TARGET-strip" -x usr/lib/libluajit-5.1.2.1.0.dylib
+"$_TARGET-strip" usr/lib/libluajit-5.1.2.1.0.dylib
 ldid -S"$_BSROOT/entitlements.xml" usr/bin/luajit-2.1.0-beta3
 ldid -S"$_BSROOT/entitlements.xml" usr/lib/libluajit-5.1.2.1.0.dylib
 )

@@ -26,7 +26,7 @@ for i in tic tput tset toe clear infocmp; do
 done
 for i in usr/lib/*.dylib; do
     if ! [ -h "$i" ]; then
-        "$_TARGET-strip" -x "$i" -no_code_signature_warning
+        "$_TARGET-strip" "$i" -no_code_signature_warning
         ldid -S"$_BSROOT/entitlements.xml" "$i"
     fi
 done
