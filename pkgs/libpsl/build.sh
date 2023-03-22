@@ -9,8 +9,8 @@ cd source || exit 1
 (
 cd package || exit 1
 rm -rf usr/share
-"$_TARGET-strip" usr/bin/psl > /dev/null 2>1
-"$_TARGET-strip" usr/lib/libpsl.5.dylib > /dev/null 2>1
+"$_TARGET-strip" usr/bin/psl > /dev/null 2>&1
+"$_TARGET-strip" usr/lib/libpsl.5.dylib > /dev/null 2>&1
 ldid -S"$_BSROOT/entitlements.xml" usr/bin/psl
 ldid -S"$_BSROOT/entitlements.xml" usr/lib/libpsl.5.dylib
 )

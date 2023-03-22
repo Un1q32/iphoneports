@@ -8,15 +8,15 @@ INSTALL_SYMLINKS=y "$_MAKE" DESTDIR="$_PKGROOT/package" install
 
 (
 cd package || exit 1
-"$_TARGET-strip" usr/bin/git > /dev/null 2>1
-"$_TARGET-strip" usr/bin/git-shell > /dev/null 2>1
-"$_TARGET-strip" usr/bin/scalar > /dev/null 2>1
-"$_TARGET-strip" usr/libexec/git-core/git-remote-http > /dev/null 2>1
-"$_TARGET-strip" usr/libexec/git-core/git-sh-i18n--envsubst > /dev/null 2>1
-"$_TARGET-strip" usr/libexec/git-core/git-http-backend > /dev/null 2>1
-"$_TARGET-strip" usr/libexec/git-core/git-http-fetch > /dev/null 2>1
-"$_TARGET-strip" usr/libexec/git-core/git-imap-send > /dev/null 2>1
-"$_TARGET-strip" usr/libexec/git-core/git-daemon > /dev/null 2>1
+"$_TARGET-strip" usr/bin/git > /dev/null 2>&1
+"$_TARGET-strip" usr/bin/git-shell > /dev/null 2>&1
+"$_TARGET-strip" usr/bin/scalar > /dev/null 2>&1
+"$_TARGET-strip" usr/libexec/git-core/git-remote-http > /dev/null 2>&1
+"$_TARGET-strip" usr/libexec/git-core/git-sh-i18n--envsubst > /dev/null 2>&1
+"$_TARGET-strip" usr/libexec/git-core/git-http-backend > /dev/null 2>&1
+"$_TARGET-strip" usr/libexec/git-core/git-http-fetch > /dev/null 2>&1
+"$_TARGET-strip" usr/libexec/git-core/git-imap-send > /dev/null 2>&1
+"$_TARGET-strip" usr/libexec/git-core/git-daemon > /dev/null 2>&1
 ldid -S"$_BSROOT/entitlements.xml" usr/bin/git
 ldid -S"$_BSROOT/entitlements.xml" usr/bin/git-shell
 ldid -S"$_BSROOT/entitlements.xml" usr/bin/scalar

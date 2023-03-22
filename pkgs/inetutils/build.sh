@@ -12,29 +12,29 @@ ln -s ../usr/bin/ping "$_PKGROOT/package/sbin/ping"
 (
 cd package || exit 1
 rm -rf usr/share
-"$_TARGET-strip" usr/bin/dnsdomainname > /dev/null 2>1
-"$_TARGET-strip" usr/bin/ftp > /dev/null 2>1
-"$_TARGET-strip" usr/bin/hostname > /dev/null 2>1
-"$_TARGET-strip" usr/bin/ifconfig > /dev/null 2>1
-"$_TARGET-strip" usr/bin/logger > /dev/null 2>1
-"$_TARGET-strip" usr/bin/ping > /dev/null 2>1
-"$_TARGET-strip" usr/bin/rcp > /dev/null 2>1
-"$_TARGET-strip" usr/bin/rexec > /dev/null 2>1
-"$_TARGET-strip" usr/bin/rlogin > /dev/null 2>1
-"$_TARGET-strip" usr/bin/rsh > /dev/null 2>1
-"$_TARGET-strip" usr/bin/telnet > /dev/null 2>1
-"$_TARGET-strip" usr/bin/tftp > /dev/null 2>1
-"$_TARGET-strip" usr/bin/traceroute > /dev/null 2>1
-"$_TARGET-strip" usr/bin/whois > /dev/null 2>1
-"$_TARGET-strip" usr/libexec/ftpd > /dev/null 2>1
-"$_TARGET-strip" usr/libexec/inetd > /dev/null 2>1
-"$_TARGET-strip" usr/libexec/rexecd > /dev/null 2>1
-"$_TARGET-strip" usr/libexec/rlogind > /dev/null 2>1
-"$_TARGET-strip" usr/libexec/rshd > /dev/null 2>1
-"$_TARGET-strip" usr/libexec/syslogd > /dev/null 2>1
-"$_TARGET-strip" usr/libexec/telnetd > /dev/null 2>1
-"$_TARGET-strip" usr/libexec/tftpd > /dev/null 2>1
-"$_TARGET-strip" usr/libexec/uucpd > /dev/null 2>1
+"$_TARGET-strip" usr/bin/dnsdomainname > /dev/null 2>&1
+"$_TARGET-strip" usr/bin/ftp > /dev/null 2>&1
+"$_TARGET-strip" usr/bin/hostname > /dev/null 2>&1
+"$_TARGET-strip" usr/bin/ifconfig > /dev/null 2>&1
+"$_TARGET-strip" usr/bin/logger > /dev/null 2>&1
+"$_TARGET-strip" usr/bin/ping > /dev/null 2>&1
+"$_TARGET-strip" usr/bin/rcp > /dev/null 2>&1
+"$_TARGET-strip" usr/bin/rexec > /dev/null 2>&1
+"$_TARGET-strip" usr/bin/rlogin > /dev/null 2>&1
+"$_TARGET-strip" usr/bin/rsh > /dev/null 2>&1
+"$_TARGET-strip" usr/bin/telnet > /dev/null 2>&1
+"$_TARGET-strip" usr/bin/tftp > /dev/null 2>&1
+"$_TARGET-strip" usr/bin/traceroute > /dev/null 2>&1
+"$_TARGET-strip" usr/bin/whois > /dev/null 2>&1
+"$_TARGET-strip" usr/libexec/ftpd > /dev/null 2>&1
+"$_TARGET-strip" usr/libexec/inetd > /dev/null 2>&1
+"$_TARGET-strip" usr/libexec/rexecd > /dev/null 2>&1
+"$_TARGET-strip" usr/libexec/rlogind > /dev/null 2>&1
+"$_TARGET-strip" usr/libexec/rshd > /dev/null 2>&1
+"$_TARGET-strip" usr/libexec/syslogd > /dev/null 2>&1
+"$_TARGET-strip" usr/libexec/telnetd > /dev/null 2>&1
+"$_TARGET-strip" usr/libexec/tftpd > /dev/null 2>&1
+"$_TARGET-strip" usr/libexec/uucpd > /dev/null 2>&1
 ldid -S"$_BSROOT/entitlements.xml" usr/bin/dnsdomainname
 ldid -S"$_BSROOT/entitlements.xml" usr/bin/ftp
 ldid -S"$_BSROOT/entitlements.xml" usr/bin/hostname

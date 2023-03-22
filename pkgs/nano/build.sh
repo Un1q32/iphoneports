@@ -14,7 +14,7 @@ mkdir package/etc
 "$_CP" files/nanorc package/etc
 cd package || exit 1
 rm -rf usr/share/info usr/share/man usr/share/doc
-"$_TARGET-strip" usr/bin/nano > /dev/null 2>1
+"$_TARGET-strip" usr/bin/nano > /dev/null 2>&1
 ldid -S"$_BSROOT/entitlements.xml" usr/bin/nano
 )
 

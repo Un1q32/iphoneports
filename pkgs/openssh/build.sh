@@ -10,9 +10,9 @@ cd source || exit 1
 (
 cd package || exit 1
 rm -rf usr/share
-"$_TARGET-strip" usr/bin/* > /dev/null 2>1
-"$_TARGET-strip" usr/sbin/* > /dev/null 2>1
-"$_TARGET-strip" usr/libexec/* > /dev/null 2>1
+"$_TARGET-strip" usr/bin/* > /dev/null 2>&1
+"$_TARGET-strip" usr/sbin/* > /dev/null 2>&1
+"$_TARGET-strip" usr/libexec/* > /dev/null 2>&1
 ldid -S"$_BSROOT/entitlements.xml" usr/bin/*
 ldid -S"$_BSROOT/entitlements.xml" usr/sbin/*
 ldid -S"$_BSROOT/entitlements.xml" usr/libexec/*

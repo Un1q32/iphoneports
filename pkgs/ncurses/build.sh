@@ -21,12 +21,12 @@ for i in ?; do
 done
 )
 for i in tic tput tset toe clear infocmp; do
-    "$_TARGET-strip" usr/bin/$i > /dev/null 2>1
+    "$_TARGET-strip" usr/bin/$i > /dev/null 2>&1
     ldid -S"$_BSROOT/entitlements.xml" usr/bin/$i
 done
 for i in usr/lib/*.dylib; do
     if ! [ -h "$i" ]; then
-        "$_TARGET-strip" "$i" -no_code_signature_warning > /dev/null 2>1
+        "$_TARGET-strip" "$i" -no_code_signature_warning > /dev/null 2>&1
         ldid -S"$_BSROOT/entitlements.xml" "$i"
     fi
 done

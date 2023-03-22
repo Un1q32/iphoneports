@@ -9,9 +9,9 @@ cd source || exit 1
 (
 cd package || exit 1
 rm -rf usr/share
-"$_TARGET-strip" usr/bin/xz > /dev/null 2>1
-"$_TARGET-strip" usr/bin/xzdec > /dev/null 2>1
-"$_TARGET-strip" usr/local/lib/liblzma.5.dylib > /dev/null 2>1
+"$_TARGET-strip" usr/bin/xz > /dev/null 2>&1
+"$_TARGET-strip" usr/bin/xzdec > /dev/null 2>&1
+"$_TARGET-strip" usr/local/lib/liblzma.5.dylib > /dev/null 2>&1
 ldid -S"$_BSROOT/entitlements.xml" usr/bin/xz
 ldid -S"$_BSROOT/entitlements.xml" usr/bin/xzdec
 ldid -S"$_BSROOT/entitlements.xml" usr/local/lib/liblzma.5.dylib
