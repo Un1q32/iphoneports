@@ -1,5 +1,4 @@
 #!/bin/sh
-
 # If no arguments are specified, print usage info
 case "$1" in
     -h|*help)
