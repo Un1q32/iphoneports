@@ -16,4 +16,4 @@ ldid -S"$_BSROOT/entitlements.xml" usr/bin/grep
 )
 
 "$_CP" -r DEBIAN package
-dpkg-deb -b --root-owner-group -Zgzip package grep-3.9.deb
+dpkg-deb -b --root-owner-group -Zgzip package grep-3.10.deb
