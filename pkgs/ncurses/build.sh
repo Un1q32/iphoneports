@@ -1,11 +1,11 @@
 #!/bin/sh
 (
 cd source || exit 1
-./configure --host="$_TARGET" --prefix=/usr --sysconfdir=/etc --with-default-terminfo-dir=/usr/share/terminfo --with-shared --without-normal --without-debug --enable-termcap --enable-symlinks CXXFLAGS="-O2 -std=c++98"
+./configure --host="$_TARGET" --prefix=/usr --sysconfdir=/etc --with-default-terminfo-dir=/usr/share/terminfo --with-shared --without-normal --without-debug --enable-termcap --enable-symlinks CXXFLAGS="-O2 -std=c++11"
 "$_MAKE" -j8
 "$_MAKE" DESTDIR="$_PKGROOT/package" install
 "$_MAKE" clean
-./configure --host="$_TARGET" --prefix=/usr --sysconfdir=/etc --with-default-terminfo-dir=/usr/share/terminfo --with-shared --without-normal --without-debug --enable-termcap --enable-symlinks --disable-overwrite --enable-widec CXXFLAGS="-O2 -std=c++98"
+./configure --host="$_TARGET" --prefix=/usr --sysconfdir=/etc --with-default-terminfo-dir=/usr/share/terminfo --with-shared --without-normal --without-debug --enable-termcap --enable-symlinks --disable-overwrite --enable-widec CXXFLAGS="-O2 -std=c++11"
 "$_MAKE" -j8
 "$_MAKE" DESTDIR="$_PKGROOT/package" install
 )
