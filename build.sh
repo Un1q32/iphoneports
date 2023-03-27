@@ -35,7 +35,8 @@ if [ "${0%/*}" = "$0" ]; then
 else
     _BSROOT="${0%/*}"
 fi
-_BSROOT="$(cd "$_BSROOT" && pwd)"
+cd "$_BSROOT" || exit 1
+_BSROOT="$PWD"
 _PKGDIR="$_BSROOT/pkgs"
 export _PKGDIR _BSROOT
 export TERM="xterm-256color"
