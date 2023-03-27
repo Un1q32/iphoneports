@@ -67,7 +67,7 @@ depcheck() {
     # Check for Apple strip
     _strip_version=$("$_TARGET-strip" --version 2> /dev/null)
     case "$_strip_version" in
-        *GNU*) error "GNU strip is not supported."
+        *GNU*) error "GNU/LLVM strip is not supported."
     esac
 
     # Check for GNU make
