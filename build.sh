@@ -30,11 +30,7 @@ error() {
 
 # Assign environment variables
 # if $0 doesn't contain any slashes, assume it's in the current directory
-if [ "${0%/*}" = "$0" ]; then
-    _BSROOT="."
-else
-    _BSROOT="${0%/*}"
-fi
+[ "${0%/*}" = "$0" ] && _BSROOT="." || _BSROOT="${0%/*}"
 cd "$_BSROOT" || exit 1
 _BSROOT="$PWD"
 _PKGDIR="$_BSROOT/pkgs"
