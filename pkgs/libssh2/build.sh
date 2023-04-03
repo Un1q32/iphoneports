@@ -1,7 +1,7 @@
 #!/bin/sh
 (
 cd source || exit 1
-./configure --host="$_TARGET" --prefix=/usr --disable-static --disable-examples-build
+./configure --host="$_TARGET" --prefix=/usr --disable-static --disable-examples-build --with-libz
 "$_MAKE" -j8
 "$_MAKE" DESTDIR="$_PKGROOT/package" install
 )
