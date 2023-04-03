@@ -1,5 +1,5 @@
---- source/Makefile.orig	2023-03-17 15:46:20.243760887 -0400
-+++ source/Makefile	2023-03-17 15:47:05.397469260 -0400
+--- source/Makefile.orig
++++ source/Makefile
 @@ -11,6 +11,8 @@
  # This program is released under the terms of the license contained
  # in the file LICENSE.
