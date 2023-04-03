@@ -33,7 +33,7 @@ error() {
 [ "${0%/*}" = "$0" ] && _BSROOT="." || _BSROOT="${0%/*}"
 cd "$_BSROOT" || exit 1
 _BSROOT="$PWD"
-_PKGDIR="$_BSROOT/pkgs"
+_PKGDIR="$_BSROOT/packages"
 export _PKGDIR _BSROOT
 export TERM="xterm-256color"
 
