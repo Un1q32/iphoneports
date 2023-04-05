@@ -11,8 +11,8 @@ rm -rf usr/share usr/lib/libzstd.a
 "$_TARGET-strip" usr/bin/zstd > /dev/null 2>&1
 "$_TARGET-strip" usr/lib/libzstd.1.5.4.dylib > /dev/null 2>&1
 ldid -S"$_BSROOT/entitlements.xml" usr/bin/zstd
-ldid -S"$_BSROOT/entitlements.xml" usr/lib/libzstd.1.5.4.dylib
+ldid -S"$_BSROOT/entitlements.xml" usr/lib/libzstd.1.5.5.dylib
 )
 
 "$_CP" -r DEBIAN package
-dpkg-deb -b --root-owner-group -Zgzip package zstd-1.5.4.deb
+dpkg-deb -b --root-owner-group -Zgzip package zstd-1.5.5.deb
