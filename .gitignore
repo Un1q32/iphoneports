@@ -1,6 +1,5 @@
 source
 package
-/sdk
-sdk.*
-.builtpkgs
 *.deb
+/sdk*
+.builtpkgs
