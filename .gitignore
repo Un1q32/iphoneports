@@ -1,6 +1,6 @@
 source
 package
 /sdk
-/sdk.tmp
-/.builtpkgs
+sdk.*
+.builtpkgs
 *.deb
