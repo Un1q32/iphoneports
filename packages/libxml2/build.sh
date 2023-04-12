@@ -16,4 +16,4 @@ ldid -S"$_BSROOT/entitlements.xml" usr/local/lib/libxml2.2.dylib
 )
 
 "$_CP" -r DEBIAN package
-dpkg-deb -b --root-owner-group -Zgzip package libxml2-2.10.3.deb
+dpkg-deb -b --root-owner-group -Zgzip package libxml2-2.10.4.deb
