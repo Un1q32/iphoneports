@@ -17,10 +17,12 @@ ldid -S"$_BSROOT/entitlements.xml" usr/bin/*
 ldid -S"$_BSROOT/entitlements.xml" usr/sbin/*
 ldid -S"$_BSROOT/entitlements.xml" usr/libexec/*
 chmod 4711 usr/libexec/ssh-keysign
+mkdir -p Library/LaunchDaemons
 )
 
-"$_CP" -r DEBIAN package
-"$_CP" -r files/Library package
+"$_CP" files/com.openssh.sshd.plist package/Library/LaunchDaemons/com.openssh.sshd.plist
 "$_CP" files/sshd_config package/etc/ssh
 "$_CP" files/sshd-keygen-wrapper package/usr/libexec
+
+"$_CP" -r DEBIAN package
 dpkg-deb -b --root-owner-group -Zgzip package openssh-9.3p1.deb
