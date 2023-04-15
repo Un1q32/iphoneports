@@ -1,6 +1,6 @@
 --- source/Makefile.in.orig
 +++ source/Makefile.in
-@@ -25,14 +25,14 @@
+@@ -25,14 +25,15 @@
  lib$(libname).a : lzlib.o
  	$(AR) $(ARFLAGS) $@ $<
  
@@ -8,6 +8,7 @@
 -	$(CC) $(CFLAGS) $(LDFLAGS) -fpic -fPIC -shared -Wl,--soname=lib$(libname).so.$(soversion) -o $@ $<
 +lib$(libname).$(pkgversion).dylib : lzlib_sh.o
 +	$(CC) $(CFLAGS) $(LDFLAGS) -fpic -fPIC -dynamiclib -Wl,-install_name,lib$(libname).$(pkgversion).dylib -o $@ $<
++	$(INSTALLNAMETOOL) -id $(libdir)/lib$(libname).$(pkgversion).dylib $@
  
  $(progname) : $(objs) lib$(libname).a
  	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ $(objs) lib$(libname).a
@@ -19,7 +20,7 @@
  
  bbexample : bbexample.o lib$(libname).a
  	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ bbexample.o lib$(libname).a
-@@ -105,15 +105,15 @@
+@@ -105,15 +106,15 @@
  	  $(INSTALL_DATA) ./lib$(libname).a "$(DESTDIR)$(libdir)/lib$(libname).a" ; \
  	fi
  	if [ -n "$(progname_shared)" ] ; then \
@@ -41,7 +42,7 @@
  	  if [ "${disable_ldconfig}" != yes ] && [ $${run_ldconfig} = yes ] && \
  	     [ -x "$(LDCONFIG)" ] ; then "$(LDCONFIG)" -n "$(DESTDIR)$(libdir)" || true ; fi ; \
  	fi
-@@ -152,9 +152,9 @@
+@@ -152,9 +153,9 @@
  uninstall-lib :
  	-rm -f "$(DESTDIR)$(includedir)/$(libname)lib.h"
  	-rm -f "$(DESTDIR)$(libdir)/lib$(libname).a"
@@ -54,7 +55,7 @@
  
  uninstall-info :
  	-if $(CAN_RUN_INSTALLINFO) ; then \
-@@ -195,7 +195,7 @@
+@@ -195,7 +196,7 @@
  
  clean :
  	-rm -f $(progname) $(objs) lzlib.o lib$(libname).a
@@ -63,3 +64,37 @@
  	-rm -f bbexample bbexample.o ffexample ffexample.o lzcheck lzcheck.o
  
  distclean : clean
+--- source/configure.orig
++++ source/configure
+@@ -82,6 +82,7 @@
+ 		echo "  --disable-ldconfig    don't run ldconfig after install"
+ 		echo "  CC=COMPILER           C compiler to use [${CC}]"
+ 		echo "  AR=ARCHIVER           library archiver to use [${AR}]"
++		echo "  INSTALLNAMETOOL=TOOL  tool to set the install name of a shared library"
+ 		echo "  CPPFLAGS=OPTIONS      command line options for the preprocessor [${CPPFLAGS}]"
+ 		echo "  CFLAGS=OPTIONS        command line options for the C compiler [${CFLAGS}]"
+ 		echo "  CFLAGS+=OPTIONS       append options to the current value of CFLAGS"
+@@ -123,6 +124,7 @@
+ 
+ 	CC=*)              CC=${optarg} ;;
+ 	AR=*)              AR=${optarg} ;;
++	INSTALLNAMETOOL=*) INSTALLNAMETOOL=${optarg} ;;
+ 	CPPFLAGS=*)  CPPFLAGS=${optarg} ;;
+ 	CFLAGS=*)      CFLAGS=${optarg} ;;
+ 	CFLAGS+=*)     CFLAGS="${CFLAGS} ${optarg}" ;;
+@@ -196,6 +198,7 @@
+ echo "mandir = ${mandir}"
+ echo "CC = ${CC}"
+ echo "AR = ${AR}"
++echo "INSTALLNAMETOOL = ${INSTALLNAMETOOL}"
+ echo "CPPFLAGS = ${CPPFLAGS}"
+ echo "CFLAGS = ${CFLAGS}"
+ echo "LDFLAGS = ${LDFLAGS}"
+@@ -229,6 +232,7 @@
+ mandir = ${mandir}
+ CC = ${CC}
+ AR = ${AR}
++INSTALLNAMETOOL = ${INSTALLNAMETOOL}
+ CPPFLAGS = ${CPPFLAGS}
+ CFLAGS = ${CFLAGS}
+ LDFLAGS = ${LDFLAGS}
