@@ -7,7 +7,7 @@
 -lib$(libname).so.$(pkgversion) : lzlib_sh.o
 -	$(CC) $(CFLAGS) $(LDFLAGS) -fpic -fPIC -shared -Wl,--soname=lib$(libname).so.$(soversion) -o $@ $<
 +lib$(libname).$(pkgversion).dylib : lzlib_sh.o
-+	$(CC) $(CFLAGS) $(LDFLAGS) -fpic -fPIC -shared -Wl,-install_name,$(libdir/lib$(libname).$(pkgversion).dylib) -o $@ $<
++	$(CC) $(CFLAGS) $(LDFLAGS) -fpic -fPIC -shared -Wl,-install_name,$(libdir)/lib$(libname).$(pkgversion).dylib -o $@ $<
  
  $(progname) : $(objs) lib$(libname).a
  	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ $(objs) lib$(libname).a
