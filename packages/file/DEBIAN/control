@@ -3,7 +3,7 @@ Priority: important
 Section: Utilities
 Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
 Architecture: iphoneos-arm
-Version: 5.44-2
+Version: 5.44-3
 Description: guesses the type of a file from contents
 Depends: xz-utils, bzip2, zlib, zstd, lzlib
 Tag: purpose::console
