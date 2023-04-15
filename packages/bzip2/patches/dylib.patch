@@ -9,14 +9,7 @@
  
  SHELL=/bin/sh
  
-@@ -19,12 +21,15 @@
- AR=ar
- RANLIB=ranlib
- LDFLAGS=
-+INSTALLNAMETOOL=install_name_tool
- 
- BIGFILES=-D_FILE_OFFSET_BITS=64
- CFLAGS=-Wall -Winline -O2 -g $(BIGFILES)
+@@ -25,6 +27,8 @@
  
  # Where you want it installed when you do 'make install'
  PREFIX=/usr/local
@@ -25,7 +18,7 @@
  
  
  OBJS= blocksort.o  \
-@@ -35,22 +40,19 @@
+@@ -35,22 +39,18 @@
        decompress.o \
        bzlib.o
  
@@ -49,13 +42,12 @@
 -	fi
 +libbz2: $(OBJS)
 +	rm -f libbz2.1.dylib
-+	$(CC) -shared -Wl,-install_name -Wl,libbz2.dylib -o libbz2.1.dylib -compatibility_version ${COMPAT_VERSION} -current_version ${PKG_VERSION} $(OBJS)
-+	$(INSTALLNAMETOOL) -id $(LIBDIR)/libbz2.1.dylib libbz2.1.dylib
++	$(CC) -shared -Wl,-install_name -Wl,$(LIBDIR)/libbz2.1.dylib -o libbz2.1.dylib -compatibility_version ${COMPAT_VERSION} -current_version ${PKG_VERSION} $(OBJS)
 +	ln -s -f libbz2.1.dylib libbz2.dylib
  
  check: test
  test: bzip2
-@@ -70,43 +72,44 @@
+@@ -70,43 +70,44 @@
  	@cat words3
  
  install: bzip2 bzip2recover
