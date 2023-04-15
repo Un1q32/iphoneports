@@ -1,7 +1,7 @@
 #!/bin/sh
 (
 cd source || exit 1
-./configure --prefix=/usr --disable-static CC="$_TARGET-clang" INSTALLNAMETOOL="$_TARGET-install_name_tool"
+./configure --prefix=/usr --disable-static CC="$_TARGET-clang"
 "$_MAKE" DESTDIR="$_PKGROOT/package" install -j8
 )
 
