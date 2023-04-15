@@ -35,7 +35,6 @@
 -bzip2: libbz2.a bzip2.o
 +bzip2: libbz2 bzip2.o
  	$(CC) $(CFLAGS) $(LDFLAGS) -o bzip2 bzip2.o -L. -lbz2
-+	$(INSTALLNAMETOOL) -change libbz2.dylib $(LIBDIR)/libbz2.1.dylib bzip2
  
  bzip2recover: bzip2recover.o
  	$(CC) $(CFLAGS) $(LDFLAGS) -o bzip2recover bzip2recover.o
@@ -51,6 +50,7 @@
 +libbz2: $(OBJS)
 +	rm -f libbz2.1.dylib
 +	$(CC) -shared -Wl,-install_name -Wl,libbz2.dylib -o libbz2.1.dylib -compatibility_version ${COMPAT_VERSION} -current_version ${PKG_VERSION} $(OBJS)
++	$(INSTALLNAMETOOL) -id $(LIBDIR)/libbz2.1.dylib libbz2.1.dylib
 +	ln -s -f libbz2.1.dylib libbz2.dylib
  
  check: test
