@@ -1,7 +1,7 @@
 #!/bin/sh
 (
 cd source || exit 1
-./configure --host="$_TARGET" --prefix=/usr
+./configure --host="$_TARGET" --prefix=/usr --enable-xzlib --enable-bzlib --enable-zlib --enable-zstdlib --enable-lzlib
 "$_MAKE" -j8
 "$_MAKE" DESTDIR="$_PKGROOT/package" install
 )
