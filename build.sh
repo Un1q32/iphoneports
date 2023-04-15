@@ -24,8 +24,8 @@ esac
 
 # Error function
 error() {
-    printf "\033[1;31mERROR:\033[0m %s %s\n" "$1" "$2"
-    exit 1
+    printf "\033[1;31mError:\033[0m %s %s\n" "$1" "$2"
+    [ "$3" = "noexit" ] || exit 1
 }
 
 # Assign environment variables
