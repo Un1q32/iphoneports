@@ -41,9 +41,9 @@
 -		$(RANLIB) libbz2.a ; \
 -	fi
 +libbz2: $(OBJS)
-+	rm -f libbz2.1.dylib
-+	$(CC) -shared -Wl,-install_name -Wl,$(LIBDIR)/libbz2.1.dylib -o libbz2.1.dylib -compatibility_version ${COMPAT_VERSION} -current_version ${PKG_VERSION} $(OBJS)
-+	ln -s -f libbz2.1.dylib libbz2.dylib
++	rm -f libbz2.1.0.dylib
++	$(CC) -shared -Wl,-install_name -Wl,$(LIBDIR)/libbz2.1.0.dylib -o libbz2.1.0.dylib -compatibility_version ${COMPAT_VERSION} -current_version ${PKG_VERSION} $(OBJS)
++	ln -s -f libbz2.1.0.dylib libbz2.dylib
  
  check: test
  test: bzip2
@@ -105,9 +105,9 @@
 +	chmod a+r $(DESTDIR)$(PREFIX)/man/man1/bzip2.1
 +	cp -f bzlib.h $(DESTDIR)$(PREFIX)/include
 +	chmod a+r $(DESTDIR)$(PREFIX)/include/bzlib.h
-+	cp -f libbz2.1.dylib $(DESTDIR)$(LIBDIR)
-+	ln -s -f libbz2.1.dylib $(DESTDIR)$(LIBDIR)/libbz2.dylib
-+	chmod a+r $(DESTDIR)$(LIBDIR)/libbz2.1.dylib
++	cp -f libbz2.1.0.dylib $(DESTDIR)$(LIBDIR)
++	ln -s -f libbz2.1.0.dylib $(DESTDIR)$(LIBDIR)/libbz2.dylib
++	chmod a+r $(DESTDIR)$(LIBDIR)/libbz2.1.0.dylib
 +	cp -f bzgrep $(DESTDIR)$(BINDIR)/bzgrep
 +	ln -s -f bzgrep $(DESTDIR)$(BINDIR)/bzegrep
 +	ln -s -f bzgrep $(DESTDIR)$(BINDIR)/bzfgrep
