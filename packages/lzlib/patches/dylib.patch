@@ -7,7 +7,7 @@
 -lib$(libname).so.$(pkgversion) : lzlib_sh.o
 -	$(CC) $(CFLAGS) $(LDFLAGS) -fpic -fPIC -shared -Wl,--soname=lib$(libname).so.$(soversion) -o $@ $<
 +lib$(libname).$(pkgversion).dylib : lzlib_sh.o
-+	$(CC) $(CFLAGS) $(LDFLAGS) -fpic -fPIC -dynamiclib -Wl,-install_name,$(libdir)/lib$(libname).$(pkgversion).dylib -compatibility_version $(soversion) -current_version $(pkgversion) -o $@ $<
++	$(CC) $(CFLAGS) $(LDFLAGS) -fpic -fPIC -dynamiclib -install_name $(libdir)/lib$(libname).$(pkgversion).dylib -compatibility_version $(soversion) -current_version $(pkgversion) -o $@ $<
  
  $(progname) : $(objs) lib$(libname).a
  	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ $(objs) lib$(libname).a
