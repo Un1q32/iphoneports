@@ -42,7 +42,7 @@
 -	fi
 +libbz2: $(OBJS)
 +	rm -f libbz2.1.0.dylib
-+	$(CC) -shared -Wl,-install_name -Wl,$(LIBDIR)/libbz2.1.0.dylib -o libbz2.1.0.dylib -compatibility_version ${COMPAT_VERSION} -current_version ${PKG_VERSION} $(OBJS)
++	$(CC) -dynamiclib -Wl,-install_name -Wl,$(LIBDIR)/libbz2.1.0.dylib -o libbz2.1.0.dylib -compatibility_version ${COMPAT_VERSION} -current_version ${PKG_VERSION} $(OBJS)
 +	ln -s -f libbz2.1.0.dylib libbz2.dylib
  
  check: test
