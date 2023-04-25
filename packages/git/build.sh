@@ -8,25 +8,15 @@ INSTALL_SYMLINKS=y "$_MAKE" DESTDIR="$_PKGROOT/package" install
 
 (
 cd package || exit 1
-"$_TARGET-strip" usr/bin/git > /dev/null 2>&1
-"$_TARGET-strip" usr/bin/git-shell > /dev/null 2>&1
-"$_TARGET-strip" usr/bin/scalar > /dev/null 2>&1
-"$_TARGET-strip" usr/libexec/git-core/git-remote-http > /dev/null 2>&1
-"$_TARGET-strip" usr/libexec/git-core/git-sh-i18n--envsubst > /dev/null 2>&1
-"$_TARGET-strip" usr/libexec/git-core/git-http-backend > /dev/null 2>&1
-"$_TARGET-strip" usr/libexec/git-core/git-http-fetch > /dev/null 2>&1
-"$_TARGET-strip" usr/libexec/git-core/git-imap-send > /dev/null 2>&1
-"$_TARGET-strip" usr/libexec/git-core/git-daemon > /dev/null 2>&1
-ldid -S"$_BSROOT/entitlements.xml" usr/bin/git
-ldid -S"$_BSROOT/entitlements.xml" usr/bin/git-shell
-ldid -S"$_BSROOT/entitlements.xml" usr/bin/scalar
-ldid -S"$_BSROOT/entitlements.xml" usr/libexec/git-core/git-remote-http
-ldid -S"$_BSROOT/entitlements.xml" usr/libexec/git-core/git-sh-i18n--envsubst
-ldid -S"$_BSROOT/entitlements.xml" usr/libexec/git-core/git-http-backend
-ldid -S"$_BSROOT/entitlements.xml" usr/libexec/git-core/git-http-fetch
-ldid -S"$_BSROOT/entitlements.xml" usr/libexec/git-core/git-imap-send
-ldid -S"$_BSROOT/entitlements.xml" usr/libexec/git-core/git-daemon
+for file in git git-shell scalar; do
+    "$_TARGET-strip" usr/bin/$file > /dev/null 2>&1
+    ldid -S"$_BSROOT/entitlements.xml" usr/bin/$file
+done
+for file in git-remote-http git-sh-i18n--envsubst git-http-backend git-http-fetch git-imap-send git-daemon; do
+    "$_TARGET-strip" usr/libexec/git-core/$file > /dev/null 2>&1
+    ldid -S"$_BSROOT/entitlements.xml" usr/libexec/git-core/$file
+done
 )
 
 "$_CP" -r DEBIAN package
-dpkg-deb -b --root-owner-group -Zgzip package git-2.40.0.deb
+dpkg-deb -b --root-owner-group -Zgzip package git-2.40.1.deb
