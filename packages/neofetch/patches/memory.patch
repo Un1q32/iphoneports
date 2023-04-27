@@ -1,0 +1,12 @@
+--- source/neofetch.orig
++++ source/neofetch
+@@ -3266,6 +3266,9 @@
+         ;;
+ 
+         "Mac OS X" | "macOS" | "iPhone OS")
++            if command -v getmemory >/dev/null; then
++                eval "$(getmemory)"
++            else
+             hw_pagesize="$(sysctl -n hw.pagesize)"
+             mem_total="$(($(sysctl -n hw.memsize) / 1024))"
+             pages_app="$(($(sysctl -n vm.page_pageable_internal_count) - $(sysctl -n vm.page_purgeable_count)))"

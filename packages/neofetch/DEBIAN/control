@@ -1,0 +1,9 @@
+Package: neofetch
+Priority: optional
+Section: Utilities
+Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
+Architecture: iphoneos-arm
+Version: 7.3.8
+Depends: bash, gawk, sed, grep, coreutils
+Description: A CLI system information tool written in BASH.
+Name: Neofetch
