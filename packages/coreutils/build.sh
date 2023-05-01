@@ -1,7 +1,7 @@
 #!/bin/sh
 (
 cd source || exit 1
-./configure --host="$_TARGET" --prefix=/usr --enable-single-binary=symlinks
+./configure --host="$_TARGET" --prefix=/usr --enable-single-binary=symlinks ac_year2038_required=no
 "$_MAKE" -j8
 "$_MAKE" DESTDIR="$_PKGROOT/package" install
 mkdir -p "$_PKGROOT/package/bin" "$_PKGROOT/package/usr/sbin"
@@ -29,4 +29,4 @@ chmod 4555 "$_PKGROOT/package/bin/su"
 )
 
 "$_CP" -r DEBIAN package
-dpkg-deb -b --root-owner-group -Zgzip package coreutils-9.2.deb
+dpkg-deb -b --root-owner-group -Zgzip package coreutils-9.3.deb
