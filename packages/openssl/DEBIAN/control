@@ -1,0 +1,9 @@
+Package: openssl
+Priority: standard
+Section: Security
+Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
+Architecture: iphoneos-arm
+Version: 0.9.8zg-14
+Description: Old version of OpenSSL kept around for compatability reasons
+Depends: libressl
+Name: OpenSSL (legacy)
