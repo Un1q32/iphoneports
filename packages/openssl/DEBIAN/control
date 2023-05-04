@@ -5,5 +5,5 @@ Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
 Architecture: iphoneos-arm
 Version: 0.9.8zg-13-1
 Description: Old version of OpenSSL kept around for compatability reasons
-Depends: libressl
+Depends: libressl, perl
 Name: OpenSSL (legacy)
