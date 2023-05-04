@@ -27,4 +27,4 @@ ldid -S"$_BSROOT/entitlements.xml" bin/gzip
 )
 
 "$_CP" -r DEBIAN package
-dpkg-deb -b --root-owner-group -Zgzip package gzip-1.12.deb
+dpkg-deb -b --root-owner-group -Zgzip package gzip.deb

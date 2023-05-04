@@ -17,4 +17,4 @@ ldid -S"$_BSROOT/entitlements.xml" usr/bin/xargs
 )
 
 "$_CP" -r DEBIAN package
-dpkg-deb -b --root-owner-group -Zgzip package findutils-4.9.0.deb
+dpkg-deb -b --root-owner-group -Zgzip package findutils.deb

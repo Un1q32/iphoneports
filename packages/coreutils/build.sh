@@ -29,4 +29,4 @@ chmod 4555 "$_PKGROOT/package/bin/su"
 )
 
 "$_CP" -r DEBIAN package
-dpkg-deb -b --root-owner-group -Zgzip package coreutils-9.3.deb
+dpkg-deb -b --root-owner-group -Zgzip package coreutils.deb

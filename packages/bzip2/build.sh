@@ -20,4 +20,4 @@ ldid -S"$_BSROOT/entitlements.xml" usr/local/lib/libbz2.1.0.dylib
 )
 
 "$_CP" -r DEBIAN package
-dpkg-deb -b --root-owner-group -Zgzip package bzip2-1.0.8.deb
+dpkg-deb -b --root-owner-group -Zgzip package bzip2.deb

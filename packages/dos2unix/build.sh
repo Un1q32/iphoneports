@@ -15,4 +15,4 @@ ldid -S"$_BSROOT/entitlements.xml" usr/bin/unix2dos
 )
 
 "$_CP" -r DEBIAN package
-dpkg-deb -b --root-owner-group -Zgzip package dos2unix-7.4.4.deb
+dpkg-deb -b --root-owner-group -Zgzip package dos2unix.deb

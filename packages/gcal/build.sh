@@ -21,4 +21,4 @@ ldid -S"$_BSROOT/entitlements.xml" usr/bin/txt2gcal
 )
 
 "$_CP" -r DEBIAN package
-dpkg-deb -b --root-owner-group -Zgzip package gcal-4.1.deb
+dpkg-deb -b --root-owner-group -Zgzip package gcal.deb

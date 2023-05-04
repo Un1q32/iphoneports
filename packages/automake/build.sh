@@ -12,4 +12,4 @@ rm -rf usr/share/info usr/share/man usr/share/doc
 )
 
 "$_CP" -r DEBIAN package
-dpkg-deb -b --root-owner-group -Zgzip package automake-1.16.5.deb
+dpkg-deb -b --root-owner-group -Zgzip package automake.deb

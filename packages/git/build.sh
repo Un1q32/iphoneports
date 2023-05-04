@@ -19,4 +19,4 @@ done
 )
 
 "$_CP" -r DEBIAN package
-dpkg-deb -b --root-owner-group -Zgzip package git-2.40.1.deb
+dpkg-deb -b --root-owner-group -Zgzip package git.deb

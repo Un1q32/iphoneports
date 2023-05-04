@@ -15,4 +15,4 @@ ldid -S"$_BSROOT/entitlements.xml" bin/bash
 )
 
 "$_CP" -r DEBIAN package
-dpkg-deb -b --root-owner-group -Zgzip package bash-5.2.15.deb
+dpkg-deb -b --root-owner-group -Zgzip package bash.deb

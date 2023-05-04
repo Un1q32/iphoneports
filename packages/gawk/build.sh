@@ -18,4 +18,4 @@ ldid -S"$_BSROOT/entitlements.xml" usr/libexec/awk/*
 )
 
 "$_CP" -r DEBIAN package
-dpkg-deb -b --root-owner-group -Zgzip package gawk-5.2.1.deb
+dpkg-deb -b --root-owner-group -Zgzip package gawk.deb

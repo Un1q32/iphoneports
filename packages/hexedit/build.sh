@@ -15,4 +15,4 @@ ldid -S"$_BSROOT/entitlements.xml" usr/bin/hexedit
 )
 
 "$_CP" -r DEBIAN package
-dpkg-deb -b --root-owner-group -Zgzip package hexedit-1.6.deb
+dpkg-deb -b --root-owner-group -Zgzip package hexedit.deb

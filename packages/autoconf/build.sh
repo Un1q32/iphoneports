@@ -12,4 +12,4 @@ rm -rf usr/share/info usr/share/man
 )
 
 "$_CP" -r DEBIAN package
-dpkg-deb -b --root-owner-group -Zgzip package autoconf-2.71.deb
+dpkg-deb -b --root-owner-group -Zgzip package autoconf.deb

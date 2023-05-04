@@ -15,4 +15,4 @@ ldid -S"$_BSROOT/entitlements.xml" usr/bin/cmatrix
 )
 
 "$_CP" -r DEBIAN package
-dpkg-deb -b --root-owner-group -Zgzip package cmatrix-2.0.deb
+dpkg-deb -b --root-owner-group -Zgzip package cmatrix.deb
