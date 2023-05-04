@@ -13,4 +13,4 @@ ldid -S"$_BSROOT/entitlements.xml" usr/bin/lzip
 )
 
 "$_CP" -r DEBIAN package
-dpkg-deb -b --root-owner-group -Zgzip package lzip-1.23.deb
+dpkg-deb -b --root-owner-group -Zgzip package lzip.deb

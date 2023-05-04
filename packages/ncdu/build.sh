@@ -14,4 +14,4 @@ ldid -S"$_BSROOT/entitlements.xml" usr/bin/ncdu
 )
 
 "$_CP" -r DEBIAN package
-dpkg-deb -b --root-owner-group -Zgzip package ncdu-1.18.1.deb
+dpkg-deb -b --root-owner-group -Zgzip package ncdu.deb

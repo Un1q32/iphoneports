@@ -15,4 +15,4 @@ ldid -S"$_BSROOT/entitlements.xml" usr/lib/libzstd.1.5.5.dylib
 )
 
 "$_CP" -r DEBIAN package
-dpkg-deb -b --root-owner-group -Zgzip package zstd-1.5.5.deb
+dpkg-deb -b --root-owner-group -Zgzip package zstd.deb

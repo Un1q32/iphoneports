@@ -15,4 +15,4 @@ ldid -S"$_BSROOT/entitlements.xml" usr/bin/rogue
 )
 
 "$_CP" -r DEBIAN package
-dpkg-deb -b --root-owner-group -Zgzip package rogue-5.4.4.deb
+dpkg-deb -b --root-owner-group -Zgzip package rogue.deb

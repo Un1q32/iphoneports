@@ -23,4 +23,4 @@ ln -s libpcre.1.dylib usr/lib/libpcre.0.dylib
 )
 
 "$_CP" -r DEBIAN package
-dpkg-deb -b --root-owner-group -Zgzip package pcre-8.45.deb
+dpkg-deb -b --root-owner-group -Zgzip package pcre.deb

@@ -20,4 +20,4 @@ ldid -S"$_BSROOT/entitlements.xml" usr/lib/libpcre2-posix.3.dylib
 )
 
 "$_CP" -r DEBIAN package
-dpkg-deb -b --root-owner-group -Zgzip package pcre2-10.42.deb
+dpkg-deb -b --root-owner-group -Zgzip package pcre2.deb

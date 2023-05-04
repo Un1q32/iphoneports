@@ -14,4 +14,4 @@ ldid -S"$_BSROOT/entitlements.xml" usr/lib/libssh2.1.dylib
 )
 
 "$_CP" -r DEBIAN package
-dpkg-deb -b --root-owner-group -Zgzip package libssh2-1.10.0.deb
+dpkg-deb -b --root-owner-group -Zgzip package libssh2.deb

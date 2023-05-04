@@ -14,4 +14,4 @@ ldid -S"$_BSROOT/entitlements.xml" usr/bin/moe
 )
 
 "$_CP" -r DEBIAN package
-dpkg-deb -b --root-owner-group -Zgzip package moe-1.13.deb
+dpkg-deb -b --root-owner-group -Zgzip package moe.deb

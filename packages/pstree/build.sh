@@ -13,4 +13,4 @@ ldid -S"$_BSROOT/entitlements.xml" usr/bin/pstree
 )
 
 "$_CP" -r DEBIAN package
-dpkg-deb -b --root-owner-group -Zgzip package pstree-2.40.deb
+dpkg-deb -b --root-owner-group -Zgzip package pstree.deb

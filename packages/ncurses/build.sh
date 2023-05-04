@@ -34,4 +34,4 @@ done
 )
 
 "$_CP" -r DEBIAN package
-dpkg-deb -b --root-owner-group -Zgzip package ncurses-5.9.deb
+dpkg-deb -b --root-owner-group -Zgzip package ncurses.deb

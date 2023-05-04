@@ -23,4 +23,4 @@ ldid -S"$_BSROOT/entitlements.xml" usr/bin/lesskey
 )
 
 "$_CP" -r DEBIAN package
-dpkg-deb -b --root-owner-group -Zgzip package less-608.deb
+dpkg-deb -b --root-owner-group -Zgzip package less.deb

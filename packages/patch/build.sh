@@ -14,4 +14,4 @@ ldid -S"$_BSROOT/entitlements.xml" usr/bin/patch
 )
 
 "$_CP" -r DEBIAN package
-dpkg-deb -b --root-owner-group -Zgzip package patch-2.7.6.deb
+dpkg-deb -b --root-owner-group -Zgzip package patch.deb

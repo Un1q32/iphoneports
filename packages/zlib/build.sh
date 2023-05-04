@@ -14,4 +14,4 @@ ldid -S"$_BSROOT/entitlements.xml" usr/local/lib/libz.1.2.13.dylib
 )
 
 "$_CP" -r DEBIAN package
-dpkg-deb -b --root-owner-group -Zgzip package zlib-1.2.13.deb
+dpkg-deb -b --root-owner-group -Zgzip package zlib.deb

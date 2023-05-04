@@ -14,4 +14,4 @@ ldid -S"$_BSROOT/entitlements.xml" usr/lib/libnghttp2.14.dylib
 )
 
 "$_CP" -r DEBIAN package
-dpkg-deb -b --root-owner-group -Zgzip package nghttp2-1.52.0.deb
+dpkg-deb -b --root-owner-group -Zgzip package nghttp2.deb

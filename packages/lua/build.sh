@@ -15,4 +15,4 @@ ldid -S"$_BSROOT/entitlements.xml" usr/bin/luac
 )
 
 "$_CP" -r DEBIAN package
-dpkg-deb -b --root-owner-group -Zgzip package lua-5.4.4.deb
+dpkg-deb -b --root-owner-group -Zgzip package lua.deb

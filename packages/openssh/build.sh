@@ -25,4 +25,4 @@ mkdir -p Library/LaunchDaemons
 "$_CP" files/sshd-keygen-wrapper package/usr/libexec/sshd-keygen-wrapper
 
 "$_CP" -r DEBIAN package
-dpkg-deb -b --root-owner-group -Zgzip package openssh-9.3p1.deb
+dpkg-deb -b --root-owner-group -Zgzip package openssh.deb

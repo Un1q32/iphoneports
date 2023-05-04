@@ -14,4 +14,4 @@ ldid -S"$_BSROOT/entitlements.xml" usr/bin/getusedmem
 )
 
 "$_CP" -r DEBIAN package
-dpkg-deb -b --root-owner-group -Zgzip package neofetch-7.3.8.deb
+dpkg-deb -b --root-owner-group -Zgzip package neofetch.deb

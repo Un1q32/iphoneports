@@ -22,4 +22,4 @@ ldid -S"$_BSROOT/entitlements.xml" usr/lib/libtls.26.dylib
 )
 
 "$_CP" -r DEBIAN package
-dpkg-deb -b --root-owner-group -Zgzip package libressl-3.7.2.deb
+dpkg-deb -b --root-owner-group -Zgzip package libressl.deb

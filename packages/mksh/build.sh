@@ -13,4 +13,4 @@ ldid -S"$_BSROOT/entitlements.xml" bin/mksh
 )
 
 "$_CP" -r DEBIAN package
-dpkg-deb -b --root-owner-group -Zgzip package mksh-59c.deb
+dpkg-deb -b --root-owner-group -Zgzip package mksh.deb

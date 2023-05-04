@@ -14,4 +14,4 @@ ldid -S"$_BSROOT/entitlements.xml" usr/lib/libunistring.5.dylib
 )
 
 "$_CP" -r DEBIAN package
-dpkg-deb -b --root-owner-group -Zgzip package libunistring-1.1.deb
+dpkg-deb -b --root-owner-group -Zgzip package libunistring.deb

@@ -16,4 +16,4 @@ ldid -S"$_BSROOT/entitlements.xml" usr/lib/libreadline.8.2.dylib
 )
 
 "$_CP" -r DEBIAN package
-dpkg-deb -b --root-owner-group -Zgzip package readline-8.2.1.deb
+dpkg-deb -b --root-owner-group -Zgzip package readline.deb

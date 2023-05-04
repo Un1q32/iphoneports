@@ -11,4 +11,4 @@ chmod u-w usr/lib/libcrypto.0.9.8.dylib usr/lib/libssl.0.9.8.dylib
 )
 
 "$_CP" -r DEBIAN package
-dpkg-deb -b --root-owner-group -Zgzip package openssl-0.9.8zg.deb
+dpkg-deb -b --root-owner-group -Zgzip package openssl.deb

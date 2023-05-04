@@ -41,11 +41,11 @@ chmod 4755 usr/bin/sudo
 
 case "$_TARGET" in
     *64*)
-        debname="sudo-1.9.13p3-arm64.deb"
+        debname="sudo-arm64.deb"
         "$_CP" -r files/DEBIAN-arm64 package/DEBIAN
     ;;
     *)
-        debname="sudo-1.9.13p3.deb"
+        debname="sudo.deb"
         "$_CP" -r DEBIAN package
     ;;
 esac
