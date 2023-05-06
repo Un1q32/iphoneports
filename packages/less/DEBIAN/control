@@ -3,7 +3,7 @@ Priority: important
 Section: Utilities
 Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
 Architecture: iphoneos-arm
-Version: 608
+Version: 633
 Depends: ncurses, pcre2
 Replaces: system-cmds (<= 433.4-11)
 Provides: more
