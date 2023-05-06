@@ -13,7 +13,7 @@
          ;;
  
          "Mac OS X" | "macOS" | "iPhone OS")
-+            if [ "$osx_version" = "8.4.1" ] && command -v getusedmem > /dev/null; then
++            if command -v getusedmem >/dev/null; then
 +                mem_used="$(getusedmem)"
 +                mem_total="$(($(sysctl -n hw.memsize) / 1024))"
 +            else
