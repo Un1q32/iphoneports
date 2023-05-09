@@ -12,11 +12,11 @@ rm -rf usr/man
 "$_TARGET-strip" bin/bzcat > /dev/null 2>&1
 "$_TARGET-strip" bin/bzip2recover > /dev/null 2>&1
 "$_TARGET-strip" usr/local/lib/libbz2.1.0.dylib > /dev/null 2>&1
-ldid -S"$_BSROOT/entitlements.xml" bin/bzip2
-ldid -S"$_BSROOT/entitlements.xml" bin/bunzip2
-ldid -S"$_BSROOT/entitlements.xml" bin/bzcat
-ldid -S"$_BSROOT/entitlements.xml" bin/bzip2recover
-ldid -S"$_BSROOT/entitlements.xml" usr/local/lib/libbz2.1.0.dylib
+ldid -S"$_BSROOT/ent.xml" bin/bzip2
+ldid -S"$_BSROOT/ent.xml" bin/bunzip2
+ldid -S"$_BSROOT/ent.xml" bin/bzcat
+ldid -S"$_BSROOT/ent.xml" bin/bzip2recover
+ldid -S"$_BSROOT/ent.xml" usr/local/lib/libbz2.1.0.dylib
 )
 
 "$_CP" -r DEBIAN package

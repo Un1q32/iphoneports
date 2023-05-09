@@ -10,7 +10,7 @@ vim_cv_memcpy_handles_overlap=set vim_cv_bcopy_handles_overlap=set vim_cv_memmov
 cd package || exit 1
 rm -rf usr/share/man usr/share/icons usr/share/applications usr/bin/xxd
 "$_TARGET-strip" usr/bin/vim > /dev/null 2>&1
-ldid -S"$_BSROOT/entitlements.xml" usr/bin/vim
+ldid -S"$_BSROOT/ent.xml" usr/bin/vim
 )
 
 "$_CP" -r DEBIAN package

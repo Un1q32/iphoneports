@@ -23,19 +23,19 @@ rm -rf usr/local
 "$_TARGET-strip" usr/libexec/sudo/sudo_intercept.so > /dev/null 2>&1
 "$_TARGET-strip" usr/libexec/sudo/sudo_noexec.so > /dev/null 2>&1
 "$_TARGET-strip" usr/libexec/sudo/system_group.so > /dev/null 2>&1
-ldid -S"$_BSROOT/entitlements.xml" usr/bin/sudo
-ldid -S"$_BSROOT/entitlements.xml" usr/bin/cvtsudoers
-ldid -S"$_BSROOT/entitlements.xml" usr/bin/sudoreplay
-ldid -S"$_BSROOT/entitlements.xml" usr/sbin/sudo_logsrvd
-ldid -S"$_BSROOT/entitlements.xml" usr/sbin/sudo_sendlog
-ldid -S"$_BSROOT/entitlements.xml" usr/sbin/visudo
-ldid -S"$_BSROOT/entitlements.xml" usr/libexec/sudo/libsudo_util.0.dylib
-ldid -S"$_BSROOT/entitlements.xml" usr/libexec/sudo/audit_json.so
-ldid -S"$_BSROOT/entitlements.xml" usr/libexec/sudo/group_file.so
-ldid -S"$_BSROOT/entitlements.xml" usr/libexec/sudo/sudoers.so
-ldid -S"$_BSROOT/entitlements.xml" usr/libexec/sudo/sudo_intercept.so
-ldid -S"$_BSROOT/entitlements.xml" usr/libexec/sudo/sudo_noexec.so
-ldid -S"$_BSROOT/entitlements.xml" usr/libexec/sudo/system_group.so
+ldid -S"$_BSROOT/ent.xml" usr/bin/sudo
+ldid -S"$_BSROOT/ent.xml" usr/bin/cvtsudoers
+ldid -S"$_BSROOT/ent.xml" usr/bin/sudoreplay
+ldid -S"$_BSROOT/ent.xml" usr/sbin/sudo_logsrvd
+ldid -S"$_BSROOT/ent.xml" usr/sbin/sudo_sendlog
+ldid -S"$_BSROOT/ent.xml" usr/sbin/visudo
+ldid -S"$_BSROOT/ent.xml" usr/libexec/sudo/libsudo_util.0.dylib
+ldid -S"$_BSROOT/ent.xml" usr/libexec/sudo/audit_json.so
+ldid -S"$_BSROOT/ent.xml" usr/libexec/sudo/group_file.so
+ldid -S"$_BSROOT/ent.xml" usr/libexec/sudo/sudoers.so
+ldid -S"$_BSROOT/ent.xml" usr/libexec/sudo/sudo_intercept.so
+ldid -S"$_BSROOT/ent.xml" usr/libexec/sudo/sudo_noexec.so
+ldid -S"$_BSROOT/ent.xml" usr/libexec/sudo/system_group.so
 chmod 4755 usr/bin/sudo
 )
 

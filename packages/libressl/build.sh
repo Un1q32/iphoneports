@@ -14,11 +14,11 @@ rm -rf usr/share
 "$_TARGET-strip" usr/lib/libcrypto.50.dylib > /dev/null 2>&1
 "$_TARGET-strip" usr/lib/libssl.53.dylib > /dev/null 2>&1
 "$_TARGET-strip" usr/lib/libtls.26.dylib > /dev/null 2>&1
-ldid -S"$_BSROOT/entitlements.xml" usr/bin/openssl
-ldid -S"$_BSROOT/entitlements.xml" usr/bin/ocspcheck
-ldid -S"$_BSROOT/entitlements.xml" usr/lib/libcrypto.50.dylib
-ldid -S"$_BSROOT/entitlements.xml" usr/lib/libssl.53.dylib
-ldid -S"$_BSROOT/entitlements.xml" usr/lib/libtls.26.dylib
+ldid -S"$_BSROOT/ent.xml" usr/bin/openssl
+ldid -S"$_BSROOT/ent.xml" usr/bin/ocspcheck
+ldid -S"$_BSROOT/ent.xml" usr/lib/libcrypto.50.dylib
+ldid -S"$_BSROOT/ent.xml" usr/lib/libssl.53.dylib
+ldid -S"$_BSROOT/ent.xml" usr/lib/libtls.26.dylib
 )
 
 "$_CP" -r DEBIAN package

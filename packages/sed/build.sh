@@ -12,7 +12,7 @@ mkdir -p "$_PKGROOT/package/bin"
 cd package || exit 1
 ln -s ../usr/bin/sed bin/sed
 "$_TARGET-strip" usr/bin/sed > /dev/null 2>&1
-ldid -S"$_BSROOT/entitlements.xml" usr/bin/sed
+ldid -S"$_BSROOT/ent.xml" usr/bin/sed
 )
 
 "$_CP" -r DEBIAN package

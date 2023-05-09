@@ -12,7 +12,7 @@ mkdir -p "$_PKGROOT/package/etc"
 cd package || exit 1
 rm -rf bin/zsh-5.9 usr/share/man
 "$_TARGET-strip" bin/zsh > /dev/null 2>&1
-ldid -S"$_BSROOT/entitlements.xml" bin/zsh
+ldid -S"$_BSROOT/ent.xml" bin/zsh
 )
 
 "$_CP" -r DEBIAN package

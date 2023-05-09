@@ -14,8 +14,8 @@ cd package || exit 1
 rm -rf usr/share
 "$_TARGET-strip" usr/bin/* > /dev/null 2>&1
 "$_TARGET-strip" usr/libexec/* > /dev/null 2>&1
-ldid -S"$_BSROOT/entitlements.xml" usr/bin/*
-ldid -S"$_BSROOT/entitlements.xml" usr/libexec/*
+ldid -S"$_BSROOT/ent.xml" usr/bin/*
+ldid -S"$_BSROOT/ent.xml" usr/libexec/*
 chmod 4755 usr/bin/ping
 chmod 4755 usr/bin/traceroute
 chmod 4755 usr/bin/rsh

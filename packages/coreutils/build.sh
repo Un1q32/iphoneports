@@ -21,10 +21,10 @@ rm -rf usr/share
 "$_TARGET-strip" usr/bin/df -no_code_signature_warning > /dev/null 2>&1
 "$_TARGET-strip" bin/su -no_code_signature_warning > /dev/null 2>&1
 "$_TARGET-strip" usr/libexec/coreutils/libstdbuf.so > /dev/null 2>&1
-ldid -S"$_BSROOT/entitlements.xml" usr/bin/coreutils
-ldid -S"$_BSROOT/entitlements.xml" usr/bin/df
-ldid -S"$_BSROOT/entitlements.xml" bin/su
-ldid -S"$_BSROOT/entitlements.xml" usr/libexec/coreutils/libstdbuf.so
+ldid -S"$_BSROOT/ent.xml" usr/bin/coreutils
+ldid -S"$_BSROOT/ent.xml" usr/bin/df
+ldid -S"$_BSROOT/ent.xml" bin/su
+ldid -S"$_BSROOT/ent.xml" usr/libexec/coreutils/libstdbuf.so
 chmod 4555 "$_PKGROOT/package/bin/su"
 )
 

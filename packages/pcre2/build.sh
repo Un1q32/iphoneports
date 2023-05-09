@@ -13,10 +13,10 @@ rm -rf usr/share
 "$_TARGET-strip" usr/bin/pcre2grep > /dev/null 2>&1
 "$_TARGET-strip" usr/lib/libpcre2-8.0.dylib > /dev/null 2>&1
 "$_TARGET-strip" usr/lib/libpcre2-posix.3.dylib > /dev/null 2>&1
-ldid -S"$_BSROOT/entitlements.xml" usr/bin/pcre2test
-ldid -S"$_BSROOT/entitlements.xml" usr/bin/pcre2grep
-ldid -S"$_BSROOT/entitlements.xml" usr/lib/libpcre2-8.0.dylib
-ldid -S"$_BSROOT/entitlements.xml" usr/lib/libpcre2-posix.3.dylib
+ldid -S"$_BSROOT/ent.xml" usr/bin/pcre2test
+ldid -S"$_BSROOT/ent.xml" usr/bin/pcre2grep
+ldid -S"$_BSROOT/ent.xml" usr/lib/libpcre2-8.0.dylib
+ldid -S"$_BSROOT/ent.xml" usr/lib/libpcre2-posix.3.dylib
 )
 
 "$_CP" -r DEBIAN package

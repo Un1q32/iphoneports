@@ -11,7 +11,7 @@ cd source || exit 1
 cd package || exit 1
 rm -rf usr/share ../packagerogue.scr
 "$_TARGET-strip" usr/bin/rogue > /dev/null 2>&1
-ldid -S"$_BSROOT/entitlements.xml" usr/bin/rogue
+ldid -S"$_BSROOT/ent.xml" usr/bin/rogue
 )
 
 "$_CP" -r DEBIAN package

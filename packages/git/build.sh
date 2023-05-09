@@ -10,11 +10,11 @@ INSTALL_SYMLINKS=y "$_MAKE" DESTDIR="$_PKGROOT/package" install
 cd package || exit 1
 for file in git git-shell scalar; do
     "$_TARGET-strip" usr/bin/$file > /dev/null 2>&1
-    ldid -S"$_BSROOT/entitlements.xml" usr/bin/$file
+    ldid -S"$_BSROOT/ent.xml" usr/bin/$file
 done
 for file in git-remote-http git-sh-i18n--envsubst git-http-backend git-http-fetch git-imap-send git-daemon; do
     "$_TARGET-strip" usr/libexec/git-core/$file > /dev/null 2>&1
-    ldid -S"$_BSROOT/entitlements.xml" usr/libexec/git-core/$file
+    ldid -S"$_BSROOT/ent.xml" usr/libexec/git-core/$file
 done
 )
 

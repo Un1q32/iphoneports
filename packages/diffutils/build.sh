@@ -16,10 +16,10 @@ cd package || exit 1
 "$_TARGET-strip" usr/bin/diff3 > /dev/null 2>&1
 "$_TARGET-strip" usr/bin/sdiff > /dev/null 2>&1
 "$_TARGET-strip" usr/bin/cmp > /dev/null 2>&1
-ldid -S"$_BSROOT/entitlements.xml" usr/bin/diff
-ldid -S"$_BSROOT/entitlements.xml" usr/bin/diff3
-ldid -S"$_BSROOT/entitlements.xml" usr/bin/sdiff
-ldid -S"$_BSROOT/entitlements.xml" usr/bin/cmp
+ldid -S"$_BSROOT/ent.xml" usr/bin/diff
+ldid -S"$_BSROOT/ent.xml" usr/bin/diff3
+ldid -S"$_BSROOT/ent.xml" usr/bin/sdiff
+ldid -S"$_BSROOT/ent.xml" usr/bin/cmp
 )
 
 "$_CP" -r DEBIAN package

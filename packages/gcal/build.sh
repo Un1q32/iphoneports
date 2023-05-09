@@ -14,10 +14,10 @@ rm -rf usr/share/info
 "$_TARGET-strip" usr/bin/gcal2txt > /dev/null 2>&1
 "$_TARGET-strip" usr/bin/tcal > /dev/null 2>&1
 "$_TARGET-strip" usr/bin/txt2gcal > /dev/null 2>&1
-ldid -S"$_BSROOT/entitlements.xml" usr/bin/gcal
-ldid -S"$_BSROOT/entitlements.xml" usr/bin/gcal2txt
-ldid -S"$_BSROOT/entitlements.xml" usr/bin/tcal
-ldid -S"$_BSROOT/entitlements.xml" usr/bin/txt2gcal
+ldid -S"$_BSROOT/ent.xml" usr/bin/gcal
+ldid -S"$_BSROOT/ent.xml" usr/bin/gcal2txt
+ldid -S"$_BSROOT/ent.xml" usr/bin/tcal
+ldid -S"$_BSROOT/ent.xml" usr/bin/txt2gcal
 )
 
 "$_CP" -r DEBIAN package

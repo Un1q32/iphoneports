@@ -14,11 +14,11 @@ rm -rf usr/share
 "$_TARGET-strip" usr/lib/libpcre.1.dylib > /dev/null 2>&1
 "$_TARGET-strip" usr/lib/libpcrecpp.0.dylib > /dev/null 2>&1
 "$_TARGET-strip" usr/lib/libpcreposix.0.dylib > /dev/null 2>&1
-ldid -S"$_BSROOT/entitlements.xml" usr/bin/pcretest
-ldid -S"$_BSROOT/entitlements.xml" usr/bin/pcregrep
-ldid -S"$_BSROOT/entitlements.xml" usr/lib/libpcre.1.dylib
-ldid -S"$_BSROOT/entitlements.xml" usr/lib/libpcrecpp.0.dylib
-ldid -S"$_BSROOT/entitlements.xml" usr/lib/libpcreposix.0.dylib
+ldid -S"$_BSROOT/ent.xml" usr/bin/pcretest
+ldid -S"$_BSROOT/ent.xml" usr/bin/pcregrep
+ldid -S"$_BSROOT/ent.xml" usr/lib/libpcre.1.dylib
+ldid -S"$_BSROOT/ent.xml" usr/lib/libpcrecpp.0.dylib
+ldid -S"$_BSROOT/ent.xml" usr/lib/libpcreposix.0.dylib
 ln -s libpcre.1.dylib usr/lib/libpcre.0.dylib
 )
 

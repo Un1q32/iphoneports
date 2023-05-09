@@ -11,8 +11,8 @@ cd package || exit 1
 rm -rf usr/share/man
 "$_TARGET-strip" usr/bin/curl > /dev/null 2>&1
 "$_TARGET-strip" usr/lib/libcurl.4.dylib > /dev/null 2>&1
-ldid -S"$_BSROOT/entitlements.xml" usr/bin/curl
-ldid -S"$_BSROOT/entitlements.xml" usr/lib/libcurl.4.dylib
+ldid -S"$_BSROOT/ent.xml" usr/bin/curl
+ldid -S"$_BSROOT/ent.xml" usr/lib/libcurl.4.dylib
 )
 
 "$_CP" -r DEBIAN package

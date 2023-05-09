@@ -15,7 +15,7 @@ mkdir package/etc
 cd package || exit 1
 rm -rf usr/share/info usr/share/man usr/share/doc
 "$_TARGET-strip" usr/bin/nano > /dev/null 2>&1
-ldid -S"$_BSROOT/entitlements.xml" usr/bin/nano
+ldid -S"$_BSROOT/ent.xml" usr/bin/nano
 )
 
 "$_CP" -r DEBIAN package

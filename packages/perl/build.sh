@@ -13,7 +13,7 @@ esac
 rm -rf usr/lib/perl5/5.26.1/*-iphoneos usr/share
 mv ./*-iphoneos usr/lib/perl5/5.26.1
 "$_TARGET-strip" usr/bin/perl -no_code_signature_warning > /dev/null 2>&1
-ldid -S"$_BSROOT/entitlements.xml" usr/bin/perl
+ldid -S"$_BSROOT/ent.xml" usr/bin/perl
 )
 
 "$_CP" -r DEBIAN package

@@ -8,7 +8,7 @@ cd source || exit 1
 (
 cd package || exit 1
 rm usr/bin/ex
-ldid -S"$_BSROOT/entitlements.xml" usr/bin/vi
+ldid -S"$_BSROOT/ent.xml" usr/bin/vi
 )
 
 "$_CP" -r DEBIAN package

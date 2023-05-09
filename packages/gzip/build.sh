@@ -23,7 +23,7 @@ mkdir -p "$_PKGROOT/package/bin"
 cd package || exit 1
 ln -s gunzip bin/uncompress
 "$_TARGET-strip" bin/gzip > /dev/null 2>&1
-ldid -S"$_BSROOT/entitlements.xml" bin/gzip
+ldid -S"$_BSROOT/ent.xml" bin/gzip
 )
 
 "$_CP" -r DEBIAN package

@@ -9,7 +9,7 @@ mkdir -p "$_PKGROOT"/package/bin
 (
 cd package || exit 1
 "$_TARGET-strip" bin/mksh > /dev/null 2>&1
-ldid -S"$_BSROOT/entitlements.xml" bin/mksh
+ldid -S"$_BSROOT/ent.xml" bin/mksh
 )
 
 "$_CP" -r DEBIAN package

@@ -9,7 +9,7 @@ cd source || exit 1
 cd package || exit 1
 rm -rf usr/share
 "$_TARGET-strip" usr/lib/liblz.1.13.dylib > /dev/null 2>&1
-ldid -S"$_BSROOT/entitlements.xml" usr/lib/liblz.1.13.dylib
+ldid -S"$_BSROOT/ent.xml" usr/lib/liblz.1.13.dylib
 )
 
 "$_CP" -r DEBIAN package

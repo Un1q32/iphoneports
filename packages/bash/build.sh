@@ -11,7 +11,7 @@ mkdir -p "$_PKGROOT"/package/bin
 cd package || exit 1
 ln -s bash bin/sh
 "$_TARGET-strip" bin/bash > /dev/null 2>&1
-ldid -S"$_BSROOT/entitlements.xml" bin/bash
+ldid -S"$_BSROOT/ent.xml" bin/bash
 )
 
 "$_CP" -r DEBIAN package

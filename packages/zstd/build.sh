@@ -10,8 +10,8 @@ cd package || exit 1
 rm -rf usr/share usr/lib/libzstd.a
 "$_TARGET-strip" usr/bin/zstd > /dev/null 2>&1
 "$_TARGET-strip" usr/lib/libzstd.1.5.4.dylib > /dev/null 2>&1
-ldid -S"$_BSROOT/entitlements.xml" usr/bin/zstd
-ldid -S"$_BSROOT/entitlements.xml" usr/lib/libzstd.1.5.5.dylib
+ldid -S"$_BSROOT/ent.xml" usr/bin/zstd
+ldid -S"$_BSROOT/ent.xml" usr/lib/libzstd.1.5.5.dylib
 )
 
 "$_CP" -r DEBIAN package

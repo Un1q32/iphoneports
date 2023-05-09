@@ -14,10 +14,10 @@ rm -rf usr/share
 "$_TARGET-strip" usr/lib/libbrotlicommon.1.dylib > /dev/null 2>&1
 "$_TARGET-strip" usr/lib/libbrotlidec.1.dylib > /dev/null 2>&1
 "$_TARGET-strip" usr/lib/libbrotlienc.1.dylib > /dev/null 2>&1
-ldid -S"$_BSROOT/entitlements.xml" usr/bin/brotli
-ldid -S"$_BSROOT/entitlements.xml" usr/lib/libbrotlicommon.1.dylib
-ldid -S"$_BSROOT/entitlements.xml" usr/lib/libbrotlidec.1.dylib
-ldid -S"$_BSROOT/entitlements.xml" usr/lib/libbrotlienc.1.dylib
+ldid -S"$_BSROOT/ent.xml" usr/bin/brotli
+ldid -S"$_BSROOT/ent.xml" usr/lib/libbrotlicommon.1.dylib
+ldid -S"$_BSROOT/ent.xml" usr/lib/libbrotlidec.1.dylib
+ldid -S"$_BSROOT/ent.xml" usr/lib/libbrotlienc.1.dylib
 )
 
 "$_CP" -r DEBIAN package
