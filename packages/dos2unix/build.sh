@@ -1,8 +1,7 @@
 #!/bin/sh
 (
 cd source || exit 1
-"$_MAKE" CC="$_TARGET-clang" STRIP=touch CPP="$_TARGET-clang -E" DESTDIR="$_PKGROOT/package" prefix=/usr ENABLE_NLS= install -j8
-# "$_MAKE" DESTDIR="$_PKGROOT/package" prefix=/usr install
+"$_MAKE" CC="$_TARGET-clang" STRIP=true CPP="$_TARGET-clang -E" DESTDIR="$_PKGROOT/package" prefix=/usr ENABLE_NLS= install -j8
 )
 
 (
