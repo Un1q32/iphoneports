@@ -1,0 +1,14 @@
+--- source/src/arscan.c.orig
++++ source/src/arscan.c
+@@ -331,7 +331,10 @@
+ #endif
+ 
+ #ifndef WINDOWS32
+-# if !defined (__ANDROID__) && !defined (__BEOS__) && !defined(MK_OS_ZOS)
++# ifdef __APPLE__
++#  include <TargetConditionals.h>
++# endif
++# if !defined (__ANDROID__) && !defined (__BEOS__) && !defined(MK_OS_ZOS) && !defined(TARGET_OS_IPHONE)
+ #  include <ar.h>
+ # else
+    /* These platforms don't have <ar.h> but have archives in the same format
