@@ -14,4 +14,4 @@ ldid -S"$_BSROOT/ent.xml" usr/bin/make
 )
 
 "$_CP" -r DEBIAN package
-dpkg-deb -b --root-owner-group -Zgzip package make-4.4.1.deb
+dpkg-deb -b --root-owner-group -Zgzip package make.deb

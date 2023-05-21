@@ -14,4 +14,4 @@ ldid -S"$_BSROOT/ent.xml" usr/bin/m4
 )
 
 "$_CP" -r DEBIAN package
-dpkg-deb -b --root-owner-group -Zgzip package m4-1.4.19.deb
+dpkg-deb -b --root-owner-group -Zgzip package m4.deb
