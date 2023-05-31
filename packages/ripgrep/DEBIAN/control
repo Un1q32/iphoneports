@@ -1,8 +1,0 @@
-Package: ripgrep
-Priority: optional
-Section: Utilities
-Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
-Architecture: iphoneos-arm
-Version: 13.0.0
-Description: Searches files for regular expressions faster then grep (armv6 not supported)
-Tag: purpose::console
