@@ -2,7 +2,7 @@
 (
 cd source || exit 1
 ncbuild() {
-    ./configure --host="$_TARGET" --prefix=/usr --sysconfdir=/etc --with-default-terminfo-dir=/usr/share/terminfo --with-shared --without-normal --without-debug --enable-termcap --enable-symlinks "$@" CXXFLAGS="-O2 -std=c++11"
+    ./configure --host="$_TARGET" --prefix=/usr --sysconfdir=/etc --with-default-terminfo-dir=/usr/share/terminfo --with-shared --without-normal --without-debug --enable-termcap --enable-symlinks "$@" CXXFLAGS="-O2 -std=c++14"
     "$_MAKE" -j8
     "$_MAKE" DESTDIR="$_PKGROOT/package" install -j8
 }
