@@ -1,0 +1,14 @@
+--- source/src/tty.c.orig
++++ source/src/tty.c
+@@ -52,6 +52,11 @@
+ #    endif
+ #   endif /* !HAVE_TERMIO_H */
+ #  endif /* !HAVE_TERMIOS_H || !HAVE_TERMIOS_FUNCS */
++
++#ifdef __APPLE__
++#  include <sys/ioctl.h>
++#endif
++
+ /*
+ *  For the Unix PC (ATT 7300 & 3B1):  (taken from less-278 by Mark Nudelman)
+ *  Since WIOCGETD is defined in sys/window.h, we can't use that to decide
