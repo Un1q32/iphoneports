@@ -16,4 +16,4 @@ ldid -S"$_BSROOT/ent.xml" usr/bin/sed
 )
 
 "$_CP" -r DEBIAN package
-dpkg-deb -b --root-owner-group -Zgzip package sed-4.9.deb
+dpkg-deb -b --root-owner-group -Zgzip package sed.deb
