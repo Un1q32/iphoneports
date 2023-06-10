@@ -3,7 +3,7 @@ Priority: optional
 Section: Utilities
 Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
 Architecture: iphoneos-arm
-Version: 7.3.8-4
+Version: 7.3.9
 Depends: bash, gawk, sed, grep, coreutils, system-cmds
 Description: A CLI system information tool written in BASH.
 Name: Neofetch
