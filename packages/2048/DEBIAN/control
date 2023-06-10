@@ -1,9 +1,8 @@
-Package: pstree
+Package: 2048.c
 Priority: optional
-Section: Utilities
+Section: Games
 Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
 Architecture: iphoneos-arm
-Version: 2.40
-Depends: adv-cmds
-Description: Show ps output as a tree
+Version: 1
+Description: 2048 game in your terminal
 Tag: purpose::console
