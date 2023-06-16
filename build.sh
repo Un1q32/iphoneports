@@ -1,25 +1,25 @@
 #!/bin/sh
-# If no arguments are specified, print usage info
-case "$1" in
-    -h|*help)
-        printf "Usage: build.sh <option> [--target=tripple] [--no-tmpfs] [-h, --help]
-        <pkg name>              - Build a single package
-        build <pkg names>       - Build all specified packages
-        all                     - Build all packages
-        clean                   - Clean a single package (remove build files)
-        cleanall                - Clean all packages (remove build files)
-        dryrun                  - Pretend to build all packages
-        list                    - List all packages
-        --target                - Specify a target other than arm-apple-darwin9
-        --no-tmpfs              - Do not use /tmp for anything (use if you have limited RAM)
-        --help                  - Print this help message\n"
+help() {
+    printf "Usage: build.sh <option> [--target=tripple] [--no-tmpfs] [-h, --help]
+    <pkg name>              - Build a single package
+    build <pkg names>       - Build all specified packages
+    all                     - Build all packages
+    clean                   - Clean a single package (remove build files)
+    cleanall                - Clean all packages (remove build files)
+    dryrun                  - Pretend to build all packages
+    list                    - List all packages
+    --target                - Specify a target other than arm-apple-darwin9
+    --no-tmpfs              - Do not use /tmp for anything (use if you have limited RAM)
+    --help                  - Print this help message\n"
+}
 
-        if [ -z "$1" ]; then
-            exit 1
-        else
-            exit 0
-        fi
-    ;;
+if [ -z "$1" ]; then
+    help
+    exit 1
+fi
+
+case "$1" in
+    -h|*help) help ; exit 0 ;;
 esac
 
 # Error function
