@@ -1,6 +1,7 @@
 #!/bin/sh
 help() {
-    printf "Usage: build.sh <option> [--target=tripple] [--no-tmpfs] [-h, --help]
+    printf "%s" "\
+Usage: build.sh <command> [options]
     <pkg name>              - Build a single package
     build <pkg names>       - Build all specified packages
     all                     - Build all packages
@@ -10,7 +11,8 @@ help() {
     list                    - List all packages
     --target                - Specify a target other than arm-apple-darwin9
     --no-tmpfs              - Do not use /tmp for anything (use if you have limited RAM)
-    --help                  - Print this help message\n"
+    --help                  - Print this help message
+"
 }
 
 if [ -z "$1" ]; then
