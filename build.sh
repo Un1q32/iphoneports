@@ -31,8 +31,8 @@ error() {
 cd "$_BSROOT" || exit 1
 _BSROOT="$PWD"
 _PKGDIR="$_BSROOT/packages"
-export _PKGDIR _BSROOT
-export TERM="xterm-256color"
+TERM="xterm-256color"
+export _PKGDIR _BSROOT TERM
 
 if [ -z "$1" ]; then
     if [ -f "$_BSROOT/.args.txt" ]; then
