@@ -7,7 +7,7 @@
         {
             "type": "bashdb",
             "request": "launch",
-            "name": "Bash-Debug",
+            "name": "BashDB",
             "program": "${file}"
         }
     ]
