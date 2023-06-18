@@ -15,11 +15,6 @@ Usage: build.sh <command> [options]
 "
 }
 
-if [ -z "$1" ]; then
-    help
-    exit 1
-fi
-
 case "$1" in
     -h|*help) help ; exit 0 ;;
 esac
@@ -38,6 +33,18 @@ _BSROOT="$PWD"
 _PKGDIR="$_BSROOT/packages"
 export _PKGDIR _BSROOT
 export TERM="xterm-256color"
+
+if [ -z "$1" ]; then
+    if [ -f "$_BSROOT/.args.txt" ]; then
+        while read -r line; do
+            set -- "$@" "$line"
+        done < "$_BSROOT/.args.txt"
+    else
+        help
+        exit 1
+    fi
+fi
+
 
 # Decide where to put temporary files
 case "$*" in
