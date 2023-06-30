@@ -60,7 +60,7 @@ case "$*" in
 esac
 
 # Cleanup temporary files from previous runs
-true > "$_TMP/.builtpkgs"
+: > "$_TMP/.builtpkgs"
 rm -rf "$_TMP"/sdk*
 
 # Check for dependencies
