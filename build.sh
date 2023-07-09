@@ -227,39 +227,55 @@ includedeps() {
 }
 
 # Parse arguments
-if [ "$1" = "all" ]; then
-    depcheck
-    rm -rf "$_PKGDIR"/*/package "$_PKGDIR"/*/source
-    buildall
-    "$_CP" -fl "$_PKGDIR"/*/*.deb "$_BSROOT/debs" 2>/dev/null
-elif [ "$1" = "list" ]; then
-    for pkg in "$_PKGDIR"/*; do
-        printf "%s\n" "${pkg##*/}"
-    done
-elif [ "$1" = "clean" ]; then
-    rm -rf "$_PKGDIR/$2/package" "$_PKGDIR/$2/source" "$_PKGDIR/$2"/*.deb "$_BSROOT/debs/$2".deb
-elif [ "$1" = "cleanall" ]; then
-    rm -rf "$_PKGDIR"/*/package "$_PKGDIR"/*/source "$_PKGDIR"/*/*.deb "$_BSROOT"/debs/*.deb "$_TMP/sdk" "$_TMP/.builtpkgs" "$_BSROOT/sdk" "$_BSROOT/.builtpkgs"
-elif [ "$1" = "dryrun" ]; then
-    buildall dryrun
-elif [ "$1" = "build" ]; then
-    depcheck
-    shift
-    for pkg in "$@"; do
-        [ -d "$_PKGDIR/$pkg" ] || error "Package not found:" "$pkg"
-    done
-    for pkg in "$@"; do
-        rm -rf "$_PKGDIR/$pkg/package" "$_PKGDIR/$pkg/source"
-    done
-    for pkg in "$@"; do
-        build "$pkg"
-        "$_CP" -fl "$_PKGDIR/$pkg"/*.deb "$_BSROOT/debs" 2>/dev/null
-    done
-elif [ -d "$_PKGDIR/$1" ]; then
-    depcheck
-    rm -rf "$_PKGDIR/$1/package" "$_PKGDIR/$1/source"
-    build "$1"
-    "$_CP" -fl "$_PKGDIR/$1"/*.deb "$_BSROOT/debs" 2>/dev/null
-else
-    error "Package not found:" "$1"
-fi
+case "$1" in
+    all)
+        depcheck
+        rm -rf "$_PKGDIR"/*/package "$_PKGDIR"/*/source
+        buildall
+        "$_CP" -fl "$_PKGDIR"/*/*.deb "$_BSROOT/debs" 2>/dev/null
+    ;;
+
+    list)
+        for pkg in "$_PKGDIR"/*; do
+            printf "%s\n" "${pkg##*/}"
+        done
+    ;;
+
+    clean)
+        rm -rf "$_PKGDIR/$2/package" "$_PKGDIR/$2/source" "$_PKGDIR/$2"/*.deb "$_BSROOT/debs/$2".deb
+    ;;
+
+    cleanall)
+        rm -rf "$_PKGDIR"/*/package "$_PKGDIR"/*/source "$_PKGDIR"/*/*.deb "$_BSROOT"/debs/*.deb "$_TMP/sdk" "$_TMP/.builtpkgs" "$_BSROOT/sdk" "$_BSROOT/.builtpkgs"
+    ;;
+
+    dryrun)
+        buildall dryrun
+    ;;
+
+    build)
+        depcheck
+        shift
+        for pkg in "$@"; do
+            [ -d "$_PKGDIR/$pkg" ] || error "Package not found:" "$pkg"
+        done
+        for pkg in "$@"; do
+            rm -rf "$_PKGDIR/$pkg/package" "$_PKGDIR/$pkg/source"
+        done
+        for pkg in "$@"; do
+            build "$pkg"
+            "$_CP" -fl "$_PKGDIR/$pkg"/*.deb "$_BSROOT/debs" 2>/dev/null
+        done
+    ;;
+
+    *)
+        if [ -d "$_PKGDIR/$1" ]; then
+            depcheck
+            rm -rf "$_PKGDIR/$1/package" "$_PKGDIR/$1/source"
+            build "$1"
+            "$_CP" -fl "$_PKGDIR/$1"/*.deb "$_BSROOT/debs" 2>/dev/null
+        else
+            error "Package not found:" "$1"
+        fi
+    ;;
+esac
