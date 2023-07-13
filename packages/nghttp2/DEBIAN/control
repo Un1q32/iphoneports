@@ -3,7 +3,7 @@ Priority: standard
 Section: Development
 Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
 Architecture: iphoneos-arm
-Version: 1.54.0-1
+Version: 1.55.0
 Depends: libxml2
 Description: An implementation of HTTP/2 and its header compression algorithm HPACK in C.
 Tag: purpose::console
