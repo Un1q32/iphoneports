@@ -1,7 +1,7 @@
 #!/bin/sh
 (
 cd src || exit 1
-./configure --prefix=/var/usr --disable-static CC="$_TARGET-clang"
+./configure --prefix=/var/usr --disable-static CC="$_TARGET-cc"
 "$_MAKE" DESTDIR="$_PKGROOT/pkg" install -j8
 )
 
