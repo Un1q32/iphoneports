@@ -1,5 +1,5 @@
 Package: iphoneports-bash
-Version: 5.2.15
+Version: 5.2.15-1
 Architecture: iphoneos-arm
 Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
 Depends: iphoneports-base, iphoneports-ncurses, iphoneports-readline
