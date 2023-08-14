@@ -1,8 +1,8 @@
-Package: 2048.c
-Priority: optional
+Package: iphoneports-2048
 Section: Games
 Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
 Architecture: iphoneos-arm
 Version: 1
 Description: 2048 in your terminal
 Tag: purpose::console
+Depends: iphoneports-base
