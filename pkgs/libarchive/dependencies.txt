@@ -1,0 +1,6 @@
+zlib
+bzip2
+xz
+zstd
+lz4
+libxml2

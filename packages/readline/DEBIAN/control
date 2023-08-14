@@ -1,8 +1,0 @@
-Package: readline
-Priority: required
-Section: Development
-Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
-Architecture: iphoneos-arm
-Version: 8.2.1-2
-Depends: ncurses
-Description: command-line history management

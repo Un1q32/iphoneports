@@ -19,18 +19,15 @@ case "$1" in
     -h|*help) help ; exit 0 ;;
 esac
 
-# Error function
 error() {
-    printf "\033[1;31mError:\033[0m %s %s\n" "$1" "$2"
-    [ "$3" = "noexit" ] || exit 1
+    printf "\033[1;31mError:\033[0m %s\n" "$1"
+    [ "$2" = "noexit" ] || exit 1
 }
 
-# Assign environment variables
-# if $0 doesn't contain any slashes, assume it's in the current directory
 [ "${0%/*}" = "$0" ] && _BSROOT="." || _BSROOT="${0%/*}"
 cd "$_BSROOT" || exit 1
 _BSROOT="$PWD"
-_PKGDIR="$_BSROOT/packages"
+_PKGDIR="$_BSROOT/pkgs"
 TERM="xterm-256color"
 export _PKGDIR _BSROOT
 export TERM="xterm-256color"
@@ -47,37 +44,31 @@ if [ -z "$1" ]; then
 fi
 
 
-# Decide where to put temporary files
 case "$*" in
     *--no-tmpfs*) export _TMP="$_BSROOT" ;;
     *) export _TMP="/tmp" ;;
 esac
 
-# Check target
 case "$*" in
     *--target=*) _TARGET="$*" ; _TARGET="${_TARGET#*--target=}" ; export _TARGET="${_TARGET%% *}" ;;
     *) export _TARGET="arm-apple-darwin9" ;;
 esac
 
-# Cleanup temporary files from previous runs
 : > "$_TMP/.builtpkgs"
 rm -rf "$_TMP"/sdk*
 
-# Check for dependencies
 depcheck() {
     for dep in "$_TARGET-clang" "$_TARGET-clang++" "$_TARGET-gcc" "$_TARGET-g++" "$_TARGET-cc" "$_TARGET-c++" "$_TARGET-strip" "$_TARGET-sdkpath" ldid dpkg-deb mv rm fakeroot od tr; do
         if ! command -v "$dep" > /dev/null; then
-            error "Missing dependency:" "$dep"
+            error "Missing dependency: $dep"
         fi
     done
 
-    # Check for Apple strip
     _strip_version=$("$_TARGET-strip" --version 2> /dev/null)
     case "$_strip_version" in
         *GNU*) error "GNU/LLVM strip is not supported."
     esac
 
-    # Check for GNU make
     if command -v gmake > /dev/null; then
         _MAKE="gmake"
     elif command -v make > /dev/null; then
@@ -90,7 +81,6 @@ depcheck() {
         error "No make command detected. Please install GNU make."
     fi
 
-    # Check for GNU patch
     if command -v gpatch > /dev/null; then
         _PATCH="gpatch"
     elif command -v make > /dev/null; then
@@ -103,7 +93,6 @@ depcheck() {
         error "No patch command detected. Please install GNU patch."
     fi
 
-    # Check for GNU cp
     if command -v gcp > /dev/null; then
         _CP="gcp"
     elif command -v cp > /dev/null; then
@@ -120,46 +109,34 @@ depcheck() {
     export _MAKE _PATCH _SDK _CP
 }
 
-# Main build function
-# First check if the package is already built, if it has then skip it
-# Second cd to the package directory and export the _PKGROOT variable
-# Third run the includedeps function to build/add any dependencies
-# Fourth run the fetch.sh script to download the source code (skipped during dryrun)
-# Fifth run the applypatches function to apply any patches to the source code (skipped during dryrun)
-# Sixth run the build.sh script to build the package (skipped during dryrun)
-# Lastly remove the temporary sdk directory
-# First argument is the package name
-# Second argument is dryrun to not actually build
 build() {
-    (
     if hasbeenbuilt "$1" "$2"; then
-        exit 0
+        return 0
     fi
-    cd "$_PKGDIR/$1" || exit 1
-    export _PKGROOT="$_PKGDIR/$1"
-    includedeps "$2"
-    [ "$2" = "dryrun" ] || ./fetch.sh
-    [ "$2" = "dryrun" ] || applypatches
-    printf "Building %s\n" "$1"
-    [ "$2" = "dryrun" ] || ./build.sh
-    rm -rf "$_SDKPATH"
+
+    if [ -f "$_PKGDIR/$1/build.sh" ] && [ -f "$_PKGDIR/$1/fetch.sh" ]; then
+        (
+        export _PKGROOT="$_PKGDIR/$1"
+        cd "$_PKGROOT" || error "Failed to cd to package directory: $1"
+        includedeps "$2"
+        [ "$2" = "dryrun" ] || ./fetch.sh
+        [ "$2" = "dryrun" ] || applypatches
+        printf "Building %s\n" "$1"
+        [ "$2" = "dryrun" ] || ./build.sh
+        rm -rf "$_SDKPATH"
+        )
+    else
+        dpkg-deb -b --root-owner-group -Zgzip "$_PKGDIR/$1" "$_BSROOT/debs/$1".deb
+    fi
     printf "%s\n" "$1" >> "$_TMP/.builtpkgs"
-    )
 }
 
-# Build all packages
 buildall() {
     for pkg in "$_PKGDIR"/*; do
-        build "${pkg##*/}" "$1"
+        build "${pkg##*/}" "$1" || error "Failed to build package: ${pkg##*/}"
     done
 }
 
-# Check if a required build dependency is missing
-# If we need to rebuild then return 1
-# Return 1 if $_PKGDIR/$1/package is missing
-# if $2 = dryrun then we rebuild the first time this function is run, but not again until the next time the script is run, even if the package is missing
-# First argument is the package name
-# Second argument is dryrun to not actually build
 hasbeenbuilt() {
     if [ "$2" = "dryrun" ]; then
         while read -r pkg; do
@@ -167,16 +144,12 @@ hasbeenbuilt() {
                 return 0
             fi
         done < "$_TMP/.builtpkgs"
-    elif [ -d "$_PKGDIR/$1/package" ]; then
+    elif [ -d "$_PKGDIR/$1/pkg" ]; then
         return 0
     fi
     return 1
 }
 
-# Apply any patches found in the patches directory
-# Unused durring dryruns
-# This function is always run inside the package directory
-# This function does not take any arguments
 applypatches() {
     if [ -d patches ]; then
         for patch in patches/*; do
@@ -186,12 +159,6 @@ applypatches() {
     fi
 }
 
-# Build an SDK for the build by copying the SDK at $_SDK to /tmp/sdk (or $_BSROOT/sdk if --no-tmpfs is specified) and then adding files from any dependencies
-# We run hasbeenbuilt on each dependency to ensure that it has been built before we try to copy it
-# When we do need to rebuild a dependency, we temporarily rename the sdk to sdk.$dep.bak, and then rename it back after we have rebuilt the dependency
-# If this is a dryrun, we don't actually build the dependency, or copy the sdk
-# If there is an sdk directory in the package folder, add it to the sdk. This allows us to add additional headers and stuff to the sdk if needed
-# First argument is dryrun to not actually build
 includedeps() {
     if ! [ "$1" = "dryrun" ]; then
         if [ -d "$_SDK" ]; then
@@ -212,9 +179,9 @@ includedeps() {
                     [ "$1" = "dryrun" ] || mv "$_SDKPATH.$dep.bak" "$_SDKPATH"
                 fi
                 printf "Including dependency %s\n" "$dep"
-                [ "$1" = "dryrun" ] || "$_CP" -ar "$_PKGDIR/$dep/package/"* "$_SDKPATH"
+                [ "$1" = "dryrun" ] || "$_CP" -ar "$_PKGDIR/$dep/pkg/"* "$_SDKPATH"
             else
-                error "Dependency not found:" "$dep"
+                error "Dependency not found: $dep"
             fi
         done < dependencies.txt
     fi
@@ -226,11 +193,10 @@ includedeps() {
     fi
 }
 
-# Parse arguments
 case "$1" in
     all)
         depcheck
-        rm -rf "$_PKGDIR"/*/package "$_PKGDIR"/*/source
+        rm -rf "$_PKGDIR"/*/pkg "$_PKGDIR"/*/src
         buildall
         "$_CP" -fl "$_PKGDIR"/*/*.deb "$_BSROOT/debs" 2>/dev/null
     ;;
@@ -242,11 +208,11 @@ case "$1" in
     ;;
 
     clean)
-        rm -rf "$_PKGDIR/$2/package" "$_PKGDIR/$2/source" "$_PKGDIR/$2"/*.deb "$_BSROOT/debs/$2".deb
+        rm -rf "$_PKGDIR/$2/pkg" "$_PKGDIR/$2/src" "$_PKGDIR/$2"/*.deb "$_BSROOT/debs/$2".deb
     ;;
 
     cleanall)
-        rm -rf "$_PKGDIR"/*/package "$_PKGDIR"/*/source "$_PKGDIR"/*/*.deb "$_BSROOT"/debs/*.deb "$_TMP/sdk" "$_TMP/.builtpkgs" "$_BSROOT/sdk" "$_BSROOT/.builtpkgs"
+        rm -rf "$_PKGDIR"/*/pkg "$_PKGDIR"/*/src "$_PKGDIR"/*/*.deb "$_BSROOT"/debs/*.deb "$_TMP/sdk" "$_TMP/.builtpkgs" "$_BSROOT/sdk" "$_BSROOT/.builtpkgs"
     ;;
 
     dryrun)
@@ -257,13 +223,13 @@ case "$1" in
         depcheck
         shift
         for pkg in "$@"; do
-            [ -d "$_PKGDIR/$pkg" ] || error "Package not found:" "$pkg"
+            [ -d "$_PKGDIR/$pkg" ] || error "Package not found: $pkg"
         done
         for pkg in "$@"; do
-            rm -rf "$_PKGDIR/$pkg/package" "$_PKGDIR/$pkg/source"
+            rm -rf "$_PKGDIR/$pkg/pkg" "$_PKGDIR/$pkg/src"
         done
         for pkg in "$@"; do
-            build "$pkg"
+            build "$pkg" || error "Failed to build package: $pkg"
             "$_CP" -fl "$_PKGDIR/$pkg"/*.deb "$_BSROOT/debs" 2>/dev/null
         done
     ;;
@@ -271,11 +237,11 @@ case "$1" in
     *)
         if [ -d "$_PKGDIR/$1" ]; then
             depcheck
-            rm -rf "$_PKGDIR/$1/package" "$_PKGDIR/$1/source"
+            rm -rf "$_PKGDIR/$1/pkg" "$_PKGDIR/$1/src"
             build "$1"
             "$_CP" -fl "$_PKGDIR/$1"/*.deb "$_BSROOT/debs" 2>/dev/null
         else
-            error "Package not found:" "$1"
+            error "Package not found: $1"
         fi
     ;;
 esac

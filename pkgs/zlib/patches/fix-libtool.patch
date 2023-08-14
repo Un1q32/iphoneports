@@ -1,0 +1,13 @@
+--- src/configure.orig
++++ src/configure
+@@ -260,7 +260,9 @@
+         SHAREDLIBV=libz.$VER$shared_ext
+         SHAREDLIBM=libz.$VER1$shared_ext
+         LDSHARED=${LDSHARED-"$cc -dynamiclib -install_name $libdir/$SHAREDLIBM -compatibility_version $VER1 -current_version $VER3"}
+-        if libtool -V 2>&1 | grep Apple > /dev/null; then
++        if "${CROSS_PREFIX}libtool" -V 2>&1 | grep Apple > /dev/null; then
++            AR="${CROSS_PREFIX}libtool"
++        elif libtool -V 2>&1 | grep Apple > /dev/null; then
+             AR="libtool"
+         else
+             AR="/usr/bin/libtool"

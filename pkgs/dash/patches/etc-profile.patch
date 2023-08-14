@@ -1,0 +1,11 @@
+--- src/src/main.c.orig
++++ src/src/main.c
+@@ -148,7 +148,7 @@
+ 	login = procargs(argc, argv);
+ 	if (login) {
+ 		state = 1;
+-		read_profile("/etc/profile");
++		read_profile("/var/usr/etc/profile");
+ state1:
+ 		state = 2;
+ 		read_profile("$HOME/.profile");

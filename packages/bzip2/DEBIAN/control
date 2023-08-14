@@ -1,9 +1,0 @@
-Package: bzip2
-Priority: important
-Section: Archiving
-Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
-Architecture: iphoneos-arm
-Version: 1.0.8-8
-Description: compression that's slightly better than gzip
-Homepage: http://www.bzip.org/
-Tag: purpose::console

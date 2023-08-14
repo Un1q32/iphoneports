@@ -1,5 +1,5 @@
-source
-package
+src
+pkg
 *.deb
 /sdk*
 .builtpkgs

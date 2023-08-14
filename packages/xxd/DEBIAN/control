@@ -1,8 +1,0 @@
-Package: xxd
-Priority: standard
-Section: Utilities
-Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
-Architecture: iphoneos-arm
-Version: 9.0.1383
-Description: Hexdump utility from vim
-Tag: purpose::console

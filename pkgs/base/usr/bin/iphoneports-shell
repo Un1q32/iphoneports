@@ -1,0 +1,2 @@
+#!/var/usr/bin/sh
+exec /var/usr/bin/sh -l

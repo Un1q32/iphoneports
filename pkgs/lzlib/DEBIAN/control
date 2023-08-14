@@ -1,0 +1,8 @@
+Package: iphoneports-lzlib
+Section: Archiving
+Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
+Architecture: iphoneos-arm
+Version: 1.13
+Description: A library providing in-memory LZMA compression and decompression functions
+Tag: purpose::console
+Depends: iphoneports-base

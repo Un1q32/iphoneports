@@ -1,8 +1,0 @@
-Package: pcre2
-Priority: standard
-Section: Development
-Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
-Architecture: iphoneos-arm
-Version: 10.42-5
-Depends: readline, bzip2, zlib
-Description: A library that implements Perl 5-style regular expressions. 2nd version

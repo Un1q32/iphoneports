@@ -1,0 +1,9 @@
+Package: iphoneports-coreutils
+Section: Utilities
+Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
+Architecture: iphoneos-arm
+Version: 9.3
+Description: The basic file, shell and text manipulation utilities of the GNU operating system
+Homepage: http://www.gnu.org/software/coreutils/
+Tag: purpose::console
+Depends: iphoneports-base

@@ -1,0 +1,16 @@
+export PATH='/var/usr/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/bin/X11:/usr/games'
+umask 022
+
+for sh in /var/usr/etc/profile.d/*.sh; do
+    [ -r "$sh" ] && . "$sh"
+done
+
+if [ -n "$BASH_VERSION" ]; then
+    . /var/usr/etc/bash/bashrc
+else
+    if [ "$(id -u)" = 0 ]; then
+        PS1="${USER:-$(id -un 2>/dev/null)}@$(uname -n 2>/dev/null) # "
+    else
+        PS1="${USER:-$(id -un 2>/dev/null)}@$(uname -n 2>/dev/null) \$ "
+    fi
+fi

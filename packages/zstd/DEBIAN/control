@@ -1,9 +1,0 @@
-Package: zstd
-Priority: optional
-Section: Archiving
-Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
-Architecture: iphoneos-arm
-Version: 1.5.5
-Depends: lz4, xz-utils, zlib
-Description: Zstandard - Fast real-time compression algorithm
-Tag: purpose::console

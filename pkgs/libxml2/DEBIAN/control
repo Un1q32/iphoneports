@@ -1,0 +1,8 @@
+Package: iphoneports-libxml2
+Section: Development
+Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
+Architecture: iphoneos-arm
+Version: 2.11.4
+Description: XML C parser and toolkit
+Tag: purpose::console
+Depends: iphoneports-base, iphoneports-zlib, iphoneports-xz

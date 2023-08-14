@@ -1,0 +1,9 @@
+Package: iphoneports-xz
+Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
+Architecture: iphoneos-arm
+Depends: iphoneports-base, iphoneports-grep, iphoneports-sed
+Description: XZ-format compression utilities
+Homepage: http://tukaani.org/xz/
+Section: Archiving
+Tag: purpose::console
+Version: 5.4.4

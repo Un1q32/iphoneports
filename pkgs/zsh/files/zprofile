@@ -1,0 +1,1 @@
+emulate sh -c 'source /var/usr/etc/profile'

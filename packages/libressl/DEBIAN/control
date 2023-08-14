@@ -1,8 +1,0 @@
-Package: libressl
-Priority: standard
-Section: Security
-Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
-Architecture: iphoneos-arm
-Version: 3.7.2-1
-Description: Free version of the TLS/crypto stack forked from OpenSSL
-Name: LibreSSL

@@ -1,0 +1,4 @@
+PermitRootLogin yes
+AuthorizedKeysFile .ssh/authorized_keys
+X11Forwarding yes
+Subsystem sftp /var/usr/libexec/sftp-server

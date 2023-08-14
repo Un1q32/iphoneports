@@ -1,9 +1,0 @@
-Package: tar
-Priority: required
-Section: Archiving
-Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
-Architecture: iphoneos-arm
-Version: 1.34
-Description: A tool for making tape archives
-Homepage: http://www.gnu.org/software/tar/
-Tag: purpose::console

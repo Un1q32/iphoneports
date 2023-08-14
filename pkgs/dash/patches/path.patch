@@ -1,0 +1,11 @@
+--- src/src/var.c.orig
++++ src/src/var.c
+@@ -74,7 +74,7 @@
+ MKINIT struct localvar_list *localvar_stack;
+ 
+ const char defpathvar[] =
+-	"PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin";
++	"PATH=/var/usr/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin";
+ char defifsvar[] = "IFS= \t\n";
+ MKINIT char defoptindvar[] = "OPTIND=1";
+ 

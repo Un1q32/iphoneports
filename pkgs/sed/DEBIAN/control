@@ -1,0 +1,9 @@
+Package: iphoneports-sed
+Version: 4.9
+Architecture: iphoneos-arm
+Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
+Section: Utilities
+Homepage: http://www.gnu.org/software/sed/
+Description: GNU stream editor
+Tag: purpose::console
+Depends: iphoneports-base
