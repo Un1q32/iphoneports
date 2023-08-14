@@ -1,12 +1,8 @@
-Package: lua
-Name: Lua
+Package: iphoneports-lua
 Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
 Architecture: iphoneos-arm
-Depends: readline
+Depends: iphoneports-base, iphoneports-readline
 Description: A powerful, efficient, lightweight, embeddable scripting language.
 Section: Development
-Priority: optional
 Tag: purpose::console, role::hacker
 Version: 5.4.4
-Replaces: com.deltaman.lua
-Conflicts: com.deltaman.lua
