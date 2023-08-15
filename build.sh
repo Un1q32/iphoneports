@@ -123,7 +123,7 @@ build() {
         (
         export _PKGROOT="$_PKGDIR/$1"
         cd "$_PKGROOT" || error "Failed to cd to package directory: $1"
-        [ "$_NODEPS" = 1 ] && includedeps "$2"
+        [ "$_NODEPS" = 1 ] || includedeps "$2"
         [ "$2" = "dryrun" ] || ./fetch.sh
         [ "$2" = "dryrun" ] || applypatches
         printf "Building %s\n" "$1"
