@@ -5,3 +5,4 @@ Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
 Section: Development
 Homepage: http://www.gnu.org/software/libunistring/
 Description: Library for manipulating Unicode strings and C strings
+Depends: iphoneports-base
