@@ -1,0 +1,36 @@
+--- src/telnet/telnet.c.orig
++++ src/telnet/telnet.c
+@@ -71,14 +71,7 @@
+ #include "types.h"
+ #include "general.h"
+ 
+-#ifdef HAVE_TERMCAP_TGETENT
+-# include <termcap.h>
+-#elif defined HAVE_CURSES_TGETENT
+-# include <curses.h>
+-# ifndef _XOPEN_CURSES
+-#  include <term.h>
+-# endif
+-#endif
++#include <termcap.h>
+ 
+ #ifdef AUTHENTICATION
+ # include <libtelnet/auth.h>
+--- src/telnetd/utility.c.orig
++++ src/telnetd/utility.c
+@@ -35,14 +35,7 @@
+ # define NET_ENCRYPT()
+ #endif
+ 
+-#ifdef HAVE_TERMCAP_TGETENT
+-# include <termcap.h>
+-#elif defined HAVE_CURSES_TGETENT
+-# include <curses.h>
+-# ifndef _XOPEN_CURSES
+-#  include <term.h>
+-# endif
+-#endif
++#include <termcap.h>
+ 
+ #if defined HAVE_STREAMSPTY && defined HAVE_GETMSG	\
+   && defined HAVE_STROPTS_H
