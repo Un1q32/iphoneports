@@ -8,6 +8,7 @@ cd src || exit 1
 
 (
 cd pkg/var/usr || exit 1
+rm -rf share var
 "$_TARGET-strip" bin/find > /dev/null 2>&1
 "$_TARGET-strip" bin/xargs > /dev/null 2>&1
 ldid -S"$_BSROOT/ent.xml" bin/find
