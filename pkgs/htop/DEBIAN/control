@@ -6,4 +6,3 @@ Depends: iphoneports-base, iphoneports-ncurses
 Description: interactive processes viewer
 Homepage: http://htop.dev
 Section: Utilities
-Tag: purpose::console

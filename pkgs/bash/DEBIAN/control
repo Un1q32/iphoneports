@@ -6,4 +6,3 @@ Depends: iphoneports-base, iphoneports-ncurses, iphoneports-readline
 Section: Terminal_Support
 Homepage: http://www.gnu.org/software/bash/
 Description: The GNU Bourne Again shell
-Tag: purpose::console

@@ -4,5 +4,4 @@ Architecture: iphoneos-arm
 Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
 Section: Terminal_Support
 Description: POSIX compliant shell that aims to be as small as possible
-Tag: purpose::console
 Depends: iphoneports-base

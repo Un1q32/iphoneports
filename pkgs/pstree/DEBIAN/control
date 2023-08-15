@@ -5,4 +5,3 @@ Architecture: iphoneos-arm
 Version: 2.40
 Depends: adv-cmds
 Description: Show ps output as a tree
-Tag: purpose::console

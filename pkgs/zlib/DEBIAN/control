@@ -5,5 +5,4 @@ Architecture: iphoneos-arm
 Version: 1.2.13
 Description: Compression library implementing the deflate compression method found in gzip and PKZIP
 Homepage: http://www.zlib.net/
-Tag: purpose::console
 Depends: iphoneports-base

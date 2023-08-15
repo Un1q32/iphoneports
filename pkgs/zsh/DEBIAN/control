@@ -5,4 +5,3 @@ Architecture: iphoneos-arm
 Version: 5.9
 Depends: iphoneports-base, iphoneports-ncurses, iphoneports-pcre
 Description: A very advanced and programmable command interpreter (shell) for UNIX
-Tag: purpose::console

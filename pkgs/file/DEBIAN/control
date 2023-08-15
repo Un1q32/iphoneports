@@ -5,4 +5,3 @@ Architecture: iphoneos-arm
 Version: 5.45
 Description: guesses the type of a file from contents
 Depends: iphoneports-base, iphoneports-xz, iphoneports-bzip2, iphoneports-zlib, iphoneports-zstd, iphoneports-lzlib
-Tag: purpose::console

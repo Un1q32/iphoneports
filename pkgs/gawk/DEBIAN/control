@@ -6,4 +6,3 @@ Version: 5.2.2
 Description: GNU's heavy-weight implementation of awk
 Depends: iphoneports-base
 Homepage: http://www.gnu.org/software/gawk/
-Tag: purpose::console

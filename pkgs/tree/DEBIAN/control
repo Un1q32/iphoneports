@@ -4,5 +4,4 @@ Architecture: iphoneos-arm
 Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
 Section: Utilities
 Description: A colorized, indented directory listing tool
-Tag: purpose::console
 Depends: iphoneports-base

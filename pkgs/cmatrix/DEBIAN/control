@@ -5,4 +5,3 @@ Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
 Depends: iphoneports-base, iphoneports-ncurses
 Section: Utilities
 Description: Terminal screen saver based on the movie "The Matrix".
-Tag: purpose::console

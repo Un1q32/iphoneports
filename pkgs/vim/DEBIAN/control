@@ -5,4 +5,3 @@ Architecture: iphoneos-arm
 Version: 9.0.1702
 Depends: iphoneports-base, iphoneports-ncurses, iphoneports-xxd
 Description: A highly configurable, improved version of the vi text editor
-Tag: purpose::console

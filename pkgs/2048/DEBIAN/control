@@ -4,5 +4,4 @@ Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
 Architecture: iphoneos-arm
 Version: 1
 Description: 2048 in your terminal
-Tag: purpose::console
 Depends: iphoneports-base

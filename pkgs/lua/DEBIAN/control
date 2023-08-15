@@ -4,5 +4,4 @@ Architecture: iphoneos-arm
 Depends: iphoneports-base, iphoneports-readline
 Description: A powerful, efficient, lightweight, embeddable scripting language.
 Section: Development
-Tag: purpose::console, role::hacker
 Version: 5.4.4
