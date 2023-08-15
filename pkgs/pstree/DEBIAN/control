@@ -1,5 +1,4 @@
-Package: pstree
-Priority: optional
+Package: iphoneports-pstree
 Section: Utilities
 Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
 Architecture: iphoneos-arm

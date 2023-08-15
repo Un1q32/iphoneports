@@ -1,3 +1,4 @@
+// vim:filetype=objc
 // program to help out neofetch, since some information is impossible to get with just shell
 
 #include <stdio.h>
