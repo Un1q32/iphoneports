@@ -1,5 +1,5 @@
---- src/neofetch.orig	2023-08-14 20:15:02.830976220 -0400
-+++ src/neofetch	2023-08-14 20:14:24.700984626 -0400
+--- src/neofetch.orig
++++ src/neofetch
 @@ -189,7 +189,7 @@
  # kib  '1020928KiB / 7117824KiB'
  # mib  '1042MiB / 6951MiB'
@@ -9,7 +9,7 @@
  
  # Change memory output precision.
  #
-@@ -3327,6 +3327,10 @@
+@@ -3405,6 +3405,10 @@
          ;;
  
          "Mac OS X" | "macOS" | "iPhone OS")
@@ -20,7 +20,7 @@
              hw_pagesize="$(sysctl -n hw.pagesize)"
              mem_total="$(($(sysctl -n hw.memsize) / 1024))"
              pages_app="$(($(sysctl -n vm.page_pageable_internal_count) - $(sysctl -n vm.page_purgeable_count)))"
-@@ -3334,6 +3338,7 @@
+@@ -3412,6 +3416,7 @@
              pages_compressed="$(vm_stat | awk '/ occupied/ { printf $5 }')"
              pages_compressed="${pages_compressed:-0}"
              mem_used="$(((pages_app + ${pages_wired//.} + ${pages_compressed//.}) * hw_pagesize / 1024))"
@@ -28,41 +28,21 @@
          ;;
  
          "BSD" | "MINIX" | "ravynOS")
-@@ -3773,6 +3778,37 @@
-                 resolution="${resolution// @ 0Hz}"
+@@ -3858,6 +3863,9 @@
          ;;
  
-+        "iPhone OS")
+         "iPhone OS")
 +            if command -v nftool > /dev/null; then
 +                resolution="$(nftool resolution)"
 +            else
-+            case $kernel_machine in
-+                "iPhone1,"[1-2] | "iPhone2,1" | "iPod"[1-3]",1"):                                                                    "320x480"   ;;
-+                "iPhone3,"[1-3] | "iPhone4,1" | "iPod4,1"):                                                                          "640x960"   ;;
-+                "iPhone5,"[1-4] | "iPhone6,"[1-2] | "iPhone8,4" | "iPod"[5-7]",1" | "iPod9,1"):                                      "640x1136"  ;;
-+                "iPad1,"[1-2] | "iPad2,"[1-7]):                                                                                      "768x1024"  ;;
-+                "iPhone10,1" | "iPhone10,4" | "iPhone9,1" | "iPhone9,3" | "iPhone8,1" | "iPhone7,2" | "iPhone12,8" | "iPhone14,6"):  "750x1334"  ;;
-+                "iPhone11,8" | "iPhone12,1"):                                                                                        "828x1792"  ;;
-+                "iPhone7,1" | "iPhone8,2" | "iPhone9,2" | "iPhone9,4" | "iPhone10,2"):                                               "1080x1920" ;;
-+                "iPhone13,1" | "iPhone14,4"):                                                                                        "1080x2340" ;;
-+                "iPhone10,3" | "iPhone10,6" | "iPhone11,2" | "iPhone12,3"):                                                          "1125x2436" ;;
-+                "iPhone13,"[2-3] | "iPhone14,2" | "iPhone14,5" | "iPhone14,7"):                                                      "1170x2532" ;;
-+                "iPhone15,2"):                                                                                                       "1179x2556" ;;
-+                "iPad4,"[1-9] | "iPad3,"[1-6] | "iPad6,"[3-4] | "iPad6,1"[1-2] | "iPad5,"[1-4] | "iPad7,"[5-6] | "iPad11,"[1-2]):    "1536x2048" ;;
-+                "iPhone11,4" | "iPhone11,6" | "iPhone12,5"):                                                                         "1242x2688" ;;
-+                "iPad14,"[1-2]):                                                                                                     "1488x2266" ;;
-+                "iPad7,1"[1-2] | "iPad11,"[6-7] | "iPad12,"[1-2]):                                                                   "1620x2160" ;;
-+                "iPhone13,4" | "iPhone14,3" | "iPhone14,8"):                                                                         "1284x2778" ;;
-+                "iPhone15,3"):                                                                                                       "1290x2796" ;;
-+                "iPad11,"[3-4] | "iPad7,"[3-4]):                                                                                     "1668x2224" ;;
-+                "iPad13,"[1-2] | "iPad13,1"[6-9]):                                                                                   "1640x2360" ;;
-+                "iPad8,"[1-4] | "iPad8,"[9-10] | "iPad13,"[4-7] | "iPad14,"[3-6]):                                                   "1668x2388" ;;
-+                "iPad6,"[7-8] | "iPad7,"[1-2] | "iPad8,"[5-8] | "iPad8,1"[1-2] | "iPad13,"[8-9] | "iPad13,1"[0-1] | "iPad14,"[5-6]): "2048x2732" ;;
-+            esac
-+            resolution="$_"
+             case $kernel_machine in
+                 "iPhone1,"[1-2] | "iPhone2,1" | "iPod"[1-3]",1"):                                                                    "320x480"   ;;
+                 "iPhone3,"[1-3] | "iPhone4,1" | "iPod4,1"):                                                                          "640x960"   ;;
+@@ -3882,6 +3890,7 @@
+                 "iPad6,"[7-8] | "iPad7,"[1-2] | "iPad8,"[5-8] | "iPad8,1"[1-2] | "iPad13,"[8-9] | "iPad13,1"[0-1] | "iPad14,"[5-6]): "2048x2732" ;;
+             esac
+             resolution="$_"
 +            fi
-+        ;;
-+
+         ;;
+ 
          "Windows")
-             IFS=$'\n' read -d "" -ra sw \
-                 <<< "$(wmic path Win32_VideoController get CurrentHorizontalResolution)"
