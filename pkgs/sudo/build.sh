@@ -20,7 +20,7 @@ chmod 4755 bin/sudo
 
 case "$_TARGET" in
     *64*)
-        debname="sudo-arm64.deb"
+        debname="sudo64.deb"
         "$_CP" -r files/DEBIAN-arm64 pkg/DEBIAN
     ;;
     *)
