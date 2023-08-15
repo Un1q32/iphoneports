@@ -1,8 +1,0 @@
-Package: brotli
-Priority: optional
-Section: Archiving
-Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
-Architecture: iphoneos-arm
-Version: 1.0.9-1
-Description: A generic-purpose lossless compression algorithm
-Tag: purpose::console
