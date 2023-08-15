@@ -3,5 +3,5 @@ Version: 3
 Architecture: iphoneos-arm
 Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
 Section: System
-Description: Base system package that sets up all the others for you
+Description: iPhonePorts base
 Depends: iphoneports-dash, iphoneports-coreutils
