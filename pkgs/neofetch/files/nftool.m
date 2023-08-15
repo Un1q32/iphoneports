@@ -9,6 +9,7 @@ void usedmem() {
     mach_msg_type_number_t count = sizeof(vm_stat) / sizeof(natural_t);
     host_statistics64(mach_host_self(), HOST_VM_INFO64, (host_info64_t)&vm_stat, &count);
     printf("%llu\n", (vm_stat.active_count + vm_stat.inactive_count) * 4ULL);
+    exit(0);
 }
 
 void resolution() {
@@ -16,6 +17,7 @@ void resolution() {
     int width = screenSizeRect.size.width;
     int height = screenSizeRect.size.height;
     printf("%dx%d\n", width, height);
+    exit(0);
 }
 
 int main(int argc, char *argv[]) {
