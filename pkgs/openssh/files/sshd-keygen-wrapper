@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/var/usr/bin/sh
 
 [ -f /var/usr/etc/ssh/ssh_host_rsa_key ] || ssh-keygen -q -t rsa -f /var/usr/etc/ssh/ssh_host_rsa_key -n ''
 [ -f /var/usr/etc/ssh/ssh_host_ecdsa_key ] || ssh-keygen -q -t ecdsa -f /var/usr/etc/ssh/ssh_host_ecdsa_key -n ''

@@ -5,7 +5,7 @@
  #ifndef DEFAULT_PATH_VALUE
  #define DEFAULT_PATH_VALUE \
 -  "/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin:."
-+  "/var/usr/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin:."
++  "/var/usr/bin:/var/usr/sbin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin:."
  #endif
  
  /* If you want to unconditionally set a value for PATH in every restricted
@@ -14,7 +14,7 @@
  #ifndef STANDARD_UTILS_PATH
  #define STANDARD_UTILS_PATH \
 -  "/bin:/usr/bin:/sbin:/usr/sbin:/etc:/usr/etc"
-+  "/var/usr/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin"
++  "/var/usr/bin:/var/usr/sbin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin"
  #endif
  
  /* The default path for enable -f */

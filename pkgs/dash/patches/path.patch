@@ -5,7 +5,7 @@
  
  const char defpathvar[] =
 -	"PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin";
-+	"PATH=/var/usr/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin";
++	"PATH=/var/usr/sbin:/var/usr/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin";
  char defifsvar[] = "IFS= \t\n";
  MKINIT char defoptindvar[] = "OPTIND=1";
  
