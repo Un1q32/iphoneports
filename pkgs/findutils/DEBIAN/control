@@ -1,11 +1,8 @@
-Package: findutils
-Priority: important
+Package: iphoneports-findutils
 Section: Utilities
 Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
 Architecture: iphoneos-arm
 Version: 4.9.0
-Depends: bash, sed
+Depends: iphoneports-bash, iphoneports-sed
 Description: indexes and searches filesystems
-Name: Find Utilities
 Homepage: http://www.gnu.org/software/findutils/
-Tag: purpose::console
