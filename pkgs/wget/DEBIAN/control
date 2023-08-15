@@ -1,8 +1,7 @@
-Package: wget
-Priority: important
+Package: iphoneports-wget
 Section: Networking
 Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
 Architecture: iphoneos-arm
-Version: 1.21.4-1
-Depends: libressl, pcre2, zlib, libunistring, libpsl
+Version: 1.21.4
+Depends: iphoneports-base, iphoneports-libressl, iphoneports-pcre2, iphoneports-zlib, iphoneports-libunistring, iphoneports-libpsl
 Description: Network utility to retrieve files from the Web
