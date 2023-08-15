@@ -1,13 +1,11 @@
-Package: sudo-arm64
-Name: Sudo (64-bit)
-Priority: standard
+Package: iphoneports-sudo64
 Section: Administration
 Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
 Architecture: iphoneos-arm
 Version: 1.9.13p3
 Description: temporarily assume root priviledges
-Depends: firmware (>= 7.0)
+Depends: iphoneports-base, firmware (>= 7.0)
 Tag: purpose::console
-Replaces: sudo
-Conflicts: sudo
-Provides: sudo
+Replaces: iphoneports-sudo
+Conflicts: iphoneports-sudo
+Provides: iphoneports-sudo

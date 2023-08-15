@@ -1,10 +1,7 @@
-Package: sudo
-Name: Sudo
-Priority: standard
+Package: iphoneports-sudo
 Section: Administration
 Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
 Architecture: iphoneos-arm
 Version: 1.9.13p3
 Description: temporarily assume root priviledges
-Depends: zlib
-Tag: purpose::console
+Depends: iphoneports-base, iphoneports-zlib

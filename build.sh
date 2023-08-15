@@ -11,6 +11,7 @@ Usage: build.sh <command> [options]
     list                    - List all packages
     --target                - Specify a target other than arm-apple-darwin9
     --no-tmpfs              - Do not use /tmp for anything (use if you have limited RAM)
+    --no-deps               - Do not add dependencies to the SDK
     --help                  - Print this help message
 "
 }
@@ -55,7 +56,7 @@ case "$*" in
 esac
 
 case "$*" in
-    *--no-dependencies*) export _NODEPS="1" ;;
+    *--no-deps*) export _NODEPS="1" ;;
 esac
 
 : > "$_TMP/.builtpkgs"
