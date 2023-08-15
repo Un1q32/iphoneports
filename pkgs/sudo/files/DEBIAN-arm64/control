@@ -5,7 +5,6 @@ Architecture: iphoneos-arm
 Version: 1.9.13p3
 Description: temporarily assume root priviledges
 Depends: iphoneports-base, firmware (>= 7.0)
-Tag: purpose::console
 Replaces: iphoneports-sudo
 Conflicts: iphoneports-sudo
 Provides: iphoneports-sudo
