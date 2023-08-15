@@ -3,6 +3,6 @@ Section: Utilities
 Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
 Architecture: iphoneos-arm
 Version: 4.9.0
-Depends: iphoneports-bash, iphoneports-sed
+Depends: iphoneports-base, iphoneports-bash, iphoneports-sed
 Description: indexes and searches filesystems
 Homepage: http://www.gnu.org/software/findutils/

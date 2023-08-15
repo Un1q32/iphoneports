@@ -9,10 +9,10 @@ cd src || exit 1
 (
 cd pkg/var/usr || exit 1
 rm -rf share var
-"$_TARGET-strip" bin/find > /dev/null 2>&1
-"$_TARGET-strip" bin/xargs > /dev/null 2>&1
-ldid -S"$_BSROOT/ent.xml" bin/find
-ldid -S"$_BSROOT/ent.xml" bin/xargs
+for bin in bin/find bin/xargs bin/locate libexec/frcode; do
+    "$_TARGET-strip" "$bin" > /dev/null 2>&1
+    ldid -S"$_BSROOT/ent.xml" "$bin"
+done
 )
 
 "$_CP" -r DEBIAN pkg
