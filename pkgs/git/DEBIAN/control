@@ -1,9 +1,7 @@
-Package: git
-Priority: optional
+Package: iphoneports-git
 Section: Data_Storage
 Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
 Architecture: iphoneos-arm
-Version: 2.41.0-1
-Depends: curl, libressl, perl, grep, pcre2, zlib
+Version: 2.41.0
+Depends: iphoneports-curl, iphoneports-libressl, iphoneports-grep, iphoneports-pcre2, iphoneports-zlib
 Description: fast content-addressable filesystem
-Name: Git

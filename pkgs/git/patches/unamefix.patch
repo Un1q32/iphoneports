@@ -1,5 +1,5 @@
---- source/config.mak.uname.orig
-+++ source/config.mak.uname
+--- src/config.mak.uname.orig
++++ src/config.mak.uname
 @@ -4,12 +4,6 @@
  # Microsoft's Safe Exception Handling in libraries (such as zlib).
  # Typically required for VS2013+/32-bit compilation on Vista+ versions.

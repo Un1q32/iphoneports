@@ -1,10 +1,8 @@
-Package: diffutils
-Priority: important
+Package: iphoneports-diffutils
 Section: Development
 Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
 Architecture: iphoneos-arm
 Version: 3.10
 Description: compare two files for differences
-Name: Diff Utilities
 Homepage: http://www.gnu.org/software/diffutils/
-Tag: purpose::console
+Depends: iphoneports-base

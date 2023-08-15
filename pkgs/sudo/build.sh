@@ -16,6 +16,10 @@ done
 chmod 4755 bin/sudo
 )
 
+mkdir -p pkg/usr/libexec
+mv pkg/var/usr/bin/sudo pkg/usr/libexec/_sudo
+ln -s /usr/libexec/_sudo pkg/var/usr/bin/sudo
+
 "$_CP" files/sudoers pkg/var/usr/etc/sudoers
 
 case "$_TARGET" in
