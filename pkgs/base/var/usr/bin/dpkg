@@ -1,0 +1,4 @@
+#!/var/usr/bin/sh
+# The old version of dpkg that Cydia ships doesnt like our bsdtar, set PATH so it uses GNU tar
+export PATH='/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/bin/X11:/usr/games'
+exec dpkg "$@"
