@@ -1,8 +1,7 @@
-Package: dos2unix
-Priority: standard
+Package: iphoneports-dos2unix
 Section: Utilities
 Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
 Architecture: iphoneos-arm
 Version: 7.5.0
 Description: DOS/Mac to Unix and vice versa text file format converter.
-Tag: purpose::console
+Depends: iphoneports-base
