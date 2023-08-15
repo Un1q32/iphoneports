@@ -1,0 +1,13 @@
+--- src/lib/macos.c.orig
++++ src/lib/macos.c
+@@ -33,7 +33,9 @@
+ #include "macos.h"
+ 
+ #if defined(ENABLE_IPV6) && defined(CURL_OSX_CALL_COPYPROXIES)
+-#include <SystemConfiguration/SCDynamicStoreCopySpecific.h>
++#include <SystemConfiguration/SCDynamicStore.h>
++CFDictionaryRef SCDynamicStoreCopyProxies(SCDynamicStoreRef store)
++    __OSX_AVAILABLE_STARTING(__MAC_10_1, __IPHONE_2_0);
+ #endif
+ 
+ CURLcode Curl_macos_init(void)
