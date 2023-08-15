@@ -1,9 +1,7 @@
-Package: nghttp2
-Priority: standard
+Package: iphoneports-nghttp2
 Section: Development
 Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
 Architecture: iphoneos-arm
 Version: 1.55.1
-Depends: libxml2
+Depends: iphoneports-libxml2
 Description: An implementation of HTTP/2 and its header compression algorithm HPACK in C.
-Tag: purpose::console
