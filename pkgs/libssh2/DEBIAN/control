@@ -1,9 +1,9 @@
-Package: libssh2
-Priority: standard
+Package: iphoneports-libssh2
 Section: Development
 Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
 Architecture: iphoneos-arm
-Version: 1.11.0-1
+Version: 1.11.0
 Description: A library implementing the SSH2 protocol
 Homepage: http://www.libssh2.org/
 Tag: purpose::console
+Depends: iphoneports-base, iphoneports-zlib, iphoneports-libressl
