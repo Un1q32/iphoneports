@@ -1,11 +1,7 @@
-Package: gcal
-Version: 4.1
+Package: iphoneports-ncal
+Version: 34
 Architecture: iphoneos-arm
 Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
 Section: Utilities
-Priority: optional
-Depends: perl
-Homepage: http://www.gnu.org/software/gcal/
+Depends: iphoneports-base
 Description: A program for calculating and printing calendars
-Tag: purpose::console
-Name: Gcal
