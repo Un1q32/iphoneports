@@ -1,2 +1,6 @@
 #!/var/usr/bin/sh
-exec /var/usr/bin/sh -l
+if [ -f /var/usr/shell ]; then
+    exec /var/usr/shell -l
+else
+    exec /var/usr/bin/sh -l
+fi

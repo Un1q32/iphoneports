@@ -1,0 +1,14 @@
+#!/var/usr/bin/sh
+if [ -z "$1" ]; then
+    printf '%s\n' 'Usage: chsh <shell>'
+    exit 1
+fi
+
+if [ -f "/var/usr/bin/$1" ]; then
+    printf '%s\n' "Changing shell to $1"
+    ln -s "/var/usr/bin/$1" /var/usr/shell
+    exit 0
+else
+    printf '%s\n' "/var/usr/bin/$1 does not exist"
+    exit 1
+fi
