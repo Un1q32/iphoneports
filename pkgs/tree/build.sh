@@ -1,7 +1,7 @@
 #!/bin/sh
 (
 cd src || exit 1
-"$_MAKE" PREFIX=/var/usr CC="$_TARGET-cc" -j8
+"$_MAKE" PREFIX=/var/usr CC="$_TARGET-cc" CFLAGS="-O2" -j8
 mkdir -p "$_PKGROOT/pkg/var/usr/bin"
 "$_CP" tree "$_PKGROOT/pkg/var/usr/bin"
 )
