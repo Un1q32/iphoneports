@@ -21,5 +21,6 @@ int main(int argc, char* argv[]) {
 
     unlink("/var/usr/shell");
     symlink(shell, "/var/usr/shell");
+    printf("iPhonePorts shell changed to %s\n", argv[1]);
     return 0;
 }
