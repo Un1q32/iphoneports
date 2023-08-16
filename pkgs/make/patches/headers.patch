@@ -1,5 +1,5 @@
---- source/src/arscan.c.orig
-+++ source/src/arscan.c
+--- src/src/arscan.c.orig
++++ src/src/arscan.c
 @@ -331,7 +331,10 @@
  #endif
  
