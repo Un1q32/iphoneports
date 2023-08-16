@@ -2,6 +2,6 @@ Package: iphoneports-neofetch
 Section: Utilities
 Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
 Architecture: iphoneos-arm
-Version: 7.3.9-1
+Version: 7.3.9-2
 Depends: iphoneports-base, iphoneports-bash, iphoneports-gawk, iphoneports-sed, iphoneports-grep, iphoneports-coreutils, system-cmds
 Description: A CLI system information tool written in BASH.
