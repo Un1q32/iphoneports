@@ -1,6 +1,6 @@
 #!/var/usr/bin/sh
 if [ -f /var/usr/shell ]; then
-    exec "$(readlink /var/usr/shell))" -l
+    exec "$(readlink /var/usr/shell)" -l
 else
     exec /var/usr/bin/sh -l
 fi
