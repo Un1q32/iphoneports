@@ -5,3 +5,4 @@ libssh2
 nghttp2
 libpsl
 libidn2
+brotli
