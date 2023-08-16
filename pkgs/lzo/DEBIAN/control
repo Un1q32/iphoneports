@@ -1,8 +1,7 @@
-Package: lzo
-Priority: optional
+Package: iphoneports-lzo
 Section: Development
 Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
 Architecture: iphoneos-arm
 Version: 2.10
 Description: Portable lossless data compression library
-Tag: purpose::console
+Depends: iphoneports-base

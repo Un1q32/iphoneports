@@ -1,9 +1,7 @@
-Package: lzop
-Priority: optional
+Package: iphoneports-lzop
 Section: Archiving
 Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
 Architecture: iphoneos-arm
 Version: 1.0.4
 Description: File compressor using lzo lib
-Tag: purpose::console
-Depends: lzo
+Depends: iphoneports-base, iphoneports-lzo
