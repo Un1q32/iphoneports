@@ -1,15 +1,14 @@
 #!/bin/sh
 (
 cd src || exit 1
-"$_MAKE" PREFIX=/var/usr CC="$_TARGET-cc" CFLAGS="-O2" -j8
-mkdir -p "$_PKGROOT/pkg/var/usr/bin"
-"$_CP" tree "$_PKGROOT/pkg/var/usr/bin"
+"$_MAKE" PREFIX="$_PKGROOT/pkg/var/usr" CC="$_TARGET-cc" CFLAGS="-O2" install -j8
 )
 
 (
-cd pkg/var/usr/bin || exit 1
-"$_TARGET-strip" tree > /dev/null 2>&1
-ldid -S"$_BSROOT/ent.xml" tree
+cd pkg/var/usr || exit 1
+rm -rf man
+"$_TARGET-strip" bin/tree > /dev/null 2>&1
+ldid -S"$_BSROOT/ent.xml" bin/tree
 )
 
 "$_CP" -r DEBIAN pkg
