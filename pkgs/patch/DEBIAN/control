@@ -1,8 +1,7 @@
-Package: patch
-Priority: important
+Package: iphoneports-patch
 Section: Development
 Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
 Architecture: iphoneos-arm
 Version: 2.7.6
 Description: merge a difference onto a file
-Tag: purpose::console
+Depends: iphoneports-base
