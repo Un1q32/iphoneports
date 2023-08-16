@@ -9,16 +9,10 @@ cd src || exit 1
 (
 cd pkg/var/usr || exit 1
 rm -rf share
-"$_TARGET-strip" bin/openssl > /dev/null 2>&1
-"$_TARGET-strip" bin/ocspcheck > /dev/null 2>&1
-"$_TARGET-strip" lib/libcrypto.50.dylib > /dev/null 2>&1
-"$_TARGET-strip" lib/libssl.53.dylib > /dev/null 2>&1
-"$_TARGET-strip" lib/libtls.26.dylib > /dev/null 2>&1
-ldid -S"$_BSROOT/ent.xml" bin/openssl
-ldid -S"$_BSROOT/ent.xml" bin/ocspcheck
-ldid -S"$_BSROOT/ent.xml" lib/libcrypto.50.dylib
-ldid -S"$_BSROOT/ent.xml" lib/libssl.53.dylib
-ldid -S"$_BSROOT/ent.xml" lib/libtls.26.dylib
+for bin in bin/openssl bin/ocspcheck lib/libcrypto.50.dylib lib/libssl.53.dylib lib/libtls.26.dylib; do
+    "$_TARGET-strip" "$bin" > /dev/null 2>&1
+    ldid -S"$_BSROOT/ent.xml" "$bin"
+done
 )
 
 "$_CP" -r DEBIAN pkg
