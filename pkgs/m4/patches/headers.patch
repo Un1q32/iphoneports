@@ -1,5 +1,5 @@
---- source/lib/stackvma.c.orig
-+++ source/lib/stackvma.c
+--- src/lib/stackvma.c.orig
++++ src/lib/stackvma.c
 @@ -1341,8 +1341,6 @@
  
  #elif (defined __APPLE__ && defined __MACH__) /* macOS */
