@@ -1,9 +1,0 @@
-Package: mksh
-Version: 59c
-Architecture: iphoneos-arm
-Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
-Section: Terminal_Support
-Priority: optional
-Description: A free implementation of the Korn Shell programming language
-Tag: purpose::console
-Name: MirBSD Korn Shell
