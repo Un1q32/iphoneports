@@ -6,7 +6,18 @@
  # vim: noai:ts=4:sw=4:expandtab
  # shellcheck source=/dev/null
  # shellcheck disable=2009 disable=2153 disable=2154 disable=2243 disable=2244 disable=2317
-@@ -189,7 +189,7 @@
+@@ -48,6 +48,10 @@
+ # Fix issues with gsettings.
+ [[ -z $GIO_EXTRA_MODULES ]] && export GIO_EXTRA_MODULES=/usr/lib/x86_64-linux-gnu/gio/modules/
+ 
++# Use sed -r instead of sed -E if using GNU sed.
++sed_ext='-E'
++[[ $(sed --version 2>/dev/null) =~ GNU ]] && sed_ext='-r'
++
+ # Neofetch default config.
+ read -rd '' config <<'EOF'
+ # See this wiki page for more info:
+@@ -189,7 +193,7 @@
  # kib  '1020928KiB / 7117824KiB'
  # mib  '1042MiB / 6951MiB'
  # gib: ' 0.98GiB / 6.79GiB'
@@ -15,7 +26,7 @@
  
  # Change memory output precision.
  #
-@@ -3419,6 +3419,10 @@
+@@ -3419,6 +3423,10 @@
          ;;
  
          "Mac OS X" | "macOS" | "iPhone OS")
@@ -26,7 +37,7 @@
              hw_pagesize="$(sysctl -n hw.pagesize)"
              mem_total="$(($(sysctl -n hw.memsize) / 1024))"
              pages_app="$(($(sysctl -n vm.page_pageable_internal_count) - $(sysctl -n vm.page_purgeable_count)))"
-@@ -3426,6 +3430,7 @@
+@@ -3426,6 +3434,7 @@
              pages_compressed="$(vm_stat | awk '/ occupied/ { printf $5 }')"
              pages_compressed="${pages_compressed:-0}"
              mem_used="$(((pages_app + ${pages_wired//.} + ${pages_compressed//.}) * hw_pagesize / 1024))"
@@ -34,7 +45,16 @@
          ;;
  
          "BSD" | "MINIX" | "ravynOS")
-@@ -3872,6 +3877,9 @@
+@@ -3592,7 +3601,7 @@
+             if [[ $ActiveNetworkName == "Wi-Fi" ]]; then
+                 LinkSpeed="$(/System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport -I | awk '/maxRate/{print}' | awk '{print $2}' )Mbps"
+             else
+-                LinkSpeed="$(ifconfig "$ActiveNetwork" | awk '/media/{print}' | sed -E "s/.*\((.*)\).*/\1/")"
++                LinkSpeed="$(ifconfig "$ActiveNetwork" | awk '/media/{print}' | sed "$sed_ext" "s/.*\((.*)\).*/\1/")"
+             fi
+             network="$ActiveNetwork: $ActiveNetworkName@$LinkSpeed"
+         ;;
+@@ -3872,6 +3881,9 @@
          ;;
  
          "iPhone OS")
@@ -44,7 +64,7 @@
              case $kernel_machine in
                  "iPhone1,"[1-2] | "iPhone2,1" | "iPod"[1-3]",1"):                                                                    "320x480"   ;;
                  "iPhone3,"[1-3] | "iPhone4,1" | "iPod4,1"):                                                                          "640x960"   ;;
-@@ -3896,6 +3904,7 @@
+@@ -3896,6 +3908,7 @@
                  "iPad6,"[7-8] | "iPad7,"[1-2] | "iPad8,"[5-8] | "iPad8,1"[1-2] | "iPad13,"[8-9] | "iPad13,1"[0-1] | "iPad14,"[5-6]): "2048x2732" ;;
              esac
              resolution="$_"
@@ -52,3 +72,21 @@
          ;;
  
          "Windows")
+@@ -5083,7 +5096,7 @@
+         printf -v block_spaces "%${block_height}s"
+ 
+         # Convert the spaces into rows of blocks.
+-        if [[ $BASH_VERSION == 3* ]]; then
++        if [ "${BASH_VERSION%%.*}" -lt 5 ]; then
+             [[ "$blocks"  ]] && cols+="${block_spaces// /${blocks}[39;49mnl}"
+             [[ "$blocks2" ]] && cols+="${block_spaces// /${blocks2}[39;49mnl}"
+         else
+@@ -5208,7 +5221,7 @@
+             strip_escape_codes "${line}" line
+             # Use patterns to replace color codes that the above line did not catch
+             line=${line//\\033\[*([0-9;])[JKmsu]/}
+-            line="$(printf %b "$line" | sed -E 's/'"$(printf %b '\x1B')"'\[*[0-9;]+[JKmsu]//g')"
++            line="$(printf %b "$line" | sed "$sed_ext" 's/'"$(printf %b '\x1B')"'\[*[0-9;]+[JKmsu]//g')"
+             ((++lines,${#line}>ascii_len)) && ascii_len="${#line}"
+         done <<< "${ascii_data//\$\{??\}}"
+     fi
