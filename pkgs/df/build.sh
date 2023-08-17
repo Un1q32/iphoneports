@@ -1,7 +1,7 @@
 #!/bin/sh
 (
 cd src || exit 1
-"$_TARGET-cc" -I. df.c vfslist.c -o df -lutil
+"$_TARGET-cc" -I. df.c vfslist.c -o df -lutil -O2
 mkdir -p "$_PKGROOT/pkg/var/usr/bin"
 "$_CP" df "$_PKGROOT/pkg/var/usr/bin"
 )

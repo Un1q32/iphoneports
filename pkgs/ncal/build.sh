@@ -1,7 +1,7 @@
 #!/bin/sh
 (
 cd src || exit 1
-"$_TARGET-cc" ncal.c calendar.c easter.c -o ncal -lncursesw
+"$_TARGET-cc" ncal.c calendar.c easter.c -o ncal -lncursesw -O2
 mkdir -p "$_PKGROOT/pkg/var/usr/bin"
 "$_CP" ncal "$_PKGROOT/pkg/var/usr/bin"
 )
