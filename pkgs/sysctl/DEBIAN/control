@@ -1,0 +1,7 @@
+Package: iphoneports-sysctl
+Version: 950
+Architecture: iphoneos-arm
+Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
+Section: Utilities
+Depends: iphoneports-base
+Description: A utility for retrieving and setting kernel parameters
