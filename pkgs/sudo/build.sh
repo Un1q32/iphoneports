@@ -18,7 +18,7 @@ chmod 4755 bin/sudo
 
 mkdir -p pkg/usr/libexec/iphoneports
 mv pkg/var/usr/bin/sudo pkg/usr/libexec/iphoneports
-ln -s /usr/libexec/iphoneports/sudo pkg/var/usr/bin/sudo
+ln -s ../../../../usr/libexec/iphoneports/sudo pkg/var/usr/bin/sudo
 
 "$_CP" files/sudoers pkg/var/usr/etc/sudoers
 
