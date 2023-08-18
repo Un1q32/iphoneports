@@ -3,4 +3,5 @@ bzip2
 xz
 zstd
 lz4
+lzo
 libxml2
