@@ -1,4 +1,4 @@
 #!/var/usr/bin/sh
-# The old version of dpkg that Cydia ships doesnt like our bsdtar, set PATH so it uses GNU tar
+# wrapper to be used for programs that break with $PATH containing iphoneports stuff
 export PATH='/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/bin/X11:/usr/games'
-exec dpkg "$@"
+exec "${0##*/}" "$@"
