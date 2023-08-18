@@ -1,5 +1,5 @@
 Package: iphoneports-su
-Section: Security
+Section: Administration
 Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
 Architecture: iphoneos-arm
 Version: 116
