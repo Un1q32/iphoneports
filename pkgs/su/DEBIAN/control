@@ -1,0 +1,8 @@
+Package: iphoneports-su
+Section: Security
+Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
+Architecture: iphoneos-arm
+Version: 116
+Description: substitute user
+Depends: iphoneports-base, pam
+Replaces: pam
