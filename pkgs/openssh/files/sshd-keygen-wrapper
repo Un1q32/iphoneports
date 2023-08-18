@@ -1,7 +1,3 @@
 #!/var/usr/bin/sh
-
-[ -f /var/usr/etc/ssh/ssh_host_rsa_key ] || ssh-keygen -q -t rsa -f /var/usr/etc/ssh/ssh_host_rsa_key -n ''
-[ -f /var/usr/etc/ssh/ssh_host_ecdsa_key ] || ssh-keygen -q -t ecdsa -f /var/usr/etc/ssh/ssh_host_ecdsa_key -n ''
-[ -f /var/usr/etc/ssh/ssh_host_ed25519_key ] || ssh-keygen -q -t ed25519 -f /var/usr/etc/ssh/ssh_host_ed25519_key -n ''
-
+/var/usr/bin/ssh-keygen -A
 exec /var/usr/sbin/sshd "$@"
