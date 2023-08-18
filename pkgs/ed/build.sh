@@ -1,16 +1,15 @@
 #!/bin/sh
 (
 cd src || exit 1
-./configure --prefix=/var/usr CC="$_TARGET-cc"
-"$_MAKE" -j8
-"$_MAKE" DESTDIR="$_PKGROOT/pkg" install
+"$_TARGET-cc" -o ed -O2 main.c io.c buf.c re.c glbl.c undo.c sub.c
+mkdir -p "$_PKGROOT/pkg/var/usr/bin"
+"$_CP" ed "$_PKGROOT/pkg/var/usr/bin"
 )
 
 (
-cd pkg/var/usr || exit 1
-rm -rf share
-"$_TARGET-strip" bin/ed > /dev/null 2>&1
-ldid -S"$_BSROOT/ent.xml" bin/ed
+cd pkg/var/usr/bin || exit 1
+"$_TARGET-strip" ed > /dev/null 2>&1
+ldid -S"$_BSROOT/ent.xml" ed
 )
 
 "$_CP" -r DEBIAN pkg
