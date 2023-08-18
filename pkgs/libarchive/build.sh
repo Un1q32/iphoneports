@@ -7,16 +7,15 @@ cd src || exit 1
 )
 
 (
-cd pkg/var/usr || exit 1
-rm -rf share
-for prog in bsdcat bsdcpio bsdtar bsdunzip; do
-    "$_TARGET-strip" "bin/$prog" > /dev/null 2>&1
-    ldid -S"$_BSROOT/ent.xml" "bin/$prog"
+cd pkg/var/usr/bin || exit 1
+rm -rf ../share
+for prog in bsdcat bsdcpio bsdtar bsdunzip ../lib/libarchive.13.dylib; do
+    "$_TARGET-strip" "$prog" > /dev/null 2>&1
+    ldid -S"$_BSROOT/ent.xml" "$prog"
 done
-"$_TARGET-strip" lib/libarchive.13.dylib > /dev/null 2>&1
-ldid -S"$_BSROOT/ent.xml" lib/libarchive.13.dylib
-ln -s bsdtar bin/tar
-ln -s bsdcpio bin/cpio
+ln -s bsdtar tar
+ln -s bsdcpio cpio
+ln -s bsdunzip unzip
 )
 
 "$_CP" -r DEBIAN pkg
