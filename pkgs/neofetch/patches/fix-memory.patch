@@ -15,22 +15,11 @@
  
  # Change memory output precision.
  #
-@@ -3423,13 +3423,17 @@
-         ;;
- 
-         "Mac OS X" | "macOS" | "iPhone OS")
--            hw_pagesize="$(sysctl -n hw.pagesize)"
-             mem_total="$(($(sysctl -n hw.memsize) / 1024))"
-+            if type -p getusedmem > /dev/null; then
-+                mem_used="$(getusedmem)"
-+            else
-+            hw_pagesize="$(sysctl -n hw.pagesize)"
-             pages_app="$(($(sysctl -n vm.page_pageable_internal_count) - $(sysctl -n vm.page_purgeable_count)))"
-             pages_wired="$(vm_stat | awk '/ wired/ { print $4 }')"
+@@ -3430,6 +3430,7 @@
              pages_compressed="$(vm_stat | awk '/ occupied/ { printf $5 }')"
              pages_compressed="${pages_compressed:-0}"
              mem_used="$(((pages_app + ${pages_wired//.} + ${pages_compressed//.}) * hw_pagesize / 1024))"
-+            fi
++            type -p getusedmem &>/dev/null && mem_used="$(getusedmem)"
          ;;
  
          "BSD" | "MINIX" | "ravynOS")
