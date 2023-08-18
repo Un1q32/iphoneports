@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/var/usr/bin/sh
 [ "$1" = "upgrade" ] && /bin/launchctl unload /Library/LaunchDaemons/com.openssh.sshd.plist
 [ "$1" = "install" ] || [ "$1" = "upgrade" ] && /bin/launchctl load /Library/LaunchDaemons/com.openssh.sshd.plist
 exit 0
