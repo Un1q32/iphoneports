@@ -1,11 +1,11 @@
 #!/bin/sh
 (
 cd src || exit 1
-./configure --host="$_TARGET" --prefix=/var/usr
-"$_MAKE" -j8
 mkdir -p "$_PKGROOT/pkg/var/usr/bin"
-for prog in gzip gunzip zcat zcmp zdiff zegrep zfgrep zforce zgrep zless zmore znew gzexe; do
+"$_TARGET-cc" -O2 -o gzip gzip.c futimens.c -DGZIP_APPLE_VERSION='"400"' -llzma -lz -lbz2
+for prog in gzip gzexe zdiff zforce zmore znew; do
     "$_CP" "$prog" "$_PKGROOT/pkg/var/usr/bin"
+    chmod 755 "$_PKGROOT/pkg/var/usr/bin/$prog"
 done
 )
 
@@ -13,6 +13,11 @@ done
 cd pkg/var/usr/bin || exit 1
 "$_TARGET-strip" gzip > /dev/null 2>&1
 ldid -S"$_BSROOT/ent.xml" gzip
+for link in gunzip gzcat zcat zegrep zfgrep zgrep; do
+    ln -s gzip "$link"
+done
+ln -s zdiff zcmp
+ln -s zmore zless
 )
 
 "$_CP" -r DEBIAN pkg

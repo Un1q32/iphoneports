@@ -2,7 +2,7 @@ Package: iphoneports-gzip
 Section: Archiving
 Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
 Architecture: iphoneos-arm
-Version: 1.12
-Depends: iphoneports-base, iphoneports-grep, iphoneports-sed
+Version: 400
+Depends: iphoneports-base, iphoneports-grep, iphoneports-sed, iphoneports-bzip2, iphoneports-xz, iphoneports-zlib
 Description: the standard Unix compression algorithm
 Homepage: http://www.gzip.org/
