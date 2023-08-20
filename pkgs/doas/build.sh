@@ -2,7 +2,7 @@
 (
 cd src || exit 1
 yacc parse.y
-"$_TARGET-cc" -o doas -O2 doas.c env.c compat/execvpe.c compat/reallocarray.c y.tab.c compat/bsd-closefrom.c -lpam -Icompat -include compat/compat.h -DUSE_PAM -D__LINUX_PAM__ -DDOAS_CONF='"/var/usr/etc/doas.conf"'
+"$_TARGET-cc" -o doas -O2 doas.c env.c compat/execvpe.c compat/reallocarray.c y.tab.c compat/bsd-closefrom.c -lpam -Icompat -include compat/compat.h -DUSE_PAM -D__LINUX_PAM__ -DDOAS_CONF='"/var/usr/etc/doas.conf"' -DGLOBAL_PATH='"/var/usr/sbin:/var/usr/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:"'
 sed -i 's,@DOAS_CONF@,/var/usr/etc/doas.conf,g' vidoas
 mkdir -p "$_PKGROOT/pkg/var/usr/bin"
 "$_CP" doas "$_PKGROOT/pkg/var/usr/bin"
