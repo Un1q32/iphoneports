@@ -1,0 +1,7 @@
+Package: iphoneports-pax
+Section: Archiving
+Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
+Architecture: iphoneos-arm
+Version: 403.100.6
+Depends: iphoneports-base
+Description: Portable Archive eXchange
