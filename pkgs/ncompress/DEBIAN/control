@@ -5,4 +5,3 @@ Architecture: iphoneos-arm
 Version: 5.0
 Depends: iphoneports-base
 Description: a fast, simple LZW file compressor
-Homepage: http://www.gzip.org/
