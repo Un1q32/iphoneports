@@ -1,7 +1,7 @@
 #!/bin/sh
 (
 cd src || exit 1
-"$_TARGET-cc" -o ed -O2 main.c io.c buf.c re.c glbl.c undo.c sub.c
+"$_TARGET-cc" -o ed -O2 main.c io.c buf.c re.c glbl.c undo.c sub.c -D__FBSDID=__RCSID
 mkdir -p "$_PKGROOT/pkg/var/usr/bin"
 "$_CP" ed "$_PKGROOT/pkg/var/usr/bin"
 )
