@@ -1,0 +1,4 @@
+#!/var/usr/bin/sh
+# wrapper to be used for programs that break when $PATH contains iphoneports stuff
+export PATH='/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/bin/X11:/usr/games'
+exec "${0##*/}" "$@"
