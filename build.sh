@@ -110,8 +110,8 @@ depcheck() {
         error "No cp command detected. Please install GNU cp."
     fi
 
-    _SDK="$("$_TARGET-sdkpath")"
-    export _MAKE _PATCH _SDK _CP
+    sdk="$("$_TARGET-sdkpath")"
+    export _MAKE _PATCH _CP
 }
 
 build() {
@@ -128,7 +128,7 @@ build() {
         [ "$2" = "dryrun" ] || applypatches
         printf "Building %s\n" "$1"
         [ "$2" = "dryrun" ] || ./build.sh
-        rm -rf "$_SDKPATH"
+        rm -rf "$_SDK"
         )
     else
         dpkg-deb -b --root-owner-group -Zgzip "$_PKGDIR/$1" "$_BSROOT/debs/$1".deb
@@ -166,9 +166,9 @@ applypatches() {
 
 includedeps() {
     if ! [ "$1" = "dryrun" ]; then
-        if [ -d "$_SDK" ]; then
-            export _SDKPATH="$_TMP/sdk"
-            "$_CP" -ar "$_SDK" "$_SDKPATH"
+        if [ -d "$sdk" ]; then
+            export _SDK="$_TMP/sdk"
+            "$_CP" -ar "$sdk" "$_SDK"
         else
             error "SDK not found"
         fi
@@ -179,12 +179,12 @@ includedeps() {
             if [ -d "$_PKGDIR/$dep" ]; then
                 if ! hasbeenbuilt "$dep" "$1"; then
                     printf "Building dependency %s\n" "$dep"
-                    [ "$1" = "dryrun" ] || mv "$_SDKPATH" "$_SDKPATH.$dep.bak"
+                    [ "$1" = "dryrun" ] || mv "$_SDK" "$_SDK.$dep.bak"
                     build "$dep" "$1"
-                    [ "$1" = "dryrun" ] || mv "$_SDKPATH.$dep.bak" "$_SDKPATH"
+                    [ "$1" = "dryrun" ] || mv "$_SDK.$dep.bak" "$_SDK"
                 fi
                 printf "Including dependency %s\n" "$dep"
-                [ "$1" = "dryrun" ] || "$_CP" -ar "$_PKGDIR/$dep/pkg/"* "$_SDKPATH"
+                [ "$1" = "dryrun" ] || "$_CP" -ar "$_PKGDIR/$dep/pkg/"* "$_SDK"
             else
                 error "Dependency not found: $dep"
             fi
@@ -193,7 +193,7 @@ includedeps() {
 
     if ! [ "$1" = "dryrun" ]; then
         if [ -d sdk ]; then
-            "$_CP" -ar sdk/* "$_SDKPATH"
+            "$_CP" -ar sdk/* "$_SDK"
         fi
     fi
 }
