@@ -9,7 +9,7 @@ Usage: build.sh <command> [options]
     cleanall                - Clean all packages (remove build files)
     dryrun                  - Pretend to build all packages
     list                    - List all packages
-    --target                - Specify a target other than arm-apple-darwin9
+    --target                - Specify a target other than arm-apple-darwin11
     --no-tmpfs              - Do not use /tmp for anything (use if you have limited RAM)
     --no-deps               - Do not add dependencies to the SDK
     --help                  - Print this help message
@@ -52,7 +52,7 @@ esac
 
 case "$*" in
     *--target=*) _TARGET="$*" ; _TARGET="${_TARGET#*--target=}" ; export _TARGET="${_TARGET%% *}" ;;
-    *) export _TARGET="arm-apple-darwin9" ;;
+    *) export _TARGET="arm-apple-darwin11" ;;
 esac
 
 case "$*" in
