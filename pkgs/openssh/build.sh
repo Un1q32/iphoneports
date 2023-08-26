@@ -1,8 +1,7 @@
 #!/bin/sh
-rm -f "$_SDK/usr/lib/libsandbox."*
 (
 cd src || exit 1
-./configure --host="$_TARGET" --prefix=/var/usr --sysconfdir=/var/usr/etc/ssh --with-privsep-user="_sshd" --with-sandbox=no
+./configure --host="$_TARGET" --prefix=/var/usr --sysconfdir=/var/usr/etc/ssh --with-privsep-user="_sshd"
 "$_MAKE" -j8
 "$_MAKE" DESTDIR="$_PKGROOT/pkg" install-nokeys STRIP_OPT=
 )
