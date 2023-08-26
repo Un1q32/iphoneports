@@ -1,5 +1,5 @@
 Package: iphoneports-dash
-Version: 0.5.12-1
+Version: 0.5.12-2
 Architecture: iphoneos-arm
 Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
 Section: Terminal_Support

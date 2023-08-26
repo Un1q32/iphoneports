@@ -2,7 +2,7 @@ Package: iphoneports-screen
 Section: Terminal_Support
 Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
 Architecture: iphoneos-arm
-Version: 4.9.0
+Version: 4.9.0-1
 Depends: iphoneports-base, iphoneports-ncurses
 Homepage: http://www.gnu.org/software/screen/
 Description: multiplexes a terminal into many

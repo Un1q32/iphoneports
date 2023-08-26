@@ -1,5 +1,5 @@
 Package: iphoneports-hexedit
-Version: 1.6
+Version: 1.6-1
 Architecture: iphoneos-arm
 Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
 Depends: iphoneports-base, iphoneports-ncurses

@@ -2,6 +2,6 @@ Package: iphoneports-ed
 Section: Text_Editors
 Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
 Architecture: iphoneos-arm
-Version: 154
+Version: 154-1
 Description: A line-oriented text editor
 Depends: iphoneports-base

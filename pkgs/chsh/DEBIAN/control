@@ -2,6 +2,6 @@ Package: iphoneports-chsh
 Section: Utilities
 Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
 Architecture: iphoneos-arm
-Version: 2
+Version: 3
 Depends: iphoneports-base
 Description: Utility to change the default iPhonePorts Shell

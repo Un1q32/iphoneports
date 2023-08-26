@@ -2,7 +2,7 @@ Package: iphoneports-gawk
 Section: Utilities
 Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
 Architecture: iphoneos-arm
-Version: 5.2.2
+Version: 5.2.2-1
 Description: GNU's heavy-weight implementation of awk
 Depends: iphoneports-base
 Homepage: http://www.gnu.org/software/gawk/

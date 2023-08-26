@@ -1,5 +1,5 @@
 Package: iphoneports-cmatrix
-Version: 2.0
+Version: 2.0-1
 Architecture: iphoneos-arm
 Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
 Depends: iphoneports-base, iphoneports-ncurses

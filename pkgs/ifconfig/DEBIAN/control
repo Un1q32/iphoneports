@@ -1,5 +1,5 @@
 Package: iphoneports-ifconfig
-Version: 325
+Version: 325-1
 Architecture: iphoneos-arm
 Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
 Section: Utilities

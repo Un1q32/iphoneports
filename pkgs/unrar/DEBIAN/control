@@ -2,6 +2,6 @@ Package: iphoneports-unrar
 Section: Archiving
 Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
 Architecture: iphoneos-arm
-Version: 6.2.10
+Version: 6.2.10-1
 Description: de-compresses files in rar format
 Depends: iphoneports-base
