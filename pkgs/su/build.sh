@@ -13,9 +13,9 @@ ldid -S"$_BSROOT/ent.xml" su
 chmod 4755 su
 )
 
-mkdir -p pkg/usr/libexec/iphoneports pkg/etc/pam.d
-mv pkg/var/usr/bin/su pkg/usr/libexec/iphoneports/su
-ln -s ../../../../usr/libexec/iphoneports/su pkg/var/usr/bin/su
+mkdir -p pkg/usr/bin/iphoneports pkg/etc/pam.d
+mv pkg/var/usr/bin/su pkg/usr/bin/iphoneports/su
+ln -s ../../../../usr/bin/iphoneports/su pkg/var/usr/bin/su
 "$_CP" files/su.pam pkg/etc/pam.d/su
 
 "$_CP" -r DEBIAN pkg

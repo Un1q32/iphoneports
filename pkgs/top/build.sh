@@ -13,9 +13,9 @@ ldid -S"$_BSROOT/ent.xml" top
 chmod 4755 top
 )
 
-mkdir -p pkg/usr/libexec/iphoneports
-mv pkg/var/usr/bin/top pkg/usr/libexec/iphoneports/top
-ln -s ../../../../usr/libexec/iphoneports/top pkg/var/usr/bin/top
+mkdir -p pkg/usr/bin/iphoneports
+mv pkg/var/usr/bin/top pkg/usr/bin/iphoneports/top
+ln -s ../../../../usr/bin/iphoneports/top pkg/var/usr/bin/top
 
 "$_CP" -r DEBIAN pkg
 dpkg-deb -b --root-owner-group -Zgzip pkg top.deb
