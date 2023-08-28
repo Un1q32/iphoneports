@@ -1,0 +1,7 @@
+Package: iphoneports-vm-stat
+Version: 498.0.10
+Architecture: iphoneos-arm
+Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
+Section: Utilities
+Depends: iphoneports-base
+Description: A utility for displaying Mach virtual memory statistics

@@ -1,0 +1,3 @@
+#!/var/usr/bin/sh
+# shellcheck disable=SC2015
+[ -f /usr/bin/vm_stat ] && exec /usr/bin/vm_stat || exec vm_stat.real
