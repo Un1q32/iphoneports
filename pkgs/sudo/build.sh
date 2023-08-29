@@ -22,15 +22,5 @@ ln -s ../../../../usr/bin/iphoneports/sudo pkg/var/usr/bin/sudo
 
 "$_CP" files/sudoers pkg/var/usr/etc/sudoers
 
-case "$_TARGET" in
-    *64*)
-        debname="sudo64.deb"
-        "$_CP" -r files/DEBIAN-arm64 pkg/DEBIAN
-    ;;
-    *)
-        debname="sudo.deb"
-        "$_CP" -r DEBIAN pkg
-    ;;
-esac
-
-dpkg-deb -b --root-owner-group -Zgzip pkg "$debname"
+"$_CP" -r DEBIAN pkg
+dpkg-deb -b --root-owner-group -Zgzip pkg sudo.deb
