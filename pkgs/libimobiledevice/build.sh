@@ -8,9 +8,11 @@ cd src || exit 1
 )
 
 (
-cd pkg/var/usr/lib || exit 1
-# "$_TARGET-strip" libimobiledevice-glue-1.0.0.dylib > /dev/null 2>&1
-# ldid -S"$_BSROOT/ent.xml" libimobiledevice-glue-1.0.0.dylib
+cd pkg/var/usr || exit 1
+"$_TARGET-strip" bin/* > /dev/null 2>&1
+ldid -S"$_BSROOT/ent.xml" bin/*
+"$_TARGET-strip" lib/libimobiledevice-1.0.6.0.0.dylib > /dev/null 2>&1
+ldid -S"$_BSROOT/ent.xml" lib/libimobiledevice-1.0.6.0.0.dylib
 )
 
 "$_CP" -r DEBIAN pkg
