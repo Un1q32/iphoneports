@@ -1,0 +1,7 @@
+Package: iphoneports-libplist
+Version: 2.3.0
+Architecture: iphoneos-arm
+Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
+Depends: iphoneports-base
+Section: Development
+Description: A library to handle Apple Property List format in binary or XML
