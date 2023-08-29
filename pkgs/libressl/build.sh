@@ -8,7 +8,7 @@ cd src || exit 1
 
 (
 cd pkg/var/usr || exit 1
-rm -rf share
+rm -rf share etc/ssl/cert.pem
 for bin in bin/openssl bin/ocspcheck lib/libcrypto.50.dylib lib/libssl.53.dylib lib/libtls.26.dylib; do
     "$_TARGET-strip" "$bin" > /dev/null 2>&1
     ldid -S"$_BSROOT/ent.xml" "$bin"
