@@ -1,0 +1,4 @@
+libplist
+libusbmuxd
+libimobiledevice-glue
+mbedtls
