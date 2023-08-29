@@ -1,7 +1,0 @@
-Package: iphoneports-mbedtls
-Section: Security
-Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
-Architecture: iphoneos-arm
-Version: 3.4.1
-Description: An open source, portable, easy to use, readable and flexible TLS library
-Depends: iphoneports-base
