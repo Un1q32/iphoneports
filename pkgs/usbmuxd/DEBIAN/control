@@ -1,5 +1,5 @@
 Package: iphoneports-usbmuxd
-Version: 1.1.1-1
+Version: 1.1.1-2
 Architecture: iphoneos-arm
 Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
 Depends: iphoneports-base, iphoneports-libplist, iphoneports-libimobiledevice, iphoneports-libusb
