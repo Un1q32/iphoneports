@@ -1,5 +1,5 @@
 Package: iphoneports-libplist
-Version: 2.3.0
+Version: 2.2.0
 Architecture: iphoneos-arm
 Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
 Depends: iphoneports-base

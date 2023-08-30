@@ -1,7 +1,7 @@
 #!/bin/sh
 (
 cd src || exit 1
-./configure --host="$_TARGET" --prefix=/var/usr --without-cython --disable-static
+./configure --host="$_TARGET" --prefix=/var/usr --without-cython --disable-static CC="$_TARGET-cc"
 "$_MAKE" -j8
 "$_MAKE" install DESTDIR="$_PKGROOT/pkg"
 )
@@ -9,7 +9,7 @@ cd src || exit 1
 (
 cd pkg/var/usr || exit 1
 rm -rf share
-for bin in bin/plistutil lib/libplist-2.0.4.dylib lib/libplist++-2.0.4.dylib; do
+for bin in bin/plistutil lib/libplist-2.0.3.dylib lib/libplist++-2.0.3.dylib; do
     "$_TARGET-strip" "$bin" > /dev/null 2>&1
     ldid -S"$_BSROOT/ent.xml" "$bin"
 done
