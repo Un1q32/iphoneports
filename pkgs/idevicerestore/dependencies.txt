@@ -1,0 +1,9 @@
+libirecovery
+libusb
+libimobiledevice
+libusbmuxd
+libplist
+libzip
+libressl
+curl
+zlib

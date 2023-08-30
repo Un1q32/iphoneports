@@ -1,0 +1,7 @@
+Package: iphoneports-libimobiledevice
+Version: 1.0.0
+Architecture: iphoneos-arm
+Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
+Depends: iphoneports-base, iphoneports-libimobiledevice, iphoneports-libzip, iphoneports-curl, iphoneports-libressl, iphoneports-libplist, iphoneports-zlib, iphoneports-libirecovery
+Section: Utilities
+Description: Restore/upgrade firmware of iOS devices
