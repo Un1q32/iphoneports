@@ -1,0 +1,5 @@
+libimobiledevice
+libimobiledevice-glue
+libusbmuxd
+libplist
+libusb
