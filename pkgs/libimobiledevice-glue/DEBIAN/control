@@ -1,7 +1,0 @@
-Package: iphoneports-libimobiledevice-glue
-Version: 1.0.0
-Architecture: iphoneos-arm
-Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
-Depends: iphoneports-base
-Section: Development
-Description: A library with common code used by libraries and tools around the libimobiledevice project

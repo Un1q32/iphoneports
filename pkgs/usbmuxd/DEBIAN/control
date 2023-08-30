@@ -2,6 +2,6 @@ Package: iphoneports-usbmuxd
 Version: 1.1.1
 Architecture: iphoneos-arm
 Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
-Depends: iphoneports-base, iphoneports-libplist, iphoneports-libimobiledevice, iphoneports-libimobiledevice-glue, iphoneports-libusb
+Depends: iphoneports-base, iphoneports-libplist, iphoneports-libimobiledevice, iphoneports-libusb
 Section: Utilities
 Description: A socket daemon to multiplex connections from and to iOS devices
