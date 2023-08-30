@@ -1,0 +1,7 @@
+Package: iphoneports-libzip
+Version: 1.10.1
+Architecture: iphoneos-arm
+Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
+Depends: iphoneports-base, iphoneports-xz
+Section: Development
+Description: A C library for reading, creating, and modifying zip archives.
