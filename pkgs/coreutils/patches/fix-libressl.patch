@@ -1,0 +1,105 @@
+--- src/lib/md5.h.orig
++++ src/lib/md5.h
+@@ -32,17 +32,7 @@
+ #  ifndef OPENSSL_API_COMPAT
+ #   define OPENSSL_API_COMPAT 0x10101000L /* FIXME: Use OpenSSL 1.1+ API.  */
+ #  endif
+-/* If <openssl/macros.h> would give a compile-time error, don't use OpenSSL.  */
+-#  include <openssl/configuration.h>
+-#  if (OPENSSL_CONFIGURED_API \
+-       < (OPENSSL_API_COMPAT < 0x900000L ? OPENSSL_API_COMPAT : \
+-          ((OPENSSL_API_COMPAT >> 28) & 0xF) * 10000 \
+-          + ((OPENSSL_API_COMPAT >> 20) & 0xFF) * 100 \
+-          + ((OPENSSL_API_COMPAT >> 12) & 0xFF)))
+-#   undef HAVE_OPENSSL_MD5
+-#  else
+-#   include <openssl/md5.h>
+-#  endif
++#  include <openssl/md5.h>
+ # endif
+ 
+ #define MD5_DIGEST_SIZE 16
+--- src/lib/sha256.h.orig
++++ src/lib/sha256.h
+@@ -30,17 +30,7 @@
+ #  ifndef OPENSSL_API_COMPAT
+ #   define OPENSSL_API_COMPAT 0x10101000L /* FIXME: Use OpenSSL 1.1+ API.  */
+ #  endif
+-/* If <openssl/macros.h> would give a compile-time error, don't use OpenSSL.  */
+-#  include <openssl/configuration.h>
+-#  if (OPENSSL_CONFIGURED_API \
+-       < (OPENSSL_API_COMPAT < 0x900000L ? OPENSSL_API_COMPAT : \
+-          ((OPENSSL_API_COMPAT >> 28) & 0xF) * 10000 \
+-          + ((OPENSSL_API_COMPAT >> 20) & 0xFF) * 100 \
+-          + ((OPENSSL_API_COMPAT >> 12) & 0xFF)))
+-#   undef HAVE_OPENSSL_SHA256
+-#  else
+-#   include <openssl/sha.h>
+-#  endif
++#  include <openssl/sha.h>
+ # endif
+ 
+ # ifdef __cplusplus
+--- src/lib/sha1.h.orig
++++ src/lib/sha1.h
+@@ -31,17 +31,7 @@
+ #  ifndef OPENSSL_API_COMPAT
+ #   define OPENSSL_API_COMPAT 0x10101000L /* FIXME: Use OpenSSL 1.1+ API.  */
+ #  endif
+-/* If <openssl/macros.h> would give a compile-time error, don't use OpenSSL.  */
+-#  include <openssl/configuration.h>
+-#  if (OPENSSL_CONFIGURED_API \
+-       < (OPENSSL_API_COMPAT < 0x900000L ? OPENSSL_API_COMPAT : \
+-          ((OPENSSL_API_COMPAT >> 28) & 0xF) * 10000 \
+-          + ((OPENSSL_API_COMPAT >> 20) & 0xFF) * 100 \
+-          + ((OPENSSL_API_COMPAT >> 12) & 0xFF)))
+-#   undef HAVE_OPENSSL_SHA1
+-#  else
+-#   include <openssl/sha.h>
+-#  endif
++#  include <openssl/sha.h>
+ # endif
+ 
+ # ifdef __cplusplus
+--- src/lib/sm3.h.orig
++++ src/lib/sm3.h
+@@ -39,17 +39,7 @@
+ #  ifndef OPENSSL_API_COMPAT
+ #   define OPENSSL_API_COMPAT 0x10101000L /* FIXME: Use OpenSSL 1.1+ API.  */
+ #  endif
+-/* If <openssl/macros.h> would give a compile-time error, don't use OpenSSL.  */
+-#  include <openssl/configuration.h>
+-#  if (OPENSSL_CONFIGURED_API \
+-       < (OPENSSL_API_COMPAT < 0x900000L ? OPENSSL_API_COMPAT : \
+-          ((OPENSSL_API_COMPAT >> 28) & 0xF) * 10000 \
+-          + ((OPENSSL_API_COMPAT >> 20) & 0xFF) * 100 \
+-          + ((OPENSSL_API_COMPAT >> 12) & 0xFF)))
+-#   undef HAVE_OPENSSL_SM3
+-#  else
+-#   include <openssl/sm3.h>
+-#  endif
++#  include <openssl/sm3.h>
+ # endif
+ 
+ # ifdef __cplusplus
+--- src/lib/sha512.h.orig
++++ src/lib/sha512.h
+@@ -30,17 +30,7 @@
+ #  ifndef OPENSSL_API_COMPAT
+ #   define OPENSSL_API_COMPAT 0x10101000L /* FIXME: Use OpenSSL 1.1+ API.  */
+ #  endif
+-/* If <openssl/macros.h> would give a compile-time error, don't use OpenSSL.  */
+-#  include <openssl/configuration.h>
+-#  if (OPENSSL_CONFIGURED_API \
+-       < (OPENSSL_API_COMPAT < 0x900000L ? OPENSSL_API_COMPAT : \
+-          ((OPENSSL_API_COMPAT >> 28) & 0xF) * 10000 \
+-          + ((OPENSSL_API_COMPAT >> 20) & 0xFF) * 100 \
+-          + ((OPENSSL_API_COMPAT >> 12) & 0xFF)))
+-#   undef HAVE_OPENSSL_SHA512
+-#  else
+-#   include <openssl/sha.h>
+-#  endif
++#  include <openssl/sha.h>
+ # endif
+ 
+ # ifdef __cplusplus

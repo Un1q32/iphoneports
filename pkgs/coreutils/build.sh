@@ -1,7 +1,7 @@
 #!/bin/sh
 (
 cd src || exit 1
-./configure --host="$_TARGET" --prefix=/var/usr --enable-single-binary=symlinks --with-openssl ac_year2038_required=no
+./configure --host="$_TARGET" --prefix=/var/usr --enable-single-binary=symlinks --with-openssl --disable-year2038
 "$_MAKE" -j8
 "$_MAKE" DESTDIR="$_PKGROOT/pkg" install
 )
