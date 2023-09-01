@@ -17,9 +17,9 @@ ldid -S"$_BSROOT/ent.xml" doas
 chmod 4755 doas
 )
 
-mkdir -p pkg/usr/bin/iphoneports pkg/etc/pam.d pkg/var/usr/etc
-mv pkg/var/usr/bin/doas pkg/usr/bin/iphoneports
-ln -s ../../../../usr/bin/iphoneports/doas pkg/var/usr/bin/doas
+mkdir -p pkg/usr/libexec/iphoneports pkg/etc/pam.d pkg/var/usr/etc
+mv pkg/var/usr/bin/doas pkg/usr/libexec/iphoneports
+ln -s ../../../../usr/libexec/iphoneports/doas pkg/var/usr/bin/doas
 "$_CP" files/doas.pam pkg/etc/pam.d/doas
 "$_CP" files/doas.conf pkg/var/usr/etc
 

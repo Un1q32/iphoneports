@@ -1,5 +1,5 @@
 Package: iphoneports-top
-Version: 39-2
+Version: 39-3
 Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
 Architecture: iphoneos-arm
 Depends: iphoneports-base, iphoneports-ncurses
