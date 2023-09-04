@@ -1,8 +1,9 @@
 #!/bin/sh
 (
 cd src || exit 1
-"$_MAKE" CROSS_COMPILE="$_TARGET-" OS=Darwin -j8
-"$_MAKE" CROSS_COMPILE="$_TARGET-" OS=Darwin PREFIX=/var/usr DESTDIR="$_PKGROOT/pkg" install
+"$_TARGET-cc" -std=c99 -O2 -D_POSIX_C_SOURCE=200809L -D_DARWIN_C_SOURCE vi.c -o vi
+mkdir -p "$_PKGROOT/pkg/var/usr/bin"
+"$_CP" vi "$_PKGROOT/pkg/var/usr/bin"
 )
 
 (
