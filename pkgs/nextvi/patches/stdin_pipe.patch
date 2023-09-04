@@ -93,19 +93,16 @@
  		term_init();
 --- src/vi.c
 +++ src/vi.c
-@@ -2028,9 +2028,11 @@ int main(int argc, char *argv[])
- 			xvis |= 4;
- 		else if (argv[i][1] == 'v' && !argv[i][2])
- 			xvis = 0;
-+		else if (!argv[i][1])
+@@ -2025,7 +2025,8 @@ int main(int argc, char *argv[])
+ 		if (argv[i][1] == '-' && !argv[i][2]) {
+ 			i++;
+ 			break;
+-		}
++		} else if (!argv[i][1])
 +			stdin_fd = open(ctermid(NULL), O_RDONLY);
- 		else {
- 			fprintf(stderr, "Unknown option: %s\n", argv[i]);
--			fprintf(stderr, "Usage: %s [-e] [-s] [-v] [file ...]\n", argv[0]);
-+			fprintf(stderr, "Usage: %s [-] [-e] [-s] [-v] [file ...]\n", argv[0]);
- 			return 1;
- 		}
- 	}
+ 		for (j = 1; argv[i][j]; j++) {
+ 			if (argv[i][j] == 's')
+ 				xvis |= 2;
 --- src/vi.h
 +++ src/vi.h
 @@ -417,3 +417,4 @@ extern rset *fsincl;
