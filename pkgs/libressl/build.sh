@@ -15,5 +15,5 @@ for bin in bin/openssl bin/ocspcheck lib/libcrypto.50.dylib lib/libssl.53.dylib 
 done
 )
 
-"$_CP" -r DEBIAN pkg
+cp -r DEBIAN pkg
 dpkg-deb -b --root-owner-group -Zgzip pkg libressl.deb

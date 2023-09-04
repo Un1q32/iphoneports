@@ -12,5 +12,5 @@ rm -rf share
 ldid -S"$_BSROOT/ent.xml" lib/liblz.1.13.dylib
 )
 
-"$_CP" -r DEBIAN pkg
+cp -r DEBIAN pkg
 dpkg-deb -b --root-owner-group -Zgzip pkg lzlib.deb

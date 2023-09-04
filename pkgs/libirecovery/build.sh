@@ -14,5 +14,5 @@ ldid -S"$_BSROOT/ent.xml" bin/irecovery
 ldid -S"$_BSROOT/ent.xml" lib/libirecovery-1.0.3.dylib
 )
 
-"$_CP" -r DEBIAN pkg
+cp -r DEBIAN pkg
 dpkg-deb -b --root-owner-group -Zgzip pkg libirecovery.deb

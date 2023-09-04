@@ -14,5 +14,5 @@ ldid -S"$_BSROOT/ent.xml" bin/lz4
 ldid -S"$_BSROOT/ent.xml" lib/liblz4.1.9.4.dylib
 )
 
-"$_CP" -r DEBIAN pkg
+cp -r DEBIAN pkg
 dpkg-deb -b --root-owner-group -Zgzip pkg lz4.deb

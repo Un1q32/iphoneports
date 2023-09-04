@@ -3,7 +3,7 @@
 cd src || exit 1
 "$_MAKE" CXX="$_TARGET-c++" STRIP=true CXXFLAGS=-O2 LIBFLAGS= -j8
 mkdir -p "$_PKGROOT/pkg/var/usr/bin"
-"$_CP" unrar "$_PKGROOT/pkg/var/usr/bin"
+cp unrar "$_PKGROOT/pkg/var/usr/bin"
 )
 
 (
@@ -12,5 +12,5 @@ cd pkg/var/usr/bin || exit 1
 ldid -S"$_BSROOT/ent.xml" unrar
 )
 
-"$_CP" -r DEBIAN pkg
+cp -r DEBIAN pkg
 dpkg-deb -b --root-owner-group -Zgzip pkg unrar.deb

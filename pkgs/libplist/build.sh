@@ -15,5 +15,5 @@ for bin in bin/plistutil lib/libplist-2.0.3.dylib lib/libplist++-2.0.3.dylib; do
 done
 )
 
-"$_CP" -r DEBIAN pkg
+cp -r DEBIAN pkg
 dpkg-deb -b --root-owner-group -Zgzip pkg libplist.deb

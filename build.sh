@@ -71,7 +71,7 @@ depcheck() {
 
     _strip_version=$("$_TARGET-strip" --version 2> /dev/null)
     case "$_strip_version" in
-        *GNU*) error "GNU/LLVM strip is not supported."
+        *GNU*) error "GNU/LLVM strip is not supported, please use Apple's strip" ;;
     esac
 
     if command -v gmake > /dev/null; then
@@ -86,32 +86,8 @@ depcheck() {
         error "No make command detected. Please install GNU make."
     fi
 
-    if command -v gpatch > /dev/null; then
-        _PATCH="gpatch"
-    elif command -v make > /dev/null; then
-        _patch_version="$(patch --version)"
-        case "$_patch_version" in
-            *GNU*) _PATCH="patch" ;;
-            *) error "Non-GNU patch detected. Please install GNU patch." ;;
-        esac
-    else
-        error "No patch command detected. Please install GNU patch."
-    fi
-
-    if command -v gcp > /dev/null; then
-        _CP="gcp"
-    elif command -v cp > /dev/null; then
-        _cp_version="$(cp --version)"
-        case "$_cp_version" in
-            *GNU*) _CP="cp" ;;
-            *) error "Non-GNU cp detected. Please install GNU cp." ;;
-        esac
-    else
-        error "No cp command detected. Please install GNU cp."
-    fi
-
     sdk="$("$_TARGET-sdkpath")"
-    export _MAKE _PATCH _CP
+    export _MAKE
 }
 
 build() {
@@ -159,7 +135,7 @@ applypatches() {
     if [ -d patches ]; then
         for patch in patches/*; do
             printf "Applying patch %s\n" "${patch##*/}"
-            "$_PATCH" -p0 < "$patch"
+            patch -p0 < "$patch"
         done
     fi
 }
@@ -168,7 +144,7 @@ includedeps() {
     if ! [ "$1" = "dryrun" ]; then
         if [ -d "$sdk" ]; then
             export _SDK="$_TMP/sdk"
-            "$_CP" -ar "$sdk" "$_SDK"
+            cp -a "$sdk" "$_SDK"
         else
             error "SDK not found"
         fi
@@ -184,7 +160,7 @@ includedeps() {
                     [ "$1" = "dryrun" ] || mv "$_SDK.$dep.bak" "$_SDK"
                 fi
                 printf "Including dependency %s\n" "$dep"
-                [ "$1" = "dryrun" ] || "$_CP" -ar "$_PKGDIR/$dep/pkg/"* "$_SDK"
+                [ "$1" = "dryrun" ] || cp -a "$_PKGDIR/$dep/pkg/"* "$_SDK"
             else
                 error "Dependency not found: $dep"
             fi
@@ -193,7 +169,7 @@ includedeps() {
 
     if ! [ "$1" = "dryrun" ]; then
         if [ -d sdk ]; then
-            "$_CP" -ar sdk/* "$_SDK"
+            cp -a sdk/* "$_SDK"
         fi
     fi
 }
@@ -203,7 +179,7 @@ case "$1" in
         depcheck
         rm -rf "$_PKGDIR"/*/pkg "$_PKGDIR"/*/src
         buildall
-        "$_CP" -fl "$_PKGDIR"/*/*.deb "$_BSROOT/debs" 2>/dev/null
+        cp -fl "$_PKGDIR"/*/*.deb "$_BSROOT/debs" 2>/dev/null
     ;;
 
     list)
@@ -235,7 +211,7 @@ case "$1" in
         done
         for pkg in "$@"; do
             build "$pkg" || error "Failed to build package: $pkg"
-            "$_CP" -fl "$_PKGDIR/$pkg"/*.deb "$_BSROOT/debs" 2>/dev/null
+            cp -fl "$_PKGDIR/$pkg"/*.deb "$_BSROOT/debs" 2>/dev/null
         done
     ;;
 
@@ -244,7 +220,7 @@ case "$1" in
             depcheck
             rm -rf "$_PKGDIR/$1/pkg" "$_PKGDIR/$1/src"
             build "$1"
-            "$_CP" -fl "$_PKGDIR/$1"/*.deb "$_BSROOT/debs" 2>/dev/null
+            cp -fl "$_PKGDIR/$1"/*.deb "$_BSROOT/debs" 2>/dev/null
         else
             error "Package not found: $1"
         fi

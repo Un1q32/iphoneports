@@ -16,5 +16,5 @@ ldid -S"$_BSROOT/ent.xml" bin/bc
 ldid -S"$_BSROOT/ent.xml" bin/dc
 )
 
-"$_CP" -r DEBIAN pkg
+cp -r DEBIAN pkg
 dpkg-deb -b --root-owner-group -Zgzip pkg bc.deb

@@ -14,5 +14,5 @@ ldid -S"$_BSROOT/ent.xml" bin/zstd
 ldid -S"$_BSROOT/ent.xml" lib/libzstd.1.5.5.dylib
 )
 
-"$_CP" -r DEBIAN pkg
+cp -r DEBIAN pkg
 dpkg-deb -b --root-owner-group -Zgzip pkg zstd.deb

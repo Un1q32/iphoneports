@@ -20,7 +20,7 @@ mkdir -p pkg/usr/libexec/iphoneports
 mv pkg/var/usr/bin/sudo pkg/usr/libexec/iphoneports
 ln -s ../../../../usr/libexec/iphoneports/sudo pkg/var/usr/bin/sudo
 
-"$_CP" files/sudoers pkg/var/usr/etc/sudoers
+cp files/sudoers pkg/var/usr/etc/sudoers
 
-"$_CP" -r DEBIAN pkg
+cp -r DEBIAN pkg
 dpkg-deb -b --root-owner-group -Zgzip pkg sudo.deb

@@ -11,5 +11,5 @@ rm -rf man
 ldid -S"$_BSROOT/ent.xml" bin/tree
 )
 
-"$_CP" -r DEBIAN pkg
+cp -r DEBIAN pkg
 dpkg-deb -b --root-owner-group -Zgzip pkg tree.deb

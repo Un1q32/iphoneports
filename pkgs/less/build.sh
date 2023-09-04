@@ -17,5 +17,5 @@ ldid -S"$_BSROOT/ent.xml" bin/lessecho
 ldid -S"$_BSROOT/ent.xml" bin/lesskey
 )
 
-"$_CP" -r DEBIAN pkg
+cp -r DEBIAN pkg
 dpkg-deb -b --root-owner-group -Zgzip pkg less.deb

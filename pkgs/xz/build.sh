@@ -17,5 +17,5 @@ ldid -S"$_BSROOT/ent.xml" bin/xzdec
 ldid -S"$_BSROOT/ent.xml" lib/liblzma.5.dylib
 )
 
-"$_CP" -r DEBIAN pkg
+cp -r DEBIAN pkg
 dpkg-deb -b --root-owner-group -Zgzip pkg xz.deb

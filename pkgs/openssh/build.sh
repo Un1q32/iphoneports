@@ -20,9 +20,9 @@ chmod 4711 libexec/ssh-keysign
 
 mkdir -p pkg/Library/LaunchDaemons
 
-"$_CP" files/com.openssh.sshd.plist pkg/Library/LaunchDaemons/com.openssh.sshd.plist
-"$_CP" files/sshd_config pkg/var/usr/etc/ssh/sshd_config
-"$_CP" files/sshd-keygen-wrapper pkg/var/usr/libexec/sshd-keygen-wrapper
+cp files/com.openssh.sshd.plist pkg/Library/LaunchDaemons/com.openssh.sshd.plist
+cp files/sshd_config pkg/var/usr/etc/ssh/sshd_config
+cp files/sshd-keygen-wrapper pkg/var/usr/libexec/sshd-keygen-wrapper
 
-"$_CP" -r DEBIAN pkg
+cp -r DEBIAN pkg
 dpkg-deb -b --root-owner-group -Zgzip pkg openssh.deb

@@ -13,5 +13,5 @@ ldid -S"$_BSROOT/ent.xml" bin/dos2unix
 ldid -S"$_BSROOT/ent.xml" bin/unix2dos
 )
 
-"$_CP" -r DEBIAN pkg
+cp -r DEBIAN pkg
 dpkg-deb -b --root-owner-group -Zgzip pkg dos2unix.deb

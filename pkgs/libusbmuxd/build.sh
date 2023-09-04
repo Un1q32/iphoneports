@@ -15,5 +15,5 @@ for bin in bin/inetcat bin/iproxy lib/libusbmuxd-2.0.6.dylib; do
 done
 )
 
-"$_CP" -r DEBIAN pkg
+cp -r DEBIAN pkg
 dpkg-deb -b --root-owner-group -Zgzip pkg libusbmuxd.deb

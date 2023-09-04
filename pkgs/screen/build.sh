@@ -14,5 +14,5 @@ rm -rf share/info share/man
 ldid -S"$_BSROOT/ent.xml" bin/screen-4.9.0
 )
 
-"$_CP" -r DEBIAN pkg
+cp -r DEBIAN pkg
 dpkg-deb -b --root-owner-group -Zgzip pkg screen.deb

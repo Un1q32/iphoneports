@@ -13,5 +13,5 @@ rm -rf share bin
 ldid -S"$_BSROOT/ent.xml" lib/libnghttp2.14.dylib
 )
 
-"$_CP" -r DEBIAN pkg
+cp -r DEBIAN pkg
 dpkg-deb -b --root-owner-group -Zgzip pkg nghttp2.deb

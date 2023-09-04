@@ -6,5 +6,5 @@ cd src || exit 1
 "$_MAKE" install DESTDIR="$_PKGROOT/pkg"
 )
 
-"$_CP" -r DEBIAN pkg
+cp -r DEBIAN pkg
 dpkg-deb -b --root-owner-group -Zgzip pkg bash-completion.deb

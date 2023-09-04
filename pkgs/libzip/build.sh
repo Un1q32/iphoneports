@@ -21,5 +21,5 @@ for bin in bin/*; do
 done
 )
 
-"$_CP" -r DEBIAN pkg
+cp -r DEBIAN pkg
 dpkg-deb -b --root-owner-group -Zgzip pkg libzip.deb

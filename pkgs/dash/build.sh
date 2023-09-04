@@ -15,5 +15,5 @@ ldid -S"$_BSROOT/ent.xml" bin/dash
 ln -s dash bin/sh
 )
 
-"$_CP" -r DEBIAN pkg
+cp -r DEBIAN pkg
 dpkg-deb -b --root-owner-group -Zgzip pkg dash.deb

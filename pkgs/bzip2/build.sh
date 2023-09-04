@@ -19,5 +19,5 @@ ldid -S"$_BSROOT/ent.xml" bin/bzip2recover
 ldid -S"$_BSROOT/ent.xml" lib/libbz2.1.0.dylib
 )
 
-"$_CP" -r DEBIAN pkg
+cp -r DEBIAN pkg
 dpkg-deb -b --root-owner-group -Zgzip pkg bzip2.deb

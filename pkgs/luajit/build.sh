@@ -14,5 +14,5 @@ ldid -S"$_BSROOT/ent.xml" bin/luajit-2.1.0-beta3
 ldid -S"$_BSROOT/ent.xml" lib/libluajit-5.1.2.1.0.dylib
 )
 
-"$_CP" -r DEBIAN pkg
+cp -r DEBIAN pkg
 dpkg-deb -b --root-owner-group -Zgzip pkg luajit.deb

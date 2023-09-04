@@ -19,5 +19,5 @@ ldid -S"$_BSROOT/ent.xml" lib/libpcre2-8.0.dylib
 ldid -S"$_BSROOT/ent.xml" lib/libpcre2-posix.3.dylib
 )
 
-"$_CP" -r DEBIAN pkg
+cp -r DEBIAN pkg
 dpkg-deb -b --root-owner-group -Zgzip pkg pcre2.deb

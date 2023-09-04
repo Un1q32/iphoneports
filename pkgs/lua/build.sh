@@ -14,5 +14,5 @@ ldid -S"$_BSROOT/ent.xml" bin/lua
 ldid -S"$_BSROOT/ent.xml" bin/luac
 )
 
-"$_CP" -r DEBIAN pkg
+cp -r DEBIAN pkg
 dpkg-deb -b --root-owner-group -Zgzip pkg lua.deb

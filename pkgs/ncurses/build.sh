@@ -25,5 +25,5 @@ done
 ln -s ncursesw include/ncurses
 )
 
-"$_CP" -r DEBIAN pkg
+cp -r DEBIAN pkg
 dpkg-deb -b --root-owner-group -Zgzip pkg ncurses.deb

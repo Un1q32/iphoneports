@@ -15,5 +15,5 @@ ldid -S"$_BSROOT/ent.xml" bin/idn2
 ldid -S"$_BSROOT/ent.xml" lib/libidn2.0.dylib
 )
 
-"$_CP" -r DEBIAN pkg
+cp -r DEBIAN pkg
 dpkg-deb -b --root-owner-group -Zgzip pkg libidn2.deb

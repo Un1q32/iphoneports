@@ -15,5 +15,5 @@ ldid -S"$_BSROOT/ent.xml" lib/libhistory.8.2.dylib
 ldid -S"$_BSROOT/ent.xml" lib/libreadline.8.2.dylib
 )
 
-"$_CP" -r DEBIAN pkg
+cp -r DEBIAN pkg
 dpkg-deb -b --root-owner-group -Zgzip pkg readline.deb

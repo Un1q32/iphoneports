@@ -14,5 +14,5 @@ for bin in bin/git bin/git-shell bin/scalar libexec/git-core/git-remote-http lib
 done
 )
 
-"$_CP" -r DEBIAN pkg
+cp -r DEBIAN pkg
 dpkg-deb -b --root-owner-group -Zgzip pkg git.deb

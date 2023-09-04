@@ -18,5 +18,5 @@ ln -s bsdcpio cpio
 ln -s bsdunzip unzip
 )
 
-"$_CP" -r DEBIAN pkg
+cp -r DEBIAN pkg
 dpkg-deb -b --root-owner-group -Zgzip pkg libarchive.deb

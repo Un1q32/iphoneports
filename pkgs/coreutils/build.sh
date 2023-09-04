@@ -15,5 +15,5 @@ ldid -S"$_BSROOT/ent.xml" bin/coreutils
 ldid -S"$_BSROOT/ent.xml" libexec/coreutils/libstdbuf.so
 )
 
-"$_CP" -r DEBIAN pkg
+cp -r DEBIAN pkg
 dpkg-deb -b --root-owner-group -Zgzip pkg coreutils.deb

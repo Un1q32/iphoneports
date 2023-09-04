@@ -8,7 +8,7 @@ cd src || exit 1
 
 (
 # for nanorc in files/syntax/*.nanorc; do
-#     "$_CP" -a "$nanorc" package/usr/share/nano/
+#     cp -a "$nanorc" package/usr/share/nano/
 # done
 cd pkg/var/usr || exit 1
 rm -rf share/info share/man share/doc
@@ -16,9 +16,9 @@ rm -rf share/info share/man share/doc
 ldid -S"$_BSROOT/ent.xml" bin/nano
 )
 
-"$_CP" -a files/syntax/*.nanorc pkg/var/usr/share/nano
+cp -a files/syntax/*.nanorc pkg/var/usr/share/nano
 mkdir -p pkg/var/usr/etc
-"$_CP" files/nanorc pkg/var/usr/etc
+cp files/nanorc pkg/var/usr/etc
 
-"$_CP" -r DEBIAN pkg
+cp -r DEBIAN pkg
 dpkg-deb -b --root-owner-group -Zgzip pkg nano.deb

@@ -14,7 +14,7 @@ ldid -S"$_BSROOT/ent.xml" bin/zsh
 mkdir -p etc/zsh
 )
 
-"$_CP" files/zprofile pkg/var/usr/etc/zsh
+cp files/zprofile pkg/var/usr/etc/zsh
 
-"$_CP" -r DEBIAN pkg
+cp -r DEBIAN pkg
 dpkg-deb -b --root-owner-group -Zgzip pkg zsh.deb

@@ -15,5 +15,5 @@ for bin in bin/find bin/xargs bin/locate libexec/frcode; do
 done
 )
 
-"$_CP" -r DEBIAN pkg
+cp -r DEBIAN pkg
 dpkg-deb -b --root-owner-group -Zgzip pkg findutils.deb
