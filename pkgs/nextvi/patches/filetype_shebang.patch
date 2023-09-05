@@ -2,7 +2,7 @@
 +++ src/ex.c
 @@ -418,6 +418,16 @@ static int ec_edit(char *loc, char *cmd, char *arg)
  			*ex_path ? ex_path : "unnamed", lbuf_len(xb),
- 			!rd && fd >= 0 ? 'r' : 'f');
+ 			fd < 0 || rd ? 'f' : 'r');
  	ex_show(msg);
 +	if (!rd && fd >= 0 && lbuf_len(xb) > 0) {
 +		int adv = 0;
@@ -14,6 +14,6 @@
 +			if (strstr(lbuf_buf(xb)[adv], langs[i]))
 +				ex_ft = syn_setft(types[i]);
 +	}
- 	return rd;
+ 	return fd < 0 || rd;
  }
  
