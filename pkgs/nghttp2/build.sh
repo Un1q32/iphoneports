@@ -1,7 +1,7 @@
 #!/bin/sh
 (
 cd src || exit 1
-./configure --host="$_TARGET" --prefix=/var/usr --disable-static --disable-examples --with-openssl --with-zlib --with-libxml2 --without-systemd --without-jansson --without-libevent-openssl --without-libcares --without-libev --without-cunit --without-mruby --without-neverbleed --without-libbpf --without-libngtcp2 --without-libnghttp3
+./configure --host="$_TARGET" --prefix=/var/usr --disable-static --disable-examples --with-openssl --with-zlib --with-libxml2 --without-libcares PKG_CONFIG_SYSROOT_DIR="$_SDK" PKG_CONFIG_PATH="$_SDK/var/usr/lib/pkgconfig"
 "$_MAKE" -j8
 "$_MAKE" DESTDIR="$_PKGROOT/pkg" install
 )

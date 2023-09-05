@@ -63,7 +63,7 @@ esac
 rm -rf "$_TMP"/sdk*
 
 depcheck() {
-    for dep in "$_TARGET-clang" "$_TARGET-clang++" "$_TARGET-gcc" "$_TARGET-g++" "$_TARGET-cc" "$_TARGET-c++" "$_TARGET-strip" "$_TARGET-sdkpath" ldid dpkg-deb mv rm fakeroot od tr; do
+    for dep in "$_TARGET-clang" "$_TARGET-clang++" "$_TARGET-gcc" "$_TARGET-g++" "$_TARGET-cc" "$_TARGET-c++" "$_TARGET-strip" "$_TARGET-otool" "$_TARGET-install_name_tool" "$_TARGET-sdkpath" ldid dpkg-deb mv rm fakeroot od tr; do
         if ! command -v "$dep" > /dev/null; then
             error "Missing dependency: $dep"
         fi
