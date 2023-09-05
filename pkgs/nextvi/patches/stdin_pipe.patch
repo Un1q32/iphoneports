@@ -1,6 +1,6 @@
 --- src/ex.c
 +++ src/ex.c
-@@ -414,11 +414,13 @@ static int ec_edit(char *loc, char *cmd, char *arg)
+@@ -414,6 +414,8 @@ static int ec_edit(char *loc, char *cmd, char *arg)
  		ex_bufpostfix(ex_buf, arg[0]);
  		syn_setft(ex_ft);
  	}
@@ -8,13 +8,7 @@
 +		return fd < 0 || rd;
  	snprintf(msg, sizeof(msg), "\"%s\"  %d lines  [%c]",
  			*ex_path ? ex_path : "unnamed", lbuf_len(xb),
- 			!rd && fd >= 0 ? 'r' : 'f');
- 	ex_show(msg);
--	return rd;
-+	return fd < 0 || rd;
- }
- 
- static int ec_editapprox(char *loc, char *cmd, char *arg)
+ 			fd < 0 || rd ? 'f' : 'r');
 @@ -1080,13 +1082,25 @@ void ex(void)
  
  void ex_init(char **files, int n)
@@ -39,7 +33,7 @@
 +		lbuf_saved(xb, 1);
 +		snprintf(msg, sizeof(msg), "\"%s\"  %d lines  [%c]",
 +				*ex_path ? ex_path : "unnamed", lbuf_len(xb),
-+				!i ? 'r' : 'f');
++				i ? 'f' : 'r');
 +		ex_show(msg);
 +	}
  }
