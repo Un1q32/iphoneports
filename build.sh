@@ -15,7 +15,6 @@ Usage: build.sh <command> [options]
     --target                - Specify a target other than $defaulttarget
     --no-tmpfs              - Do not use /tmp for anything (use if you have limited RAM)
     --no-deps               - Do not add dependencies to the SDK
-    --help                  - Print this help message
 "
 }
 
