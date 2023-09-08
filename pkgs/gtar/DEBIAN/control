@@ -1,0 +1,8 @@
+Package: iphoneports-gtar
+Section: Utilities
+Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
+Architecture: iphoneos-arm
+Version: 1.35
+Description: GNU implementation of the tar command
+Homepage: http://www.gnu.org/software/coreutils/
+Depends: iphoneports-base
