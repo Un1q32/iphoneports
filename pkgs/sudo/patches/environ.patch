@@ -1,0 +1,24 @@
+--- src/src/sudo_intercept.c.orig
++++ src/src/sudo_intercept.c
+@@ -57,7 +57,8 @@
+ #define SUDO_EXECLE	0x1
+ #define SUDO_EXECLP	0x2
+ 
+-extern char **environ;
++extern char ***_NSGetEnviron(void);
++#define environ (*_NSGetEnviron())
+ extern bool command_allowed(const char *cmnd, char * const argv[], char * const envp[], char **ncmnd, char ***nargv, char ***nenvp);
+ 
+ typedef int (*sudo_fn_execve_t)(const char *, char *const *, char *const *);
+--- src/src/sudo_intercept_common.c.orig
++++ src/src/sudo_intercept_common.c
+@@ -57,7 +57,8 @@
+ #include "sudo_util.h"
+ #include "intercept.pb-c.h"
+ 
+-extern char **environ;
++extern char ***_NSGetEnviron(void);
++#define environ (*_NSGetEnviron())
+ 
+ static union sudo_token_un intercept_token;
+ static in_port_t intercept_port;
