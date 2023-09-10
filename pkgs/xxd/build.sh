@@ -9,7 +9,7 @@ cp xxd "$_PKGROOT"/pkg/var/usr/bin
 (
 cd pkg/var/usr/bin || exit 1
 "$_TARGET-strip" xxd > /dev/null 2>&1
-ldid -S"$_BSROOT/ent.xml" xxd
+ldid -S"$_ENT" xxd
 )
 
 cp -r DEBIAN pkg

@@ -11,11 +11,11 @@ cd pkg/var/usr || exit 1
 rm -rf share/man
 for prog in tic tput tset toe clear infocmp; do
     "$_TARGET-strip" "bin/$prog" > /dev/null 2>&1
-    ldid -S"$_BSROOT/ent.xml" "bin/$prog"
+    ldid -S"$_ENT" "bin/$prog"
 done
 for lib in ncurses ncurses++ form panel menu; do
     "$_TARGET-strip" "lib/lib${lib}w.6.dylib" > /dev/null 2>&1
-    ldid -S"$_BSROOT/ent.xml" "lib/lib${lib}w.6.dylib"
+    ldid -S"$_ENT" "lib/lib${lib}w.6.dylib"
     ln -s "lib${lib}w.dylib" "lib/lib${lib}.dylib"
 done
 ln -s libncurses.dylib lib/libcurses.dylib

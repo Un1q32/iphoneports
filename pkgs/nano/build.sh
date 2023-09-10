@@ -13,7 +13,7 @@ cd src || exit 1
 cd pkg/var/usr || exit 1
 rm -rf share/info share/man share/doc
 "$_TARGET-strip" bin/nano > /dev/null 2>&1
-ldid -S"$_BSROOT/ent.xml" bin/nano
+ldid -S"$_ENT" bin/nano
 )
 
 cp -a files/syntax/*.nanorc pkg/var/usr/share/nano

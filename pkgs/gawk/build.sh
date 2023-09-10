@@ -12,9 +12,9 @@ rm -rf share/info share/man bin/gawk-* bin/gawkbug
 "$_TARGET-strip" bin/gawk > /dev/null 2>&1
 "$_TARGET-strip" libexec/awk/* > /dev/null 2>&1
 "$_TARGET-strip" lib/gawk/* > /dev/null 2>&1
-ldid -S"$_BSROOT/ent.xml" bin/gawk
-ldid -S"$_BSROOT/ent.xml" lib/gawk/*
-ldid -S"$_BSROOT/ent.xml" libexec/awk/*
+ldid -S"$_ENT" bin/gawk
+ldid -S"$_ENT" lib/gawk/*
+ldid -S"$_ENT" libexec/awk/*
 )
 
 cp -r DEBIAN pkg

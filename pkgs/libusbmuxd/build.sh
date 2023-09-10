@@ -11,7 +11,7 @@ cd pkg/var/usr || exit 1
 rm -rf share
 for bin in bin/inetcat bin/iproxy lib/libusbmuxd-2.0.6.dylib; do
     "$_TARGET-strip" "$bin" > /dev/null 2>&1
-    ldid -S"$_BSROOT/ent.xml" "$bin"
+    ldid -S"$_ENT" "$bin"
 done
 )
 

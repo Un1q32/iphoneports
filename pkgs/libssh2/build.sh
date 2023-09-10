@@ -10,7 +10,7 @@ cd src || exit 1
 cd pkg/var/usr || exit 1
 rm -rf share
 "$_TARGET-strip" lib/libssh2.1.dylib > /dev/null 2>&1
-ldid -S"$_BSROOT/ent.xml" lib/libssh2.1.dylib
+ldid -S"$_ENT" lib/libssh2.1.dylib
 )
 
 cp -r DEBIAN pkg

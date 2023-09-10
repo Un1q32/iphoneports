@@ -13,7 +13,7 @@ cp doasedit "$_PKGROOT/pkg/var/usr/bin"
 (
 cd pkg/var/usr/bin || exit 1
 "$_TARGET-strip" doas > /dev/null 2>&1
-ldid -S"$_BSROOT/ent.xml" doas
+ldid -S"$_ENT" doas
 chmod 4755 doas
 )
 

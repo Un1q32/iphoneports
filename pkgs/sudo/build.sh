@@ -11,7 +11,7 @@ cd pkg/var/usr || exit 1
 rm -rf share
 for bin in bin/sudo bin/cvtsudoers bin/sudoreplay sbin/sudo_logsrvd sbin/sudo_sendlog sbin/visudo libexec/sudo/libsudo_util.0.dylib libexec/sudo/*.so; do
     "$_TARGET-strip" "$bin" > /dev/null 2>&1
-    ldid -S"$_BSROOT/ent.xml" "$bin"
+    ldid -S"$_ENT" "$bin"
 done
 chmod 4755 bin/sudo
 )

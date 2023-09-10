@@ -12,11 +12,11 @@ rm -rf man
 "$_TARGET-strip" bin/bzcat > /dev/null 2>&1
 "$_TARGET-strip" bin/bzip2recover > /dev/null 2>&1
 "$_TARGET-strip" lib/libbz2.1.0.dylib > /dev/null 2>&1
-ldid -S"$_BSROOT/ent.xml" bin/bzip2
-ldid -S"$_BSROOT/ent.xml" bin/bunzip2
-ldid -S"$_BSROOT/ent.xml" bin/bzcat
-ldid -S"$_BSROOT/ent.xml" bin/bzip2recover
-ldid -S"$_BSROOT/ent.xml" lib/libbz2.1.0.dylib
+ldid -S"$_ENT" bin/bzip2
+ldid -S"$_ENT" bin/bunzip2
+ldid -S"$_ENT" bin/bzcat
+ldid -S"$_ENT" bin/bzip2recover
+ldid -S"$_ENT" lib/libbz2.1.0.dylib
 )
 
 cp -r DEBIAN pkg

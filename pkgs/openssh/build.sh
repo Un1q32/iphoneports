@@ -12,9 +12,9 @@ rm -rf share
 "$_TARGET-strip" bin/* > /dev/null 2>&1
 "$_TARGET-strip" sbin/* > /dev/null 2>&1
 "$_TARGET-strip" libexec/* > /dev/null 2>&1
-ldid -S"$_BSROOT/ent.xml" bin/*
-ldid -S"$_BSROOT/ent.xml" sbin/*
-ldid -S"$_BSROOT/ent.xml" libexec/*
+ldid -S"$_ENT" bin/*
+ldid -S"$_ENT" sbin/*
+ldid -S"$_ENT" libexec/*
 chmod 4711 libexec/ssh-keysign
 )
 

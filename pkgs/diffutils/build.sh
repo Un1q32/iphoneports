@@ -10,7 +10,7 @@ cd src || exit 1
 cd pkg/var/usr || exit 1
 rm -rf share
 "$_TARGET-strip" bin/* > /dev/null 2>&1
-ldid -S"$_BSROOT/ent.xml" bin/*
+ldid -S"$_ENT" bin/*
 )
 
 cp -r DEBIAN pkg

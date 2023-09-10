@@ -10,7 +10,7 @@ cp sed/sed "$_PKGROOT/pkg/var/usr/bin"
 (
 cd pkg/var/usr/bin || exit 1
 "$_TARGET-strip" sed > /dev/null 2>&1
-ldid -S"$_BSROOT/ent.xml" sed
+ldid -S"$_ENT" sed
 )
 
 cp -r DEBIAN pkg

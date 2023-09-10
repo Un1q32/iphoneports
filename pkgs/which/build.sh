@@ -9,7 +9,7 @@ cp which "$_PKGROOT/pkg/var/usr/bin"
 (
 cd pkg/var/usr/bin || exit 1
 "$_TARGET-strip" which > /dev/null 2>&1
-ldid -S"$_BSROOT/ent.xml" which
+ldid -S"$_ENT" which
 )
 
 cp -r DEBIAN pkg

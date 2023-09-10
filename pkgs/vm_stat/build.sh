@@ -9,7 +9,7 @@ cp vm_stat "$_PKGROOT/pkg/var/usr/bin/vm_stat.real"
 (
 cd pkg/var/usr/bin || exit 1
 "$_TARGET-strip" vm_stat.real > /dev/null 2>&1
-ldid -S"$_BSROOT/ent.xml" vm_stat.real
+ldid -S"$_ENT" vm_stat.real
 )
 
 cp files/vm_stat pkg/var/usr/bin/vm_stat

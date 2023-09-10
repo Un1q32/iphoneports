@@ -27,19 +27,18 @@ error() {
     [ "$2" = "noexit" ] || exit 1
 }
 
-[ "${0%/*}" = "$0" ] && _BSROOT="." || _BSROOT="${0%/*}"
-cd "$_BSROOT" || exit 1
-_BSROOT="$PWD"
-_PKGDIR="$_BSROOT/pkgs"
-TERM="xterm-256color"
-export _PKGDIR _BSROOT
+[ "${0%/*}" = "$0" ] && bsroot="." || bsroot="${0%/*}"
+cd "$bsroot" || exit 1
+bsroot="$PWD"
+pkgdir="$bsroot/pkgs"
 export TERM="xterm-256color"
+export _ENT="$bsroot/entitlements.xml"
 
 if [ -z "$1" ]; then
-    if [ -f "$_BSROOT/.args.txt" ]; then
+    if [ -f "$bsroot/.args.txt" ]; then
         while read -r line; do
             set -- "$@" "$line"
-        done < "$_BSROOT/.args.txt"
+        done < "$bsroot/.args.txt"
     else
         help
         exit 1
@@ -48,7 +47,7 @@ fi
 
 
 case "$*" in
-    *--no-tmpfs*) export _TMP="$_BSROOT" ;;
+    *--no-tmpfs*) export _TMP="$bsroot" ;;
     *) export _TMP="/tmp" ;;
 esac
 
@@ -65,7 +64,7 @@ esac
 rm -rf "$_TMP"/sdk*
 
 depcheck() {
-    for dep in "$_TARGET-clang" "$_TARGET-clang++" "$_TARGET-gcc" "$_TARGET-g++" "$_TARGET-cc" "$_TARGET-c++" "$_TARGET-strip" "$_TARGET-otool" "$_TARGET-install_name_tool" "$_TARGET-sdkpath" ldid dpkg-deb mv rm fakeroot od tr; do
+    for dep in "$_TARGET-gcc" "$_TARGET-g++" "$_TARGET-cc" "$_TARGET-c++" "$_TARGET-strip" "$_TARGET-otool" "$_TARGET-install_name_tool" "$_TARGET-sdkpath" ldid dpkg-deb mv rm fakeroot od tr; do
         if ! command -v "$dep" > /dev/null; then
             error "Missing dependency: $dep"
         fi
@@ -97,9 +96,9 @@ build() {
         return 0
     fi
 
-    if [ -f "$_PKGDIR/$1/build.sh" ] && [ -f "$_PKGDIR/$1/fetch.sh" ]; then
+    if [ -f "$pkgdir/$1/build.sh" ] && [ -f "$pkgdir/$1/fetch.sh" ]; then
         (
-        export _PKGROOT="$_PKGDIR/$1"
+        export _PKGROOT="$pkgdir/$1"
         cd "$_PKGROOT" || error "Failed to cd to package directory: $1"
         [ "$_NODEPS" = 1 ] || includedeps "$2"
         [ "$2" = "dryrun" ] || ./fetch.sh
@@ -109,13 +108,13 @@ build() {
         rm -rf "$_SDK"
         )
     else
-        dpkg-deb -b --root-owner-group -Zgzip "$_PKGDIR/$1" "$_BSROOT/debs/$1".deb
+        dpkg-deb -b --root-owner-group -Zgzip "$pkgdir/$1" "$bsroot/debs/$1".deb
     fi
     printf "%s\n" "$1" >> "$_TMP/.builtpkgs"
 }
 
 buildall() {
-    for pkg in "$_PKGDIR"/*; do
+    for pkg in "$pkgdir"/*; do
         build "${pkg##*/}" "$1" || error "Failed to build package: ${pkg##*/}"
     done
 }
@@ -127,7 +126,7 @@ hasbeenbuilt() {
                 return 0
             fi
         done < "$_TMP/.builtpkgs"
-    elif [ -d "$_PKGDIR/$1/pkg" ]; then
+    elif [ -d "$pkgdir/$1/pkg" ]; then
         return 0
     fi
     return 1
@@ -154,7 +153,7 @@ includedeps() {
 
     if [ -f dependencies.txt ]; then
         while read -r dep; do
-            if [ -d "$_PKGDIR/$dep" ]; then
+            if [ -d "$pkgdir/$dep" ]; then
                 if ! hasbeenbuilt "$dep" "$1"; then
                     printf "Building dependency %s\n" "$dep"
                     [ "$1" = "dryrun" ] || mv "$_SDK" "$_SDK.$dep.bak"
@@ -162,7 +161,7 @@ includedeps() {
                     [ "$1" = "dryrun" ] || mv "$_SDK.$dep.bak" "$_SDK"
                 fi
                 printf "Including dependency %s\n" "$dep"
-                [ "$1" = "dryrun" ] || cp -a "$_PKGDIR/$dep/pkg/"* "$_SDK"
+                [ "$1" = "dryrun" ] || cp -a "$pkgdir/$dep/pkg/"* "$_SDK"
             else
                 error "Dependency not found: $dep"
             fi
@@ -179,23 +178,23 @@ includedeps() {
 case "$1" in
     all)
         depcheck
-        rm -rf "$_PKGDIR"/*/pkg "$_PKGDIR"/*/src
+        rm -rf "$pkgdir"/*/pkg "$pkgdir"/*/src
         buildall
-        cp -fl "$_PKGDIR"/*/*.deb "$_BSROOT/debs" 2>/dev/null
+        cp -fl "$pkgdir"/*/*.deb "$bsroot/debs" 2>/dev/null
     ;;
 
     list)
-        for pkg in "$_PKGDIR"/*; do
+        for pkg in "$pkgdir"/*; do
             printf "%s\n" "${pkg##*/}"
         done
     ;;
 
     clean)
-        rm -rf "$_PKGDIR/$2/pkg" "$_PKGDIR/$2/src" "$_PKGDIR/$2"/*.deb "$_BSROOT/debs/$2".deb
+        rm -rf "$pkgdir/$2/pkg" "$pkgdir/$2/src" "$pkgdir/$2"/*.deb "$bsroot/debs/$2".deb
     ;;
 
     cleanall)
-        rm -rf "$_PKGDIR"/*/pkg "$_PKGDIR"/*/src "$_PKGDIR"/*/*.deb "$_BSROOT"/debs/*.deb "$_TMP/sdk" "$_TMP/.builtpkgs" "$_BSROOT/sdk" "$_BSROOT/.builtpkgs"
+        rm -rf "$pkgdir"/*/pkg "$pkgdir"/*/src "$pkgdir"/*/*.deb "$bsroot"/debs/*.deb "$_TMP/sdk" "$_TMP/.builtpkgs" "$bsroot/sdk" "$bsroot/.builtpkgs"
     ;;
 
     dryrun)
@@ -206,23 +205,23 @@ case "$1" in
         depcheck
         shift
         for pkg in "$@"; do
-            [ -d "$_PKGDIR/$pkg" ] || error "Package not found: $pkg"
+            [ -d "$pkgdir/$pkg" ] || error "Package not found: $pkg"
         done
         for pkg in "$@"; do
-            rm -rf "$_PKGDIR/$pkg/pkg" "$_PKGDIR/$pkg/src"
+            rm -rf "$pkgdir/$pkg/pkg" "$pkgdir/$pkg/src"
         done
         for pkg in "$@"; do
             build "$pkg" || error "Failed to build package: $pkg"
-            cp -fl "$_PKGDIR/$pkg"/*.deb "$_BSROOT/debs" 2>/dev/null
+            cp -fl "$pkgdir/$pkg"/*.deb "$bsroot/debs" 2>/dev/null
         done
     ;;
 
     *)
-        if [ -d "$_PKGDIR/$1" ]; then
+        if [ -d "$pkgdir/$1" ]; then
             depcheck
-            rm -rf "$_PKGDIR/$1/pkg" "$_PKGDIR/$1/src"
+            rm -rf "$pkgdir/$1/pkg" "$pkgdir/$1/src"
             build "$1"
-            cp -fl "$_PKGDIR/$1"/*.deb "$_BSROOT/debs" 2>/dev/null
+            cp -fl "$pkgdir/$1"/*.deb "$bsroot/debs" 2>/dev/null
         else
             error "Package not found: $1"
         fi

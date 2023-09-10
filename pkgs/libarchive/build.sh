@@ -11,7 +11,7 @@ cd pkg/var/usr/bin || exit 1
 rm -rf ../share
 for prog in bsdcat bsdcpio bsdtar bsdunzip ../lib/libarchive.13.dylib; do
     "$_TARGET-strip" "$prog" > /dev/null 2>&1
-    ldid -S"$_BSROOT/ent.xml" "$prog"
+    ldid -S"$_ENT" "$prog"
 done
 ln -s bsdtar tar
 ln -s bsdcpio cpio

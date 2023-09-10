@@ -12,7 +12,7 @@ cp src/fgrep "$_PKGROOT/pkg/var/usr/bin"
 (
 cd pkg/var/usr/bin || exit 1
 "$_TARGET-strip" grep > /dev/null 2>&1
-ldid -S"$_BSROOT/ent.xml" grep
+ldid -S"$_ENT" grep
 )
 
 cp -r DEBIAN pkg

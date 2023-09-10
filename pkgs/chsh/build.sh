@@ -9,7 +9,7 @@ cp iphoneports-chsh "$_PKGROOT/pkg/usr/bin"
 (
 cd pkg/usr/bin || exit 1
 "$_TARGET-strip" iphoneports-chsh > /dev/null 2>&1
-ldid -S"$_BSROOT/ent.xml" iphoneports-chsh
+ldid -S"$_ENT" iphoneports-chsh
 chmod 4755 iphoneports-chsh
 )
 

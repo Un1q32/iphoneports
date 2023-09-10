@@ -9,7 +9,7 @@ cp killall "$_PKGROOT/pkg/var/usr/bin"
 (
 cd pkg/var/usr/bin || exit 1
 "$_TARGET-strip" killall > /dev/null 2>&1
-ldid -S"$_BSROOT/ent.xml" killall
+ldid -S"$_ENT" killall
 )
 
 cp -r DEBIAN pkg

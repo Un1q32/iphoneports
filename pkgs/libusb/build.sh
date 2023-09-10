@@ -9,7 +9,7 @@ cd src || exit 1
 (
 cd pkg/var/usr/lib || exit 1
 "$_TARGET-strip" libusb-1.0.0.dylib > /dev/null 2>&1
-ldid -S"$_BSROOT/ent.xml" libusb-1.0.0.dylib
+ldid -S"$_ENT" libusb-1.0.0.dylib
 )
 
 ln -s libusb-1.0/libusb.h pkg/var/usr/include/libusb.h

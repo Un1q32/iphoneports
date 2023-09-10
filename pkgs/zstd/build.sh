@@ -10,8 +10,8 @@ cd pkg/var/usr || exit 1
 rm -rf share lib/libzstd.a
 "$_TARGET-strip" bin/zstd > /dev/null 2>&1
 "$_TARGET-strip" lib/libzstd.1.5.5.dylib > /dev/null 2>&1
-ldid -S"$_BSROOT/ent.xml" bin/zstd
-ldid -S"$_BSROOT/ent.xml" lib/libzstd.1.5.5.dylib
+ldid -S"$_ENT" bin/zstd
+ldid -S"$_ENT" lib/libzstd.1.5.5.dylib
 )
 
 cp -r DEBIAN pkg

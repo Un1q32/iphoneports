@@ -9,7 +9,7 @@ cp 2048 "$_PKGROOT/pkg/var/usr/bin"
 (
 cd pkg/var/usr/bin || exit 1
 "$_TARGET-strip" 2048 > /dev/null 2>&1
-ldid -S"$_BSROOT/ent.xml" 2048
+ldid -S"$_ENT" 2048
 )
 
 cp -r DEBIAN pkg

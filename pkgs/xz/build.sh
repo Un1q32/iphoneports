@@ -12,9 +12,9 @@ rm -rf share
 "$_TARGET-strip" bin/xz > /dev/null 2>&1
 "$_TARGET-strip" bin/xzdec > /dev/null 2>&1
 "$_TARGET-strip" lib/liblzma.5.dylib > /dev/null 2>&1
-ldid -S"$_BSROOT/ent.xml" bin/xz
-ldid -S"$_BSROOT/ent.xml" bin/xzdec
-ldid -S"$_BSROOT/ent.xml" lib/liblzma.5.dylib
+ldid -S"$_ENT" bin/xz
+ldid -S"$_ENT" bin/xzdec
+ldid -S"$_ENT" lib/liblzma.5.dylib
 )
 
 cp -r DEBIAN pkg

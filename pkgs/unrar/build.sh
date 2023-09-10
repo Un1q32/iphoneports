@@ -9,7 +9,7 @@ cp unrar "$_PKGROOT/pkg/var/usr/bin"
 (
 cd pkg/var/usr/bin || exit 1
 "$_TARGET-strip" unrar > /dev/null 2>&1
-ldid -S"$_BSROOT/ent.xml" unrar
+ldid -S"$_ENT" unrar
 )
 
 cp -r DEBIAN pkg

@@ -10,7 +10,7 @@ cp neofetch "$_PKGROOT/pkg/var/usr/bin"
 (
 cd pkg/var/usr/bin || exit 1
 "$_TARGET-strip" getusedmem > /dev/null 2>&1
-ldid -S"$_BSROOT/ent.xml" getusedmem
+ldid -S"$_ENT" getusedmem
 )
 
 cp -r DEBIAN pkg

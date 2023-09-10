@@ -10,7 +10,7 @@ cp bash "$_PKGROOT/pkg/var/usr/bin"
 (
 cd pkg/var/usr || exit 1
 "$_TARGET-strip" bin/bash > /dev/null 2>&1
-ldid -S"$_BSROOT/ent.xml" bin/bash
+ldid -S"$_ENT" bin/bash
 mkdir -p etc/bash/bashrc.d
 )
 

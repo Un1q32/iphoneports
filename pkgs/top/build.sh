@@ -9,7 +9,7 @@ cp top "$_PKGROOT/pkg/var/usr/bin"
 (
 cd pkg/var/usr/bin || exit 1
 "$_TARGET-strip" top > /dev/null 2>&1
-ldid -S"$_BSROOT/ent.xml" top
+ldid -S"$_ENT" top
 chmod 4755 top
 )
 

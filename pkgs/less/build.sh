@@ -12,9 +12,9 @@ rm -rf share
 "$_TARGET-strip" bin/less > /dev/null 2>&1
 "$_TARGET-strip" bin/lessecho > /dev/null 2>&1
 "$_TARGET-strip" bin/lesskey > /dev/null 2>&1
-ldid -S"$_BSROOT/ent.xml" bin/less
-ldid -S"$_BSROOT/ent.xml" bin/lessecho
-ldid -S"$_BSROOT/ent.xml" bin/lesskey
+ldid -S"$_ENT" bin/less
+ldid -S"$_ENT" bin/lessecho
+ldid -S"$_ENT" bin/lesskey
 )
 
 cp -r DEBIAN pkg

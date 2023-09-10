@@ -9,7 +9,7 @@ cp ping "$_PKGROOT/pkg/var/usr/sbin"
 (
 cd pkg/var/usr/sbin || exit 1
 "$_TARGET-strip" ping > /dev/null 2>&1
-ldid -S"$_BSROOT/ent.xml" ping
+ldid -S"$_ENT" ping
 )
 
 cp -r DEBIAN pkg

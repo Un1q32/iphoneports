@@ -21,7 +21,7 @@ lib3="$("$_TARGET-otool" -D lib/libbrotlienc.1.1.0.dylib | tail -1)"
 "$_TARGET-install_name_tool" -change "$lib3" /var/usr/lib/libbrotlienc.1.dylib bin/brotli
 for bin in bin/brotli lib/libbrotlicommon.1.1.0.dylib lib/libbrotlidec.1.1.0.dylib lib/libbrotlienc.1.1.0.dylib; do
     "$_TARGET-strip" "$bin" > /dev/null 2>&1
-    ldid -S"$_BSROOT/ent.xml" "$bin"
+    ldid -S"$_ENT" "$bin"
 done
 )
 

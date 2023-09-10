@@ -11,8 +11,8 @@ cd pkg/var/usr || exit 1
 rm -rf share/man
 "$_TARGET-strip" bin/curl > /dev/null 2>&1
 "$_TARGET-strip" lib/libcurl.4.dylib > /dev/null 2>&1
-ldid -S"$_BSROOT/ent.xml" bin/curl
-ldid -S"$_BSROOT/ent.xml" lib/libcurl.4.dylib
+ldid -S"$_ENT" bin/curl
+ldid -S"$_ENT" lib/libcurl.4.dylib
 )
 
 cp -r DEBIAN pkg

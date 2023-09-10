@@ -11,8 +11,8 @@ cd pkg/var/usr || exit 1
 rm -rf share
 "$_TARGET-strip" bin/coreutils > /dev/null 2>&1
 "$_TARGET-strip" libexec/coreutils/libstdbuf.so > /dev/null 2>&1
-ldid -S"$_BSROOT/ent.xml" bin/coreutils
-ldid -S"$_BSROOT/ent.xml" libexec/coreutils/libstdbuf.so
+ldid -S"$_ENT" bin/coreutils
+ldid -S"$_ENT" libexec/coreutils/libstdbuf.so
 )
 
 cp -r DEBIAN pkg

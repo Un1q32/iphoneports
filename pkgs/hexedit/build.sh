@@ -11,7 +11,7 @@ cd src || exit 1
 cd pkg/var/usr || exit 1
 rm -rf share
 "$_TARGET-strip" bin/hexedit > /dev/null 2>&1
-ldid -S"$_BSROOT/ent.xml" bin/hexedit
+ldid -S"$_ENT" bin/hexedit
 )
 
 cp -r DEBIAN pkg

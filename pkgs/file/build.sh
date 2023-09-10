@@ -11,8 +11,8 @@ cd pkg/var/usr || exit 1
 rm -rf share/man
 "$_TARGET-strip" bin/file > /dev/null 2>&1
 "$_TARGET-strip" lib/libmagic.1.dylib > /dev/null 2>&1
-ldid -S"$_BSROOT/ent.xml" bin/file
-ldid -S"$_BSROOT/ent.xml" lib/libmagic.1.dylib
+ldid -S"$_ENT" bin/file
+ldid -S"$_ENT" lib/libmagic.1.dylib
 )
 
 cp -r DEBIAN pkg

@@ -9,7 +9,7 @@ cp pstree "$_PKGROOT/pkg/var/usr/bin"
 (
 cd pkg/var/usr/bin || exit 1
 "$_TARGET-strip" pstree > /dev/null 2>&1
-ldid -S"$_BSROOT/ent.xml" pstree
+ldid -S"$_ENT" pstree
 )
 
 cp -r DEBIAN pkg

@@ -10,7 +10,7 @@ cd src || exit 1
 cd pkg/var/usr || exit 1
 rm -rf share
 "$_TARGET-strip" sbin/usbmuxd > /dev/null 2>&1
-ldid -S"$_BSROOT/ent.xml" sbin/usbmuxd
+ldid -S"$_ENT" sbin/usbmuxd
 )
 
 cp -r DEBIAN pkg

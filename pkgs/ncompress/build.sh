@@ -9,7 +9,7 @@ cp compress "$_PKGROOT/pkg/var/usr/bin"
 (
 cd pkg/var/usr/bin || exit 1
 "$_TARGET-strip" compress > /dev/null 2>&1
-ldid -S"$_BSROOT/ent.xml" compress
+ldid -S"$_ENT" compress
 ln -s compress uncompress
 ln -s compress zcat
 )

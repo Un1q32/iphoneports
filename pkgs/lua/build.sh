@@ -10,8 +10,8 @@ cd pkg/var/usr || exit 1
 rm -rf man
 "$_TARGET-strip" bin/lua > /dev/null 2>&1
 "$_TARGET-strip" bin/luac > /dev/null 2>&1
-ldid -S"$_BSROOT/ent.xml" bin/lua
-ldid -S"$_BSROOT/ent.xml" bin/luac
+ldid -S"$_ENT" bin/lua
+ldid -S"$_ENT" bin/luac
 )
 
 cp -r DEBIAN pkg

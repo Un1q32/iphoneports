@@ -10,7 +10,7 @@ cd src || exit 1
 cd pkg/var/usr || exit 1
 for bin in bin/git bin/git-shell bin/scalar libexec/git-core/git-remote-http libexec/git-core/git-sh-i18n--envsubst libexec/git-core/git-http-backend libexec/git-core/git-http-fetch libexec/git-core/git-imap-send libexec/git-core/git-daemon; do
     "$_TARGET-strip" "$bin" > /dev/null 2>&1
-    ldid -S"$_BSROOT/ent.xml" "$bin"
+    ldid -S"$_ENT" "$bin"
 done
 )
 

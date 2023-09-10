@@ -12,11 +12,11 @@ rm -rf share
 lib="$("$_TARGET-otool" -D lib/libzip.5.5.dylib | tail -1)"
 "$_TARGET-install_name_tool" -id /var/usr/lib/libzip.5.dylib lib/libzip.5.5.dylib
 "$_TARGET-strip" lib/libzip.5.5.dylib > /dev/null 2>&1
-ldid -S"$_BSROOT/ent.xml" lib/libzip.5.5.dylib
+ldid -S"$_ENT" lib/libzip.5.5.dylib
 for bin in bin/*; do
     "$_TARGET-install_name_tool" -change "$lib" /var/usr/lib/libzip.5.dylib "$bin"
     "$_TARGET-strip" "$bin" > /dev/null 2>&1
-    ldid -S"$_BSROOT/ent.xml" "$bin"
+    ldid -S"$_ENT" "$bin"
 done
 )
 

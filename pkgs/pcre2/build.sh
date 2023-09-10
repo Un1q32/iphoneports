@@ -13,10 +13,10 @@ rm -rf share
 "$_TARGET-strip" bin/pcre2grep > /dev/null 2>&1
 "$_TARGET-strip" lib/libpcre2-8.0.dylib > /dev/null 2>&1
 "$_TARGET-strip" lib/libpcre2-posix.3.dylib > /dev/null 2>&1
-ldid -S"$_BSROOT/ent.xml" bin/pcre2test
-ldid -S"$_BSROOT/ent.xml" bin/pcre2grep
-ldid -S"$_BSROOT/ent.xml" lib/libpcre2-8.0.dylib
-ldid -S"$_BSROOT/ent.xml" lib/libpcre2-posix.3.dylib
+ldid -S"$_ENT" bin/pcre2test
+ldid -S"$_ENT" bin/pcre2grep
+ldid -S"$_ENT" lib/libpcre2-8.0.dylib
+ldid -S"$_ENT" lib/libpcre2-posix.3.dylib
 )
 
 cp -r DEBIAN pkg

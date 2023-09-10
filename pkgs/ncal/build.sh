@@ -9,7 +9,7 @@ cp ncal "$_PKGROOT/pkg/var/usr/bin"
 (
 cd pkg/var/usr/bin || exit 1
 "$_TARGET-strip" ncal > /dev/null 2>&1
-ldid -S"$_BSROOT/ent.xml" ncal
+ldid -S"$_ENT" ncal
 ln -s ncal cal
 )
 

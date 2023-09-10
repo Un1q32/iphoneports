@@ -10,8 +10,8 @@ rm -rf share/man lib/libluajit-5.1.a
 ln -sf luajit-2.1.0-beta3 bin/luajit
 "$_TARGET-strip" bin/luajit-2.1.0-beta3 > /dev/null 2>&1
 "$_TARGET-strip" lib/libluajit-5.1.2.1.0.dylib > /dev/null 2>&1
-ldid -S"$_BSROOT/ent.xml" bin/luajit-2.1.0-beta3
-ldid -S"$_BSROOT/ent.xml" lib/libluajit-5.1.2.1.0.dylib
+ldid -S"$_ENT" bin/luajit-2.1.0-beta3
+ldid -S"$_ENT" lib/libluajit-5.1.2.1.0.dylib
 )
 
 cp -r DEBIAN pkg

@@ -12,7 +12,7 @@ done
 (
 cd pkg/var/usr/bin || exit 1
 "$_TARGET-strip" gzip > /dev/null 2>&1
-ldid -S"$_BSROOT/ent.xml" gzip
+ldid -S"$_ENT" gzip
 for link in gunzip gzcat zegrep zfgrep zgrep; do
     ln -s gzip "$link"
 done

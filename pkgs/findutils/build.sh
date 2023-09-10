@@ -11,7 +11,7 @@ cd pkg/var/usr || exit 1
 rm -rf share var
 for bin in bin/find bin/xargs bin/locate libexec/frcode; do
     "$_TARGET-strip" "$bin" > /dev/null 2>&1
-    ldid -S"$_BSROOT/ent.xml" "$bin"
+    ldid -S"$_ENT" "$bin"
 done
 )
 

@@ -8,7 +8,7 @@ cd src || exit 1
 cd pkg/var/usr || exit 1
 rm -rf man
 "$_TARGET-strip" bin/tree > /dev/null 2>&1
-ldid -S"$_BSROOT/ent.xml" bin/tree
+ldid -S"$_ENT" bin/tree
 )
 
 cp -r DEBIAN pkg

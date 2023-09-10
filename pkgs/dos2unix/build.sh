@@ -9,8 +9,8 @@ cd pkg/var/usr || exit 1
 rm -rf share
 "$_TARGET-strip" bin/dos2unix > /dev/null 2>&1
 "$_TARGET-strip" bin/unix2dos > /dev/null 2>&1
-ldid -S"$_BSROOT/ent.xml" bin/dos2unix
-ldid -S"$_BSROOT/ent.xml" bin/unix2dos
+ldid -S"$_ENT" bin/dos2unix
+ldid -S"$_ENT" bin/unix2dos
 )
 
 cp -r DEBIAN pkg

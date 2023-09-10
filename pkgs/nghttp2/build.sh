@@ -11,7 +11,7 @@ cd pkg/var/usr || exit 1
 rm -rf share
 "$_TARGET-install_name_tool" -id /var/usr/lib/libnghttp2.14.dylib lib/libnghttp2.14.24.4.dylib
 "$_TARGET-strip" lib/libnghttp2.14.24.4.dylib > /dev/null 2>&1
-ldid -S"$_BSROOT/ent.xml" lib/libnghttp2.14.24.4.dylib
+ldid -S"$_ENT" lib/libnghttp2.14.24.4.dylib
 )
 
 cp -r DEBIAN pkg
