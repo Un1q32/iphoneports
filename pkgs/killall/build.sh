@@ -1,7 +1,7 @@
 #!/bin/sh
 (
 cd src || exit 1
-"$_TARGET-cc" -O2 killall.c -o killall -D__FBSDID=__RCSID
+"$_TARGET-cc" -O2 killall.c -o killall -D'__FBSDID(x)='
 mkdir -p "$_PKGROOT/pkg/var/usr/bin"
 cp killall "$_PKGROOT/pkg/var/usr/bin"
 )

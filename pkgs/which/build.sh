@@ -1,7 +1,7 @@
 #!/bin/sh
 (
 cd src || exit 1
-"$_TARGET-cc" -O2 which.c -o which -D__FBSDID=__RCSID
+"$_TARGET-cc" -O2 which.c -o which -D'__FBSDID(x)='
 mkdir -p "$_PKGROOT/pkg/var/usr/bin"
 cp which "$_PKGROOT/pkg/var/usr/bin"
 )

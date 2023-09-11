@@ -1,7 +1,7 @@
 #!/bin/sh
 (
 cd src || exit 1
-"$_TARGET-cc" ncal.c calendar.c easter.c -o ncal -lncursesw -O2 -D__FBSDID=__RCSID -I.
+"$_TARGET-cc" ncal.c calendar.c easter.c -o ncal -lncursesw -O2 -I. -D'__FBSDID(x)='
 mkdir -p "$_PKGROOT/pkg/var/usr/bin"
 cp ncal "$_PKGROOT/pkg/var/usr/bin"
 )
