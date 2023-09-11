@@ -3,7 +3,7 @@
 cd src || exit 1
 "$_TARGET-cc" vm_stat.c -o vm_stat -O2
 mkdir -p "$_PKGROOT/pkg/var/usr/bin"
-cp vm_stat "$_PKGROOT/pkg/var/usr/bin/vm_stat"
+cp vm_stat "$_PKGROOT/pkg/var/usr/bin"
 )
 
 (
