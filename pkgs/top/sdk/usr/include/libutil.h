@@ -40,6 +40,8 @@
 #define	_LIBUTIL_H_
 
 #include <unistd.h>
+#include <stdbool.h>
+
 #define PROPERTY_MAX_NAME	64
 #define PROPERTY_MAX_VALUE	512
 
@@ -96,9 +98,6 @@ struct sockaddr;
 int	realhostname_sa(char *host, size_t hsize, struct sockaddr *addr,
 			     int addrlen);
 
-int	kld_isloaded(const char *name);
-int	kld_load(const char *name);
-
 #ifdef _STDIO_H_	/* avoid adding new includes */
 char   *fparseln(FILE *, size_t *, size_t *, const char[3], int);
 #endif
@@ -124,6 +123,9 @@ int pidfile_write(struct pidfh *pfh);
 int pidfile_close(struct pidfh *pfh);
 int pidfile_remove(struct pidfh *pfh);
 #endif
+
+int reexec_to_match_kernel(void);
+int reexec_to_match_lp64ness(bool isLP64);
 
 __END_DECLS
 
