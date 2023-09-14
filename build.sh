@@ -64,7 +64,7 @@ esac
 rm -rf "$_TMP"/sdk*
 
 depcheck() {
-    for dep in "$_TARGET-gcc" "$_TARGET-g++" "$_TARGET-cc" "$_TARGET-c++" "$_TARGET-strip" "$_TARGET-otool" "$_TARGET-install_name_tool" "$_TARGET-sdkpath" ldid dpkg-deb mv rm fakeroot od tr; do
+    for dep in "$_TARGET-gcc" "$_TARGET-g++" "$_TARGET-cc" "$_TARGET-c++" "$_TARGET-strip" "$_TARGET-sdkpath" ldid dpkg-deb fakeroot; do
         if ! command -v "$dep" > /dev/null; then
             error "Missing dependency: $dep"
         fi
@@ -81,14 +81,34 @@ depcheck() {
         _make_version="$(make --version)"
         case "$_make_version" in
             *GNU*) _MAKE="make" ;;
-            *) error "Non-GNU make detected. Please install GNU make." ;;
+            *) error "Missing dependency: GNU make" ;;
         esac
     else
-        error "No make command detected. Please install GNU make."
+        error "Missing dependency: GNU make"
+    fi
+
+    if command -v "$_TARGET-otool" > /dev/null; then
+        _OTOOL="$_TARGET-otool"
+    elif command -v otool > /dev/null; then
+        _OTOOL="otool"
+    elif command -v llvm-otool > /dev/null; then
+        _OTOOL="llvm-otool"
+    else
+        error "Missing dependency: otool"
+    fi
+
+    if command -v "$_TARGET-install_name_tool" > /dev/null; then
+        _INSTALLNAMETOOL="$_TARGET-install_name_tool"
+    elif command -v install_name_tool > /dev/null; then
+        _INSTALLNAMETOOL="install_name_tool"
+    elif command -v llvm-install-name-tool > /dev/null; then
+        _INSTALLNAMETOOL="llvm-install-name-tool"
+    else
+        error "Missing dependency: install_name_tool"
     fi
 
     sdk="$("$_TARGET-sdkpath")"
-    export _MAKE
+    export _MAKE _OTOOL _INSTALLNAMETOOL
 }
 
 build() {
