@@ -1,7 +1,7 @@
 #!/bin/sh
 (
 cd src || exit 1
-./configure --host="$_TARGET" --prefix=/var/usr PKG_CONFIG_PATH="$_SDK/var/usr/lib/pkgconfig"
+bash ./configure --host="$_TARGET" --prefix=/var/usr PKG_CONFIG_PATH="$_SDK/var/usr/lib/pkgconfig"
 "$_MAKE" -j8
 "$_MAKE" install DESTDIR="$_PKGROOT/pkg"
 )
