@@ -1,0 +1,40 @@
+--- src/configure.ac.orig
++++ src/configure.ac
+@@ -53,8 +53,8 @@
+   *mingw32*|*cygwin*)
+     AC_MSG_RESULT([yes])
+     win32=true
+-    GLOBAL_CFLAGS+="-DWIN32 -D__LITTLE_ENDIAN__=1"
+-    AC_LDFLAGS+="-static-libgcc"
++    GLOBAL_CFLAGS="$GLOBAL_CFLAGS -DWIN32 -D__LITTLE_ENDIAN__=1"
++    AC_LDFLAGS="$AC_LDFLAGS -static-libgcc"
+     ;;
+   darwin*)
+     AC_MSG_RESULT([yes])
+@@ -76,7 +76,7 @@
+ fi
+ 
+ CACHED_CFLAGS="$CFLAGS"
+-CFLAGS+=" $libimobiledevice_CFLAGS"
++CFLAGS="$CFLAGS $libimobiledevice_CFLAGS"
+ 
+ # check if libimobiledevice has timeout errors
+ AC_CACHE_CHECK(for IDEVICE_E_TIMEOUT in enum idevice_error_t, ac_cv_idevice_error_has_timeout,
+@@ -119,7 +119,7 @@
+             [use_openssl=$withval],
+             [use_openssl=$have_openssl])
+ 
+-if test "x$use_openssl" == "xyes"; then
++if test "x$use_openssl" = "xyes"; then
+   if test "x$have_openssl" != "xyes"; then
+     echo "*** NOTE: --with-openssl passed but OpenSSL is not available ***"
+     use_openssl=no
+@@ -131,7 +131,7 @@
+   openssl_CFLAGS=
+   openssl_LIBS=
+ fi
+-if test "x$have_openssl" == "xyes"; then
++if test "x$have_openssl" = "xyes"; then
+   AC_DEFINE(HAVE_OPENSSL, [1], [Define if you have OpenSSL])
+ fi
+ AC_SUBST(openssl_CFLAGS)
