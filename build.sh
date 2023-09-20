@@ -64,7 +64,7 @@ esac
 rm -rf "$_TMP"/sdk*
 
 depcheck() {
-    for dep in "$_TARGET-gcc" "$_TARGET-g++" "$_TARGET-cc" "$_TARGET-c++" "$_TARGET-strip" "$_TARGET-sdkpath" ldid dpkg-deb fakeroot; do
+    for dep in "$_TARGET-gcc" "$_TARGET-g++" "$_TARGET-cc" "$_TARGET-c++" "$_TARGET-strip" "$_TARGET-sdkpath" ldid dpkg-deb patch fakeroot; do
         if ! command -v "$dep" > /dev/null; then
             error "Missing dependency: $dep"
         fi
