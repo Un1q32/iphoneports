@@ -1,0 +1,40 @@
+--- src/gzexe.orig
++++ src/gzexe
+@@ -1,4 +1,4 @@
+-#!/bin/sh -
++#!/var/usr/bin/sh -
+ #
+ # $NetBSD: gzexe,v 1.3 2004/05/01 08:22:41 wiz Exp $
+ # $OpenBSD: gzexe,v 1.3 2003/08/05 18:22:17 deraadt Exp $
+--- src/zdiff.orig
++++ src/zdiff
+@@ -1,4 +1,4 @@
+-#!/bin/sh -
++#!/var/usr/bin/sh -
+ #
+ # $NetBSD: zdiff,v 1.5 2010/04/14 20:30:28 joerg Exp $
+ #
+--- src/znew.orig
++++ src/znew
+@@ -1,4 +1,4 @@
+-#!/bin/sh -
++#!/var/usr/bin/sh -
+ #
+ # $NetBSD: znew,v 1.3 2008/04/27 09:07:13 nakayama Exp $
+ # $OpenBSD: znew,v 1.2 2003/08/05 18:22:17 deraadt Exp $
+--- src/zmore.orig
++++ src/zmore
+@@ -1,4 +1,4 @@
+-#!/bin/sh -
++#!/var/usr/bin/sh -
+ #
+ # $NetBSD: zmore,v 1.5 2013/12/06 13:33:15 pettai Exp $
+ #
+--- src/zforce.orig
++++ src/zforce
+@@ -1,4 +1,4 @@
+-#!/bin/sh -
++#!/var/usr/bin/sh -
+ #
+ # $NetBSD: zforce,v 1.2 2003/12/28 12:43:43 wiz Exp $
+ # $OpenBSD: zforce,v 1.2 2003/08/05 18:22:17 deraadt Exp $
