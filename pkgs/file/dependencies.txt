@@ -2,4 +2,3 @@ xz
 bzip2
 zlib
 zstd
-lzlib
