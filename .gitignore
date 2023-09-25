@@ -3,3 +3,4 @@ pkg
 *.deb
 /sdk*
 .builtpkgs
+.args.txt
