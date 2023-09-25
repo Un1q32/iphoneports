@@ -14,23 +14,32 @@ int memset_s(void *dest, size_t destsz, int ch, size_t count) {
     return 0;
 }
 
-// for mkdirat and openat, the working directory is always ~/.local/share/catgirl/log
 int mkdirat(int dirfd, const char *pathname, mode_t mode) {
     if (pathname[0] == '/')
         return mkdir(pathname, mode);
-    else if (getenv("HOME") == NULL)
+    else if ((getenv("HOME") == NULL) && (getenv("XDG_DATA_HOME") == NULL))
         return -1;
+    char data[256];
+    if (getenv("XDG_DATA_HOME") != NULL)
+        snprintf(data, 256, "%s", getenv("XDG_DATA_HOME"));
+    else
+        snprintf(data, 256, "%s/.local/share", getenv("HOME"));
     char path[256];
-    snprintf(path, 256, "%s/.local/share/catgirl/log/%s", getenv("HOME"), pathname);
+    snprintf(path, 256, "%s/catgirl/log/%s", data, pathname);
     return mkdir(path, mode);
 }
 
 int openat(int dirfd, const char *pathname, int flags, mode_t mode) {
     if (pathname[0] == '/')
         return open(pathname, flags, mode);
-    else if (getenv("HOME") == NULL)
+    else if ((getenv("HOME") == NULL) && (getenv("XDG_DATA_HOME") == NULL))
         return -1;
+    char data[256];
+    if (getenv("XDG_DATA_HOME") != NULL)
+        snprintf(data, 256, "%s", getenv("XDG_DATA_HOME"));
+    else
+        snprintf(data, 256, "%s/.local/share", getenv("HOME"));
     char path[256];
-    snprintf(path, 256, "%s/.local/share/catgirl/log/%s", getenv("HOME"), pathname);
+    snprintf(path, 256, "%s/catgirl/log/%s", data, pathname);
     return open(path, flags, mode);
 }
