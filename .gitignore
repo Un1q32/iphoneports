@@ -4,3 +4,4 @@ pkg
 /sdk*
 .builtpkgs
 .args.txt
+pkglock

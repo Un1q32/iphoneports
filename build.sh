@@ -44,10 +44,12 @@ fi
 
 if [ -f "$bsroot/pkglock" ]; then
     lockpid="$(cat "$bsroot/pkglock")"
-    printf "Waiting for PID %s to finish...\n" "$lockpid"
-    while kill -0 "$lockpid" 2> /dev/null; do
-        sleep 0.5
-    done
+    if kill -0 "$lockpid" 2> /dev/null; then
+        printf "Waiting for PID %s to finish...\n" "$lockpid"
+        while kill -0 "$lockpid" 2> /dev/null; do
+            sleep 0.5
+        done
+    fi
 fi
 
 printf '%s' "$$" > "$bsroot/pkglock"
