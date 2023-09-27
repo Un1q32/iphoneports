@@ -16,15 +16,26 @@ Usage: build.sh <command> [options]
     --no-tmpfs              - Do not use /tmp for anything (use if you have limited RAM)
     --no-deps               - Do not add dependencies to the SDK
 "
+    exit "$1"
 }
 
+if [ -z "$1" ]; then
+    if [ -f "$bsroot/.args.txt" ]; then
+        while read -r line; do
+            set -- "$@" "$line"
+        done < "$bsroot/.args.txt"
+    else
+        help 1
+    fi
+fi
+
 case "$1" in
-    -h|*help) help ; exit 0 ;;
+    -h|*help) help 0 ;;
 esac
 
 error() {
     printf "\033[1;31mError:\033[0m %s\n" "$1"
-    [ "$2" = "noexit" ] || exit 1
+    [ "$2" != "noexit" ] && exit 1
 }
 
 [ "${0%/*}" = "$0" ] && bsroot="." || bsroot="${0%/*}"
@@ -33,18 +44,6 @@ bsroot="$PWD"
 pkgdir="$bsroot/pkgs"
 export TERM="xterm-256color"
 export _ENT="$bsroot/entitlements.xml"
-
-if [ -z "$1" ]; then
-    if [ -f "$bsroot/.args.txt" ]; then
-        while read -r line; do
-            set -- "$@" "$line"
-        done < "$bsroot/.args.txt"
-    else
-        help
-        exit 1
-    fi
-fi
-
 
 case "$*" in
     *--no-tmpfs*) export _TMP="$bsroot" ;;
