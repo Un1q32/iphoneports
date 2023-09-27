@@ -47,7 +47,7 @@ if [ -f "$bsroot/pkglock" ]; then
     if kill -0 "$lockpid" 2> /dev/null; then
         printf "Waiting for PID %s to finish...\n" "$lockpid"
         while kill -0 "$lockpid" 2> /dev/null; do
-            sleep 0.5
+            sleep 1
         done
     fi
 fi
