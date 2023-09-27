@@ -31,7 +31,6 @@ error() {
 [ "${0%/*}" = "$0" ] && bsroot="." || bsroot="${0%/*}"
 cd "$bsroot" || exit 1
 bsroot="$PWD"
-pkgdir="$bsroot/pkgs"
 
 if [ -z "$1" ]; then
     if [ -f "$bsroot/.args.txt" ]; then
@@ -43,6 +42,17 @@ if [ -z "$1" ]; then
     fi
 fi
 
+if [ -f "$bsroot/pkglock" ]; then
+    lockpid="$(cat "$bsroot/pkglock")"
+    printf "Waiting for PID %s to finish...\n" "$lockpid"
+    while kill -0 "$lockpid" 2> /dev/null; do
+        sleep 0.5
+    done
+fi
+
+printf '%s' "$$" > "$bsroot/pkglock"
+
+pkgdir="$bsroot/pkgs"
 export TERM="xterm-256color"
 export _ENT="$bsroot/entitlements.xml"
 
@@ -214,7 +224,7 @@ case "$1" in
     ;;
 
     cleanall)
-        rm -rf "$pkgdir"/*/pkg "$pkgdir"/*/src "$pkgdir"/*/*.deb "$bsroot"/debs/*.deb "$_TMP/sdk" "$_TMP/.builtpkgs" "$bsroot/sdk" "$bsroot/.builtpkgs"
+        rm -rf "$pkgdir"/*/pkg "$pkgdir"/*/src "$pkgdir"/*/*.deb "$bsroot"/debs/*.deb "$_TMP/sdk" "$_TMP/.builtpkgs"
     ;;
 
     dryrun)
