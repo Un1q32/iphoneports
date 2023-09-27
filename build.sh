@@ -19,16 +19,6 @@ Usage: build.sh <command> [options]
     exit "$1"
 }
 
-if [ -z "$1" ]; then
-    if [ -f "$bsroot/.args.txt" ]; then
-        while read -r line; do
-            set -- "$@" "$line"
-        done < "$bsroot/.args.txt"
-    else
-        help 1
-    fi
-fi
-
 case "$1" in
     -h|*help) help 0 ;;
 esac
@@ -42,6 +32,17 @@ error() {
 cd "$bsroot" || exit 1
 bsroot="$PWD"
 pkgdir="$bsroot/pkgs"
+
+if [ -z "$1" ]; then
+    if [ -f "$bsroot/.args.txt" ]; then
+        while read -r line; do
+            set -- "$@" "$line"
+        done < "$bsroot/.args.txt"
+    else
+        help 1
+    fi
+fi
+
 export TERM="xterm-256color"
 export _ENT="$bsroot/entitlements.xml"
 
