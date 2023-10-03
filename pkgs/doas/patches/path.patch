@@ -1,0 +1,25 @@
+--- src/vidoas.orig
++++ src/vidoas
+@@ -1,4 +1,4 @@
+-#!/bin/sh
++#!/var/usr/bin/sh
+ 
+ # Copyright (c) 2020 Kimmo Suominen <kim@netbsd.org>
+ #
+@@ -20,7 +20,7 @@
+ 
+ set -eu
+ 
+-PATH=/bin:/usr/bin:/usr/local/bin
++PATH=/var/usr/bin:/bin:/usr/bin:/usr/local/bin
+ export PATH
+ 
+ PROG="${0##*/}"
+--- src/doasedit.orig
++++ src/doasedit
+@@ -1,4 +1,4 @@
+-#!/bin/sh
++#!/var/usr/bin/sh
+ # Copy an existing text file to a temporary location. Then
+ # Edit the file.
+ # Attempt to then transfer the temporary file back to the original
