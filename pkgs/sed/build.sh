@@ -1,10 +1,9 @@
 #!/bin/sh
 (
 cd src || exit 1
-./configure --host="$_TARGET" --prefix=/var/usr
-"$_MAKE" -j8
+"$_TARGET-cc" -O2 -o sed main.c compile.c misc.c process.c -D'__FBSDID(x)='
 mkdir -p "$_PKGROOT/pkg/var/usr/bin"
-cp sed/sed "$_PKGROOT/pkg/var/usr/bin"
+cp sed "$_PKGROOT/pkg/var/usr/bin"
 )
 
 (
