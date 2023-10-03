@@ -8,7 +8,7 @@ cd src || exit 1
 
 (
 cd pkg/var/usr || exit 1
-rm -rf share/info share/man bin/gawk-* bin/gawkbug
+rm -rf share/info share/man bin/gawk-* bin/gawkbug bin/awk
 "$_TARGET-strip" bin/gawk > /dev/null 2>&1
 "$_TARGET-strip" libexec/awk/* > /dev/null 2>&1
 "$_TARGET-strip" lib/gawk/* > /dev/null 2>&1
