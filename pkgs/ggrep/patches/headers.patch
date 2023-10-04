@@ -1,0 +1,11 @@
+--- src/lib/stackvma.c.orig
++++ src/lib/stackvma.c
+@@ -1363,8 +1363,6 @@
+ 
+ #elif (defined __APPLE__ && defined __MACH__) /* macOS */
+ 
+-#include <libc.h>
+-#include <nlist.h>
+ #include <mach/mach.h>
+ #include <mach/machine/vm_param.h>
+ 
