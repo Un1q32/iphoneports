@@ -2,7 +2,7 @@ Package: iphoneports-bzip2
 Section: Archiving
 Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
 Architecture: iphoneos-arm
-Version: 1.0.8-3
+Version: 1.0.8-4
 Description: compression that's slightly better than gzip
 Homepage: http://www.bzip.org/
 Depends: iphoneports-base, iphoneports-diffutils, iphoneports-less
