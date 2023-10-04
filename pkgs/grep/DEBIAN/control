@@ -2,7 +2,6 @@ Package: iphoneports-grep
 Section: Utilities
 Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
 Architecture: iphoneos-arm
-Version: 3.11-1
-Depends: iphoneports-base, iphoneports-pcre2
+Version: 165.0.4
+Depends: iphoneports-base, iphoneports-xz, iphoneports-bzip2, iphoneports-zlib
 Description: searches files for regular expressions
-Homepage: http://www.gnu.org/software/grep/
