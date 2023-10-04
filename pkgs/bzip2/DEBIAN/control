@@ -5,4 +5,4 @@ Architecture: iphoneos-arm
 Version: 1.0.8-3
 Description: compression that's slightly better than gzip
 Homepage: http://www.bzip.org/
-Depends: iphoneports-base
+Depends: iphoneports-base, iphoneports-diffutils, iphoneports-less
