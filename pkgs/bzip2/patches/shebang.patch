@@ -14,11 +14,3 @@
  # sh is buggy on RS/6000 AIX 3.2. Replace above line with #!/bin/ksh
  
  # Bzcmp/diff wrapped for bzip2, 
---- src/bzgrep.orig
-+++ src/bzgrep
-@@ -1,4 +1,4 @@
--#!/bin/sh
-+#!/var/usr/bin/sh
- 
- # Bzgrep wrapped for bzip2, 
- # adapted from zgrep by Philippe Troin <phil@fifi.org> for Debian GNU/Linux.
