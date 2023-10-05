@@ -2,7 +2,7 @@
 (
 cd src || exit 1
 ctags -w ./*.[ch]
-"$_TARGET-cc" "$_PKGROOT/files/compat.c" buffer.c chat.c command.c complete.c config.c edit.c filter.c handle.c input.c irc.c log.c ui.c url.c window.c xdg.c -o catgirl -std=c11 -Wno-implicit-function-declaration -lncursesw -ltls -D'explicit_bzero(b,l)=memset_s((b),(l),0,(l))'
+"$_TARGET-cc" -O2 buffer.c chat.c command.c complete.c config.c edit.c filter.c handle.c input.c irc.c log.c ui.c url.c window.c xdg.c "$_PKGROOT/files/compat.c" -include "$_PKGROOT/files/compat.h" -o catgirl -std=c11 -lncursesw -ltls -D'explicit_bzero(b,l)=memset_s((b),(l),0,(l))'
 mkdir -p "$_PKGROOT/pkg/var/usr/bin"
 cp catgirl "$_PKGROOT/pkg/var/usr/bin"
 )

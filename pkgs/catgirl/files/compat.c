@@ -1,4 +1,3 @@
-// implement fake functions for compatibility with old darwin
 #include <errno.h>
 #include <fcntl.h>
 #include <stdio.h>
