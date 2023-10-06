@@ -1,7 +1,7 @@
 #!/bin/sh
 (
 cd src || exit 1
-./configure --host="$_TARGET" --prefix=/var/usr --sysconfdir=/var/usr/etc/ssh --with-privsep-user="_sshd"
+./configure --host="$_TARGET" --prefix=/var/usr --sysconfdir=/var/usr/etc/ssh --with-privsep-user="_sshd" --with-sandbox=no
 "$_MAKE" -j8
 "$_MAKE" DESTDIR="$_PKGROOT/pkg" install-nokeys STRIP_OPT=
 )
