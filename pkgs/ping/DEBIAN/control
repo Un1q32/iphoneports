@@ -1,5 +1,5 @@
 Package: iphoneports-ping
-Version: 325-1
+Version: 325-2
 Architecture: iphoneos-arm
 Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
 Section: Utilities
