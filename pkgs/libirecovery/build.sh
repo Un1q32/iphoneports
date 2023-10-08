@@ -8,10 +8,8 @@ cd src || exit 1
 
 (
 cd pkg/var/usr || exit 1
-"$_TARGET-strip" bin/irecovery > /dev/null 2>&1
-ldid -S"$_ENT" bin/irecovery
-"$_TARGET-strip" lib/libirecovery-1.0.3.dylib > /dev/null 2>&1
-ldid -S"$_ENT" lib/libirecovery-1.0.3.dylib
+"$_TARGET-strip" bin/irecovery lib/libirecovery-1.0.3.dylib > /dev/null 2>&1
+ldid -S"$_ENT" bin/irecovery lib/libirecovery-1.0.3.dylib
 )
 
 cp -r DEBIAN pkg

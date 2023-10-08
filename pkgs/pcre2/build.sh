@@ -9,14 +9,8 @@ cd src || exit 1
 (
 cd pkg/var/usr || exit 1
 rm -rf share
-"$_TARGET-strip" bin/pcre2test > /dev/null 2>&1
-"$_TARGET-strip" bin/pcre2grep > /dev/null 2>&1
-"$_TARGET-strip" lib/libpcre2-8.0.dylib > /dev/null 2>&1
-"$_TARGET-strip" lib/libpcre2-posix.3.dylib > /dev/null 2>&1
-ldid -S"$_ENT" bin/pcre2test
-ldid -S"$_ENT" bin/pcre2grep
-ldid -S"$_ENT" lib/libpcre2-8.0.dylib
-ldid -S"$_ENT" lib/libpcre2-posix.3.dylib
+"$_TARGET-strip" bin/pcre2test bin/pcre2grep lib/libpcre2-8.0.dylib lib/libpcre2-posix.3.dylib > /dev/null 2>&1
+ldid -S"$_ENT" bin/pcre2test bin/pcre2grep lib/libpcre2-8.0.dylib lib/libpcre2-posix.3.dylib
 )
 
 cp -r DEBIAN pkg

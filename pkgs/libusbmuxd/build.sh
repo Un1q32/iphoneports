@@ -9,10 +9,8 @@ cd src || exit 1
 (
 cd pkg/var/usr || exit 1
 rm -rf share
-for bin in bin/inetcat bin/iproxy lib/libusbmuxd-2.0.6.dylib; do
-    "$_TARGET-strip" "$bin" > /dev/null 2>&1
-    ldid -S"$_ENT" "$bin"
-done
+"$_TARGET-strip" bin/inetcat bin/iproxy lib/libusbmuxd-2.0.6.dylib > /dev/null 2>&1
+ldid -S"$_ENT" bin/inetcat bin/iproxy lib/libusbmuxd-2.0.6.dylib
 )
 
 cp -r DEBIAN pkg

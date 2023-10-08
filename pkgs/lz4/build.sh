@@ -8,10 +8,8 @@ cd src || exit 1
 (
 cd pkg/var/usr || exit 1
 rm -rf share lib/liblz4.a
-"$_TARGET-strip" bin/lz4 > /dev/null 2>&1
-"$_TARGET-strip" lib/liblz4.1.9.4.dylib > /dev/null 2>&1
-ldid -S"$_ENT" bin/lz4
-ldid -S"$_ENT" lib/liblz4.1.9.4.dylib
+"$_TARGET-strip" bin/lz4 lib/liblz4.1.9.4.dylib > /dev/null 2>&1
+ldid -S"$_ENT" bin/lz4 lib/liblz4.1.9.4.dylib
 )
 
 cp -r DEBIAN pkg

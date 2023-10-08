@@ -9,12 +9,8 @@ cd src || exit 1
 (
 cd pkg/var/usr || exit 1
 rm -rf share
-"$_TARGET-strip" bin/less > /dev/null 2>&1
-"$_TARGET-strip" bin/lessecho > /dev/null 2>&1
-"$_TARGET-strip" bin/lesskey > /dev/null 2>&1
-ldid -S"$_ENT" bin/less
-ldid -S"$_ENT" bin/lessecho
-ldid -S"$_ENT" bin/lesskey
+"$_TARGET-strip" bin/less bin/lessecho bin/lesskey > /dev/null 2>&1
+ldid -S"$_ENT" bin/less bin/lessecho bin/lesskey
 )
 
 cp -r DEBIAN pkg

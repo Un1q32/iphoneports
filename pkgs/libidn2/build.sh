@@ -9,10 +9,8 @@ cd src || exit 1
 (
 cd pkg/var/usr || exit 1
 rm -rf share
-"$_TARGET-strip" bin/idn2 > /dev/null 2>&1
-"$_TARGET-strip" lib/libidn2.0.dylib > /dev/null 2>&1
-ldid -S"$_ENT" bin/idn2
-ldid -S"$_ENT" lib/libidn2.0.dylib
+"$_TARGET-strip" bin/idn2 lib/libidn2.0.dylib > /dev/null 2>&1
+ldid -S"$_ENT" bin/idn2 lib/libidn2.0.dylib
 )
 
 cp -r DEBIAN pkg

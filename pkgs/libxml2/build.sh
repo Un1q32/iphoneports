@@ -9,12 +9,8 @@ cd src || exit 1
 (
 cd pkg/var/usr || exit 1
 rm -rf share/doc share/gtk-doc share/man
-"$_TARGET-strip" bin/xmlcatalog > /dev/null 2>&1
-"$_TARGET-strip" bin/xmllint > /dev/null 2>&1
-"$_TARGET-strip" lib/libxml2.2.dylib > /dev/null 2>&1
-ldid -S"$_ENT" bin/xmlcatalog
-ldid -S"$_ENT" bin/xmllint
-ldid -S"$_ENT" lib/libxml2.2.dylib
+"$_TARGET-strip" bin/xmlcatalog bin/xmllint lib/libxml2.2.dylib > /dev/null 2>&1
+ldid -S"$_ENT" bin/xmlcatalog bin/xmllint lib/libxml2.2.dylib
 )
 
 cp -r DEBIAN pkg

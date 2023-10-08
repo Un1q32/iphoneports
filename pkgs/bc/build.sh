@@ -10,10 +10,8 @@ autoreconf -fi
 (
 cd pkg/var/usr || exit 1
 rm -rf share
-"$_TARGET-strip" bin/bc > /dev/null 2>&1
-"$_TARGET-strip" bin/dc > /dev/null 2>&1
-ldid -S"$_ENT" bin/bc
-ldid -S"$_ENT" bin/dc
+"$_TARGET-strip" bin/bc bin/dc > /dev/null 2>&1
+ldid -S"$_ENT" bin/bc bin/dc
 )
 
 cp -r DEBIAN pkg

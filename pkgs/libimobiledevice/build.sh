@@ -9,10 +9,8 @@ cd src || exit 1
 (
 cd pkg/var/usr || exit 1
 rm -rf share
-"$_TARGET-strip" bin/* > /dev/null 2>&1
-ldid -S"$_ENT" bin/*
-"$_TARGET-strip" lib/libimobiledevice-1.0.6.dylib > /dev/null 2>&1
-ldid -S"$_ENT" lib/libimobiledevice-1.0.6.dylib
+"$_TARGET-strip" lib/libimobiledevice-1.0.6.dylib bin/* > /dev/null 2>&1
+ldid -S"$_ENT" lib/libimobiledevice-1.0.6.dylib bin/*
 )
 
 cp -r DEBIAN pkg

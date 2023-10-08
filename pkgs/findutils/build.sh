@@ -9,10 +9,8 @@ cd src || exit 1
 (
 cd pkg/var/usr || exit 1
 rm -rf share var
-for bin in bin/find bin/xargs bin/locate libexec/frcode; do
-    "$_TARGET-strip" "$bin" > /dev/null 2>&1
-    ldid -S"$_ENT" "$bin"
-done
+"$_TARGET-strip" bin/find bin/xargs bin/locate libexec/frcode > /dev/null 2>&1
+ldid -S"$_ENT" bin/find bin/xargs bin/locate libexec/frcode
 )
 
 cp -r DEBIAN pkg

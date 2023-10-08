@@ -9,10 +9,8 @@ cd src || exit 1
 (
 cd pkg/var/usr || exit 1
 rm -rf share
-"$_TARGET-strip" bin/psl > /dev/null 2>&1
-"$_TARGET-strip" lib/libpsl.5.dylib > /dev/null 2>&1
-ldid -S"$_ENT" bin/psl
-ldid -S"$_ENT" lib/libpsl.5.dylib
+"$_TARGET-strip" bin/psl lib/libpsl.5.dylib > /dev/null 2>&1
+ldid -S"$_ENT" bin/psl lib/libpsl.5.dylib
 )
 
 cp -r DEBIAN pkg

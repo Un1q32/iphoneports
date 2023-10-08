@@ -9,12 +9,8 @@ cd src || exit 1
 (
 cd pkg/var/usr || exit 1
 rm -rf share
-"$_TARGET-strip" bin/* > /dev/null 2>&1
-"$_TARGET-strip" sbin/* > /dev/null 2>&1
-"$_TARGET-strip" libexec/* > /dev/null 2>&1
-ldid -S"$_ENT" bin/*
-ldid -S"$_ENT" sbin/*
-ldid -S"$_ENT" libexec/*
+"$_TARGET-strip" bin/* sbin/* libexec/* > /dev/null 2>&1
+ldid -S"$_ENT" bin/* sbin/* libexec/*
 chmod 4711 libexec/ssh-keysign
 )
 
