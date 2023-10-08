@@ -1,17 +1,17 @@
 #!/bin/sh
 (
 cd src || exit 1
-"$_MAKE" TARGET_SYS=Darwin HOST_CC="gcc -m32" CROSS="$_TARGET-" CCOPT=-O2 PREFIX=/var/usr DESTDIR="$_PKGROOT/pkg" TARGET_CFLAGS="-DLUAJIT_ENABLE_JIT" MACOSX_DEPLOYMENT_TARGET=10.5 install -j8
+"$_MAKE" amalg TARGET_SYS=Darwin HOST_CC="gcc -m32" CROSS="$_TARGET-" BUILDMODE=dynamic CCOPT=-O2 PREFIX=/var/usr DESTDIR="$_PKGROOT/pkg" TARGET_CFLAGS="-DLUAJIT_ENABLE_JIT" MACOSX_DEPLOYMENT_TARGET=10.7 -j8
+"$_MAKE" install PREFIX=/var/usr DESTDIR="$_PKGROOT/pkg" TARGET_SYS=Darwin
 )
 
 (
 cd pkg/var/usr || exit 1
-rm -rf share/man lib/libluajit-5.1.a
-ln -sf luajit-2.1.0-beta3 bin/luajit
-"$_TARGET-strip" bin/luajit-2.1.0-beta3 > /dev/null 2>&1
-"$_TARGET-strip" lib/libluajit-5.1.2.1.0.dylib > /dev/null 2>&1
-ldid -S"$_ENT" bin/luajit-2.1.0-beta3
-ldid -S"$_ENT" lib/libluajit-5.1.2.1.0.dylib
+rm -rf share/man
+ver="$(echo bin/luajit-2.1.*)"
+ver="${ver#bin/luajit-2.1.}"
+"$_TARGET-strip" "bin/luajit-2.1.$ver" "lib/libluajit-5.1.2.1.$ver.dylib" > /dev/null 2>&1
+ldid -S"$_ENT" "bin/luajit-2.1.$ver" "lib/libluajit-5.1.2.1.$ver.dylib"
 )
 
 cp -r DEBIAN pkg
