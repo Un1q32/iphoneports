@@ -5,3 +5,4 @@ Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
 Section: Utilities
 Description: pattern scanning and processing language
 Depends: iphoneports-base
+Replaces: gawk
