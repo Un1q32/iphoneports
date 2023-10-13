@@ -1,0 +1,8 @@
+pcre2
+zlib
+libressl
+libxml2
+sqlite
+brotli
+zstd
+bzip2
