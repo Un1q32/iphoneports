@@ -1,6 +1,6 @@
 --- src/ex.c
 +++ src/ex.c
-@@ -418,6 +418,23 @@ static int ec_edit(char *loc, char *cmd, char *arg)
+@@ -417,6 +417,23 @@ static int ec_edit(char *loc, char *cmd, char *arg)
  			*ex_path ? ex_path : "unnamed", lbuf_len(xb),
  			fd < 0 || rd ? 'f' : 'r');
  	ex_show(msg);
@@ -9,8 +9,8 @@
 +		while (lbuf_len(xb) >= adv && lbuf_buf(xb)[adv][0] == '\n')
 +			adv++;
 +		struct filetype lfts[] = {
-+			{"sh", "^#!/.*/(env )?(sh|bash|zsh|dash)$"},
-+			{"py", "^#!/.*/(env )?(python)$"}
++			{"sh", "^#!/.*/(env )?(sh|bash|zsh|dash)( .*)?$"},
++			{"py", "^#!/.*/(env )?(python3?)( .*)?$"}
 +		};
 +		char *pats[LEN(lfts)];
 +		for (int i = 0; i < LEN(lfts); i++)

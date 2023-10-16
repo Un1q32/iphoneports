@@ -61,7 +61,7 @@
  	*key = c;
  	sbufn_done(sb)
  }
-@@ -639,7 +657,7 @@ sbuf *led_input(char *pref, char *post, int *kmap, int row)
+@@ -640,7 +658,7 @@ sbuf *led_input(char *pref, char *post, int *kmap, int row)
  			return sb;
  		}
  		led_printparts(ai, pref ? pref : "", uc_lastline(ln),
@@ -72,7 +72,7 @@
  		if (!pref || !pref[0]) {	/* updating autoindent */
 --- src/vi.c
 +++ src/vi.c
-@@ -1738,6 +1738,29 @@ void vi(int init)
+@@ -1736,6 +1736,29 @@ void vi(int init)
  				vc_insert(c);
  				vi_mod = !xpac && xrow == orow ? 3 : 1;
  				ins:
@@ -100,9 +100,9 @@
 +					goto _break;
 +				}
  				if (vi_insmov == 127) {
+ 					vi_mod = vi_mod == 3 ? 2 : 1;
  					if (xrow && !(xoff > 0 && lbuf_eol(xb, xrow))) {
- 						xoff = lbuf_eol(xb, --xrow);
-@@ -1752,6 +1775,9 @@ void vi(int init)
+@@ -1750,6 +1773,9 @@ void vi(int init)
  					xoff--;
  				xoff = xoff < 0 ? 0 : xoff;
  				break;
@@ -110,5 +110,5 @@
 +				vi_mod = 0;
 +				break;
  			case 'J':
- 				vc_join(1, vi_arg1 <= 1 ? 2 : vi_arg1);
+ 				vc_join(vi_joinmode, vi_arg1 <= 1 ? 2 : vi_arg1);
  				break;
