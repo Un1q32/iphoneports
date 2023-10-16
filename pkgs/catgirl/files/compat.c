@@ -1,9 +1,12 @@
 #include <errno.h>
 #include <fcntl.h>
+#include <limits.h>
+#include <stdarg.h>
 #include <stdio.h>
-#include <stdlib.h>
 #include <string.h>
 #include <sys/stat.h>
+
+#include "compat.h"
 
 int memset_s(void *dest, size_t destsz, int ch, size_t count) {
     if (destsz < count) {
@@ -13,32 +16,36 @@ int memset_s(void *dest, size_t destsz, int ch, size_t count) {
     return 0;
 }
 
-int mkdirat(int dirfd, const char *pathname, mode_t mode) {
-    if (pathname[0] == '/')
+int mkdirat(int fd, const char *pathname, mode_t mode) {
+    if ((fd == AT_FDCWD) || (pathname[0] == '/'))
         return mkdir(pathname, mode);
-    else if ((getenv("HOME") == NULL) && (getenv("XDG_DATA_HOME") == NULL))
+    char fdpath[PATH_MAX];
+    int fcntl_ret = fcntl(fd, F_GETPATH, fdpath);
+    if (fcntl_ret == -1) {
         return -1;
-    char data[256];
-    if (getenv("XDG_DATA_HOME") != NULL)
-        snprintf(data, 256, "%s", getenv("XDG_DATA_HOME"));
-    else
-        snprintf(data, 256, "%s/.local/share", getenv("HOME"));
-    char path[256];
-    snprintf(path, 256, "%s/catgirl/log/%s", data, pathname);
+    }
+    char path[PATH_MAX];
+    snprintf(path, PATH_MAX, "%s/%s", fdpath, pathname);
     return mkdir(path, mode);
 }
 
-int openat(int dirfd, const char *pathname, int flags, mode_t mode) {
-    if (pathname[0] == '/')
+int openat(int fd, const char *pathname, int flags, ...) {
+    mode_t mode = 0;
+    if (flags & O_CREAT) {
+        va_list ap;
+        va_start(ap, flags);
+        mode = va_arg(ap, int);
+        va_end(ap);
+    }
+
+    if ((fd == AT_FDCWD) || (pathname[0] == '/'))
         return open(pathname, flags, mode);
-    else if ((getenv("HOME") == NULL) && (getenv("XDG_DATA_HOME") == NULL))
+    char fdpath[PATH_MAX];
+    int fcntl_ret = fcntl(fd, F_GETPATH, fdpath);
+    if (fcntl_ret == -1) {
         return -1;
-    char data[256];
-    if (getenv("XDG_DATA_HOME") != NULL)
-        snprintf(data, 256, "%s", getenv("XDG_DATA_HOME"));
-    else
-        snprintf(data, 256, "%s/.local/share", getenv("HOME"));
-    char path[256];
-    snprintf(path, 256, "%s/catgirl/log/%s", data, pathname);
+    }
+    char path[PATH_MAX];
+    snprintf(path, PATH_MAX, "%s/%s", fdpath, pathname);
     return open(path, flags, mode);
 }
