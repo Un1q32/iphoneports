@@ -12,6 +12,7 @@ int memset_s(void *dest, size_t destsz, int ch, size_t count) {
     if (destsz < count) {
         return EINVAL;
     }
+
     memset(dest, ch, count);
     return 0;
 }
@@ -19,11 +20,13 @@ int memset_s(void *dest, size_t destsz, int ch, size_t count) {
 int mkdirat(int fd, const char *pathname, mode_t mode) {
     if ((fd == AT_FDCWD) || (pathname[0] == '/'))
         return mkdir(pathname, mode);
+
     char fdpath[PATH_MAX];
     int fcntl_ret = fcntl(fd, F_GETPATH, fdpath);
     if (fcntl_ret == -1) {
         return -1;
     }
+
     char path[PATH_MAX];
     snprintf(path, PATH_MAX, "%s/%s", fdpath, pathname);
     return mkdir(path, mode);
@@ -40,11 +43,13 @@ int openat(int fd, const char *pathname, int flags, ...) {
 
     if ((fd == AT_FDCWD) || (pathname[0] == '/'))
         return open(pathname, flags, mode);
+
     char fdpath[PATH_MAX];
     int fcntl_ret = fcntl(fd, F_GETPATH, fdpath);
     if (fcntl_ret == -1) {
         return -1;
     }
+
     char path[PATH_MAX];
     snprintf(path, PATH_MAX, "%s/%s", fdpath, pathname);
     return open(path, flags, mode);
