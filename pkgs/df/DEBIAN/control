@@ -1,7 +1,7 @@
 Package: iphoneports-df
-Version: 403.100.6-2
+Version: 428
 Architecture: iphoneos-arm
 Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
 Section: Utilities
-Depends: iphoneports-base
 Description: A utility for displaying free disk space
+Depends: iphoneports-base, iphoneports-libxo

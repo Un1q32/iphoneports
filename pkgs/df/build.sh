@@ -1,7 +1,7 @@
 #!/bin/sh
 (
 cd src || exit 1
-"$_TARGET-cc" df.c vfslist.c -o df -lutil -O2
+"$_TARGET-cc" -O2 df.c -o df -D'__FBSDID(x)=' -lutil -lxo
 mkdir -p "$_PKGROOT/pkg/var/usr/bin"
 cp df "$_PKGROOT/pkg/var/usr/bin"
 )

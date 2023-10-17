@@ -1,0 +1,7 @@
+Package: iphoneports-libxo
+Section: Development
+Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
+Architecture: iphoneos-arm
+Version: 1.6.0
+Description: A Library for Generating Text, XML, JSON, and HTML Output
+Depends: iphoneports-base
