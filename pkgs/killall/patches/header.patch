@@ -1,0 +1,10 @@
+--- src/killall.c.orig
++++ src/killall.c
+@@ -36,7 +36,6 @@
+ #endif /* !__APPLE__ */
+ #include <sys/stat.h>
+ #include <sys/uio.h>
+-#include <sys/user.h>
+ #include <sys/sysctl.h>
+ #include <fcntl.h>
+ #include <dirent.h>
