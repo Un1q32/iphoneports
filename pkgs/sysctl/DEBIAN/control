@@ -1,5 +1,5 @@
 Package: iphoneports-sysctl
-Version: 950-1
+Version: 970.0.4
 Architecture: iphoneos-arm
 Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
 Section: Utilities
