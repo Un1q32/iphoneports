@@ -1,4 +1,3 @@
-#include <errno.h>
 #include <fcntl.h>
 #include <limits.h>
 #include <stdarg.h>
@@ -8,13 +7,9 @@
 
 #include "compat.h"
 
-int memset_s(void *dest, size_t destsz, int ch, size_t count) {
-    if (destsz < count) {
-        return EINVAL;
-    }
-
-    memset(dest, ch, count);
-    return 0;
+void explicit_bzero(void *d, size_t n) {
+    d = memset(d, 0, n);
+    __asm__ __volatile__ ("" : : "r"(d) : "memory");
 }
 
 int mkdirat(int fd, const char *pathname, mode_t mode) {
