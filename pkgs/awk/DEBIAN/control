@@ -1,8 +1,0 @@
-Package: iphoneports-awk
-Version: 20230911
-Architecture: iphoneos-arm
-Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
-Section: Utilities
-Description: pattern scanning and processing language
-Depends: iphoneports-base
-Replaces: gawk
