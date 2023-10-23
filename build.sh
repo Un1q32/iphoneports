@@ -4,7 +4,7 @@ defaulttarget='armv7-apple-darwin11'
 
 help() {
     printf "%s" "\
-Usage: build.sh <command> [options]
+Usage: build.sh [options] <command>
     <pkg> [pkgs...]         - Build a single package
     all                     - Build all packages
     clean                   - Clean a single package
