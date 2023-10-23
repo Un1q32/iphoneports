@@ -5,15 +5,13 @@ defaulttarget='armv7-apple-darwin11'
 help() {
     printf "%s" "\
 Usage: build.sh <command> [options]
-    <pkg name>              - Build a single package
-    build <pkg names>       - Build all specified packages
+    <pkg> [pkgs...]         - Build a single package
     all                     - Build all packages
-    clean                   - Clean a single package (remove build files)
-    cleanall                - Clean all packages (remove build files)
+    clean                   - Clean a single package
+    cleanall                - Clean all packages
     dryrun                  - Pretend to build all packages
-    list                    - List all packages
-    --target                - Specify a target other than $defaulttarget
-    --no-tmpfs              - Do not use /tmp for anything
+    --target                - Specify a target (default: $defaulttarget)
+    --no-tmp                - Do not use /tmp for anything, use the current directory instead
     --no-deps               - Do not add dependencies to the SDK
 "
     exit "$1"
@@ -207,55 +205,46 @@ includedeps() {
     fi
 }
 
-case "$1" in
-    all)
-        depcheck
-        rm -rf "$pkgdir"/*/pkg "$pkgdir"/*/src
-        buildall
-        cp -fl "$pkgdir"/*/*.deb "$bsroot/debs" 2>/dev/null
-    ;;
-
-    list)
-        for pkg in "$pkgdir"/*; do
-            printf "%s\n" "${pkg##*/}"
-        done
-    ;;
-
-    clean)
-        rm -rf "$pkgdir/$2/pkg" "$pkgdir/$2/src" "$pkgdir/$2"/*.deb "$bsroot/debs/$2".deb
-    ;;
-
-    cleanall)
-        rm -rf "$pkgdir"/*/pkg "$pkgdir"/*/src "$pkgdir"/*/*.deb "$bsroot"/debs/*.deb "$_TMP/sdk" "$_TMP/.builtpkgs"
-    ;;
-
-    dryrun)
-        buildall dryrun
-    ;;
-
-    build)
-        depcheck
-        shift
-        for pkg in "$@"; do
-            [ -d "$pkgdir/$pkg" ] || error "Package not found: $pkg"
-        done
-        for pkg in "$@"; do
-            rm -rf "$pkgdir/$pkg/pkg" "$pkgdir/$pkg/src"
-        done
-        for pkg in "$@"; do
-            build "$pkg" || error "Failed to build package: $pkg"
-            cp -fl "$pkgdir/$pkg"/*.deb "$bsroot/debs" 2>/dev/null
-        done
-    ;;
-
-    *)
-        if [ -d "$pkgdir/$1" ]; then
+main() {
+    case "$1" in
+        all)
             depcheck
-            rm -rf "$pkgdir/$1/pkg" "$pkgdir/$1/src"
-            build "$1"
-            cp -fl "$pkgdir/$1"/*.deb "$bsroot/debs" 2>/dev/null
-        else
-            error "Package not found: $1"
-        fi
-    ;;
-esac
+            rm -rf "$pkgdir"/*/pkg "$pkgdir"/*/src
+            buildall
+            cp -fl "$pkgdir"/*/*.deb "$bsroot/debs" 2>/dev/null
+        ;;
+
+        clean)
+            rm -rf "$pkgdir/$2/pkg" "$pkgdir/$2/src" "$pkgdir/$2"/*.deb "$bsroot/debs/$2".deb
+        ;;
+
+        cleanall)
+            rm -rf "$pkgdir"/*/pkg "$pkgdir"/*/src "$pkgdir"/*/*.deb "$bsroot"/debs/*.deb "$_TMP/sdk" "$_TMP/.builtpkgs"
+        ;;
+
+        dryrun)
+            buildall dryrun
+        ;;
+
+        -*)
+            shift
+            main "$@"
+        ;;
+
+        *)
+            depcheck
+            for pkg in "$@"; do
+                [ -d "$pkgdir/$pkg" ] || error "Package not found: $pkg"
+            done
+            for pkg in "$@"; do
+                rm -rf "$pkgdir/$pkg/pkg" "$pkgdir/$pkg/src"
+            done
+            for pkg in "$@"; do
+                build "$pkg" || error "Failed to build package: $pkg"
+                cp -fl "$pkgdir/$pkg"/*.deb "$bsroot/debs" 2>/dev/null
+            done
+        ;;
+    esac
+}
+
+main "$@"
