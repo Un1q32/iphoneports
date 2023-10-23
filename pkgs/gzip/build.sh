@@ -13,7 +13,7 @@ done
 cd pkg/var/usr/bin || exit 1
 "$_TARGET-strip" gzip > /dev/null 2>&1
 ldid -S"$_ENT" gzip
-for link in gunzip gzcat; do
+for link in gunzip gzcat zgrep zegrep zfgrep; do
     ln -s gzip "$link"
 done
 ln -s zdiff zcmp

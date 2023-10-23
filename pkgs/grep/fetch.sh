@@ -1,8 +1,8 @@
 #!/bin/sh
 rm -rf pkg src
 printf "Downloading source...\n"
-mkdir src
-for src in grep.c queue.c util.c file.c grep.h; do
-    curl -L -s -o "src/$src" "https://raw.githubusercontent.com/apple-oss-distributions/text_cmds/text_cmds-165.0.4/grep/$src" &
-done
-wait
+curl -L -# -o src.tar.xz https://ftp.gnu.org/gnu/grep/grep-3.11.tar.xz
+printf "Unpacking source...\n"
+tar -xf src.tar.xz
+rm src.tar.xz
+mv grep-3.11 src

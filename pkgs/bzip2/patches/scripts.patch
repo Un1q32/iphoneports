@@ -29,3 +29,20 @@
  prog=`echo $0 | sed 's|.*/||'`
  case "$prog" in
    *cmp) comp=${CMP-cmp}   ;;
+--- src/bzgrep.orig
++++ src/bzgrep
+@@ -1,4 +1,4 @@
+-#!/bin/sh
++#!/var/usr/bin/sh
+ 
+ # Bzgrep wrapped for bzip2, 
+ # adapted from zgrep by Philippe Troin <phil@fifi.org> for Debian GNU/Linux.
+@@ -6,7 +6,7 @@
+ ## zgrep -- a wrapper around a grep program that decompresses files as needed
+ ## Adapted from a version sent by Charles Levert <charles@comm.polymtl.ca>
+ 
+-PATH="/usr/bin:$PATH"; export PATH
++PATH="/var/usr/bin:/usr/bin:$PATH"; export PATH
+ 
+ prog=`echo $0 | sed 's|.*/||'`
+ case "$prog" in
