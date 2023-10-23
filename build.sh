@@ -12,7 +12,7 @@ Usage: build.sh [options] <command>
     dryrun                  - Pretend to build all packages
     --target                - Specify a target (default: $defaulttarget)
     --no-tmp                - Do not use /tmp for anything, use the current directory instead
-    --no-deps               - Do not add dependencies to the SDK
+    --no-deps               - Do not include dependencies
 "
     exit "$1"
 }
@@ -130,11 +130,11 @@ build() {
         (
         export _PKGROOT="$pkgdir/$1"
         cd "$_PKGROOT" || error "Failed to cd to package directory: $1"
-        [ "$_NODEPS" = 1 ] || includedeps "$2"
-        [ "$2" = "dryrun" ] || [ -f fetch.sh ] && ./fetch.sh
-        [ "$2" = "dryrun" ] || applypatches
+        [ "$_NODEPS" != 1 ] && includedeps "$2"
+        [ "$2" != "dryrun" ] && [ -f fetch.sh ] && ./fetch.sh
+        [ "$2" != "dryrun" ] && applypatches
         printf "Building %s\n" "$1"
-        [ "$2" = "dryrun" ] || ./build.sh
+        [ "$2" != "dryrun" ] && ./build.sh
         rm -rf "$_SDK"
         )
     else
@@ -172,7 +172,7 @@ applypatches() {
 }
 
 includedeps() {
-    if ! [ "$1" = "dryrun" ]; then
+    if [ "$1" != "dryrun" ]; then
         if [ -d "$sdk" ]; then
             export _SDK="$_TMP/sdk"
             cp -a "$sdk" "$_SDK"
@@ -186,19 +186,19 @@ includedeps() {
             if [ -d "$pkgdir/$dep" ]; then
                 if ! hasbeenbuilt "$dep" "$1"; then
                     printf "Building dependency %s\n" "$dep"
-                    [ "$1" = "dryrun" ] || mv "$_SDK" "$_SDK.$dep.bak"
+                    [ "$1" != "dryrun" ] && mv "$_SDK" "$_SDK.$dep.bak"
                     build "$dep" "$1"
-                    [ "$1" = "dryrun" ] || mv "$_SDK.$dep.bak" "$_SDK"
+                    [ "$1" != "dryrun" ] && mv "$_SDK.$dep.bak" "$_SDK"
                 fi
                 printf "Including dependency %s\n" "$dep"
-                [ "$1" = "dryrun" ] || cp -a "$pkgdir/$dep/pkg/"* "$_SDK"
+                [ "$1" != "dryrun" ] && cp -a "$pkgdir/$dep/pkg/"* "$_SDK"
             else
                 error "Dependency not found: $dep"
             fi
         done < dependencies.txt
     fi
 
-    if ! [ "$1" = "dryrun" ]; then
+    if [ "$1" != "dryrun" ]; then
         if [ -d sdk ]; then
             cp -a sdk/* "$_SDK"
         fi
