@@ -13,7 +13,7 @@ Usage: build.sh <command> [options]
     dryrun                  - Pretend to build all packages
     list                    - List all packages
     --target                - Specify a target other than $defaulttarget
-    --no-tmpfs              - Do not use /tmp for anything (use if you have limited RAM)
+    --no-tmpfs              - Do not use /tmp for anything
     --no-deps               - Do not add dependencies to the SDK
 "
     exit "$1"
