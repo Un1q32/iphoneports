@@ -1,8 +1,0 @@
-Package: iphoneports-gsed
-Version: 4.9
-Architecture: iphoneos-arm
-Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
-Section: Utilities
-Homepage: http://www.gnu.org/software/sed/
-Description: GNU implementation of sed
-Depends: iphoneports-base

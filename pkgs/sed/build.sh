@@ -1,15 +1,16 @@
 #!/bin/sh
 (
 cd src || exit 1
-"$_TARGET-cc" -O2 -o sed main.c compile.c misc.c process.c -D'__FBSDID(x)='
-mkdir -p "$_PKGROOT/pkg/var/usr/bin"
-cp sed "$_PKGROOT/pkg/var/usr/bin"
+./configure --host="$_TARGET" --prefix=/var/usr
+"$_MAKE" -j8
+"$_MAKE" install DESTDIR="$_PKGROOT/pkg"
 )
 
 (
-cd pkg/var/usr/bin || exit 1
-"$_TARGET-strip" sed > /dev/null 2>&1
-ldid -S"$_ENT" sed
+cd pkg/var/usr || exit 1
+rm -rf share
+"$_TARGET-strip" bin/sed > /dev/null 2>&1
+ldid -S"$_ENT" bin/sed
 )
 
 cp -r DEBIAN pkg
