@@ -6,3 +6,4 @@ Version: 1.0.8-5
 Description: compression that's slightly better than gzip
 Homepage: http://www.bzip.org/
 Depends: iphoneports-base, iphoneports-diffutils, iphoneports-less, iphoneports-grep
+Replaces: iphoneports-grep
