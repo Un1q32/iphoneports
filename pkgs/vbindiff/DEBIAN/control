@@ -1,0 +1,7 @@
+Package: iphoneports-vbindiff
+Version: 3.0b5
+Architecture: iphoneos-arm
+Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
+Section: Utilities
+Description: displays files in hexadecimal and ASCII (or EBCDIC) and highlight the differences between them
+Depends: iphoneports-base, iphoneports-ncurses
