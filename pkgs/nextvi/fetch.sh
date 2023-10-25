@@ -1,6 +1,8 @@
 #!/bin/sh
 rm -rf pkg src
 printf "Downloading source...\n"
-git clone https://github.com/kyx0r/nextvi.git src
-cd src || exit 1
-git -c advice.detachedHead=false checkout 4083d1eae3c442dfde13af5755dbe975f1923897
+curl -L -# -o src.tar.gz https://github.com/kyx0r/nextvi/archive/6cc14fa7e4c70923fce5ea862f31d52d25304be7.tar.gz
+printf "Unpacking source...\n"
+tar -xf src.tar.gz
+rm src.tar.gz
+mv nextvi-6cc14fa7e4c70923fce5ea862f31d52d25304be7 src

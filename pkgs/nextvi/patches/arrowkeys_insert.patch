@@ -72,7 +72,7 @@
  		if (!pref || !pref[0]) {	/* updating autoindent */
 --- src/vi.c
 +++ src/vi.c
-@@ -1735,6 +1735,29 @@ void vi(int init)
+@@ -1734,6 +1734,29 @@ void vi(int init)
  				vc_insert(c);
  				vi_mod = !xpac && xrow == orow ? 3 : 1;
  				ins:
@@ -102,7 +102,7 @@
  				if (vi_insmov == 127) {
  					vi_mod = vi_mod == 3 ? 2 : 1;
  					if (xrow && !(xoff > 0 && lbuf_eol(xb, xrow))) {
-@@ -1749,6 +1772,9 @@ void vi(int init)
+@@ -1748,6 +1771,9 @@ void vi(int init)
  					xoff--;
  				xoff = xoff < 0 ? 0 : xoff;
  				break;

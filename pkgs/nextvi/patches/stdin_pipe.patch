@@ -21,7 +21,7 @@
  	snprintf(msg, sizeof(msg), "\"%s\"  %d lines  [%c]",
  			*ex_path ? ex_path : "unnamed", lbuf_len(xb),
  			fd < 0 || rd ? 'f' : 'r');
-@@ -1089,13 +1094,21 @@ void ex(void)
+@@ -1087,13 +1092,21 @@ void ex(void)
  
  void ex_init(char **files, int n)
  {
@@ -110,7 +110,7 @@
  		term_init();
 --- src/vi.c
 +++ src/vi.c
-@@ -2024,7 +2024,8 @@ int main(int argc, char *argv[])
+@@ -2023,7 +2023,8 @@ int main(int argc, char *argv[])
  		if (argv[i][1] == '-' && !argv[i][2]) {
  			i++;
  			break;
