@@ -12,6 +12,9 @@ cd pkg/var/usr || exit 1
 rm -rf share/man
 "$_TARGET-strip" bin/tic bin/tset bin/toe bin/clear bin/infocmp lib/libncursesw.6.dylib lib/libncurses++w.6.dylib lib/libformw.6.dylib lib/libmenuw.6.dylib lib/libpanelw.6.dylib > /dev/null 2>&1
 ldid -S"$_ENT" bin/tic bin/tset bin/toe bin/clear bin/infocmp lib/libncursesw.6.dylib lib/libncurses++w.6.dylib lib/libformw.6.dylib lib/libmenuw.6.dylib lib/libpanelw.6.dylib
+for lib in ncurses ncurses++ form menu panel; do
+    ln -s "lib${lib}w.dylib" "lib/lib${lib}.dylib"
+done
 ln -s libncurses.dylib lib/libcurses.dylib
 for header in include/ncursesw/*.h; do
     ln -s "${header#include/}" include/"${header#include/ncursesw/}"
