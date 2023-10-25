@@ -1,6 +1,10 @@
 # iPhonePorts build system
 
-> Package build scripts for every package in iPhonePorts
+> iPhonePorts package build scripts
+
+## Setup
+
+You will need an iPhonePorts toolchain to use the build scripts in this repo, you can build one with https://github.com/OldWorldOrdr/ios-toolchain-build.
 
 ## Usage
 
