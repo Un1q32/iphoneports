@@ -1,5 +1,4 @@
-# sudo: auth account password session
-#auth       sufficient     pam_securityserver.so
+# doas: auth account password session
 auth       sufficient     pam_unix.so
 auth       required       pam_deny.so
 account    required       pam_permit.so
