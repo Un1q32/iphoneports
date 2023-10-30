@@ -3,7 +3,7 @@
 defaulttarget='armv7-apple-darwin11'
 
 help() {
-    printf "%s" "\
+    printf '%s' "\
 Usage: build.sh [options] <command>
     <pkg> [pkgs...]         - Build a single package
     all                     - Build all packages
@@ -22,7 +22,7 @@ case "$1" in
 esac
 
 error() {
-    printf "\033[1;31mError:\033[0m %s\n" "$1"
+    printf '\033[1;31mError:\033[0m %s\n' "$1"
     [ "$2" != "noexit" ] && exit 1
 }
 
@@ -43,7 +43,7 @@ fi
 if [ -f "$bsroot/pkglock" ]; then
     lockpid="$(cat "$bsroot/pkglock")"
     if kill -0 "$lockpid" 2> /dev/null; then
-        printf "Waiting for PID %s to finish...\n" "$lockpid"
+        printf '%s\n' "Waiting for PID $lockpid to finish..."
         while kill -0 "$lockpid" 2> /dev/null; do
             sleep 1
         done
@@ -126,21 +126,18 @@ build() {
         return 0
     fi
 
-    if [ -f "$pkgdir/$1/build.sh" ]; then
-        (
-        export _PKGROOT="$pkgdir/$1"
-        cd "$_PKGROOT" || error "Failed to cd to package directory: $1"
-        [ "$_NODEPS" != 1 ] && includedeps "$2"
-        [ "$2" != "dryrun" ] && [ -f fetch.sh ] && ./fetch.sh
-        [ "$2" != "dryrun" ] && applypatches
-        printf "Building %s\n" "$1"
-        [ "$2" != "dryrun" ] && ./build.sh
-        rm -rf "$_SDK"
-        )
-    else
-        dpkg-deb -b --root-owner-group -Zgzip "$pkgdir/$1" "$bsroot/debs/$1".deb
-    fi
-    printf "%s\n" "$1" >> "$_TMP/.builtpkgs"
+    (
+    export _PKGROOT="$pkgdir/$1"
+    cd "$_PKGROOT" || error "Failed to cd to package directory: $1"
+    [ "$_NODEPS" != 1 ] && includedeps "$2"
+    [ "$2" != "dryrun" ] && [ -f fetch.sh ] && ./fetch.sh
+    [ "$2" != "dryrun" ] && applypatches
+    printf '%s\n' "Building $1"
+    [ "$2" != "dryrun" ] && ./build.sh
+    rm -rf "$_SDK"
+    )
+
+    printf '%s\n' "$1" >> "$_TMP/.builtpkgs"
 }
 
 buildall() {
@@ -165,7 +162,7 @@ hasbeenbuilt() {
 applypatches() {
     if [ -d patches ]; then
         for patch in patches/*; do
-            printf "Applying patch %s\n" "${patch##*/}"
+            printf '%s\n' "Applying patch ${patch##*/}"
             patch -p0 < "$patch"
         done
     fi
@@ -185,12 +182,12 @@ includedeps() {
         while read -r dep; do
             if [ -d "$pkgdir/$dep" ]; then
                 if ! hasbeenbuilt "$dep" "$1"; then
-                    printf "Building dependency %s\n" "$dep"
+                    printf '%s\n' "Building dependency $dep"
                     [ "$1" != "dryrun" ] && mv "$_SDK" "$_SDK.$dep.bak"
                     build "$dep" "$1"
                     [ "$1" != "dryrun" ] && mv "$_SDK.$dep.bak" "$_SDK"
                 fi
-                printf "Including dependency %s\n" "$dep"
+                printf '%s\n' "Including dependency $dep"
                 [ "$1" != "dryrun" ] && cp -a "$pkgdir/$dep/pkg/"* "$_SDK"
             else
                 error "Dependency not found: $dep"
@@ -211,11 +208,11 @@ main() {
             depcheck
             rm -rf "$pkgdir"/*/pkg "$pkgdir"/*/src
             buildall
-            cp -fl "$pkgdir"/*/*.deb "$bsroot/debs" 2>/dev/null
+            cp -f "$pkgdir"/*/*.deb "$bsroot/debs" 2> /dev/null
         ;;
 
         clean)
-            rm -rf "$pkgdir/$2/pkg" "$pkgdir/$2/src" "$pkgdir/$2"/*.deb "$bsroot/debs/$2".deb
+            rm -rf "$pkgdir/$2/pkg" "$pkgdir/$2/src" "$pkgdir/$2"/*.deb "$bsroot/debs/$2.deb"
         ;;
 
         cleanall)
@@ -237,11 +234,12 @@ main() {
                 [ -d "$pkgdir/$pkg" ] || error "Package not found: $pkg"
             done
             for pkg in "$@"; do
-                rm -rf "$pkgdir/$pkg/pkg" "$pkgdir/$pkg/src"
+                rm -rf "$pkgdir/$pkg/pkg" "$pkgdir/$pkg/src" &
             done
+            wait
             for pkg in "$@"; do
                 build "$pkg" || error "Failed to build package: $pkg"
-                cp -fl "$pkgdir/$pkg"/*.deb "$bsroot/debs" 2>/dev/null
+                cp -f "$pkgdir/$pkg"/*.deb "$bsroot/debs" 2> /dev/null
             done
         ;;
     esac
