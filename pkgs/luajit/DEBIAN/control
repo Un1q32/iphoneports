@@ -2,6 +2,6 @@ Package: iphoneports-luajit
 Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
 Architecture: iphoneos-arm
 Description: Just-in-time compiler and drop-in replacement for Lua 5.1
-Section: Development
+Section: Scripting
 Version: 2.1.1697887905
 Depends: iphoneports-base
