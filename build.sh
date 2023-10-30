@@ -82,7 +82,7 @@ depcheck() {
 
     _strip_version=$("$_TARGET-strip" --version 2> /dev/null)
     case "$_strip_version" in
-        *GNU*) error "GNU/LLVM strip is not supported, please use Apple's strip" ;;
+        *GNU*) error "GNU/LLVM strip is not supported, please use cctools strip" ;;
     esac
 
     if command -v gmake > /dev/null; then
