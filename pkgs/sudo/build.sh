@@ -1,7 +1,8 @@
 #!/bin/sh
+unset SUDO_PROMPT
 (
 cd src || exit 1
-./configure --host="$_TARGET" --prefix=/var/usr --sysconfdir=/var/usr/etc --with-passprompt="Password:" --enable-zlib=system --with-env-editor ax_cv_check_cflags___static_libgcc=no
+./configure --host="$_TARGET" --prefix=/var/usr --sysconfdir=/var/usr/etc --with-rundir=/var/usr/run/sudo --with-vardir=/var/usr/db/sudo --with-passprompt="Password:" --disable-tmpfiles.d --enable-zlib=system --with-env-editor --with-openssl ax_cv_check_cflags___static_libgcc=no
 "$_MAKE" -j8
 fakeroot "$_MAKE" DESTDIR="$_PKGROOT/pkg" install
 )
