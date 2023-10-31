@@ -229,6 +229,9 @@ main() {
         ;;
 
         *)
+            if [ "$1" = "build" ]; then
+                shift
+            fi
             depcheck
             for pkg in "$@"; do
                 [ -d "$pkgdir/$pkg" ] || error "Package not found: $pkg"
