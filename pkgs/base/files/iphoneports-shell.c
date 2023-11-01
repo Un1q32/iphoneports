@@ -1,3 +1,4 @@
+#include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
 
@@ -7,5 +8,6 @@ int main() {
         readlink("/var/usr/shell", shell, 1024);
     char* shellname = strdup(strrchr(shell, '/'));
     shellname[0] = '-';
+    setenv("SHELL", shell, 1);
     return execl(shell, shellname, NULL);
 }
