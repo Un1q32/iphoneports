@@ -2,6 +2,6 @@ Package: iphoneports-nghttp2
 Section: Development
 Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
 Architecture: iphoneos-arm
-Version: 1.58.0
+Version: 1.58.0-1
 Depends: iphoneports-base, iphoneports-libxml2, iphoneports-libressl, iphoneports-zlib
 Description: An implementation of HTTP/2 and its header compression algorithm HPACK in C.

@@ -9,8 +9,8 @@ cd src || exit 1
 (
 cd pkg/var/usr || exit 1
 rm -rf share etc/ssl/cert.pem
-"$_TARGET-strip" bin/openssl bin/ocspcheck lib/libcrypto.50.dylib lib/libssl.53.dylib lib/libtls.26.dylib > /dev/null 2>&1
-ldid -S"$_ENT" bin/openssl bin/ocspcheck lib/libcrypto.50.dylib lib/libssl.53.dylib lib/libtls.26.dylib
+"$_TARGET-strip" bin/openssl bin/ocspcheck lib/libcrypto.52.dylib lib/libssl.55.dylib lib/libtls.28.dylib > /dev/null 2>&1
+ldid -S"$_ENT" bin/openssl bin/ocspcheck lib/libcrypto.52.dylib lib/libssl.55.dylib lib/libtls.28.dylib
 )
 
 cp -r DEBIAN pkg

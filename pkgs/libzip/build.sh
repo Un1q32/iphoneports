@@ -11,7 +11,9 @@ cd pkg/var/usr || exit 1
 rm -rf share
 lib="$("$_OTOOL" -D lib/libzip.5.5.dylib | tail -1)"
 "$_INSTALLNAMETOOL" -id /var/usr/lib/libzip.5.dylib lib/libzip.5.5.dylib
-"$_INSTALLNAMETOOL" -change "$lib" /var/usr/lib/libzip.5.dylib bin/*
+"$_INSTALLNAMETOOL" -change "$lib" /var/usr/lib/libzip.5.dylib bin/zipmerge
+"$_INSTALLNAMETOOL" -change "$lib" /var/usr/lib/libzip.5.dylib bin/zipcmp
+"$_INSTALLNAMETOOL" -change "$lib" /var/usr/lib/libzip.5.dylib bin/ziptool
 "$_TARGET-strip" lib/libzip.5.5.dylib bin/* > /dev/null 2>&1
 ldid -S"$_ENT" lib/libzip.5.5.dylib bin/*
 )

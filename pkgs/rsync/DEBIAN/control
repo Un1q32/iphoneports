@@ -2,7 +2,7 @@ Package: iphoneports-rsync
 Section: Networking
 Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
 Architecture: iphoneos-arm
-Version: 3.2.7-1
+Version: 3.2.7-2
 Description: A fast and versatile file copying tool for remote and local files
 Homepage: http://www.samba.org/rsync/
 Depends: iphoneports-base, iphoneports-libressl, iphoneports-lz4, iphoneports-zstd, iphoneports-zlib
