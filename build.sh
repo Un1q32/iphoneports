@@ -171,7 +171,7 @@ applypatches() {
 includedeps() {
     if [ "$1" != "dryrun" ]; then
         if [ -d "$sdk" ]; then
-            export _SDK="$_TMP/sdk"
+            export _SDK="$_TMP/iphoneports-sdk"
             cp -a "$sdk" "$_SDK"
         else
             error "SDK not found"
@@ -183,9 +183,9 @@ includedeps() {
             if [ -d "$pkgdir/$dep" ]; then
                 if ! hasbeenbuilt "$dep" "$1"; then
                     printf '%s\n' "Building dependency $dep"
-                    [ "$1" != "dryrun" ] && mv "$_SDK" "$_SDK.$dep.bak"
+                    [ "$1" != "dryrun" ] && mv "$_SDK" "$_SDK.$dep"
                     build "$dep" "$1"
-                    [ "$1" != "dryrun" ] && mv "$_SDK.$dep.bak" "$_SDK"
+                    [ "$1" != "dryrun" ] && mv "$_SDK.$dep" "$_SDK"
                 fi
                 printf '%s\n' "Including dependency $dep"
                 [ "$1" != "dryrun" ] && cp -a "$pkgdir/$dep/pkg/"* "$_SDK"
@@ -220,7 +220,17 @@ main() {
         ;;
 
         dryrun)
-            buildall dryrun
+            if [ -z "$2" ]; then
+                buildall dryrun
+            else
+                shift
+                for pkg in "$@"; do
+                    [ -d "$pkgdir/$pkg" ] || error "Package not found: $pkg"
+                done
+                for pkg in "$@"; do
+                    build "$pkg" dryrun || error "Failed to build package: $pkg"
+                done
+            fi
         ;;
 
         -*)
