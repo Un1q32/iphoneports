@@ -71,7 +71,7 @@ case "$*" in
 esac
 
 : > "$_TMP/.builtpkgs"
-rm -rf "$_TMP"/sdk*
+rm -rf "$_TMP"/iphoneports-sdk*
 
 depcheck() {
     for dep in "$_TARGET-gcc" "$_TARGET-g++" "$_TARGET-cc" "$_TARGET-c++" "$_TARGET-strip" "$_TARGET-sdkpath" ldid dpkg-deb patch fakeroot; do
