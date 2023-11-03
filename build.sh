@@ -216,7 +216,7 @@ main() {
         ;;
 
         cleanall)
-            rm -rf "$pkgdir"/*/pkg "$pkgdir"/*/src "$pkgdir"/*/*.deb "$bsroot"/debs/*.deb "$_TMP/sdk" "$_TMP/.builtpkgs"
+            rm -rf "$pkgdir"/*/pkg "$pkgdir"/*/src "$pkgdir"/*/*.deb "$bsroot"/debs/*.deb "$_TMP"/iphoneports-sdk* "$_TMP/.builtpkgs"
         ;;
 
         dryrun)
