@@ -21,6 +21,7 @@ lib3="$("$_OTOOL" -D lib/libtls.$tlsabi.dylib | tail -1)"
 "$_INSTALLNAMETOOL" -id /var/usr/lib/libcrypto.$cryptoabi.dylib lib/libcrypto.$cryptoabi.dylib
 "$_INSTALLNAMETOOL" -id /var/usr/lib/libssl.$sslabi.dylib lib/libssl.$sslabi.dylib
 "$_INSTALLNAMETOOL" -id /var/usr/lib/libtls.$tlsabi.dylib lib/libtls.$tlsabi.dylib
+"$_INSTALLNAMETOOL" -change "$lib1" /var/usr/lib/libcrypto.$cryptoabi.dylib lib/libssl.$sslabi.dylib
 "$_INSTALLNAMETOOL" -change "$lib1" /var/usr/lib/libcrypto.$cryptoabi.dylib bin/openssl
 "$_INSTALLNAMETOOL" -change "$lib2" /var/usr/lib/libssl.$sslabi.dylib bin/openssl
 "$_INSTALLNAMETOOL" -change "$lib1" /var/usr/lib/libcrypto.$cryptoabi.dylib bin/ocspcheck
