@@ -22,6 +22,7 @@ mv pkg/var/usr/bin/doas pkg/usr/libexec/iphoneports
 ln -s ../../../../usr/libexec/iphoneports/doas pkg/var/usr/bin/doas
 cp files/doas.pam pkg/etc/pam.d/doas
 cp files/doas.conf pkg/var/usr/etc
+chmod 0400 pkg/var/usr/etc/doas.conf
 
 cp -r DEBIAN pkg
 dpkg-deb -b --root-owner-group -Zgzip pkg doas.deb
