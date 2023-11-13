@@ -13,14 +13,13 @@ void explicit_bzero(void *d, size_t n) {
 }
 
 int mkdirat(int fd, const char *pathname, mode_t mode) {
-    if ((fd == AT_FDCWD) || (pathname[0] == '/'))
+    if (fd == AT_FDCWD || pathname[0] == '/')
         return mkdir(pathname, mode);
 
     char fdpath[PATH_MAX];
     int fcntl_ret = fcntl(fd, F_GETPATH, fdpath);
-    if (fcntl_ret == -1) {
+    if (fcntl_ret == -1)
         return -1;
-    }
 
     char path[PATH_MAX];
     strcat(path, fdpath);
@@ -38,14 +37,13 @@ int openat(int fd, const char *pathname, int flags, ...) {
         va_end(ap);
     }
 
-    if ((fd == AT_FDCWD) || (pathname[0] == '/'))
+    if (fd == AT_FDCWD || pathname[0] == '/')
         return open(pathname, flags, mode);
 
     char fdpath[PATH_MAX];
     int fcntl_ret = fcntl(fd, F_GETPATH, fdpath);
-    if (fcntl_ret == -1) {
+    if (fcntl_ret == -1)
         return -1;
-    }
 
     char path[PATH_MAX];
     strcat(path, fdpath);
