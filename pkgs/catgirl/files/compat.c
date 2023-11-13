@@ -23,7 +23,9 @@ int mkdirat(int fd, const char *pathname, mode_t mode) {
     }
 
     char path[PATH_MAX];
-    snprintf(path, PATH_MAX, "%s/%s", fdpath, pathname);
+    strcat(path, fdpath);
+    strcat(path, "/");
+    strcat(path, pathname);
     return mkdir(path, mode);
 }
 
@@ -46,6 +48,8 @@ int openat(int fd, const char *pathname, int flags, ...) {
     }
 
     char path[PATH_MAX];
-    snprintf(path, PATH_MAX, "%s/%s", fdpath, pathname);
+    strcat(path, fdpath);
+    strcat(path, "/");
+    strcat(path, pathname);
     return open(path, flags, mode);
 }
