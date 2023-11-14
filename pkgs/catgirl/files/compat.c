@@ -17,8 +17,7 @@ int mkdirat(int fd, const char *pathname, mode_t mode) {
         return mkdir(pathname, mode);
 
     char fdpath[PATH_MAX];
-    int fcntl_ret = fcntl(fd, F_GETPATH, fdpath);
-    if (fcntl_ret == -1)
+    if (fcntl(fd, F_GETPATH, fdpath) == -1)
         return -1;
 
     char path[PATH_MAX];
@@ -41,8 +40,7 @@ int openat(int fd, const char *pathname, int flags, ...) {
         return open(pathname, flags, mode);
 
     char fdpath[PATH_MAX];
-    int fcntl_ret = fcntl(fd, F_GETPATH, fdpath);
-    if (fcntl_ret == -1)
+    if (fcntl(fd, F_GETPATH, fdpath) == -1)
         return -1;
 
     char path[PATH_MAX];
