@@ -1,7 +1,7 @@
 #!/bin/sh
 (
 cd src || exit 1
-"$_TARGET-cc" -O2 top.c libtop.c log.c samp.c disp.c ch.c dch.c -o top -DTOP_DEPRECATED -Wno-invalid-pp-token -Wno-implicit-function-declaration -Wno-constant-conversion -Wno-tautological-constant-out-of-range-compare -lncursesw -lutil -lpanel -framework IOKit -framework CoreFoundation
+"$_TARGET-cc" -O2 top.c libtop.c log.c samp.c disp.c ch.c dch.c -o top -DTOP_DEPRECATED -Wno-invalid-pp-token -Wno-implicit-function-declaration -Wno-constant-conversion -Wno-tautological-constant-out-of-range-compare -lncurses -lutil -lpanel -framework IOKit -framework CoreFoundation
 mkdir -p "$_PKGROOT/pkg/var/usr/bin"
 cp top "$_PKGROOT/pkg/var/usr/bin"
 )
