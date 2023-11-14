@@ -22,7 +22,7 @@ int mkdirat(int fd, const char *pathname, mode_t mode) {
         return -1;
 
     char path[PATH_MAX];
-    strcat(path, fdpath);
+    strcpy(path, fdpath);
     strcat(path, "/");
     strcat(path, pathname);
     return mkdir(path, mode);
@@ -46,7 +46,7 @@ int openat(int fd, const char *pathname, int flags, ...) {
         return -1;
 
     char path[PATH_MAX];
-    strcat(path, fdpath);
+    strcpy(path, fdpath);
     strcat(path, "/");
     strcat(path, pathname);
     return open(path, flags, mode);
