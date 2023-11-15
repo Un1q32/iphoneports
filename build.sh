@@ -130,10 +130,14 @@ build() {
     export _PKGROOT="$pkgdir/$1"
     cd "$_PKGROOT" || error "Failed to cd to package directory: $1"
     [ "$_NODEPS" != 1 ] && includedeps "$2"
-    [ "$2" != "dryrun" ] && [ -f fetch.sh ] && ./fetch.sh
-    [ "$2" != "dryrun" ] && applypatches
-    printf '%s\n' "Building $1"
-    [ "$2" != "dryrun" ] && ./build.sh
+    if [ "$2" = "dryrun" ]; then
+        printf '%s\n' "Building $1"
+    else
+        [ -f fetch.sh ] && ./fetch.sh
+        applypatches
+        printf '%s\n' "Building $1"
+        ./build.sh
+    fi
     rm -rf "$_SDK"
     )
 
