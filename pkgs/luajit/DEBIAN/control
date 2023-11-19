@@ -3,5 +3,5 @@ Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
 Architecture: iphoneos-arm
 Description: a Just-In-Time (JIT) compiler for the Lua programming language
 Section: Scripting
-Version: 2.1.1699801871
+Version: 2.1.1700008891
 Depends: iphoneports-base
