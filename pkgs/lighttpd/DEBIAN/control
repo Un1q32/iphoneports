@@ -1,5 +1,5 @@
 Package: iphoneports-lighttpd
-Version: 1.4.73-2
+Version: 1.4.73-3
 Architecture: iphoneos-arm
 Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
 Section: Networking
