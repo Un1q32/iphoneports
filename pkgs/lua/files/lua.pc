@@ -1,0 +1,19 @@
+V= 5.4
+R= 5.4.6
+prefix=/var/usr
+INSTALL_BIN= ${prefix}/bin
+INSTALL_INC= ${prefix}/include
+INSTALL_LIB= ${prefix}/lib
+INSTALL_MAN= /tmp
+INSTALL_LMOD= ${prefix}/share/lua/${V}
+INSTALL_CMOD= ${prefix}/share/lua/${V}
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+
+Name: Lua
+Description: Lua is a powerful, fast, lightweight, embeddable scripting language
+Version: 5.4.6
+Requires:
+Libs: -L${libdir} -llua
+Cflags: -I${includedir}
