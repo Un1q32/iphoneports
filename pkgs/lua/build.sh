@@ -13,9 +13,10 @@ ldid -S"$_ENT" bin/lua bin/luac
 )
 
 mkdir -p pkg/var/usr/lib/pkgconfig
-cp files/lua.pc pkg/var/usr/lib/pkgconfig
-ln -sf lua.pc pkg/var/usr/lib/pkgconfig/lua5.4.pc
-ln -sf lua.pc pkg/var/usr/lib/pkgconfig/lua-5.4.pc
+cp files/lua.pc pkg/var/usr/lib/pkgconfig/lua54.pc
+ln -sf lua54.pc pkg/var/usr/lib/pkgconfig/lua5.4.pc
+ln -sf lua54.pc pkg/var/usr/lib/pkgconfig/lua-5.4.pc
+ln -sf lua54.pc pkg/var/usr/lib/pkgconfig/lua.pc
 
 cp -r DEBIAN pkg
 dpkg-deb -b --root-owner-group -Zgzip pkg lua.deb
