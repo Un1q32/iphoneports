@@ -2,6 +2,6 @@ Package: iphoneports-libxml2
 Section: Development
 Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
 Architecture: iphoneos-arm
-Version: 2.12.0
+Version: 2.12.1
 Description: XML C parser and toolkit
 Depends: iphoneports-base, iphoneports-zlib, iphoneports-xz
