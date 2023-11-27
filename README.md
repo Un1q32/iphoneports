@@ -1,6 +1,6 @@
 # iPhonePorts build system
 
-> iPhonePorts package build scripts
+> Build scripts for the packages at https://OldWorldOrdr.github.io/
 
 ## Setup
 
