@@ -4,5 +4,5 @@ Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
 Architecture: iphoneos-arm
 Version: 1708
 Depends: iphoneports-base
-Description: on-device debugging
+Description: The GNU debugger
 Homepage: http://www.gnu.org/software/gdb/
