@@ -29,8 +29,8 @@ lib3="$("$_OTOOL" -D lib/libtls.$tlsabi.dylib | tail -1)"
 "$_INSTALLNAMETOOL" -change "$lib2" /var/usr/lib/libssl.$sslabi.dylib bin/ocspcheck
 "$_INSTALLNAMETOOL" -change "$lib3" /var/usr/lib/libtls.$tlsabi.dylib bin/ocspcheck
 "$_INSTALLNAMETOOL" -change "$lib3" /var/usr/lib/libtls.$tlsabi.dylib bin/nc
-"$_TARGET-strip" bin/openssl bin/ocspcheck bin/nc lib/libcrypto.52.dylib lib/libssl.55.dylib lib/libtls.28.dylib > /dev/null 2>&1
-ldid -S"$_ENT" bin/openssl bin/ocspcheck bin/nc lib/libcrypto.52.dylib lib/libssl.55.dylib lib/libtls.28.dylib
+"$_TARGET-strip" bin/openssl bin/ocspcheck bin/nc lib/libcrypto.$cryptoabi.dylib lib/libssl.$sslabi.dylib lib/libtls.$tlsabi.dylib > /dev/null 2>&1
+ldid -S"$_ENT" bin/openssl bin/ocspcheck bin/nc lib/libcrypto.$cryptoabi.dylib lib/libssl.$sslabi.dylib lib/libtls.$tlsabi.dylib
 )
 
 cp -r DEBIAN pkg
