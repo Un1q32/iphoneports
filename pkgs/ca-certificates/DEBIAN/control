@@ -4,5 +4,5 @@ Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
 Architecture: iphoneos-arm
 Version: 2023-12-12
 Description: Common CA certificates
-Depends: iphoneports-base, iphoneports-libressl
+Depends: iphoneports-base
 Replaces: iphoneports-libressl
