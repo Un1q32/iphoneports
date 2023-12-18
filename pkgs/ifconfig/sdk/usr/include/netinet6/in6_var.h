@@ -1,3 +1,31 @@
+/*
+ * Copyright (c) 2000-2011 Apple Inc. All rights reserved.
+ *
+ * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
+ * 
+ * This file contains Original Code and/or Modifications of Original Code
+ * as defined in and that are subject to the Apple Public Source License
+ * Version 2.0 (the 'License'). You may not use this file except in
+ * compliance with the License. The rights granted to you under the License
+ * may not be used to create, or enable the creation or redistribution of,
+ * unlawful or unlicensed copies of an Apple operating system, or to
+ * circumvent, violate, or enable the circumvention or violation of, any
+ * terms of an Apple operating system software license agreement.
+ * 
+ * Please obtain a copy of the License at
+ * http://www.opensource.apple.com/apsl/ and read it before using this file.
+ * 
+ * The Original Code and all software distributed under the License are
+ * distributed on an 'AS IS' basis, WITHOUT WARRANTY OF ANY KIND, EITHER
+ * EXPRESS OR IMPLIED, AND APPLE HEREBY DISCLAIMS ALL SUCH WARRANTIES,
+ * INCLUDING WITHOUT LIMITATION, ANY WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE, QUIET ENJOYMENT OR NON-INFRINGEMENT.
+ * Please see the License for the specific language governing rights and
+ * limitations under the License.
+ * 
+ * @APPLE_OSREFERENCE_LICENSE_HEADER_END@
+ */
+
 /*	$FreeBSD: src/sys/netinet6/in6_var.h,v 1.3.2.2 2001/07/03 11:01:52 ume Exp $	*/
 /*	$KAME: in6_var.h,v 1.56 2001/03/29 05:34:31 itojun Exp $	*/
 
@@ -69,16 +97,10 @@
 #define _NETINET6_IN6_VAR_H_
 #include <sys/appleapiopts.h>
 
+
 #ifdef __APPLE__
 #include <sys/kern_event.h>
 #endif
-
-/*
- * Interface address, Internet version.  One of these structures
- * is allocated for each interface with an Internet address.
- * The ifaddr structure contains the protocol-independent part
- * of the structure and is assumed to be first.
- */
 
 /*
  * pltime/vltime are just for future reference (required to implements 2
@@ -93,6 +115,16 @@ struct in6_addrlifetime {
 	time_t ia6t_preferred;	/* preferred lifetime expiration time */
 	u_int32_t ia6t_vltime;	/* valid lifetime */
 	u_int32_t ia6t_pltime;	/* prefix lifetime */
+};
+
+
+/* control structure to manage address selection policy */
+struct in6_addrpolicy {
+	struct sockaddr_in6 addr; /* prefix address */
+	struct sockaddr_in6 addrmask; /* prefix mask */
+	int preced;		/* precedence */
+	int label;		/* matching label */
+	u_quad_t use;		/* statistics */
 };
 
 /*
@@ -219,9 +251,10 @@ struct	in6_ifreq {
 	union {
 		struct	sockaddr_in6 ifru_addr;
 		struct	sockaddr_in6 ifru_dstaddr;
-		short	ifru_flags;
+		int	ifru_flags;
 		int	ifru_flags6;
 		int	ifru_metric;
+		int	ifru_intval;
 		caddr_t	ifru_data;
 		struct in6_addrlifetime ifru_lifetime;
 		struct in6_ifstat ifru_stat;
@@ -238,6 +271,7 @@ struct	in6_aliasreq {
 	int	ifra_flags;
 	struct in6_addrlifetime ifra_lifetime;
 };
+
 
 /* prefix type macro */
 #define IN6_PREFIX_ND	1
@@ -326,6 +360,13 @@ struct	in6_rrenumreq {
  * Event data, internet6 style.
  */
 
+struct kev_in6_addrlifetime {
+        u_int32_t ia6t_expire;
+        u_int32_t ia6t_preferred;
+        u_int32_t ia6t_vltime;
+        u_int32_t ia6t_pltime;
+};
+
 struct kev_in6_data {
         struct net_event_data   link_data;
 	struct	sockaddr_in6 ia_addr;	/* interface address */
@@ -334,9 +375,8 @@ struct kev_in6_data {
 	struct	sockaddr_in6 ia_prefixmask; /* prefix mask */
 	u_int32_t ia_plen;		/* prefix length */
 	u_int32_t ia6_flags;		/* address flags from in6_ifaddr */
-	struct in6_addrlifetime ia_lifetime; /* address life info */
+	struct kev_in6_addrlifetime ia_lifetime; /* address life info */
 };
-
 
 /*
  * Define inet6 event subclass and specific inet6 events.
@@ -415,6 +455,9 @@ struct kev_in6_data {
 #define SIOCGETMIFCNT_IN6	_IOWR('u', 107, \
 				      struct sioc_mif_req6) /* get pkt cnt per if */
 
+#define SIOCAADDRCTL_POLICY	_IOW('u', 108, struct in6_addrpolicy)
+#define SIOCDADDRCTL_POLICY	_IOW('u', 109, struct in6_addrpolicy)
+
 
 #define IN6_IFF_ANYCAST		0x01	/* anycast address */
 #define IN6_IFF_TENTATIVE	0x02	/* tentative address */
@@ -432,7 +475,6 @@ struct kev_in6_data {
 
 /* do not input/output */
 #define IN6_IFF_NOTREADY (IN6_IFF_TENTATIVE|IN6_IFF_DUPLICATED)
-
 
 
 #endif /* _NETINET6_IN6_VAR_H_ */
