@@ -82,16 +82,29 @@ typedef mach_vm_address_t	IOVirtualAddress;
 typedef vm_address_t		IOVirtualAddress;
 #endif
 
+#if defined(__LP64__) && defined(KERNEL)
+typedef IOByteCount64		IOByteCount;
+#else
 typedef IOByteCount32	 	IOByteCount;
+#endif
 
 typedef IOVirtualAddress    IOLogicalAddress;
 
+#if defined(__LP64__) && defined(KERNEL)
+
+typedef IOPhysicalAddress64	 IOPhysicalAddress;
+typedef IOPhysicalLength64	 IOPhysicalLength;
+#define IOPhysical32( hi, lo )		((UInt64) lo + ((UInt64)(hi) << 32))
+#define IOPhysSize	64
+
+#else
 
 typedef IOPhysicalAddress32	 IOPhysicalAddress;
 typedef IOPhysicalLength32	 IOPhysicalLength;
 #define IOPhysical32( hi, lo )		(lo)
 #define IOPhysSize	32
 
+#endif
 
 
 typedef struct
@@ -208,10 +221,6 @@ enum {
     kMillisecondScale = 1000 * 1000,
     kSecondScale      = 1000 * 1000 * 1000,
     kTickScale        = (kSecondScale / 100)
-};
-
-enum {
-    kIOConnectMethodVarOutputSize = -3
 };
 
 /* compatibility types */
