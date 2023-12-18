@@ -638,6 +638,9 @@ struct proc_fileportinfo {
 #define PROC_PIDLISTFILEPORTS		14
 #define PROC_PIDLISTFILEPORTS_SIZE	(sizeof(struct proc_fileportinfo))
 
+#define PROC_PIDTHREADID64INFO		15
+#define PROC_PIDTHREADID64INFO_SIZE	(sizeof(struct proc_threadinfo))
+
 /* Flavors for proc_pidfdinfo */
 
 #define PROC_PIDFDVNODEINFO		1
