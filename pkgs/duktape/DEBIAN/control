@@ -1,0 +1,7 @@
+Package: iphoneports-duktape
+Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
+Architecture: iphoneos-arm
+Depends: iphoneports-base
+Description: Embeddable Javascript engine
+Section: Scripting
+Version: 2.7.0
