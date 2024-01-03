@@ -20,7 +20,7 @@ char* _atfunc(int fd, const char* pathname) {
     if (fcntl(fd, F_GETPATH, fdpath) == -1)
         return NULL;
 
-    char path[PATH_MAX];
+    char path[strlen(fdpath) + strlen(pathname) + 2];
     strcpy(path, fdpath);
     strcat(path, "/");
     strcat(path, pathname);
