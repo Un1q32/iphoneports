@@ -1,7 +1,7 @@
 #!/bin/sh
 (
 cd src || exit 1
-./configure --host="$_TARGET" --prefix=/var/usr --disable-static
+./configure --host="$_TARGET" --prefix=/var/usr --disable-static CPPFLAGS='-DkUSBDeviceSpeedSuper=3'
 "$_MAKE" -j8
 "$_MAKE" install DESTDIR="$_PKGROOT/pkg"
 )
