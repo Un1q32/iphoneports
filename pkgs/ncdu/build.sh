@@ -9,7 +9,7 @@ cd src || exit 1
 (
 cd pkg/var/usr || exit 1
 rm -rf share
-"$_TARGET-strip" bin/ncdu > /dev/null 2>&1
+llvm-strip bin/ncdu
 ldid -S"$_ENT" bin/ncdu
 )
 

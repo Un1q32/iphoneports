@@ -10,7 +10,7 @@ autoreconf -fi
 (
 cd pkg/var/usr || exit 1
 rm -rf share
-"$_TARGET-strip" bin/cmatrix > /dev/null 2>&1
+llvm-strip bin/cmatrix
 ldid -S"$_ENT" bin/cmatrix
 )
 

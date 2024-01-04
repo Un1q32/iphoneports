@@ -8,7 +8,7 @@ cp time "$_PKGROOT/pkg/var/usr/bin"
 
 (
 cd pkg/var/usr/bin || exit 1
-"$_TARGET-strip" time > /dev/null 2>&1
+llvm-strip time
 ldid -S"$_ENT" time
 )
 

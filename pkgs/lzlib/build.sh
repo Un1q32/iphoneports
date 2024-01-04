@@ -8,7 +8,7 @@ cd src || exit 1
 (
 cd pkg/var/usr || exit 1
 rm -rf share
-"$_TARGET-strip" lib/liblz.1.13.dylib > /dev/null 2>&1
+llvm-strip lib/liblz.1.13.dylib
 ldid -S"$_ENT" lib/liblz.1.13.dylib
 )
 

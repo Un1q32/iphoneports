@@ -9,7 +9,7 @@ cd src || exit 1
 (
 cd pkg/var/usr || exit 1
 rm -rf share var
-"$_TARGET-strip" bin/find bin/xargs bin/locate libexec/frcode > /dev/null 2>&1
+llvm-strip bin/find bin/xargs bin/locate libexec/frcode
 ldid -S"$_ENT" bin/find bin/xargs bin/locate libexec/frcode
 )
 

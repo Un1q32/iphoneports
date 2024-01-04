@@ -9,7 +9,7 @@ cp catgirl "$_PKGROOT/pkg/var/usr/bin"
 
 (
 cd pkg/var/usr/bin || exit 1
-"$_TARGET-strip" catgirl > /dev/null 2>&1
+llvm-strip catgirl
 ldid -S"$_ENT" catgirl
 )
 

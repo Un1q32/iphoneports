@@ -9,7 +9,7 @@ cd src || exit 1
 (
 cd pkg/var/usr || exit 1
 rm -rf share
-"$_TARGET-strip" bin/coreutils libexec/coreutils/libstdbuf.so > /dev/null 2>&1
+llvm-strip bin/coreutils libexec/coreutils/libstdbuf.so
 ldid -S"$_ENT" bin/coreutils libexec/coreutils/libstdbuf.so
 )
 

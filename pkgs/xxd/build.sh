@@ -8,7 +8,7 @@ cp xxd "$_PKGROOT"/pkg/var/usr/bin
 
 (
 cd pkg/var/usr/bin || exit 1
-"$_TARGET-strip" xxd > /dev/null 2>&1
+llvm-strip xxd
 ldid -S"$_ENT" xxd
 )
 

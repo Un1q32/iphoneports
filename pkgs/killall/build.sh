@@ -8,7 +8,7 @@ cp killall "$_PKGROOT/pkg/var/usr/bin"
 
 (
 cd pkg/var/usr/bin || exit 1
-"$_TARGET-strip" killall > /dev/null 2>&1
+llvm-strip killall
 ldid -S"$_ENT" killall
 )
 

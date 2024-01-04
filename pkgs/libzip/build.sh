@@ -14,7 +14,7 @@ lib="$("$_OTOOL" -D lib/libzip.5.5.dylib | tail -1)"
 "$_INSTALLNAMETOOL" -change "$lib" /var/usr/lib/libzip.5.dylib bin/zipmerge
 "$_INSTALLNAMETOOL" -change "$lib" /var/usr/lib/libzip.5.dylib bin/zipcmp
 "$_INSTALLNAMETOOL" -change "$lib" /var/usr/lib/libzip.5.dylib bin/ziptool
-"$_TARGET-strip" lib/libzip.5.5.dylib bin/* > /dev/null 2>&1
+llvm-strip lib/libzip.5.5.dylib bin/*
 ldid -S"$_ENT" lib/libzip.5.5.dylib bin/*
 )
 

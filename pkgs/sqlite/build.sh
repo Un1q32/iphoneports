@@ -9,7 +9,7 @@ cd src || exit 1
 (
 cd pkg/var/usr || exit 1
 rm -rf share
-"$_TARGET-strip" bin/sqlite3 lib/libsqlite3.0.dylib > /dev/null 2>&1
+llvm-strip bin/sqlite3 lib/libsqlite3.0.dylib
 ldid -S"$_ENT" bin/sqlite3 lib/libsqlite3.0.dylib
 )
 

@@ -11,7 +11,7 @@ cd pkg/var/usr || exit 1
 rm -rf share
 mv lib/libnghttp2.14.*.dylib lib/libnghttp2.14.dylib
 "$_INSTALLNAMETOOL" -id /var/usr/lib/libnghttp2.14.dylib lib/libnghttp2.14.dylib
-"$_TARGET-strip" lib/libnghttp2.14.dylib > /dev/null 2>&1
+llvm-strip lib/libnghttp2.14.dylib
 ldid -S"$_ENT" lib/libnghttp2.14.dylib
 )
 

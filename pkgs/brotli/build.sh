@@ -19,7 +19,7 @@ lib3="$("$_OTOOL" -D lib/libbrotlienc.1.1.0.dylib | tail -1)"
 "$_INSTALLNAMETOOL" -change "$lib1" /var/usr/lib/libbrotlicommon.1.dylib bin/brotli
 "$_INSTALLNAMETOOL" -change "$lib2" /var/usr/lib/libbrotlidec.1.dylib bin/brotli
 "$_INSTALLNAMETOOL" -change "$lib3" /var/usr/lib/libbrotlienc.1.dylib bin/brotli
-"$_TARGET-strip" bin/brotli lib/libbrotlicommon.1.1.0.dylib lib/libbrotlidec.1.1.0.dylib lib/libbrotlienc.1.1.0.dylib > /dev/null 2>&1
+llvm-strip bin/brotli lib/libbrotlicommon.1.1.0.dylib lib/libbrotlidec.1.1.0.dylib lib/libbrotlienc.1.1.0.dylib
 ldid -S"$_ENT" bin/brotli lib/libbrotlicommon.1.1.0.dylib lib/libbrotlidec.1.1.0.dylib lib/libbrotlienc.1.1.0.dylib
 )
 

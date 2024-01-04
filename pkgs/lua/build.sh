@@ -8,7 +8,7 @@ cd src || exit 1
 (
 cd pkg/var/usr || exit 1
 rm -rf man
-"$_TARGET-strip" bin/lua bin/luac > /dev/null 2>&1
+llvm-strip bin/lua bin/luac
 ldid -S"$_ENT" bin/lua bin/luac
 )
 

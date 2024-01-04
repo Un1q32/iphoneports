@@ -9,7 +9,7 @@ cd src || exit 1
 (
 cd pkg/var/usr || exit 1
 rm -rf share
-"$_TARGET-strip" bin/pcretest bin/pcregrep lib/libpcre.1.dylib lib/libpcrecpp.0.dylib lib/libpcreposix.0.dylib > /dev/null 2>&1
+llvm-strip bin/pcretest bin/pcregrep lib/libpcre.1.dylib lib/libpcrecpp.0.dylib lib/libpcreposix.0.dylib
 ldid -S"$_ENT" bin/pcretest bin/pcregrep lib/libpcre.1.dylib lib/libpcrecpp.0.dylib lib/libpcreposix.0.dylib
 )
 

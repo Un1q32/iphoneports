@@ -9,7 +9,7 @@ cd src || exit 1
 (
 cd pkg/var/usr || exit 1
 rm -rf bin/zsh-5.9 share/man
-"$_TARGET-strip" bin/zsh > /dev/null 2>&1
+llvm-strip bin/zsh
 ldid -S"$_ENT" bin/zsh
 mkdir -p etc/zsh
 )

@@ -9,7 +9,7 @@ cd src || exit 1
 (
 cd pkg/var/usr || exit 1
 rm -rf share/man
-"$_TARGET-strip" bin/file lib/libmagic.1.dylib > /dev/null 2>&1
+llvm-strip bin/file lib/libmagic.1.dylib
 ldid -S"$_ENT" bin/file lib/libmagic.1.dylib
 )
 

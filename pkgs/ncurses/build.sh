@@ -10,7 +10,7 @@ unset TERMINFO
 (
 cd pkg/var/usr || exit 1
 rm -rf share/man
-"$_TARGET-strip" bin/tic bin/tset bin/toe bin/clear bin/infocmp lib/libncursesw.6.dylib lib/libncurses++w.6.dylib lib/libformw.6.dylib lib/libmenuw.6.dylib lib/libpanelw.6.dylib > /dev/null 2>&1
+llvm-strip bin/tic bin/tset bin/toe bin/clear bin/infocmp lib/libncursesw.6.dylib lib/libncurses++w.6.dylib lib/libformw.6.dylib lib/libmenuw.6.dylib lib/libpanelw.6.dylib
 ldid -S"$_ENT" bin/tic bin/tset bin/toe bin/clear bin/infocmp lib/libncursesw.6.dylib lib/libncurses++w.6.dylib lib/libformw.6.dylib lib/libmenuw.6.dylib lib/libpanelw.6.dylib
 ln -s libncursesw.dylib lib/libtinfow.dylib
 for lib in ncurses ncurses++ form menu panel tinfo; do

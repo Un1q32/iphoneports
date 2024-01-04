@@ -8,7 +8,7 @@ cp pstree "$_PKGROOT/pkg/var/usr/bin"
 
 (
 cd pkg/var/usr/bin || exit 1
-"$_TARGET-strip" pstree > /dev/null 2>&1
+llvm-strip pstree
 ldid -S"$_ENT" pstree
 )
 

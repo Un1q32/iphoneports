@@ -9,7 +9,7 @@ cd src || exit 1
 (
 cd pkg/var/usr || exit 1
 rm -rf share
-"$_TARGET-strip" bin/bzip3 lib/libbzip3.0.dylib > /dev/null 2>&1
+llvm-strip bin/bzip3 lib/libbzip3.0.dylib
 ldid -S"$_ENT" bin/bzip3 lib/libbzip3.0.dylib
 )
 

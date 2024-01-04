@@ -9,7 +9,7 @@ cd src || exit 1
 (
 cd pkg/var/usr || exit 1
 rm -rf share
-"$_TARGET-strip" sbin/lighttpd sbin/lighttpd-angel lib/liblightcomp.dylib lib/*.so > /dev/null 2>&1
+llvm-strip sbin/lighttpd sbin/lighttpd-angel lib/liblightcomp.dylib lib/*.so
 ldid -S"$_ENT" sbin/lighttpd sbin/lighttpd-angel lib/liblightcomp.dylib lib/*.so
 )
 

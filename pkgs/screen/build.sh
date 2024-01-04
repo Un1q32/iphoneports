@@ -12,7 +12,7 @@ cp etc/etcscreenrc "$_PKGROOT/pkg/var/usr/etc/screenrc"
 cd pkg/var/usr || exit 1
 rm -rf share/info share/man
 mv bin/screen-* bin/screen
-"$_TARGET-strip" bin/screen > /dev/null 2>&1
+llvm-strip bin/screen
 ldid -S"$_ENT" bin/screen
 )
 

@@ -8,7 +8,7 @@ cp ps "$_PKGROOT/pkg/var/usr/bin"
 
 (
 cd pkg/var/usr/bin || exit 1
-"$_TARGET-strip" ps > /dev/null 2>&1
+llvm-strip ps
 ldid -S"$_PKGROOT/files/ent.xml" ps
 )
 

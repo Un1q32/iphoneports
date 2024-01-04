@@ -8,7 +8,7 @@ cp which "$_PKGROOT/pkg/var/usr/bin"
 
 (
 cd pkg/var/usr/bin || exit 1
-"$_TARGET-strip" which > /dev/null 2>&1
+llvm-strip which
 ldid -S"$_ENT" which
 )
 

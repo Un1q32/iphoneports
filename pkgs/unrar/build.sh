@@ -8,7 +8,7 @@ cp unrar "$_PKGROOT/pkg/var/usr/bin"
 
 (
 cd pkg/var/usr/bin || exit 1
-"$_TARGET-strip" unrar > /dev/null 2>&1
+llvm-strip unrar
 ldid -S"$_ENT" unrar
 )
 

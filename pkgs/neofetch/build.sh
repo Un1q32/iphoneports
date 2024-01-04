@@ -9,7 +9,7 @@ cp neofetch "$_PKGROOT/pkg/var/usr/bin"
 
 (
 cd pkg/var/usr/bin || exit 1
-"$_TARGET-strip" getusedmem > /dev/null 2>&1
+llvm-strip getusedmem
 ldid -S"$_ENT" getusedmem
 )
 

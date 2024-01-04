@@ -9,7 +9,7 @@ cd src || exit 1
 (
 cd pkg/var/usr || exit 1
 rm -rf share
-"$_TARGET-strip" lib/libgmp.10.dylib > /dev/null 2>&1
+llvm-strip lib/libgmp.10.dylib
 ldid -S"$_ENT" lib/libgmp.10.dylib
 )
 

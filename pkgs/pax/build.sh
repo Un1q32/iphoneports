@@ -8,7 +8,7 @@ cp pax "$_PKGROOT/pkg/var/usr/bin"
 
 (
 cd pkg/var/usr/bin || exit 1
-"$_TARGET-strip" pax > /dev/null 2>&1
+llvm-strip pax
 ldid -S"$_ENT" pax
 )
 

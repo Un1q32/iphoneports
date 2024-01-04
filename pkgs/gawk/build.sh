@@ -9,7 +9,7 @@ cd src || exit 1
 (
 cd pkg/var/usr || exit 1
 rm -rf share/info share/man bin/gawk-* bin/gawkbug
-"$_TARGET-strip" bin/gawk lib/gawk/* libexec/awk/* > /dev/null 2>&1
+llvm-strip bin/gawk lib/gawk/* libexec/awk/*
 ldid -S"$_ENT" bin/gawk lib/gawk/* libexec/awk/*
 )
 

@@ -9,7 +9,7 @@ cd src || exit 1
 (
 cd pkg/var/usr || exit 1
 rm -rf share/man
-"$_TARGET-strip" bin/curl lib/libcurl.4.dylib > /dev/null 2>&1
+llvm-strip bin/curl lib/libcurl.4.dylib
 ldid -S"$_ENT" bin/curl lib/libcurl.4.dylib
 )
 

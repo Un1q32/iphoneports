@@ -7,7 +7,7 @@ cd src || exit 1
 (
 cd pkg/var/usr || exit 1
 rm -rf share
-"$_TARGET-strip" bin/dos2unix bin/unix2dos > /dev/null 2>&1
+llvm-strip bin/dos2unix bin/unix2dos
 ldid -S"$_ENT" bin/dos2unix bin/unix2dos
 )
 

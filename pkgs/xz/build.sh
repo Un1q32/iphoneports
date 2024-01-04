@@ -9,7 +9,7 @@ cd src || exit 1
 (
 cd pkg/var/usr || exit 1
 rm -rf share
-"$_TARGET-strip" bin/xz bin/xzdec lib/liblzma.5.dylib > /dev/null 2>&1
+llvm-strip bin/xz bin/xzdec lib/liblzma.5.dylib
 ldid -S"$_ENT" bin/xz bin/xzdec lib/liblzma.5.dylib
 )
 

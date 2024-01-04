@@ -9,7 +9,7 @@ CHOST="$_TARGET" ./configure --prefix=/var/usr --shared
 (
 cd pkg/var/usr || exit 1
 rm -rf share lib/libz.a
-"$_TARGET-strip" lib/libz.1.3.dylib > /dev/null 2>&1
+llvm-strip lib/libz.1.3.dylib
 ldid -S"$_ENT" lib/libz.1.3.dylib
 )
 

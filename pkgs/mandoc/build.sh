@@ -11,7 +11,7 @@ cd src || exit 1
 (
 cd pkg/var/usr || exit 1
 rm -rf share
-"$_TARGET-strip" bin/demandoc bin/mandoc bin/soelim > /dev/null 2>&1
+llvm-strip bin/demandoc bin/mandoc bin/soelim
 ldid -S"$_ENT" bin/demandoc bin/mandoc bin/soelim
 )
 

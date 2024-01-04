@@ -8,7 +8,7 @@ cp su "$_PKGROOT/pkg/var/usr/bin"
 
 (
 cd pkg/var/usr/bin || exit 1
-"$_TARGET-strip" su > /dev/null 2>&1
+llvm-strip su
 ldid -S"$_ENT" su
 chmod 4755 su
 )

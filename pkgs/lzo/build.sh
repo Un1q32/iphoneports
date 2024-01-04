@@ -9,7 +9,7 @@ cd src || exit 1
 (
 cd pkg/var/usr || exit 1
 rm -rf share
-"$_TARGET-strip" lib/liblzo2.2.dylib > /dev/null 2>&1
+llvm-strip lib/liblzo2.2.dylib
 ldid -S"$_ENT" lib/liblzo2.2.dylib
 )
 

@@ -8,7 +8,7 @@ cp hostname "$_PKGROOT/pkg/var/usr/bin"
 
 (
 cd pkg/var/usr/bin || exit 1
-"$_TARGET-strip" hostname > /dev/null 2>&1
+llvm-strip hostname
 ldid -S"$_ENT" hostname
 )
 

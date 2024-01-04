@@ -10,7 +10,7 @@ cp htop "$_PKGROOT/pkg/var/usr/bin"
 
 (
 cd pkg/var/usr/bin || exit 1
-"$_TARGET-strip" htop > /dev/null 2>&1
+llvm-strip htop
 ldid -S"$_ENT" htop
 )
 

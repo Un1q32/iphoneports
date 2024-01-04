@@ -10,7 +10,7 @@ fakeroot "$_MAKE" DESTDIR="$_PKGROOT/pkg" install
 (
 cd pkg/var/usr || exit 1
 rm -rf share
-"$_TARGET-strip" bin/sudo bin/cvtsudoers bin/sudoreplay sbin/sudo_logsrvd sbin/sudo_sendlog sbin/visudo libexec/sudo/libsudo_util.0.dylib libexec/sudo/*.so > /dev/null 2>&1
+llvm-strip bin/sudo bin/cvtsudoers bin/sudoreplay sbin/sudo_logsrvd sbin/sudo_sendlog sbin/visudo libexec/sudo/libsudo_util.0.dylib libexec/sudo/*.so
 ldid -S"$_ENT" bin/sudo bin/cvtsudoers bin/sudoreplay sbin/sudo_logsrvd sbin/sudo_sendlog sbin/visudo libexec/sudo/libsudo_util.0.dylib libexec/sudo/*.so
 chmod 4755 bin/sudo
 )

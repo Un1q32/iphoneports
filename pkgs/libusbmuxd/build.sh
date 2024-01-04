@@ -9,7 +9,7 @@ cd src || exit 1
 (
 cd pkg/var/usr || exit 1
 rm -rf share
-"$_TARGET-strip" bin/inetcat bin/iproxy lib/libusbmuxd-2.0.6.dylib > /dev/null 2>&1
+llvm-strip bin/inetcat bin/iproxy lib/libusbmuxd-2.0.6.dylib
 ldid -S"$_ENT" bin/inetcat bin/iproxy lib/libusbmuxd-2.0.6.dylib
 )
 
