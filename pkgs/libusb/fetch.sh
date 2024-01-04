@@ -1,8 +1,8 @@
 #!/bin/sh
 rm -rf pkg src
 printf "Downloading source...\n"
-curl -L -# -o src.tar.bz2 https://github.com/libusb/libusb/releases/download/v1.0.21/libusb-1.0.21.tar.bz2
+curl -L -# -o src.tar.bz2 https://github.com/libusb/libusb/releases/download/v1.0.23/libusb-1.0.23.tar.bz2
 printf "Unpacking source...\n"
 tar -xf src.tar.bz2
 rm src.tar.bz2
-mv libusb-1.0.21 src
+mv libusb-1.0.23 src

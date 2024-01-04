@@ -889,7 +889,8 @@ enum {
 enum {
         kUSBDeviceSpeedLow		= 0,
         kUSBDeviceSpeedFull		= 1,
-        kUSBDeviceSpeedHigh		= 2
+        kUSBDeviceSpeedHigh		= 2,
+        kUSBDeviceSpeedSuper	= 3
         };
 
 /*!

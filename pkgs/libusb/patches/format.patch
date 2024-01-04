@@ -1,0 +1,11 @@
+--- src/libusb/os/darwin_usb.c.orig
++++ src/libusb/os/darwin_usb.c
+@@ -976,7 +976,7 @@
+   do {
+     list_for_each_entry(new_device, &darwin_cached_devices, list, struct darwin_cached_device) {
+       usbi_dbg("matching sessionID/locationID 0x%" PRIx64 "/0x%x against cached device with sessionID/locationID 0x%" PRIx64 "/0x%x",
+-               sessionID, locationID, new_device->session, new_device->location);
++               sessionID, (unsigned int)locationID, new_device->session, (unsigned int)new_device->location);
+       if (new_device->location == locationID && new_device->in_reenumerate) {
+         usbi_dbg ("found cached device with matching location that is being re-enumerated");
+         *old_session_id = new_device->session;
