@@ -1,0 +1,8 @@
+Package: iphoneports-gmp
+Version: 6.3.0
+Architecture: iphoneos-arm
+Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
+Depends: iphoneports-base
+Section: Development
+Homepage: http://gmplib.org/
+Description: A free library for arbitrary precision arithmetic
