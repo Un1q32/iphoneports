@@ -9,10 +9,8 @@ cd src || exit 1
 (
 cd pkg/var/usr || exit 1
 rm -rf share bin
-llvm-strip lib/libhistory.8.2.dylib
-llvm-strip lib/libreadline.8.2.dylib
-ldid -S"$_ENT" lib/libhistory.8.2.dylib
-ldid -S"$_ENT" lib/libreadline.8.2.dylib
+llvm-strip lib/libhistory.8.2.dylib lib/libreadline.8.2.dylib
+ldid -S"$_ENT" lib/libhistory.8.2.dylib lib/libreadline.8.2.dylib
 )
 
 cp -r DEBIAN pkg
