@@ -1,0 +1,8 @@
+Package: iphoneports-mpfr
+Version: 4.2.1
+Architecture: iphoneos-arm
+Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
+Depends: iphoneports-base, iphoneports-gmp
+Section: Development
+Homepage: http://mpfr.org/
+Description: Multiple-precision floating-point library
