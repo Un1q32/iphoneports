@@ -1,5 +1,5 @@
 #!/bin/sh
-commit=0906344658d5f9b0e0fadadb5ad9cfb3bd63bf89
+commit=fdbffae8fe4464a3a0b9acc3bae7b53fa9004a37
 rm -rf pkg src
 printf "Downloading source...\n"
 curl -L -# -o src.tar.gz "https://github.com/OldWorldOrdr/nextvi/archive/${commit}.tar.gz"
