@@ -1,0 +1,118 @@
+--- src/arrayfunc.c
++++ src/arrayfunc.c
+@@ -650,7 +650,7 @@ assign_assoc_from_kvlist (var, nlist, h, flags)
+ 	  continue;
+ 	}	      
+ 
+-      aval = expand_subscript_string (v, 0);
++      aval = expand_assignment_string_to_string (v, 0);
+       if (aval == 0)
+ 	{
+ 	  aval = (char *)xmalloc (1);
+@@ -842,7 +842,7 @@ assign_compound_array_list (var, nlist, flags)
+       /* See above; we need to expand the value here */
+       if (assoc_p (var))
+ 	{
+-	  val = expand_subscript_string (val, 0);
++	  val = expand_assignment_string_to_string (val, 0);
+ 	  if (val == 0)
+ 	    {
+ 	      val = (char *)xmalloc (1);
+@@ -1030,7 +1030,7 @@ expand_and_quote_assoc_word (w, type)
+     nword[i++] = w[ind++];
+   nword[i++] = w[ind++];
+ 
+-  t = expand_subscript_string (w+ind, 0);
++  t = expand_assignment_string_to_string (w+ind, 0);
+   s = (t && strchr (t, CTLESC)) ? quote_escapes (t) : t;
+   value = sh_single_quote (s ? s : "");
+   if (s != t)
+--- src/builtins/declare.def
++++ src/builtins/declare.def
+@@ -420,11 +420,19 @@ declare_internal (list, local_var)
+ 
+       if (local_var && variable_context && STREQ (name, "-"))
+ 	{
++	  int o;
++
++	  o = localvar_inherit;
++	  localvar_inherit = 0;
+ 	  var = make_local_variable ("-", 0);
+-	  FREE (value_cell (var));		/* just in case */
+-	  value = get_current_options ();
+-	  var_setvalue (var, value);
+-	  VSETATTR (var, att_invisible);
++	  localvar_inherit = o;
++
++	  if (value_cell (var) == NULL)		/* no duplicate instances */
++	    {
++	      value = get_current_options ();
++	      var_setvalue (var, value);
++	      VSETATTR (var, att_invisible);
++	    }
+ 	  NEXT_VARIABLE ();
+ 	}
+ 
+--- src/execute_cmd.c
++++ src/execute_cmd.c
+@@ -1725,6 +1725,9 @@ execute_in_subshell (command, asynchronous, pipe_in, pipe_out, fds_to_close)
+     return_code = (return_code == EXECUTION_SUCCESS) ? EXECUTION_FAILURE
+ 						     : EXECUTION_SUCCESS;
+ 
++  /* Check for terminating signals before we return to our caller, which we
++     expect to exit immediately anyway. */
++  CHECK_TERMSIG;
+ 
+   /* If we were explicitly placed in a subshell with (), we need
+      to do the `shell cleanup' things, such as running traps[0]. */
+--- src/lib/readline/colors.c
++++ src/lib/readline/colors.c
+@@ -73,7 +73,7 @@
+ static bool is_colored (enum indicator_no type);
+ static void restore_default_color (void);
+ 
+-#define RL_COLOR_PREFIX_EXTENSION	"readline-colored-completion-prefix"
++#define RL_COLOR_PREFIX_EXTENSION	".readline-colored-completion-prefix"
+ 
+ COLOR_EXT_TYPE *_rl_color_ext_list = 0;
+ 
+--- src/lib/readline/display.c
++++ src/lib/readline/display.c
+@@ -2683,11 +2683,8 @@ rl_forced_update_display (void)
+   register char *temp;
+ 
+   if (visible_line)
+-    {
+-      temp = visible_line;
+-      while (*temp)
+-	*temp++ = '\0';
+-    }
++    memset (visible_line, 0, line_size);
++
+   rl_on_new_line ();
+   forced_display++;
+   (*rl_redisplay_function) ();
+--- src/patchlevel.h
++++ src/patchlevel.h
+@@ -25,6 +25,6 @@
+    regexp `^#define[ 	]*PATCHLEVEL', since that's what support/mkversion.sh
+    looks for to find the patch level (for the sccs version string). */
+ 
+-#define PATCHLEVEL 21
++#define PATCHLEVEL 26
+ 
+ #endif /* _PATCHLEVEL_H_ */
+--- src/subst.c
++++ src/subst.c
+@@ -10802,7 +10802,11 @@ expand_subscript_string (string, quoted)
+   oe = expand_no_split_dollar_star;
+   ret = (char *)NULL;
+ 
++#if 0
+   td.flags = W_NOPROCSUB|W_NOTILDE|W_NOSPLIT2;	/* XXX - W_NOCOMSUB? */
++#else
++  td.flags = W_NOPROCSUB|W_NOSPLIT2;	/* XXX - W_NOCOMSUB? */
++#endif
+   td.word = savestring (string);		/* in case it's freed on error */
+ 
+   expand_no_split_dollar_star = 1;
