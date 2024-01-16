@@ -1,6 +1,8 @@
 #include <stdio.h>
+#include <string.h>
 #include <unistd.h>
-int main(int argc, char* argv[]) {
+
+int main(int argc, const char* argv[]) {
     if (geteuid() != 0) {
         puts("Error: not root, is iphoneports-chsh suid root?");
         return 1;
@@ -11,7 +13,7 @@ int main(int argc, char* argv[]) {
         return 1;
     }
 
-    char shell[256];
+    char shell[strlen(argv[1]) + 14];
     sprintf(shell, "/var/usr/bin/%s", argv[1]);
 
     if (access(shell, X_OK) == -1) {
