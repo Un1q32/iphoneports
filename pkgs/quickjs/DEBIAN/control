@@ -1,0 +1,7 @@
+Package: iphoneports-quickjs
+Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
+Architecture: iphoneos-arm
+Depends: iphoneports-base
+Description: A small and embeddable Javascript engine
+Section: Scripting
+Version: 2024-1-13

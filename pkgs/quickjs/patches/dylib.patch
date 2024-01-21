@@ -1,0 +1,13 @@
+--- src/qjsc.c.orig
++++ src/qjsc.c
+@@ -445,8 +445,8 @@
+     if (dynamic_export)
+         *arg++ = "-rdynamic";
+     *arg++ = cfilename;
+-    snprintf(libjsname, sizeof(libjsname), "%s/libquickjs%s%s.a",
+-             lib_dir, bn_suffix, lto_suffix);
++    snprintf(libjsname, sizeof(libjsname), "%s/libquickjs.dylib",
++             lib_dir);
+     *arg++ = libjsname;
+     *arg++ = "-lm";
+     *arg++ = "-ldl";
