@@ -9,8 +9,13 @@ CHOST="$_TARGET" ./configure --prefix=/var/usr --shared
 (
 cd pkg/var/usr || exit 1
 rm -rf share lib/libz.a
-llvm-strip lib/libz.1.3.dylib
-ldid -S"$_ENT" lib/libz.1.3.dylib
+for file in lib/*.dylib; do
+    if [ -f "$file" ] && [ ! -h "$file" ]; then
+        llvm-strip "$file"
+        ldid -S"$_ENT" "$file"
+        break
+    fi
+done
 )
 
 cp -r DEBIAN pkg
