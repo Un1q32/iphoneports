@@ -9,11 +9,10 @@ CHOST="$_TARGET" ./configure --prefix=/var/usr --shared
 (
 cd pkg/var/usr || exit 1
 rm -rf share lib/libz.a
-for file in lib/*.dylib; do
-    if [ -f "$file" ] && [ ! -h "$file" ]; then
-        llvm-strip "$file"
-        ldid -S"$_ENT" "$file"
-        break
+for lib in lib/*.dylib; do
+    if [ -f "$lib" ] && [ ! -h "$lib" ]; then
+        llvm-strip "$lib"
+        ldid -S"$_ENT" "$lib"
     fi
 done
 )

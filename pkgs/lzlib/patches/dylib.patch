@@ -19,7 +19,7 @@
  
  bbexample : bbexample.o lib$(libname).a
  	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ bbexample.o lib$(libname).a
-@@ -105,15 +105,15 @@
+@@ -108,15 +108,15 @@
  	  $(INSTALL_DATA) ./lib$(libname).a "$(DESTDIR)$(libdir)/lib$(libname).a" ; \
  	fi
  	if [ -n "$(progname_shared)" ] ; then \
@@ -41,7 +41,7 @@
  	  if [ "${disable_ldconfig}" != yes ] && [ $${run_ldconfig} = yes ] && \
  	     [ -x "$(LDCONFIG)" ] ; then "$(LDCONFIG)" -n "$(DESTDIR)$(libdir)" || true ; fi ; \
  	fi
-@@ -152,9 +152,9 @@
+@@ -155,9 +155,9 @@
  uninstall-lib :
  	-rm -f "$(DESTDIR)$(includedir)/$(libname)lib.h"
  	-rm -f "$(DESTDIR)$(libdir)/lib$(libname).a"
@@ -54,7 +54,7 @@
  
  uninstall-info :
  	-if $(CAN_RUN_INSTALLINFO) ; then \
-@@ -195,7 +195,7 @@
+@@ -198,7 +198,7 @@
  
  clean :
  	-rm -f $(progname) $(objs) lzlib.o lib$(libname).a

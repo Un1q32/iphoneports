@@ -8,8 +8,12 @@ cd src || exit 1
 (
 cd pkg/var/usr || exit 1
 rm -rf share
-llvm-strip lib/liblz.1.13.dylib
-ldid -S"$_ENT" lib/liblz.1.13.dylib
+for lib in lib/*.dylib; do
+    if [ -f "$lib" ] && [ ! -h "$lib" ]; then
+        llvm-strip "$lib"
+        ldid -S"$_ENT" "$lib"
+    fi
+done
 )
 
 cp -r DEBIAN pkg
