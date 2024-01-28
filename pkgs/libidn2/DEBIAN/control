@@ -1,5 +1,5 @@
 Package: iphoneports-libidn2
-Version: 2.3.4-1
+Version: 2.3.5
 Architecture: iphoneos-arm
 Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
 Depends: iphoneports-base, iphoneports-libunistring
