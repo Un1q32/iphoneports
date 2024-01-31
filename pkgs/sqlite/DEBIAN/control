@@ -1,5 +1,5 @@
 Package: iphoneports-sqlite
-Version: 3.45.0
+Version: 3.45.1
 Architecture: iphoneos-arm
 Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
 Section: Utilities
