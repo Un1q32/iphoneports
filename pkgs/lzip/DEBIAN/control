@@ -2,6 +2,6 @@ Package: iphoneports-lzip
 Section: Archiving
 Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
 Architecture: iphoneos-arm
-Version: 1.23-1
+Version: 1.24
 Description: A lossless file compressor based on the LZMA algorithm
 Depends: iphoneports-base

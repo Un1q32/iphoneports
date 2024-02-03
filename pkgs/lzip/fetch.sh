@@ -1,8 +1,8 @@
 #!/bin/sh
 rm -rf pkg src
 printf "Downloading source...\n"
-curl -L -# -o src.tar.gz https://download.savannah.gnu.org/releases/lzip/lzip-1.23.tar.gz
+curl -L -# -o src.tar.gz https://download.savannah.gnu.org/releases/lzip/lzip-1.24.tar.gz
 printf "Unpacking source...\n"
 tar -xf src.tar.gz
 rm src.tar.gz
-mv lzip-1.23 src
+mv lzip-1.24 src
