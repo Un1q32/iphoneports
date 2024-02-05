@@ -13,12 +13,17 @@ int main(int argc, const char* argv[]) {
         return 1;
     }
 
-    char shell[strlen(argv[1]) + 14];
-    sprintf(shell, "/var/usr/bin/%s", argv[1]);
+    char shell[strlen(argv[1]) + 15];
+    strcpy(shell, "/var/usr/bin/");
+    strcat(shell, argv[1]);
 
     if (access(shell, X_OK) == -1) {
-        fprintf(stderr, "Error: %s is not a valid shell\n", argv[1]);
-        return 1;
+        strcpy(shell, "/var/usr/sbin/");
+        strcat(shell, argv[1]);
+        if (access(shell, X_OK) == -1) {
+            fprintf(stderr, "Error: %s is not a valid shell\n", argv[1]);
+            return 1;
+        }
     }
 
     unlink("/var/usr/shell");
