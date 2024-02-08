@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <sys/stat.h>
 #include <unistd.h>
 
 bool checkshell(const char *shell, bool exitonfail) {
@@ -33,7 +34,7 @@ int main() {
     if (access("/var/usr/shell", F_OK) == 0) {
         readlink("/var/usr/shell", shell, PATH_MAX);
         if (!checkshell(shell, false))
-            shell = "/var/usr/bin/sh";
+            strcpy(shell, "/var/usr/bin/sh");
     }
     checkshell(shell, true);
     const char *ptr = strrchr(shell, '/');
