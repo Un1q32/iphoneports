@@ -5,7 +5,7 @@ mkdir -p pkg/usr/bin pkg/var/usr/bin pkg/var/usr/etc/profile.d
 (
 cd pkg || exit 1
 
-"$_TARGET-cc" -o usr/bin/iphoneports-shell "$_PKGROOT/files/iphoneports-shell.c"
+"$_TARGET-cc" -std=c89 -O2 -o usr/bin/iphoneports-shell "$_PKGROOT/files/iphoneports-shell.c"
 llvm-strip usr/bin/iphoneports-shell
 ldid -S"$_ENT" usr/bin/iphoneports-shell
 
