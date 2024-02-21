@@ -1,6 +1,6 @@
 Package: iphoneports-make
 Section: Development
-Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
+Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Architecture: iphoneos-arm
 Version: 4.4.1-1
 Description: Standard tool to compile source trees

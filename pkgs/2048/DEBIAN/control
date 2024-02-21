@@ -1,6 +1,6 @@
 Package: iphoneports-2048
 Section: Games
-Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
+Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Architecture: iphoneos-arm
 Version: 2
 Description: 2048 in your terminal

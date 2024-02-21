@@ -1,6 +1,6 @@
 Package: iphoneports-gzip
 Section: Archiving
-Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
+Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Architecture: iphoneos-arm
 Version: 400-5
 Depends: iphoneports-base, iphoneports-sed, iphoneports-grep, iphoneports-bzip2, iphoneports-xz, iphoneports-zlib

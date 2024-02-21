@@ -1,6 +1,6 @@
 Package: iphoneports-htop
 Version: 3.0.2-1
-Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
+Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Architecture: iphoneos-arm
 Depends: iphoneports-base, iphoneports-ncurses
 Description: interactive processes viewer

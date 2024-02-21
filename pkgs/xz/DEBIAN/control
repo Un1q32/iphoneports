@@ -1,5 +1,5 @@
 Package: iphoneports-xz
-Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
+Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Architecture: iphoneos-arm
 Depends: iphoneports-base, iphoneports-grep, iphoneports-sed
 Description: XZ-format compression utilities

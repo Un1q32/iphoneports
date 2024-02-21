@@ -1,7 +1,7 @@
 Package: iphoneports-libidn2
 Version: 2.3.7
 Architecture: iphoneos-arm
-Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
+Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Depends: iphoneports-base, iphoneports-libunistring
 Section: Development
 Homepage: http://www.gnu.org/software/libidn/

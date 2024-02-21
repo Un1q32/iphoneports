@@ -1,7 +1,7 @@
 Package: iphoneports-tree
 Version: 2.1.1-2
 Architecture: iphoneos-arm
-Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
+Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Section: Utilities
 Description: A colorized, indented directory listing tool
 Depends: iphoneports-base

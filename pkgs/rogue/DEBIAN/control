@@ -1,6 +1,6 @@
 Package: iphoneports-rogue
 Section: Games
-Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
+Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Architecture: iphoneos-arm
 Version: 5.4.4-3
 Description: The original dungeon crawl game.

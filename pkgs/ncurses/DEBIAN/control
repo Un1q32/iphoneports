@@ -1,6 +1,6 @@
 Package: iphoneports-ncurses
 Section: System
-Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
+Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Architecture: iphoneos-arm
 Version: 6.4-3
 Description: System V Release 4.0 curses emulation library

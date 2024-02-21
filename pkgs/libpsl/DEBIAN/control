@@ -1,7 +1,7 @@
 Package: iphoneports-libpsl
 Version: 0.21.2-2
 Architecture: iphoneos-arm
-Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
+Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Section: Development
 Depends: iphoneports-base, iphoneports-libunistring, iphoneports-libidn2
 Description: Public Suffix List library

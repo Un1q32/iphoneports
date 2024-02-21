@@ -1,7 +1,7 @@
 Package: iphoneports-bash-completion
 Version: 2.11
 Architecture: iphoneos-arm
-Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
+Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Depends: iphoneports-base, iphoneports-bash
 Section: Terminal_Support
 Description: a collection of command line command completions for the Bash shell

@@ -1,7 +1,7 @@
 Package: iphoneports-whois
 Version: 199.0.1
 Architecture: iphoneos-arm
-Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
+Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Section: Utilities
 Depends: iphoneports-base
 Description: An internet domain name and network number directory service

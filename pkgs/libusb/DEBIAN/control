@@ -1,7 +1,7 @@
 Package: iphoneports-libusb
 Version: 1.0.23-2
 Architecture: iphoneos-arm
-Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
+Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Depends: iphoneports-base
 Section: Development
 Description: A cross-platform library to access USB devices

@@ -1,6 +1,6 @@
 Package: iphoneports-lz4
 Section: Archiving
-Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
+Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Architecture: iphoneos-arm
 Version: 1.9.4-1
 Description: Extremely fast compression algorithm

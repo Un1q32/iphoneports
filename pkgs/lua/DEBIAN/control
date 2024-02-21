@@ -1,5 +1,5 @@
 Package: iphoneports-lua
-Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
+Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Architecture: iphoneos-arm
 Depends: iphoneports-base, iphoneports-readline
 Description: A powerful, efficient, lightweight, embeddable scripting language.

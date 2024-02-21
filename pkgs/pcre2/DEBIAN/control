@@ -1,6 +1,6 @@
 Package: iphoneports-pcre2
 Section: Development
-Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
+Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Architecture: iphoneos-arm
 Version: 10.43
 Depends: iphoneports-base, iphoneports-readline, iphoneports-bzip2, iphoneports-zlib

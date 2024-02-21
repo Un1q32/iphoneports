@@ -1,5 +1,5 @@
 Package: iphoneports-luajit
-Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
+Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Architecture: iphoneos-arm
 Description: a Just-In-Time (JIT) compiler for the Lua programming language
 Section: Scripting

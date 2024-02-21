@@ -1,6 +1,6 @@
 Package: iphoneports-less
 Section: Utilities
-Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
+Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Architecture: iphoneos-arm
 Version: 643
 Depends: iphoneports-base, iphoneports-ncurses, iphoneports-pcre2

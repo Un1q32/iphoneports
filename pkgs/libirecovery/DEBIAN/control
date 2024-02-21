@@ -1,7 +1,7 @@
 Package: iphoneports-libirecovery
 Version: 1.0.0-1
 Architecture: iphoneos-arm
-Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
+Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Depends: iphoneports-base, iphoneports-libusb, iphoneports-readline
 Section: Utilities
 Description: Library and utility to talk to iBoot/iBSS via USB on Mac OS X, Windows, and Linux

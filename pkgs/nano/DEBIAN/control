@@ -1,6 +1,6 @@
 Package: iphoneports-nano
 Section: Text_Editors
-Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
+Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Architecture: iphoneos-arm
 Version: 7.2-2
 Depends: iphoneports-base, iphoneports-ncurses

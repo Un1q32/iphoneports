@@ -1,6 +1,6 @@
 Package: iphoneports-lzo
 Section: Development
-Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
+Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Architecture: iphoneos-arm
 Version: 2.10-1
 Description: Portable lossless data compression library

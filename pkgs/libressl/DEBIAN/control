@@ -1,6 +1,6 @@
 Package: iphoneports-libressl
 Section: Security
-Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
+Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Architecture: iphoneos-arm
 Version: 3.8.2-2
 Description: Free version of the TLS/crypto stack forked from OpenSSL

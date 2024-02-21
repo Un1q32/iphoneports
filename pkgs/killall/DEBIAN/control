@@ -1,7 +1,7 @@
 Package: iphoneports-killall
 Version: 302.0.1
 Architecture: iphoneos-arm
-Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
+Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Section: Utilities
 Description: A utility for killing processes by name
 Depends: iphoneports-base

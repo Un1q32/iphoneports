@@ -1,7 +1,7 @@
 Package: iphoneports-nextvi
 Version: 30
 Architecture: iphoneos-arm
-Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
+Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Section: Text_Editors
 Description: a small vi/ex editor for editing bidirectional UTF-8 text
 Depends: iphoneports-base

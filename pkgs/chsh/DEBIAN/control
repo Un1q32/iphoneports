@@ -1,6 +1,6 @@
 Package: iphoneports-chsh
 Section: Utilities
-Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
+Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Architecture: iphoneos-arm
 Version: 7
 Depends: iphoneports-base

@@ -1,6 +1,6 @@
 Package: iphoneports-rsync
 Section: Networking
-Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
+Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Architecture: iphoneos-arm
 Version: 3.2.7-2
 Description: A fast and versatile file copying tool for remote and local files

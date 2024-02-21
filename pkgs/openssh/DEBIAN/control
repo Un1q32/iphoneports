@@ -1,6 +1,6 @@
 Package: iphoneports-openssh
 Section: Networking
-Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
+Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Architecture: iphoneos-arm
 Version: 9.6p1
 Depends: iphoneports-base, iphoneports-libressl, iphoneports-zlib

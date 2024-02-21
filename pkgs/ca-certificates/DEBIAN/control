@@ -1,6 +1,6 @@
 Package: iphoneports-ca-certificates
 Section: Security
-Maintainer: Joey Reinhart (OldWorldOrder) <joey.t.reinhart@gmail.com>
+Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Architecture: iphoneos-arm
 Version: 2023-12-12
 Description: Common CA certificates
