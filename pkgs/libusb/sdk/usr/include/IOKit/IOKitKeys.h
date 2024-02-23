@@ -53,9 +53,6 @@
 #define kIOFireWirePlane		"IOFireWire"
 #define kIOUSBPlane			"IOUSB"
 
-// registry ID number
-#define kIORegistryEntryIDKey		"IORegistryEntryID"
-
 // IOService class name
 #define kIOServiceClass			"IOService"
 
@@ -85,14 +82,9 @@
 // IOService default user client class, for loadable user clients
 #define kIOUserClientClassKey		"IOUserClientClass"
 
-// key to find IOMappers
-#define kIOMapperIDKey				"IOMapperID"
-
 #define kIOUserClientCrossEndianKey		"IOUserClientCrossEndian"
 #define kIOUserClientCrossEndianCompatibleKey	"IOUserClientCrossEndianCompatible"
 #define kIOUserClientSharedInstanceKey		"IOUserClientSharedInstance"
-// diagnostic string describing the creating task
-#define kIOUserClientCreatorKey		"IOUserClientCreator"
 
 // IOService notification types
 #define kIOPublishNotification		"IOServicePublish"
@@ -151,7 +143,6 @@
 
 // IODTNVRAM property keys
 #define kIONVRAMDeletePropertyKey	"IONVRAM-DELETE-PROPERTY"
-#define kIONVRAMSyncNowPropertyKey	"IONVRAM-SYNCNOW-PROPERTY"
 #define kIODTNVRAMPanicInfoKey		"aapl,panic-info"
 
 // keys for complex boot information

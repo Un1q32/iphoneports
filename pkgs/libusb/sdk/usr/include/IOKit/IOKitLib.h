@@ -1,22 +1,21 @@
 /*
- * Copyright (c) 1998-2009 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 1998-2000 Apple Computer, Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
- * This file contains Original Code and/or Modifications of Original Code
- * as defined in and that are subject to the Apple Public Source License
- * Version 2.0 (the 'License'). You may not use this file except in
- * compliance with the License. Please obtain a copy of the License at
- * http://www.opensource.apple.com/apsl/ and read it before using this
- * file.
+ * The contents of this file constitute Original Code as defined in and
+ * are subject to the Apple Public Source License Version 1.1 (the
+ * "License").  You may not use this file except in compliance with the
+ * License.  Please obtain a copy of the License at
+ * http://www.apple.com/publicsource and read it before using this file.
  * 
- * The Original Code and all software distributed under the License are
- * distributed on an 'AS IS' basis, WITHOUT WARRANTY OF ANY KIND, EITHER
+ * This Original Code and all software distributed under the License are
+ * distributed on an "AS IS" basis, WITHOUT WARRANTY OF ANY KIND, EITHER
  * EXPRESS OR IMPLIED, AND APPLE HEREBY DISCLAIMS ALL SUCH WARRANTIES,
  * INCLUDING WITHOUT LIMITATION, ANY WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE, QUIET ENJOYMENT OR NON-INFRINGEMENT.
- * Please see the License for the specific language governing rights and
- * limitations under the License.
+ * FITNESS FOR A PARTICULAR PURPOSE OR NON-INFRINGEMENT.  Please see the
+ * License for the specific language governing rights and limitations
+ * under the License.
  * 
  * @APPLE_LICENSE_HEADER_END@
  */
@@ -53,8 +52,6 @@
 
 #include <AvailabilityMacros.h>
 
-#include <dispatch/dispatch.h>
-
 __BEGIN_DECLS
 
 /*! @header IOKitLib
@@ -82,7 +79,7 @@ typedef void
     @param refcon The refcon passed when the notification was installed.
     @param service The IOService whose state has changed.
     @param messageType A messageType enum, defined by IOKit/IOMessage.h or by the IOService's family.
-    @param messageArgument An argument for the message, dependent on the messageType.  If the message data is larger than sizeof(void*), then messageArgument contains a pointer to the message data; otherwise, messageArgument contains the message data.
+    @param messageArgument An argument for the message, dependent on the messageType.
 */
 
 typedef void
@@ -126,9 +123,6 @@ IONotificationPortCreate(
 
 /*! @function IONotificationPortDestroy
     @abstract Destroys a notification object created with IONotificationPortCreate.
-                Also destroys any mach_port's or CFRunLoopSources obatined from 
-                <code>@link IONotificationPortGetRunLoopSource @/link</code>
-                or <code>@link IONotificationPortGetMachPort @/link</code>
     @param notify A reference to the notification object. */
 
 void
@@ -137,12 +131,7 @@ IONotificationPortDestroy(
 
 /*! @function IONotificationPortGetRunLoopSource
     @abstract Returns a CFRunLoopSource to be used to listen for notifications.
-    @discussion A notification object may deliver notifications to a CFRunLoop 
-                by adding the run loop source returned by this function to the run loop.
-
-                The caller should not release this CFRunLoopSource. Just call 
-                <code>@link IONotificationPortDestroy @/link</code> to dispose of the
-                IONotificationPortRef and the CFRunLoopSource when done.
+    @discussion A notification object may deliver notifications to a CFRunLoop client by adding the run loop source returned by this function to the run loop.
     @param notify The notification object.
     @result A CFRunLoopSourceRef for the notification object. */
 
@@ -152,14 +141,7 @@ IONotificationPortGetRunLoopSource(
 
 /*! @function IONotificationPortGetMachPort
     @abstract Returns a mach_port to be used to listen for notifications.
-    @discussion A notification object may deliver notifications to a mach messaging client 
-                if they listen for messages on the port obtained from this function. 
-                Callbacks associated with the notifications may be delivered by calling 
-                IODispatchCalloutFromMessage with messages received.
-                
-                The caller should not release this mach_port_t. Just call 
-                <code>@link IONotificationPortDestroy @/link</code> to dispose of the
-                mach_port_t and IONotificationPortRef when done.
+    @discussion A notification object may deliver notifications to a mach messaging client if they listen for messages on the port obtained from this function. Callbacks associated with the notifications may be delivered by calling IODispatchCalloutFromMessage with messages received 
     @param notify The notification object.
     @result A mach_port for the notification object. */
 
@@ -169,22 +151,10 @@ IONotificationPortGetMachPort(
 
 /*! @function IODispatchCalloutFromMessage
     @abstract Dispatches callback notifications from a mach message.
-    @discussion A notification object may deliver notifications to a mach messaging client, 
-                which should call this function to generate the callbacks associated with the notifications arriving on the port.
+    @discussion A notification object may deliver notifications to a mach messaging client, which should call this function to generate the callbacks associated with the notifications arriving on the port.
     @param unused Not used, set to zero.
     @param msg A pointer to the message received.
     @param reference Pass the IONotificationPortRef for the object. */
-
-/*! @function IONotificationPortSetDispatchQueue
-    @abstract Sets a dispatch queue to be used to listen for notifications.
-    @discussion A notification object may deliver notifications to a dispatch client.
-    @param notify The notification object.
-    @param queue A dispatch queue. */
-
-void
-IONotificationPortSetDispatchQueue(
-	IONotificationPortRef notify, dispatch_queue_t queue )
-__OSX_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_4_3);
 
 void
 IODispatchCalloutFromMessage(
@@ -244,7 +214,7 @@ IOObjectGetClass(
 	io_object_t	object,
 	io_name_t	className );
 	
-/*! @function IOObjectCopyClass
+/*! @function CFStringRef IOObjectCopyClass
     @abstract Return the class name of an IOKit object.
 	@discussion This function does the same thing as IOObjectGetClass, but returns the result as a CFStringRef.
 	@param object The IOKit object.
@@ -254,7 +224,7 @@ CFStringRef
 IOObjectCopyClass(io_object_t object)
 AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 
-/*! @function IOObjectCopySuperclassForClass
+/*! @function CFStringRef IOObjectCopySuperclassForClass
     @abstract Return the superclass name of the given class.
     @discussion This function uses the OSMetaClass system in the kernel to derive the name of the superclass of the class.
 	@param classname The name of the class as a CFString.
@@ -264,7 +234,7 @@ CFStringRef
 IOObjectCopySuperclassForClass(CFStringRef classname)
 AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 
-/*! @function IOObjectCopyBundleIdentifierForClass
+/*! @function CFStringRef IOObjectCopyBundleIdentifierForClass
     @abstract Return the bundle identifier of the given class.
 	@discussion This function uses the OSMetaClass system in the kernel to derive the name of the kmod, which is the same as the bundle identifier.
 	@param classname The name of the class as a CFString.
@@ -298,38 +268,15 @@ IOObjectIsEqualTo(
 	io_object_t	object,
 	io_object_t	anObject );
 
-/*! @function IOObjectGetKernelRetainCount
-    @abstract Returns kernel retain count of an IOKit object.
-    @discussion This function may be used in diagnostics to determine the current retain count of the kernel object at the kernel level.
-    @param object An IOKit object.
-    @result If the object handle is valid, the kernel objects retain count is returned, otherwise zero is returned. */
-
-uint32_t
-IOObjectGetKernelRetainCount(
-	io_object_t	object )
-AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
-
-/*! @function IOObjectGetUserRetainCount
-    @abstract Returns the retain count for the current process of an IOKit object.
-    @discussion This function may be used in diagnostics to determine the current retain count for the calling process of the kernel object.
-    @param object An IOKit object.
-    @result If the object handle is valid, the objects user retain count is returned, otherwise zero is returned. */
-
-uint32_t
-IOObjectGetUserRetainCount(
-	io_object_t	object )
-AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
-
 /*! @function IOObjectGetRetainCount
-    @abstract Returns kernel retain count of an IOKit object. Identical to IOObjectGetKernelRetainCount() but available prior to Mac OS 10.6.
-    @discussion This function may be used in diagnostics to determine the current retain count of the kernel object at the kernel level.
+    @abstract Returns kernel retain count of an IOKit object.
+    @discussion This function may be used in diagnostics to determine the current retain count of the kernel object.
     @param object An IOKit object.
     @result If the object handle is valid, the kernel objects retain count is returned, otherwise zero is returned. */
 
 uint32_t
 IOObjectGetRetainCount(
 	io_object_t	object );
-
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
@@ -620,8 +567,7 @@ IOConnectSetNotificationPort(
     @param ofSize The size of the mapping created is passed back on success.
     @result A kern_return_t error code. */
 
-#if !__LP64__ || defined(IOCONNECT_MAPMEMORY_10_6)
-
+#if !__LP64__
 kern_return_t
 IOConnectMapMemory(
 	io_connect_t	connect,
@@ -631,32 +577,11 @@ IOConnectMapMemory(
 	vm_size_t	*ofSize,
 	IOOptionBits	 options );
 
+kern_return_t IOConnectMapMemory64
 #else
-
-kern_return_t
-IOConnectMapMemory(
-	 io_connect_t		connect,
-	 uint32_t		memoryType,
-	 task_port_t		intoTask,
-	 mach_vm_address_t	*atAddress,
-	 mach_vm_size_t		*ofSize,
-	 IOOptionBits		 options );
-
-#endif /* !__LP64__ || defined(IOCONNECT_MAPMEMORY_10_6) */
-
-
-/*! @function IOConnectMapMemory64
-    @abstract Map hardware or shared memory into the caller's task.
-    @discussion This is a generic method to create a mapping in the callers task. The family will interpret the type parameter to determine what sort of mapping is being requested. Cache modes and placed mappings may be requested by the caller.
-    @param connect The connect handle created by IOServiceOpen.
-    @param memoryType What is being requested to be mapped, not interpreted by IOKit and family defined. The family may support physical hardware or shared memory mappings.
-    @param intoTask The task port for the task in which to create the mapping. This may be different to the task which the opened the connection.
-    @param atAddress An in/out parameter - if the kIOMapAnywhere option is not set, the caller should pass the address where it requests the mapping be created, otherwise nothing need to set on input. The address of the mapping created is passed back on sucess.
-    @param ofSize The size of the mapping created is passed back on success.
-    @result A kern_return_t error code. */
-
-kern_return_t IOConnectMapMemory64(
-	 io_connect_t		connect,
+kern_return_t IOConnectMapMemory
+#endif
+	(io_connect_t		connect,
 	 uint32_t		memoryType,
 	 task_port_t		intoTask,
 	 mach_vm_address_t	*atAddress,
@@ -668,12 +593,11 @@ kern_return_t IOConnectMapMemory64(
     @discussion This is a generic method to remove a mapping in the callers task.
     @param connect The connect handle created by IOServiceOpen.
     @param memoryType The memory type originally requested in IOConnectMapMemory.
-    @param fromTask The task port for the task in which to remove the mapping. This may be different to the task which the opened the connection.
+    @param intoTask The task port for the task in which to remove the mapping. This may be different to the task which the opened the connection.
     @param atAddress The address of the mapping to be removed.
     @result A kern_return_t error code. */
 
-#if !__LP64__ || defined(IOCONNECT_MAPMEMORY_10_6)
-
+#if !__LP64__
 kern_return_t
 IOConnectUnmapMemory(
 	io_connect_t	connect,
@@ -681,33 +605,14 @@ IOConnectUnmapMemory(
 	task_port_t	fromTask,
 	vm_address_t	atAddress );
 
+kern_return_t IOConnectUnmapMemory64
 #else
-
-kern_return_t
-IOConnectUnmapMemory(
-	io_connect_t	connect,
-	uint32_t	memoryType,
-	task_port_t	fromTask,
-	mach_vm_address_t	atAddress );
-
-
-#endif /* !__LP64__ || defined(IOCONNECT_MAPMEMORY_10_6) */
-
-/*! @function IOConnectUnmapMemory64
-    @abstract Remove a mapping made with IOConnectMapMemory64.
-    @discussion This is a generic method to remove a mapping in the callers task.
-    @param connect The connect handle created by IOServiceOpen.
-    @param memoryType The memory type originally requested in IOConnectMapMemory.
-    @param fromTask The task port for the task in which to remove the mapping. This may be different to the task which the opened the connection.
-    @param atAddress The address of the mapping to be removed.
-    @result A kern_return_t error code. */
-
-kern_return_t IOConnectUnmapMemory64(
-	io_connect_t		connect,
+kern_return_t IOConnectUnmapMemory
+#endif
+	(io_connect_t		connect,
 	 uint32_t		memoryType,
 	 task_port_t		fromTask,
 	 mach_vm_address_t	atAddress );
-
 
 /*! @function IOConnectSetCFProperties
     @abstract Set CF container based properties on a connection.
@@ -1031,18 +936,6 @@ IORegistryEntryGetPath(
 	const io_name_t         plane,
 	io_string_t		path );
 
-/*! @function IORegistryEntryGetRegistryEntryID
-    @abstract Returns an ID for the registry entry that is global to all tasks.
-    @discussion The entry ID returned by IORegistryEntryGetRegistryEntryID can be used to identify a registry entry across all tasks. A registry entry may be looked up by its entryID by creating a matching dictionary with IORegistryEntryIDMatching() to be used with the IOKit matching functions. The ID is valid only until the machine reboots.
-    @param entry The registry entry handle whose ID to look up.
-    @param entryID The resulting ID.
-    @result A kern_return_t error code. */
-
-kern_return_t
-IORegistryEntryGetRegistryEntryID(
-	io_registry_entry_t	entry,
-	uint64_t *		entryID );
-
 /*! @function IORegistryEntryCreateCFProperties
     @abstract Create a CF dictionary representation of a registry entry's property table.
     @discussion This function creates an instantaneous snapshot of a registry entry's property table, creating a CFDictionary analogue in the caller's task. Not every object available in the kernel is represented as a CF container; currently OSDictionary, OSArray, OSSet, OSSymbol, OSString, OSData, OSNumber, OSBoolean are created as their CF counterparts. 
@@ -1177,7 +1070,7 @@ IORegistryEntryGetParentIterator(
     @discussion This function will return the parent to which the registry entry was first attached in a plane.
     @param entry The registry entry whose parent to look up.
     @param plane The name of an existing registry plane. Plane names are defined in IOKitKeys.h, eg. kIOServicePlane.
-    @param parent The first parent of the registry entry, on success. The parent must be released by the caller.
+    @param child The first parent of the registry entry, on success. The parent must be released by the caller.
     @result A kern_return_t error code. */
 
 kern_return_t
@@ -1251,16 +1144,6 @@ IOOpenFirmwarePathMatching(
 	mach_port_t	masterPort,
 	uint32_t	options,
 	const char *	path );
-
-/*! @function IORegistryEntryIDMatching
-    @abstract Create a matching dictionary that specifies an IOService match based on a registry entry ID.
-    @discussion This function creates a matching dictionary that will match a registered, active IOService found with the given registry entry ID. The entry ID for a registry entry is returned by IORegistryEntryGetRegistryEntryID().
-    @param entryID The registry entry ID to be found. 
-    @result The matching dictionary created, is returned on success, or zero on failure. The dictionary is commonly passed to IOServiceGetMatchingServices or IOServiceAddNotification which will consume a reference, otherwise it should be released with CFRelease by the caller. */
-
-CFMutableDictionaryRef
-IORegistryEntryIDMatching(
-	uint64_t	entryID );
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
@@ -1359,10 +1242,6 @@ IOCatalogueModuleLoaded(
         mach_port_t             masterPort,
         io_name_t               name );
 
-/* Use IOCatalogueSendData(), with kIOCatalogResetDrivers, to replace catalogue
- * rather than emptying it. Doing so keeps instance counts down by uniquing
- * existing personalities.
- */
 kern_return_t
 IOCatalogueReset(
         mach_port_t             masterPort,
