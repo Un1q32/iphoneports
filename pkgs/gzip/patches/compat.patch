@@ -1,0 +1,33 @@
+--- src/gzip.c.orig
++++ src/gzip.c
+@@ -75,6 +75,30 @@
+ #include <sys/attr.h>
+ #include <copyfile.h>
+ #include <get_compat.h>
++
++char *strndup(const char *str, size_t size) {
++	char *ret = malloc(size + 1);
++	if (ret == NULL)
++		return NULL;
++	memcpy(ret, str, size);
++	ret[size] = '\0';
++	return ret;
++}
++
++int fgetattrlist(int fd, struct attrlist *attrList, void *attrBuf, size_t attrBufSize, unsigned long options) {
++	char fdpath[PATH_MAX];
++	if (fcntl(fd, F_GETPATH, fdpath) == -1)
++		return -1;
++	return getattrlist(fdpath, attrList, attrBuf, attrBufSize, options);
++}
++
++int fsetattrlist(int fd, struct attrlist *attrList, void *attrBuf, size_t attrBufSize, unsigned long options) {
++	char fdpath[PATH_MAX];
++	if (fcntl(fd, F_GETPATH, fdpath) == -1)
++		return -1;
++	return setattrlist(fdpath, attrList, attrBuf, attrBufSize, options);
++}
++
+ int futimens(int fd, const struct timespec times[2]);
+ 
+ #define	st_atim	st_atimespec
