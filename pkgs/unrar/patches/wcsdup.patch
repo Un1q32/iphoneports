@@ -1,0 +1,17 @@
+--- src/extract.cpp.orig
++++ src/extract.cpp
+@@ -1,5 +1,14 @@
+ #include "rar.hpp"
+ 
++wchar_t *wcsdup(const wchar_t *str) {
++  if (str == NULL)
++    return NULL;
++  wchar_t *ret = (wchar_t *)malloc((wcslen(str) + 1) * sizeof(wchar_t));
++  if (ret != NULL)
++    wcscpy(ret, str);
++  return ret;
++}
++
+ CmdExtract::CmdExtract(CommandData *Cmd)
+ {
+   CmdExtract::Cmd=Cmd;
