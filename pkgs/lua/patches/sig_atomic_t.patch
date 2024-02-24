@@ -1,0 +1,10 @@
+--- src/src/lstate.h.orig
++++ src/src/lstate.h
+@@ -128,6 +128,7 @@
+ */
+ #if !defined(l_signalT)
+ #include <signal.h>
++typedef int sig_atomic_t;
+ #define l_signalT	sig_atomic_t
+ #endif
+ 
