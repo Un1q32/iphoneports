@@ -1,0 +1,11 @@
+--- src/Compat.c.orig
++++ src/Compat.c
+@@ -18,6 +18,8 @@
+ 
+ #include "XUtils.h" // IWYU pragma: keep
+ 
++#define AT_FDCWD -2
++#define AT_SYMLINK_NOFOLLOW 0x0020
+ 
+ /* GNU/Hurd does not have PATH_MAX in limits.h */
+ #ifndef PATH_MAX
