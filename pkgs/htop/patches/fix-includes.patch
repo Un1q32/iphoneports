@@ -1,0 +1,16 @@
+--- src/darwin/Platform.c.orig
++++ src/darwin/Platform.c
+@@ -14,11 +14,11 @@
+ #include <math.h>
+ #include <stdlib.h>
+ #include <unistd.h>
++#include <sys/socket.h>
+ #include <net/if.h>
+ #include <net/if_types.h>
+ #include <net/route.h>
+-#include <sys/socket.h>
+-#include <sys/_types/_mach_port_t.h>
++#include <mach/port.h>
+ 
+ #include <CoreFoundation/CFBase.h>
+ #include <CoreFoundation/CFDictionary.h>
