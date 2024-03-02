@@ -1,7 +1,0 @@
-Package: iphoneports-mandoc
-Section: Utilities
-Maintainer: Uniq <joey.t.reinhart@gmail.com>
-Architecture: iphoneos-arm
-Version: 1.14.6
-Depends: iphoneports-base, iphoneports-zlib
-Description: a suite of tools compiling mdoc
