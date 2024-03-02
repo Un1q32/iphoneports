@@ -1,8 +1,0 @@
-Package: iphoneports-gdb
-Section: Development
-Maintainer: Uniq <joey.t.reinhart@gmail.com>
-Architecture: iphoneos-arm
-Version: 1708
-Depends: iphoneports-base
-Description: The GNU debugger
-Homepage: http://www.gnu.org/software/gdb/
