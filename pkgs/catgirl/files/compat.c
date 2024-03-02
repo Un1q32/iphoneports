@@ -54,3 +54,54 @@ int openat(int fd, const char* path, int flags, ...) {
     free(new_path);
     return ret;
 }
+
+void *memmem(const void *haystack, size_t haystacklen, const void *needle, size_t needlelen) {
+    if (needlelen > haystacklen)
+        return NULL;
+
+    const char *h = haystack;
+    const char *n = needle;
+    for (size_t i = 0; i <= haystacklen - needlelen; i++) {
+        if (memcmp(h + i, n, needlelen) == 0)
+            return (void *)(h + i);
+    }
+    return NULL;
+}
+
+ssize_t getdelim(char **lineptr, size_t *n, int delim, FILE *stream) {
+    if (lineptr == NULL || n == NULL || stream == NULL)
+        return -1;
+
+    if (*lineptr == NULL) {
+        *n = 128;
+        *lineptr = malloc(*n);
+        if (*lineptr == NULL)
+            return -1;
+    }
+
+    size_t i = 0;
+    int c;
+    while ((c = fgetc(stream)) != EOF) {
+        if (i + 1 >= *n) {
+            *n *= 2;
+            char *new_lineptr = realloc(*lineptr, *n);
+            if (new_lineptr == NULL)
+                return -1;
+            *lineptr = new_lineptr;
+        }
+
+        (*lineptr)[i++] = c;
+        if (c == delim)
+            break;
+    }
+
+    if (i == 0)
+        return -1;
+
+    (*lineptr)[i] = '\0';
+    return i;
+}
+
+ssize_t getline(char **lineptr, size_t *n, FILE *stream) {
+    return getdelim(lineptr, n, '\n', stream);
+}
