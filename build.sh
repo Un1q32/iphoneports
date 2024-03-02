@@ -1,6 +1,6 @@
 #!/bin/sh
 
-defaulttarget='arm-apple-darwin10'
+defaulttarget='armv6-apple-darwin10'
 
 help() {
     printf '%s' "\
