@@ -1,0 +1,11 @@
+--- src/lib/posixtm.c.orig
++++ src/lib/posixtm.c
+@@ -191,7 +191,7 @@
+              | (tm0.tm_min ^ tm1.tm_min)
+              | (tm0.tm_sec ^ tm1.tm_sec)))
+         {
+-          if (ckd_add (&t, t, leapsec))
++          if (ckd_add (&t, t, (int)leapsec))
+             return false;
+           *p = t;
+           return true;
