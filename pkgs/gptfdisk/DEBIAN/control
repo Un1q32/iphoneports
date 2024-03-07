@@ -1,0 +1,7 @@
+Package: iphoneports-gptfdisk
+Maintainer: Uniq <joey.t.reinhart@gmail.com>
+Architecture: iphoneos-arm
+Depends: iphoneports-base, iphoneports-ncurses, iphoneports-popt
+Description: A text-mode partitioning tool that works on GUID Partition Table (GPT) disks
+Section: Utilities
+Version: 1.0.10
