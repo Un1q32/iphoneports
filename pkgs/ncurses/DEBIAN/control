@@ -1,5 +1,5 @@
 Package: iphoneports-ncurses
-Section: System
+Section: Development
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Architecture: iphoneos-arm
 Version: 6.4-3
