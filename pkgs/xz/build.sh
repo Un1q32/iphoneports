@@ -1,7 +1,7 @@
 #!/bin/sh
 (
 cd src || exit 1
-./configure --host="$_TARGET" --prefix=/var/usr --disable-static
+./configure --host="$_TARGET" --prefix=/var/usr --disable-static gl_cv_posix_shell=/var/usr/bin/sh
 "$_MAKE" -j8
 "$_MAKE" DESTDIR="$_PKGROOT/pkg" install
 )
