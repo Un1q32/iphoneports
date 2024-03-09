@@ -1,7 +1,7 @@
-Package: io.github.oldworldordr.iconfix
+Package: iconfix
 Name: iFile/MTerminal icon fix
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
-Version: 6.1
+Version: 7
 Architecture: iphoneos-arm
 Description: A script that fixes the iFile and MTerminal icons on iOS 6 and below.
 Section: Utilities
