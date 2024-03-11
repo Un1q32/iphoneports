@@ -1,0 +1,16 @@
+--- src/src/wget.c.orig
++++ src/src/wget.c
+@@ -3147,7 +3147,12 @@
+ 	timespecs[1].tv_sec = tt;
+ 	timespecs[1].tv_nsec = 0;
+ 
+-	if (! isatty(fd) && futimens(fd, timespecs) == -1)
++	struct timeval timevals[2];
++	timevals[0].tv_sec = timespecs[0].tv_sec;
++	timevals[0].tv_usec = timespecs[0].tv_nsec / 1000;
++	timevals[1].tv_sec = timespecs[1].tv_sec;
++	timevals[1].tv_usec = timespecs[1].tv_nsec / 1000;
++	if (! isatty(fd) && futimes(fd, timevals) == -1)
+ 		error_printf (_("Failed to set file date (%d)\n"), errno);
+ }
+ 
