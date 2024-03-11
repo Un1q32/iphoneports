@@ -1,0 +1,11 @@
+--- src/lib/spawn-pipe.c.orig
++++ src/lib/spawn-pipe.c
+@@ -81,6 +81,8 @@
+ 
+ #endif
+ 
++extern char ***_NSGetEnviron(void);
++#define environ (*_NSGetEnviron())
+ 
+ #ifdef EINTR
+ 

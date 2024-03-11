@@ -1,0 +1,7 @@
+libressl
+nghttp2
+brotli
+pcre2
+zlib
+libpsl
+zstd
