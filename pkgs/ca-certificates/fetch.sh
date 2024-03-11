@@ -2,4 +2,4 @@
 rm -rf pkg src
 printf "Downloading source...\n"
 mkdir src
-curl -L -# -o src/cert.pem https://curl.se/ca/cacert-2023-12-12.pem
+curl -L -# -o src/cert.pem https://curl.se/ca/cacert-2024-03-11.pem
