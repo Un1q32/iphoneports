@@ -1,0 +1,7 @@
+Package: iphoneports-xorgproto
+Section: Development
+Maintainer: Uniq <joey.t.reinhart@gmail.com>
+Architecture: iphoneos-arm
+Version: 2023.2
+Description: combined X.Org X11 Protocol headers
+Depends: iphoneports-base

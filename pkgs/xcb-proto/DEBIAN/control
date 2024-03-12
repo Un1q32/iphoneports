@@ -1,0 +1,7 @@
+Package: iphoneports-xcb-proto
+Section: Development
+Maintainer: Uniq <joey.t.reinhart@gmail.com>
+Architecture: iphoneos-arm
+Version: 1.16.0
+Description: XML-XCB protocol descriptions
+Depends: iphoneports-base

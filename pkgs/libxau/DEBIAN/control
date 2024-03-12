@@ -1,0 +1,7 @@
+Package: iphoneports-libxau
+Section: Development
+Maintainer: Uniq <joey.t.reinhart@gmail.com>
+Architecture: iphoneos-arm
+Version: 1.0.11
+Description: X11 authorisation library
+Depends: iphoneports-base
