@@ -8,8 +8,8 @@ cd src || exit 1
 (
 cd pkg/var/usr || exit 1
 rm -rf share lib/libzstd.a
-llvm-strip bin/zstd lib/libzstd.1.5.5.dylib
-ldid -S"$_ENT" bin/zstd lib/libzstd.1.5.5.dylib
+llvm-strip bin/zstd lib/libzstd.1.5.6.dylib
+ldid -S"$_ENT" bin/zstd lib/libzstd.1.5.6.dylib
 )
 
 cp -r DEBIAN pkg
