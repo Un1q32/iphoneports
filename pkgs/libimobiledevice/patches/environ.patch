@@ -1,0 +1,12 @@
+--- src/3rd_party/libsrp6a-sha512/t_misc.c.orig
++++ src/3rd_party/libsrp6a-sha512/t_misc.c
+@@ -77,7 +77,8 @@
+  * tricks with variable ordering and sometimes define quirky
+  * environment variables like $WINDOWID or $_.
+  */
+-extern char ** environ;
++extern char ***_NSGetEnviron(void);
++#define environ (*_NSGetEnviron())
+ 
+ static void
+ t_envhash(unsigned char * out)

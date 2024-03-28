@@ -1,0 +1,12 @@
+--- src/configure.ac.orig
++++ src/configure.ac
+@@ -40,9 +40,7 @@
+ LT_INIT
+ 
+ # Checks for libraries.
+-PKG_CHECK_MODULES(libusbmuxd, libusbmuxd-2.0 >= $LIBUSBMUXD_VERSION)
+ PKG_CHECK_MODULES(libplist, libplist-2.0 >= $LIBPLIST_VERSION)
+-PKG_CHECK_MODULES(limd_glue, libimobiledevice-glue-1.0 >= $LIMD_GLUE_VERSION)
+ AC_ARG_WITH([readline],
+             [AS_HELP_STRING([--without-readline],
+             [build without support for libreadline (default is yes)])],

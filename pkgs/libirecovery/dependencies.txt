@@ -1,2 +1,4 @@
 readline
 libusb
+libimobiledevice-glue
+libplist

@@ -1,0 +1,7 @@
+Package: iphoneports-ideviceinstaller
+Version: 1.1.1-1
+Architecture: iphoneos-arm
+Maintainer: Uniq <joey.t.reinhart@gmail.com>
+Depends: iphoneports-base, iphoneports-libimobiledevice, iphoneports-libplist, iphoneports-libzip
+Section: Utilities
+Description: Manage apps of iOS devices

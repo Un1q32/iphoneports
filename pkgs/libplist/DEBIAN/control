@@ -1,5 +1,5 @@
 Package: iphoneports-libplist
-Version: 2.3.0-1
+Version: 2.4.0
 Architecture: iphoneos-arm
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Depends: iphoneports-base

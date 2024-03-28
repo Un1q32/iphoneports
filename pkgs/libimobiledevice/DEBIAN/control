@@ -1,7 +1,7 @@
 Package: iphoneports-libimobiledevice
-Version: 1.3.0-2
+Version: 1.3.0-3
 Architecture: iphoneos-arm
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
-Depends: iphoneports-base, iphoneports-libusbmuxd, iphoneports-libplist, iphoneports-libressl, iphoneports-usbmuxd
+Depends: iphoneports-base, iphoneports-libusbmuxd, iphoneports-libplist, iphoneports-libressl, iphoneports-usbmuxd, iphoneports-libimobiledevice-glue, iphoneports-readline
 Section: Utilities
 Description: A cross-platform protocol library to communicate with iOS devices

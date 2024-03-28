@@ -1,7 +1,8 @@
 #!/bin/sh
 (
 cd src || exit 1
-./configure --host="$_TARGET" --prefix=/var/usr --disable-static PKG_CONFIG_LIBDIR="$_SDK/var/usr/lib/pkgconfig" ac_cv_func_malloc_0_nonnull=yes ac_cv_func_realloc_0_nonnull=yes
+./autogen.sh
+./configure --host="$_TARGET" --prefix=/var/usr PKG_CONFIG_LIBDIR="$_SDK/var/usr/lib/pkgconfig" PACKAGE_VERSION=360619c5f721f93f0b9d8af1a2df0b926fbcf281
 "$_MAKE" -j8
 "$_MAKE" install DESTDIR="$_PKGROOT/pkg"
 )

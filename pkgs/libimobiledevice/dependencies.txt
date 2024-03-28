@@ -1,3 +1,5 @@
 libplist
 libusbmuxd
 libressl
+libimobiledevice-glue
+readline

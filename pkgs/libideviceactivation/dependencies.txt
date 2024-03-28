@@ -1,6 +1,9 @@
 libimobiledevice
+libimobiledevice-glue
 libusbmuxd
 libplist
-libusb
-libimobiledevice-glue
 libressl
+curl
+libxml2
+zlib
+xz

@@ -9,8 +9,8 @@ cd src || exit 1
 (
 cd pkg/var/usr || exit 1
 rm -rf share
-llvm-strip bin/plistutil lib/libplist-2.0.3.dylib lib/libplist++-2.0.3.dylib
-ldid -S"$_ENT" bin/plistutil lib/libplist-2.0.3.dylib lib/libplist++-2.0.3.dylib
+llvm-strip bin/plistutil lib/libplist-2.0.4.dylib lib/libplist++-2.0.4.dylib
+ldid -S"$_ENT" bin/plistutil lib/libplist-2.0.4.dylib lib/libplist++-2.0.4.dylib
 )
 
 cp -r DEBIAN pkg

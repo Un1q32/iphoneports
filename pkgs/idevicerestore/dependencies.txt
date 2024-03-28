@@ -7,3 +7,4 @@ libzip
 libressl
 curl
 zlib
+libimobiledevice-glue

@@ -1,8 +1,8 @@
 #!/bin/sh
 (
 cd src || exit 1
-autoreconf -fi
-./configure --host="$_TARGET" --prefix=/var/usr PKG_CONFIG_LIBDIR="$_SDK/var/usr/lib/pkgconfig"
+./autogen.sh
+bash ./configure --host="$_TARGET" --prefix=/var/usr PKG_CONFIG_LIBDIR="$_SDK/var/usr/lib/pkgconfig" PACKAGE_VERSION=e4a5ac4114177293e3a1b555ee767377b21d4432
 "$_MAKE" -j8
 "$_MAKE" install DESTDIR="$_PKGROOT/pkg"
 )

@@ -1,7 +1,7 @@
 Package: iphoneports-libusbmuxd
-Version: 2.0.2-1
+Version: 2.1.0
 Architecture: iphoneos-arm
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
-Depends: iphoneports-base, iphoneports-libplist
+Depends: iphoneports-base, iphoneports-libplist, iphoneports-libimobiledevice-glue
 Section: Development
 Description: A client library to multiplex connections from and to iOS devices

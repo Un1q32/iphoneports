@@ -9,8 +9,8 @@ cd src || exit 1
 (
 cd pkg/var/usr || exit 1
 rm -rf share
-llvm-strip bin/inetcat bin/iproxy lib/libusbmuxd-2.0.6.dylib
-ldid -S"$_ENT" bin/inetcat bin/iproxy lib/libusbmuxd-2.0.6.dylib
+llvm-strip bin/inetcat bin/iproxy lib/libusbmuxd-2.0.7.dylib
+ldid -S"$_ENT" bin/inetcat bin/iproxy lib/libusbmuxd-2.0.7.dylib
 )
 
 cp -r DEBIAN pkg
