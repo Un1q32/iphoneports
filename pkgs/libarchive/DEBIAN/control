@@ -2,6 +2,6 @@ Package: iphoneports-libarchive
 Section: Archiving
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Architecture: iphoneos-arm
-Version: 3.7.2-2
+Version: 3.7.2-3
 Depends: iphoneports-base, iphoneports-libxml2, iphoneports-xz, iphoneports-zlib, iphoneports-bzip2, iphoneports-zstd, iphoneports-lz4
 Description: Multi-format archive and compression library
