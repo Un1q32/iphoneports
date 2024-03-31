@@ -45,6 +45,6 @@ int main(int argc, char *argv[]) {
     shellname[0] = '-';
     setenv("SHELL", shell, 1);
     execl(shell, shellname, NULL);
-    puts("Error: exec failed!");
+    perror("exec");
     return EXIT_FAILURE;
 }
