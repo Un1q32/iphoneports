@@ -29,8 +29,10 @@ bool checkshell(const char *shell, bool exitonfail) {
     return true;
 }
 
-int main() {
+int main(int argc, char *argv[]) {
     char shell[PATH_MAX] = "/var/usr/bin/sh";
+    (void)argc;
+    (void)argv;
     if (access("/var/usr/shell", F_OK) == 0) {
         readlink("/var/usr/shell", shell, PATH_MAX);
         if (!checkshell(shell, false))
