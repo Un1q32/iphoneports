@@ -1,10 +1,10 @@
 # iPhonePorts build system
 
-> Build scripts for the packages at https://OldWorldOrdr.github.io/
+> Build scripts for the packages at https://cydia.uniq.gay/
 
 ## Setup
 
-You will need an iPhonePorts toolchain to use the build scripts in this repo, you can build one with https://github.com/OldWorldOrdr/ios-toolchain-build.
+You will need an iPhonePorts toolchain to use the build scripts in this repo, you can build one with https://github.com/Un1q32/ios-toolchain-build.
 
 ## Usage
 
@@ -12,10 +12,10 @@ You will need an iPhonePorts toolchain to use the build scripts in this repo, yo
 Usage: build.sh [options] <command>
     <pkg> [pkgs...]         - Build a single package
     all                     - Build all packages
-    clean                   - Clean a single package
+    clean <pkg> [pkgs...]   - Clean a single package
     cleanall                - Clean all packages
     dryrun                  - Pretend to build all packages
-    --target                - Specify a target (default: armv7-apple-darwin11)
+    --target                - Specify a target (default: armv6-apple-darwin10)
     --no-tmp                - Do not use /tmp for anything, use the current directory instead
     --no-deps               - Do not include dependencies
 ```

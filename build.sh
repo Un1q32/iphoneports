@@ -7,7 +7,7 @@ help() {
 Usage: build.sh [options] <command>
     <pkg> [pkgs...]         - Build a single package
     all                     - Build all packages
-    clean                   - Clean a single package
+    clean <pkg> [pkgs...]   - Clean a single package
     cleanall                - Clean all packages
     dryrun                  - Pretend to build all packages
     --target                - Specify a target (default: $defaulttarget)
@@ -211,7 +211,15 @@ main() {
         ;;
 
         clean)
-            rm -rf "$pkgdir/$2/pkg" "$pkgdir/$2/src" "$pkgdir/$2"/*.deb "$bsroot/debs/$2.deb"
+            if [ -n "$2" ]; then
+                shift
+                for pkg in "$@"; do
+                    [ -d "$pkgdir/$pkg" ] || error "Package not found: $pkg"
+                    rm -rf "$pkgdir/$pkg/pkg" "$pkgdir/$pkg/src" "$pkgdir/$pkg"/*.deb "$bsroot/debs/$pkg.deb"
+                done
+            else
+                error "No package specified"
+            fi
         ;;
 
         cleanall)
