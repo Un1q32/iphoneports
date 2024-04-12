@@ -1,0 +1,11 @@
+--- src/login.c.orig
++++ src/login.c
+@@ -109,6 +109,8 @@
+ #endif
+ 
+ #include <mach/mach_types.h>
++#include <mach/mach_init.h>
++#include <mach/task.h>
+ 
+ #include <servers/bootstrap.h>
+ 
