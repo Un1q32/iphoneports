@@ -1,0 +1,10 @@
+--- src/file_passwd.c.orig
++++ src/file_passwd.c
+@@ -33,6 +33,7 @@
+ #include <sys/resource.h>
+ #include <sys/stat.h>
+ #include <sys/wait.h>
++#include <signal.h>
+ #include "stringops.h"
+ 
+ #define TEMP_FILE_TEMPLATE "/var/run/.pwtmpXXXXXX"

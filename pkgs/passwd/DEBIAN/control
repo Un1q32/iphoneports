@@ -1,0 +1,7 @@
+Package: iphoneports-passwd
+Section: Administration
+Maintainer: Uniq <joey.t.reinhart@gmail.com>
+Architecture: iphoneos-arm
+Version: 433
+Description: modify a user's password
+Depends: iphoneports-base, pam
