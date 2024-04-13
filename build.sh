@@ -171,7 +171,8 @@ includedeps() {
     if [ "$1" != "dryrun" ]; then
         if [ -d "$sdk" ]; then
             export _SDK="$_TMP/iphoneports-sdk"
-            cp -a "$sdk" "$_SDK"
+            mkdir -p "$_SDK"
+            cp -a "$sdk"/* "$_SDK"
         else
             error "SDK not found"
         fi
