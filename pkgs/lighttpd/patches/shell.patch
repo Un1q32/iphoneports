@@ -1,6 +1,6 @@
 --- src/src/fdevent.c.orig
 +++ src/src/fdevent.c
-@@ -433,9 +433,6 @@
+@@ -434,9 +434,6 @@
  /* iOS does not allow subprocess creation; avoid compiling advanced interfaces*/
  #if defined(__APPLE__) && defined(__MACH__)
  #include <TargetConditionals.h> /* TARGET_OS_IPHONE, TARGET_OS_MAC */
@@ -10,7 +10,7 @@
  #endif
  
  
-@@ -656,7 +653,7 @@
+@@ -657,7 +654,7 @@
  
      int errnum = errno;
      int argnum =
@@ -21,7 +21,7 @@
      perror(argv[argnum]);
 --- src/src/gw_backend.c.orig
 +++ src/src/gw_backend.c
-@@ -1677,8 +1677,8 @@
+@@ -1648,8 +1648,8 @@
  
                      host->args.ptr = ck_calloc(4, sizeof(char *));
                      host->args.used = 3;
