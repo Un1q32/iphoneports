@@ -1,5 +1,5 @@
 #!/bin/sh
-commit=9649448434ab5c674d2cc11f76e69e6ee5e9dc09
+commit=5f083426b4ede24b2576f3a56eaf8ac3632c02f7
 rm -rf pkg src
 printf "Downloading source...\n"
 curl -L -# -o src.tar.gz "https://github.com/libimobiledevice/libimobiledevice/archive/${commit}.tar.gz"
