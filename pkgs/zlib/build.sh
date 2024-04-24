@@ -1,7 +1,7 @@
 #!/bin/sh
 (
 cd src || exit 1
-CHOST="$_TARGET" ./configure --prefix=/var/usr --shared
+CHOST="$_TARGET" ./configure --prefix=/var/usr --zlib-compat --without-acle
 "$_MAKE" -j8
 "$_MAKE" DESTDIR="$_PKGROOT/pkg" install
 )

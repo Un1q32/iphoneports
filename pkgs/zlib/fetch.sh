@@ -1,8 +1,8 @@
 #!/bin/sh
 rm -rf pkg src
 printf "Downloading source...\n"
-curl -L -# -o src.tar.xz https://zlib.net/zlib-1.3.1.tar.xz
+curl -L -# -o src.tar.gz https://github.com/zlib-ng/zlib-ng/archive/refs/tags/2.1.6.tar.gz
 printf "Unpacking source...\n"
-tar -xf src.tar.xz
-rm src.tar.xz
-mv zlib-1.3.1 src
+tar -xf src.tar.gz
+rm src.tar.gz
+mv zlib-ng-2.1.6 src
