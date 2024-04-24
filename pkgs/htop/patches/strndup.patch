@@ -1,16 +1,18 @@
 --- src/XUtils.c.orig
 +++ src/XUtils.c
-@@ -260,10 +260,12 @@
+@@ -260,10 +260,14 @@
  }
  
  char* xStrndup(const char* str, size_t len) {
 -   char* data = strndup(str, len);
-+   char *data = malloc(len + 1);
++   const char *end = memchr(str, '\0', len);
++   size_t size = end ? end - str : len;
++   char *data = malloc(size + 1);
     if (!data) {
        fail();
     }
-+   memcpy(data, str, len);
-+   data[len] = '\0';
++   memcpy(data, str, size);
++   data[size] = '\0';
     return data;
  }
  

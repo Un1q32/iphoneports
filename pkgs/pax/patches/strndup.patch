@@ -1,16 +1,17 @@
 --- src/pat_rep.c.orig
 +++ src/pat_rep.c
-@@ -80,6 +80,15 @@
+@@ -80,6 +80,16 @@
  static char * range_match(char *, int);
  static int resub(regex_t *, regmatch_t *, char *, char *, char *, char *);
  
-+char *strndup(const char *str, size_t size) {
-+	char *ret = malloc(size + 1);
-+	if (ret == NULL)
-+		return NULL;
-+	memcpy(ret, str, size);
-+	ret[size] = '\0';
-+	return ret;
++char *strndup(const char *str, size_t maxlen) {
++	const char *end = memchr(str, '\0', maxlen);
++	size_t len = end ? end - str : maxlen;
++	char *newstr = malloc(len + 1);
++	if (!newstr) return NULL;
++	memcpy(newstr, str, len);
++	newstr[len] = '\0';
++	return newstr;
 +}
 +
  /*
