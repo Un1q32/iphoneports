@@ -13,6 +13,7 @@ for lib in lib/*.dylib; do
     if [ -f "$lib" ] && [ ! -h "$lib" ]; then
         llvm-strip "$lib"
         ldid -S"$_ENT" "$lib"
+        "$_INSTALLNAMETOOL" -id /var/usr/lib/libz.1.dylib "$lib"
     fi
 done
 )
