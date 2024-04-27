@@ -21,11 +21,6 @@ case "$1" in
     -h|*help) help 0 ;;
 esac
 
-error() {
-    printf '\033[1;31mError:\033[0m %s\n' "$1"
-    [ "$2" != "noexit" ] && exit 1
-}
-
 [ "${0%/*}" = "$0" ] && bsroot="." || bsroot="${0%/*}"
 cd "$bsroot" || exit 1
 bsroot="$PWD"
@@ -72,6 +67,11 @@ esac
 
 : > "$_TMP/.builtpkgs"
 rm -rf "$_TMP"/iphoneports-sdk*
+
+error() {
+    printf '\033[1;31mError:\033[0m %s\n' "$1"
+    [ "$2" != "noexit" ] && { rm -f "$bsroot/pkglock"; exit 1; }
+}
 
 depcheck() {
     for dep in "$_TARGET-gcc" "$_TARGET-g++" "$_TARGET-cc" "$_TARGET-c++" "$_TARGET-sdkpath" llvm-strip ldid dpkg-deb patch fakeroot automake autoreconf m4 yacc ctags; do
@@ -262,6 +262,7 @@ main() {
                 build "$pkg" || error "Failed to build package: $pkg"
                 cp -f "$pkgdir/$pkg"/*.deb "$bsroot/debs" 2> /dev/null
             done
+            rm -f "$bsroot/pkglock"
         ;;
     esac
 }
