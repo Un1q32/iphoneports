@@ -2,7 +2,7 @@ Package: iphoneports-coreutils
 Section: Utilities
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Architecture: iphoneos-arm
-Version: 9.4-3
+Version: 9.5
 Description: The basic file, shell and text manipulation utilities of the GNU operating system
 Homepage: http://www.gnu.org/software/coreutils/
 Depends: iphoneports-base, iphoneports-libressl
