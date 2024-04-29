@@ -2,7 +2,7 @@
 (
 cd src || exit 1
 unset TERMINFO
-./configure --host="$_TARGET" --prefix=/var/usr --with-shared --enable-widec --disable-stripping --with-cxx-binding --with-cxx-shared --without-normal --without-debug --without-manpages
+./configure --host="$_TARGET" --prefix=/var/usr --with-shared --enable-widec --disable-stripping --with-cxx-binding --with-cxx-shared --without-normal --without-debug --without-manpages --enable-pc-files --with-pkg-config-libdir=/var/usr/lib/pkgconfig
 "$_MAKE" -j8
 "$_MAKE" DESTDIR="$_PKGROOT/pkg" install -j8
 )
@@ -16,10 +16,13 @@ for lib in ncurses ncurses++ form menu panel tinfo; do
     ln -s "lib${lib}w.dylib" "lib/lib${lib}.dylib"
 done
 ln -s libncurses.dylib lib/libcurses.dylib
-for header in include/ncursesw/*.h; do
-    ln -s "${header#include/}" include/"${header#include/ncursesw/}"
+for pc in form menu panel ncurses ncurses++; do
+    ln -s "${pc}w.pc" "lib/pkgconfig/${pc}.pc"
 done
-ln -s ncursesw include/ncurses
+mv include/ncursesw/* include
+rm -rf include/ncursesw
+ln -s . include/ncurses
+ln -s . include/ncursesw
 )
 
 cp -r DEBIAN pkg
