@@ -2,14 +2,13 @@
 (
 cd src || exit 1
 unset TERMINFO
-./configure --host="$_TARGET" --prefix=/var/usr --with-shared --enable-widec --disable-stripping --with-cxx-binding --with-cxx-shared --without-normal --without-debug
+./configure --host="$_TARGET" --prefix=/var/usr --with-shared --enable-widec --disable-stripping --with-cxx-binding --with-cxx-shared --without-normal --without-debug --without-manpages
 "$_MAKE" -j8
 "$_MAKE" DESTDIR="$_PKGROOT/pkg" install -j8
 )
 
 (
 cd pkg/var/usr || exit 1
-rm -rf share/man
 llvm-strip bin/tic bin/tset bin/toe bin/clear bin/infocmp lib/libncursesw.6.dylib lib/libncurses++w.6.dylib lib/libformw.6.dylib lib/libmenuw.6.dylib lib/libpanelw.6.dylib
 ldid -S"$_ENT" bin/tic bin/tset bin/toe bin/clear bin/infocmp lib/libncursesw.6.dylib lib/libncurses++w.6.dylib lib/libformw.6.dylib lib/libmenuw.6.dylib lib/libpanelw.6.dylib
 ln -s libncursesw.dylib lib/libtinfow.dylib
