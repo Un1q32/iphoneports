@@ -5,3 +5,4 @@ pcre2
 zlib
 libpsl
 zstd
+libidn2
