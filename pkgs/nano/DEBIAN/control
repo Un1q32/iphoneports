@@ -2,6 +2,6 @@ Package: iphoneports-nano
 Section: Text_Editors
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Architecture: iphoneos-arm
-Version: 7.2-2
+Version: 8.0
 Depends: iphoneports-base, iphoneports-ncurses
 Description: completely free, modern clone of Pico

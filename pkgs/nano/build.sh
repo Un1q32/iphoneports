@@ -13,9 +13,9 @@ llvm-strip bin/nano
 ldid -S"$_ENT" bin/nano
 )
 
-cp -a files/syntax/*.nanorc pkg/var/usr/share/nano
 mkdir -p pkg/var/usr/etc
-cp files/nanorc pkg/var/usr/etc
+cp src/doc/sample.nanorc pkg/var/usr/etc/nanorc
+sed -i 's|# include "/var/usr/share/nano/\*\.nanorc"|include "/var/usr/share/nano/*.nanorc"|' pkg/var/usr/etc/nanorc
 
 cp -r DEBIAN pkg
 dpkg-deb -b --root-owner-group -Zgzip pkg nano.deb
