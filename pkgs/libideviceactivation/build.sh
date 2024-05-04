@@ -2,7 +2,7 @@
 (
 cd src || exit 1
 ./autogen.sh
-./configure --host="$_TARGET" --prefix=/var/usr --disable-static PKG_CONFIG_LIBDIR="$_SDK/var/usr/lib/pkgconfig" PACKAGE_VERSION=067c439e0b18d6f1c8a37dde791f9d91191a922e
+./configure --host="$_TARGET" --prefix=/var/usr --disable-static PKG_CONFIG_LIBDIR="$_SDK/var/usr/lib/pkgconfig"
 "$_MAKE" -j8
 "$_MAKE" install DESTDIR="$_PKGROOT/pkg"
 )

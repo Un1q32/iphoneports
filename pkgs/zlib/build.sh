@@ -11,9 +11,9 @@ cd pkg/var/usr || exit 1
 rm -rf share lib/libz.a
 for lib in lib/*.dylib; do
     if [ -f "$lib" ] && [ ! -h "$lib" ]; then
+        "$_INSTALLNAMETOOL" -id /var/usr/lib/libz.1.dylib "$lib"
         llvm-strip "$lib"
         ldid -S"$_ENT" "$lib"
-        "$_INSTALLNAMETOOL" -id /var/usr/lib/libz.1.dylib "$lib"
     fi
 done
 )

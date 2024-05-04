@@ -1,9 +1,6 @@
 #!/bin/sh
-commit=067c439e0b18d6f1c8a37dde791f9d91191a922e
 rm -rf pkg src
 printf "Downloading source...\n"
-curl -L -# -o src.tar.gz "https://github.com/libimobiledevice/libideviceactivation/archive/${commit}.tar.gz"
-printf "Unpacking source...\n"
-tar -xf src.tar.gz
-rm src.tar.gz
-mv "libideviceactivation-${commit}" src
+git clone https://github.com/libimobiledevice/libideviceactivation.git src
+cd src || exit 1
+git -c advice.detachedHead=false checkout 6925d58ef7994168fb9585aa6f48421149982329

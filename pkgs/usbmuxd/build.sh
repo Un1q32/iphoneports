@@ -2,7 +2,7 @@
 (
 cd src || exit 1
 ./autogen.sh
-./configure --host="$_TARGET" --prefix=/var/usr PKG_CONFIG_LIBDIR="$_SDK/var/usr/lib/pkgconfig" PACKAGE_VERSION=360619c5f721f93f0b9d8af1a2df0b926fbcf281
+./configure --host="$_TARGET" --prefix=/var/usr PKG_CONFIG_LIBDIR="$_SDK/var/usr/lib/pkgconfig"
 "$_MAKE" -j8
 "$_MAKE" install DESTDIR="$_PKGROOT/pkg"
 )
