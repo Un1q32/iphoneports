@@ -1,7 +1,11 @@
 #!/bin/sh
 (
 cd src || exit 1
-"$_TARGET-cc" -O2 -o ps ps.c print.c nlist.c tasks.c keyword.c -D'__FBSDID(x)=' -Wno-deprecated-non-prototype -Wno-#warnings
+for src in ps.c print.c nlist.c tasks.c keyword.c; do
+    "$_TARGET-cc" -O2 -c "$src" -D'__FBSDID(x)=' -Wno-deprecated-non-prototype -Wno-#warnings &
+done
+wait
+"$_TARGET-cc" -o ps -O2 ./*.o
 mkdir -p "$_PKGROOT/pkg/var/usr/bin"
 cp ps "$_PKGROOT/pkg/var/usr/bin"
 )

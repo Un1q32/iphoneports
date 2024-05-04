@@ -2,7 +2,11 @@
 (
 cd src || exit 1
 mkdir -p "$_PKGROOT/pkg/var/usr/bin"
-"$_TARGET-cc" -O2 -o gzip gzip.c futimens.c -DGZIP_APPLE_VERSION='"400"' -D'__FBSDID(x)=' -llzma -lz -lbz2
+for src in gzip.c futimens.c; do
+    "$_TARGET-cc" -O2 -c "$src" -DGZIP_APPLE_VERSION='"400"' -D'__FBSDID(x)=' &
+done
+wait
+"$_TARGET-cc" -o gzip -O2 -llzma -lz -lbz2 ./*.o
 for prog in gzip gzexe zdiff zforce zmore znew; do
     cp "$prog" "$_PKGROOT/pkg/var/usr/bin"
     chmod 755 "$_PKGROOT/pkg/var/usr/bin/$prog"
