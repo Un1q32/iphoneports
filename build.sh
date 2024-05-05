@@ -2,25 +2,6 @@
 
 defaulttarget='armv6-apple-darwin10'
 
-help() {
-    printf '%s' "\
-Usage: build.sh [options] <command>
-    <pkg> [pkgs...]         - Build a single package
-    all                     - Build all packages
-    clean <pkg> [pkgs...]   - Clean a single package
-    cleanall                - Clean all packages
-    dryrun                  - Pretend to build all packages
-    --target                - Specify a target (default: $defaulttarget)
-    --no-tmp                - Do not use /tmp for anything, use the current directory instead
-    --no-deps               - Do not include dependencies
-"
-    exit "$1"
-}
-
-case "$1" in
-    -h|*help) help 0 ;;
-esac
-
 [ "${0%/*}" = "$0" ] && bsroot="." || bsroot="${0%/*}"
 cd "$bsroot" || exit 1
 bsroot="$PWD"
@@ -30,8 +11,6 @@ if [ -z "$1" ]; then
         while read -r line; do
             set -- "$@" "$line"
         done < "$bsroot/.args.txt"
-    else
-        help 1
     fi
 fi
 
@@ -244,6 +223,21 @@ main() {
         -*)
             shift
             main "$@"
+        ;;
+
+        '')
+            printf '%s' "\
+Usage: build.sh [options] <command>
+    <pkg> [pkgs...]         - Build a single package
+    all                     - Build all packages
+    clean <pkg> [pkgs...]   - Clean a single package
+    cleanall                - Clean all packages
+    dryrun                  - Pretend to build all packages
+    --target                - Specify a target (default: $defaulttarget)
+    --no-tmp                - Do not use /tmp for anything, use the current directory instead
+    --no-deps               - Do not include dependencies
+"
+            exit 1
         ;;
 
         *)
