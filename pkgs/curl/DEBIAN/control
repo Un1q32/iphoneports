@@ -2,7 +2,7 @@ Package: iphoneports-curl
 Section: Networking
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Architecture: iphoneos-arm
-Version: 8.7.1-1
+Version: 8.8.0
 Depends: iphoneports-base, iphoneports-libressl, iphoneports-ca-certificates, iphoneports-zstd, iphoneports-zlib, iphoneports-libssh2, iphoneports-nghttp2, iphoneports-libpsl, iphoneports-libidn2, iphoneports-brotli
 Description: An URL retrieval utility and library
 Homepage: http://curl.se/
