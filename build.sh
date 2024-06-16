@@ -256,9 +256,9 @@ Usage: build.sh [options] <command>
                 build "$pkg" || error "Failed to build package: $pkg"
                 cp -f "$pkgdir/$pkg"/*.deb "$bsroot/debs" 2> /dev/null
             done
-            rm -f "$bsroot/pkglock"
         ;;
     esac
 }
 
 main "$@"
+rm -f "$bsroot/pkglock"
