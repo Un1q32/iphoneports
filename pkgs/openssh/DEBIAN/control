@@ -2,7 +2,7 @@ Package: iphoneports-openssh
 Section: Networking
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Architecture: iphoneos-arm
-Version: 9.7p1-1
+Version: 9.8p1
 Depends: iphoneports-base, iphoneports-libressl, iphoneports-zlib
 Description: secure remote access between machines
 Depiction: http://cydia.saurik.com/info/openssh/
