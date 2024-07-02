@@ -2,6 +2,6 @@ Package: iphoneports-zlib
 Section: Development
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Architecture: iphoneos-arm
-Version: 2.1.7
+Version: 2.2.1
 Description: zlib replacement with optimizations for "next generation" systems
 Depends: iphoneports-base
