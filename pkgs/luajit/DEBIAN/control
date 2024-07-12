@@ -3,5 +3,5 @@ Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Architecture: iphoneos-arm
 Description: a Just-In-Time (JIT) compiler for the Lua programming language
 Section: Scripting
-Version: 2.1.1713773202
+Version: 2.1.1720049189
 Depends: iphoneports-base
