@@ -6,7 +6,7 @@ llvm-strip "$_PKGROOT/pkg/usr/libexec/iphoneports/iphoneports-chsh"
 ldid -S"$_ENT" "$_PKGROOT/pkg/usr/libexec/iphoneports/iphoneports-chsh"
 chmod 4755 "$_PKGROOT/pkg/usr/libexec/iphoneports/iphoneports-chsh"
 
-ln -s /usr/libexec/iphoneports/iphoneports-chsh "$_PKGROOT/pkg/var/usr/bin/chsh"
+ln -s /usr/libexec/iphoneports/iphoneports-chsh "$_PKGROOT/pkg/var/usr/bin"
 
 cp -r DEBIAN pkg
 dpkg-deb -b --root-owner-group -Zgzip pkg chsh.deb
