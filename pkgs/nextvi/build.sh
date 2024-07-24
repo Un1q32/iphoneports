@@ -7,11 +7,11 @@ cp vi "$_PKGROOT/pkg/var/usr/bin"
 )
 
 (
-cd pkg/var/usr || exit 1
-llvm-strip bin/vi
-ldid -S"$_ENT" bin/vi
-ln -s vi bin/ex
-ln -s vi bin/view
+cd pkg/var/usr/bin || exit 1
+llvm-strip vi
+ldid -S"$_ENT" vi
+ln -s vi ex
+ln -s vi view
 )
 
 cp -r DEBIAN pkg
