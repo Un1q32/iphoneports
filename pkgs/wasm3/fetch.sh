@@ -1,5 +1,5 @@
 #!/bin/sh
-commit=139076a98b8321b67f850a844f558b5e91b5ac83
+commit=256cd37bbd654c6b3dc1f7523ebc651ee4a87989
 rm -rf pkg src
 printf "Downloading source...\n"
 curl -L -# -o src.tar.gz "https://github.com/wasm3/wasm3/archive/${commit}.tar.gz"
