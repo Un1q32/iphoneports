@@ -1,0 +1,20 @@
+--- src/programs/Makefile.orig
++++ src/programs/Makefile
+@@ -45,6 +45,8 @@
+ LIBFILES  = $(wildcard $(LIBDIR)/*.c)
+ SRCFILES  = $(sort $(LIBFILES) $(wildcard *.c))
+ OBJFILES  = $(SRCFILES:.c=.o)
++LZ4FILES  = $(wildcard *.c) $(LIBDIR)/xxhash.c
++LZ4OBJS   = $(LZ4FILES:.c=.o)
+ 
+ DEBUGFLAGS= -Wall -Wextra -Wundef -Wcast-qual -Wcast-align -Wshadow \
+             -Wswitch-enum -Wdeclaration-after-statement -Wstrict-prototypes \
+@@ -117,7 +119,7 @@
+ lz4: LDFLAGS += $(THREAD_LD)
+ lz4: $(OBJFILES)
+ 	echo "$(THREAD_MSG)"
+-	$(CC) $(ALLFLAGS) $(OBJFILES) -o $@$(EXT) $(LDLIBS)
++	$(CC) $(ALLFLAGS) $(LZ4OBJS) -o $@$(EXT) $(LDLIBS) -L$(LIBDIR) -llz4
+ endif
+ CLEAN += lz4
+ 

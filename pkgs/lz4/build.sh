@@ -1,15 +1,14 @@
 #!/bin/sh
 (
 cd src || exit 1
-"$_MAKE" CC="$_TARGET-cc" RANLIB="$_TARGET-ranlib" PREFIX=/var/usr TARGET_OS=Darwin -j8
-"$_MAKE" DESTDIR="$_PKGROOT/pkg" PREFIX=/var/usr TARGET_OS=Darwin install
+"$_MAKE" CC="$_TARGET-cc" RANLIB="$_TARGET-ranlib" PREFIX=/var/usr DESTDIR="$_PKGROOT/pkg" BUILD_STATIC=no TARGET_OS=Darwin install -j8
 )
 
 (
 cd pkg/var/usr || exit 1
-rm -rf share lib/liblz4.a
-llvm-strip bin/lz4 lib/liblz4.1.9.4.dylib
-ldid -S"$_ENT" bin/lz4 lib/liblz4.1.9.4.dylib
+rm -rf share
+llvm-strip bin/lz4 lib/liblz4.1.*.dylib
+ldid -S"$_ENT" bin/lz4 lib/liblz4.1.*.dylib
 )
 
 cp -r DEBIAN pkg
