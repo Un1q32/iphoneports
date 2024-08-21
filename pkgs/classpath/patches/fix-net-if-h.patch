@@ -1,0 +1,12 @@
+--- src/native/jni/java-net/gnu_java_net_VMPlainSocketImpl.c.orig
++++ src/native/jni/java-net/gnu_java_net_VMPlainSocketImpl.c
+@@ -51,9 +51,7 @@
+ #endif
+ #include <netinet/in.h>
+ #include <netinet/tcp.h>
+-#ifdef HAVE_NET_IF_H
+ #include <net/if.h>
+-#endif
+ #include <errno.h>
+ #include <stdlib.h>
+ #include <stdio.h>
