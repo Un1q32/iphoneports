@@ -1,5 +1,5 @@
 #!/bin/sh
-commit=583afdcb8f8b883d341005d0c635837143d71445
+commit=b8600d6e8e3a5006df5d55278426e7bfcebfd6f3
 rm -rf pkg src
 printf "Downloading source...\n"
 curl -L -# -o src.tar.gz "https://github.com/Un1q32/nextvi/archive/${commit}.tar.gz"
