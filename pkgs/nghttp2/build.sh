@@ -10,6 +10,7 @@ cmake .. -DCMAKE_BUILD_TYPE=Release -DCMAKE_C_COMPILER="$_TARGET-cc" -DCMAKE_SYS
 cd pkg/var/usr || exit 1
 rm -rf share
 mv lib/libnghttp2.14.*.dylib lib/libnghttp2.14.dylib
+"$_INSTALLNAMETOOL" -id /var/usr/lib/libnghttp2.14.dylib lib/libnghttp2.14.dylib
 llvm-strip lib/libnghttp2.14.dylib
 ldid -S"$_ENT" lib/libnghttp2.14.dylib
 )
