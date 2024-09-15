@@ -21,7 +21,7 @@
 -            hw_pagesize="$(sysctl -n hw.pagesize)"
 -            pages_used=$((p - $(sysctl -n vm.page_purgeable_count)))
 +            if has getusedmem; then
-+                mem_used=$(getusedmem)
++                mem_used=$(($(getusedmem) / 1024 ))
 +            else
 +                # Some older iOS devices don't have 'vm_stat'.
 +                has vm_stat || return
@@ -64,8 +64,8 @@
 +                # This ensures that any variables defined in the while loop
 +                # are still accessible in the script.
 +                done <<-EOF
-+                    $(vm_stat)
-+                EOF
++					$(vm_stat)
++				EOF
  
 -            mem_used=$((pages_used * hw_pagesize / 1024 / 1024))
 +                mem_used=$((pages_used * hw_pagesize / 1024 / 1024))
