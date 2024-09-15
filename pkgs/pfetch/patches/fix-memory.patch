@@ -1,0 +1,75 @@
+--- src/pfetch.orig
++++ src/pfetch
+@@ -1,4 +1,4 @@
+-#!/bin/sh
++#!/var/usr/bin/sh
+ #
+ # pfetch - Simple POSIX sh fetch script.
+ 
+@@ -941,36 +941,40 @@
+         # Used memory is calculated using the following "formula":
+         # (app + wired + occupied) * pagesize / 1024 / 1024
+         (Darwin*)
+-            # Some older iOS devices don't have 'vm_stat'.
+-            has vm_stat || return
+-
+-            # Older kernels don't have 'vm.page_pageable_internal_count'.
+-            p=$(sysctl -n vm.page_pageable_internal_count 2>/dev/null)
+-            [ -z "$p" ] && return
+-
+             mem_full=$(($(sysctl -n hw.memsize) / 1024 / 1024))
+-            hw_pagesize="$(sysctl -n hw.pagesize)"
+-            pages_used=$((p - $(sysctl -n vm.page_purgeable_count)))
++            if has getusedmem; then
++                mem_used=$(getusedmem)
++            else
++                # Some older iOS devices don't have 'vm_stat'.
++                has vm_stat || return
+ 
+-            # Parse the 'vm_stat' file splitting on ':' and '.'.
+-            # The format of the file is 'key:   000.' and an additional
+-            # split is used on '.' to filter it out.
+-            while IFS=:. read -r key val; do
+-                case $key in
+-                    (*' wired'*|*' occupied'*)
+-                        pages_used=$((pages_used + ${val:-0}))
+-                    ;;
+-                esac
++                # Older kernels don't have 'vm.page_pageable_internal_count'.
++                p=$(sysctl -n vm.page_pageable_internal_count 2>/dev/null)
++                [ -z "$p" ] && return
++
++                hw_pagesize="$(sysctl -n hw.pagesize)"
++                pages_used=$((p - $(sysctl -n vm.page_purgeable_count)))
++
++                # Parse the 'vm_stat' file splitting on ':' and '.'.
++                # The format of the file is 'key:   000.' and an additional
++                # split is used on '.' to filter it out.
++                while IFS=:. read -r key val; do
++                    case $key in
++                        (*' wired'*|*' occupied'*)
++                            pages_used=$((pages_used + ${val:-0}))
++                        ;;
++                    esac
+ 
+-            # Using '<<-EOF' is the only way to loop over a command's
+-            # output without the use of a pipe ('|').
+-            # This ensures that any variables defined in the while loop
+-            # are still accessible in the script.
+-            done <<-EOF
+-                $(vm_stat)
+-			EOF
++                # Using '<<-EOF' is the only way to loop over a command's
++                # output without the use of a pipe ('|').
++                # This ensures that any variables defined in the while loop
++                # are still accessible in the script.
++                done <<-EOF
++                    $(vm_stat)
++                EOF
+ 
+-            mem_used=$((pages_used * hw_pagesize / 1024 / 1024))
++                mem_used=$((pages_used * hw_pagesize / 1024 / 1024))
++            fi
+         ;;
+ 
+         (OpenBSD*)
