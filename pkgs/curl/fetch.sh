@@ -1,8 +1,8 @@
 #!/bin/sh
 rm -rf pkg src
 printf "Downloading source...\n"
-curl -L -# -o src.tar.xz https://curl.se/download/curl-8.10.0.tar.xz
+curl -L -# -o src.tar.xz https://curl.se/download/curl-8.10.1.tar.xz
 printf "Unpacking source...\n"
 tar -xf src.tar.xz
 rm src.tar.xz
-mv curl-8.10.0 src
+mv curl-8.10.1 src
