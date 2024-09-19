@@ -2,7 +2,7 @@ Package: iphoneports-gawk
 Section: Utilities
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Architecture: iphoneos-arm
-Version: 5.3.0
+Version: 5.3.1
 Description: pattern scanning and processing language
 Depends: iphoneports-base
 Replaces: iphoneports-awk
