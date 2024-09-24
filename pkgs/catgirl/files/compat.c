@@ -12,47 +12,42 @@ void explicit_bzero(void *d, size_t n) {
   __asm__ __volatile__("" : : "r"(d) : "memory");
 }
 
-char *_atfunc(int fd, const char *path) {
+int mkdirat(int fd, const char *path, mode_t mode) {
   if (fd == AT_FDCWD || path[0] == '/')
-    return strdup(path);
+    return mkdir(path, mode);
 
   char fdpath[PATH_MAX];
   if (fcntl(fd, F_GETPATH, fdpath) == -1)
-    return NULL;
+    return -1;
 
   char new_path[strlen(fdpath) + strlen(path) + 2];
   strcpy(new_path, fdpath);
   strcat(new_path, "/");
   strcat(new_path, path);
-  return strdup(new_path);
-}
-
-int mkdirat(int fd, const char *path, mode_t mode) {
-  char *new_path = _atfunc(fd, path);
-  if (new_path == NULL)
-    return -1;
-
-  int ret = mkdir(new_path, mode);
-  free(new_path);
-  return ret;
+  return mkdir(new_path, mode);
 }
 
 int openat(int fd, const char *path, int flags, ...) {
   mode_t mode = 0;
   if (flags & O_CREAT) {
-    va_list ap;
-    va_start(ap, flags);
-    mode = va_arg(ap, int);
-    va_end(ap);
+    va_list va_args;
+    va_start(va_args, flags);
+    mode = va_arg(va_args, int);
+    va_end(va_args);
   }
 
-  char *new_path = _atfunc(fd, path);
-  if (new_path == NULL)
+  if (fd == AT_FDCWD || path[0] == '/')
+    return open(path, flags, mode);
+
+  char fdpath[PATH_MAX];
+  if (fcntl(fd, F_GETPATH, fdpath) == -1)
     return -1;
 
-  int ret = open(new_path, flags, mode);
-  free(new_path);
-  return ret;
+  char new_path[strlen(fdpath) + strlen(path) + 2];
+  strcpy(new_path, fdpath);
+  strcat(new_path, "/");
+  strcat(new_path, path);
+  return open(new_path, flags, mode);
 }
 
 void *memmem(const void *haystack, size_t haystacklen, const void *needle,
