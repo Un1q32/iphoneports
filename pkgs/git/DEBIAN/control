@@ -2,6 +2,6 @@ Package: iphoneports-git
 Section: Data_Storage
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Architecture: iphoneos-arm
-Version: 2.46.1
+Version: 2.46.2
 Depends: iphoneports-base, iphoneports-curl, iphoneports-libressl, iphoneports-grep, iphoneports-pcre2, iphoneports-zlib
 Description: fast content-addressable filesystem
