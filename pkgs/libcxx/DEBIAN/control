@@ -1,4 +1,4 @@
-Package: iphoneports-libcxx
+Package: iphoneports-libc++
 Section: Development
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Architecture: iphoneos-arm

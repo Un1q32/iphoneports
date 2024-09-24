@@ -4,4 +4,4 @@ Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Architecture: iphoneos-arm
 Version: 7.0.9
 Description: de-compresses files in rar format
-Depends: iphoneports-base, iphoneports-libcxx
+Depends: iphoneports-base, iphoneports-libc++
