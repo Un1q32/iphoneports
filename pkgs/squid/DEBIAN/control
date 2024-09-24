@@ -2,6 +2,6 @@ Package: iphoneports-squid
 Version: 6.11
 Architecture: iphoneos-arm
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
-Section: Terminal_Support
-Description: POSIX compliant shell that aims to be as small as possible
-Depends: iphoneports-base, iphoneports-libc++
+Section: Networking
+Description: Full-featured Web proxy cache server
+Depends: iphoneports-base, iphoneports-libressl, iphoneports-libc++
