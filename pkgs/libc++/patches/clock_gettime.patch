@@ -1,3 +1,14 @@
+--- src/libcxx/src/filesystem/filesystem_clock.cpp.orig
++++ src/libcxx/src/filesystem/filesystem_clock.cpp
+@@ -29,7 +29,7 @@
+ #  include <sys/time.h> // for gettimeofday and timeval
+ #endif
+ 
+-#if defined(__APPLE__) || defined(__gnu_hurd__) || (defined(_POSIX_TIMERS) && _POSIX_TIMERS > 0)
++#if defined(__gnu_hurd__) || (defined(_POSIX_TIMERS) && _POSIX_TIMERS > 0)
+ #  define _LIBCPP_HAS_CLOCK_GETTIME
+ #endif
+ 
 --- src/libcxx/src/chrono.cpp.orig
 +++ src/libcxx/src/chrono.cpp
 @@ -33,7 +33,7 @@
@@ -9,14 +20,45 @@
  #  define _LIBCPP_HAS_CLOCK_GETTIME
  #endif
  
---- src/libcxx/src/filesystem/filesystem_clock.cpp.orig
-+++ src/libcxx/src/filesystem/filesystem_clock.cpp
-@@ -29,7 +29,7 @@
- #  include <sys/time.h> // for gettimeofday and timeval
- #endif
+@@ -155,6 +155,33 @@
  
--#if defined(__APPLE__) || defined(__gnu_hurd__) || (defined(_POSIX_TIMERS) && _POSIX_TIMERS > 0)
-+#if defined(__gnu_hurd__) || (defined(_POSIX_TIMERS) && _POSIX_TIMERS > 0)
- #  define _LIBCPP_HAS_CLOCK_GETTIME
- #endif
+ #  if defined(__APPLE__)
+ 
++#   if !defined(CLOCK_MONOTONIC_RAW)
++#    include <mach/mach_time.h>
++static steady_clock::rep steady_simplified() {
++    return static_cast<steady_clock::rep>(mach_absolute_time());
++}
++static double compute_steady_factor() {
++    mach_timebase_info_data_t MachInfo;
++    mach_timebase_info(&MachInfo);
++    return static_cast<double>(MachInfo.numer) / MachInfo.denom;
++}
++static steady_clock::rep steady_full() {
++    static const double factor = compute_steady_factor();
++    return static_cast<steady_clock::rep>(mach_absolute_time() * factor);
++}
++typedef steady_clock::rep (*FP)();
++static FP init_steady_clock() {
++    mach_timebase_info_data_t MachInfo;
++    mach_timebase_info(&MachInfo);
++    if (MachInfo.numer == MachInfo.denom)
++        return &steady_simplified;
++    return &steady_full;
++}
++static steady_clock::time_point __libcpp_steady_clock_now() {
++    static FP fp = init_steady_clock();
++    return steady_clock::time_point(steady_clock::duration(fp()));
++}
++#else
+ // On Apple platforms, only CLOCK_UPTIME_RAW, CLOCK_MONOTONIC_RAW or
+ // mach_absolute_time are able to time functions in the nanosecond range.
+ // Furthermore, only CLOCK_MONOTONIC_RAW is truly monotonic, because it
+@@ -166,6 +193,7 @@
+     __throw_system_error(errno, "clock_gettime(CLOCK_MONOTONIC_RAW) failed");
+   return steady_clock::time_point(seconds(tp.tv_sec) + nanoseconds(tp.tv_nsec));
+ }
++#endif
+ 
+ #  elif defined(_LIBCPP_WIN32API)
  
