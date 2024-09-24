@@ -15,4 +15,4 @@ ldid -S"$_ENT" libc++.1.0.dylib libc++abi.1.0.dylib
 )
 
 cp -r DEBIAN pkg
-dpkg-deb -b --root-owner-group -Zgzip pkg libcxx.deb
+dpkg-deb -b --root-owner-group -Zgzip pkg libc++.deb
