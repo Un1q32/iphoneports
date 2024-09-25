@@ -5,8 +5,6 @@
 #include <string.h>
 #include <unistd.h>
 
-#include "compat.h"
-
 DIR *fdopendir(int fd) {
   char fdpath[PATH_MAX];
   if (fcntl(fd, F_GETPATH, fdpath) == -1)

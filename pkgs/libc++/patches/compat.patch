@@ -1,13 +1,5 @@
 --- src/libcxx/src/filesystem/operations.cpp.orig
 +++ src/libcxx/src/filesystem/operations.cpp
-@@ -23,6 +23,7 @@
- #include "path_parser.h"
- #include "posix_compat.h"
- #include "time_utils.h"
-+#include "compat.h"
- 
- #if defined(_LIBCPP_WIN32API)
- #  define WIN32_LEAN_AND_MEAN
 @@ -764,9 +765,10 @@
  
  uintmax_t remove_all_impl(int parent_directory, const path& p, error_code& ec) {
@@ -22,11 +14,10 @@
      DIR* stream = ::fdopendir(fd);
 --- src/libcxx/src/CMakeLists.txt.orig
 +++ src/libcxx/src/CMakeLists.txt
-@@ -125,6 +125,8 @@
+@@ -125,6 +125,7 @@
      filesystem/operations.cpp
      filesystem/posix_compat.h
      filesystem/time_utils.h
-+    filesystem/compat.h
 +    filesystem/compat.c
      )
    # Filesystem uses __int128_t, which requires a definition of __muloi4 when
