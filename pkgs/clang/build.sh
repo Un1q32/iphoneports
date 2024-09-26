@@ -41,9 +41,6 @@ for file in bin/* lib/*.dylib; do
     ldid -S"$_ENT" "$file"
   fi
 done
-for cc in cc c++ gcc g++; do
-  ln -s clang "bin/$cc"
-done
 )
 
 cp -r DEBIAN pkg
