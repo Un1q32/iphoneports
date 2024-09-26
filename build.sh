@@ -53,7 +53,7 @@ error() {
 }
 
 depcheck() {
-    for dep in "$_TARGET-gcc" "$_TARGET-g++" "$_TARGET-cc" "$_TARGET-c++" "$_TARGET-sdkpath" llvm-strip ldid dpkg-deb patch fakeroot automake autoreconf m4 yacc ctags tar gzip bzip2 xz zstd ninja; do
+    for dep in "$_TARGET-gcc" "$_TARGET-g++" "$_TARGET-cc" "$_TARGET-c++" "$_TARGET-strip" "$_TARGET-sdkpath" llvm-strip ldid dpkg-deb patch fakeroot automake autoreconf m4 yacc ctags tar gzip bzip2 xz zstd ninja; do
         if ! command -v "$dep" > /dev/null; then
             error "Missing dependency: $dep"
         fi
