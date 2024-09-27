@@ -1,17 +1,3 @@
---- src/libcxx/src/filesystem/operations.cpp.orig
-+++ src/libcxx/src/filesystem/operations.cpp
-@@ -764,9 +765,10 @@
- 
- uintmax_t remove_all_impl(int parent_directory, const path& p, error_code& ec) {
-   // First, try to open the path as a directory.
--  const int options = O_CLOEXEC | O_RDONLY | O_DIRECTORY | O_NOFOLLOW;
-+  const int options = O_RDONLY | O_DIRECTORY | O_NOFOLLOW;
-   int fd            = ::openat(parent_directory, p.c_str(), options);
-   if (fd != -1) {
-+    ::fcntl(fd, F_SETFD, FD_CLOEXEC);
-     // If that worked, iterate over the contents of the directory and
-     // remove everything in it, recursively.
-     DIR* stream = ::fdopendir(fd);
 --- src/libcxx/src/CMakeLists.txt.orig
 +++ src/libcxx/src/CMakeLists.txt
 @@ -125,6 +125,7 @@
