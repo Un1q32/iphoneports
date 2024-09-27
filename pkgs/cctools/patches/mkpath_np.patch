@@ -1,0 +1,28 @@
+--- src/cctools/ld64/src/3rd/mkpath_np.c.orig
++++ src/cctools/ld64/src/3rd/mkpath_np.c
+@@ -21,7 +21,6 @@
+  * @APPLE_LICENSE_HEADER_END@
+  */
+ 
+-#ifndef __APPLE__
+ 
+ #include "mkpath_np.h"
+ 
+@@ -200,4 +199,3 @@
+ 	return _mkpath_np(path, omode, NULL);
+ }
+ 
+-#endif /* ! __APPLE__ */
+\ No newline at end of file
+--- src/cctools/ld64/src/ld/Snapshot.cpp.orig
++++ src/cctools/ld64/src/ld/Snapshot.cpp
+@@ -23,9 +23,7 @@
+ 
+ #include "compile_stubs.h"
+ 
+-#ifndef __APPLE__ // ld64-port
+ #include "mkpath_np.h"
+-#endif
+ 
+ //#define STORE_PID_IN_SNAPSHOT 1
+ 

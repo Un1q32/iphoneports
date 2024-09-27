@@ -1,0 +1,16 @@
+--- src/cctools/ld64/src/ld/libcodedirectory.c.orig
++++ src/cctools/ld64/src/ld/libcodedirectory.c
+@@ -69,13 +69,11 @@
+ #endif
+ 
+ #define bl htonl
+-#ifndef __APPLE__ // ld64-port
+ #if __BYTE_ORDER == __LITTLE_ENDIAN
+ #define htonll __builtin_bswap64
+ #else
+ #define htonll(x) x
+ #endif
+-#endif
+ 
+ /* As of the time of writing this, code signing always uses
+  * 4096 byte pages, even on devices with higher native page

@@ -1,0 +1,17 @@
+--- src/cctools/include/stuff/diagnostics.h.orig
++++ src/cctools/include/stuff/diagnostics.h
+@@ -82,13 +82,6 @@
+  */
+ void diagnostics_write(void);
+ 
+-#if defined(__APPLE__ ) && defined(__has_builtin)
+-#  if __has_builtin(__builtin_available)
+-#    define HAVE_OPENMEMSTREAM_RUNTIME __builtin_available(macOS 10.13, *)
+-#  endif
+-#endif
+-#ifndef HAVE_OPENMEMSTREAM_RUNTIME
+-#  define HAVE_OPENMEMSTREAM_RUNTIME 1
+-#endif
++#define HAVE_OPENMEMSTREAM_RUNTIME 0
+ 
+ #endif /* diagnostics_h */
