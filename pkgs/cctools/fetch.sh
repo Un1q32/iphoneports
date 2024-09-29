@@ -1,5 +1,5 @@
 #!/bin/sh
-commit=2db454bc8480b5450697da84f7727bb0924d61f6
+commit=164f42296d56fd9456cb9e969ad6cf95e430cb39
 rm -rf pkg src
 printf "Downloading source...\n"
 curl -L -# -o src.tar.gz "https://github.com/tpoechtrager/cctools-port/archive/${commit}.tar.gz"
