@@ -1,7 +1,7 @@
 #!/bin/sh
 (
 cd src || exit 1
-"$_TARGET-cc" sysctl.c -o sysctl -O2
+"$_TARGET-cc" sysctl.c -o sysctl -O2 -D'__FBSDID(x)=' -Wno-pointer-sign
 mkdir -p "$_PKGROOT/pkg/var/usr/bin"
 cp sysctl "$_PKGROOT/pkg/var/usr/bin"
 )

@@ -1,5 +1,5 @@
 Package: iphoneports-sysctl
-Version: 970.0.4
+Version: 979.100.8
 Architecture: iphoneos-arm
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Section: Utilities
