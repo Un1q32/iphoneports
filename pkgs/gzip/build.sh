@@ -3,7 +3,7 @@
 cd src || exit 1
 mkdir -p "$_PKGROOT/pkg/var/usr/bin"
 for src in gzip.c futimens.c; do
-    "$_TARGET-cc" -O2 -c "$src" -DGZIP_APPLE_VERSION='"400"' -D'__FBSDID(x)=' &
+    "$_TARGET-cc" -O2 -c "$src" -DGZIP_APPLE_VERSION='"448.0.3"' -D'__FBSDID(x)=' &
 done
 wait
 "$_TARGET-cc" -o gzip -O2 -llzma -lz -lbz2 ./*.o

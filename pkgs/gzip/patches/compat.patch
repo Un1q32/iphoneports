@@ -1,6 +1,6 @@
 --- src/gzip.c.orig
 +++ src/gzip.c
-@@ -75,6 +75,31 @@
+@@ -78,6 +78,31 @@
  #include <sys/attr.h>
  #include <copyfile.h>
  #include <get_compat.h>
