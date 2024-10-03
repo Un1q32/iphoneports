@@ -8,7 +8,7 @@ cd src || exit 1
 (
 cd pkg/var/usr || exit 1
 rm -rf share lib/libzstd.a
-llvm-strip bin/zstd lib/libzstd.1.5.6.dylib
+"$_TARGET-strip" bin/zstd lib/libzstd.1.5.6.dylib 2>/dev/null
 ldid -S"$_ENT" bin/zstd lib/libzstd.1.5.6.dylib
 )
 

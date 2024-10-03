@@ -10,7 +10,7 @@ cd src || exit 1
 cd pkg/var/usr || exit 1
 rm -rf share/doc share/gtk-doc share/man
 ln -s libxml2/libxml include/libxml
-llvm-strip bin/xmlcatalog bin/xmllint lib/libxml2.2.dylib
+"$_TARGET-strip" bin/xmlcatalog bin/xmllint lib/libxml2.2.dylib 2>/dev/null
 ldid -S"$_ENT" bin/xmlcatalog bin/xmllint lib/libxml2.2.dylib
 )
 

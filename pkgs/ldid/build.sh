@@ -9,7 +9,7 @@ cp ldid "$_PKGROOT/pkg/var/usr/bin"
 (
 cd pkg/var/usr/bin || exit 1
 ln -s ldid ldid2
-llvm-strip ldid
+"$_TARGET-strip" ldid 2>/dev/null
 ldid -S"$_ENT" ldid
 )
 

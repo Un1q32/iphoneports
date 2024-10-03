@@ -10,7 +10,7 @@ cd src || exit 1
 (
 cd pkg/var/usr || exit 1
 rm -rf share
-llvm-strip bin/ideviceactivation lib/libideviceactivation-1.0.2.dylib
+"$_TARGET-strip" bin/ideviceactivation lib/libideviceactivation-1.0.2.dylib 2>/dev/null
 ldid -S"$_ENT" bin/ideviceactivation lib/libideviceactivation-1.0.2.dylib
 )
 

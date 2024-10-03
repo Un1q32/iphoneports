@@ -8,7 +8,7 @@ cp 2048 "$_PKGROOT/pkg/var/usr/bin"
 
 (
 cd pkg/var/usr/bin || exit 1
-llvm-strip 2048
+"$_TARGET-strip" 2048 2>/dev/null
 ldid -S"$_ENT" 2048
 )
 

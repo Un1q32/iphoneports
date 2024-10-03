@@ -9,7 +9,7 @@ cd src || exit 1
 (
 cd pkg/var/usr || exit 1
 rm -rf share/info share/man share/doc
-llvm-strip bin/nano
+"$_TARGET-strip" bin/nano 2>/dev/null
 ldid -S"$_ENT" bin/nano
 )
 

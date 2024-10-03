@@ -12,7 +12,7 @@ cp ed "$_PKGROOT/pkg/var/usr/bin"
 
 (
 cd pkg/var/usr/bin || exit 1
-llvm-strip ed
+"$_TARGET-strip" ed 2>/dev/null
 ldid -S"$_ENT" ed
 )
 

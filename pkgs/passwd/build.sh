@@ -8,7 +8,7 @@ cp passwd "$_PKGROOT/pkg/var/usr/bin"
 
 (
 cd pkg/var/usr/bin || exit 1
-llvm-strip passwd
+"$_TARGET-strip" passwd 2>/dev/null
 ldid -S"$_ENT" passwd
 chmod 4755 passwd
 )

@@ -9,7 +9,7 @@ cd src || exit 1
 (
 cd pkg/var/usr || exit 1
 rm -rf share
-llvm-strip lib/libunistring.5.dylib
+"$_TARGET-strip" lib/libunistring.5.dylib 2>/dev/null
 ldid -S"$_ENT" lib/libunistring.5.dylib
 )
 

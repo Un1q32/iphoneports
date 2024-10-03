@@ -8,7 +8,7 @@ cd src || exit 1
 
 (
 cd pkg/var/usr || exit 1
-llvm-strip bin/irecovery lib/libirecovery-1.0.5.dylib
+"$_TARGET-strip" bin/irecovery lib/libirecovery-1.0.5.dylib 2>/dev/null
 ldid -S"$_ENT" bin/irecovery lib/libirecovery-1.0.5.dylib
 )
 

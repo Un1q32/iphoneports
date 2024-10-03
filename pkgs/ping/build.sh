@@ -9,7 +9,7 @@ cp ping ping6 "$_PKGROOT/pkg/var/usr/sbin"
 
 (
 cd pkg/var/usr/sbin || exit 1
-llvm-strip ping ping6
+"$_TARGET-strip" ping ping6 2>/dev/null
 ldid -S"$_ENT" ping ping6
 )
 

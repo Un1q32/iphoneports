@@ -17,7 +17,7 @@ tlsabi=29
 mv lib/libcrypto.$cryptoabi.*.dylib lib/libcrypto.$cryptoabi.dylib
 mv lib/libssl.$sslabi.*.dylib lib/libssl.$sslabi.dylib
 mv lib/libtls.$tlsabi.*.dylib lib/libtls.$tlsabi.dylib
-llvm-strip bin/openssl bin/ocspcheck bin/nc lib/libcrypto.$cryptoabi.dylib lib/libssl.$sslabi.dylib lib/libtls.$tlsabi.dylib
+"$_TARGET-strip" bin/openssl bin/ocspcheck bin/nc lib/libcrypto.$cryptoabi.dylib lib/libssl.$sslabi.dylib lib/libtls.$tlsabi.dylib 2>/dev/null
 ldid -S"$_ENT" bin/openssl bin/ocspcheck bin/nc lib/libcrypto.$cryptoabi.dylib lib/libssl.$sslabi.dylib lib/libtls.$tlsabi.dylib
 )
 

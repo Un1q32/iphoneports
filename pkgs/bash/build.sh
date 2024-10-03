@@ -9,7 +9,7 @@ cp bash "$_PKGROOT/pkg/var/usr/bin"
 
 (
 cd pkg/var/usr || exit 1
-llvm-strip bin/bash
+"$_TARGET-strip" bin/bash 2>/dev/null
 ldid -S"$_ENT" bin/bash
 mkdir -p etc/bash/bashrc.d
 )

@@ -10,7 +10,7 @@ bash ./configure --host="$_TARGET" --prefix=/var/usr PKG_CONFIG_LIBDIR="$_SDK/va
 (
 cd pkg/var/usr || exit 1
 rm -rf share
-llvm-strip bin/idevicerestore
+"$_TARGET-strip" bin/idevicerestore 2>/dev/null
 ldid -S"$_ENT" bin/idevicerestore
 )
 

@@ -8,7 +8,7 @@ cp top "$_PKGROOT/pkg/var/usr/bin"
 
 (
 cd pkg/var/usr/bin || exit 1
-llvm-strip top
+"$_TARGET-strip" top 2>/dev/null
 ldid -S"$_ENT" top
 chmod 4755 top
 )

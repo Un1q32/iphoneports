@@ -17,7 +17,7 @@ cp libgptfdisk.dylib "$_PKGROOT/pkg/var/usr/lib"
 
 (
 cd pkg/var/usr || exit 1
-llvm-strip sbin/* lib/libgptfdisk.dylib
+"$_TARGET-strip" sbin/* lib/libgptfdisk.dylib 2>/dev/null
 ldid -S"$_ENT" sbin/* lib/libgptfdisk.dylib
 )
 

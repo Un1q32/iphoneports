@@ -9,7 +9,7 @@ cmake .. -DCMAKE_BUILD_TYPE=Release -DCMAKE_C_COMPILER="$_TARGET-cc" -DCMAKE_SYS
 (
 cd pkg/var/usr || exit 1
 rm -rf share
-llvm-strip lib/libzip.5.5.dylib bin/*
+"$_TARGET-strip" lib/libzip.5.5.dylib bin/* 2>/dev/null
 ldid -S"$_ENT" lib/libzip.5.5.dylib bin/*
 )
 

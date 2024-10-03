@@ -9,7 +9,7 @@ cd src || exit 1
 (
 cd pkg/var/usr || exit 1
 rm -rf share
-llvm-strip bin/idn2 lib/libidn2.0.dylib
+"$_TARGET-strip" bin/idn2 lib/libidn2.0.dylib 2>/dev/null
 ldid -S"$_ENT" bin/idn2 lib/libidn2.0.dylib
 )
 

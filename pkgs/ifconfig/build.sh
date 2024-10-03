@@ -12,7 +12,7 @@ cp ifconfig "$_PKGROOT/pkg/var/usr/sbin"
 
 (
 cd pkg/var/usr/sbin || exit 1
-llvm-strip ifconfig
+"$_TARGET-strip" ifconfig 2>/dev/null
 ldid -S"$_ENT" ifconfig
 )
 

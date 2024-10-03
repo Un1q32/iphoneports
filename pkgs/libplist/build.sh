@@ -9,7 +9,7 @@ cd src || exit 1
 (
 cd pkg/var/usr || exit 1
 rm -rf share
-llvm-strip bin/plistutil lib/libplist-2.0.4.dylib lib/libplist++-2.0.4.dylib
+"$_TARGET-strip" bin/plistutil lib/libplist-2.0.4.dylib lib/libplist++-2.0.4.dylib 2>/dev/null
 ldid -S"$_ENT" bin/plistutil lib/libplist-2.0.4.dylib lib/libplist++-2.0.4.dylib
 )
 

@@ -15,7 +15,7 @@ cp duk "$_PKGROOT/pkg/var/usr/bin"
 
 (
 cd pkg/var/usr || exit 1
-llvm-strip bin/duk lib/libduktape.207.dylib
+"$_TARGET-strip" bin/duk lib/libduktape.207.dylib 2>/dev/null
 ldid -S"$_ENT" bin/duk lib/libduktape.207.dylib
 )
 

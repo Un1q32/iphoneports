@@ -8,7 +8,7 @@ CC="$_TARGET-cc" HOSTCC=cc ./configure --prefix=/var/usr --enable-readline --dis
 
 (
 cd pkg/var/usr/bin || exit 1
-llvm-strip bc
+"$_TARGET-strip" bc 2>/dev/null
 ldid -S"$_ENT" bc
 )
 

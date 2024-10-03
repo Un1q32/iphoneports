@@ -11,7 +11,7 @@ cd pkg/var/usr || exit 1
 rm -rf share
 for dylib in lib/*.dylib; do
     [ -h "$dylib" ] && continue
-    llvm-strip "$dylib"
+    "$_TARGET-strip" "$dylib" 2>/dev/null
     ldid -S"$_ENT" "$dylib"
 done
 )

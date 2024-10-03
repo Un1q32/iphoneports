@@ -12,7 +12,7 @@ cmake .. -DCMAKE_BUILD_TYPE=Release -DCMAKE_C_COMPILER="$_TARGET-cc" -DCMAKE_SYS
 
 (
 cd pkg/var/usr/bin || exit 1
-llvm-strip wasm3
+"$_TARGET-strip" wasm3 2>/dev/null
 ldid -S"$_ENT" wasm3
 )
 

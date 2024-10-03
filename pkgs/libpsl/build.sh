@@ -9,7 +9,7 @@ cd src || exit 1
 (
 cd pkg/var/usr || exit 1
 rm -rf share
-llvm-strip bin/psl lib/libpsl.5.dylib
+"$_TARGET-strip" bin/psl lib/libpsl.5.dylib 2>/dev/null
 ldid -S"$_ENT" bin/psl lib/libpsl.5.dylib
 )
 

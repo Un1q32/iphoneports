@@ -4,4 +4,4 @@ Architecture: iphoneos-arm
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Section: System
 Description: iPhonePorts base
-Depends: firmware (>= 3.1), iphoneports-dash, iphoneports-coreutils
+Depends: firmware (>= 3.0), iphoneports-dash, iphoneports-coreutils

@@ -9,7 +9,7 @@ cd src || exit 1
 (
 cd pkg/var/usr || exit 1
 rm -rf share
-llvm-strip bin/less bin/lessecho bin/lesskey
+"$_TARGET-strip" bin/less bin/lessecho bin/lesskey 2>/dev/null
 ldid -S"$_ENT" bin/less bin/lessecho bin/lesskey
 )
 

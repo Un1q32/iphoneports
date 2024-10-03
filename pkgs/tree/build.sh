@@ -7,7 +7,7 @@ cd src || exit 1
 (
 cd pkg/var/usr || exit 1
 rm -rf man
-llvm-strip bin/tree
+"$_TARGET-strip" bin/tree 2>/dev/null
 ldid -S"$_ENT" bin/tree
 )
 

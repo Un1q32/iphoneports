@@ -11,7 +11,7 @@ cd src || exit 1
 cd pkg/var/usr/lib/classpath || exit 1
 for lib in lib*.dylib; do
   if ! [ -h "$lib" ]; then
-    llvm-strip "$lib"
+    "$_TARGET-strip" "$lib" 2>/dev/null
     ldid -S"$_ENT" "$lib"
   fi
 done

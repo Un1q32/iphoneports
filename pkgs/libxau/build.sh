@@ -9,7 +9,7 @@ cd src || exit 1
 (
 cd pkg/var/usr || exit 1
 rm -rf share
-llvm-strip lib/libXau.6.0.0.dylib
+"$_TARGET-strip" lib/libXau.6.0.0.dylib 2>/dev/null
 ldid -S"$_ENT" lib/libXau.6.0.0.dylib
 )
 

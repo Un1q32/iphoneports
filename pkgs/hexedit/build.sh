@@ -10,7 +10,7 @@ cd src || exit 1
 (
 cd pkg/var/usr || exit 1
 rm -rf share
-llvm-strip bin/hexedit
+"$_TARGET-strip" bin/hexedit 2>/dev/null
 ldid -S"$_ENT" bin/hexedit
 )
 

@@ -8,7 +8,7 @@ cp vm_stat "$_PKGROOT/pkg/var/usr/bin"
 
 (
 cd pkg/var/usr/bin || exit 1
-llvm-strip vm_stat
+"$_TARGET-strip" vm_stat 2>/dev/null
 ldid -S"$_ENT" vm_stat
 )
 

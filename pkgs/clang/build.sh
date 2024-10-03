@@ -37,7 +37,7 @@ cd pkg/var/usr || exit 1
 rm -rf share bin/git-clang-format
 for file in bin/* lib/*.dylib; do
   if ! [ -h "$file" ]; then
-    llvm-strip "$file"
+    "$_TARGET-strip" "$file" 2>/dev/null
     ldid -S"$_ENT" "$file"
   fi
 done

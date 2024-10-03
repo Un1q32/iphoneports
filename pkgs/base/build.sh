@@ -6,7 +6,7 @@ mkdir -p pkg/usr/bin pkg/var/usr/bin pkg/var/usr/etc/profile.d
 cd pkg || exit 1
 
 "$_TARGET-cc" -Wall -Wextra -Wpedantic -std=c99 -O2 -o usr/bin/iphoneports-shell "$_PKGROOT/files/iphoneports-shell.c"
-llvm-strip usr/bin/iphoneports-shell
+"$_TARGET-strip" usr/bin/iphoneports-shell 2>/dev/null
 ldid -S"$_ENT" usr/bin/iphoneports-shell
 
 cp "$_PKGROOT/files/profile" var/usr/etc

@@ -12,7 +12,7 @@ cp ncal "$_PKGROOT/pkg/var/usr/bin"
 
 (
 cd pkg/var/usr/bin || exit 1
-llvm-strip ncal
+"$_TARGET-strip" ncal 2>/dev/null
 ldid -S"$_ENT" ncal
 ln -s ncal cal
 )

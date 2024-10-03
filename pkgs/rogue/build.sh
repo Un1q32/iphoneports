@@ -9,7 +9,7 @@ cd src || exit 1
 (
 cd pkg/var/usr || exit 1
 rm -rf share/doc share/man
-llvm-strip bin/rogue
+"$_TARGET-strip" bin/rogue 2>/dev/null
 ldid -S"$_ENT" bin/rogue
 chmod 2755 bin/rogue
 )

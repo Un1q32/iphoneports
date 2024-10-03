@@ -7,3 +7,9 @@ curl
 libxml2
 zlib
 xz
+libidn2
+brotli
+zstd
+libpsl
+libssh2
+nghttp2

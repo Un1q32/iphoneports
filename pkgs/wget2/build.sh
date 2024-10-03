@@ -9,7 +9,7 @@ cd src || exit 1
 (
 cd pkg/var/usr || exit 1
 rm -rf share bin/wget2_noinstall
-llvm-strip bin/wget2 lib/libwget.2.dylib
+"$_TARGET-strip" bin/wget2 lib/libwget.2.dylib 2>/dev/null
 ldid -S"$_ENT" bin/wget2 lib/libwget.2.dylib
 )
 

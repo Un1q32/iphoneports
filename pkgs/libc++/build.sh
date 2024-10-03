@@ -11,7 +11,7 @@ DESTDIR="$_PKGROOT/pkg" ninja install-cxx install-cxxabi -j8
 (
 cd pkg/var/usr/lib || exit 1
 rm -rf libc++experimental.a ../include/c++/v1/experimental
-"$_TARGET-strip" libc++.1.0.dylib libc++abi.1.0.dylib 2>/dev/null
+"$_TARGET-strip" libc++.1.0.dylib libc++abi.1.0.dylib 2>/dev/null 2>/dev/null
 ldid -S"$_ENT" libc++.1.0.dylib libc++abi.1.0.dylib
 )
 

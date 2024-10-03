@@ -8,7 +8,7 @@ cp vi "$_PKGROOT/pkg/var/usr/bin"
 
 (
 cd pkg/var/usr/bin || exit 1
-llvm-strip vi
+"$_TARGET-strip" vi 2>/dev/null
 ldid -S"$_ENT" vi
 ln -s vi ex
 ln -s vi view

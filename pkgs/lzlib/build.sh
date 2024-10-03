@@ -10,7 +10,7 @@ cd pkg/var/usr || exit 1
 rm -rf share
 for lib in lib/*.dylib; do
     if [ -f "$lib" ] && [ ! -h "$lib" ]; then
-        llvm-strip "$lib"
+        "$_TARGET-strip" "$lib" 2>/dev/null
         ldid -S"$_ENT" "$lib"
     fi
 done

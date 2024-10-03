@@ -8,7 +8,7 @@ cd src || exit 1
 (
 cd pkg/var/usr || exit 1
 rm -rf share
-llvm-strip bin/lzip
+"$_TARGET-strip" bin/lzip 2>/dev/null
 ldid -S"$_ENT" bin/lzip
 )
 

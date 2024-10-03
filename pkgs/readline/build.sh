@@ -9,7 +9,7 @@ cd src || exit 1
 (
 cd pkg/var/usr || exit 1
 rm -rf share bin
-llvm-strip lib/libhistory.8.2.dylib lib/libreadline.8.2.dylib
+"$_TARGET-strip" lib/libhistory.8.2.dylib lib/libreadline.8.2.dylib 2>/dev/null
 ldid -S"$_ENT" lib/libhistory.8.2.dylib lib/libreadline.8.2.dylib
 )
 

@@ -7,7 +7,7 @@ cd src || exit 1
 (
 cd pkg/var/usr || exit 1
 rm -rf share
-llvm-strip bin/lz4 lib/liblz4.1.*.dylib
+"$_TARGET-strip" bin/lz4 lib/liblz4.1.*.dylib 2>/dev/null
 ldid -S"$_ENT" bin/lz4 lib/liblz4.1.*.dylib
 )
 

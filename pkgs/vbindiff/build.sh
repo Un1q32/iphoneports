@@ -10,7 +10,7 @@ cp vbindiff "$_PKGROOT/pkg/var/usr/bin"
 
 (
 cd pkg/var/usr/bin || exit 1
-llvm-strip vbindiff
+"$_TARGET-strip" vbindiff 2>/dev/null
 ldid -S"$_ENT" vbindiff
 )
 

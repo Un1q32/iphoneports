@@ -8,7 +8,7 @@ cp whois "$_PKGROOT/pkg/var/usr/bin"
 
 (
 cd pkg/var/usr/bin || exit 1
-llvm-strip whois
+"$_TARGET-strip" whois 2>/dev/null
 ldid -S"$_ENT" whois
 )
 

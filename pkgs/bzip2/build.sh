@@ -7,7 +7,7 @@ cd src || exit 1
 (
 cd pkg/var/usr || exit 1
 rm -rf man
-llvm-strip bin/bzip2 bin/bzip2recover lib/libbz2.1.0.dylib
+"$_TARGET-strip" bin/bzip2 bin/bzip2recover lib/libbz2.1.0.dylib 2>/dev/null
 ldid -S"$_ENT" bin/bzip2 bin/bzip2recover lib/libbz2.1.0.dylib
 )
 

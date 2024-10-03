@@ -8,7 +8,7 @@ cp sysctl "$_PKGROOT/pkg/var/usr/bin"
 
 (
 cd pkg/var/usr/bin || exit 1
-llvm-strip sysctl
+"$_TARGET-strip" sysctl 2>/dev/null
 ldid -S"$_ENT" sysctl
 )
 

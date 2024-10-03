@@ -9,7 +9,7 @@ cd src || exit 1
 (
 cd pkg/var/usr/bin || exit 1
 rm -rf ../share
-llvm-strip bsdcat bsdcpio bsdtar bsdunzip ../lib/libarchive.13.dylib
+"$_TARGET-strip" bsdcat bsdcpio bsdtar bsdunzip ../lib/libarchive.13.dylib 2>/dev/null
 ldid -S"$_ENT" bsdcat bsdcpio bsdtar bsdunzip ../lib/libarchive.13.dylib
 for prog in tar cpio unzip; do
     ln -s "bsd$prog" "$prog"

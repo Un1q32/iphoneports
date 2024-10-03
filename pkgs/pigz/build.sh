@@ -9,7 +9,7 @@ cp pigz "$_PKGROOT/pkg/var/usr/bin"
 (
 cd pkg/var/usr/bin || exit 1
 ln -s pigz unpigz
-llvm-strip pigz
+"$_TARGET-strip" pigz 2>/dev/null
 ldid -S"$_ENT" pigz
 )
 
