@@ -118,12 +118,6 @@ build() {
     printf '%s\n' "$1" >> "$_TMP/.builtpkgs"
 }
 
-buildall() {
-    for pkg in "$pkgdir"/*; do
-        build "${pkg##*/}" "$1" || error "Failed to build package: ${pkg##*/}"
-    done
-}
-
 hasbeenbuilt() {
     if [ "$2" = "dryrun" ]; then
         while read -r pkg; do
@@ -186,7 +180,9 @@ main() {
         all)
             depcheck
             rm -rf "$pkgdir"/*/pkg "$pkgdir"/*/src
-            buildall
+            for pkg in "$pkgdir"/*; do
+                build "${pkg##*/}" || error "Failed to build package: ${pkg##*/}"
+            done
             cp -f "$pkgdir"/*/*.deb "$bsroot/debs" 2> /dev/null
         ;;
 
@@ -208,7 +204,9 @@ main() {
 
         dryrun)
             if [ -z "$2" ]; then
-                buildall dryrun
+                for pkg in "$pkgdir"/*; do
+                    build "${pkg##*/}" dryrun || error "Failed to build package: ${pkg##*/}"
+                done
             else
                 shift
                 for pkg in "$@"; do
