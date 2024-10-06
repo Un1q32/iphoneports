@@ -8,7 +8,7 @@ bsroot="$PWD"
 
 if [ -z "$1" ]; then
     if [ -f "$bsroot/.args.txt" ]; then
-        while read -r line; do
+        while IFS= read -r line; do
             set -- "$@" "$line"
         done < "$bsroot/.args.txt"
     fi
@@ -53,7 +53,7 @@ error() {
 }
 
 depcheck() {
-    for dep in "$_TARGET-gcc" "$_TARGET-g++" "$_TARGET-cc" "$_TARGET-c++" "$_TARGET-strip" "$_TARGET-sdkpath" llvm-strip ldid dpkg-deb patch fakeroot automake autoreconf m4 yacc ctags tar gzip bzip2 xz zstd ninja; do
+    for dep in "$_TARGET-gcc" "$_TARGET-g++" "$_TARGET-cc" "$_TARGET-c++" "$_TARGET-strip" "$_TARGET-sdkpath" ldid dpkg-deb patch fakeroot automake autoreconf m4 yacc ctags tar gzip bzip2 xz zstd ninja; do
         if ! command -v "$dep" > /dev/null; then
             error "Missing dependency: $dep"
         fi
@@ -103,8 +103,8 @@ build() {
     (
     export _PKGROOT="$pkgdir/$1"
     cd "$_PKGROOT" || error "Failed to cd to package directory: $1"
-    [ "$_NODEPS" != 1 ] && includedeps "$2"
-    if [ "$2" = "dryrun" ]; then
+    [ "$_NODEPS" != 1 ] && includedeps
+    if [ -n "$dryrun" ]; then
         printf '%s\n' "Building $1"
     else
         [ -f fetch.sh ] && ./fetch.sh
@@ -119,8 +119,8 @@ build() {
 }
 
 hasbeenbuilt() {
-    if [ "$2" = "dryrun" ]; then
-        while read -r pkg; do
+    if [ -n "$dryrun" ]; then
+        while IFS= read -r pkg; do
             if [ "$pkg" = "$1" ]; then
                 return 0
             fi
@@ -141,7 +141,7 @@ applypatches() {
 }
 
 includedeps() {
-    if [ "$1" != "dryrun" ]; then
+    if [ -z "$dryrun" ]; then
         if [ -d "$sdk" ]; then
             export _SDK="$_TMP/iphoneports-sdk"
             mkdir -p "$_SDK"
@@ -152,23 +152,23 @@ includedeps() {
     fi
 
     if [ -f dependencies.txt ]; then
-        while read -r dep; do
+        while IFS= read -r dep; do
             if [ -d "$pkgdir/$dep" ]; then
-                if ! hasbeenbuilt "$dep" "$1"; then
+                if ! hasbeenbuilt "$dep"; then
                     printf '%s\n' "Building dependency $dep"
-                    [ "$1" != "dryrun" ] && mv "$_SDK" "$_SDK.$dep"
-                    build "$dep" "$1"
-                    [ "$1" != "dryrun" ] && mv "$_SDK.$dep" "$_SDK"
+                    [ -z "$dryrun" ] && mv "$_SDK" "$_SDK.$dep"
+                    build "$dep"
+                    [ -z "$dryrun" ] && mv "$_SDK.$dep" "$_SDK"
                 fi
                 printf '%s\n' "Including dependency $dep"
-                [ "$1" != "dryrun" ] && cp -a "$pkgdir/$dep/pkg/"* "$_SDK"
+                [ -z "$dryrun" ] && cp -a "$pkgdir/$dep/pkg/"* "$_SDK"
             else
                 error "Dependency not found: $dep"
             fi
         done < dependencies.txt
     fi
 
-    if [ "$1" != "dryrun" ]; then
+    if [ -z "$dryrun" ]; then
         if [ -d sdk ]; then
             cp -a sdk/* "$_SDK"
         fi
@@ -203,9 +203,10 @@ main() {
         ;;
 
         dryrun)
+            dryrun=1
             if [ -z "$2" ]; then
                 for pkg in "$pkgdir"/*; do
-                    build "${pkg##*/}" dryrun || error "Failed to build package: ${pkg##*/}"
+                    build "${pkg##*/}" || error "Failed to build package: ${pkg##*/}"
                 done
             else
                 shift
@@ -213,9 +214,28 @@ main() {
                     [ -d "$pkgdir/$pkg" ] || error "Package not found: $pkg"
                 done
                 for pkg in "$@"; do
-                    build "$pkg" dryrun || error "Failed to build package: $pkg"
+                    build "$pkg" || error "Failed to build package: $pkg"
                 done
             fi
+        ;;
+
+        deprebuild)
+            depcheck
+            [ -d "$pkgdir/$2" ] || error "Package not found: $2"
+            rm -rf "$pkgdir/$2/pkg" "$pkgdir/$2/src"
+            build "$2" || error "Failed to build package: $2"
+            cp -f "$pkgdir/$2"/*.deb "$bsroot/debs" 2> /dev/null
+            for pkg in "$pkgdir"/*; do
+                if [ -f "$pkg/dependencies.txt" ]; then
+                    while IFS= read -r dep; do
+                        if [ "$dep" = "$2" ]; then
+                            rm -rf "$pkg/pkg" "$pkg/src"
+                            build "${pkg##*/}" || error "Failed to build package: ${pkg##*/}"
+                            cp -f "$pkg"/*.deb "$bsroot/debs" 2> /dev/null
+                        fi
+                    done < "$pkg/dependencies.txt"
+                fi
+            done
         ;;
 
         -*)
@@ -231,6 +251,7 @@ Usage: build.sh [options] <command>
     clean <pkg> [pkgs...]   - Clean a single package
     cleanall                - Clean all packages
     dryrun                  - Pretend to build all packages
+    deprebuild <pkg>        - Build a package and all the packages that depend on it
     --target                - Specify a target (default: $defaulttarget)
     --no-tmp                - Do not use /tmp for anything, use the current directory instead
     --no-deps               - Do not include dependencies
