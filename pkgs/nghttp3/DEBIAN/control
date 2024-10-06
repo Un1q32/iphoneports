@@ -1,0 +1,7 @@
+Package: iphoneports-nghttp3
+Section: Development
+Maintainer: Uniq <joey.t.reinhart@gmail.com>
+Architecture: iphoneos-arm
+Version: 1.6.0
+Depends: iphoneports-base
+Description: HTTP/3 library written in C
