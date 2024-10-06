@@ -10,8 +10,9 @@ DESTDIR="$_PKGROOT/pkg" ninja install -j8
 cd pkg/var/usr || exit 1
 rm -rf share
 mv lib/libngtcp2.16.*.dylib lib/libngtcp2.16.dylib
-"$_TARGET-strip" lib/libtcp2.16.dylib 2>/dev/null
-ldid -S"$_ENT" lib/libngtcp2.16.dylib
+mv lib/libngtcp2_crypto_quictls.2.*.dylib lib/libngtcp2_crypto_quictls.2.dylib
+"$_TARGET-strip" lib/libngtcp2.16.dylib lib/libngtcp2_crypto_quictls.2.dylib 2>/dev/null
+ldid -S"$_ENT" lib/libngtcp2.16.dylib lib/libngtcp2_crypto_quictls.2.dylib
 )
 
 cp -r DEBIAN pkg
