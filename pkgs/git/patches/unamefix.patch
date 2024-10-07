@@ -1,6 +1,6 @@
 --- src/config.mak.uname.orig
 +++ src/config.mak.uname
-@@ -4,12 +4,6 @@
+@@ -4,11 +4,6 @@
  # Microsoft's Safe Exception Handling in libraries (such as zlib).
  # Typically required for VS2013+/32-bit compilation on Vista+ versions.
  
@@ -8,7 +8,6 @@
 -uname_M := $(shell sh -c 'uname -m 2>/dev/null || echo not')
 -uname_O := $(shell sh -c 'uname -o 2>/dev/null || echo not')
 -uname_R := $(shell sh -c 'uname -r 2>/dev/null || echo not')
--uname_P := $(shell sh -c 'uname -p 2>/dev/null || echo not')
 -uname_V := $(shell sh -c 'uname -v 2>/dev/null || echo not')
  
  ifneq ($(findstring MINGW,$(uname_S)),)
