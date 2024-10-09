@@ -3,3 +3,4 @@ libusbmuxd
 libressl
 libimobiledevice-glue
 readline
+libtatsu
