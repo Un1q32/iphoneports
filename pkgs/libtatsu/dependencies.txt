@@ -1,0 +1,12 @@
+libplist
+curl
+libidn2
+zlib
+brotli
+zstd
+libressl
+libpsl
+libssh2
+nghttp2
+nghttp3
+ngtcp2

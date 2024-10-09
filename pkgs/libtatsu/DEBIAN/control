@@ -1,0 +1,7 @@
+Package: iphoneports-libtatsu
+Version: 1.0.3
+Architecture: iphoneos-arm
+Maintainer: Uniq <joey.t.reinhart@gmail.com>
+Depends: iphoneports-base, iphoneports-libplist, iphoneports-curl
+Section: Development
+Description: Library handling the communication with Apple's Tatsu Signing Server (TSS)
