@@ -6,6 +6,16 @@ defaulttarget='armv6-apple-darwin10'
 cd "$bsroot" || exit 1
 bsroot="$PWD"
 
+if ! command -v "$EDITOR" >/dev/null 2>&1; then
+    for editor in nvim vim vi micro nano; do
+        if command -v $editor >/dev/null 2>&1; then
+            EDITOR=$editor
+            break
+        fi
+    done
+    EDITOR=none
+fi
+
 if [ -z "$1" ]; then
     if [ -f "$bsroot/.args.txt" ]; then
         while IFS= read -r line; do
@@ -219,22 +229,31 @@ main() {
             fi
         ;;
 
-        deprebuild)
+        abibreak)
+            [ "$EDITOR" = "none" ] && error "No suitable text editor found"
             depcheck
             [ -d "$pkgdir/$2" ] || error "Package not found: $2"
-            rm -rf "$pkgdir/$2/pkg" "$pkgdir/$2/src"
-            build "$2" || error "Failed to build package: $2"
-            cp -f "$pkgdir/$2"/*.deb "$bsroot/debs" 2> /dev/null
             for pkg in "$pkgdir"/*; do
                 if [ -f "$pkg/dependencies.txt" ]; then
                     while IFS= read -r dep; do
                         if [ "$dep" = "$2" ]; then
-                            rm -rf "$pkg/pkg" "$pkg/src"
-                            build "${pkg##*/}" || error "Failed to build package: ${pkg##*/}"
-                            cp -f "$pkg"/*.deb "$bsroot/debs" 2> /dev/null
+                            if [ -z "$deppkgs" ]; then
+                                deppkgs="${pkg##*/}"
+                            else
+                                deppkgs="$deppkgs ${pkg##*/}"
+                            fi
+                            "$EDITOR" "$pkg/DEBIAN/control"
                         fi
                     done < "$pkg/dependencies.txt"
                 fi
+            done
+            rm -rf "$pkgdir/$2/pkg" "$pkgdir/$2/src"
+            build "$2" || error "Failed to build package: $2"
+            cp -f "$pkgdir/$2"/*.deb "$bsroot/debs" 2> /dev/null
+            for pkg in $deppkgs; do
+                rm -rf "$pkgdir/$pkg/pkg" "$pkgdir/$pkg/src"
+                build "$pkg" || error "Failed to build package: $pkg"
+                cp -f "$pkgdir/$pkg"/*.deb "$bsroot/debs" 2> /dev/null
             done
         ;;
 
@@ -251,7 +270,8 @@ Usage: build.sh [options] <command>
     clean <pkg> [pkgs...]   - Clean a single package
     cleanall                - Clean all packages
     dryrun                  - Pretend to build all packages
-    deprebuild <pkg>        - Build a package and all the packages that depend on it
+    abibreak <pkg>          - ABI break helper, opens all the control files for packages
+                              that depend on <pkg> and then rebuilds them
     --target                - Specify a target (default: $defaulttarget)
     --no-tmp                - Do not use /tmp for anything, use the current directory instead
     --no-deps               - Do not include dependencies
