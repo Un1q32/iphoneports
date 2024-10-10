@@ -1,0 +1,10 @@
+--- src/src/Makefile.orig
++++ src/src/Makefile
+@@ -65,7 +65,6 @@
+ 
+ boxes: $(ALL_OBJ) | check_dir
+ 	$(CC) $(LDFLAGS) $^ -o $@ -lunistring -lpcre2-32 -lncurses
+-	if [ "$(STRIP)" = "true" ] ; then strip $@ ; fi
+ 
+ boxes.static: $(ALL_OBJ) | check_dir
+ 	$(CC) $(LDFLAGS) $^ -o $(BOXES_EXECUTABLE_NAME) -l:libunistring.a -l:libpcre2-32.a -l:libncurses.a
