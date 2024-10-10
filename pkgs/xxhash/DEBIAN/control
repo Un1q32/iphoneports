@@ -1,0 +1,7 @@
+Package: iphoneports-xxhash
+Section: Development
+Maintainer: Uniq <joey.t.reinhart@gmail.com>
+Architecture: iphoneos-arm
+Version: 0.8.2
+Description: Extremely fast non-cryptographic hash algorithm
+Depends: iphoneports-base
