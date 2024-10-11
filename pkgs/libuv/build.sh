@@ -1,6 +1,6 @@
 #!/bin/sh
 
-"$_TARGET-cc" -O2 -c -o src/compat.o files/compat.c
+"$_TARGET-cc" -O3 -c -o src/compat.o files/compat.c
 
 (
 cd src || exit 1

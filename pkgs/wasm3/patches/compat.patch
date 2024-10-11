@@ -1,8 +1,0 @@
---- src/source/CMakeLists.txt.orig
-+++ src/source/CMakeLists.txt
-@@ -1,4 +1,5 @@
- set(sources
-+    "compat.c"
-     "m3_api_libc.c"
-     "m3_api_wasi.c"
-     "m3_api_uvwasi.c"
