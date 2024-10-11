@@ -14,6 +14,7 @@ cd src || exit 1
 cd pkg/var/usr/lib || exit 1
 "$_TARGET-strip" libuv.1.dylib 2>/dev/null
 ldid -S"$_ENT" libuv.1.dylib
+sed -i "/compat.o/c\Libs: -L\${libdir} -luv" pkgconfig/libuv.pc
 )
 
 cp -r DEBIAN pkg
