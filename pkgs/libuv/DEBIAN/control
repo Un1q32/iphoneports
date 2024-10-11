@@ -1,0 +1,7 @@
+Package: iphoneports-libuv
+Version: 1.49.1
+Architecture: iphoneos-arm
+Maintainer: Uniq <joey.t.reinhart@gmail.com>
+Section: Development
+Depends: iphoneports-base
+Description: Cross-platform asynchronous I/O
