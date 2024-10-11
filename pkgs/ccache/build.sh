@@ -7,9 +7,14 @@ DESTDIR="$_PKGROOT/pkg" ninja install -j8
 )
 
 (
-cd pkg/var/usr/bin || exit 1
-"$_TARGET-strip" ccache 2>/dev/null
-ldid -S"$_ENT" ccache
+cd pkg/var/usr || exit 1
+"$_TARGET-strip" bin/ccache 2>/dev/null
+ldid -S"$_ENT" bin/ccache
+mkdir -p share/ccache etc/profile.d
+cp "$_PKGROOT/files/ccache.sh" etc/profile.d
+for cc in cc c++ gcc g++ clang clang++; do
+  ln -s ../../bin/ccache "share/ccache/$cc"
+done
 )
 
 cp -r DEBIAN pkg
