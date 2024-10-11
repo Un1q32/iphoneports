@@ -1,12 +1,10 @@
 #!/bin/sh
-
-"$_TARGET-cc" -O2 -c -o src/compat.o files/compat.c
-
 mkdir -p src/build
+cp files/compat.c src/source
 (
 cd src/build || exit 1
 cpu="${_TARGET%%-*}"
-cmake -GNinja .. -DCMAKE_BUILD_TYPE=Release -DCMAKE_C_COMPILER="$_TARGET-cc" -DCMAKE_SYSTEM_NAME=Darwin -DCMAKE_INSTALL_PREFIX=/var/usr -DCMAKE_SYSTEM_PROCESSOR="$cpu" -DCMAKE_FIND_ROOT_PATH_MODE_INCLUDE=ONLY -DCMAKE_EXE_LINKER_FLAGS="$_PKGROOT/src/compat.o"
+cmake -GNinja .. -DCMAKE_BUILD_TYPE=Release -DCMAKE_C_COMPILER="$_TARGET-cc" -DCMAKE_SYSTEM_NAME=Darwin -DCMAKE_INSTALL_PREFIX=/var/usr -DCMAKE_FIND_ROOT_PATH_MODE_INCLUDE=ONLY -DCMAKE_SYSTEM_PROCESSOR="$cpu"
 DESTDIR="$_PKGROOT/pkg" ninja install -j8
 )
 
