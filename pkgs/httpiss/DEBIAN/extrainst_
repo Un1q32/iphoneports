@@ -1,4 +1,0 @@
-#!/var/usr/bin/sh
-[ "$1" = "upgrade" ] && /var/usr/bin/sudo -u mobile launchctl unload /Library/LaunchAgents/com.iphoneports.httpiss.plist
-[ "$1" = "install" ] || [ "$1" = "upgrade" ] && /var/usr/bin/sudo -u mobile launchctl load /Library/LaunchAgents/com.iphoneports.httpiss.plist
-exit 0

@@ -1,7 +1,0 @@
-Package: iphoneports-squid
-Version: 6.12-1
-Architecture: iphoneos-arm
-Maintainer: Uniq <joey.t.reinhart@gmail.com>
-Section: Networking
-Description: Full-featured Web proxy cache server
-Depends: iphoneports-base, iphoneports-libressl, iphoneports-libc++

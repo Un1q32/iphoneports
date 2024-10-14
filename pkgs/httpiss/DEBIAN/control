@@ -1,8 +1,0 @@
-Package: iphoneports-httpiss
-Name: HTTPISS
-Version: 1
-Architecture: iphoneos-arm
-Maintainer: Uniq <joey.t.reinhart@gmail.com>
-Depends: iphoneports-base, iphoneports-squid, iphoneports-sudo
-Section: Tweaks
-Description: Proxy that makes HTTPS work everywhere, even on iOS 3

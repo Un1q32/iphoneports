@@ -1,4 +1,0 @@
-#!/var/usr/bin/sh
-cd /var/usr/share/httpiss || exit 1
-/var/usr/bin/openssl req -x509 -newkey rsa:4096 -subj '/CN=httpiss' -nodes -days 999999 -keyout key.pem -out cert.pem
-/var/usr/bin/openssl x509 -inform pem -in cert.pem -outform der -out cert.cer
