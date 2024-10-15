@@ -1,7 +1,7 @@
 #!/bin/sh
 (
 cd src || exit 1
-./configure --host="$_TARGET" --prefix=/var/usr --disable-static --without-udev PKG_CONFIG_LIBDIR="$_SDK/var/usr/lib/pkgconfig"
+./configure --host="$_TARGET" --prefix=/var/usr --disable-static --without-udev --without-iokit PKG_CONFIG_LIBDIR="$_SDK/var/usr/lib/pkgconfig"
 "$_MAKE" -j8
 "$_MAKE" install DESTDIR="$_PKGROOT/pkg"
 )
