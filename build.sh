@@ -13,7 +13,7 @@ if ! command -v "$EDITOR" >/dev/null 2>&1; then
             break
         fi
     done
-    EDITOR=none
+    command -v "$EDITOR" >/dev/null 2>&1 || EDITOR=none
 fi
 
 if [ -z "$1" ]; then
