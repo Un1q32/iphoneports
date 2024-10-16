@@ -1,5 +1,4 @@
 #!/bin/sh
-rm -f "$_SDK/usr/include/utmp.h"
 (
 cd src || exit 1
 ./configure --host="$_TARGET" --prefix=/var/usr --sysconfdir=/var/usr/etc/ssh --with-privsep-user="_sshd" --with-sandbox=no --disable-libutil
