@@ -5,4 +5,4 @@ curl -L -# -o src.tar.gz https://cdn.openbsd.org/pub/OpenBSD/LibreSSL/libressl-3
 printf "Unpacking source...\n"
 tar -xf src.tar.gz
 rm src.tar.gz
-mv libressl-3.9.2 src
+mv libressl-* src
