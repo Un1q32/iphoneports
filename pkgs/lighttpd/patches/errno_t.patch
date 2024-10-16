@@ -1,0 +1,10 @@
+--- src/src/ck.h.orig
++++ src/src/ck.h
+@@ -13,6 +13,7 @@
+ #define __STDC_WANT_LIB_EXT1__ 1
+ #endif
+ #if defined(__APPLE__) && defined(__MACH__)
++typedef int errno_t;
+ #ifndef _DARWIN_C_SOURCE
+ #define _DARWIN_C_SOURCE
+ #endif

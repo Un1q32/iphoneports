@@ -1,0 +1,11 @@
+--- src/src/main.c.orig
++++ src/src/main.c
+@@ -103,7 +103,7 @@
+ 		memset(&hints, '\0', sizeof(struct addrinfo));
+ 		hints.ai_family = AF_UNSPEC;
+ 		hints.ai_socktype = SOCK_STREAM;
+-		hints.ai_flags = AI_PASSIVE | AI_NUMERICSERV;
++		hints.ai_flags = AI_PASSIVE;
+ 		hints.ai_protocol = IPPROTO_TCP;
+ 
+ 		res = getaddrinfo(hostname, tcp_port, &hints, &result);
