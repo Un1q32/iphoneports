@@ -1,5 +1,4 @@
-#ifndef _FAKE_FCNTL_H_
-#define _FAKE_FCNTL_H_
+#pragma once
 
 #include_next <fcntl.h>
 #include <sys/cdefs.h>
@@ -14,5 +13,3 @@
 __BEGIN_DECLS
 extern int openat(int, const char *, int, ...);
 __END_DECLS
-
-#endif
