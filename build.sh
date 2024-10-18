@@ -230,6 +230,7 @@ main() {
         ;;
 
         abibreak)
+            [ -z "$2" ] && error "You must specify a package"
             [ "$EDITOR" = "none" ] && error "No suitable text editor found"
             depcheck
             [ -d "$pkgdir/$2" ] || error "Package not found: $2"
