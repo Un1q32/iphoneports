@@ -1,0 +1,15 @@
+--- src/crypto/arch/arm/crypto_arch.h.orig
++++ src/crypto/arch/arm/crypto_arch.h
+@@ -20,10 +20,12 @@
+ 
+ #ifndef OPENSSL_NO_ASM
+ 
++#ifdef __ELF__
+ #define HAVE_AES_SET_ENCRYPT_KEY_INTERNAL
+ #define HAVE_AES_SET_DECRYPT_KEY_INTERNAL
+ #define HAVE_AES_ENCRYPT_INTERNAL
+ #define HAVE_AES_DECRYPT_INTERNAL
++#endif
+ 
+ #endif
+ 

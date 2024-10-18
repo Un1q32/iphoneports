@@ -11,9 +11,9 @@ DESTDIR="$_PKGROOT/pkg" ninja install -j8
 cd pkg/var/usr || exit 1
 rm -rf share etc/ssl/cert.pem
 ln -s nc bin/netcat
-cryptoabi=53
-sslabi=56
-tlsabi=29
+cryptoabi=55
+sslabi=58
+tlsabi=31
 mv lib/libcrypto.$cryptoabi.*.dylib lib/libcrypto.$cryptoabi.dylib
 mv lib/libssl.$sslabi.*.dylib lib/libssl.$sslabi.dylib
 mv lib/libtls.$tlsabi.*.dylib lib/libtls.$tlsabi.dylib

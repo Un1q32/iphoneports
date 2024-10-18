@@ -2,7 +2,7 @@ Package: iphoneports-libssh2
 Section: Development
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Architecture: iphoneos-arm
-Version: 1.11.1
+Version: 1.11.1-1
 Description: A library implementing the SSH2 protocol
 Homepage: http://www.libssh2.org/
 Depends: iphoneports-base, iphoneports-zlib, iphoneports-libressl
