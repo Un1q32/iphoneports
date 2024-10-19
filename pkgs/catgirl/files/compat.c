@@ -69,21 +69,22 @@ ssize_t getdelim(char **lineptr, size_t *n, int delim, FILE *stream) {
     return -1;
 
   if (*lineptr == NULL) {
-    *n = 128;
-    *lineptr = malloc(*n);
+    *lineptr = malloc(128);
     if (*lineptr == NULL)
       return -1;
+    *n = 128;
   }
 
   size_t i = 0;
   int c;
   while ((c = fgetc(stream)) != EOF) {
     if (i + 1 >= *n) {
-      *n *= 2;
-      char *new_lineptr = realloc(*lineptr, *n);
+      size_t new_size = *n + 128;
+      char *new_lineptr = realloc(*lineptr, new_size);
       if (new_lineptr == NULL)
         return -1;
       *lineptr = new_lineptr;
+      *n = new_size;
     }
 
     (*lineptr)[i++] = c;
