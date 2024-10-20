@@ -1,0 +1,3 @@
+#!/bin/sh
+export PKG_CONFIG_LIBDIR="$_SDK/var/usr/lib/pkgconfig"
+exec pkg-config "$@"

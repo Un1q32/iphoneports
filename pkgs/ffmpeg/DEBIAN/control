@@ -1,0 +1,7 @@
+Package: iphoneports-ffmpeg
+Section: Multimedia
+Maintainer: Uniq <joey.t.reinhart@gmail.com>
+Architecture: iphoneos-arm
+Version: 7.1
+Description: Complete solution to record, convert and stream audio and video
+Depends: iphoneports-base, iphoneports-zlib, iphoneports-xz, iphoneports-bzip2, iphoneports-libxml2, iphoneports-libressl
