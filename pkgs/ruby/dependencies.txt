@@ -1,4 +1,0 @@
-libc++
-libressl
-gmp
-zlib
