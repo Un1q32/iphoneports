@@ -1,0 +1,20 @@
+[binaries]
+c = '@CC@'
+cpp = '@CXX@'
+objc = '@CC@'
+objcpp = '@CXX@'
+ar = '@AR@'
+ranlib = '@RANLIB@'
+strip = 'touch'
+
+[properties]
+root = '@SDK@'
+needs_exe_wrapper = true
+
+[host_machine]
+system = 'darwin'
+subsystem = 'ios'
+kernel = 'xnu'
+cpu_family = 'arm'
+cpu = 'arm'
+endian = 'little'

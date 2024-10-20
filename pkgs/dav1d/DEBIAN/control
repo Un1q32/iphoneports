@@ -1,0 +1,7 @@
+Package: iphoneports-dav1d
+Section: Development
+Maintainer: Uniq <joey.t.reinhart@gmail.com>
+Architecture: iphoneos-arm
+Version: 1.5.0
+Description: AV1 cross-platform decoder focused on speed and correctness
+Depends: iphoneports-base
