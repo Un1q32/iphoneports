@@ -1,7 +1,7 @@
 #!/bin/sh
 (
 cd src || exit 1
-./configure --host="$_TARGET" --prefix=/var/usr --with-destdir="$_PKGROOT/pkg" --disable-install-doc --enable-shared ac_cv_func_backtrace=no
+./configure --host="$_TARGET" --prefix=/var/usr --with-destdir="$_PKGROOT/pkg" --disable-install-doc --enable-shared ac_cv_func_backtrace=no ac_cv_func_fgetattrlist=no
 "$_MAKE" -j8
 "$_MAKE" install
 )
