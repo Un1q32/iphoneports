@@ -188,12 +188,29 @@ includedeps() {
 main() {
     case "$1" in
         all)
+            shift
             depcheck
-            rm -rf "$pkgdir"/*/pkg "$pkgdir"/*/src
             for pkg in "$pkgdir"/*; do
-                build "${pkg##*/}" || error "Failed to build package: ${pkg##*/}"
+                unset dontbuild
+                for exclude in "$@"; do
+                    [ "$pkg" = "$exclude" ] && dontbuild=1
+                done
+                [ -n "$dontbuild" ] && continue
+
+                if [ -z "$pkglist" ]; then
+                    pkglist="${pkg##*/}"
+                else
+                    pkglist="$pkglist ${pkg##*/}"
+                fi
+
+                rm -rf "$pkg/pkg" "$pkg/src" &
             done
-            cp -f "$pkgdir"/*/*.deb "$bsroot/debs" 2> /dev/null
+            wait
+
+            for pkg in $pkglist; do
+                build "$pkg" || error "Failed to build package: $pkg"
+                cp -f "$pkgdir/$pkg"/*.deb "$bsroot/debs" 2> /dev/null
+            done
         ;;
 
         clean)
@@ -267,7 +284,7 @@ main() {
             printf '%s' "\
 Usage: build.sh [options] <command>
     <pkg> [pkgs...]         - Build a single package
-    all                     - Build all packages
+    all [pkgs...]           - Build all packages (except those specified)
     clean <pkg> [pkgs...]   - Clean a single package
     cleanall                - Clean all packages
     dryrun                  - Pretend to build all packages
