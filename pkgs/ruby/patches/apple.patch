@@ -1,0 +1,21 @@
+--- src/vm_dump.c.orig
++++ src/vm_dump.c
+@@ -20,9 +20,7 @@
+ # endif
+ # include <mach/vm_map.h>
+ # include <mach/mach_init.h>
+-# ifdef __LP64__
+ #  define vm_region_recurse vm_region_recurse_64
+-# endif
+ /* that is defined in sys/queue.h, and conflicts with
+  * ccan/list/list.h */
+ # undef LIST_HEAD
+@@ -859,8 +857,6 @@
+ #elif defined __APPLE__
+ # if defined(__aarch64__)
+ #   define dump_machine_register(reg, regstr) (col_count = print_machine_register(errout, mctx->MCTX_SS_REG(reg), regstr, col_count, 80))
+-# else
+-#   define dump_machine_register(reg) (col_count = print_machine_register(errout, mctx->MCTX_SS_REG(reg), #reg, col_count, 80))
+ # endif
+ #endif
+ 

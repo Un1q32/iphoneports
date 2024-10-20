@@ -1,0 +1,7 @@
+Package: iphoneports-ruby
+Maintainer: Uniq <joey.t.reinhart@gmail.com>
+Architecture: iphoneos-arm
+Depends: iphoneports-base, iphoneports-libc++, iphoneports-libressl, iphoneports-gmp, iphoneports-zlib
+Description: An object-oriented language for quick and easy programming
+Section: Scripting
+Version: 3.3.5

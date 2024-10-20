@@ -1,0 +1,32 @@
+--- src/ext/digest/md5/md5init.c.orig
++++ src/ext/digest/md5/md5init.c
+@@ -5,6 +5,7 @@
+ #include "../digest.h"
+ #if defined(MD5_USE_COMMONDIGEST)
+ #include "md5cc.h"
++#define MD5_Init CC_MD5_Init
+ #else
+ #include "md5.h"
+ #endif
+--- src/ext/digest/sha1/sha1init.c.orig
++++ src/ext/digest/sha1/sha1init.c
+@@ -5,6 +5,7 @@
+ #include "../digest.h"
+ #if defined(SHA1_USE_COMMONDIGEST)
+ #include "sha1cc.h"
++#define SHA1_Init CC_SHA1_Init
+ #else
+ #include "sha1.h"
+ #endif
+--- src/ext/digest/sha2/sha2init.c.orig
++++ src/ext/digest/sha2/sha2init.c
+@@ -5,6 +5,9 @@
+ #include "../digest.h"
+ #if defined(SHA2_USE_COMMONDIGEST)
+ #include "sha2cc.h"
++#define SHA256_Init CC_SHA256_Init
++#define SHA384_Init CC_SHA384_Init
++#define SHA512_Init CC_SHA512_Init
+ #else
+ #include "sha2.h"
+ #endif
