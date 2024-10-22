@@ -1,0 +1,38 @@
+--- src/lib/Makefile.orig
++++ src/lib/Makefile
+@@ -46,7 +46,6 @@
+ BUILD_SHARED:=yes
+ BUILD_STATIC:=yes
+ 
+-CPPFLAGS+= -DXXH_NAMESPACE=LZ4_
+ USERCFLAGS:= -O3 $(CFLAGS)
+ DEBUGFLAGS:= -Wall -Wextra -Wcast-qual -Wcast-align -Wshadow \
+              -Wswitch-enum -Wdeclaration-after-statement -Wstrict-prototypes \
+--- src/programs/Makefile.orig
++++ src/programs/Makefile
+@@ -45,13 +45,15 @@
+ LIBFILES  = $(wildcard $(LIBDIR)/*.c)
+ SRCFILES  = $(sort $(LIBFILES) $(wildcard *.c))
+ OBJFILES  = $(SRCFILES:.c=.o)
++LZ4FILES  = $(wildcard *.c)
++LZ4OBJS   = $(LZ4FILES:.c=.o)
+ 
+ DEBUGFLAGS= -Wall -Wextra -Wundef -Wcast-qual -Wcast-align -Wshadow \
+             -Wswitch-enum -Wdeclaration-after-statement -Wstrict-prototypes \
+             -Wpointer-arith -Wstrict-aliasing=1
+ USERCFLAGS:= -O3 $(CFLAGS) # -O3 can be overruled by user-provided -Ox level
+ CFLAGS    = $(DEBUGFLAGS) $(USERCFLAGS)
+-CPPFLAGS += -I$(LIBDIR) -DXXH_NAMESPACE=LZ4_
++CPPFLAGS += -I$(LIBDIR)
+ 
+ include ../Makefile.inc
+ 
+@@ -117,7 +119,7 @@
+ lz4: LDFLAGS += $(THREAD_LD)
+ lz4: $(OBJFILES)
+ 	echo "$(THREAD_MSG)"
+-	$(CC) $(ALLFLAGS) $(OBJFILES) -o $@$(EXT) $(LDLIBS)
++	$(CC) $(ALLFLAGS) $(LZ4OBJS) -o $@$(EXT) $(LDLIBS) -L$(LIBDIR) -llz4 -lxxhash
+ endif
+ CLEAN += lz4
+ 

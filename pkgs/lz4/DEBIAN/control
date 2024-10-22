@@ -4,4 +4,4 @@ Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Architecture: iphoneos-arm
 Version: 1.10.0
 Description: Extremely fast compression algorithm
-Depends: iphoneports-base
+Depends: iphoneports-base, iphoneports-xxhash
