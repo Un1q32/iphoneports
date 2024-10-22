@@ -1,8 +1,8 @@
 #!/bin/sh
 rm -rf pkg src
 printf "Downloading source...\n"
-curl -L -# -o src.tar.gz https://download.samba.org/pub/rsync/src/rsync-3.2.7.tar.gz
+curl -L -# -o src.tar.gz https://download.samba.org/pub/rsync/src/rsync-3.3.0.tar.gz
 printf "Unpacking source...\n"
 tar -xf src.tar.gz
 rm src.tar.gz
-mv rsync-3.2.7 src
+mv rsync-* src

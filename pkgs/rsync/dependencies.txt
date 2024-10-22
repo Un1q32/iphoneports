@@ -2,3 +2,4 @@ libressl
 zstd
 lz4
 zlib
+xxhash
