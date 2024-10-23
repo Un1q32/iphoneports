@@ -2,6 +2,6 @@ Package: iphoneports-xorg-util-macros
 Section: Development
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Architecture: iphoneos-arm
-Version: 1.20.0
+Version: 1.20.1
 Description: X.Org Autotools macros
 Depends: iphoneports-base
