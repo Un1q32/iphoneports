@@ -1,7 +1,7 @@
 #!/bin/sh
 (
 cd src || exit 1
-./configure --host="$_TARGET" --prefix=/var/usr --disable-static --enable-static-shell=no
+./configure --host="$_TARGET" --prefix=/var/usr --disable-static --disable-static-shell --enable-silent-rules
 "$_MAKE" -j8
 "$_MAKE" install DESTDIR="$_PKGROOT/pkg"
 )
