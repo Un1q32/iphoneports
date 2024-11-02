@@ -1,7 +1,7 @@
 #!/bin/sh
 (
 cd src || exit 1
-"$_TARGET-cc" -o login -O3 -flto login.c -DUSE_PAM -lpam -w
+"$_TARGET-cc" -o login -Os -flto login.c -DUSE_PAM -lpam -w
 mkdir -p "$_PKGROOT/pkg/var/usr/bin"
 cp login "$_PKGROOT/pkg/var/usr/bin"
 )

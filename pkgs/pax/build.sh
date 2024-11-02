@@ -2,10 +2,10 @@
 (
 cd src || exit 1
 for src in *.c; do
-  "$_TARGET-cc" -O3 -flto -c "$src" -D'__FBSDID(x)=' &
+  "$_TARGET-cc" -Os -flto -c "$src" -D'__FBSDID(x)=' &
 done
 wait
-"$_TARGET-cc" -o pax -O3 -flto ./*.o
+"$_TARGET-cc" -o pax -Os -flto ./*.o
 mkdir -p "$_PKGROOT/pkg/var/usr/bin"
 cp pax "$_PKGROOT/pkg/var/usr/bin"
 )
