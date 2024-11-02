@@ -1,7 +1,7 @@
 #!/bin/sh
 (
 cd src || exit 1
-"$_TARGET-cc" -O2 -DUNIX -o xxd xxd.c
+"$_TARGET-cc" -O3 -flto -DUNIX -o xxd xxd.c
 mkdir -p "$_PKGROOT"/pkg/var/usr/bin
 cp xxd "$_PKGROOT"/pkg/var/usr/bin
 )
