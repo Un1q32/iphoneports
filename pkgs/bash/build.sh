@@ -1,7 +1,7 @@
 #!/bin/sh
 (
 cd src || exit 1
-./configure --host="$_TARGET" --prefix=/var/usr --with-installed-readline CFLAGS="-Wno-parentheses -Wno-format-security -Wno-deprecated-non-prototype -O2"
+./configure --host="$_TARGET" --prefix=/var/usr --with-installed-readline CFLAGS="-Wno-parentheses -Wno-format-security -Wno-deprecated-non-prototype -O3"
 "$_MAKE" -j8
 mkdir -p "$_PKGROOT/pkg/var/usr/bin"
 cp bash "$_PKGROOT/pkg/var/usr/bin"
