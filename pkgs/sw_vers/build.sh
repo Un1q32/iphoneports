@@ -1,7 +1,7 @@
 #!/bin/sh
 (
 cd src || exit 1
-"$_TARGET-cc" sw_vers.c -o sw_vers -O2 -framework CoreFoundation
+"$_TARGET-cc" sw_vers.c -o sw_vers -Os -flto -framework CoreFoundation
 mkdir -p "$_PKGROOT/pkg/var/usr/bin"
 cp sw_vers "$_PKGROOT/pkg/var/usr/bin"
 )
