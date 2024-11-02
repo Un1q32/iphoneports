@@ -3,7 +3,7 @@
 cd src || exit 1
 autoreconf -i
 ./configure --host="$_TARGET" --prefix=/var/usr
-"$_TARGET-c++" -O2 -o vbindiff vbindiff.cpp curses/ConWin.cpp GetOpt/GetOpt.cpp -lncurses -lpanel -Icurses
+"$_TARGET-c++" -O3 -flto -o vbindiff vbindiff.cpp curses/ConWin.cpp GetOpt/GetOpt.cpp -lncurses -lpanel -Icurses
 mkdir -p "$_PKGROOT/pkg/var/usr/bin"
 cp vbindiff "$_PKGROOT/pkg/var/usr/bin"
 )
