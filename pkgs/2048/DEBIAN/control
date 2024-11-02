@@ -2,6 +2,6 @@ Package: iphoneports-2048
 Section: Games
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Architecture: iphoneos-arm
-Version: 2
+Version: 3
 Description: 2048 in your terminal
 Depends: iphoneports-base
