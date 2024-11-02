@@ -1,7 +1,7 @@
 #!/bin/sh
 (
 cd src || exit 1
-"$_TARGET-cc" -O2 time.c -o time -Wno-deprecated-non-prototype -D'__FBSDID(x)='
+"$_TARGET-cc" -Os -flto time.c -o time -Wno-deprecated-non-prototype -D'__FBSDID(x)='
 mkdir -p "$_PKGROOT/pkg/var/usr/bin"
 cp time "$_PKGROOT/pkg/var/usr/bin"
 )
