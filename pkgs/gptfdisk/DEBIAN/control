@@ -4,4 +4,4 @@ Architecture: iphoneos-arm
 Depends: iphoneports-base, iphoneports-ncurses, iphoneports-popt
 Description: A text-mode partitioning tool that works on GUID Partition Table (GPT) disks
 Section: Utilities
-Version: 1.0.10
+Version: 1.0.10-1
