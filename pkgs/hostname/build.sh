@@ -1,7 +1,7 @@
 #!/bin/sh
 (
 cd src || exit 1
-"$_TARGET-cc" -O2 hostname.c -o hostname -D'__FBSDID(x)='
+"$_TARGET-cc" -Os -flto hostname.c -o hostname -D'__FBSDID(x)='
 mkdir -p "$_PKGROOT/pkg/var/usr/bin"
 cp hostname "$_PKGROOT/pkg/var/usr/bin"
 )
