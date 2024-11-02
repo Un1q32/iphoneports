@@ -1,0 +1,12 @@
+--- src/llvm/cmake/modules/AddLLVM.cmake.orig
++++ src/llvm/cmake/modules/AddLLVM.cmake
+@@ -510,9 +510,6 @@
+ 
+   if(ARG_MODULE)
+     add_library(${name} MODULE ${ALL_FILES})
+-  elseif(ARG_SHARED)
+-    add_windows_version_resource_file(ALL_FILES ${ALL_FILES})
+-    add_library(${name} SHARED ${ALL_FILES})
+   else()
+     add_library(${name} STATIC ${ALL_FILES})
+   endif()

@@ -1,0 +1,11 @@
+--- src/llvm/lib/Support/Host.cpp.orig
++++ src/llvm/lib/Support/Host.cpp
+@@ -1230,7 +1230,7 @@
+     return "generic";
+   }
+   switch (hostInfo.cpu_subtype) {
+-    case CPU_SUBTYPE_ARM_V7S:
++    case 11:
+       return "swift";
+     default:;
+     }
