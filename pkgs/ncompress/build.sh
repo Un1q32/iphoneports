@@ -2,7 +2,7 @@
 (
 cd src || exit 1
 mkdir -p "$_PKGROOT/pkg/var/usr/bin"
-"$_TARGET-cc" -O2 -o compress compress.c -DUTIME_H -DLSTAT -DUSERMEM=800000 -Wno-deprecated-non-prototype
+"$_TARGET-cc" -O3 -flto -o compress compress.c -DUTIME_H -DLSTAT -DUSERMEM=800000 -Wno-deprecated-non-prototype
 cp compress "$_PKGROOT/pkg/var/usr/bin"
 )
 
