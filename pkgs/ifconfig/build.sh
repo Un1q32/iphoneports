@@ -2,10 +2,10 @@
 (
 cd src || exit 1
 for src in ifconfig.c ifmedia.c; do
-  "$_TARGET-cc" -c "$src" -O2 -DUSE_IF_MEDIA -DINET6 -DNO_IPX -Wno-deprecated-non-prototype -Wno-extra-tokens &
+  "$_TARGET-cc" -c "$src" -Os -flto -DUSE_IF_MEDIA -DINET6 -DNO_IPX -Wno-deprecated-non-prototype -Wno-extra-tokens &
 done
 wait
-"$_TARGET-cc" -o ifconfig -O2 ./*.o
+"$_TARGET-cc" -o ifconfig -Os -flto ./*.o
 mkdir -p "$_PKGROOT/pkg/var/usr/sbin"
 cp ifconfig "$_PKGROOT/pkg/var/usr/sbin"
 )
