@@ -1,7 +1,7 @@
 #!/bin/sh
 (
 cd src || exit 1
-"$_TARGET-cc" -O2 -o pstree pstree.c
+"$_TARGET-cc" -Os -flto -o pstree pstree.c
 mkdir -p "$_PKGROOT/pkg/var/usr/bin"
 cp pstree "$_PKGROOT/pkg/var/usr/bin"
 )
