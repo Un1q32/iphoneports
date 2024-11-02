@@ -1,7 +1,7 @@
 #!/bin/sh
 (
 cd src || exit 1
-"$_TARGET-cc" -o su -O2 su.c -lpam
+"$_TARGET-cc" -o su -Os -flto su.c -lpam
 mkdir -p "$_PKGROOT/pkg/var/usr/bin"
 cp su "$_PKGROOT/pkg/var/usr/bin"
 )

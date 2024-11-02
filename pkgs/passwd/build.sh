@@ -1,7 +1,7 @@
 #!/bin/sh
 (
 cd src || exit 1
-"$_TARGET-cc" -o passwd -O2 passwd.c file_passwd.c stringops.c -w
+"$_TARGET-cc" -o passwd -Os -flto passwd.c file_passwd.c stringops.c -w
 mkdir -p "$_PKGROOT/pkg/var/usr/bin"
 cp passwd "$_PKGROOT/pkg/var/usr/bin"
 )
