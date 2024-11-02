@@ -1,7 +1,7 @@
 #!/bin/sh
 (
 cd src || exit 1
-"$_TARGET-cc" whois.c -o whois -O2 -Wno-string-plus-int -D'__FBSDID(x)='
+"$_TARGET-cc" whois.c -o whois -Os -flto -Wno-string-plus-int -D'__FBSDID(x)='
 mkdir -p "$_PKGROOT/pkg/var/usr/bin"
 cp whois "$_PKGROOT/pkg/var/usr/bin"
 )

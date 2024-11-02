@@ -1,5 +1,5 @@
 Package: iphoneports-whois
-Version: 199.0.1
+Version: 199.0.1-1
 Architecture: iphoneos-arm
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Section: Utilities
