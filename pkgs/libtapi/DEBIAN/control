@@ -1,7 +1,0 @@
-Package: iphoneports-libtapi
-Section: Development
-Maintainer: Uniq <joey.t.reinhart@gmail.com>
-Architecture: iphoneos-arm
-Version: 1300.6.5
-Description: Apple TAPI Library
-Depends: iphoneports-base, iphoneports-libc++
