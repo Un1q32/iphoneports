@@ -1,0 +1,7 @@
+Package: iphoneports-distcc
+Section: Development
+Maintainer: Uniq <joey.t.reinhart@gmail.com>
+Architecture: iphoneos-arm
+Version: 3.4
+Description: Distributed compilation service for C, C++ and Objective-C
+Depends: iphoneports-base, iphoneports-clang
