@@ -5,3 +5,4 @@ libxml2
 bzip2
 libzip
 libpng
+libjpeg-turbo
