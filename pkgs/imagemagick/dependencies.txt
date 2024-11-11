@@ -4,3 +4,4 @@ xz
 libxml2
 bzip2
 libzip
+libpng
