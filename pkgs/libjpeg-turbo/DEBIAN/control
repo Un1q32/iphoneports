@@ -1,0 +1,7 @@
+Package: iphoneports-libjpeg-turbo
+Version: 3.0.4
+Architecture: iphoneos-arm
+Maintainer: Uniq <joey.t.reinhart@gmail.com>
+Depends: iphoneports-base
+Section: Development
+Description: JPEG image codec with accelerated baseline compression and decompression
