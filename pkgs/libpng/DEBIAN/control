@@ -1,0 +1,7 @@
+Package: iphoneports-libpng
+Version: 1.6.44
+Architecture: iphoneos-arm
+Maintainer: Uniq <joey.t.reinhart@gmail.com>
+Depends: iphoneports-base, iphoneports-zlib
+Section: Development
+Description: A collection of routines used to create PNG format graphics files
