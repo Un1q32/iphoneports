@@ -4,3 +4,4 @@ bzip2
 libxml2
 libressl
 dav1d
+libwebp
