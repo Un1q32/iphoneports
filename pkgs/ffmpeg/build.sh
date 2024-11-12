@@ -13,14 +13,11 @@ cd pkg/var/usr || exit 1
 rm -rf share
 "$_TARGET-strip" bin/ffmpeg bin/ffprobe 2>/dev/null
 ldid -S"$_ENT" bin/ffmpeg bin/ffprobe
-
-cd lib || exit 1
-for lib in pkgconfig/*.pc; do
-  lib="${lib%.pc*}"
-  lib="${lib##*/}"
-
-  "$_TARGET-strip" "$(readlink "$lib.dylib")" 2>/dev/null
-  ldid -S"$_ENT" "$(readlink "$lib.dylib")"
+for lib in lib/*.dylib; do
+    if ! [ -h "$lib" ]; then
+        "$_TARGET-strip" "$lib" 2>/dev/null
+        ldid -S"$_ENT" "$lib"
+    fi
 done
 )
 
