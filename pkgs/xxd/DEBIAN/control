@@ -2,6 +2,6 @@ Package: iphoneports-xxd
 Section: Utilities
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Architecture: iphoneos-arm
-Version: 2024-10-19-1
+Version: 2024-11-11
 Description: Hexdump utility from vim
 Depends: iphoneports-base
