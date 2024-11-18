@@ -7,4 +7,5 @@ brotli
 zstd
 lua
 xz
-pam
+xxhash
+bzip2

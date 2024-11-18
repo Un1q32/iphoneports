@@ -2,7 +2,7 @@ Package: iphoneports-screen
 Section: Terminal_Support
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Architecture: iphoneos-arm
-Version: 4.9.1
-Depends: iphoneports-base, iphoneports-ncurses, pam
+Version: 4.9.1-1
+Depends: iphoneports-base, iphoneports-ncurses
 Homepage: http://www.gnu.org/software/screen/
 Description: multiplexes a terminal into many
