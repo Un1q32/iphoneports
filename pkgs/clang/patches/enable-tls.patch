@@ -1,0 +1,35 @@
+--- src/clang/lib/Basic/Targets/OSTargets.h.orig
++++ src/clang/lib/Basic/Targets/OSTargets.h
+@@ -57,16 +57,7 @@
+     if (Triple.isMacOSX())
+       this->TLSSupported = !Triple.isMacOSXVersionLT(10, 7);
+     else if (Triple.isiOS()) {
+-      // 64-bit iOS supported it from 8 onwards, 32-bit device from 9 onwards,
+-      // 32-bit simulator from 10 onwards.
+-      if (Triple.isArch64Bit())
+-        this->TLSSupported = !Triple.isOSVersionLT(8);
+-      else if (Triple.isArch32Bit()) {
+-        if (!Triple.isSimulatorEnvironment())
+-          this->TLSSupported = !Triple.isOSVersionLT(9);
+-        else
+-          this->TLSSupported = !Triple.isOSVersionLT(10);
+-      }
++      this->TLSSupported = true;
+     } else if (Triple.isWatchOS()) {
+       if (!Triple.isSimulatorEnvironment())
+         this->TLSSupported = !Triple.isOSVersionLT(2);
+--- src/llvm/include/llvm/TargetParser/Triple.h.orig
++++ src/llvm/include/llvm/TargetParser/Triple.h
+@@ -1080,7 +1007,11 @@
+   /// Note: Android API level 29 (10) introduced ELF TLS.
+   bool hasDefaultEmulatedTLS() const {
+     return (isAndroid() && isAndroidVersionLT(29)) || isOSOpenBSD() ||
+-           isWindowsCygwinEnvironment() || isOHOSFamily();
++           isWindowsCygwinEnvironment() || isOHOSFamily() ||
++           (isiOS() && ((isArch64Bit() && isOSVersionLT(8)) ||
++                        (isArch32Bit() &&
++                         ((isSimulatorEnvironment() && isOSVersionLT(10)) ||
++                          isOSVersionLT(9)))));
+   }
+ 
+   /// True if the target supports both general-dynamic and TLSDESC, and TLSDESC
