@@ -1,6 +1,6 @@
 --- src/libusb/os/darwin_usb.c.orig
 +++ src/libusb/os/darwin_usb.c
-@@ -976,7 +976,7 @@
+@@ -1009,7 +1009,7 @@
    do {
      list_for_each_entry(new_device, &darwin_cached_devices, list, struct darwin_cached_device) {
        usbi_dbg("matching sessionID/locationID 0x%" PRIx64 "/0x%x against cached device with sessionID/locationID 0x%" PRIx64 "/0x%x",
