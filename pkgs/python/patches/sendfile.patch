@@ -1,0 +1,10 @@
+--- src/Modules/posixmodule.c.orig
++++ src/Modules/posixmodule.c
+@@ -7,6 +7,7 @@
+    of the compiler used.  Different compilers define their own feature
+    test macro, e.g. '_MSC_VER'. */
+ 
++#include <sys/socket.h>
+ #include "Python.h"
+ 
+ #ifdef __VXWORKS__

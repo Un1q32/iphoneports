@@ -1,0 +1,7 @@
+Package: iphoneports-python
+Maintainer: Uniq <joey.t.reinhart@gmail.com>
+Architecture: iphoneos-arm
+Depends: iphoneports-base, iphoneports-ncurses, iphoneports-readline, iphoneports-bzip2, iphoneports-xz, iphoneports-zlib, iphoneports-libressl
+Description: The Python programming language
+Section: Scripting
+Version: 3.13.0

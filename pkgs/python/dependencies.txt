@@ -1,0 +1,6 @@
+ncurses
+readline
+bzip2
+xz
+zlib
+libressl

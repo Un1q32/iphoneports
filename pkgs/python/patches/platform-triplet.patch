@@ -1,0 +1,11 @@
+--- src/Misc/platform_triplet.c.orig
++++ src/Misc/platform_triplet.c
+@@ -255,7 +255,7 @@
+ PLATFORM_TRIPLET=arm64-iphonesimulator
+ #      endif
+ #    else
+-PLATFORM_TRIPLET=arm64-iphoneos
++PLATFORM_TRIPLET=armv6-iphoneos
+ #    endif
+ // Older macOS SDKs do not define TARGET_OS_OSX
+ #  elif !defined(TARGET_OS_OSX) || TARGET_OS_OSX

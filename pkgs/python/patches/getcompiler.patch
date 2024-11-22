@@ -1,0 +1,11 @@
+--- src/Python/getcompiler.c.orig
++++ src/Python/getcompiler.c
+@@ -8,7 +8,7 @@
+ // Note the __clang__ conditional has to come before the __GNUC__ one because
+ // clang pretends to be GCC.
+ #if defined(__clang__)
+-#define COMPILER "[Clang " __clang_version__ "]"
++#define COMPILER "[" __VERSION__ "]"
+ #elif defined(__GNUC__)
+ #define COMPILER "[GCC " __VERSION__ "]"
+ // Generic fallbacks.
