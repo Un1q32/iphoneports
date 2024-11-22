@@ -17,26 +17,12 @@
              ts.tv_sec++;
 --- src/quickjs-libc.c.orig
 +++ src/quickjs-libc.c
-@@ -1972,16 +1972,16 @@
- #if defined(__linux__) || defined(__APPLE__)
- static int64_t get_time_ms(void)
- {
--    struct timespec ts;
--    clock_gettime(CLOCK_MONOTONIC, &ts);
--    return (uint64_t)ts.tv_sec * 1000 + (ts.tv_nsec / 1000000);
-+    struct timeval tv;
-+    gettimeofday(&tv, NULL);
-+    return (int64_t)tv.tv_sec * 1000 + (tv.tv_usec / 1000);
+@@ -1969,7 +1969,7 @@
+     return JS_UNDEFINED;
  }
  
- static int64_t get_time_ns(void)
+-#if defined(__linux__) || defined(__APPLE__)
++#if defined(__linux__)
+ static int64_t get_time_ms(void)
  {
--    struct timespec ts;
--    clock_gettime(CLOCK_MONOTONIC, &ts);
--    return (uint64_t)ts.tv_sec * 1000000000 + ts.tv_nsec;
-+    struct timeval tv;
-+    gettimeofday(&tv, NULL);
-+    return (int64_t)tv.tv_sec * 1000000000 + (tv.tv_usec * 1000);
- }
- #else
- /* more portable, but does not work if the date is updated */
+     struct timespec ts;
