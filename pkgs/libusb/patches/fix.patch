@@ -1,0 +1,11 @@
+--- src/libusb/os/darwin_usb.c.orig
++++ src/libusb/os/darwin_usb.c
+@@ -2137,7 +2137,7 @@
+   IOReturn kresult;
+   enum libusb_error ret;
+ 
+-#if !defined(TARGET_OS_OSX) || TARGET_OS_OSX == 1
++#if 1
+   if (dpriv->capture_count > 0) {
+     /* we have to use ResetDevice as USBDeviceReEnumerate() loses the authorization for capture */
+     kresult = (*dpriv->device)->ResetDevice (dpriv->device);
