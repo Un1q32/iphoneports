@@ -1,0 +1,44 @@
+--- src/src/unix/core.c.orig
++++ src/src/unix/core.c
+@@ -56,7 +56,7 @@
+ # endif /* defined(__APPLE__) */
+ 
+ 
+-#if defined(__APPLE__) && !TARGET_OS_IPHONE
++#if defined(__APPLE__)
+ # include <crt_externs.h>
+ # include <mach-o/dyld.h> /* _NSGetExecutablePath */
+ # define environ (*_NSGetEnviron())
+@@ -110,9 +110,10 @@
+ 
+ 
+ /* https://github.com/libuv/libuv/issues/1674 */
++#include <mach/clock.h>
+ int uv_clock_gettime(uv_clock_id clock_id, uv_timespec64_t* ts) {
+-  struct timespec t;
+-  int r;
++  clock_serv_t clock_serv;
++  mach_timespec_t t;
+ 
+   if (ts == NULL)
+     return UV_EFAULT;
+@@ -121,15 +122,14 @@
+     default:
+       return UV_EINVAL;
+     case UV_CLOCK_MONOTONIC:
+-      r = clock_gettime(CLOCK_MONOTONIC, &t);
++      host_get_clock_service(mach_host_self(), SYSTEM_CLOCK, &clock_serv);
+       break;
+     case UV_CLOCK_REALTIME:
+-      r = clock_gettime(CLOCK_REALTIME, &t);
++      host_get_clock_service(mach_host_self(), CALENDAR_CLOCK, &clock_serv);
+       break;
+   }
+-
+-  if (r)
+-    return UV__ERR(errno);
++  clock_get_time(clock_serv, &t);
++  mach_port_deallocate(mach_task_self(), clock_serv);
+ 
+   ts->tv_sec = t.tv_sec;
+   ts->tv_nsec = t.tv_nsec;

@@ -5,7 +5,7 @@
 (
 cd src || exit 1
 ./autogen.sh
-./configure --host="$_TARGET" --prefix=/var/usr --disable-static CPPFLAGS=-Wno-incompatible-function-pointer-types LIBS="$_PKGROOT/src/compat.o"
+./configure --host="$_TARGET" --prefix=/var/usr --disable-static CPPFLAGS="-Wno-incompatible-function-pointer-types -I$_SDK/var/usr/include" LIBS="$_PKGROOT/src/compat.o"
 "$_MAKE" -j8
 "$_MAKE" install DESTDIR="$_PKGROOT/pkg"
 )

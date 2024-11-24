@@ -1,0 +1,11 @@
+--- src/src/unix/darwin.c.orig
++++ src/src/unix/darwin.c
+@@ -209,7 +209,7 @@
+   if (cpuspeed == 0)
+     /* If sysctl hw.cputype == CPU_TYPE_ARM64, the correct value is unavailable
+      * from Apple, but we can hard-code it here to a plausible value. */
+-    cpuspeed = 2400000000;
++    cpuspeed = 2400000000LL;
+ 
+   if (host_processor_info(mach_host_self(), PROCESSOR_CPU_LOAD_INFO, &numcpus,
+                           (processor_info_array_t*)&info,
