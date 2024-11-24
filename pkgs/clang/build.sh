@@ -3,14 +3,9 @@
 _get_distribution_components() {
   ninja -t targets | grep -Po 'install-\K.*(?=-stripped:)' | while read -r target; do
     case $target in
-      clang-libraries|distribution)
-        continue
-        ;;
-      clang|clangd|clang-*)
-        ;;
-      clang*|findAllSymbols|scan-build*|scan-view|hmaptool)
-        continue
-        ;;
+      clang-libraries|distribution) continue ;;
+      clang|clangd|clang-*) ;;
+      clang*|findAllSymbols|scan-build*|scan-view|hmaptool) continue ;;
     esac
     printf '%s;' "$target"
   done
