@@ -1,6 +1,6 @@
 --- src/src/wget.c.orig
 +++ src/src/wget.c
-@@ -3147,7 +3147,12 @@
+@@ -3266,7 +3266,12 @@
  	timespecs[1].tv_sec = tt;
  	timespecs[1].tv_nsec = 0;
  

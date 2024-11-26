@@ -1,6 +1,6 @@
 --- src/lib/spawn-pipe.c.orig
 +++ src/lib/spawn-pipe.c
-@@ -81,6 +81,8 @@
+@@ -82,6 +82,8 @@
  
  #endif
  
