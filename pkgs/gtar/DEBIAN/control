@@ -1,5 +1,5 @@
 Package: iphoneports-gtar
-Section: Utilities
+Section: Archiving
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Architecture: iphoneos-arm
 Version: 1.35
