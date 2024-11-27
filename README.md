@@ -10,14 +10,16 @@ You will need an iPhonePorts toolchain to use the build scripts in this repo, yo
 
 ```
 Usage: build.sh [options] <command>
-    <pkg> [pkgs...]         - Build a single package
-    all                     - Build all packages
+    <pkg> [pkgs...]         - Build specified packages
+    build <pkg> [pkgs...]   - Build specified packages
+    all [pkgs...]           - Build all packages (except those specified)
     clean <pkg> [pkgs...]   - Clean a single package
     cleanall                - Clean all packages
-    dryrun                  - Pretend to build all packages
+    dryrun [pkgs...]        - Pretend to build all packages, for debugging
+    abibreak <pkg>          - ABI break helper, opens all the control files for packages
+                              that depend on <pkg> and then rebuilds them
     --target                - Specify a target (default: armv6-apple-darwin10)
     --no-tmp                - Do not use /tmp for anything, use the current directory instead
-    --no-deps               - Do not include dependencies
 ```
 
 ## Examples
