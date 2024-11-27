@@ -50,10 +50,6 @@ case "$*" in
     *) export _TARGET="$defaulttarget" ;;
 esac
 
-case "$*" in
-    *--no-deps*) export _NODEPS="1" ;;
-esac
-
 : > "$_TMP/.builtpkgs"
 rm -rf "$_TMP"/iphoneports-sdk*
 
@@ -113,7 +109,7 @@ build() {
     (
     export _PKGROOT="$pkgdir/$1"
     cd "$_PKGROOT" || error "Failed to cd to package directory: $1"
-    [ "$_NODEPS" != 1 ] && includedeps
+    includedeps
     if [ -n "$dryrun" ]; then
         printf '%s\n' "Building $1"
     else
@@ -292,7 +288,6 @@ Usage: build.sh [options] <command>
                               that depend on <pkg> and then rebuilds them
     --target                - Specify a target (default: $defaulttarget)
     --no-tmp                - Do not use /tmp for anything, use the current directory instead
-    --no-deps               - Do not include dependencies
 "
             exit 1
         ;;
