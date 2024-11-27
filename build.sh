@@ -279,11 +279,12 @@ main() {
         '')
             printf '%s' "\
 Usage: build.sh [options] <command>
-    <pkg> [pkgs...]         - Build a single package
+    <pkg> [pkgs...]         - Build specified packages
+    build <pkg> [pkgs...]   - Build specified packages
     all [pkgs...]           - Build all packages (except those specified)
     clean <pkg> [pkgs...]   - Clean a single package
     cleanall                - Clean all packages
-    dryrun                  - Pretend to build all packages
+    dryrun [pkgs...]        - Pretend to build all packages, for debugging
     abibreak <pkg>          - ABI break helper, opens all the control files for packages
                               that depend on <pkg> and then rebuilds them
     --target                - Specify a target (default: $defaulttarget)
