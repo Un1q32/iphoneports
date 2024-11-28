@@ -1,0 +1,7 @@
+Package: iphoneports-nettle
+Section: Security
+Maintainer: Uniq <joey.t.reinhart@gmail.com>
+Architecture: iphoneos-arm
+Version: 3.10
+Description: A low-level cryptographic library
+Depends: iphoneports-base
