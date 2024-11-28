@@ -9,8 +9,8 @@ cd src || exit 1
 (
 cd pkg/var/usr || exit 1
 rm -rf share
-"$_TARGET-strip" bin/* lib/libnettle.8.9.dylib 2>/dev/null
-ldid -S"$_ENT" bin/* lib/libnettle.8.9.dylib
+"$_TARGET-strip" bin/* lib/libnettle.8.9.dylib lib/libhogweed.6.9.dylib 2>/dev/null
+ldid -S"$_ENT" bin/* lib/libnettle.8.9.dylib lib/libhogweed.6.9.dylib
 )
 
 cp -r DEBIAN pkg

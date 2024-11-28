@@ -4,4 +4,4 @@ Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Architecture: iphoneos-arm
 Version: 3.10
 Description: A low-level cryptographic library
-Depends: iphoneports-base
+Depends: iphoneports-base, iphoneports-gmp
