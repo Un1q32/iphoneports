@@ -1,0 +1,11 @@
+--- src/dist/Makefile.in.orig
++++ src/dist/Makefile.in
+@@ -1159,7 +1159,7 @@
+ # Library and standard utilities install.
+ ##################################################
+ library_install: install_setup
+-library_install: install_include install_lib install_utilities @ADDITIONAL_INSTALL@ install_docs
++library_install: install_include install_lib install_utilities @ADDITIONAL_INSTALL@
+ 
+ uninstall: uninstall_include uninstall_lib uninstall_utilities @ADDITIONAL_UNINSTALL@ uninstall_docs
+ 
