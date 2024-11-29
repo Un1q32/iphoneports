@@ -1,0 +1,7 @@
+Package: iphoneports-gnutls
+Section: Security
+Maintainer: Uniq <joey.t.reinhart@gmail.com>
+Architecture: iphoneos-arm
+Version: 3.8.8
+Description: A library which provides a secure layer over a reliable transport layer
+Depends: iphoneports-base, iphoneports-nettle, iphoneports-ca-certificates

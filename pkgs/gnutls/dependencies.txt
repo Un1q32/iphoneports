@@ -1,0 +1,7 @@
+nettle
+gmp
+libunistring
+zlib
+brotli
+zstd
+libidn2
