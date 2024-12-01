@@ -181,11 +181,20 @@ includedeps() {
     fi
 }
 
+sysroot() {
+    if [ -f "$pkgdir/$1/dependencies.txt" ]; then
+        while IFS= read -r dep; do
+            sysroot "$dep"
+        done < "$pkgdir/$1/dependencies.txt"
+    fi
+    cp -a "$pkgdir/$1"/pkg/* sysroot
+}
+
 main() {
     case "$1" in
         all)
-            shift
             depcheck
+            shift
             for pkg in "$pkgdir"/*; do
                 unset dontbuild
                 for exclude in "$@"; do
@@ -210,15 +219,12 @@ main() {
         ;;
 
         clean)
-            if [ -n "$2" ]; then
-                shift
-                for pkg in "$@"; do
-                    [ -d "$pkgdir/$pkg" ] || error "Package not found: $pkg"
-                    rm -rf "$pkgdir/$pkg/pkg" "$pkgdir/$pkg/src" "$pkgdir/$pkg"/*.deb "$bsroot/debs/$pkg.deb"
-                done
-            else
-                error "No package specified"
-            fi
+            [ -z "$2" ] && error "No package specified"
+            shift
+            for pkg in "$@"; do
+                [ -d "$pkgdir/$pkg" ] || error "Package not found: $pkg"
+                rm -rf "$pkgdir/$pkg/pkg" "$pkgdir/$pkg/src" "$pkgdir/$pkg"/*.deb "$bsroot/debs/$pkg.deb"
+            done
         ;;
 
         cleanall)
@@ -271,6 +277,26 @@ main() {
             done
         ;;
 
+        sysroot)
+            [ -z "$2" ] && error "You must specify a package"
+            depcheck
+            shift
+            for pkg in "$@"; do
+                [ -d "$pkgdir/$pkg" ] || error "Package not found: $pkg"
+            done
+            for pkg in "$@"; do
+                build "$pkg" || error "Failed to build package: $pkg"
+            done
+            rm -rf sysroot
+            mkdir sysroot
+            printf 'Building sysroot...\n'
+            for pkg in "$@"; do
+                sysroot "$pkg"
+            done
+            rm -rf sysroot/DEBIAN
+            printf 'Done!\n'
+        ;;
+
         -*)
             shift
             main "$@"
@@ -287,6 +313,8 @@ Usage: build.sh [options] <command>
     dryrun [pkgs...]        - Pretend to build all packages, for debugging
     abibreak <pkg>          - ABI break helper, opens all the control files for packages
                               that depend on <pkg> and then rebuilds them
+    sysroot <pkg> [pkgs...] - Copy specified package's files and dependencies to sysroot directory
+                              Useful for installing packages in environments without dpkg
     --target                - Specify a target (default: $defaulttarget)
     --no-tmp                - Do not use /tmp for anything, use the current directory instead
 "
@@ -297,6 +325,7 @@ Usage: build.sh [options] <command>
             if [ "$1" = "build" ]; then
                 shift
             fi
+            [ -z "$1" ] && error "You must specify a package"
             depcheck
             for pkg in "$@"; do
                 [ -d "$pkgdir/$pkg" ] || error "Package not found: $pkg"

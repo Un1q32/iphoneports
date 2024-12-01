@@ -5,3 +5,4 @@ pkg
 /.builtpkgs
 /.args.txt
 /pkglock
+/sysroot

@@ -18,6 +18,8 @@ Usage: build.sh [options] <command>
     dryrun [pkgs...]        - Pretend to build all packages, for debugging
     abibreak <pkg>          - ABI break helper, opens all the control files for packages
                               that depend on <pkg> and then rebuilds them
+    sysroot <pkg> [pkgs...] - Copy specified package's files and dependencies to sysroot directory
+                              Useful for installing packages in environments without dpkg
     --target                - Specify a target (default: armv6-apple-darwin10)
     --no-tmp                - Do not use /tmp for anything, use the current directory instead
 ```
