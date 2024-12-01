@@ -5,7 +5,7 @@
  #      endif
  #    else
 -PLATFORM_TRIPLET=arm64-iphoneos
-+PLATFORM_TRIPLET=armv6-iphoneos
++PLATFORM_TRIPLET=arm-iphoneos
  #    endif
  // Older macOS SDKs do not define TARGET_OS_OSX
  #  elif !defined(TARGET_OS_OSX) || TARGET_OS_OSX
