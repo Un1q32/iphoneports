@@ -1,6 +1,6 @@
 --- src/Modules/_ssl.c.orig
 +++ src/Modules/_ssl.c
-@@ -4540,7 +4540,7 @@
+@@ -4728,7 +4728,7 @@
      return 0;
  }
  
