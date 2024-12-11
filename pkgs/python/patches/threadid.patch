@@ -1,0 +1,11 @@
+--- src/Python/thread_pthread.h.orig
++++ src/Python/thread_pthread.h
+@@ -376,7 +376,7 @@
+         PyThread_init_thread();
+ #ifdef __APPLE__
+     uint64_t native_id;
+-    (void) pthread_threadid_np(NULL, &native_id);
++    native_id = pthread_mach_thread_np(pthread_self());
+ #elif defined(__linux__)
+     pid_t native_id;
+     native_id = syscall(SYS_gettid);
