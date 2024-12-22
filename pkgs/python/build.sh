@@ -14,8 +14,7 @@ autoreconf -fi
 
 "$_TARGET-cc" emutls.c atomic.c -O3 -flto -c
 ./configure --host="$_TARGET" --prefix=/var/usr --build="$(cc -dumpmachine)" --with-build-python="$_PKGROOT/src/buildpython/bin/python3" --without-mimalloc --enable-shared --without-ensurepip --with-libs="$_PKGROOT/src/emutls.o $_PKGROOT/src/atomic.o" LDSHARED="$_TARGET-cc -shared -undefined dynamic_lookup" MACHDEP=darwin ac_sys_system=Darwin ac_cv_buggy_getaddrinfo=no ac_cv_file__dev_ptmx=yes ac_cv_file__dev_ptc=no PKG_CONFIG_LIBDIR="$_SDK/var/usr/lib/pkgconfig"
-"$_MAKE" -j8
-"$_MAKE" DESTDIR="$_PKGROOT/pkg" install
+"$_MAKE" DESTDIR="$_PKGROOT/pkg" install -j8
 )
 
 (
