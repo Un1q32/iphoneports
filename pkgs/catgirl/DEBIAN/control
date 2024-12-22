@@ -2,6 +2,6 @@ Package: iphoneports-catgirl
 Version: 2.2a-4
 Architecture: iphoneos-arm
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
-Section: Utilities
+Section: Networking
 Description: a terminal IRC client.
 Depends: iphoneports-base
