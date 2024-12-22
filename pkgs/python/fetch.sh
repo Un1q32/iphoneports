@@ -8,6 +8,6 @@ rm src.tar.xz
 mv Python-* src
 
 for src in emutls.c atomic.c int_lib.h int_types.h int_endianness.h int_util.h assembly.h; do
-  curl -s -o "src/$src" "https://raw.githubusercontent.com/llvm/llvm-project/refs/tags/llvmorg-19.1.4/compiler-rt/lib/builtins/$src" &
+  curl -s -o "src/$src" "https://raw.githubusercontent.com/llvm/llvm-project/refs/tags/llvmorg-19.1.6/compiler-rt/lib/builtins/$src" &
 done
 wait
