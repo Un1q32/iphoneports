@@ -8,7 +8,9 @@ cd src || exit 1
 (
 cd pkg/var/usr || exit 1
 rm -rf share
-lib="$(realpath lib/libmpdec.dylib)"
+abi=4
+lib="$(realpath lib/libmpdec.$abi.dylib)"
+"$_INSTALLNAMETOOL" -id /var/usr/lib/libmpdec.$abi.dylib "$lib"
 "$_TARGET-strip" "$lib" 2>/dev/null
 ldid -S"$_ENT" "$lib"
 )
