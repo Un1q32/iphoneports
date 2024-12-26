@@ -1,0 +1,4 @@
+/var/usr/etc/default/distcc
+/var/usr/etc/distcc/clients.allow
+/var/usr/etc/distcc/commands.allow.sh
+/var/usr/etc/distcc/hosts
