@@ -2,7 +2,7 @@
 (
 cd src || exit 1
 ./autogen.sh
-./configure --host="$_TARGET" --prefix=/var/usr --without-libiberty --without-avahi --disable-Werror --disable-pump-mode
+./configure --host="$_TARGET" --prefix=/var/usr --without-libiberty --without-avahi --disable-Werror --enable-rfc2553 --disable-pump-mode
 "$_MAKE" -j8
 "$_MAKE" DESTDIR="$_PKGROOT/pkg" install
 )
