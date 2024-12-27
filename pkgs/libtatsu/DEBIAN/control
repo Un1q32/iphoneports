@@ -1,5 +1,5 @@
 Package: iphoneports-libtatsu
-Version: 1.0.3-1
+Version: 1.0.4
 Architecture: iphoneos-arm
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Depends: iphoneports-base, iphoneports-libplist, iphoneports-curl
