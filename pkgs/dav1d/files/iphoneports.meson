@@ -5,7 +5,7 @@ objc = '@CC@'
 objcpp = '@CXX@'
 ar = '@AR@'
 ranlib = '@RANLIB@'
-strip = 'touch'
+strip = 'true'
 
 [properties]
 root = '@SDK@'
@@ -13,8 +13,8 @@ needs_exe_wrapper = true
 
 [host_machine]
 system = 'darwin'
-subsystem = 'ios'
+subsystem = '@SUBSYSTEM@'
 kernel = 'xnu'
-cpu_family = 'arm'
-cpu = 'arm'
+cpu_family = '@CPU_FAMILY@'
+cpu = '@CPU@'
 endian = 'little'
