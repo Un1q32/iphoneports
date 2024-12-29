@@ -1,0 +1,7 @@
+Package: iphoneports-node
+Maintainer: Uniq <joey.t.reinhart@gmail.com>
+Architecture: iphoneos-arm
+Depends: iphoneports-base
+Description: Evented I/O for V8 javascript
+Section: Scripting
+Version: 23.5.0

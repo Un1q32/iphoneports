@@ -1,0 +1,22 @@
+--- src/deps/v8/third_party/abseil-cpp/absl/synchronization/internal/kernel_timeout.h.orig
++++ src/deps/v8/third_party/abseil-cpp/absl/synchronization/internal/kernel_timeout.h
+@@ -82,7 +82,7 @@
+   // this method in the case of a spurious wakeup.
+   struct timespec MakeRelativeTimespec() const;
+ 
+-#ifndef _WIN32
++#if 0
+   // Convert to `struct timespec` for interfaces that expect an absolute timeout
+   // on a specific clock `c`. This is similar to `MakeAbsTimespec()`, but
+   // callers usually want to use this method with `CLOCK_MONOTONIC` when
+--- src/deps/v8/third_party/abseil-cpp/absl/synchronization/internal/kernel_timeout.cc.orig
++++ src/deps/v8/third_party/abseil-cpp/absl/synchronization/internal/kernel_timeout.cc
+@@ -148,7 +148,7 @@
+   return absl::ToTimespec(absl::Nanoseconds(InNanosecondsFromNow()));
+ }
+ 
+-#ifndef _WIN32
++#if 0
+ struct timespec KernelTimeout::MakeClockAbsoluteTimespec(clockid_t c) const {
+   if (!has_timeout()) {
+     return absl::ToTimespec(absl::Nanoseconds(kMaxNanos));
