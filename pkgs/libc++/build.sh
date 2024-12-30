@@ -1,6 +1,5 @@
 #!/bin/sh
 mkdir -p src/build
-cp files/compat.c src/libcxx/src/filesystem
 (
 cd src/build || exit 1
 cpu="${_TARGET%%-*}"
