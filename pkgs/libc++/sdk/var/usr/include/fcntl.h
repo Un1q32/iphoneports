@@ -31,7 +31,7 @@ static inline int openat(int fd, const char *path, int flags, ...) {
   if (fcntl(fd, F_GETPATH, fdpath) == -1)
     return -1;
 
-  char new_path[strlen(fdpath) + strlen(path) + 1];
+  char new_path[strlen(fdpath) + strlen(path) + 2];
   strcpy(new_path, fdpath);
   strcat(new_path, "/");
   strcat(new_path, path);
