@@ -1,9 +1,16 @@
 --- src/clang/lib/Basic/Targets/OSTargets.h.orig
 +++ src/clang/lib/Basic/Targets/OSTargets.h
-@@ -57,16 +57,7 @@
-     if (Triple.isMacOSX())
-       this->TLSSupported = !Triple.isMacOSXVersionLT(10, 7);
-     else if (Triple.isiOS()) {
+@@ -50,33 +50,7 @@
+ public:
+   DarwinTargetInfo(const llvm::Triple &Triple, const TargetOptions &Opts)
+       : OSTargetInfo<Target>(Triple, Opts) {
+-    // By default, no TLS, and we list permitted architecture/OS
+-    // combinations.
+-    this->TLSSupported = false;
+-
+-    if (Triple.isMacOSX())
+-      this->TLSSupported = !Triple.isMacOSXVersionLT(10, 7);
+-    else if (Triple.isiOS()) {
 -      // 64-bit iOS supported it from 8 onwards, 32-bit device from 9 onwards,
 -      // 32-bit simulator from 10 onwards.
 -      if (Triple.isArch64Bit())
@@ -14,22 +21,47 @@
 -        else
 -          this->TLSSupported = !Triple.isOSVersionLT(10);
 -      }
-+      this->TLSSupported = true;
-     } else if (Triple.isWatchOS()) {
-       if (!Triple.isSimulatorEnvironment())
-         this->TLSSupported = !Triple.isOSVersionLT(2);
+-    } else if (Triple.isWatchOS()) {
+-      if (!Triple.isSimulatorEnvironment())
+-        this->TLSSupported = !Triple.isOSVersionLT(2);
+-      else
+-        this->TLSSupported = !Triple.isOSVersionLT(3);
+-    } else if (Triple.isDriverKit()) {
+-      // No TLS on DriverKit.
+-    } else if (Triple.isXROS())
+-      this->TLSSupported = true;
+-
++    this->TLSSupported = true;
+     this->MCountName = "\01mcount";
+   }
+ 
+--- src/clang/lib/CodeGen/ItaniumCXXABI.cpp.orig
++++ src/clang/lib/CodeGen/ItaniumCXXABI.cpp
+@@ -2828,7 +2828,7 @@
+   const char *Name = "__cxa_atexit";
+   if (TLS) {
+     const llvm::Triple &T = CGF.getTarget().getTriple();
+-    Name = T.isOSDarwin() ?  "_tlv_atexit" : "__cxa_thread_atexit";
++    Name = (T.isOSDarwin() && !T.hasDefaultEmulatedTLS()) ?  "_tlv_atexit" : "__cxa_thread_atexit";
+   }
+ 
+   // We're assuming that the destructor function is something we can
 --- src/llvm/include/llvm/TargetParser/Triple.h.orig
 +++ src/llvm/include/llvm/TargetParser/Triple.h
-@@ -1080,7 +1007,11 @@
+@@ -1080,7 +1080,15 @@
    /// Note: Android API level 29 (10) introduced ELF TLS.
    bool hasDefaultEmulatedTLS() const {
      return (isAndroid() && isAndroidVersionLT(29)) || isOSOpenBSD() ||
 -           isWindowsCygwinEnvironment() || isOHOSFamily();
 +           isWindowsCygwinEnvironment() || isOHOSFamily() ||
++           (isMacOSX() && isMacOSXVersionLT(10, 7)) ||
 +           (isiOS() && ((isArch64Bit() && isOSVersionLT(8)) ||
 +                        (isArch32Bit() &&
 +                         ((isSimulatorEnvironment() && isOSVersionLT(10)) ||
-+                          isOSVersionLT(9)))));
++                          isOSVersionLT(9))))) ||
++           (isWatchOS() && (isOSVersionLT(2) ||
++                            (isSimulatorEnvironment() && isOSVersionLT(3)))) ||
++           isDriverKit();
    }
  
    /// True if the target supports both general-dynamic and TLSDESC, and TLSDESC
