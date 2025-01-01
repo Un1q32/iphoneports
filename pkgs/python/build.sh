@@ -22,7 +22,7 @@ mkdir _buildpython && cd _buildpython || exit 1
 
 (
 cd pkg/var/usr || exit 1
-rm -rf share
+rm -rf share lib/python*/test lib/python*/idlelib/idle_test
 "$_TARGET-strip" "bin/$(readlink bin/python3)" lib/*.dylib lib/python3.13/lib-dynload/*.so 2>/dev/null
 ldid -S"$_ENT" "bin/$(readlink bin/python3)" lib/*.dylib lib/python3.13/lib-dynload/*.so
 )
