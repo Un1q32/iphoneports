@@ -65,3 +65,13 @@
    }
  
    /// True if the target supports both general-dynamic and TLSDESC, and TLSDESC
+--- src/llvm/lib/LTO/LTOBackend.cpp.orig
++++ src/llvm/lib/LTO/LTOBackend.cpp
+@@ -511,6 +511,7 @@
+     return TOrErr.takeError();
+ 
+   std::unique_ptr<TargetMachine> TM = createTargetMachine(C, *TOrErr, Mod);
++  TM->Options.EmulatedTLS = TM->getTargetTriple().hasDefaultEmulatedTLS();
+ 
+   LLVM_DEBUG(dbgs() << "Running regular LTO\n");
+   if (!C.CodeGenOnly) {
