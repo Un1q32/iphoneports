@@ -18,7 +18,7 @@
     <key>EnvironmentVariables</key>
     <dict>
         <key>PATH</key>
-        <string>/var/usr/sbin:/var/usr/bin:/usr/locals/bin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin</string>
+        <string>/var/usr/sbin:/var/usr/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin</string>
     </dict>
 
     <key>SessionCreate</key>
