@@ -1,0 +1,7 @@
+Package: iphoneports-compiler-rt
+Section: Development
+Maintainer: Uniq <joey.t.reinhart@gmail.com>
+Architecture: iphoneos-arm
+Version: 19.1.6
+Description: Compiler runtime libraries for clang
+Depends: iphoneports-base
