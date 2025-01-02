@@ -1,6 +1,6 @@
 --- src/clang/lib/Driver/ToolChains/Darwin.cpp.orig
 +++ src/clang/lib/Driver/ToolChains/Darwin.cpp
-@@ -2145,7 +2145,8 @@ inferDeploymentTargetFromArch(DerivedArgList &Args, const Darwin &Toolchain,
+@@ -2104,7 +2104,8 @@
    StringRef MachOArchName = Toolchain.getMachOArchName(Args);
    if (MachOArchName == "arm64" || MachOArchName == "arm64e")
      OSTy = llvm::Triple::MacOSX;
