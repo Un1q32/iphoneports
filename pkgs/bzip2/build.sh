@@ -1,7 +1,7 @@
 #!/bin/sh
 (
 cd src || exit 1
-"$_MAKE" CC="$_TARGET-cc" DESTDIR="$_PKGROOT/pkg" PREFIX=/var/usr install -j8
+"$_MAKE" CC="$_TARGET-cc" DESTDIR="$_PKGROOT/pkg" PREFIX=/var/usr install -j"$_JOBS"
 )
 
 (

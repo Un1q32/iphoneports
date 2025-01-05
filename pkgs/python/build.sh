@@ -12,11 +12,11 @@ autoreconf -fi
 (
 mkdir _buildpython && cd _buildpython || exit 1
 ../configure --prefix="$_PKGROOT/src/buildpython" --without-ensurepip
-"$_MAKE" install -j8
+"$_MAKE" install -j"$_JOBS"
 )
 
 ./configure --host="$_TARGET" --prefix=/var/usr --build="$(cc -dumpmachine)" --with-build-python="$_PKGROOT/src/buildpython/bin/python3" --without-mimalloc --with-lto --enable-shared --without-ensurepip LDSHARED="$_TARGET-cc -shared -undefined dynamic_lookup" MACHDEP=darwin ac_sys_system=Darwin ac_cv_buggy_getaddrinfo=no ac_cv_file__dev_ptmx=yes ac_cv_file__dev_ptc=no PKG_CONFIG_LIBDIR="$_SDK/var/usr/lib/pkgconfig"
-"$_MAKE" DESTDIR="$_PKGROOT/pkg" install -j8
+"$_MAKE" DESTDIR="$_PKGROOT/pkg" install -j"$_JOBS"
 )
 
 (

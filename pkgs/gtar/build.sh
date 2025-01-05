@@ -2,7 +2,7 @@
 (
 cd src || exit 1
 ./configure --host="$_TARGET" --prefix=/var/usr --program-prefix=g --disable-year2038 LIBS="-liconv"
-"$_MAKE" -j8
+"$_MAKE" -j"$_JOBS"
 "$_MAKE" DESTDIR="$_PKGROOT/pkg" install
 )
 

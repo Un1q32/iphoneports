@@ -3,7 +3,7 @@
 cd src || exit 1
 ./autogen.sh
 ./configure --host="$_TARGET" --prefix=/var/usr --disable-unicode --disable-linux-affinity
-"$_MAKE" -j8
+"$_MAKE" -j"$_JOBS"
 mkdir -p "$_PKGROOT/pkg/var/usr/bin"
 cp htop "$_PKGROOT/pkg/var/usr/bin"
 )

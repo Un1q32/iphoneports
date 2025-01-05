@@ -11,25 +11,25 @@ ios3srcs="$ios6srcs"
 ios2srcs="$ios3srcs"
 
 for src in $ios2srcs; do
-    while [ "$(pgrep clang | wc -l)" -ge 8 ]; do
+    while [ "$(pgrep clang | wc -l)" -ge "$_JOBS" ]; do
         sleep 0.1
     done
     "$clang" -isysroot "$_PKGROOT/sysroot" -target armv6-apple-ios2 "../lib/builtins/$src" -c -O3 -o "armv6-${src%\.c}.o" &
 done
 for src in $ios3srcs; do
-    while [ "$(pgrep clang | wc -l)" -ge 8 ]; do
+    while [ "$(pgrep clang | wc -l)" -ge "$_JOBS" ]; do
         sleep 0.1
     done
     "$clang" -isysroot "$_PKGROOT/sysroot" -target armv7-apple-ios3 "../lib/builtins/$src" -c -O3 -o "armv7-${src%\.c}.o" &
 done
 for src in $ios6srcs; do
-    while [ "$(pgrep clang | wc -l)" -ge 8 ]; do
+    while [ "$(pgrep clang | wc -l)" -ge "$_JOBS" ]; do
         sleep 0.1
     done
     "$clang" -isysroot "$_PKGROOT/sysroot" -target armv7s-apple-ios6 "../lib/builtins/$src" -c -O3 -o "armv7s-${src%\.c}.o" &
 done
 for src in $ios7srcs; do
-    while [ "$(pgrep clang | wc -l)" -ge 8 ]; do
+    while [ "$(pgrep clang | wc -l)" -ge "$_JOBS" ]; do
         sleep 0.1
     done
     "$clang" -isysroot "$_PKGROOT/sysroot" -target arm64-apple-ios7 "../lib/builtins/$src" -c -O3 -o "arm64-${src%\.c}.o" &

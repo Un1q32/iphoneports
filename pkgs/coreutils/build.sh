@@ -2,7 +2,7 @@
 (
 cd src || exit 1
 ./configure --host="$_TARGET" --prefix=/var/usr --enable-single-binary=symlinks --with-openssl --disable-year2038 fu_cv_sys_stat_statvfs=yes
-"$_MAKE" -j8
+"$_MAKE" -j"$_JOBS"
 "$_MAKE" DESTDIR="$_PKGROOT/pkg" install
 )
 

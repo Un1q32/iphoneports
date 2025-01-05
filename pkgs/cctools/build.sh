@@ -8,7 +8,7 @@ cd src/cctools || exit 1
 rm include/foreign/machine/_structs.h
 ./autogen.sh
 ./configure --host="$_TARGET" --prefix=/var/usr LLVM_INCLUDE_DIR="$_SDK/var/usr/include" LLVM_LIB_DIR="$_SDK/var/usr/lib"
-"$_MAKE" -j8
+"$_MAKE" -j"$_JOBS"
 "$_MAKE" install DESTDIR="$_PKGROOT/pkg"
 )
 

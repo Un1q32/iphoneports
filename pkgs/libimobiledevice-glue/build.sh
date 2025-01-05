@@ -2,7 +2,7 @@
 (
 cd src || exit 1
 ./configure --host="$_TARGET" --prefix=/var/usr --disable-static
-"$_MAKE" -j8
+"$_MAKE" -j"$_JOBS"
 "$_MAKE" install DESTDIR="$_PKGROOT/pkg"
 )
 

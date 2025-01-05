@@ -2,7 +2,7 @@
 (
 cd src || exit 1
 CHOST="$_TARGET" ./configure --prefix=/var/usr --zlib-compat
-"$_MAKE" -j8
+"$_MAKE" -j"$_JOBS"
 "$_MAKE" DESTDIR="$_PKGROOT/pkg" install
 )
 

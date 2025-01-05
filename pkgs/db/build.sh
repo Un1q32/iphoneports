@@ -2,7 +2,7 @@
 (
 cd src/build_unix || exit 1
 ../dist/configure --host="$_TARGET" --prefix=/var/usr --enable-cxx --enable-compat185 --disable-static --with-mutex=Darwin/_spin_lock_try CPPFLAGS='-Wno-deprecated-non-prototype'
-"$_MAKE" -j8
+"$_MAKE" -j"$_JOBS"
 "$_MAKE" DESTDIR="$_PKGROOT/pkg" install
 )
 

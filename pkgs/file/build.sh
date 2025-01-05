@@ -2,13 +2,13 @@
 (
 cd src || exit 1
 ./configure --prefix="$_PKGROOT/src/native"
-"$_MAKE" -j8
+"$_MAKE" -j"$_JOBS"
 "$_MAKE" install
 "$_MAKE" clean
 export PATH="$_PKGROOT/src/native/bin:$PATH"
 
 ./configure --host="$_TARGET" --prefix=/var/usr --enable-xzlib --enable-bzlib --enable-zlib --enable-zstdlib
-"$_MAKE" -j8
+"$_MAKE" -j"$_JOBS"
 "$_MAKE" DESTDIR="$_PKGROOT/pkg" install
 )
 

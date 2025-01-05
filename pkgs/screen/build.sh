@@ -2,7 +2,7 @@
 (
 cd src || exit 1
 ./configure --host="$_TARGET" --prefix=/var/usr --enable-colors256 --enable-rxvt_osc --enable-telnet CPPFLAGS="-Wno-implicit-function-declaration"
-"$_MAKE" -j8
+"$_MAKE" -j"$_JOBS"
 "$_MAKE" DESTDIR="$_PKGROOT/pkg" install
 cp etc/etcscreenrc "$_PKGROOT/pkg/var/usr/etc/screenrc"
 )

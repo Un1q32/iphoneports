@@ -3,7 +3,7 @@
 cd src || exit 1
 ./autogen.sh
 ./configure --host="$_TARGET" --prefix=/var/usr
-"$_MAKE" -j8
+"$_MAKE" -j"$_JOBS"
 "$_MAKE" install DESTDIR="$_PKGROOT/pkg"
 )
 

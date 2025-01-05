@@ -4,7 +4,7 @@ mkdir -p src/build
 cd src/build || exit 1
 cpu="${_TARGET%%-*}"
 cmake -GNinja .. -DCMAKE_BUILD_TYPE=Release -DCMAKE_C_COMPILER="$_TARGET-cc" -DCMAKE_SYSTEM_NAME=Darwin -DCMAKE_INSTALL_PREFIX=/var/usr -DCMAKE_FIND_ROOT_PATH_MODE_INCLUDE=ONLY -DCMAKE_SYSTEM_PROCESSOR="$cpu" -DWITH_SYSTEM_LIBUV=ON -DBUILD_NATIVE=OFF -DLIBUV_LIBRARIES= -DLIBUV_INCLUDE_DIR="$_SDK/var/usr/include"
-DESTDIR="$_PKGROOT/pkg" ninja install -j8
+DESTDIR="$_PKGROOT/pkg" ninja install -j"$_JOBS"
 )
 
 (

@@ -40,6 +40,18 @@ pkgdir="$bsroot/pkgs"
 export TERM="xterm-256color"
 export _ENT="$bsroot/entitlements.xml"
 
+if command -v nproc > /dev/null; then
+    cpus=$(nproc)
+elif sysctl -n hw.ncpu > /dev/null 2>&1; then
+    cpus=$(sysctl -n hw.ncpu)
+else
+    cpus=1
+fi
+
+_JOBS=$((cpus * 2 / 3))
+[ "$_JOBS" = 0 ] && _JOBS=1
+export _JOBS
+
 case "$*" in
     *--no-tmpfs*) export _TMP="$bsroot" ;;
     *) export _TMP="/tmp" ;;

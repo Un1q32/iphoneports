@@ -2,7 +2,7 @@
 (
 cd src || exit 1
 ./configure --prefix=/var/usr CXX="$_TARGET-c++"
-"$_MAKE" DESTDIR="$_PKGROOT/pkg" install -j8
+"$_MAKE" DESTDIR="$_PKGROOT/pkg" install -j"$_JOBS"
 )
 
 (
