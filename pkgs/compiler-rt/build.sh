@@ -5,30 +5,30 @@ cd src/build || exit 1
 clang="$(command -v "$_TARGET-sdkpath")"
 clang="${clang%/*}/../share/iphoneports/bin/clang"
 
-ios7srcs="emutls.c extendhfsf2.c truncsfhf2.c"
-ios6srcs="$ios7srcs atomic.c"
-ios3srcs="$ios6srcs"
-ios2srcs="$ios3srcs"
+arm64srcs="emutls.c"
+armv7ssrcs="$arm64srcs atomic.c extendhfsf2.c truncsfhf2.c"
+armv7srcs="$armv7ssrcs"
+armv6srcs="$armv7srcs"
 
-for src in $ios2srcs; do
+for src in $armv6srcs; do
     while [ "$(pgrep clang | wc -l)" -ge "$_JOBS" ]; do
         sleep 0.1
     done
     "$clang" -isysroot "$_PKGROOT/sysroot" -target armv6-apple-ios2 "../lib/builtins/$src" -c -O3 -o "armv6-${src%\.c}.o" &
 done
-for src in $ios3srcs; do
+for src in $armv7srcs; do
     while [ "$(pgrep clang | wc -l)" -ge "$_JOBS" ]; do
         sleep 0.1
     done
     "$clang" -isysroot "$_PKGROOT/sysroot" -target armv7-apple-ios3 "../lib/builtins/$src" -c -O3 -o "armv7-${src%\.c}.o" &
 done
-for src in $ios6srcs; do
+for src in $armv7ssrcs; do
     while [ "$(pgrep clang | wc -l)" -ge "$_JOBS" ]; do
         sleep 0.1
     done
     "$clang" -isysroot "$_PKGROOT/sysroot" -target armv7s-apple-ios6 "../lib/builtins/$src" -c -O3 -o "armv7s-${src%\.c}.o" &
 done
-for src in $ios7srcs; do
+for src in $arm64srcs; do
     while [ "$(pgrep clang | wc -l)" -ge "$_JOBS" ]; do
         sleep 0.1
     done
