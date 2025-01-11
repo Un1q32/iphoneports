@@ -2,6 +2,9 @@
 
 #include_next <spawn.h>
 
-__BEGIN_DECLS
-extern int posix_spawn_file_actions_addinherit_np(posix_spawn_file_actions_t *, int);
-__END_DECLS
+static inline int
+posix_spawn_file_actions_addinherit_np(posix_spawn_file_actions_t *fa, int fd) {
+  (void)fa;
+  (void)fd;
+  return 0;
+}

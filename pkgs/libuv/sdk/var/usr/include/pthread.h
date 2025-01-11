@@ -2,6 +2,7 @@
 
 #include_next <pthread.h>
 
-__BEGIN_DECLS
-extern int pthread_setname_np(const char *);
-__END_DECLS
+static inline int pthread_setname_np(const char *name) {
+  (void)name;
+  return 0;
+}
