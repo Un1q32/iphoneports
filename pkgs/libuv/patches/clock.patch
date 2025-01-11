@@ -9,7 +9,7 @@
  # include <crt_externs.h>
  # include <mach-o/dyld.h> /* _NSGetExecutablePath */
  # define environ (*_NSGetEnviron())
-@@ -110,9 +110,10 @@
+@@ -111,9 +111,10 @@
  
  
  /* https://github.com/libuv/libuv/issues/1674 */
@@ -22,7 +22,7 @@
  
    if (ts == NULL)
      return UV_EFAULT;
-@@ -121,15 +122,14 @@
+@@ -122,15 +123,14 @@
      default:
        return UV_EINVAL;
      case UV_CLOCK_MONOTONIC:
