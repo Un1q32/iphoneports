@@ -40,18 +40,6 @@ pkgdir="$bsroot/pkgs"
 export TERM="xterm-256color"
 export _ENT="$bsroot/entitlements.xml"
 
-if command -v nproc > /dev/null; then
-    cpus=$(nproc)
-elif sysctl -n hw.ncpu > /dev/null 2>&1; then
-    cpus=$(sysctl -n hw.ncpu)
-else
-    cpus=1
-fi
-
-_JOBS=$((cpus * 2 / 3))
-[ "$_JOBS" = 0 ] && _JOBS=1
-export _JOBS
-
 case "$*" in
     *--no-tmpfs*) export _TMP="$bsroot" ;;
     *) export _TMP="/tmp" ;;
@@ -60,6 +48,26 @@ esac
 case "$*" in
     *--target=*) _TARGET="$*" ; _TARGET="${_TARGET#*--target=}" ; export _TARGET="${_TARGET%% *}" ;;
     *) export _TARGET="$defaulttarget" ;;
+esac
+
+case "$*" in
+    *-j*)
+        _JOBS="$*" ; _JOBS="${_JOBS#*-j}" ; export _JOBS="${_JOBS%% *}"
+    ;;
+
+    *)
+        if command -v nproc > /dev/null; then
+            cpus=$(nproc)
+        elif sysctl -n hw.ncpu > /dev/null 2>&1; then
+            cpus=$(sysctl -n hw.ncpu)
+        else
+            cpus=1
+        fi
+
+        _JOBS=$((cpus * 2 / 3))
+        [ "$_JOBS" = 0 ] && _JOBS=1
+        export _JOBS
+    ;;
 esac
 
 : > "$_TMP/.builtpkgs"
@@ -329,6 +337,7 @@ Usage: build.sh [options] <command>
                               Useful for installing packages in environments without dpkg
     --target                - Specify a target (default: $defaulttarget)
     --no-tmp                - Do not use /tmp for anything, use the current directory instead
+    -jN                     - Set the number of jobs passed to programs like make and ninja
 "
             exit 1
         ;;

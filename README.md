@@ -22,6 +22,7 @@ Usage: build.sh [options] <command>
                               Useful for installing packages in environments without dpkg
     --target                - Specify a target (default: armv6-apple-darwin10)
     --no-tmp                - Do not use /tmp for anything, use the current directory instead
+    -jN                     - Set the number of jobs passed to programs like make and ninja
 ```
 
 ## Examples
