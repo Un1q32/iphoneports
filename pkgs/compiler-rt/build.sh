@@ -8,7 +8,7 @@ clang="${clang%/*}/../share/iphoneports/bin/clang"
 arm64srcs="emutls.c"
 armv7ssrcs="$arm64srcs atomic.c extendhfsf2.c truncsfhf2.c"
 armv7srcs="$armv7ssrcs"
-armv6srcs="$armv7srcs floatundidf.c floatundisf.c"
+armv6srcs="$armv7srcs"
 
 for src in $armv6srcs; do
     while [ "$(pgrep clang | wc -l)" -ge "$_JOBS" ]; do
