@@ -2,7 +2,7 @@ Package: iphoneports-getusedmem
 Section: Utilities
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Architecture: iphoneos-arm
-Version: 4
+Version: 5
 Depends: iphoneports-base
 Description: prints used memory in kb, for use in scripts
 Replaces: iphoneports-neofetch

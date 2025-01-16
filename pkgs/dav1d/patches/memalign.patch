@@ -1,0 +1,26 @@
+--- src/src/mem.h.orig
++++ src/src/mem.h
+@@ -101,15 +101,21 @@
+     // must be an integral multiple of alignment.
+     return aligned_alloc(align, ROUND_UP(sz, align));
+ #else
+-#error No aligned allocation functions are available
++    char *ptr = malloc(sz + align + sizeof(void *));
++    char *result = ptr + sizeof(void *);
++    result = (char *)(((size_t)result + align - 1) & ~(align - 1));
++    ((char **)result)[-1] = ptr;
++    return result;
+ #endif
+ }
+ 
+ static inline void dav1d_free_aligned_internal(void *ptr) {
+ #ifdef _WIN32
+     _aligned_free(ptr);
+-#else
++#elif HAVE_POSIX_MEMALIGN || HAVE_MEMALIGN || HAVE_ALIGNED_ALLOC
+     free(ptr);
++#else
++    free(((void **)ptr)[-1]);
+ #endif
+ }
+ 
