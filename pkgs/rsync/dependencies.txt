@@ -3,3 +3,4 @@ zstd
 lz4
 zlib
 xxhash
+popt
