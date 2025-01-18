@@ -85,6 +85,14 @@ depcheck() {
         fi
     done
 
+    case $_TARGET in
+        x86_64*|i386-*|i686-*)
+            if ! command -v nasm > /dev/null; then
+                error "Missing dependency: nasm"
+            fi
+        ;;
+    esac
+
     if command -v gmake > /dev/null; then
         _MAKE="gmake"
     elif command -v make > /dev/null; then
