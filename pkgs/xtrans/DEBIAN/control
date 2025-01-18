@@ -1,7 +1,0 @@
-Package: iphoneports-xtrans
-Section: Development
-Maintainer: Uniq <joey.t.reinhart@gmail.com>
-Architecture: iphoneos-arm
-Version: 1.5.1
-Description: X transport library
-Depends: iphoneports-base

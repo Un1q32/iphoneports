@@ -1,4 +1,0 @@
-xorgproto
-xcb-proto
-libxau
-xorg-util-macros

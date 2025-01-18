@@ -1,7 +1,0 @@
-Package: iphoneports-libxcb
-Section: Development
-Maintainer: Uniq <joey.t.reinhart@gmail.com>
-Architecture: iphoneos-arm
-Version: 1.17.0
-Description: X11 client-side library
-Depends: iphoneports-base, iphoneports-libxau
