@@ -1,7 +1,0 @@
-Package: iphoneports-login
-Section: Utilities
-Maintainer: Uniq <joey.t.reinhart@gmail.com>
-Architecture: iphoneos-arm
-Version: 433-1
-Description: log into the computer
-Depends: iphoneports-base, pam
