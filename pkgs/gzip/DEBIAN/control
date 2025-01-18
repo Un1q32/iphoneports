@@ -2,7 +2,7 @@ Package: iphoneports-gzip
 Section: Archiving
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Architecture: iphoneos-arm
-Version: 448.0.3-1
+Version: 448.0.3-2
 Depends: iphoneports-base, iphoneports-sed, iphoneports-grep, iphoneports-bzip2, iphoneports-xz, iphoneports-zlib
 Replaces: iphoneports-grep
 Description: the standard Unix compression algorithm
