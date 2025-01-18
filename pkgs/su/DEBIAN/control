@@ -1,8 +1,0 @@
-Package: iphoneports-su
-Section: Administration
-Maintainer: Uniq <joey.t.reinhart@gmail.com>
-Architecture: iphoneos-arm
-Version: 116-5
-Description: substitute user
-Depends: iphoneports-base, pam
-Replaces: pam
