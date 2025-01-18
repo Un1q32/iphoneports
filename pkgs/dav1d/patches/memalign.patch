@@ -1,13 +1,12 @@
 --- src/src/mem.h.orig
 +++ src/src/mem.h
-@@ -101,15 +101,21 @@
+@@ -101,15 +101,20 @@
      // must be an integral multiple of alignment.
      return aligned_alloc(align, ROUND_UP(sz, align));
  #else
 -#error No aligned allocation functions are available
-+    char *ptr = malloc(sz + align + sizeof(void *));
-+    char *result = ptr + sizeof(void *);
-+    result = (char *)(((size_t)result + align - 1) & ~(align - 1));
++    char *ptr = (char *)malloc(sz + align + sizeof(void *));
++    char *result = (char *)(((size_t)ptr + sizeof(void *) + align - 1) & ~(align - 1));
 +    ((char **)result)[-1] = ptr;
 +    return result;
  #endif
