@@ -86,7 +86,7 @@ depcheck() {
     done
 
     case $_TARGET in
-        x86_64*|i386-*|i686-*)
+        x86_64*|i386-*)
             if ! command -v nasm > /dev/null; then
                 error "Missing dependency: nasm"
             fi

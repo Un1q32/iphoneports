@@ -16,7 +16,7 @@ case $cpu in
         cpu_family=x86_64
     ;;
 
-    i386|i686)
+    i386)
         cpu_family=x86
     ;;
 
