@@ -6,7 +6,7 @@ clang="$(command -v "$_TARGET-sdkpath")"
 clang="${clang%/*}/../share/iphoneports/bin/clang"
 
 x64srcs="emutls.c"
-x32srcs="$x64srcs"
+x32srcs="$x64srcs atomic.c"
 arm64srcs="emutls.c"
 armv7ssrcs="$arm64srcs atomic.c extendhfsf2.c truncsfhf2.c"
 armv7srcs="$armv7ssrcs"
@@ -58,7 +58,7 @@ wait
 "$_TARGET-libtool" -static -o libclang_rt.osx.a ./*.o
 rm ./*.o
 
-cp *.a "$_PKGROOT/pkg/var/usr/lib/clang/19/lib/darwin"
+cp ./*.a "$_PKGROOT/pkg/var/usr/lib/clang/19/lib/darwin"
 )
 
 cp -r DEBIAN pkg
