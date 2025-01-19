@@ -1,0 +1,11 @@
+--- src/cctools/ld64/src/ld/libcodedirectory.c.orig
++++ src/cctools/ld64/src/ld/libcodedirectory.c
+@@ -20,7 +20,7 @@
+ #include <sys/mman.h>
+ #include <sys/queue.h>
+ 
+-#if defined(HAVE_DISPATCH_DISPATCH_H) && HAVE_DISPATCH_DISPATCH_H // ld64-port
++#if 0
+ #define LIBCD_PARALLEL 1
+ #endif
+ 
