@@ -1,0 +1,11 @@
+--- src/clang/lib/DirectoryWatcher/mac/DirectoryWatcher-mac.cpp.orig
++++ src/clang/lib/DirectoryWatcher/mac/DirectoryWatcher-mac.cpp
+@@ -19,7 +19,7 @@
+ using namespace llvm;
+ using namespace clang;
+ 
+-#if TARGET_OS_OSX
++#if 0
+ 
+ static void stopFSEventStream(FSEventStreamRef);
+ 
