@@ -6,18 +6,27 @@ cpu="${_TARGET%%-*}"
 case $cpu in
     arm64|arm64e|aarch64)
         cpu_family=aarch64
+        asm=true
+    ;;
+
+    armv7*)
+        cpu_family=arm
+        asm=true
     ;;
 
     arm*)
         cpu_family=arm
+        asm=false
     ;;
 
     x86_64|x86_64h)
         cpu_family=x86_64
+        asm=true
     ;;
 
     i386)
         cpu_family=x86
+        asm=true
     ;;
 
     *)
@@ -53,7 +62,7 @@ export PATH="$_PKGROOT/src/tmpbin:$PATH"
 
 (
 cd src/build || exit 1
-meson setup .. --cross-file="$_PKGROOT/src/iphoneports.meson" --prefix=/var/usr -Denable_asm=false -Denable_tests=false
+meson setup .. --cross-file="$_PKGROOT/src/iphoneports.meson" --prefix=/var/usr -Denable_asm="$asm" -Denable_tests=false
 DESTDIR="$_PKGROOT/pkg" ninja install -j"$_JOBS"
 )
 
