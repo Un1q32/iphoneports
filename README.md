@@ -37,7 +37,7 @@ Usage: build.sh [options] <command>
 ./build.sh ed xxd
 ```
 
-#### Build gzip for arm64-apple-darwin14
+#### Build gzip for i386-apple-darwin10
 ```sh
-./build.sh --target=arm64-apple-darwin14 gzip
+./build.sh --target=i386-apple-darwin10 gzip
 ```
