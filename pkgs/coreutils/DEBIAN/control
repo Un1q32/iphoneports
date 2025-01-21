@@ -5,4 +5,4 @@ Architecture: iphoneos-arm
 Version: 9.6
 Description: The basic file, shell and text manipulation utilities of the GNU operating system
 Homepage: http://www.gnu.org/software/coreutils/
-Depends: iphoneports-base, iphoneports-libressl
+Depends: iphoneports-base, iphoneports-libressl, iphoneports-gmp
