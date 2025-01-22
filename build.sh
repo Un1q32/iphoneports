@@ -154,6 +154,7 @@ build() {
     )
 
     [ -n "$dryrun" ] && printf '%s\n' "$1" >> "$_TMP/.builtpkgs"
+    return 0
 }
 
 hasbeenbuilt() {
