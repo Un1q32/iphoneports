@@ -77,7 +77,6 @@ error() {
     printf '\033[1;31mError:\033[0m %s\n' "$1"
     if [ "$2" != "noexit" ]; then
         rm -f "$bsroot/pkglock"
-        [ -n "$_SDK" ] && rm -rf "$_SDK"*
         exit 1
     fi
 }
@@ -148,10 +147,11 @@ build() {
         [ -f fetch.sh ] && ./fetch.sh
         applypatches
         printf '%s\n' "Building $1"
-        ./build.sh || error "Failed to build package: $1"
+        ./build.sh || fail=1
     fi
     rm -rf "$_SDK"
-    )
+    [ -z "$fail" ]
+    ) || return 1
 
     [ -n "$dryrun" ] && printf '%s\n' "$1" >> "$_TMP/.builtpkgs"
     return 0
@@ -196,8 +196,15 @@ includedeps() {
                 if ! hasbeenbuilt "$dep"; then
                     printf '%s\n' "Building dependency $dep"
                     [ -z "$dryrun" ] && mv "$_SDK" "$_SDK.$dep"
-                    build "$dep"
-                    [ -z "$dryrun" ] && mv "$_SDK.$dep" "$_SDK"
+                    build "$dep" || fail=1
+                    if [ -z "$dryrun" ]; then
+                        if [ -n "$fail" ]; then
+                            rm -rf "$_SDK.$dep"
+                            error "Failed to build package: $dep"
+                        else
+                            mv "$_SDK.$dep" "$_SDK"
+                        fi
+                    fi
                 fi
                 printf '%s\n' "Including dependency $dep"
                 [ -z "$dryrun" ] && cp -a "$pkgdir/$dep/pkg/"* "$_SDK"
