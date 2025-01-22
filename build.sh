@@ -77,6 +77,7 @@ error() {
     printf '\033[1;31mError:\033[0m %s\n' "$1"
     if [ "$2" != "noexit" ]; then
         rm -f "$bsroot/pkglock"
+        [ -n "$_SDK" ] && rm -rf "$_SDK"*
         exit 1
     fi
 }
@@ -147,7 +148,7 @@ build() {
         [ -f fetch.sh ] && ./fetch.sh
         applypatches
         printf '%s\n' "Building $1"
-        ./build.sh
+        ./build.sh || error "Failed to build package: $1"
     fi
     rm -rf "$_SDK"
     )
