@@ -75,7 +75,10 @@ rm -rf "$_TMP"/iphoneports-sdk*
 
 error() {
     printf '\033[1;31mError:\033[0m %s\n' "$1"
-    [ "$2" != "noexit" ] && { rm -f "$bsroot/pkglock"; exit 1; }
+    if [ "$2" != "noexit" ]; then
+        rm -f "$bsroot/pkglock"
+        exit 1
+    fi
 }
 
 depcheck() {
@@ -149,7 +152,7 @@ build() {
     rm -rf "$_SDK"
     )
 
-    printf '%s\n' "$1" >> "$_TMP/.builtpkgs"
+    [ -n "$dryrun" ] && printf '%s\n' "$1" >> "$_TMP/.builtpkgs"
 }
 
 hasbeenbuilt() {
