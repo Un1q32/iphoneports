@@ -3,7 +3,7 @@
 cd src || exit 1
 cpu="${_TARGET%%-*}"
 export PKG_CONFIG_LIBDIR="$_SDK/var/usr/lib/pkgconfig"
-./configure --prefix=/var/usr --cross-prefix="$_TARGET-" --arch="$cpu" --target-os=darwin --stdc=c23 --disable-stripping --disable-debug --disable-doc --disable-avdevice --disable-static --enable-shared --enable-lto --enable-zlib --enable-lzma --enable-bzlib --enable-libxml2 --enable-openssl --enable-libdav1d --enable-libwebp --pkg-config="$(command -v pkg-config)"
+./configure --prefix=/var/usr --cross-prefix="$_TARGET-" --arch="$cpu" --target-os=darwin --stdc=c23 --disable-stripping --disable-debug --disable-doc --disable-avdevice --disable-static --enable-shared --enable-lto --enable-zlib --enable-lzma --enable-bzlib --enable-libxml2 --enable-openssl --enable-libdav1d --enable-libwebp --pkg-config='pkg-config'
 "$_MAKE" -j"$_JOBS"
 "$_MAKE" DESTDIR="$_PKGROOT/pkg" install
 )
