@@ -237,6 +237,7 @@ main() {
     case "$1" in
         all|all-noclean)
             depcheck
+            kind=$1
             shift
             for pkg in "$pkgdir"/*; do
                 unset dontbuild
@@ -251,13 +252,14 @@ main() {
                     pkglist="$pkglist ${pkg##*/}"
                 fi
 
-                if [ "$1" != "all-noclean" ]; then
+                if [ "$kind" != "all-noclean" ]; then
                     rm -rf "$pkg/pkg" "$pkg/src" &
                 fi
             done
             wait
 
             for pkg in $pkglist; do
+                [ "$kind" = "all-noclean" ] && hasbeenbuilt "$pkg" && continue
                 build "$pkg" || error "Failed to build package: $pkg"
                 cp -f "$pkgdir/$pkg"/*.deb "$bsroot/debs" 2> /dev/null
             done
