@@ -1,7 +1,7 @@
 #!/bin/sh -e
 (
 cd src || exit 1
-./configure --host="$_TARGET" --prefix=/var/usr --enable-colors256 --enable-rxvt_osc --enable-telnet CPPFLAGS="-Wno-implicit-function-declaration"
+./configure --host="$_TARGET" --prefix=/var/usr --enable-telnet --enable-utmp
 "$_MAKE" -j"$_JOBS"
 "$_MAKE" DESTDIR="$_PKGROOT/pkg" install
 mkdir -p "$_PKGROOT/pkg/var/usr/etc"
