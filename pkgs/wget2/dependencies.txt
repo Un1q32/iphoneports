@@ -6,3 +6,5 @@ zlib
 libpsl
 zstd
 libidn2
+xz
+bzip2
