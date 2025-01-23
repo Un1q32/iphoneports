@@ -13,6 +13,7 @@ Usage: build.sh [options] <command>
     <pkg> [pkgs...]         - Build specified packages
     build <pkg> [pkgs...]   - Build specified packages
     all [pkgs...]           - Build all packages (except those specified)
+    all-noclean [pkgs...]   - Same as all but doesn't cleanall first
     clean <pkg> [pkgs...]   - Clean a single package
     cleanall                - Clean all packages
     dryrun [pkgs...]        - Pretend to build all packages, for debugging

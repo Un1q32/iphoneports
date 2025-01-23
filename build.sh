@@ -235,7 +235,7 @@ sysroot() {
 
 main() {
     case "$1" in
-        all)
+        all|all-noclean)
             depcheck
             shift
             for pkg in "$pkgdir"/*; do
@@ -251,7 +251,9 @@ main() {
                     pkglist="$pkglist ${pkg##*/}"
                 fi
 
-                rm -rf "$pkg/pkg" "$pkg/src" &
+                if [ "$1" != "all-noclean" ]; then
+                    rm -rf "$pkg/pkg" "$pkg/src" &
+                fi
             done
             wait
 
@@ -351,6 +353,7 @@ Usage: build.sh [options] <command>
     <pkg> [pkgs...]         - Build specified packages
     build <pkg> [pkgs...]   - Build specified packages
     all [pkgs...]           - Build all packages (except those specified)
+    all-noclean [pkgs...]   - Same as all but doesn't cleanall first
     clean <pkg> [pkgs...]   - Clean a single package
     cleanall                - Clean all packages
     dryrun [pkgs...]        - Pretend to build all packages, for debugging
