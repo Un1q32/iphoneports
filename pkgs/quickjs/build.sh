@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/sh -e
 # shellcheck disable=2086
 (
 cd src || exit 1
@@ -16,7 +16,7 @@ cp quickjs.h quickjs-libc.h "$_PKGROOT/pkg/var/usr/include/quickjs"
 
 (
 cd pkg/var/usr || exit 1
-"$_TARGET-strip" bin/qjs bin/qjsc lib/quickjs/libquickjs.dylib 2>/dev/null
+"$_TARGET-strip" bin/qjs bin/qjsc lib/quickjs/libquickjs.dylib 2>/dev/null || true
 ldid -S"$_ENT" bin/qjs bin/qjsc lib/quickjs/libquickjs.dylib
 )
 

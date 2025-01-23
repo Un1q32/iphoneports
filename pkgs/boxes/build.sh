@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/sh -e
 (
 cd src || exit 1
 "$_MAKE" CC="$_TARGET-cc" GLOBALCONF=/var/usr/etc/boxes-config
@@ -9,7 +9,7 @@ cp boxes-config "$_PKGROOT/pkg/var/usr/etc"
 
 (
 cd pkg/var/usr/bin || exit 1
-"$_TARGET-strip" boxes 2>/dev/null
+"$_TARGET-strip" boxes 2>/dev/null || true
 ldid -S"$_ENT" boxes
 )
 

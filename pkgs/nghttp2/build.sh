@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/sh -e
 mkdir -p src/build
 (
 cd src/build || exit 1
@@ -11,7 +11,7 @@ cd pkg/var/usr || exit 1
 rm -rf share
 mv lib/libnghttp2.14.*.dylib lib/libnghttp2.14.dylib
 "$_INSTALLNAMETOOL" -id /var/usr/lib/libnghttp2.14.dylib lib/libnghttp2.14.dylib
-"$_TARGET-strip" lib/libnghttp2.14.dylib 2>/dev/null
+"$_TARGET-strip" lib/libnghttp2.14.dylib 2>/dev/null || true
 ldid -S"$_ENT" lib/libnghttp2.14.dylib
 )
 

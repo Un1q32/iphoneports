@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/sh -e
 (
 cd src || exit 1
 "$_TARGET-c++" -Os -flto ldid.cpp -o ldid -lplist-2.0 -lcrypto -DLDID_VERSION='"2.1.5-procursus7"'
@@ -9,7 +9,7 @@ cp ldid "$_PKGROOT/pkg/var/usr/bin"
 (
 cd pkg/var/usr/bin || exit 1
 ln -s ldid ldid2
-"$_TARGET-strip" ldid 2>/dev/null
+"$_TARGET-strip" ldid 2>/dev/null || true
 ldid -S"$_ENT" ldid
 )
 

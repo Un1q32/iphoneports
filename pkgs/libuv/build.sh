@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/sh -e
 (
 cd src || exit 1
 ./autogen.sh
@@ -8,7 +8,7 @@ cd src || exit 1
 
 (
 cd pkg/var/usr/lib || exit 1
-"$_TARGET-strip" libuv.1.dylib 2>/dev/null
+"$_TARGET-strip" libuv.1.dylib 2>/dev/null || true
 ldid -S"$_ENT" libuv.1.dylib
 )
 

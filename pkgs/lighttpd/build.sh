@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/sh -e
 (
 cd src || exit 1
 ./autogen.sh
@@ -10,7 +10,7 @@ cd src || exit 1
 (
 cd pkg/var/usr || exit 1
 rm -rf share
-"$_TARGET-strip" sbin/lighttpd sbin/lighttpd-angel lib/liblightcomp.dylib lib/*.so 2>/dev/null
+"$_TARGET-strip" sbin/lighttpd sbin/lighttpd-angel lib/liblightcomp.dylib lib/*.so 2>/dev/null || true
 ldid -S"$_ENT" sbin/lighttpd sbin/lighttpd-angel lib/liblightcomp.dylib lib/*.so
 )
 

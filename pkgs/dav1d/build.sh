@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/sh -e
 mkdir -p src/build src/tmpbin
 
 cpu="${_TARGET%%-*}"
@@ -49,12 +49,12 @@ sed -e "s|@CC@|$_TARGET-cc|g" \
     files/iphoneports.meson > src/iphoneports.meson
 
 [ "$_INSTALLNAMETOOL" != "install_name_tool" ] && printf '%s' "\
-#!/bin/sh
+#!/bin/sh -e
 exec \"$(command -v "$_INSTALLNAMETOOL")\" \"\$@\"
 " > src/tmpbin/install_name_tool && chmod +x src/tmpbin/install_name_tool
 
 [ "$_OTOOL" != "otool" ] && printf '%s' "\
-#!/bin/sh
+#!/bin/sh -e
 exec \"$(command -v "$_OTOOL")\" \"\$@\"
 " > src/tmpbin/otool && chmod +x src/tmpbin/otool
 
@@ -68,7 +68,7 @@ DESTDIR="$_PKGROOT/pkg" ninja install -j"$_JOBS"
 
 (
 cd pkg/var/usr || exit 1
-"$_TARGET-strip" bin/dav1d lib/libdav1d.7.dylib 2>/dev/null
+"$_TARGET-strip" bin/dav1d lib/libdav1d.7.dylib 2>/dev/null || true
 ldid -S"$_ENT" bin/dav1d lib/libdav1d.7.dylib
 )
 

@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/sh -e
 (
 cd src || exit 1
 for src in crc32.cc support.cc guid.cc gptpart.cc mbrpart.cc basicmbr.cc mbr.cc gpt.cc bsd.cc parttypes.cc attributes.cc diskio.cc diskio-unix.cc; do
@@ -17,7 +17,7 @@ cp libgptfdisk.dylib "$_PKGROOT/pkg/var/usr/lib"
 
 (
 cd pkg/var/usr || exit 1
-"$_TARGET-strip" sbin/* lib/libgptfdisk.dylib 2>/dev/null
+"$_TARGET-strip" sbin/* lib/libgptfdisk.dylib 2>/dev/null || true
 ldid -S"$_ENT" sbin/* lib/libgptfdisk.dylib
 )
 

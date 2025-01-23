@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/sh -e
 mkdir -p pkg/var/usr/bin
 cp src/pfetch pkg/var/usr/bin
 

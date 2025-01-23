@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/sh -e
 mkdir -p src/build
 (
 cd src/build || exit 1
@@ -12,7 +12,7 @@ cd pkg/var/usr || exit 1
 rm -rf share
 mv lib/libjpeg.62.*.dylib lib/libjpeg.62.dylib
 mv lib/libturbojpeg.0.*.dylib lib/libturbojpeg.0.dylib
-"$_TARGET-strip" lib/libjpeg.62.dylib lib/libturbojpeg.0.dylib bin/* 2>/dev/null
+"$_TARGET-strip" lib/libjpeg.62.dylib lib/libturbojpeg.0.dylib bin/* 2>/dev/null || true
 ldid -S"$_ENT" lib/libjpeg.62.dylib lib/libturbojpeg.0.dylib bin/*
 )
 

@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/sh -e
 (
 cd src || exit 1
 "$_TARGET-cc" whois.c -o whois -Os -flto -Wno-string-plus-int -D'__FBSDID(x)='
@@ -8,7 +8,7 @@ cp whois "$_PKGROOT/pkg/var/usr/bin"
 
 (
 cd pkg/var/usr/bin || exit 1
-"$_TARGET-strip" whois 2>/dev/null
+"$_TARGET-strip" whois 2>/dev/null || true
 ldid -S"$_ENT" whois
 )
 

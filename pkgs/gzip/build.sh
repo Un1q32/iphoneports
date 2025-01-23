@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/sh -e
 (
 cd src || exit 1
 mkdir -p "$_PKGROOT/pkg/var/usr/bin"
@@ -15,7 +15,7 @@ done
 
 (
 cd pkg/var/usr/bin || exit 1
-"$_TARGET-strip" gzip 2>/dev/null
+"$_TARGET-strip" gzip 2>/dev/null || true
 ldid -S"$_ENT" gzip
 for link in gunzip gzcat zgrep zegrep zfgrep; do
     ln -s gzip "$link"

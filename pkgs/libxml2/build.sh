@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/sh -e
 (
 cd src || exit 1
 ./configure --host="$_TARGET" --prefix=/var/usr --disable-static --without-python --with-zlib --with-lzma PKG_CONFIG_LIBDIR="$_SDK/var/usr/lib/pkgconfig"
@@ -10,7 +10,7 @@ cd src || exit 1
 cd pkg/var/usr || exit 1
 rm -rf share/doc share/gtk-doc share/man
 ln -s libxml2/libxml include/libxml
-"$_TARGET-strip" bin/xmlcatalog bin/xmllint lib/libxml2.2.dylib 2>/dev/null
+"$_TARGET-strip" bin/xmlcatalog bin/xmllint lib/libxml2.2.dylib 2>/dev/null || true
 ldid -S"$_ENT" bin/xmlcatalog bin/xmllint lib/libxml2.2.dylib
 )
 

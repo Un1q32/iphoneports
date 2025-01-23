@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/sh -e
 (
 cd src || exit 1
 ./configure --host="$_TARGET" --prefix=/var/usr --disable-static CPPFLAGS='-DkUSBDeviceSpeedSuper=3'
@@ -8,7 +8,7 @@ cd src || exit 1
 
 (
 cd pkg/var/usr/lib || exit 1
-"$_TARGET-strip" libusb-1.0.0.dylib 2>/dev/null
+"$_TARGET-strip" libusb-1.0.0.dylib 2>/dev/null || true
 ldid -S"$_ENT" libusb-1.0.0.dylib
 )
 

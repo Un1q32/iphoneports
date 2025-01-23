@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/sh -e
 
 cp files/configure.h src/cctools/ld64/src
 cp "$_SDK/var/usr/include/llvm-c/lto.h" "$_SDK/var/usr/include/llvm-c/ExternC.h" src/cctools/include/llvm-c
@@ -15,7 +15,7 @@ rm include/foreign/machine/_structs.h
 (
 cd pkg/var/usr || exit 1
 rm -rf share
-"$_TARGET-strip" bin/* libexec/as/*/as 2>/dev/null
+"$_TARGET-strip" bin/* libexec/as/*/as 2>/dev/null || true
 ldid -S"$_ENT" bin/* libexec/as/*/as
 )
 

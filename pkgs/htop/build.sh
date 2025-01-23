@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/sh -e
 (
 cd src || exit 1
 ./autogen.sh
@@ -10,7 +10,7 @@ cp htop "$_PKGROOT/pkg/var/usr/bin"
 
 (
 cd pkg/var/usr/bin || exit 1
-"$_TARGET-strip" htop 2>/dev/null
+"$_TARGET-strip" htop 2>/dev/null || true
 ldid -S"$_ENT" htop
 )
 

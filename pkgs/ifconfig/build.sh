@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/sh -e
 (
 cd src || exit 1
 for src in ifconfig.c ifmedia.c; do
@@ -12,7 +12,7 @@ cp ifconfig "$_PKGROOT/pkg/var/usr/sbin"
 
 (
 cd pkg/var/usr/sbin || exit 1
-"$_TARGET-strip" ifconfig 2>/dev/null
+"$_TARGET-strip" ifconfig 2>/dev/null || true
 ldid -S"$_ENT" ifconfig
 )
 

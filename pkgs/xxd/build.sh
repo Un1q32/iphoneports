@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/sh -e
 (
 cd src || exit 1
 "$_TARGET-cc" -O3 -flto -DUNIX -o xxd xxd.c
@@ -8,7 +8,7 @@ cp xxd "$_PKGROOT"/pkg/var/usr/bin
 
 (
 cd pkg/var/usr/bin || exit 1
-"$_TARGET-strip" xxd 2>/dev/null
+"$_TARGET-strip" xxd 2>/dev/null || true
 ldid -S"$_ENT" xxd
 )
 

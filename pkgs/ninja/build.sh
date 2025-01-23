@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/sh -e
 mkdir -p src/build
 (
 cd src/build || exit 1
@@ -8,7 +8,7 @@ DESTDIR="$_PKGROOT/pkg" ninja install -j"$_JOBS"
 
 (
 cd pkg/var/usr/bin || exit 1
-"$_TARGET-strip" ninja 2>/dev/null
+"$_TARGET-strip" ninja 2>/dev/null || true
 ldid -S"$_ENT" ninja
 )
 

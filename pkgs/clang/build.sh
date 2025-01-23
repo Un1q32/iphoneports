@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/sh -e
 
 _get_distribution_components() {
   ninja -t targets | grep -Po 'install-\K.*(?=-stripped:)' | while read -r target; do
@@ -32,7 +32,7 @@ cd pkg/var/usr || exit 1
 rm -rf share bin/git-clang-format
 for file in bin/* lib/*.dylib; do
   if ! [ -h "$file" ]; then
-    "$_TARGET-strip" "$file" 2>/dev/null
+    "$_TARGET-strip" "$file" 2>/dev/null || true
     ldid -S"$_ENT" "$file"
   fi
 done

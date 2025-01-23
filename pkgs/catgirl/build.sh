@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/sh -e
 (
 cd src || exit 1
 ctags -w ./*.[ch]
@@ -9,7 +9,7 @@ cp catgirl "$_PKGROOT/pkg/var/usr/bin"
 
 (
 cd pkg/var/usr/bin || exit 1
-"$_TARGET-strip" catgirl 2>/dev/null
+"$_TARGET-strip" catgirl 2>/dev/null || true
 ldid -S"$_ENT" catgirl
 )
 

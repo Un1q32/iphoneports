@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/sh -e
 (
 cd src || exit 1
 "$_TARGET-cc" ping.c -o ping -Os -flto -Wno-deprecated-non-prototype
@@ -9,7 +9,7 @@ cp ping ping6 "$_PKGROOT/pkg/var/usr/sbin"
 
 (
 cd pkg/var/usr/sbin || exit 1
-"$_TARGET-strip" ping ping6 2>/dev/null
+"$_TARGET-strip" ping ping6 2>/dev/null || true
 ldid -S"$_ENT" ping ping6
 )
 

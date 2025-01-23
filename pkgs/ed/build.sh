@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/sh -e
 (
 cd src || exit 1
 for src in main.c io.c buf.c re.c glbl.c undo.c sub.c; do
@@ -12,7 +12,7 @@ cp ed "$_PKGROOT/pkg/var/usr/bin"
 
 (
 cd pkg/var/usr/bin || exit 1
-"$_TARGET-strip" ed 2>/dev/null
+"$_TARGET-strip" ed 2>/dev/null || true
 ldid -S"$_ENT" ed
 )
 

@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/sh -e
 mkdir -p src/build
 (
 cd src/build || exit 1
@@ -17,7 +17,7 @@ tlsabi=31
 mv lib/libcrypto.$cryptoabi.*.dylib lib/libcrypto.$cryptoabi.dylib
 mv lib/libssl.$sslabi.*.dylib lib/libssl.$sslabi.dylib
 mv lib/libtls.$tlsabi.*.dylib lib/libtls.$tlsabi.dylib
-"$_TARGET-strip" bin/openssl bin/ocspcheck bin/nc lib/libcrypto.$cryptoabi.dylib lib/libssl.$sslabi.dylib lib/libtls.$tlsabi.dylib 2>/dev/null
+"$_TARGET-strip" bin/openssl bin/ocspcheck bin/nc lib/libcrypto.$cryptoabi.dylib lib/libssl.$sslabi.dylib lib/libtls.$tlsabi.dylib 2>/dev/null || true
 ldid -S"$_ENT" bin/openssl bin/ocspcheck bin/nc lib/libcrypto.$cryptoabi.dylib lib/libssl.$sslabi.dylib lib/libtls.$tlsabi.dylib
 )
 

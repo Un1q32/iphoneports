@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/sh -e
 (
 cd src || exit 1
 "$_TARGET-cc" -o passwd -Os -flto passwd.c file_passwd.c stringops.c -w
@@ -8,7 +8,7 @@ cp passwd "$_PKGROOT/pkg/var/usr/bin"
 
 (
 cd pkg/var/usr/bin || exit 1
-"$_TARGET-strip" passwd 2>/dev/null
+"$_TARGET-strip" passwd 2>/dev/null || true
 ldid -S"$_ENT" passwd
 chmod 4755 passwd
 )

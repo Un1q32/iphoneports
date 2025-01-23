@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/sh -e
 (
 cd src || exit 1
 ./configure --host="$_TARGET" --prefix=/var/usr --disable-year2038
@@ -9,7 +9,7 @@ cd src || exit 1
 (
 cd pkg/var/usr || exit 1
 rm -rf share var
-"$_TARGET-strip" bin/find bin/xargs bin/locate libexec/frcode 2>/dev/null
+"$_TARGET-strip" bin/find bin/xargs bin/locate libexec/frcode 2>/dev/null || true
 ldid -S"$_ENT" bin/find bin/xargs bin/locate libexec/frcode
 )
 

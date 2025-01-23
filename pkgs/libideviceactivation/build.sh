@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/sh -e
 (
 cd src || exit 1
 autoreconf -fi
@@ -10,7 +10,7 @@ autoreconf -fi
 (
 cd pkg/var/usr || exit 1
 rm -rf share
-"$_TARGET-strip" bin/ideviceactivation lib/libideviceactivation-1.0.2.dylib 2>/dev/null
+"$_TARGET-strip" bin/ideviceactivation lib/libideviceactivation-1.0.2.dylib 2>/dev/null || true
 ldid -S"$_ENT" bin/ideviceactivation lib/libideviceactivation-1.0.2.dylib
 )
 

@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/sh -e
 (
 cd src || exit 1
 CHOST="$_TARGET" ./configure --prefix=/var/usr --zlib-compat --without-neon
@@ -12,7 +12,7 @@ rm -rf share lib/libz.a
 for lib in lib/*.dylib; do
     if [ -f "$lib" ] && [ ! -h "$lib" ]; then
         "$_INSTALLNAMETOOL" -id /var/usr/lib/libz.1.dylib "$lib"
-        "$_TARGET-strip" "$lib" 2>/dev/null
+        "$_TARGET-strip" "$lib" 2>/dev/null || true
         ldid -S"$_ENT" "$lib"
     fi
 done

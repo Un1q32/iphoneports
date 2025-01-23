@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/sh -e
 (
 cd src || exit 1
 ./configure --host="$_TARGET" --prefix=/var/usr
@@ -9,7 +9,7 @@ cd src || exit 1
 (
 cd pkg/var/usr || exit 1
 rm -rf share
-"$_TARGET-strip" bin/lzop 2>/dev/null
+"$_TARGET-strip" bin/lzop 2>/dev/null || true
 ldid -S"$_ENT" bin/lzop
 )
 

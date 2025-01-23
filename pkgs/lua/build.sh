@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/sh -e
 (
 cd src || exit 1
 "$_MAKE" PLAT=macosx INSTALL_TOP=/var/usr CC="$_TARGET-cc" RANLIB="$_TARGET-ranlib" AR="$_TARGET-ar rcu"
@@ -8,7 +8,7 @@ cd src || exit 1
 (
 cd pkg/var/usr || exit 1
 rm -rf man
-"$_TARGET-strip" bin/lua bin/luac 2>/dev/null
+"$_TARGET-strip" bin/lua bin/luac 2>/dev/null || true
 ldid -S"$_ENT" bin/lua bin/luac
 )
 

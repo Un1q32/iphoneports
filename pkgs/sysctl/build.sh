@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/sh -e
 (
 cd src || exit 1
 "$_TARGET-cc" sysctl.c -o sysctl -Os -flto -D'__FBSDID(x)=' -Wno-pointer-sign
@@ -8,7 +8,7 @@ cp sysctl "$_PKGROOT/pkg/var/usr/bin"
 
 (
 cd pkg/var/usr/bin || exit 1
-"$_TARGET-strip" sysctl 2>/dev/null
+"$_TARGET-strip" sysctl 2>/dev/null || true
 ldid -S"$_ENT" sysctl
 )
 

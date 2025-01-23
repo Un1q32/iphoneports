@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/sh -e
 (
 cd src || exit 1
 ./autogen.sh
@@ -11,7 +11,7 @@ cd src || exit 1
 cd pkg/var/usr || exit 1
 rm -rf share sbin
 for bin in distcc distccd distccmon-text lsdistcc; do
-    "$_TARGET-strip" "bin/$bin" 2>/dev/null
+    "$_TARGET-strip" "bin/$bin" 2>/dev/null || true
     ldid -S"$_ENT" "bin/$bin"
 done
 )

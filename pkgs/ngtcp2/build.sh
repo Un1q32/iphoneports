@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/sh -e
 mkdir -p src/build
 (
 cd src/build || exit 1
@@ -11,7 +11,7 @@ cd pkg/var/usr || exit 1
 rm -rf share
 mv lib/libngtcp2.16.*.dylib lib/libngtcp2.16.dylib
 mv lib/libngtcp2_crypto_quictls.2.*.dylib lib/libngtcp2_crypto_quictls.2.dylib
-"$_TARGET-strip" lib/libngtcp2.16.dylib lib/libngtcp2_crypto_quictls.2.dylib 2>/dev/null
+"$_TARGET-strip" lib/libngtcp2.16.dylib lib/libngtcp2_crypto_quictls.2.dylib 2>/dev/null || true
 ldid -S"$_ENT" lib/libngtcp2.16.dylib lib/libngtcp2_crypto_quictls.2.dylib
 )
 

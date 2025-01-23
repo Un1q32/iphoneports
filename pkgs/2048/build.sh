@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/sh -e
 (
 cd src || exit 1
 "$_TARGET-cc" -Os -flto -o 2048 2048.c
@@ -8,7 +8,7 @@ cp 2048 "$_PKGROOT/pkg/var/usr/bin"
 
 (
 cd pkg/var/usr/bin || exit 1
-"$_TARGET-strip" 2048 2>/dev/null
+"$_TARGET-strip" 2048 2>/dev/null || true
 ldid -S"$_ENT" 2048
 )
 

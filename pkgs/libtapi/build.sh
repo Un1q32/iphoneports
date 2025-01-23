@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/sh -e
 mkdir -p src/src/build
 (
 cd src/src/build || exit 1
@@ -11,7 +11,7 @@ DESTDIR="$_PKGROOT/pkg" ninja install-libtapi install-tapi-headers -j"$_JOBS"
 (
 cd pkg/var/usr/lib || exit 1
 "$_INSTALLNAMETOOL" -id /var/usr/lib/libtapi.dylib libtapi.dylib
-"$_TARGET-strip" libtapi.dylib 2>/dev/null
+"$_TARGET-strip" libtapi.dylib 2>/dev/null || true
 ldid -S"$_ENT" libtapi.dylib
 )
 

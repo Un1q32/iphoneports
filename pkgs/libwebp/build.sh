@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/sh -e
 mkdir -p src/build
 (
 cd src/build || exit 1
@@ -11,7 +11,7 @@ cd pkg/var/usr || exit 1
 rm -rf share
 for lib in lib/*.dylib; do
     if ! [ -h "$lib" ]; then
-        "$_TARGET-strip" "$lib" 2>/dev/null
+        "$_TARGET-strip" "$lib" 2>/dev/null || true
         ldid -S"$_ENT" "$lib"
     fi
 done

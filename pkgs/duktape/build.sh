@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/sh -e
 (
 cd src || exit 1
 "$_TARGET-cc" -Os -shared -o libduktape.dylib src/duktape.c -install_name /var/usr/lib/libduktape.207.dylib -current_version 207 -compatibility_version 207
@@ -15,7 +15,7 @@ cp duk "$_PKGROOT/pkg/var/usr/bin"
 
 (
 cd pkg/var/usr || exit 1
-"$_TARGET-strip" bin/duk lib/libduktape.207.dylib 2>/dev/null
+"$_TARGET-strip" bin/duk lib/libduktape.207.dylib 2>/dev/null || true
 ldid -S"$_ENT" bin/duk lib/libduktape.207.dylib
 )
 

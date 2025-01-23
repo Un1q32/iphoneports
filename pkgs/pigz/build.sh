@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/sh -e
 (
 cd src || exit 1
 "$_MAKE" CC="$_TARGET-cc"
@@ -9,7 +9,7 @@ cp pigz "$_PKGROOT/pkg/var/usr/bin"
 (
 cd pkg/var/usr/bin || exit 1
 ln -s pigz unpigz
-"$_TARGET-strip" pigz 2>/dev/null
+"$_TARGET-strip" pigz 2>/dev/null || true
 ldid -S"$_ENT" pigz
 )
 
