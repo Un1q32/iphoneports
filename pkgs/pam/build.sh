@@ -12,6 +12,7 @@ ln -s . pam
 cd pkg || exit 1
 mv usr/include var/usr
 rm -rf usr
+ln -s pam var/usr/include/security
 cd var/usr/lib || exit 1
 mv libpam.1.0.dylib libpam.1.dylib
 "$_TARGET-strip" libpam.1.dylib security/*.so 2>/dev/null || true
