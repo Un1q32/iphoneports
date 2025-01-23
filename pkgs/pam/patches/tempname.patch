@@ -1,0 +1,11 @@
+--- src/modules/pam_unix/pw_util.c.orig
++++ src/modules/pam_unix/pw_util.c
+@@ -82,7 +82,7 @@
+ 
+ #include "pw_util.h"
+ 
+-extern char *tempname;
++char *tempname;
+ static pid_t editpid = -1;
+ static int lockfd;
+ 

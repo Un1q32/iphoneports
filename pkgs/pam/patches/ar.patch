@@ -1,0 +1,11 @@
+--- src/pam/modules/pammodutil/Makefile.orig
++++ src/pam/modules/pammodutil/Makefile
+@@ -37,7 +37,7 @@
+ 	$(CC) $(CFLAGS) $(CPPFLAGS) $(TARGET_ARCH) -c $< -o $@
+ 
+ $(LIBSTATIC): $(SLIBOBJECTS)
+-	ar cr $@ $(SLIBOBJECTS)
++	$(AR) cr $@ $(SLIBOBJECTS)
+ 	$(RANLIB) $@
+ 
+ install:

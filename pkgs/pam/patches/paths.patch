@@ -1,0 +1,15 @@
+--- src/pam/libpam/pam_private.h.orig
++++ src/pam/libpam/pam_private.h
+@@ -28,9 +28,9 @@
+ 
+ /* the Linux-PAM configuration file */
+ 
+-#define PAM_CONFIG    "/etc/pam.conf"
+-#define PAM_CONFIG_D  "/etc/pam.d"
+-#define PAM_CONFIG_DF "/etc/pam.d/%s"
++#define PAM_CONFIG    "/var/usr/etc/pam.conf"
++#define PAM_CONFIG_D  "/var/usr/etc/pam.d"
++#define PAM_CONFIG_DF "/var/usr/etc/pam.d/%s"
+ 
+ #define PAM_DEFAULT_SERVICE        "other"     /* lower case */
+ #define PAM_DEFAULT_SERVICE_FILE   PAM_CONFIG_D "/" PAM_DEFAULT_SERVICE

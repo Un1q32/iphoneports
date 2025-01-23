@@ -1,0 +1,7 @@
+Package: iphoneports-pam
+Section: Administration
+Maintainer: Uniq <joey.t.reinhart@gmail.com>
+Architecture: iphoneos-arm
+Version: 32.1
+Description: Pluggable authentication modules
+Depends: iphoneports-base

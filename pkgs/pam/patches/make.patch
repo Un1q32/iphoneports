@@ -1,0 +1,17 @@
+--- src/pam/modules/Makefile.orig
++++ src/pam/modules/Makefile
+@@ -13,7 +13,7 @@
+ 
+ all:	
+ 	@echo building the static modutil library
+-	make -C pammodutil all
++	$(MAKE) -C pammodutil all
+ 	@echo modules sources available are:
+ 	@ls -d $(MODDIRS) 2>/dev/null ; echo :--------
+ 	@echo
+@@ -56,4 +56,4 @@
+ 			$(MAKE) -C $$i clean ; \
+ 		} fi ; \
+ 	done
+-	make -C pammodutil clean
++	$(MAKE) -C pammodutil clean

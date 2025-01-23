@@ -1,0 +1,11 @@
+--- src/pam/Makefile.orig
++++ src/pam/Makefile
+@@ -25,7 +25,7 @@
+ 
+ real-giantlibpam:
+     ifeq ($(USESONAME),yes)
+-	$(LD_L) $(SOSWITCH) /usr/lib/libpam.$(MAJOR_REL).$(DYNTYPE) -o libpam/libpam.$(DYNTYPE) libpam/libpam.a libpamc/libpamc.a libpam_misc/libpam_misc.a
++	$(LD_L) $(SOSWITCH) /var/usr/lib/libpam.$(MAJOR_REL).$(DYNTYPE) -o libpam/libpam.$(DYNTYPE) libpam/libpam.a libpamc/libpamc.a libpam_misc/libpam_misc.a
+     else
+ 	$(LD_L) -o libpam/libpam.$(DYNTYPE) libpam/libpam.a libpamc/libpamc.a libpam_misc/libpam_misc.a
+     endif
