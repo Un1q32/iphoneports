@@ -19,16 +19,6 @@
  endif()
  
  if(CURL_USE_OPENSSL)
---- src/Source/CMakeLists.txt.orig
-+++ src/Source/CMakeLists.txt
-@@ -1052,7 +1052,6 @@
- # On Apple we need CoreFoundation and CoreServices
- if(APPLE)
-   target_link_libraries(CMakeLib PUBLIC "-framework CoreFoundation")
--  target_link_libraries(CMakeLib PUBLIC "-framework CoreServices")
- endif()
- 
- if(WIN32 AND NOT UNIX)
 --- src/Utilities/cmlibarchive/CMakeLists.txt.orig
 +++ src/Utilities/cmlibarchive/CMakeLists.txt
 @@ -2182,7 +2182,6 @@
@@ -39,3 +29,15 @@
  ENDIF(APPLE)
  
  add_subdirectory(libarchive)
+--- src/Source/CMakeLists.txt.orig
++++ src/Source/CMakeLists.txt
+@@ -1052,7 +1052,9 @@
+ # On Apple we need CoreFoundation and CoreServices
+ if(APPLE)
+   target_link_libraries(CMakeLib PUBLIC "-framework CoreFoundation")
++  if(HAVE_CoreServices)
+   target_link_libraries(CMakeLib PUBLIC "-framework CoreServices")
++  endif()
+ endif()
+ 
+ if(WIN32 AND NOT UNIX)
