@@ -1,5 +1,5 @@
 Package: iphoneports-login
-Section: Utilities
+Section: Administration
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Architecture: iphoneos-arm
 Version: 433-2
