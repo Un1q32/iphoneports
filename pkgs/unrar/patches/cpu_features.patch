@@ -1,0 +1,38 @@
+--- src/system.cpp.orig
++++ src/system.cpp
+@@ -229,18 +229,18 @@
+     if ((CPUInfo[3] & 0x2000000)!=0)
+       return SSE_SSE;
+   }
+-#elif defined(__GNUC__)
+-  if (__builtin_cpu_supports("avx2"))
++#elif defined(__AVX2__)
+     return SSE_AVX2;
+-  if (__builtin_cpu_supports("sse4.1"))
++#elif defined(__SSE4_1__)
+     return SSE_SSE41;
+-  if (__builtin_cpu_supports("ssse3"))
++#elif defined(__SSE3__)
+     return SSE_SSSE3;
+-  if (__builtin_cpu_supports("sse2"))
++#elif defined(__SSE2__)
+     return SSE_SSE2;
+-  if (__builtin_cpu_supports("sse"))
++#elif defined(__SSE__)
+     return SSE_SSE;
+-#endif
++#else
+   return SSE_NONE;
++#endif
+ }
+ #endif
+--- src/rijndael.cpp.orig
++++ src/rijndael.cpp
+@@ -112,7 +112,6 @@
+   else
+     AES_NI=false;
+ #elif defined(__GNUC__)
+-  AES_NI=__builtin_cpu_supports("aes");
+ #endif
+ 
+ #elif defined(USE_NEON_AES)
