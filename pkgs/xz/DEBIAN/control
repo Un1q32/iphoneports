@@ -5,4 +5,4 @@ Depends: iphoneports-base, iphoneports-grep, iphoneports-sed
 Description: XZ-format compression utilities
 Homepage: http://tukaani.org/xz/
 Section: Archiving
-Version: 5.6.3
+Version: 5.6.4
