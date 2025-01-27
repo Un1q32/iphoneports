@@ -1,0 +1,13 @@
+--- src/libcxx/include/__config.orig
++++ src/libcxx/include/__config
+@@ -662,6 +662,10 @@
+          __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ < 101500)
+ #      define _LIBCPP_HAS_NO_C11_ALIGNED_ALLOC
+ #    endif
++#    if (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                                                    \
++         __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ < 130000)
++#      define _LIBCPP_HAS_NO_C11_ALIGNED_ALLOC
++#    endif
+ #  elif defined(__ANDROID__) && __ANDROID_API__ < 28
+ // Android only provides aligned_alloc when targeting API 28 or higher.
+ #    define _LIBCPP_HAS_NO_C11_ALIGNED_ALLOC
