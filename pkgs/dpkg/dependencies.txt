@@ -1,0 +1,6 @@
+libmd
+ncurses
+xz
+zlib
+bzip2
+libc++
