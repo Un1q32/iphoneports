@@ -2,6 +2,6 @@ Package: iphoneports-ldid
 Version: 2.1.5-procursus7-4
 Architecture: iphoneos-arm
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
-Depends: iphoneports-base, iphoneports-libplist, iphoneports-libressl
+Depends: iphoneports-base, iphoneports-libplist, iphoneports-libressl, iphoneports-libc++
 Section: Development
 Description: Link Identity Editor. Put real or fake signatures in a Mach-O.
