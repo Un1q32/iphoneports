@@ -1,0 +1,7 @@
+Package: iphoneports-xar
+Section: Archiving
+Maintainer: Uniq <joey.t.reinhart@gmail.com>
+Architecture: iphoneos-arm
+Version: 501
+Description: eXtensible ARchive format
+Depends: iphoneports-base, iphoneports-zlib

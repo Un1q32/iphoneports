@@ -1,0 +1,15 @@
+--- src/xar/include/xar.h.in.orig
++++ src/xar/include/xar.h.in
+@@ -48,11 +48,8 @@
+ #include <stdint.h>
+ #include <sys/stat.h>
+ 
+-#ifdef __APPLE__
+-#import <os/availability.h>
+-#else
+ #define API_DEPRECATED(...)
+-#endif
++#define API_AVAILABLE(...)
+ 
+ #pragma pack(4)
+ 
