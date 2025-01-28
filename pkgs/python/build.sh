@@ -1,7 +1,7 @@
 #!/bin/sh -e
 
 mkdir -p "$_PKGROOT/src/iphoneports-fakebin"
-printf '#!/bin/sh\necho 10.5.0\n' > "$_PKGROOT/src/iphoneports-fakebin/sw_vers"
+printf '#!/bin/sh\necho 10.6.0\n' > "$_PKGROOT/src/iphoneports-fakebin/sw_vers"
 chmod +x "$_PKGROOT/src/iphoneports-fakebin/sw_vers"
 export PATH="$_PKGROOT/src/iphoneports-fakebin:$PATH"
 
@@ -15,7 +15,7 @@ mkdir _buildpython && cd _buildpython || exit 1
 "$_MAKE" install -j"$_JOBS"
 )
 
-./configure --host="$_TARGET" --prefix=/var/usr --build="$(cc -dumpmachine)" --with-build-python="$_PKGROOT/src/buildpython/bin/python3" --without-mimalloc --with-lto --enable-shared --without-ensurepip LDSHARED="$_TARGET-cc -shared -undefined dynamic_lookup" MACHDEP=darwin ac_sys_system=Darwin ac_cv_buggy_getaddrinfo=no ac_cv_file__dev_ptmx=yes ac_cv_file__dev_ptc=no PKG_CONFIG_LIBDIR="$_SDK/var/usr/lib/pkgconfig" CPPFLAGS=-D_DARWIN_USE_64_BIT_INODE
+./configure --host="$_TARGET" --prefix=/var/usr --build="$(cc -dumpmachine)" --with-build-python="$_PKGROOT/src/buildpython/bin/python3" --without-mimalloc --with-lto --enable-shared --without-ensurepip LDSHARED="$_TARGET-cc -shared -undefined dynamic_lookup" MACHDEP=darwin ac_sys_system=Darwin ac_cv_buggy_getaddrinfo=no ac_cv_file__dev_ptmx=yes ac_cv_file__dev_ptc=no PKG_CONFIG_LIBDIR="$_SDK/var/usr/lib/pkgconfig"
 "$_MAKE" DESTDIR="$_PKGROOT/pkg" install -j"$_JOBS"
 )
 
