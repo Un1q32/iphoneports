@@ -1,7 +1,7 @@
 #!/bin/sh -e
 (
 cd src || exit 1
-./configure --host="$_TARGET" --prefix=/var/usr
+./configure --host="$_TARGET" --prefix=/var/usr --with-readline
 "$_MAKE" -j"$_JOBS"
 "$_MAKE" DESTDIR="$_PKGROOT/pkg" install
 )
