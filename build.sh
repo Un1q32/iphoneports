@@ -52,23 +52,27 @@ esac
 
 case "$*" in
     *-j*)
-        _JOBS="$*" ; _JOBS="${_JOBS#*-j}" ; export _JOBS="${_JOBS%% *}"
-    ;;
-
-    *)
-        if command -v nproc > /dev/null; then
-            cpus=$(nproc)
-        elif sysctl -n hw.ncpu > /dev/null 2>&1; then
-            cpus=$(sysctl -n hw.ncpu)
-        else
-            cpus=1
-        fi
-
-        _JOBS=$((cpus * 2 / 3))
-        [ "$_JOBS" = 0 ] && _JOBS=1
-        export _JOBS
+        _JOBS="$*" ; _JOBS="${_JOBS#*-j}" ; _JOBS="${_JOBS%% *}"
+        case $_JOBS in
+            ''|*[!0-9]*) unset _JOBS ;;
+            *) export _JOBS ;;
+        esac
     ;;
 esac
+
+if [ -z "$_JOBS" ]; then
+    if command -v nproc > /dev/null; then
+        cpus=$(nproc)
+    elif sysctl -n hw.ncpu > /dev/null 2>&1; then
+        cpus=$(sysctl -n hw.ncpu)
+    else
+        cpus=1
+    fi
+
+    _JOBS=$((cpus * 2 / 3))
+    [ "$_JOBS" = 0 ] && _JOBS=1
+    export _JOBS
+fi
 
 : > "$_TMP/.builtpkgs"
 rm -rf "$_TMP"/iphoneports-sdk*
