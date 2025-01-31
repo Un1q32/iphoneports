@@ -1,0 +1,27 @@
+--- src/tools/gyp/pylib/gyp/generator/make.py.orig
++++ src/tools/gyp/pylib/gyp/generator/make.py
+@@ -145,7 +145,7 @@
+ SPACE_REPLACEMENT = "?"
+ 
+ 
+-LINK_COMMANDS_LINUX = """\
++LINK_COMMANDS_NOTHING = """\
+ quiet_cmd_alink = AR($(TOOLSET)) $@
+ cmd_alink = rm -f $@ && $(AR.$(TOOLSET)) crs $@ $(filter %.o,$^)
+ 
+@@ -206,7 +206,7 @@
+ cmd_solink_module = $(LINK.$(TOOLSET)) -o $@ -shared $(GYP_LDFLAGS) $(LDFLAGS.$(TOOLSET)) -Wl,-soname=$(@F) -Wl,--start-group $(filter-out FORCE_DO_CMD, $^) -Wl,--end-group $(LIBS)
+ """  # noqa: E501
+ 
+-LINK_COMMANDS_MAC = """\
++LINK_COMMANDS_LINUX = """\
+ quiet_cmd_alink = LIBTOOL-STATIC $@
+ cmd_alink = rm -f $@ && %(python)s gyp-mac-tool filter-libtool libtool $(GYP_LIBTOOLFLAGS) -static -o $@ $(filter %%.o,$^)
+ 
+@@ -2742,4 +2742,4 @@
+ 
+     root_makefile.write(SHARED_FOOTER)
+ 
+-    root_makefile.close()
++    root_makefile.close()
+\ No newline at end of file
