@@ -1,6 +1,6 @@
 --- src/llvm/lib/Support/Unix/Path.inc.orig
 +++ src/llvm/lib/Support/Unix/Path.inc
-@@ -43,7 +43,8 @@
+@@ -48,7 +48,8 @@
  #include <sys/auxv.h>
  #else
  #include <machine/elf.h>
@@ -10,7 +10,7 @@
  #endif
  #elif defined(__DragonFly__)
  #include <sys/mount.h>
-@@ -1486,34 +1487,6 @@
+@@ -1491,34 +1492,6 @@
  std::error_code copy_file(const Twine &From, const Twine &To) {
    std::string FromS = From.str();
    std::string ToS = To.str();
@@ -47,7 +47,7 @@
    return errnoAsErrorCode();
 --- src/llvm/lib/Support/Unix/Program.inc.orig
 +++ src/llvm/lib/Support/Unix/Program.inc
-@@ -42,7 +42,7 @@
+@@ -50,7 +50,7 @@
  #include <TargetConditionals.h>
  #endif
  
