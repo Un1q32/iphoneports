@@ -24,8 +24,8 @@
 --- src/libcxxabi/include/cxxabi.h.orig
 +++ src/libcxxabi/include/cxxabi.h
 @@ -180,7 +180,7 @@
- extern _LIBCXXABI_FUNC_VIS bool __cxa_uncaught_exception() throw();
- extern _LIBCXXABI_FUNC_VIS unsigned int __cxa_uncaught_exceptions() throw();
+ extern _LIBCXXABI_FUNC_VIS bool __cxa_uncaught_exception() _LIBCXXABI_NOEXCEPT;
+ extern _LIBCXXABI_FUNC_VIS unsigned int __cxa_uncaught_exceptions() _LIBCXXABI_NOEXCEPT;
  
 -#if defined(__linux__) || defined(__Fuchsia__)
 +#if defined(__linux__) || defined(__Fuchsia__) || defined(__APPLE__)
