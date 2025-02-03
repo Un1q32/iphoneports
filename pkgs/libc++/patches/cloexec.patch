@@ -1,6 +1,6 @@
 --- src/libcxx/src/filesystem/operations.cpp.orig
 +++ src/libcxx/src/filesystem/operations.cpp
-@@ -764,9 +765,10 @@
+@@ -885,9 +885,10 @@
  
  uintmax_t remove_all_impl(int parent_directory, const path& p, error_code& ec) {
    // First, try to open the path as a directory.
