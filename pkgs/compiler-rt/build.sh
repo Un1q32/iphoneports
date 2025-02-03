@@ -38,7 +38,7 @@ for src in $arm64srcs; do
 done
 wait
 
-"$_TARGET-libtool" -static -o libclang_rt.ios.a ./*.o
+"$_TARGET-libtool" -static -o libclang_rt.ios.a ./*.o 2>/dev/null
 rm ./*.o
 
 for src in $x32srcs; do
@@ -53,9 +53,10 @@ for src in $x64srcs; do
     done
     "$clang" -isysroot "$_PKGROOT/macsysroot" -target x86_64-apple-macos10.4 "../lib/builtins/$src" -c -O3 -o "x86_64-${src%\.c}.o" &
 done
+"$clang" -isysroot "$_PKGROOT/macsysroot" -target arm64-apple-macos11.0 -xc /dev/null -c -O3 -o nothing.o &
 wait
 
-"$_TARGET-libtool" -static -o libclang_rt.osx.a ./*.o
+"$_TARGET-libtool" -static -o libclang_rt.osx.a ./*.o 2>/dev/null
 rm ./*.o
 
 cp ./*.a "$_PKGROOT/pkg/var/usr/lib/clang/19/lib/darwin"
