@@ -1,7 +1,7 @@
 Package: iphoneports-ca-certificates
 Section: Security
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
-Architecture: iphoneos-arm
+Architecture: all
 Version: 2024-12-31
 Description: Common CA certificates
 Depends: iphoneports-base
