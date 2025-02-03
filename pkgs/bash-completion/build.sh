@@ -1,9 +1,8 @@
 #!/bin/sh -e
 (
 cd src || exit 1
-./configure --host="$_TARGET" --prefix=/var/usr
-"$_MAKE" -j"$_JOBS"
-"$_MAKE" install DESTDIR="$_PKGROOT/pkg"
+./configure --prefix=/var/usr
+"$_MAKE" install DESTDIR="$_PKGROOT/pkg" -j"$_JOBS"
 )
 
 cp -r DEBIAN pkg

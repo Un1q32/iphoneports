@@ -1,6 +1,6 @@
 Package: iphoneports-bash-completion
 Version: 2.14.0
-Architecture: iphoneos-arm
+Architecture: any
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Depends: iphoneports-base, iphoneports-bash
 Section: Terminal_Support
