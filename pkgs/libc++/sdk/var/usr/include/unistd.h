@@ -2,11 +2,14 @@
 
 #include_next <unistd.h>
 
+#if (defined(__IPHONE_OS_VERSION_MIN_REQUIRED) &&                              \
+     __IPHONE_OS_VERSION_MIN_REQUIRED < 80000) ||                              \
+    (defined(__MAC_OS_X_VERSION_MIN_REQUIRED) &&                               \
+     __MAC_OS_X_VERSION_MIN_REQUIRED < 101000)
+
 #include <fcntl.h>
 #include <limits.h>
 #include <string.h>
-
-#define unlinkat __iphoneports_unlinkat
 
 static inline int unlinkat(int fd, const char *path, int flags) {
   if (fd == AT_FDCWD || path[0] == '/') {
@@ -27,3 +30,5 @@ static inline int unlinkat(int fd, const char *path, int flags) {
     return rmdir(new_path);
   return unlink(new_path);
 }
+
+#endif

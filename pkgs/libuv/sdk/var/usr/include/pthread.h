@@ -2,9 +2,14 @@
 
 #include_next <pthread.h>
 
-#define pthread_setname_np __iphoneports_pthread_setname_np
+#if (defined(__IPHONE_OS_VERSION_MIN_REQUIRED) &&                              \
+     __IPHONE_OS_VERSION_MIN_REQUIRED < 30200) ||                              \
+    (defined(__MAC_OS_X_VERSION_MIN_REQUIRED) &&                               \
+     __MAC_OS_X_VERSION_MIN_REQUIRED < 1060)
 
 static inline int pthread_setname_np(const char *name) {
   (void)name;
   return 0;
 }
+
+#endif

@@ -2,12 +2,14 @@
 
 #include_next <sys/uio.h>
 
+#if (defined(__IPHONE_OS_VERSION_MIN_REQUIRED) &&                              \
+     __IPHONE_OS_VERSION_MIN_REQUIRED < 140000) ||                             \
+    (defined(__MAC_OS_X_VERSION_MIN_REQUIRED) &&                               \
+     __MAC_OS_X_VERSION_MIN_REQUIRED < 110000)
+
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
-
-#define preadv __iphoneports_preadv
-#define pwritev __iphoneports_pwritev
 
 static inline ssize_t preadv(int fd, const struct iovec *iov, int iovcnt,
                              off_t offset) {
@@ -60,3 +62,5 @@ static inline ssize_t pwritev(int fd, const struct iovec *iov, int iovcnt,
   free(fbuf);
   return writeret;
 }
+
+#endif

@@ -2,10 +2,6 @@
 
 #include_next <fcntl.h>
 
-#include <limits.h>
-#include <stdarg.h>
-#include <string.h>
-
 #ifndef AT_FDCWD
 #define AT_FDCWD -2
 #endif
@@ -13,7 +9,14 @@
 #define AT_REMOVEDIR 0x0080
 #endif
 
-#define openat __iphoneports_openat
+#if (defined(__IPHONE_OS_VERSION_MIN_REQUIRED) &&                              \
+     __IPHONE_OS_VERSION_MIN_REQUIRED < 80000) ||                              \
+    (defined(__MAC_OS_X_VERSION_MIN_REQUIRED) &&                               \
+     __MAC_OS_X_VERSION_MIN_REQUIRED < 101000)
+
+#include <limits.h>
+#include <stdarg.h>
+#include <string.h>
 
 static inline int openat(int fd, const char *path, int flags, ...) {
   mode_t mode = 0;
@@ -37,3 +40,5 @@ static inline int openat(int fd, const char *path, int flags, ...) {
   strcat(new_path, path);
   return open(new_path, flags, mode);
 }
+
+#endif

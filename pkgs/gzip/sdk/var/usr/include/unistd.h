@@ -2,11 +2,14 @@
 
 #include_next <unistd.h>
 
+#if (defined(__IPHONE_OS_VERSION_MIN_REQUIRED) &&                              \
+     __IPHONE_OS_VERSION_MIN_REQUIRED < 30000) ||                              \
+    (defined(__MAC_OS_X_VERSION_MIN_REQUIRED) &&                               \
+     __MAC_OS_X_VERSION_MIN_REQUIRED < 1060)
+
 #include <limits.h>
 #include <sys/attr.h>
 #include <sys/fcntl.h>
-
-#define fgetattrlist __iphoneports_fgetattrlist
 
 static inline int fgetattrlist(int fd, struct attrlist *attrList, void *attrBuf,
                                size_t attrBufSize, unsigned long options) {
@@ -23,3 +26,5 @@ static inline int fsetattrlist(int fd, struct attrlist *attrList, void *attrBuf,
     return -1;
   return setattrlist(fdpath, attrList, attrBuf, attrBufSize, options);
 }
+
+#endif

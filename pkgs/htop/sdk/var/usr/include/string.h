@@ -2,9 +2,12 @@
 
 #include_next <string.h>
 
-#include <stdlib.h>
+#if (defined(__IPHONE_OS_VERSION_MIN_REQUIRED) &&                              \
+     __IPHONE_OS_VERSION_MIN_REQUIRED < 40300) ||                              \
+    (defined(__MAC_OS_X_VERSION_MIN_REQUIRED) &&                               \
+     __MAC_OS_X_VERSION_MIN_REQUIRED < 1070)
 
-#define strndup __iphoneports_strndup
+#include <stdlib.h>
 
 static inline char *strndup(const char *str, size_t maxlen) {
   const char *end = (const char *)memchr(str, '\0', maxlen);
@@ -16,3 +19,5 @@ static inline char *strndup(const char *str, size_t maxlen) {
   newstr[len] = '\0';
   return newstr;
 }
+
+#endif
