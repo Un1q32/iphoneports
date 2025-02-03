@@ -2,7 +2,7 @@ Package: iphoneports-make
 Section: Development
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Architecture: iphoneos-arm
-Version: 4.4.1-1
+Version: 4.4.1-2
 Description: Standard tool to compile source trees
 Homepage: http://www.gnu.org/software/make/
 Depends: iphoneports-base
