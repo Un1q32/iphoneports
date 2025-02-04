@@ -313,7 +313,7 @@ main() {
                             else
                                 deppkgs="$deppkgs ${pkg##*/}"
                             fi
-                            "$EDITOR" "$pkg/DEBIAN/control"
+                            [ -f "$pkg/DEBIAN/control" ] && "$EDITOR" "$pkg/DEBIAN/control"
                         fi
                     done < "$pkg/dependencies.txt"
                 fi
