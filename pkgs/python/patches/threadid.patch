@@ -1,12 +1,18 @@
 --- src/Python/thread_pthread.h.orig
 +++ src/Python/thread_pthread.h
-@@ -375,8 +375,7 @@
+@@ -375,8 +375,15 @@
      if (!initialized)
          PyThread_init_thread();
  #ifdef __APPLE__
--    uint64_t native_id;
--    (void) pthread_threadid_np(NULL, &native_id);
++#if (defined(__IPHONE_OS_VERSION_MIN_REQUIRED) &&                              \
++     __IPHONE_OS_VERSION_MIN_REQUIRED < 30200) ||                              \
++    (defined(__MAC_OS_X_VERSION_MIN_REQUIRED) &&                               \
++     __MAC_OS_X_VERSION_MIN_REQUIRED < 1060)
 +    mach_port_t native_id = pthread_mach_thread_np(pthread_self());
++#else
+     uint64_t native_id;
+     (void) pthread_threadid_np(NULL, &native_id);
++#endif
  #elif defined(__linux__)
      pid_t native_id;
      native_id = syscall(SYS_gettid);
