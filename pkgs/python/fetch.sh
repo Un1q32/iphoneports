@@ -1,7 +1,7 @@
 #!/bin/sh
 rm -rf pkg src
 printf "Downloading source...\n"
-curl -L -# -o src.tar.xz https://www.python.org/ftp/python/3.13.1/Python-3.13.1.tar.xz
+curl -L -# -o src.tar.xz https://www.python.org/ftp/python/3.13.2/Python-3.13.2.tar.xz
 printf "Unpacking source...\n"
 tar -xf src.tar.xz
 rm src.tar.xz
