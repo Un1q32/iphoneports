@@ -9,6 +9,8 @@
 
 #include <stdlib.h>
 
+#define strndup __iphoneports_strndup
+
 static inline char *strndup(const char *str, size_t maxlen) {
   const char *end = (const char *)memchr(str, '\0', maxlen);
   size_t len = end ? end - str : maxlen;

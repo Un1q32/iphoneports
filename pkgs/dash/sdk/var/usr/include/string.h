@@ -7,6 +7,8 @@
     (defined(__MAC_OS_X_VERSION_MIN_REQUIRED) &&                               \
      __MAC_OS_X_VERSION_MIN_REQUIRED < 1070)
 
+#define stpncpy __iphoneports_stpncpy
+
 static inline char *stpncpy(char *restrict s1, const char *restrict s2, size_t n) {
   char *s = s1;
   const char *p = s2;

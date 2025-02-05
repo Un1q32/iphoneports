@@ -11,6 +11,9 @@
 #include <sys/attr.h>
 #include <sys/fcntl.h>
 
+#define fgetattrlist __iphoneports_fgetattrlist
+#define fsetattrlist __iphoneports_fsetattrlist
+
 static inline int fgetattrlist(int fd, struct attrlist *attrList, void *attrBuf,
                                size_t attrBufSize, unsigned long options) {
   char fdpath[PATH_MAX];

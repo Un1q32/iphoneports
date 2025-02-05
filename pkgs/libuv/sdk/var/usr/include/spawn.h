@@ -7,6 +7,8 @@
     (defined(__MAC_OS_X_VERSION_MIN_REQUIRED) &&                               \
      __MAC_OS_X_VERSION_MIN_REQUIRED < 1070)
 
+#define posix_spawn_file_actions_addinherit_np __iphoneports_posix_spawn_file_actions_addinherit_np
+
 static inline int
 posix_spawn_file_actions_addinherit_np(posix_spawn_file_actions_t *fa, int fd) {
   (void)fa;

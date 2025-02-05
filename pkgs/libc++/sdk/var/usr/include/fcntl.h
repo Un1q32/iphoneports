@@ -18,6 +18,8 @@
 #include <stdarg.h>
 #include <string.h>
 
+#define openat __iphoneports_openat
+
 static inline int openat(int fd, const char *path, int flags, ...) {
   mode_t mode = 0;
   if (flags & O_CREAT) {

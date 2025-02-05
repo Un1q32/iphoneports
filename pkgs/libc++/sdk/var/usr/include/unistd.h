@@ -11,6 +11,8 @@
 #include <limits.h>
 #include <string.h>
 
+#define unlinkat __iphoneports_unlinkat
+
 static inline int unlinkat(int fd, const char *path, int flags) {
   if (fd == AT_FDCWD || path[0] == '/') {
     if (flags & AT_REMOVEDIR)

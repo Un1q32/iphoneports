@@ -11,6 +11,9 @@
 #include <string.h>
 #include <unistd.h>
 
+#define preadv __iphoneports_preadv
+#define pwritev __iphoneports_pwritev
+
 static inline ssize_t preadv(int fd, const struct iovec *iov, int iovcnt,
                              off_t offset) {
   size_t bytes = 0;

@@ -7,6 +7,8 @@
     (defined(__MAC_OS_X_VERSION_MIN_REQUIRED) &&                               \
      __MAC_OS_X_VERSION_MIN_REQUIRED < 101300)
 
+#define open_memstream __iphoneports_open_memstream
+
 static inline FILE *open_memstream(char **, size_t *) { return NULL; }
 
 #endif
