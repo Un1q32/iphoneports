@@ -1,7 +1,7 @@
 Package: iphoneports-nettle
 Section: Security
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
-Architecture: iphoneos-arm
+Architecture: @DPKGARCH@
 Version: 3.10.1
 Description: A low-level cryptographic library
 Depends: iphoneports-base, iphoneports-gmp

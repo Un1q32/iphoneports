@@ -1,7 +1,7 @@
 Package: iphoneports-libc++
 Section: Development
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
-Architecture: iphoneos-arm
+Architecture: @DPKGARCH@
 Version: 19.1.7
 Description: LLVM C++ standard library
 Depends: iphoneports-base

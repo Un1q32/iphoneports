@@ -1,7 +1,7 @@
 Package: iphoneports-ninja
 Section: Development
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
-Architecture: iphoneos-arm
+Architecture: @DPKGARCH@
 Version: 1.12.1
 Description: Small build system with a focus on speed
 Depends: iphoneports-base, iphoneports-libc++

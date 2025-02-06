@@ -1,7 +1,7 @@
 Package: iphoneports-tcsh
 Section: Terminal_Support
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
-Architecture: iphoneos-arm
+Architecture: @DPKGARCH@
 Version: 6.24.13
 Depends: iphoneports-base, iphoneports-ncurses
 Description: enhanced version of the BSD C Shell

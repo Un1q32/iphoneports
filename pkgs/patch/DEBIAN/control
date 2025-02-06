@@ -1,7 +1,7 @@
 Package: iphoneports-patch
 Section: Development
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
-Architecture: iphoneos-arm
+Architecture: @DPKGARCH@
 Version: 2.7.6-1
 Description: merge a difference onto a file
 Depends: iphoneports-base

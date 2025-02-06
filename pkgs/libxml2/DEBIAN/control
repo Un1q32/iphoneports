@@ -1,7 +1,7 @@
 Package: iphoneports-libxml2
 Section: Development
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
-Architecture: iphoneos-arm
+Architecture: @DPKGARCH@
 Version: 2.13.5
 Description: XML C parser and toolkit
 Depends: iphoneports-base, iphoneports-zlib, iphoneports-xz

@@ -1,6 +1,6 @@
 Package: iphoneports-vm-stat
 Version: 498.0.10-5
-Architecture: iphoneos-arm
+Architecture: @DPKGARCH@
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Section: Utilities
 Depends: iphoneports-base

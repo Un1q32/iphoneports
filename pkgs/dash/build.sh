@@ -16,4 +16,5 @@ ln -s dash bin/sh
 )
 
 cp -r DEBIAN pkg
-dpkg-deb -b --root-owner-group -Zgzip pkg dash.deb
+sed -e "s|@DPKGARCH@|$_DPKGARCH|" DEBIAN/control > pkg/DEBIAN/control
+dpkg-deb -b --root-owner-group -Zgzip pkg "dash-$_DPKGARCH.deb"

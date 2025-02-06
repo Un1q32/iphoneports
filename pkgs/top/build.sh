@@ -18,4 +18,5 @@ mv pkg/var/usr/bin/top pkg/usr/libexec/iphoneports/top
 ln -s ../../../../usr/libexec/iphoneports/top pkg/var/usr/bin/top
 
 cp -r DEBIAN pkg
-dpkg-deb -b --root-owner-group -Zgzip pkg top.deb
+sed -e "s|@DPKGARCH@|$_DPKGARCH|" DEBIAN/control > pkg/DEBIAN/control
+dpkg-deb -b --root-owner-group -Zgzip pkg "top-$_DPKGARCH.deb"

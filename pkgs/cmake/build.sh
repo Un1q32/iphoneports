@@ -15,4 +15,5 @@ ldid -S"$_ENT" bin/*
 )
 
 cp -r DEBIAN pkg
-dpkg-deb -b --root-owner-group -Zgzip pkg cmake.deb
+sed -e "s|@DPKGARCH@|$_DPKGARCH|" DEBIAN/control > pkg/DEBIAN/control
+dpkg-deb -b --root-owner-group -Zgzip pkg "cmake-$_DPKGARCH.deb"

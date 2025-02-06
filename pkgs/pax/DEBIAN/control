@@ -1,7 +1,7 @@
 Package: iphoneports-pax
 Section: Archiving
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
-Architecture: iphoneos-arm
+Architecture: @DPKGARCH@
 Version: 428-2
 Depends: iphoneports-base
 Description: Portable Archive eXchange

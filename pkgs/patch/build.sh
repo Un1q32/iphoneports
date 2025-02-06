@@ -14,4 +14,5 @@ ldid -S"$_ENT" bin/patch
 )
 
 cp -r DEBIAN pkg
-dpkg-deb -b --root-owner-group -Zgzip pkg patch.deb
+sed -e "s|@DPKGARCH@|$_DPKGARCH|" DEBIAN/control > pkg/DEBIAN/control
+dpkg-deb -b --root-owner-group -Zgzip pkg "patch-$_DPKGARCH.deb"

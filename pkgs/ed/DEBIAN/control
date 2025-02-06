@@ -1,7 +1,7 @@
 Package: iphoneports-ed
 Section: Text_Editors
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
-Architecture: iphoneos-arm
+Architecture: @DPKGARCH@
 Version: 154-2
 Description: A line-oriented text editor
 Depends: iphoneports-base

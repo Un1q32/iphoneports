@@ -13,4 +13,5 @@ ldid -S"$_ENT" bin/* lib/libgnutls.30.dylib lib/libgnutlsxx.30.dylib
 )
 
 cp -r DEBIAN pkg
-dpkg-deb -b --root-owner-group -Zgzip pkg gnutls.deb
+sed -e "s|@DPKGARCH@|$_DPKGARCH|" DEBIAN/control > pkg/DEBIAN/control
+dpkg-deb -b --root-owner-group -Zgzip pkg "gnutls-$_DPKGARCH.deb"

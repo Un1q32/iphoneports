@@ -1,7 +1,7 @@
 Package: iphoneports-coreutils
 Section: Utilities
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
-Architecture: iphoneos-arm
+Architecture: @DPKGARCH@
 Version: 9.6
 Description: The basic file, shell and text manipulation utilities of the GNU operating system
 Homepage: http://www.gnu.org/software/coreutils/

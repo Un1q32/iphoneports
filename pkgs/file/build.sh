@@ -20,4 +20,5 @@ ldid -S"$_ENT" bin/file lib/libmagic.1.dylib
 )
 
 cp -r DEBIAN pkg
-dpkg-deb -b --root-owner-group -Zgzip pkg file.deb
+sed -e "s|@DPKGARCH@|$_DPKGARCH|" DEBIAN/control > pkg/DEBIAN/control
+dpkg-deb -b --root-owner-group -Zgzip pkg "file-$_DPKGARCH.deb"

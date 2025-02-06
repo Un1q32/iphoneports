@@ -6,4 +6,5 @@ mkdir -p "$_PKGROOT/pkg/var/usr/bin"
 ldid -S"$_ENT" "$_PKGROOT/pkg/var/usr/bin/getusedmem"
 
 cp -r DEBIAN pkg
-dpkg-deb -b --root-owner-group -Zgzip pkg getusedmem.deb
+sed -e "s|@DPKGARCH@|$_DPKGARCH|" DEBIAN/control > pkg/DEBIAN/control
+dpkg-deb -b --root-owner-group -Zgzip pkg "getusedmem-$_DPKGARCH.deb"

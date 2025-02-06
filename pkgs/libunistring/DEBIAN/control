@@ -1,6 +1,6 @@
 Package: iphoneports-libunistring
 Version: 1.3
-Architecture: iphoneos-arm
+Architecture: @DPKGARCH@
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Section: Development
 Homepage: http://www.gnu.org/software/libunistring/

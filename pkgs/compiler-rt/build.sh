@@ -63,4 +63,5 @@ cp ./*.a "$_PKGROOT/pkg/var/usr/lib/clang/19/lib/darwin"
 )
 
 cp -r DEBIAN pkg
-dpkg-deb -b --root-owner-group -Zgzip pkg compiler-rt.deb
+sed -e "s|@DPKGARCH@|$_DPKGARCH|" DEBIAN/control > pkg/DEBIAN/control
+dpkg-deb -b --root-owner-group -Zgzip pkg "compiler-rt-$_DPKGARCH.deb"

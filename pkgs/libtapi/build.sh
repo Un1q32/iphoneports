@@ -16,4 +16,5 @@ ldid -S"$_ENT" libtapi.dylib
 )
 
 cp -r DEBIAN pkg
-dpkg-deb -b --root-owner-group -Zgzip pkg libtapi.deb
+sed -e "s|@DPKGARCH@|$_DPKGARCH|" DEBIAN/control > pkg/DEBIAN/control
+dpkg-deb -b --root-owner-group -Zgzip pkg "libtapi-$_DPKGARCH.deb"

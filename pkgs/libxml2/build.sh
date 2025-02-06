@@ -15,4 +15,5 @@ ldid -S"$_ENT" bin/xmlcatalog bin/xmllint lib/libxml2.2.dylib
 )
 
 cp -r DEBIAN pkg
-dpkg-deb -b --root-owner-group -Zgzip pkg libxml2.deb
+sed -e "s|@DPKGARCH@|$_DPKGARCH|" DEBIAN/control > pkg/DEBIAN/control
+dpkg-deb -b --root-owner-group -Zgzip pkg "libxml2-$_DPKGARCH.deb"

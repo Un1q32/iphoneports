@@ -17,4 +17,5 @@ ldid -S"$_PKGROOT/files/ent.xml" ps
 )
 
 cp -r DEBIAN pkg
-dpkg-deb -b --root-owner-group -Zgzip pkg ps.deb
+sed -e "s|@DPKGARCH@|$_DPKGARCH|" DEBIAN/control > pkg/DEBIAN/control
+dpkg-deb -b --root-owner-group -Zgzip pkg "ps-$_DPKGARCH.deb"

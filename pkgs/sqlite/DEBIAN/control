@@ -1,6 +1,6 @@
 Package: iphoneports-sqlite
 Version: 3.48.0
-Architecture: iphoneos-arm
+Architecture: @DPKGARCH@
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Section: Utilities
 Description: SQL database engine

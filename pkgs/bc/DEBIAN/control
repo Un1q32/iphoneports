@@ -1,6 +1,6 @@
 Package: iphoneports-bc
 Version: 7.0.3
-Architecture: iphoneos-arm
+Architecture: @DPKGARCH@
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Section: Utilities
 Description: An arbitrary-precision decimal arithmetic language and calculator

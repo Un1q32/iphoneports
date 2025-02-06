@@ -1,7 +1,7 @@
 Package: iphoneports-libtapi
 Section: Development
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
-Architecture: iphoneos-arm
+Architecture: @DPKGARCH@
 Version: 1300.6.5-1
 Description: Text-based Application Programming Interface frontend
 Depends: iphoneports-base, iphoneports-libc++, iphoneports-ncurses

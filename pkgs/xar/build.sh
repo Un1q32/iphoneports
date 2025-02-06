@@ -15,4 +15,5 @@ ldid -S"$_ENT" bin/xar lib/libxar.1.dylib
 )
 
 cp -r DEBIAN pkg
-dpkg-deb -b --root-owner-group -Zgzip pkg xar.deb
+sed -e "s|@DPKGARCH@|$_DPKGARCH|" DEBIAN/control > pkg/DEBIAN/control
+dpkg-deb -b --root-owner-group -Zgzip pkg "xar-$_DPKGARCH.deb"

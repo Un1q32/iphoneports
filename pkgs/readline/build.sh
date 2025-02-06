@@ -14,4 +14,5 @@ ldid -S"$_ENT" lib/libhistory.8.2.dylib lib/libreadline.8.2.dylib
 )
 
 cp -r DEBIAN pkg
-dpkg-deb -b --root-owner-group -Zgzip pkg readline.deb
+sed -e "s|@DPKGARCH@|$_DPKGARCH|" DEBIAN/control > pkg/DEBIAN/control
+dpkg-deb -b --root-owner-group -Zgzip pkg "readline-$_DPKGARCH.deb"

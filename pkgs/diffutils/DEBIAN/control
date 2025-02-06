@@ -1,7 +1,7 @@
 Package: iphoneports-diffutils
 Section: Development
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
-Architecture: iphoneos-arm
+Architecture: @DPKGARCH@
 Version: 3.10-1
 Description: compare two files for differences
 Homepage: http://www.gnu.org/software/diffutils/

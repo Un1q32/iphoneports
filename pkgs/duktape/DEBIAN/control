@@ -1,6 +1,6 @@
 Package: iphoneports-duktape
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
-Architecture: iphoneos-arm
+Architecture: @DPKGARCH@
 Depends: iphoneports-base
 Description: Embeddable Javascript engine
 Section: Scripting

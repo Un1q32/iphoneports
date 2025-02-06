@@ -19,4 +19,5 @@ ln -s ../../../../usr/libexec/iphoneports/login pkg/var/usr/bin/login
 cp files/login.pam pkg/var/usr/etc/pam.d/login
 
 cp -r DEBIAN pkg
-dpkg-deb -b --root-owner-group -Zgzip pkg login.deb
+sed -e "s|@DPKGARCH@|$_DPKGARCH|" DEBIAN/control > pkg/DEBIAN/control
+dpkg-deb -b --root-owner-group -Zgzip pkg "login-$_DPKGARCH.deb"

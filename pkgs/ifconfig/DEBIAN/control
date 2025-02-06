@@ -1,6 +1,6 @@
 Package: iphoneports-ifconfig
 Version: 325-2
-Architecture: iphoneos-arm
+Architecture: @DPKGARCH@
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Section: Utilities
 Depends: iphoneports-base

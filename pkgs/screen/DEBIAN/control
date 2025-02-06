@@ -1,7 +1,7 @@
 Package: iphoneports-screen
 Section: Terminal_Support
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
-Architecture: iphoneos-arm
+Architecture: @DPKGARCH@
 Version: 5.0.0
 Depends: iphoneports-base, iphoneports-ncurses, iphoneports-pam
 Homepage: http://www.gnu.org/software/screen/

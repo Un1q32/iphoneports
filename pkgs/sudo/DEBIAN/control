@@ -1,7 +1,7 @@
 Package: iphoneports-sudo
 Section: Administration
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
-Architecture: iphoneos-arm
+Architecture: @DPKGARCH@
 Version: 1.9.16p2
 Description: temporarily assume root priviledges
 Depends: iphoneports-base, iphoneports-zlib, iphoneports-libressl

@@ -1,7 +1,7 @@
 Package: iphoneports-gtar
 Section: Archiving
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
-Architecture: iphoneos-arm
+Architecture: @DPKGARCH@
 Version: 1.35
 Description: GNU implementation of the tar command
 Homepage: http://www.gnu.org/software/coreutils/

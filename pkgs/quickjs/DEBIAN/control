@@ -1,6 +1,6 @@
 Package: iphoneports-quickjs
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
-Architecture: iphoneos-arm
+Architecture: @DPKGARCH@
 Depends: iphoneports-base
 Description: A small and embeddable Javascript engine
 Section: Scripting

@@ -1,7 +1,7 @@
 Package: iphoneports-rogue
 Section: Games
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
-Architecture: iphoneos-arm
+Architecture: @DPKGARCH@
 Version: 5.4.4-4
 Description: The original dungeon crawl game.
 Depends: iphoneports-base, iphoneports-ncurses

@@ -23,4 +23,5 @@ cp files/sudoers pkg/var/usr/etc/sudoers
 chmod 440 pkg/var/usr/etc/sudoers
 
 cp -r DEBIAN pkg
-dpkg-deb -b --root-owner-group -Zgzip pkg sudo.deb
+sed -e "s|@DPKGARCH@|$_DPKGARCH|" DEBIAN/control > pkg/DEBIAN/control
+dpkg-deb -b --root-owner-group -Zgzip pkg "sudo-$_DPKGARCH.deb"

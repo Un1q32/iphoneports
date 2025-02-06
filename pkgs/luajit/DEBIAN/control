@@ -1,6 +1,6 @@
 Package: iphoneports-luajit
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
-Architecture: iphoneos-arm
+Architecture: @DPKGARCH@
 Description: a Just-In-Time (JIT) compiler for the Lua programming language
 Section: Scripting
 Version: 2.1.1736781742

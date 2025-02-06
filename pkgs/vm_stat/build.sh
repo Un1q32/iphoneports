@@ -13,4 +13,5 @@ ldid -S"$_ENT" vm_stat
 )
 
 cp -r DEBIAN pkg
-dpkg-deb -b --root-owner-group -Zgzip pkg vm_stat.deb
+sed -e "s|@DPKGARCH@|$_DPKGARCH|" DEBIAN/control > pkg/DEBIAN/control
+dpkg-deb -b --root-owner-group -Zgzip pkg "vm_stat-$_DPKGARCH.deb"

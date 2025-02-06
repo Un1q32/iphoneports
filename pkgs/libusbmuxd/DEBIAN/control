@@ -1,6 +1,6 @@
 Package: iphoneports-libusbmuxd
 Version: 2.1.0
-Architecture: iphoneos-arm
+Architecture: @DPKGARCH@
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Depends: iphoneports-base, iphoneports-libplist, iphoneports-libimobiledevice-glue
 Section: Development

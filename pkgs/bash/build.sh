@@ -17,4 +17,5 @@ mkdir -p etc/bash/bashrc.d
 cp files/bashrc pkg/var/usr/etc/bash
 
 cp -r DEBIAN pkg
-dpkg-deb -b --root-owner-group -Zgzip pkg bash.deb
+sed -e "s|@DPKGARCH@|$_DPKGARCH|" DEBIAN/control > pkg/DEBIAN/control
+dpkg-deb -b --root-owner-group -Zgzip pkg "bash-$_DPKGARCH.deb"

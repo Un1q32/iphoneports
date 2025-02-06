@@ -17,4 +17,5 @@ ldid -S"$_ENT" lib/libjpeg.62.dylib lib/libturbojpeg.0.dylib bin/*
 )
 
 cp -r DEBIAN pkg
-dpkg-deb -b --root-owner-group -Zgzip pkg libjpeg-turbo.deb
+sed -e "s|@DPKGARCH@|$_DPKGARCH|" DEBIAN/control > pkg/DEBIAN/control
+dpkg-deb -b --root-owner-group -Zgzip pkg "libjpeg-turbo-$_DPKGARCH.deb"

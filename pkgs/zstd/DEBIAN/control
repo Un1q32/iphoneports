@@ -1,7 +1,7 @@
 Package: iphoneports-zstd
 Section: Archiving
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
-Architecture: iphoneos-arm
+Architecture: @DPKGARCH@
 Version: 1.5.6-1
 Depends: iphoneports-base, iphoneports-lz4, iphoneports-xz, iphoneports-zlib
 Description: Zstandard - Fast real-time compression algorithm

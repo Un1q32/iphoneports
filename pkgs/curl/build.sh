@@ -14,4 +14,5 @@ ldid -S"$_ENT" bin/curl lib/libcurl.4.dylib
 )
 
 cp -r DEBIAN pkg
-dpkg-deb -b --root-owner-group -Zgzip pkg curl.deb
+sed -e "s|@DPKGARCH@|$_DPKGARCH|" DEBIAN/control > pkg/DEBIAN/control
+dpkg-deb -b --root-owner-group -Zgzip pkg "curl-$_DPKGARCH.deb"

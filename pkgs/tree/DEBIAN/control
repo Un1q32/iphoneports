@@ -1,6 +1,6 @@
 Package: iphoneports-tree
 Version: 2.2.1
-Architecture: iphoneos-arm
+Architecture: @DPKGARCH@
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Section: Utilities
 Description: A colorized, indented directory listing tool

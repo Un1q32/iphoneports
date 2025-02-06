@@ -1,7 +1,7 @@
 Package: iphoneports-db
 Section: Data Storage
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
-Architecture: iphoneos-arm
+Architecture: @DPKGARCH@
 Version: 6.2.32
 Description: The Berkeley DB embedded database system
 Depends: iphoneports-base

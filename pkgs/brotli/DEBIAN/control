@@ -1,7 +1,7 @@
 Package: iphoneports-brotli
 Section: Archiving
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
-Architecture: iphoneos-arm
+Architecture: @DPKGARCH@
 Version: 1.1.0-1
 Description: A generic-purpose lossless compression algorithm
 Depends: iphoneports-base

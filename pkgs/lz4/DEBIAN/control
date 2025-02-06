@@ -1,7 +1,7 @@
 Package: iphoneports-lz4
 Section: Archiving
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
-Architecture: iphoneos-arm
+Architecture: @DPKGARCH@
 Version: 1.10.0-1
 Description: Extremely fast compression algorithm
 Depends: iphoneports-base, iphoneports-xxhash

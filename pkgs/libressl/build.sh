@@ -22,4 +22,5 @@ ldid -S"$_ENT" bin/openssl bin/ocspcheck bin/nc lib/libcrypto.$cryptoabi.dylib l
 )
 
 cp -r DEBIAN pkg
-dpkg-deb -b --root-owner-group -Zgzip pkg libressl.deb
+sed -e "s|@DPKGARCH@|$_DPKGARCH|" DEBIAN/control > pkg/DEBIAN/control
+dpkg-deb -b --root-owner-group -Zgzip pkg "libressl-$_DPKGARCH.deb"

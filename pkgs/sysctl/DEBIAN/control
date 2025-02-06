@@ -1,6 +1,6 @@
 Package: iphoneports-sysctl
 Version: 979.100.8-1
-Architecture: iphoneos-arm
+Architecture: @DPKGARCH@
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Section: Utilities
 Depends: iphoneports-base

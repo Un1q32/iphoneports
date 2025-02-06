@@ -1,7 +1,7 @@
 Package: iphoneports-libressl
 Section: Security
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
-Architecture: iphoneos-arm
+Architecture: @DPKGARCH@
 Version: 4.0.0
 Description: Free version of the TLS/crypto stack forked from OpenSSL
 Depends: iphoneports-base, iphoneports-ca-certificates

@@ -18,4 +18,5 @@ cp src/doc/sample.nanorc pkg/var/usr/etc/nanorc
 sed -i 's|# include "/var/usr/share/nano/\*\.nanorc"|include "/var/usr/share/nano/*.nanorc"|' pkg/var/usr/etc/nanorc
 
 cp -r DEBIAN pkg
-dpkg-deb -b --root-owner-group -Zgzip pkg nano.deb
+sed -e "s|@DPKGARCH@|$_DPKGARCH|" DEBIAN/control > pkg/DEBIAN/control
+dpkg-deb -b --root-owner-group -Zgzip pkg "nano-$_DPKGARCH.deb"

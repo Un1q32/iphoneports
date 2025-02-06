@@ -1,7 +1,7 @@
 Package: iphoneports-su
 Section: Administration
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
-Architecture: iphoneos-arm
+Architecture: @DPKGARCH@
 Version: 116-6
 Description: substitute user
 Depends: iphoneports-base, iphoneports-pam

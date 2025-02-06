@@ -17,4 +17,5 @@ mkdir -p etc/zsh
 cp files/zprofile pkg/var/usr/etc/zsh
 
 cp -r DEBIAN pkg
-dpkg-deb -b --root-owner-group -Zgzip pkg zsh.deb
+sed -e "s|@DPKGARCH@|$_DPKGARCH|" DEBIAN/control > pkg/DEBIAN/control
+dpkg-deb -b --root-owner-group -Zgzip pkg "zsh-$_DPKGARCH.deb"

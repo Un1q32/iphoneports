@@ -1,7 +1,7 @@
 Package: iphoneports-top
 Version: 39-4
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
-Architecture: iphoneos-arm
+Architecture: @DPKGARCH@
 Depends: iphoneports-base, iphoneports-ncurses
 Description: A utility to display and update information about the top cpu processes
 Section: Utilities

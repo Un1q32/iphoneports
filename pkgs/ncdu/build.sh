@@ -14,4 +14,5 @@ ldid -S"$_ENT" bin/ncdu
 )
 
 cp -r DEBIAN pkg
-dpkg-deb -b --root-owner-group -Zgzip pkg ncdu.deb
+sed -e "s|@DPKGARCH@|$_DPKGARCH|" DEBIAN/control > pkg/DEBIAN/control
+dpkg-deb -b --root-owner-group -Zgzip pkg "ncdu-$_DPKGARCH.deb"

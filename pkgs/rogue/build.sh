@@ -19,4 +19,5 @@ mv pkg/var/usr/bin/rogue pkg/usr/libexec/iphoneports
 ln -s ../../../../usr/libexec/iphoneports/rogue pkg/var/usr/bin/rogue
 
 cp -r DEBIAN pkg
-dpkg-deb -b --root-owner-group -Zgzip pkg rogue.deb
+sed -e "s|@DPKGARCH@|$_DPKGARCH|" DEBIAN/control > pkg/DEBIAN/control
+dpkg-deb -b --root-owner-group -Zgzip pkg "rogue-$_DPKGARCH.deb"

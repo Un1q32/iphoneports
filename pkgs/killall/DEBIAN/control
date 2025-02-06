@@ -1,6 +1,6 @@
 Package: iphoneports-killall
 Version: 302.0.1-1
-Architecture: iphoneos-arm
+Architecture: @DPKGARCH@
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Section: Utilities
 Description: A utility for killing processes by name

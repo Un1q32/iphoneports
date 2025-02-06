@@ -1,6 +1,6 @@
 Package: iphoneports-dash
 Version: 0.5.12-2
-Architecture: iphoneos-arm
+Architecture: @DPKGARCH@
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Section: Terminal_Support
 Description: POSIX compliant shell that aims to be as small as possible

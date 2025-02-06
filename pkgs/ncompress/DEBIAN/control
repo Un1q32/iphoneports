@@ -1,7 +1,7 @@
 Package: iphoneports-ncompress
 Section: Archiving
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
-Architecture: iphoneos-arm
+Architecture: @DPKGARCH@
 Version: 5.0-2
 Depends: iphoneports-base
 Description: a fast, simple LZW file compressor

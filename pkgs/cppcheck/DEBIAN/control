@@ -1,7 +1,7 @@
 Package: iphoneports-cppcheck
 Section: Development
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
-Architecture: iphoneos-arm
+Architecture: @DPKGARCH@
 Version: 2.16.0
 Description: A tool for static C/C++ code analysis
 Depends: iphoneports-base, iphoneports-libc++, iphoneports-pcre, iphoneports-python

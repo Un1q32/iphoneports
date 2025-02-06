@@ -14,4 +14,5 @@ ldid -S"$_ENT" lib/libgmp.10.dylib
 )
 
 cp -r DEBIAN pkg
-dpkg-deb -b --root-owner-group -Zgzip pkg gmp.deb
+sed -e "s|@DPKGARCH@|$_DPKGARCH|" DEBIAN/control > pkg/DEBIAN/control
+dpkg-deb -b --root-owner-group -Zgzip pkg "gmp-$_DPKGARCH.deb"

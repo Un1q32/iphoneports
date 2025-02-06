@@ -1,6 +1,6 @@
 Package: iphoneports-hexedit
 Version: 1.6-1
-Architecture: iphoneos-arm
+Architecture: @DPKGARCH@
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Depends: iphoneports-base, iphoneports-ncurses
 Section: Text_Editors

@@ -25,4 +25,5 @@ cp files/doas.conf pkg/var/usr/etc
 chmod 440 pkg/var/usr/etc/doas.conf
 
 cp -r DEBIAN pkg
-dpkg-deb -b --root-owner-group -Zgzip pkg doas.deb
+sed -e "s|@DPKGARCH@|$_DPKGARCH|" DEBIAN/control > pkg/DEBIAN/control
+dpkg-deb -b --root-owner-group -Zgzip pkg "doas-$_DPKGARCH.deb"

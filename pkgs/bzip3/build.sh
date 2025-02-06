@@ -14,4 +14,5 @@ ldid -S"$_ENT" bin/bzip3 lib/libbzip3.0.dylib
 )
 
 cp -r DEBIAN pkg
-dpkg-deb -b --root-owner-group -Zgzip pkg bzip3.deb
+sed -e "s|@DPKGARCH@|$_DPKGARCH|" DEBIAN/control > pkg/DEBIAN/control
+dpkg-deb -b --root-owner-group -Zgzip pkg "bzip3-$_DPKGARCH.deb"

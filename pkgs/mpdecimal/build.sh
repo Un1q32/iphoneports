@@ -16,4 +16,5 @@ ldid -S"$_ENT" "$lib"
 )
 
 cp -r DEBIAN pkg
-dpkg-deb -b --root-owner-group -Zgzip pkg mpdecimal.deb
+sed -e "s|@DPKGARCH@|$_DPKGARCH|" DEBIAN/control > pkg/DEBIAN/control
+dpkg-deb -b --root-owner-group -Zgzip pkg "mpdecimal-$_DPKGARCH.deb"

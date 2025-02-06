@@ -1,6 +1,6 @@
 Package: iphoneports-base
 Version: 21
-Architecture: iphoneos-arm
+Architecture: @DPKGARCH@
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Section: System
 Description: iPhonePorts base

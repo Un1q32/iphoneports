@@ -1,7 +1,7 @@
 Package: iphoneports-dos2unix
 Section: Utilities
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
-Architecture: iphoneos-arm
+Architecture: @DPKGARCH@
 Version: 7.5.2
 Description: DOS/Mac to Unix and vice versa text file format converter.
 Depends: iphoneports-base

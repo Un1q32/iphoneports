@@ -1,6 +1,6 @@
 Package: iphoneports-usbmuxd
 Version: 1.1.1-8
-Architecture: iphoneos-arm
+Architecture: @DPKGARCH@
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Depends: iphoneports-base, iphoneports-libplist, iphoneports-libimobiledevice, iphoneports-libusb, iphoneports-libimobiledevice-glue
 Section: Utilities

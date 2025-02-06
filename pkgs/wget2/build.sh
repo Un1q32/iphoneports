@@ -15,4 +15,5 @@ ldid -S"$_ENT" bin/wget2 lib/libwget.3.dylib
 )
 
 cp -r DEBIAN pkg
-dpkg-deb -b --root-owner-group -Zgzip pkg wget2.deb
+sed -e "s|@DPKGARCH@|$_DPKGARCH|" DEBIAN/control > pkg/DEBIAN/control
+dpkg-deb -b --root-owner-group -Zgzip pkg "wget2-$_DPKGARCH.deb"

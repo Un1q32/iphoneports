@@ -1,6 +1,6 @@
 Package: iphoneports-ping
 Version: 325-7
-Architecture: iphoneos-arm
+Architecture: @DPKGARCH@
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Section: Utilities
 Depends: iphoneports-base

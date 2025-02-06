@@ -1,7 +1,7 @@
 Package: iphoneports-boxes
 Section: Utilities
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
-Architecture: iphoneos-arm
+Architecture: @DPKGARCH@
 Version: 2.3.1
 Description: Command line ASCII boxes unlimited!
 Depends: iphoneports-base, iphoneports-ncurses, iphoneports-libunistring, iphoneports-pcre2

@@ -15,4 +15,5 @@ ldid -S"$_ENT" bin/idevicerestore
 )
 
 cp -r DEBIAN pkg
-dpkg-deb -b --root-owner-group -Zgzip pkg idevicerestore.deb
+sed -e "s|@DPKGARCH@|$_DPKGARCH|" DEBIAN/control > pkg/DEBIAN/control
+dpkg-deb -b --root-owner-group -Zgzip pkg "idevicerestore-$_DPKGARCH.deb"

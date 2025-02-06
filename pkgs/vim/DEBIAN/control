@@ -1,6 +1,6 @@
 Package: iphoneports-vim
 Version: 9.1.1065
-Architecture: iphoneos-arm
+Architecture: @DPKGARCH@
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Section: Text_Editors
 Description: Vi Improved, a highly configurable, improved version of the vi text editor

@@ -1,7 +1,7 @@
 Package: iphoneports-popt
 Section: Development
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
-Architecture: iphoneos-arm
+Architecture: @DPKGARCH@
 Version: 1.19
 Depends: iphoneports-base
 Description: C library for parsing command line parameters

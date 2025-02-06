@@ -1,7 +1,7 @@
 Package: iphoneports-ncdu
 Section: Utilities
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
-Architecture: iphoneos-arm
+Architecture: @DPKGARCH@
 Version: 1.21
 Depends: iphoneports-base, iphoneports-ncurses
 Description: Disk usage analyzer with an ncurses interface

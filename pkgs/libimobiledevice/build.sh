@@ -15,4 +15,5 @@ ldid -S"$_ENT" lib/libimobiledevice-1.0.6.dylib bin/*
 )
 
 cp -r DEBIAN pkg
-dpkg-deb -b --root-owner-group -Zgzip pkg libimobiledevice.deb
+sed -e "s|@DPKGARCH@|$_DPKGARCH|" DEBIAN/control > pkg/DEBIAN/control
+dpkg-deb -b --root-owner-group -Zgzip pkg "libimobiledevice-$_DPKGARCH.deb"

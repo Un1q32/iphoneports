@@ -1,7 +1,7 @@
 Package: iphoneports-pigz
 Section: Archiving
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
-Architecture: iphoneos-arm
+Architecture: @DPKGARCH@
 Version: 2.8
 Depends: iphoneports-base, iphoneports-zlib
 Description: A parallel implementation of gzip for modern multi-processor, multi-core machines

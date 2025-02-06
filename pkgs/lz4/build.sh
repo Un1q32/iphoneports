@@ -12,4 +12,5 @@ ldid -S"$_ENT" bin/lz4 lib/liblz4.1.*.dylib
 )
 
 cp -r DEBIAN pkg
-dpkg-deb -b --root-owner-group -Zgzip pkg lz4.deb
+sed -e "s|@DPKGARCH@|$_DPKGARCH|" DEBIAN/control > pkg/DEBIAN/control
+dpkg-deb -b --root-owner-group -Zgzip pkg "lz4-$_DPKGARCH.deb"

@@ -19,4 +19,5 @@ ln -s ../../../../usr/libexec/iphoneports/su pkg/var/usr/bin/su
 cp files/su.pam pkg/var/usr/etc/pam.d/su
 
 cp -r DEBIAN pkg
-dpkg-deb -b --root-owner-group -Zgzip pkg su.deb
+sed -e "s|@DPKGARCH@|$_DPKGARCH|" DEBIAN/control > pkg/DEBIAN/control
+dpkg-deb -b --root-owner-group -Zgzip pkg "su-$_DPKGARCH.deb"

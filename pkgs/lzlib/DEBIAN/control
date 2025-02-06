@@ -1,7 +1,7 @@
 Package: iphoneports-lzlib
 Section: Archiving
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
-Architecture: iphoneos-arm
+Architecture: @DPKGARCH@
 Version: 1.14
 Description: A library providing in-memory LZMA compression and decompression functions
 Depends: iphoneports-base

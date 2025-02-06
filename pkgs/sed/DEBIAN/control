@@ -1,6 +1,6 @@
 Package: iphoneports-sed
 Version: 4.9-2
-Architecture: iphoneos-arm
+Architecture: @DPKGARCH@
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Section: Utilities
 Homepage: http://www.gnu.org/software/sed/

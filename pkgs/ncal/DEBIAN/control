@@ -1,6 +1,6 @@
 Package: iphoneports-ncal
 Version: 44-1
-Architecture: iphoneos-arm
+Architecture: @DPKGARCH@
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Section: Utilities
 Depends: iphoneports-base

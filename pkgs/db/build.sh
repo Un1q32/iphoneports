@@ -13,4 +13,5 @@ ldid -S"$_ENT" bin/* lib/libdb-6.2.dylib lib/libdb_cxx-6.2.dylib
 )
 
 cp -r DEBIAN pkg
-dpkg-deb -b --root-owner-group -Zgzip pkg db.deb
+sed -e "s|@DPKGARCH@|$_DPKGARCH|" DEBIAN/control > pkg/DEBIAN/control
+dpkg-deb -b --root-owner-group -Zgzip pkg "db-$_DPKGARCH.deb"

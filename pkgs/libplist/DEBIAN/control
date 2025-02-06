@@ -1,6 +1,6 @@
 Package: iphoneports-libplist
 Version: 2.6.0
-Architecture: iphoneos-arm
+Architecture: @DPKGARCH@
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Depends: iphoneports-base
 Section: Development

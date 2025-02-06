@@ -30,4 +30,5 @@ cp ./*.so "$_PKGROOT/pkg/var/usr/lib/security"
 )
 
 cp -r DEBIAN pkg
-dpkg-deb -b --root-owner-group -Zgzip pkg pam.deb
+sed -e "s|@DPKGARCH@|$_DPKGARCH|" DEBIAN/control > pkg/DEBIAN/control
+dpkg-deb -b --root-owner-group -Zgzip pkg "pam-$_DPKGARCH.deb"

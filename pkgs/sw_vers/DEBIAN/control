@@ -1,6 +1,6 @@
 Package: iphoneports-sw-vers
 Version: 1-1
-Architecture: iphoneos-arm
+Architecture: @DPKGARCH@
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Section: Utilities
 Depends: iphoneports-base

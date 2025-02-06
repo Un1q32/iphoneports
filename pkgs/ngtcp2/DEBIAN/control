@@ -1,7 +1,7 @@
 Package: iphoneports-ngtcp2
 Section: Development
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
-Architecture: iphoneos-arm
+Architecture: @DPKGARCH@
 Version: 1.10.0
 Depends: iphoneports-base, iphoneports-libressl
 Description: ngtcp2 project is an effort to implement IETF QUIC protocol

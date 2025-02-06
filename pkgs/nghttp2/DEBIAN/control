@@ -1,7 +1,7 @@
 Package: iphoneports-nghttp2
 Section: Development
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
-Architecture: iphoneos-arm
+Architecture: @DPKGARCH@
 Version: 1.64.0
 Depends: iphoneports-base
 Description: An implementation of HTTP/2 and its header compression algorithm HPACK in C.

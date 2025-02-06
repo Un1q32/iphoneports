@@ -1,7 +1,7 @@
 Package: iphoneports-xxhash
 Section: Development
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
-Architecture: iphoneos-arm
+Architecture: @DPKGARCH@
 Version: 0.8.3-1
 Description: Extremely fast non-cryptographic hash algorithm
 Depends: iphoneports-base

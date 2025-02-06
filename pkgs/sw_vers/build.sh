@@ -13,4 +13,5 @@ ldid -S"$_ENT" sw_vers
 )
 
 cp -r DEBIAN pkg
-dpkg-deb -b --root-owner-group -Zgzip pkg sw_vers.deb
+sed -e "s|@DPKGARCH@|$_DPKGARCH|" DEBIAN/control > pkg/DEBIAN/control
+dpkg-deb -b --root-owner-group -Zgzip pkg "sw_vers-$_DPKGARCH.deb"

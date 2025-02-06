@@ -16,4 +16,5 @@ ldid -S"$_ENT" lib/libngtcp2.16.dylib lib/libngtcp2_crypto_quictls.2.dylib
 )
 
 cp -r DEBIAN pkg
-dpkg-deb -b --root-owner-group -Zgzip pkg ngtcp2.deb
+sed -e "s|@DPKGARCH@|$_DPKGARCH|" DEBIAN/control > pkg/DEBIAN/control
+dpkg-deb -b --root-owner-group -Zgzip pkg "ngtcp2-$_DPKGARCH.deb"

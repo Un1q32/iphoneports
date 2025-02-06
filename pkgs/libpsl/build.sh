@@ -14,4 +14,5 @@ ldid -S"$_ENT" bin/psl lib/libpsl.5.dylib
 )
 
 cp -r DEBIAN pkg
-dpkg-deb -b --root-owner-group -Zgzip pkg libpsl.deb
+sed -e "s|@DPKGARCH@|$_DPKGARCH|" DEBIAN/control > pkg/DEBIAN/control
+dpkg-deb -b --root-owner-group -Zgzip pkg "libpsl-$_DPKGARCH.deb"

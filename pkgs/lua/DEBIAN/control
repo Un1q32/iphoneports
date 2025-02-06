@@ -1,6 +1,6 @@
 Package: iphoneports-lua
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
-Architecture: iphoneos-arm
+Architecture: @DPKGARCH@
 Depends: iphoneports-base, iphoneports-readline
 Description: A powerful, efficient, lightweight, embeddable scripting language.
 Section: Scripting

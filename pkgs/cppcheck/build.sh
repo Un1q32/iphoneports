@@ -11,4 +11,5 @@ ldid -S"$_ENT" cppcheck
 )
 
 cp -r DEBIAN pkg
-dpkg-deb -b --root-owner-group -Zgzip pkg cppcheck.deb
+sed -e "s|@DPKGARCH@|$_DPKGARCH|" DEBIAN/control > pkg/DEBIAN/control
+dpkg-deb -b --root-owner-group -Zgzip pkg "cppcheck-$_DPKGARCH.deb"

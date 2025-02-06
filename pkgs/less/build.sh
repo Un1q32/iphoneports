@@ -14,4 +14,5 @@ ldid -S"$_ENT" bin/less bin/lessecho bin/lesskey
 )
 
 cp -r DEBIAN pkg
-dpkg-deb -b --root-owner-group -Zgzip pkg less.deb
+sed -e "s|@DPKGARCH@|$_DPKGARCH|" DEBIAN/control > pkg/DEBIAN/control
+dpkg-deb -b --root-owner-group -Zgzip pkg "less-$_DPKGARCH.deb"

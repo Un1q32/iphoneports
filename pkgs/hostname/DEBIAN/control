@@ -1,6 +1,6 @@
 Package: iphoneports-hostname
 Version: 240.100.15-1
-Architecture: iphoneos-arm
+Architecture: @DPKGARCH@
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Section: Utilities
 Depends: iphoneports-base

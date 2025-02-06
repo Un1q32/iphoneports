@@ -12,4 +12,5 @@ ldid -S"$_ENT" bin/xxhsum lib/libxxhash.0.8.*.dylib
 )
 
 cp -r DEBIAN pkg
-dpkg-deb -b --root-owner-group -Zgzip pkg xxhash.deb
+sed -e "s|@DPKGARCH@|$_DPKGARCH|" DEBIAN/control > pkg/DEBIAN/control
+dpkg-deb -b --root-owner-group -Zgzip pkg "xxhash-$_DPKGARCH.deb"

@@ -1,7 +1,7 @@
 Package: iphoneports-llvm
 Section: Development
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
-Architecture: iphoneos-arm
+Architecture: @DPKGARCH@
 Version: 19.1.7
 Description: Compiler infrastructure
 Depends: iphoneports-base, iphoneports-libc++, iphoneports-zlib

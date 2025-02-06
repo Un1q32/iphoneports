@@ -1,6 +1,6 @@
 Package: iphoneports-libwebp
 Version: 1.5.0
-Architecture: iphoneos-arm
+Architecture: @DPKGARCH@
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Depends: iphoneports-base
 Section: Development

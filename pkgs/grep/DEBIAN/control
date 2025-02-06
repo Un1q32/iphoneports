@@ -1,7 +1,7 @@
 Package: iphoneports-grep
 Section: Utilities
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
-Architecture: iphoneos-arm
+Architecture: @DPKGARCH@
 Version: 3.11-2
 Depends: iphoneports-base, iphoneports-pcre2
 Description: searches files for regular expressions

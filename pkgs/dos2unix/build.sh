@@ -12,4 +12,5 @@ ldid -S"$_ENT" bin/dos2unix bin/unix2dos
 )
 
 cp -r DEBIAN pkg
-dpkg-deb -b --root-owner-group -Zgzip pkg dos2unix.deb
+sed -e "s|@DPKGARCH@|$_DPKGARCH|" DEBIAN/control > pkg/DEBIAN/control
+dpkg-deb -b --root-owner-group -Zgzip pkg "dos2unix-$_DPKGARCH.deb"

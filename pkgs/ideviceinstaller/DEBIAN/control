@@ -1,6 +1,6 @@
 Package: iphoneports-ideviceinstaller
 Version: 1.1.1-5
-Architecture: iphoneos-arm
+Architecture: @DPKGARCH@
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Depends: iphoneports-base, iphoneports-libimobiledevice, iphoneports-libplist, iphoneports-libzip
 Section: Utilities
