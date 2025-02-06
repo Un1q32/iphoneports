@@ -367,7 +367,7 @@ main() {
 
         bootstrap)
             depcheck
-            pkgs='base dpkg gzip gtar grep sed less diffutils'
+            pkgs='base dpkg dash coreutils gzip gtar grep sed less diffutils'
             for pkg in $pkgs; do
                 build "$pkg" || error "Failed to build package: $pkg"
             done
