@@ -23,6 +23,14 @@ mv include/ncursesw/* include
 rm -rf include/ncursesw
 ln -s . include/ncurses
 ln -s . include/ncursesw
+cd share/terminfo
+for ti in */*; do
+    case "$ti" in
+        (*ansi*|*cons25*|*cygwin*|*dumb*|*linux*|*mach*|*rxvt*|*screen*|*sun*|*vt52*|*vt100*|*vt102*|*vt220*|*swvt25*|*swvt25m*|*xterm*|*putty*|*konsole*|*gnome*|*apple*|*Apple_Terminal*|*unknown*) ;;
+        (*) rm "$ti" ;;
+    esac
+done
+find . -type d -empty -delete
 )
 
 cp -r DEBIAN pkg
