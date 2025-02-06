@@ -274,7 +274,7 @@ main() {
                 fi
 
                 if [ "$kind" != "all-noclean" ]; then
-                    rm -rf "$pkg/pkg" "$pkg/src" &
+                    rm -rf "$pkg/pkg" "$pkg/src" "$pkg"/*.deb &
                 fi
             done
             wait
@@ -291,7 +291,7 @@ main() {
             shift
             for pkg in "$@"; do
                 [ -d "$pkgdir/$pkg" ] || error "Package not found: $pkg"
-                rm -rf "$pkgdir/$pkg/pkg" "$pkgdir/$pkg/src" "$pkgdir/$pkg"/*.deb "$bsroot/debs/$pkg.deb"
+                rm -rf "$pkgdir/$pkg/pkg" "$pkgdir/$pkg/src" "$pkgdir/$pkg"/*.deb
             done
         ;;
 
@@ -339,7 +339,7 @@ main() {
             build "$2" || error "Failed to build package: $2"
             cp -f "$pkgdir/$2"/*.deb "$bsroot/debs" 2> /dev/null
             for pkg in $deppkgs; do
-                rm -rf "$pkgdir/$pkg/pkg" "$pkgdir/$pkg/src"
+                rm -rf "$pkgdir/$pkg/pkg" "$pkgdir/$pkg/src" "$pkgdir/$pkg"/*.deb
                 build "$pkg" || error "Failed to build package: $pkg"
                 cp -f "$pkgdir/$pkg"/*.deb "$bsroot/debs" 2> /dev/null
             done
@@ -401,7 +401,7 @@ Usage: build.sh [options] <command>
                 [ -d "$pkgdir/$pkg" ] || error "Package not found: $pkg"
             done
             for pkg in "$@"; do
-                rm -rf "$pkgdir/$pkg/pkg" "$pkgdir/$pkg/src" &
+                rm -rf "$pkgdir/$pkg/pkg" "$pkgdir/$pkg/src" "$pkgdir/$pkg"/*.deb &
             done
             wait
             for pkg in "$@"; do
