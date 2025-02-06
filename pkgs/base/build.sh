@@ -23,4 +23,5 @@ done
 
 cp -r DEBIAN pkg
 sed -e "s|@DPKGARCH@|$_DPKGARCH|" DEBIAN/control > pkg/DEBIAN/control
+[ "$_DPKGARCH" = "iphoneos-arm" ] && sed -i '/^Depends:/ s/$/, firmware (>= 3.0)/' pkg/DEBIAN/control
 dpkg-deb -b --root-owner-group -Zgzip pkg "base-$_DPKGARCH.deb"

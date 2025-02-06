@@ -4,6 +4,6 @@ Architecture: @DPKGARCH@
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Section: System
 Description: iPhonePorts base
-Depends: firmware (>= 3.0), iphoneports-dash, iphoneports-coreutils
+Depends: iphoneports-dash, iphoneports-coreutils
 Replaces: iphoneports-chsh
 Conflicts: iphoneports-chsh
