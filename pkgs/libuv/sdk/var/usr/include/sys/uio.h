@@ -2,10 +2,10 @@
 
 #include_next <sys/uio.h>
 
-#if (defined(__IPHONE_OS_VERSION_MIN_REQUIRED) &&                              \
-     __IPHONE_OS_VERSION_MIN_REQUIRED < 140000) ||                             \
-    (defined(__MAC_OS_X_VERSION_MIN_REQUIRED) &&                               \
-     __MAC_OS_X_VERSION_MIN_REQUIRED < 110000)
+#if (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                              \
+     __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ < 140000) ||                             \
+    (defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) &&                               \
+     __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ < 110000)
 
 #include <stdlib.h>
 #include <string.h>

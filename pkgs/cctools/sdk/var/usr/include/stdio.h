@@ -2,10 +2,10 @@
 
 #include_next <stdio.h>
 
-#if (defined(__IPHONE_OS_VERSION_MIN_REQUIRED) &&                              \
-     __IPHONE_OS_VERSION_MIN_REQUIRED < 110000) ||                             \
-    (defined(__MAC_OS_X_VERSION_MIN_REQUIRED) &&                               \
-     __MAC_OS_X_VERSION_MIN_REQUIRED < 101300)
+#if (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                              \
+     __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ < 110000) ||                             \
+    (defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) &&                               \
+     __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ < 101300)
 
 #define open_memstream __iphoneports_open_memstream
 

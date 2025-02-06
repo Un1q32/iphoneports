@@ -2,10 +2,10 @@
 
 #include_next <unistd.h>
 
-#if (defined(__IPHONE_OS_VERSION_MIN_REQUIRED) &&                              \
-     __IPHONE_OS_VERSION_MIN_REQUIRED < 30000) ||                              \
-    (defined(__MAC_OS_X_VERSION_MIN_REQUIRED) &&                               \
-     __MAC_OS_X_VERSION_MIN_REQUIRED < 1060)
+#if (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                \
+     __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ < 30000) ||                \
+    (defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) &&                 \
+     __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ < 1060)
 
 #include <limits.h>
 #include <sys/attr.h>

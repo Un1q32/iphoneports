@@ -9,10 +9,10 @@
 #define AT_REMOVEDIR 0x0080
 #endif
 
-#if (defined(__IPHONE_OS_VERSION_MIN_REQUIRED) &&                              \
-     __IPHONE_OS_VERSION_MIN_REQUIRED < 80000) ||                              \
-    (defined(__MAC_OS_X_VERSION_MIN_REQUIRED) &&                               \
-     __MAC_OS_X_VERSION_MIN_REQUIRED < 101000)
+#if (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                              \
+     __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ < 80000) ||                              \
+    (defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) &&                               \
+     __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ < 101000)
 
 #include <limits.h>
 #include <stdarg.h>
