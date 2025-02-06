@@ -2,7 +2,7 @@ Package: iphoneports-dpkg
 Section: Packaging
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Architecture: @DPKGARCH@
-Version: 1.22.15
+Version: 1.22.15-1
 Description: The Debian Package Manager tools
-Depends: iphoneports-base, iphoneports-libmd, iphoneports-zlib, iphoneports-xz, iphoneports-bzip2, iphoneports-ncurses, iphoneports-libc++, iphoneports-gtar
+Depends: iphoneports-base, iphoneports-libmd, iphoneports-zlib, iphoneports-xz, iphoneports-bzip2, iphoneports-gtar
 Replaces: iphoneports-base, dpkg
