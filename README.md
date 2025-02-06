@@ -21,6 +21,7 @@ Usage: build.sh [options] <command>
                               that depend on <pkg> and then rebuilds them
     sysroot <pkg> [pkgs...] - Copy specified package's files and dependencies to sysroot directory
                               Useful for installing packages in environments without dpkg
+    bootstrap               - Make a sysroot with base, dpkg, and all their dependencies
     --target                - Specify a target (default: armv6-apple-darwin10)
     --no-tmp                - Do not use /tmp for anything, use the current directory instead
     -jN                     - Set the number of jobs passed to programs like make and ninja

@@ -365,6 +365,22 @@ main() {
             printf 'Done!\n'
         ;;
 
+        bootstrap)
+            depcheck
+            pkgs='base dpkg gzip gtar grep sed less diffutils'
+            for pkg in $pkgs; do
+                build "$pkg" || error "Failed to build package: $pkg"
+            done
+            rm -rf sysroot
+            mkdir sysroot
+            printf 'Building sysroot...\n'
+            for pkg in $pkgs; do
+                sysroot "$pkg"
+            done
+            rm -rf sysroot/DEBIAN
+            printf 'Done!\n'
+        ;;
+
         -*)
             shift
             main "$@"
@@ -384,6 +400,7 @@ Usage: build.sh [options] <command>
                               that depend on <pkg> and then rebuilds them
     sysroot <pkg> [pkgs...] - Copy specified package's files and dependencies to sysroot directory
                               Useful for installing packages in environments without dpkg
+    bootstrap               - Make a sysroot with base, dpkg, and all their dependencies
     --target                - Specify a target (default: $defaulttarget)
     --no-tmp                - Do not use /tmp for anything, use the current directory instead
     -jN                     - Set the number of jobs passed to programs like make and ninja
