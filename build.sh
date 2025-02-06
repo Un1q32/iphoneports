@@ -78,7 +78,7 @@ case $_TARGET in
     arm64*|aarch64*)
         command -v "$_TARGET-sdkpath" > /dev/null || error "Missing dependency: $_TARGET-sdkpath"
         if [ -d "$("$_TARGET-sdkpath")/System/Library/Frameworks/MobileCoreServices.framework" ]; then
-            export _DPKGARCH=iphoneos-arm
+            export _DPKGARCH=iphoneos-arm64
         else
             export _DPKGARCH=darwin-arm64
         fi
