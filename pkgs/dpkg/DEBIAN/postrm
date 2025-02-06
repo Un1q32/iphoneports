@@ -1,6 +1,6 @@
 #!/bin/sh
 [ "$1" = "remove" ] || [ "$1" = "purge" ] || exit 0
 [ -f /var/usr/bin/path-wrapper ] || exit 0
-for file in dpkg dpkg-deb dpkg-divert dpkg-maintscript-helper dpkg-query dpkg-split dpkg-statoverride dpkg-trigger dselect update-alternatives; do
+for file in dpkg dpkg-deb dpkg-divert dpkg-maintscript-helper dpkg-query dpkg-split dpkg-statoverride dpkg-trigger update-alternatives; do
     ln -sf path-wrapper "/var/usr/bin/$file"
 done
