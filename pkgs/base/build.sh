@@ -16,7 +16,7 @@ ln -s /usr/libexec/iphoneports/iphoneports-chsh var/usr/bin/iphoneports-chsh
 cp "$_PKGROOT/files/profile" var/usr/etc
 cp "$_PKGROOT/files/path-wrapper" var/usr/bin
 
-for link in apt-cache apt-cdrom apt-config apt-extracttemplates apt-ftparchive apt-get apt-key apt-mark apt-sortpkgs dpkg dpkg-deb dpkg-divert dpkg-maintscript-helper dpkg-query dpkg-split dpkg-statoverride dpkg-trigger dselect update-alternatives; do
+for link in apt-cache apt-cdrom apt-config apt-extracttemplates apt-ftparchive apt-get apt-key apt-mark apt-sortpkgs dselect; do
   ln -s path-wrapper "var/usr/bin/$link"
 done
 )
