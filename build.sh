@@ -74,6 +74,23 @@ if [ -z "$_JOBS" ]; then
     export _JOBS
 fi
 
+case $_TARGET in
+    arm64*|aarch64*)
+        command -v "$_TARGET-sdkpath" > /dev/null || error "Missing dependency: $_TARGET-sdkpath"
+        if [ -d "$("$_TARGET-sdkpath")/System/Library/Frameworks/MobileCoreServices.framework" ]; then
+            export _DPKGARCH=iphoneos-arm
+        else
+            export _DPKGARCH=darwin-arm64
+        fi
+    ;;
+
+    arm*) export _DPKGARCH=iphoneos-arm ;;
+    x86_64*) export _DPKGARCH=darwin-amd64 ;;
+    i386*) export _DPKGARCH=darwin-i386 ;;
+    ppc64*|powerpc64*) export _DPKGARCH=darwin-ppc64 ;;
+    ppc*|powerpc*) export _DPKGARCH=darwin-powerpc ;;
+esac
+
 : > "$_TMP/.builtpkgs"
 rm -rf "$_TMP"/iphoneports-sdk*
 
