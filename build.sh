@@ -246,6 +246,7 @@ includedeps() {
 }
 
 sysroot() {
+    [ -d "$pkgdir/$1/pkg" ] || build "$1" || error "Failed to build package: $1"
     if [ -f "$pkgdir/$1/dependencies.txt" ]; then
         while IFS= read -r dep; do
             sysroot "$dep"
