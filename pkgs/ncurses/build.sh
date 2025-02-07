@@ -2,7 +2,7 @@
 (
 cd src || exit 1
 unset TERMINFO
-./configure --host="$_TARGET" --prefix=/var/usr --with-shared --enable-widec --disable-stripping --with-cxx-binding --with-cxx-shared --without-normal --without-debug --without-manpages --enable-pc-files --with-pkg-config-libdir=/var/usr/lib/pkgconfig --disable-mixed-case
+./configure --host="$_TARGET" --prefix=/var/usr --with-shared --enable-widec --disable-stripping --with-cxx-binding --with-cxx-shared --without-normal --without-debug --without-manpages --enable-pc-files --with-pkg-config-libdir=/var/usr/lib/pkgconfig
 "$_MAKE" -j"$_JOBS"
 "$_MAKE" DESTDIR="$_PKGROOT/pkg" install -j"$_JOBS"
 )
