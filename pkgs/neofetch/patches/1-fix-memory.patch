@@ -1,15 +1,10 @@
 --- src/neofetch.orig
 +++ src/neofetch
-@@ -1,4 +1,4 @@
--#!/usr/bin/env bash
-+#!/var/usr/bin/env bash
- # vim: noai:ts=4:sw=4:expandtab
- # shellcheck source=/dev/null
- # shellcheck disable=2009 disable=2153 disable=2154 disable=2243 disable=2244 disable=2317
-@@ -3670,6 +3670,7 @@
-             pages_compressed="$(vm_stat | awk '/ occupied/ { printf $5 }')"
-             pages_compressed="${pages_compressed:-0}"
-             mem_used="$(((pages_app + ${pages_wired//.} + ${pages_compressed//.}) * hw_pagesize / 1024))"
+@@ -3674,6 +3674,8 @@
+                 pages_compressed="${pages_compressed:-0}"
+                 mem_used="$(((pages_app + ${pages_wired//.} + ${pages_compressed//.}) * hw_pagesize / 1024))"
+             fi
++            mem_total="$(($(sysctl -n hw.memsize) / 1024))"
 +            type -p getusedmem &>/dev/null && mem_used="$(getusedmem)"
          ;;
  
