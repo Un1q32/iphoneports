@@ -30,11 +30,14 @@ DESTDIR="$_PKGROOT/pkg" ninja install-distribution -j"$_JOBS"
 (
 cd pkg/var/usr || exit 1
 rm -rf share bin/git-clang-format
+case $_DPKGARCH in
+    iphoneos-*) rm bin/clang-repl ;;
+esac
 for file in bin/* lib/*.dylib; do
-  if ! [ -h "$file" ]; then
-    "$_TARGET-strip" "$file" 2>/dev/null || true
-    ldid -S"$_ENT" "$file"
-  fi
+    if ! [ -h "$file" ]; then
+        "$_TARGET-strip" "$file" 2>/dev/null || true
+        ldid -S"$_ENT" "$file"
+    fi
 done
 )
 
