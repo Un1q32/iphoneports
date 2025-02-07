@@ -1,11 +1,12 @@
 --- src/neofetch.orig
 +++ src/neofetch
-@@ -3674,6 +3674,8 @@
+@@ -3674,7 +3674,8 @@
                  pages_compressed="${pages_compressed:-0}"
                  mem_used="$(((pages_app + ${pages_wired//.} + ${pages_compressed//.}) * hw_pagesize / 1024))"
+             else
+-                return 0
++                mem_total="$(($(sysctl -n hw.memsize) / 1024))"
++                type -p getusedmem &>/dev/null && mem_used="$(getusedmem)"
              fi
-+            mem_total="$(($(sysctl -n hw.memsize) / 1024))"
-+            type -p getusedmem &>/dev/null && mem_used="$(getusedmem)"
          ;;
  
-         "BSD" | "MINIX" | "ravynOS")
