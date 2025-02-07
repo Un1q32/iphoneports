@@ -15,9 +15,9 @@
 #define MCAST_LEAVE_SOURCE_GROUP 83
 #endif
 
-#if (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                              \
-     __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ < 40300) ||                              \
-    (defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) &&                               \
+#if (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                \
+     __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ < 40300) ||                \
+    (defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) &&                 \
      __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ < 1070)
 
 struct ip_mreq_source {

@@ -2,9 +2,9 @@
 
 #include_next <sys/uio.h>
 
-#if (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                              \
-     __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ < 140000) ||                             \
-    (defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) &&                               \
+#if (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                \
+     __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ < 140000) ||               \
+    (defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) &&                 \
      __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ < 110000)
 
 #include <stdlib.h>
