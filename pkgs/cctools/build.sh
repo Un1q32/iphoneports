@@ -14,9 +14,9 @@ rm include/foreign/machine/_structs.h
 
 (
 cd pkg/var/usr || exit 1
-rm -rf share bin/otool
-"$_TARGET-strip" bin/* libexec/as/*/as 2>/dev/null || true
-ldid -S"$_ENT" bin/* libexec/as/*/as
+rm -rf share libexec bin/otool
+"$_TARGET-strip" bin/* 2>/dev/null || true
+ldid -S"$_ENT" bin/*
 ln -s llvm-otool bin/otool
 )
 
