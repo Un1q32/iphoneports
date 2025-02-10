@@ -14,10 +14,9 @@ rm include/foreign/machine/_structs.h
 
 (
 cd pkg/var/usr || exit 1
-rm -rf share libexec bin/otool
+rm -rf share libexec
 "$_TARGET-strip" bin/* 2>/dev/null || true
 ldid -S"$_ENT" bin/*
-ln -s llvm-otool bin/otool
 )
 
 cp -r DEBIAN pkg
