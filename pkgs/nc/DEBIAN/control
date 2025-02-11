@@ -1,0 +1,7 @@
+Package: iphoneports-nc
+Section: Networking
+Maintainer: Uniq <joey.t.reinhart@gmail.com>
+Architecture: @DPKGARCH@
+Version: 4.0.0
+Description: TCP/IP swiss army knife
+Depends: iphoneports-base, iphoneports-libressl, iphoneports-libtls
