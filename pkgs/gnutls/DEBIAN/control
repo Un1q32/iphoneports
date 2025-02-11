@@ -2,6 +2,6 @@ Package: iphoneports-gnutls
 Section: Security
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Architecture: @DPKGARCH@
-Version: 3.8.8
+Version: 3.8.9
 Description: A library which provides a secure layer over a reliable transport layer
 Depends: iphoneports-base, iphoneports-nettle, iphoneports-gmp, iphoneports-libunistring, iphoneports-zlib, iphoneports-brotli, iphoneports-zstd, iphoneports-libidn2
