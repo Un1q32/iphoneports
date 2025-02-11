@@ -1,0 +1,7 @@
+Package: iphoneports-libsodium
+Section: Development
+Maintainer: Uniq <joey.t.reinhart@gmail.com>
+Architecture: @DPKGARCH@
+Version: 1.0.20
+Description: A modern, portable, easy to use crypto library
+Depends: iphoneports-base
