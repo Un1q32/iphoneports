@@ -1,0 +1,11 @@
+--- src/src/llvm/cmake/modules/CheckCompilerVersion.cmake.orig
++++ src/src/llvm/cmake/modules/CheckCompilerVersion.cmake
+@@ -70,7 +70,7 @@
+       message(FATAL_ERROR "Host Clang must have at least -fms-compatibility-version=${MSVC_MIN}, your version is ${CMAKE_CXX_SIMULATE_VERSION}.")
+     endif()
+     set(CLANG_CL 1)
+-  elseif(NOT LLVM_ENABLE_LIBCXX)
++  elseif(0)
+     # Test that we aren't using too old of a version of libstdc++.
+     set(OLD_CMAKE_REQUIRED_FLAGS ${CMAKE_REQUIRED_FLAGS})
+     set(OLD_CMAKE_REQUIRED_LIBRARIES ${CMAKE_REQUIRED_LIBRARIES})
