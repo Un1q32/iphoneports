@@ -1,7 +1,7 @@
 #!/bin/sh -e
 (
 cd src || exit 1
-./autogen.sh
+autoreconf -fi
 ./configure --host="$_TARGET" --prefix=/var/usr --disable-static
 "$_MAKE" -j"$_JOBS"
 "$_MAKE" DESTDIR="$_PKGROOT/pkg" install
