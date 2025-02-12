@@ -7,3 +7,4 @@ libzip
 libpng
 libjpeg-turbo
 libwebp
+libc++
