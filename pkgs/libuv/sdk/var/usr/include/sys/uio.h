@@ -6,6 +6,8 @@
      __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ < 140000) ||               \
     (defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) &&                 \
      __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ < 110000) ||                \
+    (defined(__ENVIRONMENT_TV_OS_VERSION_MIN_REQUIRED__) &&                    \
+     __ENVIRONMENT_TV_OS_VERSION_MIN_REQUIRED__ < 140000) ||                   \
     (defined(__ENVIRONMENT_WATCH_OS_VERSION_MIN_REQUIRED__) &&                 \
      __ENVIRONMENT_WATCH_OS_VERSION_MIN_REQUIRED__ < 70000)
 
