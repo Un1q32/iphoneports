@@ -1,26 +1,26 @@
 --- src/libcxx/src/filesystem/filesystem_clock.cpp.orig
 +++ src/libcxx/src/filesystem/filesystem_clock.cpp
-@@ -29,7 +29,7 @@
- #  include <sys/time.h> // for gettimeofday and timeval
+@@ -34,7 +34,7 @@
+ #  define _LIBCPP_HAS_TIMESPEC_GET
  #endif
  
--#if defined(__APPLE__) || defined(__gnu_hurd__) || (defined(_POSIX_TIMERS) && _POSIX_TIMERS > 0)
-+#if defined(__gnu_hurd__) || (defined(_POSIX_TIMERS) && _POSIX_TIMERS > 0)
+-#if defined(__APPLE__) || defined(__gnu_hurd__) || defined(__AMDGPU__) || defined(__NVPTX__) ||                        \
++#if defined(__gnu_hurd__) || defined(__AMDGPU__) || defined(__NVPTX__) ||                        \
+     (defined(_POSIX_TIMERS) && _POSIX_TIMERS > 0)
  #  define _LIBCPP_HAS_CLOCK_GETTIME
  #endif
- 
 --- src/libcxx/src/chrono.cpp.orig
 +++ src/libcxx/src/chrono.cpp
-@@ -33,7 +33,7 @@
+@@ -37,7 +37,7 @@
  
- // OpenBSD does not have a fully conformant suite of POSIX timers, but
+ // OpenBSD and GPU do not have a fully conformant suite of POSIX timers, but
  // it does have clock_gettime and CLOCK_MONOTONIC which is all we need.
--#if defined(__APPLE__) || defined(__gnu_hurd__) || defined(__OpenBSD__) || (defined(_POSIX_TIMERS) && _POSIX_TIMERS > 0)
-+#if defined(__gnu_hurd__) || defined(__OpenBSD__) || (defined(_POSIX_TIMERS) && _POSIX_TIMERS > 0)
+-#if defined(__APPLE__) || defined(__gnu_hurd__) || defined(__OpenBSD__) || defined(__AMDGPU__) ||                      \
++#if defined(__gnu_hurd__) || defined(__OpenBSD__) || defined(__AMDGPU__) ||                      \
+     defined(__NVPTX__) || (defined(_POSIX_TIMERS) && _POSIX_TIMERS > 0)
  #  define _LIBCPP_HAS_CLOCK_GETTIME
  #endif
- 
-@@ -155,6 +155,31 @@
+@@ -172,6 +172,31 @@
  
  #  if defined(__APPLE__)
  
@@ -52,7 +52,7 @@
  // On Apple platforms, only CLOCK_UPTIME_RAW, CLOCK_MONOTONIC_RAW or
  // mach_absolute_time are able to time functions in the nanosecond range.
  // Furthermore, only CLOCK_MONOTONIC_RAW is truly monotonic, because it
-@@ -166,6 +191,7 @@
+@@ -183,6 +208,7 @@
      __throw_system_error(errno, "clock_gettime(CLOCK_MONOTONIC_RAW) failed");
    return steady_clock::time_point(seconds(tp.tv_sec) + nanoseconds(tp.tv_nsec));
  }

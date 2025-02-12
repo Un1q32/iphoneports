@@ -2,6 +2,6 @@ Package: iphoneports-compiler-rt
 Section: Development
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Architecture: all
-Version: 19.1.7-3
+Version: 20.1.0
 Description: Compiler runtime libraries for clang
 Depends: iphoneports-base
