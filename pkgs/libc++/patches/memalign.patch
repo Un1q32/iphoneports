@@ -34,7 +34,7 @@
  
 --- src/libcxx/include/__config.orig
 +++ src/libcxx/include/__config
-@@ -662,6 +662,18 @@
+@@ -662,6 +662,24 @@
           __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ < 101500)
  #      define _LIBCPP_HAS_NO_C11_ALIGNED_ALLOC
  #    endif
@@ -42,8 +42,14 @@
 +         __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ < 130000)
 +#      define _LIBCPP_HAS_NO_C11_ALIGNED_ALLOC
 +#    endif
-+#    if (defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) &&                                                     \
-+         __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ < 1060)
++#    if (defined(__ENVIRONMENT_WATCH_OS_VERSION_MIN_REQUIRED__) &&                                                     \
++         __ENVIRONMENT_WATCH_OS_VERSION_MIN_REQUIRED__ < 60000)
++#      define _LIBCPP_HAS_NO_C11_ALIGNED_ALLOC
++#    endif
++#    if (defined(__ENVIRONMENT_TV_OS_VERSION_MIN_REQUIRED__) && __ENVIRONMENT_TV_OS_VERSION_MIN_REQUIRED__ < 130000)
++#      define _LIBCPP_HAS_NO_C11_ALIGNED_ALLOC
++#    endif
++#    if (defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) && __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ < 1060)
 +#      define _LIBCPP_HAS_NO_POSIX_MEMALIGN
 +#    endif
 +#    if (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                                                    \
