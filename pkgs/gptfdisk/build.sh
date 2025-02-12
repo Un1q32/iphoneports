@@ -1,8 +1,9 @@
 #!/bin/sh -e
 (
-cd src || exit 1
+cd src
+[ -d "$_SDK/usr/include/c++/4.2.1" ] && rm "$_SDK/var/usr/lib/libc++.dylib"
 for src in crc32.cc support.cc guid.cc gptpart.cc mbrpart.cc basicmbr.cc mbr.cc gpt.cc bsd.cc parttypes.cc attributes.cc diskio.cc diskio-unix.cc; do
-  "$_TARGET-c++" "$src" -c -Os -flto &
+    "$_TARGET-c++" "$src" -c -Os -flto &
 done
 wait
 "$_TARGET-c++" -o libgptfdisk.dylib -shared -install_name /var/usr/lib/libgptfdisk.dylib -Os -flto crc32.o support.o guid.o gptpart.o mbrpart.o basicmbr.o mbr.o gpt.o bsd.o parttypes.o attributes.o diskio.o diskio-unix.o
@@ -16,11 +17,12 @@ cp libgptfdisk.dylib "$_PKGROOT/pkg/var/usr/lib"
 )
 
 (
-cd pkg/var/usr || exit 1
+cd pkg/var/usr
 "$_TARGET-strip" sbin/* lib/libgptfdisk.dylib 2>/dev/null || true
 ldid -S"$_ENT" sbin/* lib/libgptfdisk.dylib
 )
 
 cp -r DEBIAN pkg
 sed -e "s|@DPKGARCH@|$_DPKGARCH|" DEBIAN/control > pkg/DEBIAN/control
+[ -d "$_SDK/usr/include/c++/4.2.1" ] || sed -i -e '/^Depends:/ s/$/, iphoneports-libc++/' pkg/DEBIAN/control
 dpkg-deb -b --root-owner-group -Zgzip pkg "gptfdisk-$_DPKGARCH.deb"
