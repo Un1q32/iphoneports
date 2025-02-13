@@ -1,6 +1,7 @@
 #!/bin/sh -e
 (
 cd src || exit 1
+autoreconf -fi
 ./configure --host="$_TARGET" --prefix=/var/usr
 "$_MAKE" -j"$_JOBS"
 "$_MAKE" DESTDIR="$_PKGROOT/pkg" install
