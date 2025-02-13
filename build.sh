@@ -368,7 +368,7 @@ main() {
 
         bootstrap)
             depcheck
-            pkgs='base dpkg dash coreutils gzip gtar grep sed less diffutils ca-certificates'
+            pkgs='base bzip2 ca-certificates coreutils dash diffutils dpkg gmp grep gtar gzip less libmd libressl ncurses pcre2 readline sed xz zlib'
             for pkg in $pkgs; do
                 build "$pkg" || error "Failed to build package: $pkg"
             done
@@ -377,6 +377,7 @@ main() {
             printf 'Building sysroot...\n'
             for pkg in $pkgs; do
                 sysroot "$pkg"
+                cp -f "$pkgdir/$pkg"/*.deb "$bsroot/debs" 2> /dev/null
             done
             rm -rf sysroot/DEBIAN
             printf 'Done!\n'
