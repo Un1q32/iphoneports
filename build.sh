@@ -127,6 +127,18 @@ depcheck() {
         error "Missing dependency: GNU make"
     fi
 
+    if command -v gtar > /dev/null; then
+        gtar="gtar"
+    elif command -v make > /dev/null; then
+        _tar_version="$(tar --version)"
+        case "$_tar_version" in
+            *GNU*) gtar="tar" ;;
+            *) error "Missing dependency: GNU tar" ;;
+        esac
+    else
+        error "Missing dependency: GNU tar"
+    fi
+
     if command -v "$_TARGET-otool" > /dev/null; then
         _OTOOL="$_TARGET-otool"
     elif command -v otool > /dev/null; then
@@ -283,7 +295,7 @@ main() {
             for pkg in $pkglist; do
                 [ "$kind" = "all-noclean" ] && hasbeenbuilt "$pkg" && continue
                 build "$pkg" || error "Failed to build package: $pkg"
-                cp -f "$pkgdir/$pkg"/*.deb "$bsroot/debs" 2> /dev/null
+                cp -f "$pkgdir/$pkg"/*.deb debs 2> /dev/null
             done
         ;;
 
@@ -342,7 +354,7 @@ main() {
             for pkg in $deppkgs; do
                 rm -rf "$pkgdir/$pkg/pkg" "$pkgdir/$pkg/src" "$pkgdir/$pkg"/*.deb
                 build "$pkg" || error "Failed to build package: $pkg"
-                cp -f "$pkgdir/$pkg"/*.deb "$bsroot/debs" 2> /dev/null
+                cp -f "$pkgdir/$pkg"/*.deb debs 2> /dev/null
             done
         ;;
 
@@ -363,6 +375,11 @@ main() {
                 sysroot "$pkg"
             done
             rm -rf sysroot/DEBIAN
+            printf 'Making tarball...\n'
+            (
+            cd sysroot || exit 1
+            "$gtar" --owner 0 --group 0 -czf sysroot.tar.gz ./*
+            ) || error "Failed to build sysroot tarball"
             printf 'Done!\n'
         ;;
 
@@ -377,9 +394,18 @@ main() {
             printf 'Building sysroot...\n'
             for pkg in $pkgs; do
                 sysroot "$pkg"
-                cp -f "$pkgdir/$pkg"/*.deb "$bsroot/debs" 2> /dev/null
+                cp -f "$pkgdir/$pkg"/*.deb debs 2> /dev/null
             done
             rm -rf sysroot/DEBIAN
+            printf 'Making tarballs...\n'
+            (
+            cd sysroot || exit 1
+            "$gtar" --owner 0 --group 0 -czf bootstrap.tar.gz ./*
+            ) || error "Failed to build bootstrap tarball"
+            (
+            cd debs || exit 1
+            "$gtar" --owner 0 --group 0 -czf debs.tar.gz ./*
+            ) || error "Failed to build debs tarball"
             printf 'Done!\n'
         ;;
 
