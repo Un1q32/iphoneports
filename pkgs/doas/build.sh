@@ -17,9 +17,9 @@ ldid -S"$_ENT" doas
 chmod 4755 doas
 )
 
-mkdir -p pkg/usr/libexec/iphoneports pkg/var/usr/etc/pam.d
-mv pkg/var/usr/bin/doas pkg/usr/libexec/iphoneports
-ln -s ../../../../usr/libexec/iphoneports/doas pkg/var/usr/bin/doas
+mkdir -p pkg/usr/local/libexec/iphoneports pkg/var/usr/etc/pam.d
+mv pkg/var/usr/bin/doas pkg/usr/local/libexec/iphoneports
+ln -s ../../../../usr/local/libexec/iphoneports/doas pkg/var/usr/bin/doas
 cp files/doas.pam pkg/var/usr/etc/pam.d/doas
 cp files/doas.conf pkg/var/usr/etc
 chmod 440 pkg/var/usr/etc/doas.conf

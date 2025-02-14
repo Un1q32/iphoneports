@@ -13,9 +13,9 @@ ldid -S"$_ENT" login
 chmod 4755 login
 )
 
-mkdir -p pkg/usr/libexec/iphoneports pkg/var/usr/etc/pam.d
-mv pkg/var/usr/bin/login pkg/usr/libexec/iphoneports/login
-ln -s ../../../../usr/libexec/iphoneports/login pkg/var/usr/bin/login
+mkdir -p pkg/usr/local/libexec/iphoneports pkg/var/usr/etc/pam.d
+mv pkg/var/usr/bin/login pkg/usr/local/libexec/iphoneports/login
+ln -s ../../../../usr/local/libexec/iphoneports/login pkg/var/usr/bin/login
 cp files/login.pam pkg/var/usr/etc/pam.d/login
 
 cp -r DEBIAN pkg

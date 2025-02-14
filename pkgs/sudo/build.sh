@@ -15,9 +15,9 @@ ldid -S"$_ENT" bin/sudo bin/cvtsudoers bin/sudoreplay sbin/sudo_logsrvd sbin/sud
 chmod 4755 bin/sudo
 )
 
-mkdir -p pkg/usr/libexec/iphoneports
-mv pkg/var/usr/bin/sudo pkg/usr/libexec/iphoneports
-ln -s ../../../../usr/libexec/iphoneports/sudo pkg/var/usr/bin/sudo
+mkdir -p pkg/usr/local/libexec/iphoneports
+mv pkg/var/usr/bin/sudo pkg/usr/local/libexec/iphoneports
+ln -s ../../../../usr/local/libexec/iphoneports/sudo pkg/var/usr/bin/sudo
 
 cp files/sudoers pkg/var/usr/etc/sudoers
 chmod 440 pkg/var/usr/etc/sudoers

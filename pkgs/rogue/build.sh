@@ -14,9 +14,9 @@ ldid -S"$_ENT" bin/rogue
 chmod 2755 bin/rogue
 )
 
-mkdir -p pkg/usr/libexec/iphoneports
-mv pkg/var/usr/bin/rogue pkg/usr/libexec/iphoneports
-ln -s ../../../../usr/libexec/iphoneports/rogue pkg/var/usr/bin/rogue
+mkdir -p pkg/usr/local/libexec/iphoneports
+mv pkg/var/usr/bin/rogue pkg/usr/local/libexec/iphoneports
+ln -s ../../../../usr/local/libexec/iphoneports/rogue pkg/var/usr/bin/rogue
 
 cp -r DEBIAN pkg
 sed -e "s|@DPKGARCH@|$_DPKGARCH|" DEBIAN/control > pkg/DEBIAN/control
