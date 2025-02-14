@@ -38,7 +38,6 @@ printf '%s' "$$" > "$bsroot/pkglock"
 
 pkgdir="$bsroot/pkgs"
 export TERM="xterm-256color"
-export _ENT="$bsroot/entitlements.xml"
 
 case "$*" in
     *--no-tmpfs*) export _TMP="$bsroot" ;;
@@ -90,6 +89,12 @@ case $_TARGET in
     ppc64*|powerpc64*) export _DPKGARCH=darwin-ppc64 ;;
     ppc*|powerpc*) export _DPKGARCH=darwin-powerpc ;;
 esac
+
+case $_DPKGARCH in
+    iphoneos-*) _ENT="$bsroot/ios-entitlements.xml" ;;
+    *) _ENT= ;;
+esac
+export _ENT
 
 : > "$_TMP/.builtpkgs"
 rm -rf "$_TMP"/iphoneports-sdk*
