@@ -3,6 +3,5 @@ pkg
 *.deb
 /iphoneports-sdk*
 /.builtpkgs
-/.args.txt
 /pkglock
 /sysroot
