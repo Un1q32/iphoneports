@@ -16,14 +16,6 @@ if ! command -v "$EDITOR" >/dev/null 2>&1; then
     command -v "$EDITOR" >/dev/null 2>&1 || EDITOR=none
 fi
 
-if [ -z "$1" ]; then
-    if [ -f "$bsroot/.args.txt" ]; then
-        while IFS= read -r line; do
-            set -- "$@" "$line"
-        done < "$bsroot/.args.txt"
-    fi
-fi
-
 if [ -f "$bsroot/pkglock" ]; then
     lockpid="$(cat "$bsroot/pkglock")"
     if kill -0 "$lockpid" 2> /dev/null; then
