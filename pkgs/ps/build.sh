@@ -1,6 +1,6 @@
 #!/bin/sh -e
 (
-cd src || exit 1
+cd src
 for src in ps.c print.c nlist.c tasks.c keyword.c; do
     "$_TARGET-cc" -Os -flto -c "$src" -D'__FBSDID(x)=' -Wno-deprecated-non-prototype -Wno-#warnings &
 done
@@ -11,7 +11,7 @@ cp ps "$_PKGROOT/pkg/var/usr/bin"
 )
 
 (
-cd pkg/var/usr/bin || exit 1
+cd pkg/var/usr/bin
 "$_TARGET-strip" ps 2>/dev/null || true
 case $_DPKGARCH in
     iphoneos-*) ldid -S"$_PKGROOT/files/ios-entitlements.xml" ps ;;
