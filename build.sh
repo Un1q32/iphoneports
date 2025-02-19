@@ -16,8 +16,8 @@ if ! command -v "$EDITOR" >/dev/null 2>&1; then
     command -v "$EDITOR" >/dev/null 2>&1 || EDITOR=none
 fi
 
-if [ -f "$bsroot/pkglock" ]; then
-    read -r lockpid < "$bsroot/pkglock"
+if [ -f pkglock ]; then
+    read -r lockpid < pkglock
     if kill -0 "$lockpid" 2> /dev/null; then
         printf '%s\n' "Waiting for PID $lockpid to finish..."
         while kill -0 "$lockpid" 2> /dev/null; do
@@ -26,7 +26,7 @@ if [ -f "$bsroot/pkglock" ]; then
     fi
 fi
 
-printf '%s' "$$" > "$bsroot/pkglock"
+printf '%s' "$$" > pkglock
 
 pkgdir="$bsroot/pkgs"
 export TERM="xterm-256color"
