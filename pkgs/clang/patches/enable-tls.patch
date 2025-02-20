@@ -46,33 +46,3 @@
    }
  
    // We're assuming that the destructor function is something we can
---- src/llvm/include/llvm/TargetParser/Triple.h.orig
-+++ src/llvm/include/llvm/TargetParser/Triple.h
-@@ -1080,7 +1080,15 @@
-   /// Note: Android API level 29 (10) introduced ELF TLS.
-   bool hasDefaultEmulatedTLS() const {
-     return (isAndroid() && isAndroidVersionLT(29)) || isOSOpenBSD() ||
--           isWindowsCygwinEnvironment() || isOHOSFamily();
-+           isWindowsCygwinEnvironment() || isOHOSFamily() ||
-+           (isMacOSX() && isMacOSXVersionLT(10, 7)) ||
-+           (isiOS() && ((isArch64Bit() && isOSVersionLT(8)) ||
-+                        (isArch32Bit() &&
-+                         ((isSimulatorEnvironment() && isOSVersionLT(10)) ||
-+                          isOSVersionLT(9))))) ||
-+           (isWatchOS() && (isOSVersionLT(2) ||
-+                            (isSimulatorEnvironment() && isOSVersionLT(3)))) ||
-+           isDriverKit();
-   }
- 
-   /// True if the target supports both general-dynamic and TLSDESC, and TLSDESC
---- src/llvm/lib/LTO/LTOBackend.cpp.orig
-+++ src/llvm/lib/LTO/LTOBackend.cpp
-@@ -511,6 +511,8 @@
-     return TOrErr.takeError();
- 
-   std::unique_ptr<TargetMachine> TM = createTargetMachine(C, *TOrErr, Mod);
-+  if (TM->Options.EmulatedTLS == 0)
-+    TM->Options.EmulatedTLS = TM->getTargetTriple().hasDefaultEmulatedTLS();
- 
-   LLVM_DEBUG(dbgs() << "Running regular LTO\n");
-   if (!C.CodeGenOnly) {
