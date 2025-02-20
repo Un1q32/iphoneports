@@ -1,7 +1,7 @@
 #!/bin/sh -e
 mkdir -p src/build pkg/var/usr/lib/clang/19/lib/darwin
 (
-cd src/build || exit 1
+cd src/build
 clang="$(command -v "$_TARGET-sdkpath")"
 clang="${clang%/*}/../share/iphoneports/bin/clang"
 

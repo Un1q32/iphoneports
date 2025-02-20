@@ -1,6 +1,6 @@
 #!/bin/sh -e
 (
-cd src || exit 1
+cd src
 ./configure --prefix=/var/usr
 "$_MAKE" install DESTDIR="$_PKGROOT/pkg" -j"$_JOBS"
 )

@@ -1,13 +1,13 @@
 #!/bin/sh -e
 (
-cd src || exit 1
+cd src
 ./configure --host="$_TARGET" --prefix=/var/usr --disable-static --disable-arch-native
 "$_MAKE" -j"$_JOBS"
 "$_MAKE" DESTDIR="$_PKGROOT/pkg" install
 )
 
 (
-cd pkg/var/usr || exit 1
+cd pkg/var/usr
 rm -rf share
 for script in bin/*; do
     [ "$script" = 'bin/bzip3' ] || [ "$script" = 'bin/bunzip3' ] && continue

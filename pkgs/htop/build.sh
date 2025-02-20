@@ -1,6 +1,6 @@
 #!/bin/sh -e
 (
-cd src || exit 1
+cd src
 ./autogen.sh
 ./configure --host="$_TARGET" --prefix=/var/usr --disable-unicode --disable-linux-affinity
 "$_MAKE" -j"$_JOBS"
@@ -9,7 +9,7 @@ cp htop "$_PKGROOT/pkg/var/usr/bin"
 )
 
 (
-cd pkg/var/usr/bin || exit 1
+cd pkg/var/usr/bin
 "$_TARGET-strip" htop 2>/dev/null || true
 ldid -S"$_ENT" htop
 )

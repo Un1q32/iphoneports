@@ -1,13 +1,13 @@
 #!/bin/sh -e
 (
-cd src || exit 1
+cd src
 "$_TARGET-cc" -o login -Os -flto login.c -DUSE_PAM -lpam -w
 mkdir -p "$_PKGROOT/pkg/var/usr/bin"
 cp login "$_PKGROOT/pkg/var/usr/bin"
 )
 
 (
-cd pkg/var/usr/bin || exit 1
+cd pkg/var/usr/bin
 "$_TARGET-strip" login 2>/dev/null || true
 ldid -S"$_ENT" login
 chmod 4755 login

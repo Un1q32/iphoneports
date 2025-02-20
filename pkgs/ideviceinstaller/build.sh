@@ -1,6 +1,6 @@
 #!/bin/sh -e
 (
-cd src || exit 1
+cd src
 autoreconf -fi
 ./configure --host="$_TARGET" --prefix=/var/usr PKG_CONFIG_LIBDIR="$_SDK/var/usr/lib/pkgconfig" ac_cv_func_malloc_0_nonnull=yes ac_cv_func_realloc_0_nonnull=yes
 "$_MAKE" -j"$_JOBS"
@@ -8,7 +8,7 @@ autoreconf -fi
 )
 
 (
-cd pkg/var/usr || exit 1
+cd pkg/var/usr
 rm -rf share
 "$_TARGET-strip" bin/ideviceinstaller 2>/dev/null || true
 ldid -S"$_ENT" bin/ideviceinstaller

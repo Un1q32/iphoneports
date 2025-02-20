@@ -1,13 +1,13 @@
 #!/bin/sh -e
 (
-cd src || exit 1
+cd src
 "$_TARGET-cc" -Os -flto killall.c -o killall -D'__FBSDID(x)='
 mkdir -p "$_PKGROOT/pkg/var/usr/bin"
 cp killall "$_PKGROOT/pkg/var/usr/bin"
 )
 
 (
-cd pkg/var/usr/bin || exit 1
+cd pkg/var/usr/bin
 "$_TARGET-strip" killall 2>/dev/null || true
 ldid -S"$_ENT" killall
 )

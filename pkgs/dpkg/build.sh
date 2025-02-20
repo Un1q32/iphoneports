@@ -1,6 +1,6 @@
 #!/bin/sh -e
 (
-cd src || exit 1
+cd src
 if ! command -v gtar >/dev/null; then
     mkdir tmpbin
     printf '%s' "\
@@ -23,7 +23,7 @@ sed -i -e "s|@DPKGARCH@|$_DPKGARCH|" data/tupletable
 )
 
 (
-cd pkg/var/usr || exit 1
+cd pkg/var/usr
 rm -rf share/man share/doc share/perl5 share/polkit-1 libexec/dpkg/methods ../lib/dpkg/methods
 grep -Erl '#! ?/usr/bin/perl' | while IFS= read -r file; do
     rm -f "$file"

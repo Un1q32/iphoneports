@@ -1,6 +1,6 @@
 #!/bin/sh -e
 (
-cd src || exit 1
+cd src
 ./autogen.sh
 ./configure --host="$_TARGET" --enable-silent-rules --prefix=/var/usr --with-openssl --with-zlib --with-bzip2 --with-brotli --with-zstd --with-lua --with-sqlite --with-webdav-props --with-xxhash PKG_CONFIG_LIBDIR="$_SDK/var/usr/lib/pkgconfig"
 "$_MAKE" -j"$_JOBS"
@@ -8,7 +8,7 @@ cd src || exit 1
 )
 
 (
-cd pkg/var/usr || exit 1
+cd pkg/var/usr
 rm -rf share
 "$_TARGET-strip" sbin/lighttpd sbin/lighttpd-angel lib/liblightcomp.dylib lib/*.so 2>/dev/null || true
 ldid -S"$_ENT" sbin/lighttpd sbin/lighttpd-angel lib/liblightcomp.dylib lib/*.so

@@ -1,13 +1,13 @@
 #!/bin/sh -e
 (
-cd src || exit 1
+cd src
 ./configure --host="$_TARGET" --prefix=/var/usr --disable-static
 "$_MAKE" -j"$_JOBS"
 "$_MAKE" install DESTDIR="$_PKGROOT/pkg"
 )
 
 (
-cd pkg/var/usr || exit 1
+cd pkg/var/usr
 "$_TARGET-strip" lib/libimobiledevice-glue-1.0.0.dylib 2>/dev/null || true
 ldid -S"$_ENT" lib/libimobiledevice-glue-1.0.0.dylib
 )

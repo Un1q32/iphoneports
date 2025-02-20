@@ -1,6 +1,6 @@
 #!/bin/sh -e
 (
-cd src || exit 1
+cd src
 autoreconf -fi
 ./configure --host="$_TARGET" --prefix=/var/usr --without-libiberty --without-avahi --disable-Werror --enable-rfc2553 --disable-pump-mode rsync_cv_HAVE_C99_VSNPRINTF=yes
 "$_MAKE" -j"$_JOBS"
@@ -8,7 +8,7 @@ autoreconf -fi
 )
 
 (
-cd pkg/var/usr || exit 1
+cd pkg/var/usr
 rm -rf share sbin
 for bin in distcc distccd distccmon-text lsdistcc; do
     "$_TARGET-strip" "bin/$bin" 2>/dev/null || true

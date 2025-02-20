@@ -1,13 +1,13 @@
 #!/bin/sh -e
 (
-cd src || exit 1
+cd src
 ./configure --host="$_TARGET" --prefix=/var/usr --enable-etcdir=/var/usr/etc/zsh --enable-zshenv=/var/usr/etc/zsh/zshenv --enable-zlogin=/var/usr/etc/zsh/zlogin --enable-zlogout=/var/usr/etc/zsh/zlogout --enable-zprofile=/var/usr/etc/zsh/zprofile --enable-zshrc=/var/usr/etc/zsh/zshrc --enable-zsh-secure-free --enable-multibyte --enable-pcre PCRECONF=true LIBS="-lpcre"
 "$_MAKE" -j"$_JOBS"
 "$_MAKE" DESTDIR="$_PKGROOT/pkg" install
 )
 
 (
-cd pkg/var/usr || exit 1
+cd pkg/var/usr
 rm -rf bin/zsh-5.9 share/man
 "$_TARGET-strip" bin/zsh 2>/dev/null || true
 ldid -S"$_ENT" bin/zsh

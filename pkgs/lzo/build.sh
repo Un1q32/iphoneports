@@ -1,6 +1,6 @@
 #!/bin/sh -e
 (
-cd src || exit 1
+cd src
 autoreconf -fi
 ./configure --host="$_TARGET" --prefix=/var/usr --disable-static --enable-shared
 "$_MAKE" -j"$_JOBS"
@@ -8,7 +8,7 @@ autoreconf -fi
 )
 
 (
-cd pkg/var/usr || exit 1
+cd pkg/var/usr
 rm -rf share
 "$_TARGET-strip" lib/liblzo2.2.dylib 2>/dev/null || true
 ldid -S"$_ENT" lib/liblzo2.2.dylib

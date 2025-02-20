@@ -13,7 +13,7 @@ _get_distribution_components() {
 
 mkdir -p src/build
 (
-cd src/build || exit 1
+cd src/build
 tblgen="$(command -v "$_TARGET-sdkpath")"
 tblgen="${tblgen%/*}/../share/iphoneports/bin/llvm-tblgen"
 case ${_TARGET%%-*} in
@@ -26,7 +26,7 @@ DESTDIR="$_PKGROOT/pkg" ninja install-distribution -j"$_JOBS"
 )
 
 (
-cd pkg/var/usr || exit 1
+cd pkg/var/usr
 rm -rf share
 for file in bin/* lib/*.dylib; do
     if ! [ -h "$file" ]; then

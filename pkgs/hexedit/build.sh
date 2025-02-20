@@ -1,6 +1,6 @@
 #!/bin/sh -e
 (
-cd src || exit 1
+cd src
 ./autogen.sh
 ./configure --host="$_TARGET" --prefix=/var/usr
 "$_MAKE" -j"$_JOBS"
@@ -8,7 +8,7 @@ cd src || exit 1
 )
 
 (
-cd pkg/var/usr || exit 1
+cd pkg/var/usr
 rm -rf share
 "$_TARGET-strip" bin/hexedit 2>/dev/null || true
 ldid -S"$_ENT" bin/hexedit

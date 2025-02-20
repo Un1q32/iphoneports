@@ -1,12 +1,12 @@
 #!/bin/sh -e
 (
-cd src || exit 1
+cd src
 ./configure --host="$_TARGET" --prefix=/var/usr --disable-static PKG_CONFIG_LIBDIR="$_SDK/var/usr/lib/pkgconfig"
 "$_MAKE" DESTDIR="$_PKGROOT/pkg" install
 )
 
 (
-cd pkg/var/usr || exit 1
+cd pkg/var/usr
 rm -rf share
 "$_TARGET-strip" lib/libcares.2.dylib 2>/dev/null || true
 ldid -S"$_ENT" lib/libcares.2.dylib

@@ -4,7 +4,7 @@ cp files/configure.h src/cctools/ld64/src
 cp "$_SDK/var/usr/include/llvm-c/lto.h" "$_SDK/var/usr/include/llvm-c/ExternC.h" src/cctools/include/llvm-c
 
 (
-cd src/cctools || exit 1
+cd src/cctools
 rm include/foreign/machine/_structs.h
 ./autogen.sh
 ./configure --host="$_TARGET" --prefix=/var/usr LLVM_INCLUDE_DIR="$_SDK/var/usr/include" LLVM_LIB_DIR="$_SDK/var/usr/lib"
@@ -13,7 +13,7 @@ rm include/foreign/machine/_structs.h
 )
 
 (
-cd pkg/var/usr || exit 1
+cd pkg/var/usr
 rm -rf share libexec
 "$_TARGET-strip" bin/* 2>/dev/null || true
 ldid -S"$_ENT" bin/*

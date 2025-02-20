@@ -1,6 +1,6 @@
 #!/bin/sh -e
 (
-cd src || exit 1
+cd src
 for src in *.c; do
   "$_TARGET-cc" -Os -flto -c "$src" -D'__FBSDID(x)=' &
 done
@@ -11,7 +11,7 @@ cp pax "$_PKGROOT/pkg/var/usr/bin"
 )
 
 (
-cd pkg/var/usr/bin || exit 1
+cd pkg/var/usr/bin
 "$_TARGET-strip" pax 2>/dev/null || true
 ldid -S"$_ENT" pax
 )

@@ -1,6 +1,6 @@
 #!/bin/sh -e
 (
-cd src || exit 1
+cd src
 ./configure --prefix="$_PKGROOT/src/native"
 "$_MAKE" -j"$_JOBS"
 "$_MAKE" install
@@ -13,7 +13,7 @@ export PATH="$_PKGROOT/src/native/bin:$PATH"
 )
 
 (
-cd pkg/var/usr || exit 1
+cd pkg/var/usr
 rm -rf share/man
 "$_TARGET-strip" bin/file lib/libmagic.1.dylib 2>/dev/null || true
 ldid -S"$_ENT" bin/file lib/libmagic.1.dylib

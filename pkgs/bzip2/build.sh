@@ -1,11 +1,11 @@
 #!/bin/sh -e
 (
-cd src || exit 1
+cd src
 "$_MAKE" CC="$_TARGET-cc" DESTDIR="$_PKGROOT/pkg" PREFIX=/var/usr install -j"$_JOBS"
 )
 
 (
-cd pkg/var/usr || exit 1
+cd pkg/var/usr
 rm -rf man
 "$_TARGET-strip" bin/bzip2 bin/bzip2recover lib/libbz2.1.0.dylib 2>/dev/null || true
 ldid -S"$_ENT" bin/bzip2 bin/bzip2recover lib/libbz2.1.0.dylib

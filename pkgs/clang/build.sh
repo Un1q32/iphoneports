@@ -19,7 +19,7 @@ export PATH="$_PKGROOT/src/iphoneports-fakebin:$PATH"
 
 mkdir -p src/build
 (
-cd src/build || exit 1
+cd src/build
 tblgendir="$(command -v "$_TARGET-sdkpath")"
 tblgendir="${tblgendir%/*}/../share/iphoneports/bin"
 case ${_TARGET%%-*} in
@@ -32,7 +32,7 @@ DESTDIR="$_PKGROOT/pkg" ninja install-distribution -j"$_JOBS"
 )
 
 (
-cd pkg/var/usr || exit 1
+cd pkg/var/usr
 rm -rf share bin/git-clang-format
 case $_DPKGARCH in
     iphoneos-*) rm bin/clang-repl ;;

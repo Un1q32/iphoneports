@@ -1,6 +1,6 @@
 #!/bin/sh -e
 (
-cd src || exit 1
+cd src
 autoreconf -fi
 [ -d "$_SDK/usr/include/c++/4.2.1" ] && rm "$_SDK/var/usr/lib/libc++.dylib"
 ./configure --host="$_TARGET" --prefix=/var/usr
@@ -10,7 +10,7 @@ cp vbindiff "$_PKGROOT/pkg/var/usr/bin"
 )
 
 (
-cd pkg/var/usr/bin || exit 1
+cd pkg/var/usr/bin
 "$_TARGET-strip" vbindiff 2>/dev/null || true
 ldid -S"$_ENT" vbindiff
 )

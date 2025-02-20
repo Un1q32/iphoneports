@@ -1,12 +1,12 @@
 #!/bin/sh -e
 (
-cd src || exit 1
+cd src
 ./configure --prefix=/var/usr --disable-static CC="$_TARGET-cc"
 "$_MAKE" DESTDIR="$_PKGROOT/pkg" install -j"$_JOBS"
 )
 
 (
-cd pkg/var/usr || exit 1
+cd pkg/var/usr
 rm -rf share
 for lib in lib/*.dylib; do
     if [ -f "$lib" ] && [ ! -h "$lib" ]; then

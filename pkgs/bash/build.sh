@@ -1,6 +1,6 @@
 #!/bin/sh -e
 (
-cd src || exit 1
+cd src
 ./configure --host="$_TARGET" --prefix=/var/usr --with-installed-readline CFLAGS="-Wno-parentheses -Wno-format-security -Wno-deprecated-non-prototype -O3"
 "$_MAKE" -j"$_JOBS"
 mkdir -p "$_PKGROOT/pkg/var/usr/bin"
@@ -8,7 +8,7 @@ cp bash "$_PKGROOT/pkg/var/usr/bin"
 )
 
 (
-cd pkg/var/usr || exit 1
+cd pkg/var/usr
 "$_TARGET-strip" bin/bash 2>/dev/null || true
 ldid -S"$_ENT" bin/bash
 mkdir -p etc/bash/bashrc.d

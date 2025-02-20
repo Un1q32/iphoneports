@@ -61,13 +61,13 @@ exec \"$(command -v "$_OTOOL")\" \"\$@\"
 export PATH="$_PKGROOT/src/tmpbin:$PATH"
 
 (
-cd src/build || exit 1
+cd src/build
 meson setup .. --cross-file="$_PKGROOT/src/iphoneports.meson" --prefix=/var/usr -Denable_asm="$asm" -Denable_tests=false
 DESTDIR="$_PKGROOT/pkg" ninja install -j"$_JOBS"
 )
 
 (
-cd pkg/var/usr || exit 1
+cd pkg/var/usr
 "$_TARGET-strip" bin/dav1d lib/libdav1d.7.dylib 2>/dev/null || true
 ldid -S"$_ENT" bin/dav1d lib/libdav1d.7.dylib
 )

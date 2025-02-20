@@ -1,13 +1,13 @@
 #!/bin/sh -e
 (
-cd src || exit 1
+cd src
 ./configure --host="$_TARGET" --prefix=/var/usr --disable-static
 "$_MAKE" -j"$_JOBS"
 "$_MAKE" DESTDIR="$_PKGROOT/pkg" install
 )
 
 (
-cd pkg/var/usr/bin || exit 1
+cd pkg/var/usr/bin
 rm -rf ../share
 "$_TARGET-strip" bsdcat bsdcpio bsdtar bsdunzip ../lib/libarchive.13.dylib 2>/dev/null || true
 ldid -S"$_ENT" bsdcat bsdcpio bsdtar bsdunzip ../lib/libarchive.13.dylib

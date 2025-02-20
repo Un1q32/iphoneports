@@ -1,6 +1,6 @@
 #!/bin/sh -e
 (
-cd src || exit 1
+cd src
 clang="$(command -v "$_TARGET-sdkpath")"
 clang="${clang%/*}/../share/iphoneports/bin/clang"
 "$_TARGET-cc" -dM -E - < /dev/null | grep -q __LP64__ && arg=-m64
@@ -9,7 +9,7 @@ clang="${clang%/*}/../share/iphoneports/bin/clang"
 )
 
 (
-cd pkg/var/usr || exit 1
+cd pkg/var/usr
 rm -rf share/man
 ver="$(echo bin/luajit-2.1.*)"
 ver="${ver#bin/luajit-2.1.}"

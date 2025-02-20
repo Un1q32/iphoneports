@@ -1,7 +1,7 @@
 #!/bin/sh -e
 mkdir -p src/build
 (
-cd src/build || exit 1
+cd src/build
 cpu="${_TARGET%%-*}"
 cmake -GNinja .. -DCMAKE_BUILD_TYPE=Release -DCMAKE_C_COMPILER="$_TARGET-cc" -DCMAKE_SYSTEM_NAME=Darwin -DCMAKE_INSTALL_PREFIX=/var/usr -DCMAKE_INSTALL_NAME_TOOL="$_INSTALLNAMETOOL" -DCMAKE_INSTALL_NAME_DIR=/var/usr/lib -DCMAKE_SYSTEM_PROCESSOR="$cpu" -DCMAKE_FIND_ROOT_PATH_MODE_INCLUDE=ONLY -DCMAKE_FIND_ROOT_PATH="$_SDK/var/usr" -DBUILD_SHARED_LIBS=yes -DLIBRESSL_TESTS=OFF -DLIBRESSL_APPS=OFF
 DESTDIR="$_PKGROOT/pkg" ninja tls/install include/install -j"$_JOBS"
@@ -10,7 +10,7 @@ cp pkgconfig/libtls.pc "$_PKGROOT/pkg/var/usr/lib/pkgconfig"
 )
 
 (
-cd pkg/var/usr || exit 1
+cd pkg/var/usr
 rm -rf include/openssl
 tlsabi=31
 mv lib/libtls.$tlsabi.*.dylib lib/libtls.$tlsabi.dylib

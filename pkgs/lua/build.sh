@@ -1,12 +1,12 @@
 #!/bin/sh -e
 (
-cd src || exit 1
+cd src
 "$_MAKE" PLAT=macosx INSTALL_TOP=/var/usr CC="$_TARGET-cc" RANLIB="$_TARGET-ranlib" AR="$_TARGET-ar rcu"
 "$_MAKE" PLAT=macosx INSTALL_TOP="$_PKGROOT/pkg/var/usr" CC="$_TARGET-cc" RANLIB="$_TARGET-ranlib" AR="$_TARGET-ar rcu" install
 )
 
 (
-cd pkg/var/usr || exit 1
+cd pkg/var/usr
 rm -rf man
 "$_TARGET-strip" bin/lua bin/luac 2>/dev/null || true
 ldid -S"$_ENT" bin/lua bin/luac

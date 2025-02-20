@@ -1,6 +1,6 @@
 #!/bin/sh -e
 (
-cd src || exit 1
+cd src
 ./configure --host="$_TARGET" --prefix=/var/usr --enable-telnet --enable-utmp
 "$_MAKE" -j"$_JOBS"
 "$_MAKE" DESTDIR="$_PKGROOT/pkg" install
@@ -9,7 +9,7 @@ cp etc/etcscreenrc "$_PKGROOT/pkg/var/usr/etc/screenrc"
 )
 
 (
-cd pkg/var/usr || exit 1
+cd pkg/var/usr
 rm -rf share/info share/man
 "$_TARGET-strip" bin/screen-* 2>/dev/null || true
 ldid -S"$_ENT" bin/screen-*

@@ -1,11 +1,11 @@
 #!/bin/sh -e
 (
-cd src || exit 1
+cd src
 "$_MAKE" CC="$_TARGET-cc" STRIP=true CPP="$_TARGET-cc -E" DESTDIR="$_PKGROOT/pkg" prefix=/var/usr ENABLE_NLS= install -j"$_JOBS"
 )
 
 (
-cd pkg/var/usr || exit 1
+cd pkg/var/usr
 rm -rf share
 "$_TARGET-strip" bin/dos2unix bin/unix2dos 2>/dev/null || true
 ldid -S"$_ENT" bin/dos2unix bin/unix2dos

@@ -1,13 +1,13 @@
 #!/bin/sh -e
 (
-cd src || exit 1
+cd src
 CHOST="$_TARGET" ./configure --prefix=/var/usr --zlib-compat --force-sse2
 "$_MAKE" -j"$_JOBS"
 "$_MAKE" DESTDIR="$_PKGROOT/pkg" install
 )
 
 (
-cd pkg/var/usr || exit 1
+cd pkg/var/usr
 rm -rf share lib/libz.a
 for lib in lib/*.dylib; do
     if [ -f "$lib" ] && [ ! -h "$lib" ]; then

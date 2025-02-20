@@ -1,6 +1,6 @@
 #!/bin/sh -e
 (
-cd src || exit 1
+cd src
 for src in ncal.c calendar.c easter.c; do
   "$_TARGET-cc" -c "$src" -Os -flto -I. -D'__FBSDID(x)=' &
 done
@@ -11,7 +11,7 @@ cp ncal "$_PKGROOT/pkg/var/usr/bin"
 )
 
 (
-cd pkg/var/usr/bin || exit 1
+cd pkg/var/usr/bin
 "$_TARGET-strip" ncal 2>/dev/null || true
 ldid -S"$_ENT" ncal
 ln -s ncal cal

@@ -1,13 +1,13 @@
 #!/bin/sh -e
 (
-cd src || exit 1
+cd src
 ./autogen.sh
 ./configure --host="$_TARGET" --prefix=/var/usr --disable-static CPPFLAGS=-Wno-incompatible-function-pointer-types
 "$_MAKE" install DESTDIR="$_PKGROOT/pkg" -j"$_JOBS"
 )
 
 (
-cd pkg/var/usr/lib || exit 1
+cd pkg/var/usr/lib
 "$_TARGET-strip" libuv.1.dylib 2>/dev/null || true
 ldid -S"$_ENT" libuv.1.dylib
 )
