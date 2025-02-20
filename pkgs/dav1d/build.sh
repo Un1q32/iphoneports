@@ -1,9 +1,7 @@
 #!/bin/sh -e
 mkdir -p src/build src/tmpbin
 
-cpu="${_TARGET%%-*}"
-
-case $cpu in
+case $_CPU in
     arm64|arm64e|aarch64)
         cpu_family=aarch64
         asm=true
@@ -19,7 +17,7 @@ case $cpu in
         asm=false
     ;;
 
-    x86_64|x86_64h)
+    x86_64*)
         cpu_family=x86_64
         asm=true
     ;;
@@ -35,17 +33,14 @@ case $cpu in
     ;;
 esac
 
-subsystem= # shut up shellcheck
-eval "$("$_TARGET-cc" -E -xc files/subsystem.sh)"
-
 sed -e "s|@CC@|$_TARGET-cc|g" \
     -e "s|@CXX@|$_TARGET-c++|g" \
     -e "s|@AR@|$_TARGET-ar|g" \
     -e "s|@RANLIB@|$_TARGET-ranlib|g" \
     -e "s|@SDK@|$_SDK|g" \
-    -e "s|@CPU@|$cpu|g" \
+    -e "s|@CPU@|$_CPU|g" \
     -e "s|@CPU_FAMILY@|$cpu_family|g" \
-    -e "s|@SUBSYSTEM@|$subsystem|g" \
+    -e "s|@SUBSYSTEM@|$_SUBSYSTEM|g" \
     files/iphoneports.meson > src/iphoneports.meson
 
 printf '%s' "\

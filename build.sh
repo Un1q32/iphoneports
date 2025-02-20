@@ -137,7 +137,23 @@ depcheck() {
     fi
 
     sdk="$("$_TARGET-sdkpath")"
-    export _MAKE
+
+    eval "$(printf '%s' '\
+if [ TARGET_OS_IOS = 1 ]; then
+    _SUBSYSTEM=ios
+elif [ TARGET_OS_OSX = 1 ]; then
+    _SUBSYSTEM=macos
+elif [ TARGET_OS_WATCH = 1 ]; then
+    _SUBSYSTEM=watchos
+elif [ TARGET_OS_TV = 1 ]; then
+    _SUBSYSTEM=tvos
+else
+    echo "UNSUPPORTED PLATFORM"
+    exit 1
+fi
+' | "$_TARGET-cc" -E -xc -)"
+    _CPU="${_TARGET%%-*}"
+    export _MAKE _SUBSYSTEM _CPU
 }
 
 build() {
