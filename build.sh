@@ -65,23 +65,6 @@ if [ -z "$_JOBS" ]; then
     export _JOBS
 fi
 
-case $_TARGET in
-    arm64*|aarch64*)
-        command -v "$_TARGET-sdkpath" > /dev/null || error "Missing dependency: $_TARGET-sdkpath"
-        if [ -d "$("$_TARGET-sdkpath")/System/Library/Frameworks/MobileCoreServices.framework" ]; then
-            export _DPKGARCH=iphoneos-arm
-        else
-            export _DPKGARCH=darwin-arm64
-        fi
-    ;;
-
-    arm*) export _DPKGARCH=iphoneos-arm ;;
-    x86_64*) export _DPKGARCH=darwin-amd64 ;;
-    i386*) export _DPKGARCH=darwin-i386 ;;
-    ppc64*|powerpc64*) export _DPKGARCH=darwin-ppc64 ;;
-    ppc*|powerpc*) export _DPKGARCH=darwin-powerpc ;;
-esac
-
 case $_DPKGARCH in
     iphoneos-*) _ENT="$bsroot/ios-entitlements.xml" ;;
     *) _ENT= ;;
@@ -153,7 +136,24 @@ else
 fi
 ' | "$_TARGET-cc" -E -xc -)"
     _CPU="${_TARGET%%-*}"
-    export _MAKE _SUBSYSTEM _CPU
+
+    case $_CPU in
+        arm64*|aarch64*)
+            if [ "$_SUBSYSTEM" = "ios" ]; then
+                _DPKGARCH=iphoneos-arm
+            else
+                _DPKGARCH=darwin-arm64
+            fi
+        ;;
+
+        arm*) _DPKGARCH=iphoneos-arm ;;
+        x86_64*) _DPKGARCH=darwin-amd64 ;;
+        i386) _DPKGARCH=darwin-i386 ;;
+        ppc64) _DPKGARCH=darwin-ppc64 ;;
+        ppc|powerpc) _DPKGARCH=darwin-powerpc ;;
+    esac
+
+    export _MAKE _SUBSYSTEM _CPU _DPKGARCH
 }
 
 build() {
