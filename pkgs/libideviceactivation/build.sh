@@ -16,4 +16,4 @@ ldid -S"$_ENT" bin/ideviceactivation lib/libideviceactivation-1.0.2.dylib
 
 cp -r DEBIAN pkg
 sed -e "s|@DPKGARCH@|$_DPKGARCH|" DEBIAN/control > pkg/DEBIAN/control
-dpkg-deb -b --root-owner-group -Zgzip pkg "libideviceactivation-$_DPKGARCH.deb"
+dpkg-deb -b --root-owner-group -Zgzip pkg "libideviceactivation-$_CPU-$_SUBSYSTEM.deb"

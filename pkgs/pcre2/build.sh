@@ -15,4 +15,4 @@ ldid -S"$_ENT" bin/pcre2test bin/pcre2grep lib/libpcre2-8.0.dylib lib/libpcre2-1
 
 cp -r DEBIAN pkg
 sed -e "s|@DPKGARCH@|$_DPKGARCH|" DEBIAN/control > pkg/DEBIAN/control
-dpkg-deb -b --root-owner-group -Zgzip pkg "pcre2-$_DPKGARCH.deb"
+dpkg-deb -b --root-owner-group -Zgzip pkg "pcre2-$_CPU-$_SUBSYSTEM.deb"

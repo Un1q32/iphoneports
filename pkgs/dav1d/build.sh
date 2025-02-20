@@ -64,4 +64,4 @@ ldid -S"$_ENT" bin/dav1d lib/libdav1d.7.dylib
 
 cp -r DEBIAN pkg
 sed -e "s|@DPKGARCH@|$_DPKGARCH|" DEBIAN/control > pkg/DEBIAN/control
-dpkg-deb -b --root-owner-group -Zgzip pkg "dav1d-$_DPKGARCH.deb"
+dpkg-deb -b --root-owner-group -Zgzip pkg "dav1d-$_CPU-$_SUBSYSTEM.deb"

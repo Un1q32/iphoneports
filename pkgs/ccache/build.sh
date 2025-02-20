@@ -19,4 +19,4 @@ done
 
 cp -r DEBIAN pkg
 sed -e "s|@DPKGARCH@|$_DPKGARCH|" DEBIAN/control > pkg/DEBIAN/control
-dpkg-deb -b --root-owner-group -Zgzip pkg "ccache-$_DPKGARCH.deb"
+dpkg-deb -b --root-owner-group -Zgzip pkg "ccache-$_CPU-$_SUBSYSTEM.deb"

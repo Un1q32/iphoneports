@@ -14,4 +14,4 @@ ldid -S"$_ENT" libtatsu.0.dylib
 
 cp -r DEBIAN pkg
 sed -e "s|@DPKGARCH@|$_DPKGARCH|" DEBIAN/control > pkg/DEBIAN/control
-dpkg-deb -b --root-owner-group -Zgzip pkg "libtatsu-$_DPKGARCH.deb"
+dpkg-deb -b --root-owner-group -Zgzip pkg "libtatsu-$_CPU-$_SUBSYSTEM.deb"

@@ -22,4 +22,4 @@ cp files/sshd-keygen-wrapper pkg/var/usr/libexec/sshd-keygen-wrapper
 
 cp -r DEBIAN pkg
 sed -e "s|@DPKGARCH@|$_DPKGARCH|" DEBIAN/control > pkg/DEBIAN/control
-dpkg-deb -b --root-owner-group -Zgzip pkg "openssh-$_DPKGARCH.deb"
+dpkg-deb -b --root-owner-group -Zgzip pkg "openssh-$_CPU-$_SUBSYSTEM.deb"

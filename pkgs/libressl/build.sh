@@ -19,4 +19,4 @@ ldid -S"$_ENT" bin/openssl lib/libcrypto.$cryptoabi.dylib lib/libssl.$sslabi.dyl
 
 cp -r DEBIAN pkg
 sed -e "s|@DPKGARCH@|$_DPKGARCH|" DEBIAN/control > pkg/DEBIAN/control
-dpkg-deb -b --root-owner-group -Zgzip pkg "libressl-$_DPKGARCH.deb"
+dpkg-deb -b --root-owner-group -Zgzip pkg "libressl-$_CPU-$_SUBSYSTEM.deb"

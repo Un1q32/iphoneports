@@ -15,4 +15,4 @@ ldid -S"$_ENT" bin/rsync
 
 cp -r DEBIAN pkg
 sed -e "s|@DPKGARCH@|$_DPKGARCH|" DEBIAN/control > pkg/DEBIAN/control
-dpkg-deb -b --root-owner-group -Zgzip pkg "rsync-$_DPKGARCH.deb"
+dpkg-deb -b --root-owner-group -Zgzip pkg "rsync-$_CPU-$_SUBSYSTEM.deb"

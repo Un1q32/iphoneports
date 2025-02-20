@@ -13,4 +13,4 @@ ldid -S"$_ENT" bin/dos2unix bin/unix2dos
 
 cp -r DEBIAN pkg
 sed -e "s|@DPKGARCH@|$_DPKGARCH|" DEBIAN/control > pkg/DEBIAN/control
-dpkg-deb -b --root-owner-group -Zgzip pkg "dos2unix-$_DPKGARCH.deb"
+dpkg-deb -b --root-owner-group -Zgzip pkg "dos2unix-$_CPU-$_SUBSYSTEM.deb"

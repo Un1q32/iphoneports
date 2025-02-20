@@ -15,4 +15,4 @@ ldid -S"$_ENT" pigz
 
 cp -r DEBIAN pkg
 sed -e "s|@DPKGARCH@|$_DPKGARCH|" DEBIAN/control > pkg/DEBIAN/control
-dpkg-deb -b --root-owner-group -Zgzip pkg "pigz-$_DPKGARCH.deb"
+dpkg-deb -b --root-owner-group -Zgzip pkg "pigz-$_CPU-$_SUBSYSTEM.deb"

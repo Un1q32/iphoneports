@@ -14,4 +14,4 @@ ldid -S"$_ENT" killall
 
 cp -r DEBIAN pkg
 sed -e "s|@DPKGARCH@|$_DPKGARCH|" DEBIAN/control > pkg/DEBIAN/control
-dpkg-deb -b --root-owner-group -Zgzip pkg "killall-$_DPKGARCH.deb"
+dpkg-deb -b --root-owner-group -Zgzip pkg "killall-$_CPU-$_SUBSYSTEM.deb"

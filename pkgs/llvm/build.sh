@@ -38,4 +38,4 @@ done
 
 cp -r DEBIAN pkg
 sed -e "s|@DPKGARCH@|$_DPKGARCH|" DEBIAN/control > pkg/DEBIAN/control
-dpkg-deb -b --root-owner-group -Zgzip pkg "llvm-$_DPKGARCH.deb"
+dpkg-deb -b --root-owner-group -Zgzip pkg "llvm-$_CPU-$_SUBSYSTEM.deb"

@@ -15,4 +15,4 @@ ldid -S"$_ENT" bin/m4
 
 cp -r DEBIAN pkg
 sed -e "s|@DPKGARCH@|$_DPKGARCH|" DEBIAN/control > pkg/DEBIAN/control
-dpkg-deb -b --root-owner-group -Zgzip pkg "m4-$_DPKGARCH.deb"
+dpkg-deb -b --root-owner-group -Zgzip pkg "m4-$_CPU-$_SUBSYSTEM.deb"

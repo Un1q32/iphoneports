@@ -14,4 +14,4 @@ ldid -S"$_ENT" bc
 
 cp -r DEBIAN pkg
 sed -e "s|@DPKGARCH@|$_DPKGARCH|" DEBIAN/control > pkg/DEBIAN/control
-dpkg-deb -b --root-owner-group -Zgzip pkg "bc-$_DPKGARCH.deb"
+dpkg-deb -b --root-owner-group -Zgzip pkg "bc-$_CPU-$_SUBSYSTEM.deb"

@@ -15,4 +15,4 @@ ldid -S"$_ENT" bin/make
 
 cp -r DEBIAN pkg
 sed -e "s|@DPKGARCH@|$_DPKGARCH|" DEBIAN/control > pkg/DEBIAN/control
-dpkg-deb -b --root-owner-group -Zgzip pkg "make-$_DPKGARCH.deb"
+dpkg-deb -b --root-owner-group -Zgzip pkg "make-$_CPU-$_SUBSYSTEM.deb"

@@ -15,4 +15,4 @@ ldid -S"$_ENT" bin/xz bin/xzdec lib/liblzma.5.dylib
 
 cp -r DEBIAN pkg
 sed -e "s|@DPKGARCH@|$_DPKGARCH|" DEBIAN/control > pkg/DEBIAN/control
-dpkg-deb -b --root-owner-group -Zgzip pkg "xz-$_DPKGARCH.deb"
+dpkg-deb -b --root-owner-group -Zgzip pkg "xz-$_CPU-$_SUBSYSTEM.deb"

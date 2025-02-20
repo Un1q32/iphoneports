@@ -20,4 +20,4 @@ ln -s ../../../../usr/local/libexec/iphoneports/rogue pkg/var/usr/bin/rogue
 
 cp -r DEBIAN pkg
 sed -e "s|@DPKGARCH@|$_DPKGARCH|" DEBIAN/control > pkg/DEBIAN/control
-dpkg-deb -b --root-owner-group -Zgzip pkg "rogue-$_DPKGARCH.deb"
+dpkg-deb -b --root-owner-group -Zgzip pkg "rogue-$_CPU-$_SUBSYSTEM.deb"

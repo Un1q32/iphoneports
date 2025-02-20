@@ -15,4 +15,4 @@ ldid -S"$_ENT" bin/* lib/libnettle.8.*.dylib lib/libhogweed.6.*.dylib
 
 cp -r DEBIAN pkg
 sed -e "s|@DPKGARCH@|$_DPKGARCH|" DEBIAN/control > pkg/DEBIAN/control
-dpkg-deb -b --root-owner-group -Zgzip pkg "nettle-$_DPKGARCH.deb"
+dpkg-deb -b --root-owner-group -Zgzip pkg "nettle-$_CPU-$_SUBSYSTEM.deb"

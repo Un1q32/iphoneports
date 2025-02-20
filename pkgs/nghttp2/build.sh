@@ -17,4 +17,4 @@ ldid -S"$_ENT" lib/libnghttp2.14.dylib
 
 cp -r DEBIAN pkg
 sed -e "s|@DPKGARCH@|$_DPKGARCH|" DEBIAN/control > pkg/DEBIAN/control
-dpkg-deb -b --root-owner-group -Zgzip pkg "nghttp2-$_DPKGARCH.deb"
+dpkg-deb -b --root-owner-group -Zgzip pkg "nghttp2-$_CPU-$_SUBSYSTEM.deb"

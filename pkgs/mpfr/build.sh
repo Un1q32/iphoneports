@@ -15,4 +15,4 @@ ldid -S"$_ENT" lib/libmpfr.6.dylib
 
 cp -r DEBIAN pkg
 sed -e "s|@DPKGARCH@|$_DPKGARCH|" DEBIAN/control > pkg/DEBIAN/control
-dpkg-deb -b --root-owner-group -Zgzip pkg "mpfr-$_DPKGARCH.deb"
+dpkg-deb -b --root-owner-group -Zgzip pkg "mpfr-$_CPU-$_SUBSYSTEM.deb"

@@ -19,4 +19,4 @@ ldid -S"$_ENT" "bin/luajit-2.1.$ver" "lib/libluajit-5.1.2.1.$ver.dylib"
 
 cp -r DEBIAN pkg
 sed -e "s|@DPKGARCH@|$_DPKGARCH|" DEBIAN/control > pkg/DEBIAN/control
-dpkg-deb -b --root-owner-group -Zgzip pkg "luajit-$_DPKGARCH.deb"
+dpkg-deb -b --root-owner-group -Zgzip pkg "luajit-$_CPU-$_SUBSYSTEM.deb"

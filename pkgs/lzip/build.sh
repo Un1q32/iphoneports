@@ -16,4 +16,4 @@ ldid -S"$_ENT" bin/lzip
 cp -r DEBIAN pkg
 sed -e "s|@DPKGARCH@|$_DPKGARCH|" DEBIAN/control > pkg/DEBIAN/control
 [ -d "$_SDK/usr/include/c++/4.2.1" ] || sed -i -e '/^Depends:/ s/$/, iphoneports-libc++/' pkg/DEBIAN/control
-dpkg-deb -b --root-owner-group -Zgzip pkg "lzip-$_DPKGARCH.deb"
+dpkg-deb -b --root-owner-group -Zgzip pkg "lzip-$_CPU-$_SUBSYSTEM.deb"

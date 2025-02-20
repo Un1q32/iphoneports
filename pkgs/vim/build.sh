@@ -14,4 +14,4 @@ ldid -S"$_ENT" bin/vim
 
 cp -r DEBIAN pkg
 sed -e "s|@DPKGARCH@|$_DPKGARCH|" DEBIAN/control > pkg/DEBIAN/control
-dpkg-deb -b --root-owner-group -Zgzip pkg "vim-$_DPKGARCH.deb"
+dpkg-deb -b --root-owner-group -Zgzip pkg "vim-$_CPU-$_SUBSYSTEM.deb"

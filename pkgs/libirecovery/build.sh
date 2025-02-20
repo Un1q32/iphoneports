@@ -14,4 +14,4 @@ ldid -S"$_ENT" bin/irecovery lib/libirecovery-1.0.5.dylib
 
 cp -r DEBIAN pkg
 sed -e "s|@DPKGARCH@|$_DPKGARCH|" DEBIAN/control > pkg/DEBIAN/control
-dpkg-deb -b --root-owner-group -Zgzip pkg "libirecovery-$_DPKGARCH.deb"
+dpkg-deb -b --root-owner-group -Zgzip pkg "libirecovery-$_CPU-$_SUBSYSTEM.deb"

@@ -19,4 +19,4 @@ sed -i 's|# include "/var/usr/share/nano/\*\.nanorc"|include "/var/usr/share/nan
 
 cp -r DEBIAN pkg
 sed -e "s|@DPKGARCH@|$_DPKGARCH|" DEBIAN/control > pkg/DEBIAN/control
-dpkg-deb -b --root-owner-group -Zgzip pkg "nano-$_DPKGARCH.deb"
+dpkg-deb -b --root-owner-group -Zgzip pkg "nano-$_CPU-$_SUBSYSTEM.deb"

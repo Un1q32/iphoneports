@@ -15,4 +15,4 @@ ldid -S"$_ENT" bin/gtar
 
 cp -r DEBIAN pkg
 sed -e "s|@DPKGARCH@|$_DPKGARCH|" DEBIAN/control > pkg/DEBIAN/control
-dpkg-deb -b --root-owner-group -Zgzip pkg "gtar-$_DPKGARCH.deb"
+dpkg-deb -b --root-owner-group -Zgzip pkg "gtar-$_CPU-$_SUBSYSTEM.deb"
