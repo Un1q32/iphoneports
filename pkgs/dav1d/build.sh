@@ -48,15 +48,10 @@ sed -e "s|@CC@|$_TARGET-cc|g" \
     -e "s|@SUBSYSTEM@|$subsystem|g" \
     files/iphoneports.meson > src/iphoneports.meson
 
-[ "$_INSTALLNAMETOOL" != "install_name_tool" ] && printf '%s' "\
-#!/bin/sh -e
-exec \"$(command -v "$_INSTALLNAMETOOL")\" \"\$@\"
+printf '%s' "\
+#!/bin/sh
+exec \"$(command -v "$_TARGET-install_name_tool")\" \"\$@\"
 " > src/tmpbin/install_name_tool && chmod +x src/tmpbin/install_name_tool
-
-[ "$_OTOOL" != "otool" ] && printf '%s' "\
-#!/bin/sh -e
-exec \"$(command -v "$_OTOOL")\" \"\$@\"
-" > src/tmpbin/otool && chmod +x src/tmpbin/otool
 
 export PATH="$_PKGROOT/src/tmpbin:$PATH"
 

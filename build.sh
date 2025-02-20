@@ -98,7 +98,7 @@ error() {
 }
 
 depcheck() {
-    for dep in "$_TARGET-gcc" "$_TARGET-g++" "$_TARGET-cc" "$_TARGET-c++" "$_TARGET-strip" "$_TARGET-sdkpath" ldid dpkg-deb patch fakeroot automake autoreconf m4 yacc ctags tar gzip bzip2 xz zstd ninja sed pgrep meson cmake; do
+    for dep in "$_TARGET-gcc" "$_TARGET-g++" "$_TARGET-cc" "$_TARGET-c++" "$_TARGET-strip" "$_TARGET-sdkpath" "$_TARGET-install_name_tool" ldid dpkg-deb patch fakeroot automake autoreconf m4 yacc ctags tar gzip bzip2 xz zstd ninja sed pgrep meson cmake; do
         if ! command -v "$dep" > /dev/null; then
             error "Missing dependency: $dep"
         fi
@@ -136,28 +136,8 @@ depcheck() {
         error "Missing dependency: GNU tar"
     fi
 
-    if command -v "$_TARGET-otool" > /dev/null; then
-        _OTOOL="$_TARGET-otool"
-    elif command -v otool > /dev/null; then
-        _OTOOL="otool"
-    elif command -v llvm-otool > /dev/null; then
-        _OTOOL="llvm-otool"
-    else
-        error "Missing dependency: otool"
-    fi
-
-    if command -v "$_TARGET-install_name_tool" > /dev/null; then
-        _INSTALLNAMETOOL="$_TARGET-install_name_tool"
-    elif command -v install_name_tool > /dev/null; then
-        _INSTALLNAMETOOL="install_name_tool"
-    elif command -v llvm-install-name-tool > /dev/null; then
-        _INSTALLNAMETOOL="llvm-install-name-tool"
-    else
-        error "Missing dependency: install_name_tool"
-    fi
-
     sdk="$("$_TARGET-sdkpath")"
-    export _MAKE _OTOOL _INSTALLNAMETOOL
+    export _MAKE
 }
 
 build() {
