@@ -1,0 +1,11 @@
+--- src/os.hpp.orig
++++ src/os.hpp
+@@ -221,7 +221,7 @@
+ #endif
+ 
+ // Unlike Apple x64, utimensat shall be available in all Apple M1 systems.
+-#if _POSIX_C_SOURCE >= 200809L || defined(__APPLE__) && defined(__arm64__)
++#ifdef UTIME_NOW
+   #define UNIX_TIME_NS // Nanosecond time precision in Unix.
+ #endif
+ 
