@@ -14,4 +14,4 @@ ldid -S"$_ENT" bin/zstd lib/libzstd.1.5.6.dylib
 
 cp -r DEBIAN pkg
 sed -e "s|@DPKGARCH@|$_DPKGARCH|" DEBIAN/control > pkg/DEBIAN/control
-dpkg-deb -b --root-owner-group -Zgzip pkg "zstd-$_CPU-$_SUBSYSTEM.deb"
+dpkg-deb -b --root-owner-group -Zgzip pkg zstd.deb

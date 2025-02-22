@@ -20,4 +20,4 @@ case $_DPKGARCH in
     iphoneos-*) ;;
     *) sed -i -e 's|iphoneports-usbmuxd, ||' pkg/DEBIAN/control ;;
 esac
-dpkg-deb -b --root-owner-group -Zgzip pkg "libimobiledevice-$_CPU-$_SUBSYSTEM.deb"
+dpkg-deb -b --root-owner-group -Zgzip pkg libimobiledevice.deb

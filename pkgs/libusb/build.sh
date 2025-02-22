@@ -17,4 +17,4 @@ ln -s libusb-1.0/libusb.h pkg/var/usr/include/libusb.h
 
 cp -r DEBIAN pkg
 sed -e "s|@DPKGARCH@|$_DPKGARCH|" DEBIAN/control > pkg/DEBIAN/control
-dpkg-deb -b --root-owner-group -Zgzip pkg "libusb-$_CPU-$_SUBSYSTEM.deb"
+dpkg-deb -b --root-owner-group -Zgzip pkg libusb.deb

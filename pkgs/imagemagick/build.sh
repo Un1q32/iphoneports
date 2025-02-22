@@ -17,4 +17,4 @@ ldid -S"$_ENT" bin/magick lib/libMagick++-7.Q16HDRI.5.dylib lib/libMagickCore-7.
 cp -r DEBIAN pkg
 sed -e "s|@DPKGARCH@|$_DPKGARCH|" DEBIAN/control > pkg/DEBIAN/control
 [ -d "$_SDK/usr/include/c++/4.2.1" ] || sed -i -e '/^Depends:/ s/$/, iphoneports-libc++/' pkg/DEBIAN/control
-dpkg-deb -b --root-owner-group -Zgzip pkg "imagemagick-$_CPU-$_SUBSYSTEM.deb"
+dpkg-deb -b --root-owner-group -Zgzip pkg imagemagick.deb

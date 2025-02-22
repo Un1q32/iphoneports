@@ -13,4 +13,4 @@ ldid -S"$_ENT" bin/bzip2 bin/bzip2recover lib/libbz2.1.0.dylib
 
 cp -r DEBIAN pkg
 sed -e "s|@DPKGARCH@|$_DPKGARCH|" DEBIAN/control > pkg/DEBIAN/control
-dpkg-deb -b --root-owner-group -Zgzip pkg "bzip2-$_CPU-$_SUBSYSTEM.deb"
+dpkg-deb -b --root-owner-group -Zgzip pkg bzip2.deb

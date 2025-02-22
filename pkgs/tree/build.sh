@@ -13,4 +13,4 @@ ldid -S"$_ENT" bin/tree
 
 cp -r DEBIAN pkg
 sed -e "s|@DPKGARCH@|$_DPKGARCH|" DEBIAN/control > pkg/DEBIAN/control
-dpkg-deb -b --root-owner-group -Zgzip pkg "tree-$_CPU-$_SUBSYSTEM.deb"
+dpkg-deb -b --root-owner-group -Zgzip pkg tree.deb

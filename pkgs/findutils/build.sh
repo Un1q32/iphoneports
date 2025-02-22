@@ -15,4 +15,4 @@ ldid -S"$_ENT" bin/find bin/xargs bin/locate libexec/frcode
 
 cp -r DEBIAN pkg
 sed -e "s|@DPKGARCH@|$_DPKGARCH|" DEBIAN/control > pkg/DEBIAN/control
-dpkg-deb -b --root-owner-group -Zgzip pkg "findutils-$_CPU-$_SUBSYSTEM.deb"
+dpkg-deb -b --root-owner-group -Zgzip pkg findutils.deb

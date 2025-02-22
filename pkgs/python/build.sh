@@ -28,4 +28,4 @@ ldid -S"$_ENT" "bin/$(readlink bin/python3)" lib/*.dylib lib/python3.13/lib-dynl
 
 cp -r DEBIAN pkg
 sed -e "s|@DPKGARCH@|$_DPKGARCH|" DEBIAN/control > pkg/DEBIAN/control
-dpkg-deb -b --root-owner-group -Zgzip pkg "python-$_CPU-$_SUBSYSTEM.deb"
+dpkg-deb -b --root-owner-group -Zgzip pkg python.deb

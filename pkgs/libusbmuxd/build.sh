@@ -15,4 +15,4 @@ ldid -S"$_ENT" bin/inetcat bin/iproxy lib/libusbmuxd-2.0.7.dylib
 
 cp -r DEBIAN pkg
 sed -e "s|@DPKGARCH@|$_DPKGARCH|" DEBIAN/control > pkg/DEBIAN/control
-dpkg-deb -b --root-owner-group -Zgzip pkg "libusbmuxd-$_CPU-$_SUBSYSTEM.deb"
+dpkg-deb -b --root-owner-group -Zgzip pkg libusbmuxd.deb

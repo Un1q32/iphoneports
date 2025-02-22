@@ -26,4 +26,4 @@ ln -s ../../../../usr/local/libexec/iphoneports/ps pkg/var/usr/bin/ps
 
 cp -r DEBIAN pkg
 sed -e "s|@DPKGARCH@|$_DPKGARCH|" DEBIAN/control > pkg/DEBIAN/control
-dpkg-deb -b --root-owner-group -Zgzip pkg "ps-$_CPU-$_SUBSYSTEM.deb"
+dpkg-deb -b --root-owner-group -Zgzip pkg ps.deb
