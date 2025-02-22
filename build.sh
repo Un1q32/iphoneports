@@ -72,7 +72,7 @@ esac
 export _ENT
 
 : > "$_TMP/.builtpkgs"
-rm -rf "$_TMP"/iphoneports-sdk*
+rm -rf "$_TMP"/iphoneports-sdk-*
 
 error() {
     printf '\033[1;31mError:\033[0m %s\n' "$1"
@@ -211,7 +211,7 @@ applypatches() {
 includedeps() {
     if [ -z "$dryrun" ]; then
         if [ -d "$sdk" ]; then
-            export _SDK="$_TMP/iphoneports-sdk"
+            export _SDK="$_TMP/iphoneports-sdk-$_TARGET"
             mkdir -p "$_SDK"
             cp -a "$sdk"/* "$_SDK"
         else
@@ -302,7 +302,7 @@ main() {
         ;;
 
         cleanall)
-            rm -rf "$pkgdir"/*/pkg "$pkgdir"/*/src "$pkgdir"/*/*.deb "$bsroot"/debs/*.deb "$_TMP"/iphoneports-sdk* "$_TMP/.builtpkgs"
+            rm -rf "$pkgdir"/*/pkg "$pkgdir"/*/src "$pkgdir"/*/*.deb "$bsroot"/debs/*.deb "$_TMP"/iphoneports-sdk-* "$_TMP/.builtpkgs"
         ;;
 
         dryrun)
