@@ -72,7 +72,6 @@ esac
 export _ENT
 
 : > "$_TMP/.builtpkgs"
-rm -rf "$_TMP"/iphoneports-sdk-*
 
 error() {
     printf '\033[1;31mError:\033[0m %s\n' "$1"
