@@ -9,6 +9,15 @@
  TO_MAN= lua.1 luac.1
  
  # Lua version and release.
+@@ -52,7 +52,7 @@
+ all:	$(PLAT)
+ 
+ $(PLATS) help test clean:
+-	@cd src && $(MAKE) $@
++	@cd src && $(MAKE) $@ V=$(V) R=$(R)
+ 
+ install: dummy
+ 	cd src && $(MKDIR) $(INSTALL_BIN) $(INSTALL_INC) $(INSTALL_LIB) $(INSTALL_MAN) $(INSTALL_LMOD) $(INSTALL_CMOD)
 @@ -58,8 +58,11 @@
  	cd src && $(MKDIR) $(INSTALL_BIN) $(INSTALL_INC) $(INSTALL_LIB) $(INSTALL_MAN) $(INSTALL_LMOD) $(INSTALL_CMOD)
  	cd src && $(INSTALL_EXEC) $(TO_BIN) $(INSTALL_BIN)
@@ -42,7 +51,7 @@
  CORE_O=	lapi.o lcode.o lctype.o ldebug.o ldo.o ldump.o lfunc.o lgc.o llex.o lmem.o lobject.o lopcodes.o lparser.o lstate.o lstring.o ltable.o ltm.o lundump.o lvm.o lzio.o
  LIB_O=	lauxlib.o lbaselib.o lcorolib.o ldblib.o liolib.o lmathlib.o loadlib.o loslib.o lstrlib.o ltablib.o lutf8lib.o linit.o
  BASE_O= $(CORE_O) $(LIB_O) $(MYOBJS)
-@@ -44,8 +48,12 @@
+@@ -44,8 +48,8 @@
  LUAC_O=	luac.o
  
  ALL_O= $(BASE_O) $(LUA_O) $(LUAC_O)
@@ -50,14 +59,10 @@
 -ALL_A= $(LUA_A)
 +ALL_T= $(LUA_DYLIB) $(LUA_A) $(LUA_T) $(LUAC_T)
 +ALL_A= $(LUA_DYLIB) $(LUA_A)
-+
-+# Lua version and release.
-+V= 5.4
-+R= $V.6
  
  # Targets start here.
  default: $(PLAT)
-@@ -60,11 +68,14 @@
+@@ -60,11 +64,14 @@
  	$(AR) $@ $(BASE_O)
  	$(RANLIB) $@
  
@@ -76,7 +81,7 @@
  
  test:
  	./$(LUA_T) -v
-@@ -129,7 +140,7 @@
+@@ -129,7 +136,7 @@
  	$(MAKE) $(ALL) SYSCFLAGS="-DLUA_USE_LINUX -DLUA_USE_READLINE" SYSLIBS="-Wl,-E -ldl -lreadline"
  
  Darwin macos macosx:
