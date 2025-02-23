@@ -54,10 +54,9 @@ esac
 if [ -z "$_JOBS" ]; then
     if command -v nproc > /dev/null; then
         cpus=$(nproc)
-    elif sysctl -n hw.ncpu > /dev/null 2>&1; then
-        cpus=$(sysctl -n hw.ncpu)
     else
-        cpus=1
+        cpus=$(sysctl -n hw.ncpu 2> /dev/null)
+        [ -z "$cpus" ] && cpus=1
     fi
 
     _JOBS=$((cpus * 2 / 3))
