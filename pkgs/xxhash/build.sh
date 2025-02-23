@@ -7,8 +7,8 @@ cd src
 (
 cd pkg/var/usr
 rm -rf share lib/libxxhash.a
-"$_TARGET-strip" bin/xxhsum lib/libxxhash.0.8.*.dylib 2>/dev/null || true
-ldid -S"$_ENT" bin/xxhsum lib/libxxhash.0.8.*.dylib
+"$_TARGET-strip" bin/xxhsum lib/libxxhash.0.*.dylib 2>/dev/null || true
+ldid -S"$_ENT" bin/xxhsum lib/libxxhash.0.*.dylib
 )
 
 cp -r DEBIAN pkg
