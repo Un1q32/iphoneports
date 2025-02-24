@@ -1,7 +1,7 @@
 #!/bin/sh -e
 (
 cd src
-"$_TARGET-cc" -Os -flto -o 2048 2048.c
+"$_TARGET-cc" -std=c99 -Os -flto -o 2048 2048.c
 mkdir -p "$_PKGROOT/pkg/var/usr/bin"
 cp 2048 "$_PKGROOT/pkg/var/usr/bin"
 )
