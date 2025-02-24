@@ -1,0 +1,9 @@
+Package: iphoneports-tinyxxd
+Section: Utilities
+Maintainer: Uniq <joey.t.reinhart@gmail.com>
+Architecture: @DPKGARCH@
+Version: 1.3.7
+Description: Standalone version of the hex dump utility that comes with ViM
+Depends: iphoneports-base
+Replaces: iphoneports-xxd
+Provides: iphoneports-xxd
