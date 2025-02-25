@@ -16,9 +16,14 @@ int main(int argc, const char *argv[]) {
     return EXIT_FAILURE;
   }
 
-  char shell[strlen(argv[1]) + 14];
-  strcpy(shell, "/var/usr/bin/");
-  strcat(shell, argv[1]);
+  size_t shelllen = strlen(argv[1]);
+  char *shell = malloc(shelllen + 14);
+  if (!shell) {
+    fprintf(stderr, "Error: not enough memory");
+    return EXIT_FAILURE;
+  }
+  memcpy(shell, "/var/usr/bin/", 13);
+  memcpy(shell + 13, argv[1], shelllen + 1);
 
   struct stat st;
   if (stat(shell, &st) != 0) {
