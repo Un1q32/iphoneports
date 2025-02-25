@@ -7,3 +7,4 @@ Description: Standalone version of the hex dump utility that comes with ViM
 Depends: iphoneports-base
 Replaces: iphoneports-xxd
 Provides: iphoneports-xxd
+Conflicts: iphoneports-xxd
