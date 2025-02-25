@@ -14,7 +14,10 @@ rm -rf share/doc share/man
 ldid -S"$_ENT" bin/magick lib/libMagick++-7.Q16HDRI.5.dylib lib/libMagickCore-7.Q16HDRI.10.dylib lib/libMagickWand-7.Q16HDRI.10.dylib
 )
 
+mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"
+cp src/LICENSE "pkg/var/usr/share/licenses/$_PKGNAME"
+
 cp -r DEBIAN pkg
 sed -e "s|@DPKGARCH@|$_DPKGARCH|" DEBIAN/control > pkg/DEBIAN/control
 [ -d "$_SDK/usr/include/c++/4.2.1" ] || sed -i -e '/^Depends:/ s/$/, iphoneports-libc++/' pkg/DEBIAN/control
-dpkg-deb -b --root-owner-group -Zgzip pkg imagemagick.deb
+dpkg-deb -b --root-owner-group -Zgzip pkg "$_PKGNAME.deb"

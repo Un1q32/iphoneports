@@ -20,6 +20,9 @@ cp files/com.openssh.sshd.plist pkg/Library/LaunchDaemons/com.openssh.sshd.plist
 cp files/sshd_config pkg/var/usr/etc/ssh/sshd_config
 cp files/sshd-keygen-wrapper pkg/var/usr/libexec/sshd-keygen-wrapper
 
+mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"
+cp src/LICENSE "pkg/var/usr/share/licenses/$_PKGNAME"
+
 cp -r DEBIAN pkg
 sed -e "s|@DPKGARCH@|$_DPKGARCH|" DEBIAN/control > pkg/DEBIAN/control
-dpkg-deb -b --root-owner-group -Zgzip pkg openssh.deb
+dpkg-deb -b --root-owner-group -Zgzip pkg "$_PKGNAME.deb"

@@ -24,6 +24,9 @@ cp files/doas.pam pkg/var/usr/etc/pam.d/doas
 cp files/doas.conf pkg/var/usr/etc
 chmod 440 pkg/var/usr/etc/doas.conf
 
+mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"
+cp src/LICENSE "pkg/var/usr/share/licenses/$_PKGNAME"
+
 cp -r DEBIAN pkg
 sed -e "s|@DPKGARCH@|$_DPKGARCH|" DEBIAN/control > pkg/DEBIAN/control
-dpkg-deb -b --root-owner-group -Zgzip pkg doas.deb
+dpkg-deb -b --root-owner-group -Zgzip pkg "$_PKGNAME.deb"

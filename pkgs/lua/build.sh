@@ -18,6 +18,9 @@ ln -sf lua54.pc pkg/var/usr/lib/pkgconfig/lua5.4.pc
 ln -sf lua54.pc pkg/var/usr/lib/pkgconfig/lua-5.4.pc
 ln -sf lua54.pc pkg/var/usr/lib/pkgconfig/lua.pc
 
+mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"
+cp files/LICENSE "pkg/var/usr/share/licenses/$_PKGNAME"
+
 cp -r DEBIAN pkg
 sed -e "s|@DPKGARCH@|$_DPKGARCH|" DEBIAN/control > pkg/DEBIAN/control
-dpkg-deb -b --root-owner-group -Zgzip pkg lua.deb
+dpkg-deb -b --root-owner-group -Zgzip pkg "$_PKGNAME.deb"

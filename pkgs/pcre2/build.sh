@@ -13,6 +13,9 @@ rm -rf share
 ldid -S"$_ENT" bin/pcre2test bin/pcre2grep lib/libpcre2-8.0.dylib lib/libpcre2-16.0.dylib lib/libpcre2-32.0.dylib lib/libpcre2-posix.3.dylib
 )
 
+mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"
+cp src/LICENSE "pkg/var/usr/share/licenses/$_PKGNAME"
+
 cp -r DEBIAN pkg
 sed -e "s|@DPKGARCH@|$_DPKGARCH|" DEBIAN/control > pkg/DEBIAN/control
-dpkg-deb -b --root-owner-group -Zgzip pkg pcre2.deb
+dpkg-deb -b --root-owner-group -Zgzip pkg "$_PKGNAME.deb"

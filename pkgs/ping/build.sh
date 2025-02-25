@@ -13,6 +13,9 @@ cd pkg/var/usr/sbin
 ldid -S"$_ENT" ping ping6
 )
 
+mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"
+cp files/* "pkg/var/usr/share/licenses/$_PKGNAME"
+
 cp -r DEBIAN pkg
 sed -e "s|@DPKGARCH@|$_DPKGARCH|" DEBIAN/control > pkg/DEBIAN/control
-dpkg-deb -b --root-owner-group -Zgzip pkg ping.deb
+dpkg-deb -b --root-owner-group -Zgzip pkg "$_PKGNAME.deb"

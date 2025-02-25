@@ -22,6 +22,9 @@ ln -s ../../../../usr/local/libexec/iphoneports/sudo pkg/var/usr/bin/sudo
 cp files/sudoers pkg/var/usr/etc/sudoers
 chmod 440 pkg/var/usr/etc/sudoers
 
+mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"
+cp src/LICENSE.md "pkg/var/usr/share/licenses/$_PKGNAME"
+
 cp -r DEBIAN pkg
 sed -e "s|@DPKGARCH@|$_DPKGARCH|" DEBIAN/control > pkg/DEBIAN/control
-dpkg-deb -b --root-owner-group -Zgzip pkg sudo.deb
+dpkg-deb -b --root-owner-group -Zgzip pkg "$_PKGNAME.deb"

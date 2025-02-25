@@ -26,13 +26,16 @@ ln -s . include/ncursesw
 cd share/terminfo
 for ti in */*; do
     case "$ti" in
-        (*ansi*|*cons25*|*cygwin*|*dumb*|*linux*|*mach*|*rxvt*|*screen*|*sun*|*vt52*|*vt100*|*vt102*|*vt220*|*swvt25*|*swvt25m*|*xterm*|*putty*|*konsole*|*gnome*|*apple*|*Apple_Terminal*|*unknown*) ;;
+        (*ansi*|*cons25*|*cygwin*|*dumb*|*linux*|*mach*|*rxvt*|*screen*|*sun*|*vt52*|*vt100*|*vt102*|*vt220*|*swvt25*|*xterm*|*putty*|*konsole*|*gnome*|*apple*|*Apple_Terminal*|*unknown*) ;;
         (*) rm "$ti" ;;
     esac
 done
 find . -type d -empty -delete
 )
 
+mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"
+cp src/COPYING "pkg/var/usr/share/licenses/$_PKGNAME"
+
 cp -r DEBIAN pkg
 sed -e "s|@DPKGARCH@|$_DPKGARCH|" DEBIAN/control > pkg/DEBIAN/control
-dpkg-deb -b --root-owner-group -Zgzip pkg ncurses.deb
+dpkg-deb -b --root-owner-group -Zgzip pkg "$_PKGNAME.deb"

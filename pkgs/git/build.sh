@@ -11,6 +11,9 @@ cd pkg/var/usr
 ldid -S"$_ENT" bin/git bin/git-shell bin/scalar libexec/git-core/git-remote-http libexec/git-core/git-sh-i18n--envsubst libexec/git-core/git-http-backend libexec/git-core/git-http-fetch libexec/git-core/git-imap-send libexec/git-core/git-daemon
 )
 
+mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"
+cp src/COPYING "pkg/var/usr/share/licenses/$_PKGNAME"
+
 cp -r DEBIAN pkg
 sed -e "s|@DPKGARCH@|$_DPKGARCH|" DEBIAN/control > pkg/DEBIAN/control
-dpkg-deb -b --root-owner-group -Zgzip pkg git.deb
+dpkg-deb -b --root-owner-group -Zgzip pkg "$_PKGNAME.deb"

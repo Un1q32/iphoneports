@@ -13,6 +13,9 @@ ln -s pigz unpigz
 ldid -S"$_ENT" pigz
 )
 
+mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"
+cp files/LICENSE "pkg/var/usr/share/licenses/$_PKGNAME"
+
 cp -r DEBIAN pkg
 sed -e "s|@DPKGARCH@|$_DPKGARCH|" DEBIAN/control > pkg/DEBIAN/control
-dpkg-deb -b --root-owner-group -Zgzip pkg pigz.deb
+dpkg-deb -b --root-owner-group -Zgzip pkg "$_PKGNAME.deb"

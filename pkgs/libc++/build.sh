@@ -13,6 +13,9 @@ rm -rf libc++experimental.a ../include/c++/v1/experimental
 ldid -S"$_ENT" libc++.1.0.dylib libc++abi.1.0.dylib
 )
 
+mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"
+cp src/libcxx/LICENSE.TXT "pkg/var/usr/share/licenses/$_PKGNAME"
+
 cp -r DEBIAN pkg
 sed -e "s|@DPKGARCH@|$_DPKGARCH|" DEBIAN/control > pkg/DEBIAN/control
-dpkg-deb -b --root-owner-group -Zgzip pkg libc++.deb
+dpkg-deb -b --root-owner-group -Zgzip pkg "$_PKGNAME.deb"

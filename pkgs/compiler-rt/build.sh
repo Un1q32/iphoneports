@@ -62,5 +62,8 @@ rm ./*.o
 cp ./*.a "$_PKGROOT/pkg/var/usr/lib/clang/19/lib/darwin"
 )
 
+mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"
+cp src/LICENSE.TXT "pkg/var/usr/share/licenses/$_PKGNAME"
+
 cp -r DEBIAN pkg
-dpkg-deb -b --root-owner-group -Zgzip pkg compiler-rt.deb
+dpkg-deb -b --root-owner-group -Zgzip pkg "$_PKGNAME.deb"

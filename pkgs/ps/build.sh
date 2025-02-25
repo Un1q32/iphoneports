@@ -24,6 +24,9 @@ mkdir -p pkg/usr/local/libexec/iphoneports
 mv pkg/var/usr/bin/ps pkg/usr/local/libexec/iphoneports
 ln -s ../../../../usr/local/libexec/iphoneports/ps pkg/var/usr/bin/ps
 
+mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"
+cp files/LICENSE "pkg/var/usr/share/licenses/$_PKGNAME"
+
 cp -r DEBIAN pkg
 sed -e "s|@DPKGARCH@|$_DPKGARCH|" DEBIAN/control > pkg/DEBIAN/control
-dpkg-deb -b --root-owner-group -Zgzip pkg ps.deb
+dpkg-deb -b --root-owner-group -Zgzip pkg "$_PKGNAME.deb"

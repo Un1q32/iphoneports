@@ -15,6 +15,9 @@ lib="$(realpath lib/libmpdec.$abi.dylib)"
 ldid -S"$_ENT" "$lib"
 )
 
+mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"
+cp src/COPYRIGHT.txt "pkg/var/usr/share/licenses/$_PKGNAME"
+
 cp -r DEBIAN pkg
 sed -e "s|@DPKGARCH@|$_DPKGARCH|" DEBIAN/control > pkg/DEBIAN/control
-dpkg-deb -b --root-owner-group -Zgzip pkg mpdecimal.deb
+dpkg-deb -b --root-owner-group -Zgzip pkg "$_PKGNAME.deb"
