@@ -1,5 +1,6 @@
 #!/bin/sh -e
-mkdir -p src/build pkg/var/usr/lib/clang/19/lib/darwin
+llvmver=19
+mkdir -p src/build "pkg/var/usr/lib/clang/$llvmver/lib/darwin"
 (
 cd src/build
 clang="$(command -v "$_TARGET-sdkpath")"
@@ -59,7 +60,7 @@ wait
 "$_TARGET-libtool" -static -o libclang_rt.osx.a ./*.o 2>/dev/null
 rm ./*.o
 
-cp ./*.a "$_PKGROOT/pkg/var/usr/lib/clang/19/lib/darwin"
+cp ./*.a "$_PKGROOT/pkg/var/usr/lib/clang/$llvmver/lib/darwin"
 )
 
 mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"
