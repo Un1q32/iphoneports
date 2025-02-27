@@ -170,10 +170,12 @@ build() {
         [ -f fetch.sh ] && ./fetch.sh
         applypatches
         printf '%s\n' "Building $1"
-        ./build.sh || fail=1
+        ./build.sh || {
+            rm -rf pkg "$_SDK"
+            return 2
+        }
     fi
     rm -rf "$_SDK"
-    [ -z "$fail" ] || return 2
     )
 
     case $? in
