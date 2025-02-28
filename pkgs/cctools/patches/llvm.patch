@@ -1,6 +1,6 @@
 --- src/cctools/m4/llvm.m4.orig
 +++ src/cctools/m4/llvm.m4
-@@ -42,49 +42,38 @@
+@@ -45,49 +45,38 @@
            no)
        fi
  
