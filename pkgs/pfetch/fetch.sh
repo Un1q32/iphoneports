@@ -2,7 +2,8 @@
 rm -rf pkg src
 printf "Downloading source...\n"
 mkdir -p src
-curl -L -s -o src/pfetch https://raw.githubusercontent.com/Un1q32/pfetch/1.7.1/pfetch &
-curl -L -s -o src/LICENSE https://raw.githubusercontent.com/Un1q32/pfetch/1.7.1/LICENSE
+ver=1.8.0
+curl -L -s -o src/pfetch "https://raw.githubusercontent.com/Un1q32/pfetch/$ver/pfetch" &
+curl -L -s -o src/LICENSE "https://raw.githubusercontent.com/Un1q32/pfetch/$ver/LICENSE"
 wait
 chmod 755 src/pfetch
