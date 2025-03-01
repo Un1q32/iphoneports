@@ -31,6 +31,8 @@ printf '%s' "$$" > pkglock
 pkgdir="$bsroot/pkgs"
 export TERM="xterm-256color"
 
+[ -f defaulttarget.txt ] && IFS= read -r defaulttarget < defaulttarget.txt
+
 case "$*" in
     *--no-tmpfs*) export _TMP="$bsroot" ;;
     *) export _TMP="/tmp" ;;
