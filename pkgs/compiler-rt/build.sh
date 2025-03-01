@@ -6,7 +6,7 @@ cd src/build
 clang="$(command -v "$_TARGET-sdkpath")"
 clang="${clang%/*}/../share/iphoneports/bin/clang"
 
-x64srcs="emutls.c eprintf.c"
+x64srcs="emutls.c eprintf.c int_util.c"
 x32srcs="$x64srcs atomic.c"
 
 arm64srcs="emutls.c"
