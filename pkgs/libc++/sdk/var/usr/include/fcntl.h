@@ -17,6 +17,7 @@
 #include <limits.h>
 #include <stdarg.h>
 #include <string.h>
+#include <sys/stat.h>
 
 #define openat __iphoneports_openat
 
@@ -33,7 +34,7 @@ static inline int openat(int fd, const char *path, int flags, ...) {
     return open(path, flags, mode);
 
   struct stat st;
-  if (stat(fd, &st) == -1 || !S_ISDIR(st.st_mode))
+  if (fstat(fd, &st) == -1 || !S_ISDIR(st.st_mode))
     return -1;
 
   char fdpath[PATH_MAX + strlen(path) + 2];
