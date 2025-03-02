@@ -1,0 +1,29 @@
+--- src/libcxx/src/thread.cpp.orig
++++ src/libcxx/src/thread.cpp
+@@ -18,6 +18,10 @@
+ #  include <unistd.h> // for sysconf
+ #endif
+ 
++#if __has_include(<sys/sysctl.h>)
++#  include <sys/sysctl.h>
++#endif
++
+ #if defined(__NetBSD__)
+ #  pragma weak pthread_create // Do not create libpthread dependency
+ #endif
+@@ -75,6 +79,15 @@
+   SYSTEM_INFO info;
+   GetSystemInfo(&info);
+   return info.dwNumberOfProcessors;
++#elif defined(CTL_HW) && defined(HW_NCPU)
++  int mib[2], ncpus = 0;
++  mib[0]     = CTL_HW;
++  mib[1]     = HW_NCPU;
++  size_t len = sizeof(ncpus);
++  sysctl(mib, 2, &ncpus, &len, NULL, 0);
++  if (ncpus < 0)
++    return 0;
++  return ncpus;
+ #else // defined(CTL_HW) && defined(HW_NCPU)
+   // TODO: grovel through /proc or check cpuid on x86 and similar
+   // instructions on other architectures.
