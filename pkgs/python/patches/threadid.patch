@@ -4,10 +4,10 @@
      if (!initialized)
          PyThread_init_thread();
  #ifdef __APPLE__
-+#if (defined(__IPHONE_OS_VERSION_MIN_REQUIRED) &&                              \
-+     __IPHONE_OS_VERSION_MIN_REQUIRED < 30200) ||                              \
-+    (defined(__MAC_OS_X_VERSION_MIN_REQUIRED) &&                               \
-+     __MAC_OS_X_VERSION_MIN_REQUIRED < 1060)
++#if (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                \
++     __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ < 30200) ||                \
++    (defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) &&                 \
++     __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ < 1060)
 +    mach_port_t native_id = pthread_mach_thread_np(pthread_self());
 +#else
      uint64_t native_id;
