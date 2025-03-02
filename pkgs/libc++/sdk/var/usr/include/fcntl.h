@@ -54,7 +54,7 @@ static inline int openat(int fd, const char *path, int flags, ...) {
 #define O_CLOEXEC 0x1000000
 
 static inline int __iphoneports_open(const char *path, int flags, ...) {
-  mode_t mode = 0;
+  mode_t mode;
   bool passmode = false;
   if (flags & O_CREAT) {
     va_list va_args;
