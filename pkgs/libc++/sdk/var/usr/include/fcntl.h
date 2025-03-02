@@ -48,7 +48,7 @@ static inline int openat(int fd, const char *path, int flags, ...) {
     ret = open(path, flags, mode);
 #ifdef __USE_OPEN_WRAPPER
     if (cloexec && fd != -1)
-      fcntl(fd, F_SETFD, FD_CLOEXEC);
+      fcntl(ret, F_SETFD, FD_CLOEXEC);
 #endif
     return ret;
   }
@@ -65,7 +65,7 @@ static inline int openat(int fd, const char *path, int flags, ...) {
   ret = open(fdpath, flags, mode);
 #ifdef __USE_OPEN_WRAPPER
   if (cloexec && fd != -1)
-    fcntl(fd, F_SETFD, FD_CLOEXEC);
+    fcntl(ret, F_SETFD, FD_CLOEXEC);
 #endif
   return ret;
 }
