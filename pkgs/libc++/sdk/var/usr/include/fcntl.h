@@ -8,6 +8,11 @@
 #ifndef AT_REMOVEDIR
 #define AT_REMOVEDIR 0x0080
 #endif
+#ifndef O_CLOEXEC
+#include <stdbool.h>
+#define O_CLOEXEC 0x1000000
+#define __USE_OPEN_WRAPPER
+#endif
 
 #if (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                \
      __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ < 80000) ||                \
@@ -30,8 +35,23 @@ static inline int openat(int fd, const char *path, int flags, ...) {
     va_end(va_args);
   }
 
-  if (fd == AT_FDCWD || path[0] == '/')
-    return open(path, flags, mode);
+#ifdef __USE_OPEN_WRAPPER
+  bool cloexec = false;
+  if (flags & O_CLOEXEC) {
+    flags &= ~O_CLOEXEC;
+    cloexec = true;
+  }
+#endif
+
+  int ret;
+  if (fd == AT_FDCWD || path[0] == '/') {
+    ret = open(path, flags, mode);
+#ifdef __USE_OPEN_WRAPPER
+    if (cloexec && fd != -1)
+      fcntl(fd, F_SETFD, FD_CLOEXEC);
+#endif
+    return ret;
+  }
 
   struct stat st;
   if (fstat(fd, &st) == -1 || !S_ISDIR(st.st_mode))
@@ -42,18 +62,20 @@ static inline int openat(int fd, const char *path, int flags, ...) {
 
   strcat(fdpath, "/");
   strcat(fdpath, path);
-  return open(fdpath, flags, mode);
+  ret = open(fdpath, flags, mode);
+#ifdef __USE_OPEN_WRAPPER
+  if (cloexec && fd != -1)
+    fcntl(fd, F_SETFD, FD_CLOEXEC);
+#endif
+  return ret;
 }
 
 #endif
 
-#ifndef O_CLOEXEC
+#ifdef __USE_OPEN_WRAPPER
 
 #include <stdarg.h>
-#include <stdbool.h>
 #include <unistd.h>
-
-#define O_CLOEXEC 0x1000000
 
 static inline int __iphoneports_open(const char *path, int flags, ...) {
   int mode = 0;
