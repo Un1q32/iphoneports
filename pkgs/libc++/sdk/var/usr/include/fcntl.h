@@ -21,22 +21,16 @@
 #define openat __iphoneports_openat
 
 static inline int openat(int fd, const char *path, int flags, ...) {
-  int mode;
-  bool passmode = false;
+  int mode = 0;
   if (flags & O_CREAT) {
     va_list va_args;
     va_start(va_args, flags);
     mode = va_arg(va_args, int);
     va_end(va_args);
-    passmode = true;
   }
 
-  if (fd == AT_FDCWD || path[0] == '/') {
-    if (passmode)
-      return open(path, flags, mode);
-    else
-      return open(path, flags);
-  }
+  if (fd == AT_FDCWD || path[0] == '/')
+    return open(path, flags, mode);
 
   struct stat st;
   if (stat(fd, &st) == -1 || !S_ISDIR(st.st_mode))
@@ -47,10 +41,7 @@ static inline int openat(int fd, const char *path, int flags, ...) {
 
   strcat(fdpath, "/");
   strcat(fdpath, path);
-  if (passmode)
-    return open(fdpath, flags, mode);
-  else
-    return open(fdpath, flags);
+  return open(fdpath, flags, mode);
 }
 
 #endif
@@ -64,25 +55,19 @@ static inline int openat(int fd, const char *path, int flags, ...) {
 #define O_CLOEXEC 0x1000000
 
 static inline int __iphoneports_open(const char *path, int flags, ...) {
-  int mode;
-  bool passmode = false;
+  int mode = 0;
   if (flags & O_CREAT) {
     va_list va_args;
     va_start(va_args, flags);
     mode = va_arg(va_args, int);
     va_end(va_args);
-    passmode = true;
   }
   bool cloexec = false;
   if (flags & O_CLOEXEC) {
     flags &= ~O_CLOEXEC;
     cloexec = true;
   }
-  int fd;
-  if (passmode)
-    fd = open(path, flags, mode);
-  else
-    fd = open(path, flags);
+  int fd = open(path, flags, mode);
   if (cloexec && fd != -1)
     fcntl(fd, F_SETFD, FD_CLOEXEC);
   return fd;
