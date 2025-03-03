@@ -8,19 +8,19 @@
 
 static bool checkshell(const char *shell, bool exitonfail) {
   struct stat st;
-  if (stat(shell, &st) != 0) {
+  if (__builtin_expect(stat(shell, &st) != 0, 0)) {
     printf("Error: %s not found!\n", shell);
     if (exitonfail)
       exit(EXIT_FAILURE);
     return false;
   }
-  if (!S_ISREG(st.st_mode)) {
+  if (__builtin_expect(!S_ISREG(st.st_mode), 0)) {
     printf("Error: %s is not a regular file!\n", shell);
     if (exitonfail)
       exit(EXIT_FAILURE);
     return false;
   }
-  if ((st.st_mode & S_IXUSR) == 0) {
+  if (__builtin_expect(!(st.st_mode & S_IXUSR), 0)) {
     printf("Error: %s is not executable!\n", shell);
     if (exitonfail)
       exit(EXIT_FAILURE);
@@ -32,8 +32,9 @@ static bool checkshell(const char *shell, bool exitonfail) {
 int main(void) {
   char shell[PATH_MAX] = "/var/usr/bin/sh";
   if (access("/var/usr/shell", F_OK) == 0) {
-    if (readlink("/var/usr/shell", shell, PATH_MAX) == -1 ||
-        !checkshell(shell, false))
+    if (__builtin_expect(readlink("/var/usr/shell", shell, PATH_MAX) == -1,
+                         0) ||
+        __builtin_expect(!checkshell(shell, false), 0))
       strcpy(shell, "/var/usr/bin/sh");
   }
   checkshell(shell, true);
