@@ -1,4 +1,3 @@
 readline
-ncurses
 bzip2
 zlib
