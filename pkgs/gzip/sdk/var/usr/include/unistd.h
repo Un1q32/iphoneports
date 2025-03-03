@@ -17,7 +17,7 @@
 static inline int fgetattrlist(int fd, struct attrlist *attrList, void *attrBuf,
                                size_t attrBufSize, unsigned long options) {
   char fdpath[PATH_MAX];
-  if (fcntl(fd, F_GETPATH, fdpath) == -1)
+  if (__builtin_expect(fcntl(fd, F_GETPATH, fdpath) == -1, 0))
     return -1;
   return getattrlist(fdpath, attrList, attrBuf, attrBufSize, options);
 }
@@ -25,7 +25,7 @@ static inline int fgetattrlist(int fd, struct attrlist *attrList, void *attrBuf,
 static inline int fsetattrlist(int fd, struct attrlist *attrList, void *attrBuf,
                                size_t attrBufSize, unsigned long options) {
   char fdpath[PATH_MAX];
-  if (fcntl(fd, F_GETPATH, fdpath) == -1)
+  if (__builtin_expect(fcntl(fd, F_GETPATH, fdpath) == -1, 0))
     return -1;
   return setattrlist(fdpath, attrList, attrBuf, attrBufSize, options);
 }
