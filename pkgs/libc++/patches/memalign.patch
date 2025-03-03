@@ -27,7 +27,7 @@
 +#  elif !defined(_LIBCPP_HAS_NO_POSIX_MEMALIGN)
    ::free(__ptr);
 +#  else
-+  if (__builtin_expect(__ptr, 1))
++  if (__builtin_expect(__ptr != NULL, 1))
 +    ::free(((void**)__ptr)[-1]);
  #  endif
  }
