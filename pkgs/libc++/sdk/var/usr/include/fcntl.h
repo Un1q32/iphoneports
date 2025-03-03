@@ -47,7 +47,7 @@ static inline int openat(int fd, const char *path, int flags, ...) {
   if (fd == AT_FDCWD || path[0] == '/') {
     ret = open(path, flags, mode);
 #ifdef __USE_OPEN_WRAPPER
-    if (cloexec && __builtin_expect(fd != -1, 1))
+    if (cloexec && __builtin_expect(ret != -1, 1))
       fcntl(ret, F_SETFD, FD_CLOEXEC);
 #endif
     return ret;
@@ -64,7 +64,7 @@ static inline int openat(int fd, const char *path, int flags, ...) {
   strcat(fdpath, path);
   ret = open(fdpath, flags, mode);
 #ifdef __USE_OPEN_WRAPPER
-  if (cloexec && __builtin_expect(fd != -1, 1))
+  if (cloexec && __builtin_expect(ret != -1, 1))
     fcntl(ret, F_SETFD, FD_CLOEXEC);
 #endif
   return ret;
