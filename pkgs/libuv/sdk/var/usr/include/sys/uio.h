@@ -26,11 +26,11 @@ static inline ssize_t preadv(int fd, const struct iovec *iov, int iovcnt,
     bytes += iov[i].iov_len;
 
   char *buf = (char *)malloc(bytes);
-  if (!buf)
+  if (__builtin_expect(!buf, 0))
     return -1;
 
   ssize_t readret = pread(fd, buf, bytes, offset);
-  if (readret < 0)
+  if (__builtin_expect(readret < 0, 0))
     return -1;
 
   bytes = readret;
@@ -56,7 +56,7 @@ static inline ssize_t pwritev(int fd, const struct iovec *iov, int iovcnt,
     bytes += iov[i].iov_len;
 
   char *buf = (char *)malloc(bytes);
-  if (!buf)
+  if (__builtin_expect(!buf, 0))
     return -1;
 
   void *fbuf = buf;
