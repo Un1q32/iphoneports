@@ -11,7 +11,7 @@
 #define O_CLOEXEC 0x1000000
 
 static inline int __iphoneports_open(const char *path, int flags, ...) {
-  int mode = 0;
+  int mode;
   if (flags & O_CREAT) {
     va_list va_args;
     va_start(va_args, flags);

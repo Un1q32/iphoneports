@@ -11,7 +11,7 @@
 #ifndef O_CLOEXEC
 #include <stdbool.h>
 #define O_CLOEXEC 0x1000000
-#define __USE_OPEN_WRAPPER
+#define __NO_O_CLOEXEC
 #endif
 
 #if (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                \
@@ -27,7 +27,7 @@
 #define openat __iphoneports_openat
 
 static inline int openat(int fd, const char *path, int flags, ...) {
-  int mode = 0;
+  int mode;
   if (flags & O_CREAT) {
     va_list va_args;
     va_start(va_args, flags);
@@ -35,7 +35,7 @@ static inline int openat(int fd, const char *path, int flags, ...) {
     va_end(va_args);
   }
 
-#ifdef __USE_OPEN_WRAPPER
+#ifdef __NO_O_CLOEXEC
   bool cloexec = false;
   if (__builtin_expect(flags & O_CLOEXEC, 0)) {
     flags &= ~O_CLOEXEC;
@@ -46,7 +46,7 @@ static inline int openat(int fd, const char *path, int flags, ...) {
   int ret;
   if (fd == AT_FDCWD || path[0] == '/') {
     ret = open(path, flags, mode);
-#ifdef __USE_OPEN_WRAPPER
+#ifdef __NO_O_CLOEXEC
     if (cloexec && __builtin_expect(ret != -1, 1))
       fcntl(ret, F_SETFD, FD_CLOEXEC);
 #endif
@@ -63,7 +63,7 @@ static inline int openat(int fd, const char *path, int flags, ...) {
   strcat(fdpath, "/");
   strcat(fdpath, path);
   ret = open(fdpath, flags, mode);
-#ifdef __USE_OPEN_WRAPPER
+#ifdef __NO_O_CLOEXEC
   if (cloexec && __builtin_expect(ret != -1, 1))
     fcntl(ret, F_SETFD, FD_CLOEXEC);
 #endif
@@ -72,13 +72,13 @@ static inline int openat(int fd, const char *path, int flags, ...) {
 
 #endif
 
-#ifdef __USE_OPEN_WRAPPER
+#ifdef __NO_O_CLOEXEC
 
 #include <stdarg.h>
 #include <unistd.h>
 
 static inline int __iphoneports_open(const char *path, int flags, ...) {
-  int mode = 0;
+  int mode;
   if (flags & O_CREAT) {
     va_list va_args;
     va_start(va_args, flags);
