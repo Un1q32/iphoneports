@@ -21,7 +21,7 @@
 +#elif HAVE_POSIX_MEMALIGN || HAVE_MEMALIGN || HAVE_ALIGNED_ALLOC
      free(ptr);
 +#else
-+    if (__builtin_expect(ptr, 1)) free(((void **)ptr)[-1]);
++    if (__builtin_expect(ptr != NULL, 1)) free(((void **)ptr)[-1]);
  #endif
  }
  
