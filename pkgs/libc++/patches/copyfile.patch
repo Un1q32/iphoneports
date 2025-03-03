@@ -1,0 +1,11 @@
+--- src/libcxx/src/filesystem/operations.cpp.orig
++++ src/libcxx/src/filesystem/operations.cpp
+@@ -40,7 +40,7 @@
+ #if __has_include(<sys/sendfile.h>)
+ #  include <sys/sendfile.h>
+ #  define _LIBCPP_FILESYSTEM_USE_SENDFILE
+-#elif defined(__APPLE__) || __has_include(<copyfile.h>)
++#elif __has_include(<copyfile.h>)
+ #  include <copyfile.h>
+ #  define _LIBCPP_FILESYSTEM_USE_COPYFILE
+ #else
