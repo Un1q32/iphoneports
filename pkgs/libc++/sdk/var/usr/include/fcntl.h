@@ -37,7 +37,7 @@ static inline int openat(int fd, const char *path, int flags, ...) {
 
 #ifdef __USE_OPEN_WRAPPER
   bool cloexec = false;
-  if (flags & O_CLOEXEC) {
+  if (__builtin_expect(flags & O_CLOEXEC, 0)) {
     flags &= ~O_CLOEXEC;
     cloexec = true;
   }
@@ -47,14 +47,14 @@ static inline int openat(int fd, const char *path, int flags, ...) {
   if (fd == AT_FDCWD || path[0] == '/') {
     ret = open(path, flags, mode);
 #ifdef __USE_OPEN_WRAPPER
-    if (cloexec && fd != -1)
+    if (cloexec && __builtin_expect(fd != -1, 1))
       fcntl(ret, F_SETFD, FD_CLOEXEC);
 #endif
     return ret;
   }
 
   struct stat st;
-  if (fstat(fd, &st) == -1 || !S_ISDIR(st.st_mode))
+  if (__builtin_expect(fstat(fd, &st) == -1 || !S_ISDIR(st.st_mode), 0))
     return -1;
 
   char fdpath[PATH_MAX + strlen(path) + 2];
@@ -64,7 +64,7 @@ static inline int openat(int fd, const char *path, int flags, ...) {
   strcat(fdpath, path);
   ret = open(fdpath, flags, mode);
 #ifdef __USE_OPEN_WRAPPER
-  if (cloexec && fd != -1)
+  if (cloexec && __builtin_expect(fd != -1, 1))
     fcntl(ret, F_SETFD, FD_CLOEXEC);
 #endif
   return ret;
@@ -86,12 +86,12 @@ static inline int __iphoneports_open(const char *path, int flags, ...) {
     va_end(va_args);
   }
   bool cloexec = false;
-  if (flags & O_CLOEXEC) {
+  if (__builtin_expect(flags & O_CLOEXEC, 0)) {
     flags &= ~O_CLOEXEC;
     cloexec = true;
   }
   int fd = open(path, flags, mode);
-  if (cloexec && fd != -1)
+  if (cloexec && __builtin_expect(fd != -1, 1))
     fcntl(fd, F_SETFD, FD_CLOEXEC);
   return fd;
 }
