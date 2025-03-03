@@ -43,9 +43,8 @@ static inline int openat(int fd, const char *path, int flags, ...) {
   }
 #endif
 
-  int ret;
   if (fd == AT_FDCWD || path[0] == '/') {
-    ret = open(path, flags, mode);
+    int ret = open(path, flags, mode);
 #ifdef __NO_O_CLOEXEC
     if (cloexec && __builtin_expect(ret != -1, 1))
       fcntl(ret, F_SETFD, FD_CLOEXEC);
@@ -62,40 +61,12 @@ static inline int openat(int fd, const char *path, int flags, ...) {
 
   strcat(fdpath, "/");
   strcat(fdpath, path);
-  ret = open(fdpath, flags, mode);
+  int ret = open(fdpath, flags, mode);
 #ifdef __NO_O_CLOEXEC
   if (cloexec && __builtin_expect(ret != -1, 1))
     fcntl(ret, F_SETFD, FD_CLOEXEC);
 #endif
   return ret;
 }
-
-#endif
-
-#ifdef __NO_O_CLOEXEC
-
-#include <stdarg.h>
-#include <unistd.h>
-
-static inline int __iphoneports_open(const char *path, int flags, ...) {
-  int mode;
-  if (flags & O_CREAT) {
-    va_list va_args;
-    va_start(va_args, flags);
-    mode = va_arg(va_args, int);
-    va_end(va_args);
-  }
-  bool cloexec = false;
-  if (__builtin_expect(flags & O_CLOEXEC, 0)) {
-    flags &= ~O_CLOEXEC;
-    cloexec = true;
-  }
-  int fd = open(path, flags, mode);
-  if (cloexec && __builtin_expect(fd != -1, 1))
-    fcntl(fd, F_SETFD, FD_CLOEXEC);
-  return fd;
-}
-
-#define open __iphoneports_open
 
 #endif
