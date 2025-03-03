@@ -12,7 +12,7 @@
    return __result;
 +#  else
 +  void* __ptr = ::malloc(__size + __alignment + sizeof(void*));
-+  if (!__ptr)
++  if (__builtin_expect(!__ptr, 0))
 +    return NULL;
 +  void* __result         = (void*)(((uintptr_t)__ptr + sizeof(void*) + __alignment - 1) & ~(__alignment - 1));
 +  ((void**)__result)[-1] = __ptr;
@@ -27,7 +27,7 @@
 +#  elif !defined(_LIBCPP_HAS_NO_POSIX_MEMALIGN)
    ::free(__ptr);
 +#  else
-+  if (__ptr)
++  if (__builtin_expect(ptr, 1))
 +    ::free(((void**)__ptr)[-1]);
  #  endif
  }
