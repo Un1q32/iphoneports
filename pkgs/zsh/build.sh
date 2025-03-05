@@ -17,7 +17,7 @@ mkdir -p etc/zsh
 cp files/zprofile pkg/var/usr/etc/zsh
 
 mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"
-cp src/LICENSE "pkg/var/usr/share/licenses/$_PKGNAME"
+cp src/LICENCE "pkg/var/usr/share/licenses/$_PKGNAME"
 
 cp -r DEBIAN pkg
 sed -e "s|@DPKGARCH@|$_DPKGARCH|" DEBIAN/control > pkg/DEBIAN/control
