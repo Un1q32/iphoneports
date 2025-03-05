@@ -2,6 +2,6 @@ Package: iphoneports-wasm3
 Section: Scripting
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Architecture: @DPKGARCH@
-Version: 0.5.0-4
+Version: 0.5.0-5
 Description: A fast WebAssembly interpreter and the most universal WASM runtime
 Depends: iphoneports-base, iphoneports-libuv

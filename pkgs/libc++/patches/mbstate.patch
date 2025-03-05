@@ -6,5 +6,5 @@
  #elif __has_include(<sys/_types/_mbstate_t.h>)
 +#  include <machine/types.h>
  #  include <sys/_types/_mbstate_t.h> // works on Darwin
- #elif !defined(_LIBCPP_HAS_NO_WIDE_CHARACTERS) && __has_include_next(<wchar.h>)
+ #elif _LIBCPP_HAS_WIDE_CHARACTERS && __has_include_next(<wchar.h>)
  #  include_next <wchar.h> // fall back to the C standard provider of mbstate_t

@@ -1,12 +1,9 @@
 #!/bin/sh
 rm -rf pkg src
 printf "Downloading source...\n"
-mkdir src && cd src || exit 1
-llvmver='19.1.7'
-for project in llvm libcxx libcxxabi runtimes cmake; do
-    {
-    curl -L -s "https://github.com/llvm/llvm-project/releases/download/llvmorg-$llvmver/$project-$llvmver.src.tar.xz" | tar -xJ
-    mv "$project-$llvmver.src" "$project"
-    } &
-done
-wait
+llvmver='20.1.0'
+curl -L -# -o src.tar.xz "https://github.com/llvm/llvm-project/releases/download/llvmorg-$llvmver/llvm-project-$llvmver.src.tar.xz"
+printf "Unpacking source...\n"
+tar -xf src.tar.xz
+rm src.tar.xz
+mv llvm-project-* src
