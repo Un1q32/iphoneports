@@ -21,7 +21,7 @@ cp files/sshd_config pkg/var/usr/etc/ssh/sshd_config
 cp files/sshd-keygen-wrapper pkg/var/usr/libexec/sshd-keygen-wrapper
 
 mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"
-cp src/LICENSE "pkg/var/usr/share/licenses/$_PKGNAME"
+cp src/LICENCE "pkg/var/usr/share/licenses/$_PKGNAME"
 
 cp -r DEBIAN pkg
 sed -e "s|@DPKGARCH@|$_DPKGARCH|" DEBIAN/control > pkg/DEBIAN/control
