@@ -72,7 +72,7 @@ case $_DPKGARCH in
 esac
 export _ENT
 
-: > "$_TMP/.builtpkgs"
+: > "$bsroot/.builtpkgs"
 
 error() {
     printf '\033[1;31mError:\033[0m %s\n' "$1"
@@ -185,7 +185,7 @@ build() {
         2) return 1 ;;
     esac
 
-    [ -n "$dryrun" ] && printf '%s\n' "$1" >> "$_TMP/.builtpkgs"
+    [ -n "$dryrun" ] && printf '%s\n' "$1" >> "$bsroot/.builtpkgs"
     return 0
 }
 
@@ -195,7 +195,7 @@ hasbeenbuilt() {
             if [ "$pkg" = "$1" ]; then
                 return 0
             fi
-        done < "$_TMP/.builtpkgs"
+        done < "$bsroot/.builtpkgs"
     elif [ -d "$pkgdir/$1/pkg" ]; then
         return 0
     fi
@@ -305,7 +305,7 @@ main() {
         ;;
 
         cleanall)
-            rm -rf "$pkgdir"/*/pkg "$pkgdir"/*/src "$pkgdir"/*/*.deb "$bsroot"/debs/*.deb "$_TMP"/iphoneports-sdk-* "$_TMP/.builtpkgs"
+            rm -rf "$pkgdir"/*/pkg "$pkgdir"/*/src "$pkgdir"/*/*.deb "$bsroot"/debs/*.deb "$_TMP"/iphoneports-sdk-* "$bsroot/.builtpkgs"
         ;;
 
         dryrun)
