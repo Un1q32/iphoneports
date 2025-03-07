@@ -236,7 +236,7 @@
 #elif defined(_NONSTD_SOURCE)
 #define __DARWIN_UNIX03	0
 #else /* default */
-#define __DARWIN_UNIX03	0
+#define __DARWIN_UNIX03	1
 #endif /* _APPLE_C_SOURCE || _XOPEN_SOURCE || _POSIX_C_SOURCE || __LP64__ */
 #endif /* !__DARWIN_UNIX03 */
 
