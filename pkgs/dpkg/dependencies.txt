@@ -1,4 +1,5 @@
 zlib
 xz
 bzip2
+zstd
 libmd

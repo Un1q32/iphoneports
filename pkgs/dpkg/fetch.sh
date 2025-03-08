@@ -1,8 +1,10 @@
 #!/bin/sh
 rm -rf pkg src
 printf "Downloading source...\n"
-curl -L -# -o src.tar.bz2 https://snapshot.debian.org/file/295059bda18995efe34f22bc50befd574067bc70/dpkg_1.22.15.tar.xz
+dpkgver='1.22.17'
+curl -L -# -o src.tar.bz2 "https://salsa.debian.org/dpkg-team/dpkg/-/archive/$dpkgver/dpkg-$dpkgver.tar.bz2"
 printf "Unpacking source...\n"
 tar -xf src.tar.bz2
 rm src.tar.bz2
 mv dpkg-* src
+printf '%s\n' "$dpkgver" > src/.dist-version

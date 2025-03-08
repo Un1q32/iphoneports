@@ -381,7 +381,7 @@ main() {
 
         bootstrap)
             depcheck
-            pkgs='base bzip2 ca-certificates coreutils dash diffutils dpkg gmp grep gtar gzip less libmd libressl ncurses pcre2 readline sed xz zlib'
+            pkgs='base bzip2 ca-certificates coreutils dash diffutils dpkg gmp grep gtar gzip less libmd libressl ncurses pcre2 readline sed xz zlib zstd lz4 xxhash'
             for pkg in $pkgs; do
                 build "$pkg" || error "Failed to build package: $pkg"
             done
