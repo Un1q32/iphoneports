@@ -15,7 +15,7 @@
 
 static inline ssize_t getdelim(char **lineptr, size_t *n, int delim,
                                FILE *stream) {
-  if (lineptr == NULL || n == NULL || stream == NULL)
+  if (!lineptr || !n || !stream)
     return -1;
 
   if (*lineptr == NULL) {
@@ -31,7 +31,7 @@ static inline ssize_t getdelim(char **lineptr, size_t *n, int delim,
     if (i + 1 >= *n) {
       size_t new_size = *n + 128;
       char *new_lineptr = realloc(*lineptr, new_size);
-      if (new_lineptr == NULL)
+      if (!new_lineptr)
         return -1;
       *lineptr = new_lineptr;
       *n = new_size;
