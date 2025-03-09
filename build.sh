@@ -81,7 +81,7 @@ error() {
 }
 
 depcheck() {
-    for dep in "$_TARGET-gcc" "$_TARGET-g++" "$_TARGET-cc" "$_TARGET-c++" "$_TARGET-strip" "$_TARGET-sdkpath" "$_TARGET-install_name_tool" ldid dpkg-deb patch fakeroot automake autoreconf m4 yacc ctags tar gzip bzip2 xz zstd ninja sed pgrep meson cmake curl git; do
+    for dep in "$_TARGET-gcc" "$_TARGET-g++" "$_TARGET-cc" "$_TARGET-c++" "$_TARGET-strip" "$_TARGET-sdkpath" "$_TARGET-install_name_tool" ldid dpkg-deb fakeroot automake autoreconf m4 yacc ctags tar gzip bzip2 xz zstd ninja sed pgrep meson cmake curl git; do
         if ! command -v "$dep" > /dev/null; then
             error "Missing dependency: $dep"
         fi
@@ -98,7 +98,7 @@ depcheck() {
     if command -v gmake > /dev/null; then
         _MAKE="gmake"
     elif command -v make > /dev/null; then
-        _make_version="$(make --version)"
+        _make_version="$(make --version 2>/dev/null)"
         case "$_make_version" in
             *GNU*) _MAKE="make" ;;
             *) error "Missing dependency: GNU make" ;;
@@ -107,10 +107,22 @@ depcheck() {
         error "Missing dependency: GNU make"
     fi
 
+    if command -v gpatch > /dev/null; then
+        gpatch="gmake"
+    elif command -v patch > /dev/null; then
+        _patch_version="$(patch --version 2>/dev/null)"
+        case "$_patch_version" in
+            *GNU*) gpatch="patch" ;;
+            *) error "Missing dependency: GNU patch" ;;
+        esac
+    else
+        error "Missing dependency: GNU patch"
+    fi
+
     if command -v gtar > /dev/null; then
         gtar="gtar"
     elif command -v make > /dev/null; then
-        _tar_version="$(tar --version)"
+        _tar_version="$(tar --version 2>/dev/null)"
         case "$_tar_version" in
             *GNU*) gtar="tar" ;;
             *) error "Missing dependency: GNU tar" ;;
@@ -206,7 +218,7 @@ applypatches() {
     if [ -d patches ]; then
         for patch in patches/*; do
             printf '%s\n' "Applying patch ${patch##*/}"
-            patch -p0 < "$patch"
+            "$gpatch" -p0 < "$patch"
         done
     fi
 }
