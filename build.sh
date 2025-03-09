@@ -108,7 +108,7 @@ depcheck() {
     fi
 
     if command -v gpatch > /dev/null; then
-        gpatch="gmake"
+        gpatch="gpatch"
     elif command -v patch > /dev/null; then
         _patch_version="$(patch --version 2>/dev/null)"
         case "$_patch_version" in
