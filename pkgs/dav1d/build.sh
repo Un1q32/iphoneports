@@ -53,7 +53,7 @@ export PATH="$_PKGROOT/src/tmpbin:$PATH"
 (
 cd src/build
 meson setup .. --cross-file="$_PKGROOT/src/iphoneports.meson" --prefix=/var/usr -Denable_asm="$asm" -Denable_tests=false
-DESTDIR="$_PKGROOT/pkg" ninja install -j"$_JOBS"
+DESTDIR="$_PKGROOT/pkg" ninja -j"$_JOBS" install
 )
 
 (
