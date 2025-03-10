@@ -38,11 +38,12 @@ for src in $arm64srcs; do
     done
     "$clang" -isysroot "$_PKGROOT/iossysroot" -target arm64-apple-ios7 "../lib/builtins/$src" -c -O3 -o "arm64-${src%\.c}.o" &
 done
-"$clang" -isysroot "$_PKGROOT/iossysroot" -target arm64e-apple-ios12 -xc /dev/null -c -O3 -o nothing.o &
 wait
 
-"$_TARGET-libtool" -static -o libclang_rt.ios.a ./*.o 2>/dev/null
-rm ./*.o
+"$_TARGET-libtool" -static -o builtins.a ./*.o
+"$_TARGET-ar" rc nothing.a /dev/null
+"$_TARGET-lipo" -create builtins.a -arch arm64e nothing.a -output libclang_rt.ios.a
+rm ./*.o nothing.a builtins.a
 
 for src in $x32srcs; do
     while [ "$(pgrep clang | wc -l)" -ge "$_JOBS" ]; do
@@ -56,11 +57,12 @@ for src in $x64srcs; do
     done
     "$clang" -isysroot "$_PKGROOT/macsysroot" -target x86_64-apple-macos10.4 "../lib/builtins/$src" -c -O3 -o "x86_64-${src%\.c}.o" &
 done
-"$clang" -isysroot "$_PKGROOT/macsysroot" -target unknown-apple-macos11.0 -arch arm64 -arch arm64e -xc /dev/null -c -O3 -o nothing.o &
 wait
 
-"$_TARGET-libtool" -static -o libclang_rt.osx.a ./*.o 2>/dev/null
-rm ./*.o
+"$_TARGET-libtool" -static -o builtins.a ./*.o
+"$_TARGET-ar" rc nothing.a /dev/null
+"$_TARGET-lipo" -create builtins.a -arch arm64e nothing.a -arch arm64 nothing.a -output libclang_rt.osx.a
+rm ./*.o nothing.a builtins.a
 
 cp ./*.a "$_PKGROOT/pkg/var/usr/lib/clang/$llvmver/lib/darwin"
 )
