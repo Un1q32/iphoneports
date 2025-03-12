@@ -1,0 +1,15 @@
+--- src/src/fdevent.c.orig
++++ src/src/fdevent.c
+@@ -801,12 +801,9 @@
+ #endif
+ #if defined(__APPLE__) && defined(__MACH__)
+ #include <TargetConditionals.h> /* TARGET_OS_IPHONE, TARGET_OS_MAC */
+-#if TARGET_OS_IPHONE            /* iOS, tvOS, or watchOS device */
+ /*#define TCPS_CLOSE_WAIT 5*/   /* ??? which header contains this, if any ??? */
+-#elif TARGET_OS_MAC             /* MacOS */
+ #include <netinet/tcp_fsm.h>
+ #endif
+-#endif
+ 
+ /* fd must be TCP socket (AF_INET, AF_INET6), end-of-stream recv() 0 bytes */
+ int fdevent_is_tcp_half_closed(int fd) {
