@@ -3,6 +3,6 @@ Section: Packaging
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Architecture: @DPKGARCH@
 Version: 1.22.18
-Description: The Debian Package Manager tools
+Description: The Debian Package Manager
 Depends: iphoneports-base, iphoneports-libmd, iphoneports-zlib, iphoneports-xz, iphoneports-bzip2, iphoneports-gtar, iphoneports-gzip
 Replaces: iphoneports-base, dpkg
