@@ -156,6 +156,9 @@ fi
             else
                 _DPKGARCH=darwin-arm64
             fi
+            if "$_TARGET-cc" -dM -E - < /dev/null | grep -q __arm64e__; then
+                export _CPU=arm64e
+            fi
         ;;
 
         arm*) _DPKGARCH=iphoneos-arm ;;
