@@ -2,7 +2,7 @@
 mkdir -p src/build src/tmpbin
 
 case $_CPU in
-    arm64|arm64e|aarch64)
+    arm64*|aarch64*)
         cpu_family=aarch64
         asm=true
     ;;
