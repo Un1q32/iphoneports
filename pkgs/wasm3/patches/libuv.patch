@@ -1,0 +1,11 @@
+--- src/CMakeLists.txt.orig
++++ src/CMakeLists.txt
+@@ -209,7 +209,7 @@
+     add_subdirectory(${uvwasi_SOURCE_DIR} ${uvwasi_BINARY_DIR} EXCLUDE_FROM_ALL)
+   endif()
+   set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Dd_m3HasUVWASI")
+-  target_link_libraries(${OUT_FILE} uvwasi_a uv_a)
++  target_link_libraries(${OUT_FILE} uvwasi_a uv)
+ endif()
+ 
+ check_ipo_supported(RESULT result)
