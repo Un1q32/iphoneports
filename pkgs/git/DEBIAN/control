@@ -2,6 +2,6 @@ Package: iphoneports-git
 Section: Data_Storage
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Architecture: @DPKGARCH@
-Version: 2.48.1
+Version: 2.49.0
 Depends: iphoneports-base, iphoneports-curl, iphoneports-libressl, iphoneports-grep, iphoneports-pcre2, iphoneports-zlib
 Description: fast content-addressable filesystem
