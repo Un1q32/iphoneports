@@ -1,8 +1,8 @@
 #!/bin/sh -e
-llvmver=20
-mkdir -p src/build "pkg/var/usr/lib/clang/$llvmver/lib/darwin"
+llvmver="$(sed -n 's/.*set(LLVM_VERSION_MAJOR \([0-9][0-9]*\)).*/\1/p' src/cmake/Modules/LLVMVersion.cmake)"
+mkdir -p src/compiler-rt/build "pkg/var/usr/lib/clang/$llvmver/lib/darwin"
 (
-cd src/build
+cd src/compiler-rt/build
 clang="$(command -v "$_TARGET-sdkpath")"
 clang="${clang%/*}/../share/iphoneports/bin/clang"
 
@@ -68,7 +68,7 @@ cp ./*.a "$_PKGROOT/pkg/var/usr/lib/clang/$llvmver/lib/darwin"
 )
 
 mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"
-cp src/LICENSE.TXT "pkg/var/usr/share/licenses/$_PKGNAME"
+cp src/compiler-rt/LICENSE.TXT "pkg/var/usr/share/licenses/$_PKGNAME"
 
 cp -r DEBIAN pkg
 dpkg-deb -b --root-owner-group -Zgzip pkg "$_PKGNAME.deb"
