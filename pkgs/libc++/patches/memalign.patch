@@ -84,7 +84,7 @@
  #  if defined(_LIBCPP_MSVCRT_LIKE)
    ::_aligned_free(__ptr);
 -#  else
-+#  elif !defined(_LIBCPP_HAS_NO_POSIX_MEMALIGN)
++#  elif !defined(_LIBCPP_HAS_NO_POSIX_MEMALIGN) || (_LIBCPP_STD_VER >= 17 && !defined(_LIBCPP_HAS_NO_C11_ALIGNED_ALLOC))
    ::free(__ptr);
 +#  else
 +  if (__ptr)
