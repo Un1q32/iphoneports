@@ -10,8 +10,8 @@ cd src
 (
 cd pkg/var/usr
 rm -rf share
-"$_TARGET-strip" bin/* lib/libpkgconf.5.dylib 2>/dev/null || true
-ldid -S"$_ENT" bin/* lib/libpkgconf.5.dylib
+"$_TARGET-strip" bin/* lib/libpkgconf.*.dylib 2>/dev/null || true
+ldid -S"$_ENT" bin/* lib/libpkgconf.*.dylib
 ln -s pkgconf bin/pkg-config
 )
 
