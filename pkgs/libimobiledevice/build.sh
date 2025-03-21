@@ -19,8 +19,5 @@ cp src/COPYING "pkg/var/usr/share/licenses/$_PKGNAME"
 
 cp -r DEBIAN pkg
 sed -e "s|@DPKGARCH@|$_DPKGARCH|" DEBIAN/control > pkg/DEBIAN/control
-case $_DPKGARCH in
-    iphoneos-*) ;;
-    *) sed -i -e 's|iphoneports-usbmuxd, ||' pkg/DEBIAN/control ;;
-esac
+[ "$_SUBSYSTEM" = "macos" ] && sed -i -e 's|iphoneports-usbmuxd, ||' pkg/DEBIAN/control
 dpkg-deb -b --root-owner-group -Zgzip pkg "$_PKGNAME.deb"
