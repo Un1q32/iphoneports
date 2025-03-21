@@ -1,14 +1,21 @@
 #!/bin/sh -e
 
 _get_distribution_components() {
-  ninja -t targets | grep -Po 'install-\K.*(?=-stripped:)' | while read -r target; do
-    case $target in
-      clang-libraries|distribution) continue ;;
-      clang|clangd|clang-*) ;;
-      clang*|findAllSymbols|scan-build*|scan-view|hmaptool) continue ;;
-    esac
-    printf '%s;' "$target"
-  done
+    ninja -t targets | grep -Po 'install-\K.*(?=-stripped:)' | while read -r target; do
+        case $target in
+            clang-repl)
+                case $_CPU in
+                    arm64*) ;;
+                    arm*) continue ;;
+                esac
+            ;;
+
+            clang-libraries|distribution) continue ;;
+            clang|clangd|clang-*) ;;
+            clang*|findAllSymbols|scan-build*|scan-view|hmaptool) continue ;;
+        esac
+        printf '%s;' "$target"
+    done
 }
 
 # awful hack to make clang not print git info in version string
@@ -34,9 +41,6 @@ DESTDIR="$_PKGROOT/pkg" ninja -j"$_JOBS" install-distribution
 (
 cd pkg/var/usr
 rm -rf share bin/git-clang-format
-case $_DPKGARCH in
-    iphoneos-*) rm bin/clang-repl ;;
-esac
 for file in bin/* lib/*.dylib; do
     if ! [ -h "$file" ]; then
         "$_TARGET-strip" "$file" 2>/dev/null || true
