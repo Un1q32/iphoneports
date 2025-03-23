@@ -20,9 +20,12 @@ static inline int unlinkat(int fd, const char *path, int flags) {
     return unlink(path);
   }
 
-  char fdpath[PATH_MAX + strlen(path) + 2];
-  if (__builtin_expect(fcntl(fd, F_GETPATH, fdpath) == -1, 0))
+  struct stat st;
+  if (__builtin_expect(fstat(fd, &st) == -1 || !S_ISDIR(st.st_mode), 0))
     return -1;
+
+  char fdpath[PATH_MAX + strlen(path) + 2];
+  fcntl(fd, F_GETPATH, fdpath);
 
   strcat(fdpath, "/");
   strcat(fdpath, path);

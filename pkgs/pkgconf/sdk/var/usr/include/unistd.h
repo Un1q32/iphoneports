@@ -18,9 +18,12 @@ static inline ssize_t readlinkat(int fd, const char *path, char *buf,
   if (fd == AT_FDCWD || path[0] == '/')
     return readlink(path, buf, bufsize);
 
-  char fdpath[PATH_MAX + strlen(path) + 2];
-  if (__builtin_expect(fcntl(fd, F_GETPATH, fdpath) == -1, 0))
+  struct stat st;
+  if (__builtin_expect(fstat(fd, &st) == -1 || !S_ISDIR(st.st_mode), 0))
     return -1;
+
+  char fdpath[PATH_MAX + strlen(path) + 2];
+  fcntl(fd, F_GETPATH, fdpath);
 
   if (__builtin_expect(path[0] != '\0', 1)) {
     strcat(fdpath, "/");
