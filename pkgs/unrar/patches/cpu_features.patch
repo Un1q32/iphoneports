@@ -28,11 +28,16 @@
  #endif
 --- src/rijndael.cpp.orig
 +++ src/rijndael.cpp
-@@ -112,7 +112,6 @@
+@@ -111,8 +111,10 @@
+   }
    else
      AES_NI=false;
- #elif defined(__GNUC__)
+-#elif defined(__GNUC__)
 -  AES_NI=__builtin_cpu_supports("aes");
++#elif defined(__AES__)
++  AES_NI=true;
++#else
++  AES_NI=false;
  #endif
  
  #elif defined(USE_NEON_AES)
