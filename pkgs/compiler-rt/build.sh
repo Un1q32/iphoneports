@@ -1,9 +1,5 @@
 #!/bin/sh -e
-if [ -f src/iphoneports-llvmversion.txt ]; then
-    read -r llvmver < src/iphoneports-llvmversion.txt
-elif [ -f src/cmake/Modules/LLVMVersion.cmake ]; then
-    llvmver="$(sed -n 's/.*set(LLVM_VERSION_MAJOR \([0-9][0-9]*\)).*/\1/p' src/cmake/Modules/LLVMVersion.cmake)"
-fi
+read -r llvmver < src/iphoneports-llvmversion.txt
 mkdir -p src/compiler-rt/build "pkg/var/usr/lib/clang/$llvmver/lib/darwin"
 (
 cd src/compiler-rt/build
