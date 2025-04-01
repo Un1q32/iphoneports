@@ -1,0 +1,32 @@
+--- src/llvm/lib/Support/Unix/Path.inc.orig
++++ src/llvm/lib/Support/Unix/Path.inc
+@@ -31,7 +31,9 @@
+ #include <pwd.h>
+ 
+ #ifdef __APPLE__
++#if __has_include(<copyfile.h>)
+ #include <copyfile.h>
++#endif
+ #include <mach-o/dyld.h>
+ #include <sys/attr.h>
+ #if __has_include(<sys/clonefile.h>)
+@@ -1477,7 +1479,7 @@
+ 
+ namespace fs {
+ 
+-#ifdef __APPLE__
++#if defined(__APPLE__) && __has_include(<copyfile.h>)
+ /// This implementation tries to perform an APFS CoW clone of the file,
+ /// which can be much faster and uses less space.
+ /// Unfortunately fcopyfile(3) does not support COPYFILE_CLONE, so the
+--- src/llvm/lib/Support/Path.cpp.orig
++++ src/llvm/lib/Support/Path.cpp
+@@ -1012,7 +1012,7 @@
+   return std::error_code();
+ }
+ 
+-#ifndef __APPLE__
++#if !defined(__APPLE__) || !__has_include(<copyfile.h>)
+ std::error_code copy_file(const Twine &From, const Twine &To) {
+   int ReadFD, WriteFD;
+   if (std::error_code EC = openFileForRead(From, ReadFD, OF_None))

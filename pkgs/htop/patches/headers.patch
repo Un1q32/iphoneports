@@ -1,0 +1,10 @@
+--- src/darwin/DarwinMachine.c.orig
++++ src/darwin/DarwinMachine.c
+@@ -16,6 +16,7 @@
+ #include <unistd.h>
+ #include <sys/mman.h>
+ #include <sys/sysctl.h>
++#include <mach/mach_init.h>
+ 
+ #include "CRT.h"
+ #include "Machine.h"

@@ -1,0 +1,29 @@
+--- src/gzip.c.orig
++++ src/gzip.c
+@@ -76,7 +76,9 @@
+ 
+ #ifdef __APPLE__
+ #include <sys/attr.h>
++#if __has_include(<copyfile.h>)
+ #include <copyfile.h>
++#endif
+ #include <get_compat.h>
+ int futimens(int fd, const struct timespec times[2]);
+ 
+@@ -1503,14 +1505,14 @@
+ 		goto bad_outfile;
+ 	}
+ 
+-#ifdef __APPLE__
++#if defined(__APPLE__) && __has_include(<copyfile.h>)
+ 	fcopyfile(in, out, 0, COPYFILE_ACL | COPYFILE_XATTR);
+ 	clear_type_and_creator(out);
+ #endif /* __APPLE__ */
+ 	copymodes(out, &isb, outfile);
+ 	remove_file = NULL;
+ #endif
+-#ifdef __APPLE__
++#if defined(__APPLE__) && __has_include(<copyfile.h>)
+ 	(void)close(in);
+ #endif /* __APPLE__ */
+ 	if (close(out) == -1)

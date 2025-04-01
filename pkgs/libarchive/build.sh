@@ -1,7 +1,9 @@
 #!/bin/sh -e
+# shellcheck disable=2086
 (
 cd src
-./configure --host="$_TARGET" --prefix=/var/usr --disable-static
+grep -q acl_set_link_np "$_SDK/usr/include/sys/acl.h" || noacl='ac_cv_archive_acl_darwin=no'
+./configure --host="$_TARGET" --prefix=/var/usr --disable-static $noacl
 "$_MAKE" -j"$_JOBS"
 "$_MAKE" DESTDIR="$_PKGROOT/pkg" install
 )
