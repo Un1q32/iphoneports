@@ -8,4 +8,3 @@ ngtcp2
 libpsl
 libidn2
 brotli
-libunistring
