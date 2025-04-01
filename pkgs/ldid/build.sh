@@ -1,7 +1,7 @@
 #!/bin/sh -e
 (
 cd src
-"$_TARGET-c++" -Os -flto ldid.cpp -o ldid -lplist-2.0 -lcrypto -DLDID_VERSION='"2.1.5-procursus7"'
+"$_TARGET-c++" -std=gnu++11 -Os -flto ldid.cpp -o ldid -lplist-2.0 -lcrypto -DLDID_VERSION='"2.1.5-procursus7"'
 mkdir -p "$_PKGROOT/pkg/var/usr/bin"
 cp ldid "$_PKGROOT/pkg/var/usr/bin"
 )
