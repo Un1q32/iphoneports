@@ -1,3 +1,4 @@
+#include <errno.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -26,23 +27,23 @@ int main(int argc, const char *argv[]) {
   memcpy(shell + 13, argv[1], shelllen + 1);
 
   struct stat st;
-  if (__builtin_expect(stat(shell, &st) != 0, 0)) {
+  if (stat(shell, &st) != 0) {
     fprintf(stderr, "Error: cannot stat %s\n", shell);
     return EXIT_FAILURE;
   }
-  if (__builtin_expect(!S_ISREG(st.st_mode), 0)) {
+  if (!S_ISREG(st.st_mode)) {
     fprintf(stderr, "Error: %s is not a regular file\n", shell);
     return EXIT_FAILURE;
   }
-  if (__builtin_expect(!(st.st_mode & S_IXUSR), 0)) {
+  if (!(st.st_mode & S_IXUSR)) {
     fprintf(stderr, "Error: %s is not executable\n", shell);
     return EXIT_FAILURE;
   }
-  if (__builtin_expect(unlink("/var/usr/shell") != 0, 0)) {
+  if (unlink("/var/usr/shell") != 0 && errno != ENOENT) {
     perror("Error: unlink");
     return EXIT_FAILURE;
   }
-  if (__builtin_expect(symlink(shell, "/var/usr/shell") != 0, 0)) {
+  if (symlink(shell, "/var/usr/shell") != 0) {
     perror("Error: symlink");
     return EXIT_FAILURE;
   }
