@@ -1,21 +1,15 @@
 --- src/Utilities/cmcurl/CMakeLists.txt.orig
 +++ src/Utilities/cmcurl/CMakeLists.txt
-@@ -753,17 +753,12 @@
- if(_use_core_foundation_and_core_services)
-   find_library(COREFOUNDATION_FRAMEWORK "CoreFoundation")
-   mark_as_advanced(COREFOUNDATION_FRAMEWORK)
--  find_library(CORESERVICES_FRAMEWORK "CoreServices")
--  mark_as_advanced(CORESERVICES_FRAMEWORK)
- 
-   if(NOT COREFOUNDATION_FRAMEWORK)
-     message(FATAL_ERROR "CoreFoundation framework not found")
+@@ -929,12 +929,6 @@
    endif()
+   list(APPEND CURL_LIBS "-framework CoreFoundation")
+ 
+-  find_library(CORESERVICES_FRAMEWORK NAMES "CoreServices")
+-  mark_as_advanced(CORESERVICES_FRAMEWORK)
 -  if(NOT CORESERVICES_FRAMEWORK)
 -    message(FATAL_ERROR "CoreServices framework not found")
 -  endif()
- 
--  list(APPEND CURL_LIBS "-framework CoreFoundation" "-framework CoreServices")
-+  list(APPEND CURL_LIBS "-framework CoreFoundation")
+-  list(APPEND CURL_LIBS "-framework CoreServices")
  endif()
  
  if(CURL_USE_OPENSSL)
@@ -31,7 +25,7 @@
  add_subdirectory(libarchive)
 --- src/Source/CMakeLists.txt.orig
 +++ src/Source/CMakeLists.txt
-@@ -1052,7 +1052,9 @@
+@@ -1047,7 +1047,9 @@
  # On Apple we need CoreFoundation and CoreServices
  if(APPLE)
    target_link_libraries(CMakeLib PUBLIC "-framework CoreFoundation")
