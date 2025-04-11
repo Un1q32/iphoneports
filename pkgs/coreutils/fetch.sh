@@ -1,7 +1,7 @@
 #!/bin/sh
 rm -rf pkg src
 printf "Downloading source...\n"
-curl -L -# -o src.tar.xz https://ftp.gnu.org/gnu/coreutils/coreutils-9.6.tar.xz
+curl -L -# -o src.tar.xz https://ftp.gnu.org/gnu/coreutils/coreutils-9.7.tar.xz
 printf "Unpacking source...\n"
 tar -xf src.tar.xz
 rm src.tar.xz
