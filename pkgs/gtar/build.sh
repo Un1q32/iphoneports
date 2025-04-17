@@ -1,7 +1,11 @@
 #!/bin/sh -e
 (
 cd src
-./configure --host="$_TARGET" --prefix=/var/usr --program-prefix=g --disable-year2038 LIBS="-liconv"
+case $_CPU in
+    *64) ;;
+    *) y2038='--disable-year2038' ;;
+esac
+./configure --host="$_TARGET" --prefix=/var/usr --program-prefix=g $y2038 LIBS="-liconv"
 "$_MAKE" -j"$_JOBS"
 "$_MAKE" DESTDIR="$_PKGROOT/pkg" install
 )

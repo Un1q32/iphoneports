@@ -1,7 +1,11 @@
 #!/bin/sh -e
 (
 cd src
-./configure --host="$_TARGET" --prefix=/var/usr --enable-single-binary=symlinks --with-openssl --disable-year2038 fu_cv_sys_stat_statvfs=yes
+case $_CPU in
+    *64) ;;
+    *) y2038='--disable-year2038' ;;
+esac
+./configure --host="$_TARGET" --prefix=/var/usr --enable-single-binary=symlinks --with-openssl $y2038 fu_cv_sys_stat_statvfs=yes
 "$_MAKE" -j"$_JOBS"
 "$_MAKE" DESTDIR="$_PKGROOT/pkg" install
 )
