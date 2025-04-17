@@ -2,7 +2,6 @@ Package: iphoneports-diffutils
 Section: Development
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Architecture: @DPKGARCH@
-Version: 3.11
+Version: 3.12
 Description: compare two files for differences
-Homepage: http://www.gnu.org/software/diffutils/
 Depends: iphoneports-base

@@ -1,7 +1,7 @@
 #!/bin/sh -e
 (
 cd src
-./configure --host="$_TARGET" --prefix=/var/usr
+./configure --host="$_TARGET" --prefix=/var/usr gl_cv_func_strcasecmp_works=yes
 "$_MAKE" -j"$_JOBS"
 "$_MAKE" DESTDIR="$_PKGROOT/pkg" install
 )
