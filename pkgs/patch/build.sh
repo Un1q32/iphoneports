@@ -2,7 +2,11 @@
 (
 cd src
 autoreconf -fi
-./configure --host="$_TARGET" --prefix=/var/usr
+case $_CPU in
+    *64) ;;
+    *) y2038='--disable-year2038' ;;
+esac
+./configure --host="$_TARGET" --prefix=/var/usr $y2038
 "$_MAKE" -j"$_JOBS"
 "$_MAKE" DESTDIR="$_PKGROOT/pkg" install
 )
