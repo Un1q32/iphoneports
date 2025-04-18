@@ -1,6 +1,6 @@
 --- src/Python/thread_pthread.h.orig
 +++ src/Python/thread_pthread.h
-@@ -375,8 +375,15 @@
+@@ -387,8 +387,15 @@
      if (!initialized)
          PyThread_init_thread();
  #ifdef __APPLE__
