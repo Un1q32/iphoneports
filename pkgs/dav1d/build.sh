@@ -48,6 +48,11 @@ printf '%s' "\
 exec \"$(command -v "$_TARGET-install_name_tool")\" \"\$@\"
 " > src/tmpbin/install_name_tool && chmod +x src/tmpbin/install_name_tool
 
+printf '%s' "\
+#!/bin/sh
+exec \"$(command -v "$_TARGET-otool")\" \"\$@\"
+" > src/tmpbin/otool && chmod +x src/tmpbin/otool
+
 export PATH="$_PKGROOT/src/tmpbin:$PATH"
 
 (
