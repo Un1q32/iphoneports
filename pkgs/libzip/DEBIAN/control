@@ -1,5 +1,5 @@
 Package: iphoneports-libzip
-Version: 1.11.3
+Version: 1.11.3-1
 Architecture: @DPKGARCH@
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Depends: iphoneports-base, iphoneports-xz, iphoneports-libressl

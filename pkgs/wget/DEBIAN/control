@@ -2,6 +2,6 @@ Package: iphoneports-wget
 Section: Networking
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Architecture: @DPKGARCH@
-Version: 1.25.0
+Version: 1.25.0-1
 Depends: iphoneports-base, iphoneports-libressl, iphoneports-pcre2, iphoneports-zlib, iphoneports-libunistring, iphoneports-libpsl
 Description: Network utility to retrieve files from the Web

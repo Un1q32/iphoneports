@@ -9,8 +9,8 @@ DESTDIR="$_PKGROOT/pkg" ninja -j"$_JOBS" install
 (
 cd pkg/var/usr
 rm -rf share etc/ssl/cert.pem include/tls.h bin/ocspcheck lib/pkgconfig/libtls.pc lib/libtls.* lib/cmake/LibreSSL/LibreSSL-TLS*
-cryptoabi=55
-sslabi=58
+cryptoabi=56
+sslabi=59
 mv lib/libcrypto.$cryptoabi.*.dylib lib/libcrypto.$cryptoabi.dylib
 mv lib/libssl.$sslabi.*.dylib lib/libssl.$sslabi.dylib
 "$_TARGET-strip" bin/openssl lib/libcrypto.$cryptoabi.dylib lib/libssl.$sslabi.dylib 2>/dev/null || true

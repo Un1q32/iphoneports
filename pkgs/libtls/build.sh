@@ -11,7 +11,7 @@ cp pkgconfig/libtls.pc "$_PKGROOT/pkg/var/usr/lib/pkgconfig"
 (
 cd pkg/var/usr
 rm -rf include/openssl
-tlsabi=31
+tlsabi=32
 mv lib/libtls.$tlsabi.*.dylib lib/libtls.$tlsabi.dylib
 "$_TARGET-strip" lib/libtls.$tlsabi.dylib 2>/dev/null || true
 ldid -S"$_ENT" lib/libtls.$tlsabi.dylib

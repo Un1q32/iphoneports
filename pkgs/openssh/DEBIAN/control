@@ -2,7 +2,7 @@ Package: iphoneports-openssh
 Section: Networking
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Architecture: @DPKGARCH@
-Version: 10.0p1
+Version: 10.0p1-1
 Depends: iphoneports-base, iphoneports-libressl, iphoneports-zlib
 Description: secure remote access between machines
 Replaces: openssh

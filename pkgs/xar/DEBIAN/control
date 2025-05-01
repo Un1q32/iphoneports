@@ -2,6 +2,6 @@ Package: iphoneports-xar
 Section: Archiving
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Architecture: @DPKGARCH@
-Version: 501
+Version: 501-1
 Description: eXtensible ARchive format
 Depends: iphoneports-base, iphoneports-zlib, iphoneports-xz, iphoneports-bzip2, iphoneports-libxml2, iphoneports-libressl
