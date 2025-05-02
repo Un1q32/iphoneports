@@ -2,6 +2,6 @@ Package: iphoneports-cctools
 Section: Development
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Architecture: @DPKGARCH@
-Version: 1021.4-ld64-762-2
+Version: 1021.4-ld64-762-3
 Description: Mach-O binary utilities
 Depends: iphoneports-base, iphoneports-libc++, iphoneports-llvm, iphoneports-libtapi, iphoneports-xar

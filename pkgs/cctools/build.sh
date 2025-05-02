@@ -14,7 +14,7 @@ rm include/foreign/machine/_structs.h
 
 (
 cd pkg/var/usr
-rm -rf share libexec
+rm -rf share
 "$_TARGET-strip" bin/* 2>/dev/null || true
 ldid -S"$_ENT" bin/*
 )
