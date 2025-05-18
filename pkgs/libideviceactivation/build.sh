@@ -10,8 +10,7 @@ autoreconf -fi
 (
 cd pkg/var/usr
 rm -rf share
-"$_TARGET-strip" bin/ideviceactivation lib/libideviceactivation-1.0.2.dylib 2>/dev/null || true
-ldid -S"$_ENT" bin/ideviceactivation lib/libideviceactivation-1.0.2.dylib
+strip_sign bin/ideviceactivation lib/libideviceactivation-1.0.2.dylib
 )
 
 mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"

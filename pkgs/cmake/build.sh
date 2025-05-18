@@ -10,8 +10,7 @@ DESTDIR="$_PKGROOT/pkg" ninja -j"$_JOBS" install
 (
 cd pkg/var/usr
 rm -rf doc share/cmake-*/Help
-"$_TARGET-strip" bin/* 2>/dev/null || true
-ldid -S"$_ENT" bin/*
+strip_sign bin/*
 )
 
 mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"

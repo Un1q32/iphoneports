@@ -9,8 +9,7 @@ DESTDIR="$_PKGROOT/pkg" ninja -j"$_JOBS" install-cxx install-cxxabi
 (
 cd pkg/var/usr/lib
 rm -rf libc++experimental.a ../include/c++/v1/experimental
-"$_TARGET-strip" libc++.1.0.dylib libc++abi.1.0.dylib 2>/dev/null || true
-ldid -S"$_ENT" libc++.1.0.dylib libc++abi.1.0.dylib
+strip_sign libc++.1.0.dylib libc++abi.1.0.dylib
 )
 
 mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"

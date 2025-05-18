@@ -10,8 +10,7 @@ autoreconf -fi
 (
 cd pkg/var/usr
 rm -rf share
-"$_TARGET-strip" lib/liblzo2.2.dylib 2>/dev/null || true
-ldid -S"$_ENT" lib/liblzo2.2.dylib
+strip_sign lib/liblzo2.2.dylib
 )
 
 mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"

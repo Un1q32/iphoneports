@@ -8,8 +8,7 @@ cp which "$_PKGROOT/pkg/var/usr/bin"
 
 (
 cd pkg/var/usr/bin
-"$_TARGET-strip" which 2>/dev/null || true
-ldid -S"$_ENT" which
+strip_sign which
 )
 
 mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"

@@ -9,8 +9,7 @@ cd src
 (
 cd pkg/var/usr
 rm -rf share/doc share/man
-"$_TARGET-strip" bin/rogue 2>/dev/null || true
-ldid -S"$_ENT" bin/rogue
+strip_sign bin/rogue
 chmod 2755 bin/rogue
 )
 

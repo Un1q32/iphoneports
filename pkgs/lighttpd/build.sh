@@ -10,8 +10,7 @@ cd src
 (
 cd pkg/var/usr
 rm -rf share
-"$_TARGET-strip" sbin/lighttpd sbin/lighttpd-angel lib/liblightcomp.dylib lib/*.so 2>/dev/null || true
-ldid -S"$_ENT" sbin/lighttpd sbin/lighttpd-angel lib/liblightcomp.dylib lib/*.so
+strip_sign sbin/lighttpd sbin/lighttpd-angel lib/liblightcomp.dylib lib/*.so
 )
 
 mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"

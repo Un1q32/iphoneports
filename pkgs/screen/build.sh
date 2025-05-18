@@ -11,8 +11,7 @@ cp etc/etcscreenrc "$_PKGROOT/pkg/var/usr/etc/screenrc"
 (
 cd pkg/var/usr
 rm -rf share/info share/man
-"$_TARGET-strip" bin/screen-* 2>/dev/null || true
-ldid -S"$_ENT" bin/screen-*
+strip_sign bin/screen-*
 )
 
 mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"

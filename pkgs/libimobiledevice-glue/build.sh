@@ -8,8 +8,7 @@ cd src
 
 (
 cd pkg/var/usr
-"$_TARGET-strip" lib/libimobiledevice-glue-1.0.0.dylib 2>/dev/null || true
-ldid -S"$_ENT" lib/libimobiledevice-glue-1.0.0.dylib
+strip_sign lib/libimobiledevice-glue-1.0.0.dylib
 )
 
 mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"

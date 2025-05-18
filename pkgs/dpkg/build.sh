@@ -31,8 +31,7 @@ grep -Erl '#! ?/usr/bin/perl' | while IFS= read -r file; do
 done
 for bin in bin/*; do
     [ "$bin" = "bin/dpkg-maintscript-helper" ] && continue
-    "$_TARGET-strip" "$bin" 2>/dev/null || true
-    ldid -S"$_ENT" "$bin"
+    strip_and_sign "$bin"
 done
 )
 

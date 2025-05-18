@@ -11,8 +11,7 @@ cd pkg/var/usr
 rm -rf share
 mv lib/libjpeg.62.*.dylib lib/libjpeg.62.dylib
 mv lib/libturbojpeg.0.*.dylib lib/libturbojpeg.0.dylib
-"$_TARGET-strip" lib/libjpeg.62.dylib lib/libturbojpeg.0.dylib bin/* 2>/dev/null || true
-ldid -S"$_ENT" lib/libjpeg.62.dylib lib/libturbojpeg.0.dylib bin/*
+strip_sign lib/libjpeg.62.dylib lib/libturbojpeg.0.dylib bin/*
 )
 
 mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"

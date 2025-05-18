@@ -11,8 +11,7 @@ cd pkg/var/usr
 rm -rf share
 mv lib/libnghttp2.14.*.dylib lib/libnghttp2.14.dylib
 "$_TARGET-install_name_tool" -id /var/usr/lib/libnghttp2.14.dylib lib/libnghttp2.14.dylib
-"$_TARGET-strip" lib/libnghttp2.14.dylib 2>/dev/null || true
-ldid -S"$_ENT" lib/libnghttp2.14.dylib
+strip_sign lib/libnghttp2.14.dylib
 )
 
 mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"

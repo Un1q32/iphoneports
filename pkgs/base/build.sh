@@ -8,8 +8,7 @@ cd pkg
 "$_TARGET-cc" -Wall -Wextra -Wpedantic -std=c99 -Os -flto -o usr/local/bin/iphoneports-shell "$_PKGROOT/files/iphoneports-shell.c"
 "$_TARGET-cc" -Wall -Wextra -Wpedantic -std=c99 -Os -flto -o usr/local/libexec/iphoneports/iphoneports-chsh "$_PKGROOT/files/iphoneports-chsh.c"
 
-"$_TARGET-strip" usr/local/bin/iphoneports-shell usr/local/libexec/iphoneports/iphoneports-chsh 2>/dev/null || true
-ldid -S"$_ENT" usr/local/bin/iphoneports-shell usr/local/libexec/iphoneports/iphoneports-chsh
+strip_sign usr/local/bin/iphoneports-shell usr/local/libexec/iphoneports/iphoneports-chsh
 chmod 4755 usr/local/libexec/iphoneports/iphoneports-chsh
 ln -s /usr/local/libexec/iphoneports/iphoneports-chsh var/usr/bin/iphoneports-chsh
 

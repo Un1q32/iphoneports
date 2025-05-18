@@ -9,8 +9,7 @@ cd src
 (
 cd pkg/var/usr
 rm -rf share/man
-"$_TARGET-strip" bin/curl lib/libcurl.4.dylib 2>/dev/null || true
-ldid -S"$_ENT" bin/curl lib/libcurl.4.dylib
+strip_sign bin/curl lib/libcurl.4.dylib
 )
 
 mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"

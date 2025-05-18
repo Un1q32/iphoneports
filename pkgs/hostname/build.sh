@@ -8,8 +8,7 @@ cp hostname "$_PKGROOT/pkg/var/usr/bin"
 
 (
 cd pkg/var/usr/bin
-"$_TARGET-strip" hostname 2>/dev/null || true
-ldid -S"$_ENT" hostname
+strip_sign hostname
 )
 
 mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"

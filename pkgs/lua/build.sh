@@ -8,8 +8,7 @@ cd src
 (
 cd pkg/var/usr
 rm -rf man
-"$_TARGET-strip" bin/lua bin/luac "$(realpath lib/liblua.dylib)" 2>/dev/null || true
-ldid -S"$_ENT" bin/lua bin/luac "$(realpath lib/liblua.dylib)"
+strip_sign bin/lua bin/luac "$(realpath lib/liblua.dylib)"
 )
 
 mkdir -p pkg/var/usr/lib/pkgconfig

@@ -13,8 +13,7 @@ esac
 (
 cd pkg/var/usr
 rm -rf share
-"$_TARGET-strip" bin/coreutils libexec/coreutils/libstdbuf.so 2>/dev/null || true
-ldid -S"$_ENT" bin/coreutils libexec/coreutils/libstdbuf.so
+strip_sign bin/coreutils libexec/coreutils/libstdbuf.so
 )
 
 mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"

@@ -8,8 +8,7 @@ cd src
 (
 cd pkg/var/usr
 rm -rf bin/xxd share/applications share/icons share/man
-"$_TARGET-strip" bin/vim 2>/dev/null || true
-ldid -S"$_ENT" bin/vim
+strip_sign bin/vim
 )
 
 mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"

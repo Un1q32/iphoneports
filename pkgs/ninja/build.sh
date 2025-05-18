@@ -8,8 +8,7 @@ DESTDIR="$_PKGROOT/pkg" ninja -j"$_JOBS" install
 
 (
 cd pkg/var/usr/bin
-"$_TARGET-strip" ninja 2>/dev/null || true
-ldid -S"$_ENT" ninja
+strip_sign ninja
 )
 
 mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"

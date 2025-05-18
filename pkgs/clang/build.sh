@@ -33,8 +33,8 @@ case ${_TARGET%%-*} in
     arm64*|x86_64*) ltoopt='ON' ;;
     *) ltoopt='OFF' ;;
 esac
-cmake -GNinja ../clang -DCMAKE_BUILD_TYPE=MinSizeRel -DCMAKE_C_COMPILER="$_TARGET-cc" -DCMAKE_RANLIB="$(command -v $_TARGET-ranlib)" -DCMAKE_SYSTEM_NAME=Darwin -DCMAKE_INSTALL_PREFIX=/var/usr -DCMAKE_INSTALL_NAME_TOOL="$_TARGET-install_name_tool" -DCMAKE_FIND_ROOT_PATH_MODE_INCLUDE=ONLY -DCMAKE_FIND_ROOT_PATH="$_SDK/var/usr" -DCLANG_LINK_CLANG_DYLIB=ON -DLLVM_LINK_LLVM_DYLIB=ON -DLLVM_INCLUDE_TESTS=OFF -DLLVM_TABLEGEN_EXE="$tblgendir/llvm-tblgen" -DCLANG_TABLEGEN_EXE="$tblgendir/clang-tblgen" -DLLVM_ENABLE_LTO="$ltoopt" -DLLVM_ENABLE_LIBCXX=ON
-cmake -GNinja ../clang -DCMAKE_BUILD_TYPE=MinSizeRel -DCMAKE_C_COMPILER="$_TARGET-cc" -DCMAKE_RANLIB="$(command -v $_TARGET-ranlib)" -DCMAKE_SYSTEM_NAME=Darwin -DCMAKE_INSTALL_PREFIX=/var/usr -DCMAKE_INSTALL_NAME_TOOL="$_TARGET-install_name_tool" -DCMAKE_FIND_ROOT_PATH_MODE_INCLUDE=ONLY -DCMAKE_FIND_ROOT_PATH="$_SDK/var/usr" -DCLANG_LINK_CLANG_DYLIB=ON -DLLVM_LINK_LLVM_DYLIB=ON -DLLVM_INCLUDE_TESTS=OFF -DLLVM_TABLEGEN_EXE="$tblgendir/llvm-tblgen" -DCLANG_TABLEGEN_EXE="$tblgendir/clang-tblgen" -DLLVM_ENABLE_LTO="$ltoopt" -DLLVM_ENABLE_LIBCXX=ON -DLLVM_DISTRIBUTION_COMPONENTS="$(_get_distribution_components)"
+cmake -GNinja ../clang -DCMAKE_BUILD_TYPE=MinSizeRel -DCMAKE_C_COMPILER="$_TARGET-cc" -DCMAKE_RANLIB="$(command -v "$_TARGET-ranlib")" -DCMAKE_SYSTEM_NAME=Darwin -DCMAKE_INSTALL_PREFIX=/var/usr -DCMAKE_INSTALL_NAME_TOOL="$_TARGET-install_name_tool" -DCMAKE_FIND_ROOT_PATH_MODE_INCLUDE=ONLY -DCMAKE_FIND_ROOT_PATH="$_SDK/var/usr" -DCLANG_LINK_CLANG_DYLIB=ON -DLLVM_LINK_LLVM_DYLIB=ON -DLLVM_INCLUDE_TESTS=OFF -DLLVM_TABLEGEN_EXE="$tblgendir/llvm-tblgen" -DCLANG_TABLEGEN_EXE="$tblgendir/clang-tblgen" -DLLVM_ENABLE_LTO="$ltoopt" -DLLVM_ENABLE_LIBCXX=ON
+cmake -GNinja ../clang -DCMAKE_BUILD_TYPE=MinSizeRel -DCMAKE_C_COMPILER="$_TARGET-cc" -DCMAKE_RANLIB="$(command -v "$_TARGET-ranlib")" -DCMAKE_SYSTEM_NAME=Darwin -DCMAKE_INSTALL_PREFIX=/var/usr -DCMAKE_INSTALL_NAME_TOOL="$_TARGET-install_name_tool" -DCMAKE_FIND_ROOT_PATH_MODE_INCLUDE=ONLY -DCMAKE_FIND_ROOT_PATH="$_SDK/var/usr" -DCLANG_LINK_CLANG_DYLIB=ON -DLLVM_LINK_LLVM_DYLIB=ON -DLLVM_INCLUDE_TESTS=OFF -DLLVM_TABLEGEN_EXE="$tblgendir/llvm-tblgen" -DCLANG_TABLEGEN_EXE="$tblgendir/clang-tblgen" -DLLVM_ENABLE_LTO="$ltoopt" -DLLVM_ENABLE_LIBCXX=ON -DLLVM_DISTRIBUTION_COMPONENTS="$(_get_distribution_components)"
 DESTDIR="$_PKGROOT/pkg" ninja -j"$_JOBS" install-distribution
 )
 
@@ -43,8 +43,7 @@ cd pkg/var/usr
 rm -rf share bin/git-clang-format
 for file in bin/* lib/*.dylib; do
     if ! [ -h "$file" ]; then
-        "$_TARGET-strip" "$file" 2>/dev/null || true
-        ldid -S"$_ENT" "$file"
+        strip_and_sign "$file"
     fi
 done
 )

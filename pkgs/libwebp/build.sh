@@ -11,8 +11,7 @@ cd pkg/var/usr
 rm -rf share
 for lib in lib/*.dylib; do
     if ! [ -h "$lib" ]; then
-        "$_TARGET-strip" "$lib" 2>/dev/null || true
-        ldid -S"$_ENT" "$lib"
+        strip_and_sign "$lib"
     fi
 done
 )

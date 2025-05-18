@@ -7,8 +7,7 @@ cd src
 (
 cd pkg/var/usr
 rm -rf man
-"$_TARGET-strip" bin/tree 2>/dev/null || true
-ldid -S"$_ENT" bin/tree
+strip_sign bin/tree
 )
 
 mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"

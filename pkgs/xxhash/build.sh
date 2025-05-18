@@ -7,8 +7,7 @@ cd src
 (
 cd pkg/var/usr
 rm -rf share lib/libxxhash.a
-"$_TARGET-strip" bin/xxhsum lib/libxxhash.0.*.dylib 2>/dev/null || true
-ldid -S"$_ENT" bin/xxhsum lib/libxxhash.0.*.dylib
+strip_sign bin/xxhsum lib/libxxhash.0.*.dylib
 )
 
 mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"

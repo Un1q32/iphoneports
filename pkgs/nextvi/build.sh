@@ -8,8 +8,7 @@ cp vi "$_PKGROOT/pkg/var/usr/bin"
 
 (
 cd pkg/var/usr/bin
-"$_TARGET-strip" vi 2>/dev/null || true
-ldid -S"$_ENT" vi
+strip_sign vi
 )
 
 mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"

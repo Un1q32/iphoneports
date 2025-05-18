@@ -10,8 +10,7 @@ autoreconf -fi
 (
 cd pkg/var/usr
 rm -rf share
-"$_TARGET-strip" bin/idevicerestore 2>/dev/null || true
-ldid -S"$_ENT" bin/idevicerestore
+strip_sign bin/idevicerestore
 )
 
 mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"

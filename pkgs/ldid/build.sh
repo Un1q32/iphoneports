@@ -9,8 +9,7 @@ cp ldid "$_PKGROOT/pkg/var/usr/bin"
 (
 cd pkg/var/usr/bin
 ln -s ldid ldid2
-"$_TARGET-strip" ldid 2>/dev/null || true
-ldid -S"$_ENT" ldid
+strip_sign ldid
 )
 
 mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"

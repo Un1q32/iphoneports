@@ -9,8 +9,7 @@ DESTDIR="$_PKGROOT/pkg" ninja -j"$_JOBS" install
 (
 cd pkg/var/usr
 rm -rf share
-"$_TARGET-strip" lib/libzip.5.5.dylib bin/* 2>/dev/null || true
-ldid -S"$_ENT" lib/libzip.5.5.dylib bin/*
+strip_sign lib/libzip.5.5.dylib bin/*
 )
 
 mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"

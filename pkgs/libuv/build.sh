@@ -8,8 +8,7 @@ cd src
 
 (
 cd pkg/var/usr/lib
-"$_TARGET-strip" libuv.1.dylib 2>/dev/null || true
-ldid -S"$_ENT" libuv.1.dylib
+strip_sign libuv.1.dylib
 )
 
 mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"

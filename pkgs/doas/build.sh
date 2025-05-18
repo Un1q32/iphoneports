@@ -12,8 +12,7 @@ cp doasedit "$_PKGROOT/pkg/var/usr/bin"
 
 (
 cd pkg/var/usr/bin
-"$_TARGET-strip" doas 2>/dev/null || true
-ldid -S"$_ENT" doas
+strip_sign doas
 chmod 4755 doas
 )
 

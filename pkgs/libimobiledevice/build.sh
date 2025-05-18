@@ -10,8 +10,7 @@ autoreconf -fi
 (
 cd pkg/var/usr
 rm -rf share
-"$_TARGET-strip" lib/libimobiledevice-1.0.6.dylib bin/* 2>/dev/null || true
-ldid -S"$_ENT" lib/libimobiledevice-1.0.6.dylib bin/*
+strip_sign lib/libimobiledevice-1.0.6.dylib bin/*
 )
 
 mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"

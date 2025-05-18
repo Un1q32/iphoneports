@@ -11,8 +11,7 @@ export PATH="$PATH:$PWD/tmpbin"
 (
 cd pkg/var/usr
 rm -rf share lib/libzstd.a
-"$_TARGET-strip" bin/zstd lib/libzstd.1.*.dylib 2>/dev/null || true
-ldid -S"$_ENT" bin/zstd lib/libzstd.1.*.dylib
+strip_sign bin/zstd lib/libzstd.1.*.dylib
 )
 
 mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"

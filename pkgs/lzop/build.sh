@@ -10,8 +10,7 @@ autoreconf -fi
 (
 cd pkg/var/usr
 rm -rf share
-"$_TARGET-strip" bin/lzop 2>/dev/null || true
-ldid -S"$_ENT" bin/lzop
+strip_sign bin/lzop
 )
 
 mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"

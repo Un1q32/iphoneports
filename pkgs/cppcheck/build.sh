@@ -6,8 +6,7 @@ cd src
 
 (
 cd pkg/var/usr/bin
-"$_TARGET-strip" cppcheck 2>/dev/null || true
-ldid -S"$_ENT" cppcheck
+strip_sign cppcheck
 )
 
 mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"

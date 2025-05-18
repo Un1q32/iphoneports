@@ -9,8 +9,7 @@ cd src
 (
 cd pkg/var/usr
 rm -rf share/info share/man share/doc
-"$_TARGET-strip" bin/nano 2>/dev/null || true
-ldid -S"$_ENT" bin/nano
+strip_sign bin/nano
 )
 
 mkdir -p pkg/var/usr/etc

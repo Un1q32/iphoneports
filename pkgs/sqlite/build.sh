@@ -9,8 +9,7 @@ cd src
 (
 cd pkg/var/usr
 rm -rf share
-"$_TARGET-strip" bin/sqlite3 lib/libsqlite3.0.dylib 2>/dev/null || true
-ldid -S"$_ENT" bin/sqlite3 lib/libsqlite3.0.dylib
+strip_sign bin/sqlite3 lib/libsqlite3.0.dylib
 )
 
 mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"

@@ -9,8 +9,7 @@ DESTDIR="$_PKGROOT/pkg" ninja -j"$_JOBS" apps/nc/install
 (
 cd pkg/var/usr
 rm -rf share
-"$_TARGET-strip" bin/nc 2>/dev/null || true
-ldid -S"$_ENT" bin/nc
+strip_sign bin/nc
 )
 
 mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"

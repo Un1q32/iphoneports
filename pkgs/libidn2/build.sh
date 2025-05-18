@@ -9,8 +9,7 @@ cd src
 (
 cd pkg/var/usr
 rm -rf share
-"$_TARGET-strip" bin/idn2 lib/libidn2.0.dylib 2>/dev/null || true
-ldid -S"$_ENT" bin/idn2 lib/libidn2.0.dylib
+strip_sign bin/idn2 lib/libidn2.0.dylib
 )
 
 mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"

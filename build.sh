@@ -75,9 +75,9 @@ export _ENT
 
 : > "$bsroot/.builtpkgs"
 
-ldid() {
-    [ "$_SUBSYSTEM" = "macos" ] && [ "$_CPU" != "arm64" ] && [ "$_CPU" != "arm64e" ] && return
-    command ldid "$@"
+strip_and_sign() {
+    "$_TARGET-strip" "$@" 2>/dev/null || true
+    [ "$_SUBSYSTEM" != "macos" ] || [ "$_CPU" = "arm64" ] || [ "$_CPU" = "arm64e" ] && ldid -S"$_ENT" "$@"
 }
 
 error() {

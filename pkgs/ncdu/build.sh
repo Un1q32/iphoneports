@@ -9,8 +9,7 @@ cd src
 (
 cd pkg/var/usr
 rm -rf share
-"$_TARGET-strip" bin/ncdu 2>/dev/null || true
-ldid -S"$_ENT" bin/ncdu
+strip_sign bin/ncdu
 )
 
 mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"

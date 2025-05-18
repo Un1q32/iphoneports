@@ -11,8 +11,7 @@ autoreconf -fi
 cd pkg/var/usr
 rm -rf share sbin
 for bin in distcc distccd distccmon-text lsdistcc; do
-    "$_TARGET-strip" "bin/$bin" 2>/dev/null || true
-    ldid -S"$_ENT" "bin/$bin"
+    strip_and_sign "bin/$bin"
 done
 )
 

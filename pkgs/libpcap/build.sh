@@ -9,8 +9,7 @@ DESTDIR="$_PKGROOT/pkg" ninja -j"$_JOBS" install
 (
 cd pkg/var/usr
 rm -rf share lib/libpcap.a
-"$_TARGET-strip" "$(realpath lib/libpcap.dylib)" 2>/dev/null || true
-ldid -S"$_ENT" "$(realpath lib/libpcap.dylib)"
+strip_sign "$(realpath lib/libpcap.dylib)"
 )
 
 mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"

@@ -18,8 +18,7 @@ cp libgptfdisk.dylib "$_PKGROOT/pkg/var/usr/lib"
 
 (
 cd pkg/var/usr
-"$_TARGET-strip" sbin/* lib/libgptfdisk.dylib 2>/dev/null || true
-ldid -S"$_ENT" sbin/* lib/libgptfdisk.dylib
+strip_sign sbin/* lib/libgptfdisk.dylib
 )
 
 mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"

@@ -15,8 +15,7 @@ done
 
 (
 cd pkg/var/usr/bin
-"$_TARGET-strip" gzip 2>/dev/null || true
-ldid -S"$_ENT" gzip
+strip_sign gzip
 for link in gunzip gzcat zgrep zegrep zfgrep; do
     ln -s gzip "$link"
 done

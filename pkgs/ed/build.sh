@@ -12,8 +12,7 @@ cp ed "$_PKGROOT/pkg/var/usr/bin"
 
 (
 cd pkg/var/usr/bin
-"$_TARGET-strip" ed 2>/dev/null || true
-ldid -S"$_ENT" ed
+strip_sign ed
 )
 
 mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"

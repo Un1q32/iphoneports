@@ -14,8 +14,7 @@ esac
 (
 cd pkg/var/usr
 rm -rf share
-"$_TARGET-strip" bin/patch 2>/dev/null || true
-ldid -S"$_ENT" bin/patch
+strip_sign bin/patch
 )
 
 mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"

@@ -8,8 +8,7 @@ cp compress "$_PKGROOT/pkg/var/usr/bin"
 
 (
 cd pkg/var/usr/bin
-"$_TARGET-strip" compress 2>/dev/null || true
-ldid -S"$_ENT" compress
+strip_sign compress
 ln -s compress uncompress
 ln -s compress zcat
 )

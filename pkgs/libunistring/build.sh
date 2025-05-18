@@ -10,8 +10,7 @@ autoreconf -fi
 (
 cd pkg/var/usr
 rm -rf share
-"$_TARGET-strip" lib/libunistring.5.dylib 2>/dev/null || true
-ldid -S"$_ENT" lib/libunistring.5.dylib
+strip_sign lib/libunistring.5.dylib
 )
 
 mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"

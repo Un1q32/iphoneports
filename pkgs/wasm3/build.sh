@@ -8,8 +8,7 @@ DESTDIR="$_PKGROOT/pkg" ninja -j"$_JOBS" install
 
 (
 cd pkg/var/usr/bin
-"$_TARGET-strip" wasm3 2>/dev/null || true
-ldid -S"$_ENT" wasm3
+strip_sign wasm3
 )
 
 mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"

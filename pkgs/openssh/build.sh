@@ -9,8 +9,7 @@ cd src
 (
 cd pkg/var/usr
 rm -rf share
-"$_TARGET-strip" bin/* sbin/* libexec/* 2>/dev/null || true
-ldid -S"$_ENT" bin/* sbin/* libexec/*
+strip_sign bin/* sbin/* libexec/*
 chmod 4711 libexec/ssh-keysign
 )
 

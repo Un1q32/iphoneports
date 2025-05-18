@@ -8,8 +8,7 @@ cp vm_stat "$_PKGROOT/pkg/var/usr/bin"
 
 (
 cd pkg/var/usr/bin
-"$_TARGET-strip" vm_stat 2>/dev/null || true
-ldid -S"$_ENT" vm_stat
+strip_sign vm_stat
 )
 
 mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"

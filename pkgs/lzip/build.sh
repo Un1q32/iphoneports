@@ -9,8 +9,7 @@ cd src
 (
 cd pkg/var/usr
 rm -rf share
-"$_TARGET-strip" bin/lzip 2>/dev/null || true
-ldid -S"$_ENT" bin/lzip
+strip_sign bin/lzip
 )
 
 mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"

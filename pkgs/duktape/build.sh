@@ -15,8 +15,7 @@ cp duk "$_PKGROOT/pkg/var/usr/bin"
 
 (
 cd pkg/var/usr
-"$_TARGET-strip" bin/duk lib/libduktape.207.dylib 2>/dev/null || true
-ldid -S"$_ENT" bin/duk lib/libduktape.207.dylib
+strip_sign bin/duk lib/libduktape.207.dylib
 )
 
 mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"

@@ -13,8 +13,7 @@ cd pkg/var/usr
 rm -rf share/man
 ver="$(echo bin/luajit-2.1.*)"
 ver="${ver#bin/luajit-2.1.}"
-"$_TARGET-strip" "bin/luajit-2.1.$ver" "lib/libluajit-5.1.2.1.$ver.dylib" 2>/dev/null || true
-ldid -S"$_ENT" "bin/luajit-2.1.$ver" "lib/libluajit-5.1.2.1.$ver.dylib"
+strip_sign "bin/luajit-2.1.$ver" "lib/libluajit-5.1.2.1.$ver.dylib"
 )
 
 mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"

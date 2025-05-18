@@ -9,8 +9,7 @@ cd src
 (
 cd pkg/var/usr
 rm -rf share
-"$_TARGET-strip" bin/inetcat bin/iproxy lib/libusbmuxd-2.0.7.dylib 2>/dev/null || true
-ldid -S"$_ENT" bin/inetcat bin/iproxy lib/libusbmuxd-2.0.7.dylib
+strip_sign bin/inetcat bin/iproxy lib/libusbmuxd-2.0.7.dylib
 )
 
 mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"

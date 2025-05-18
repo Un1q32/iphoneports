@@ -8,8 +8,7 @@ cp login "$_PKGROOT/pkg/var/usr/bin"
 
 (
 cd pkg/var/usr/bin
-"$_TARGET-strip" login 2>/dev/null || true
-ldid -S"$_ENT" login
+strip_sign login
 chmod 4755 login
 )
 

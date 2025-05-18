@@ -10,8 +10,7 @@ autoreconf -fi
 (
 cd pkg/var/usr
 rm -rf share
-"$_TARGET-strip" sbin/usbmuxd 2>/dev/null || true
-ldid -S"$_ENT" sbin/usbmuxd
+strip_sign sbin/usbmuxd
 )
 
 mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"

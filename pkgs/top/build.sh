@@ -8,8 +8,7 @@ cp top "$_PKGROOT/pkg/var/usr/bin"
 
 (
 cd pkg/var/usr/bin
-"$_TARGET-strip" top 2>/dev/null || true
-ldid -S"$_ENT" top
+strip_sign top
 chmod 4755 top
 )
 

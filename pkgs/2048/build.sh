@@ -8,8 +8,7 @@ cp 2048 "$_PKGROOT/pkg/var/usr/bin"
 
 (
 cd pkg/var/usr/bin
-"$_TARGET-strip" 2048 2>/dev/null || true
-ldid -S"$_ENT" 2048
+strip_sign 2048
 )
 
 mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"

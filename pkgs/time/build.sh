@@ -8,8 +8,7 @@ cp time "$_PKGROOT/pkg/var/usr/bin"
 
 (
 cd pkg/var/usr/bin
-"$_TARGET-strip" time 2>/dev/null || true
-ldid -S"$_ENT" time
+strip_sign time
 )
 
 mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"

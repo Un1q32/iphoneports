@@ -10,8 +10,7 @@ cp htop "$_PKGROOT/pkg/var/usr/bin"
 
 (
 cd pkg/var/usr/bin
-"$_TARGET-strip" htop 2>/dev/null || true
-ldid -S"$_ENT" htop
+strip_sign htop
 )
 
 mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"

@@ -10,8 +10,7 @@ ln -s . include/xar
 (
 cd pkg/var/usr
 rm -rf share
-"$_TARGET-strip" bin/xar lib/libxar.1.dylib 2>/dev/null || true
-ldid -S"$_ENT" bin/xar lib/libxar.1.dylib
+strip_sign bin/xar lib/libxar.1.dylib
 )
 
 mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"

@@ -9,8 +9,7 @@ cp pigz "$_PKGROOT/pkg/var/usr/bin"
 (
 cd pkg/var/usr/bin
 ln -s pigz unpigz
-"$_TARGET-strip" pigz 2>/dev/null || true
-ldid -S"$_ENT" pigz
+strip_sign pigz
 )
 
 mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"

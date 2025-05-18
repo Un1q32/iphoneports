@@ -9,8 +9,7 @@ cd src
 (
 cd pkg/var/usr
 rm -rf bin/zsh-5.9 share/man
-"$_TARGET-strip" bin/zsh 2>/dev/null || true
-ldid -S"$_ENT" bin/zsh
+strip_sign bin/zsh
 mkdir -p etc/zsh
 )
 

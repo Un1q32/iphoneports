@@ -9,8 +9,7 @@ grep -q kUSBDeviceSpeedSuper "$_SDK/System/Library/Frameworks/IOKit.framework/He
 
 (
 cd pkg/var/usr/lib
-"$_TARGET-strip" libusb-1.0.0.dylib 2>/dev/null || true
-ldid -S"$_ENT" libusb-1.0.0.dylib
+strip_sign libusb-1.0.0.dylib
 )
 
 ln -s libusb-1.0/libusb.h pkg/var/usr/include/libusb.h

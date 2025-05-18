@@ -10,8 +10,7 @@ autoreconf -fi
 (
 cd pkg/var/usr
 rm -rf share
-"$_TARGET-strip" lib/libpopt.0.dylib 2>/dev/null || true
-ldid -S"$_ENT" lib/libpopt.0.dylib
+strip_sign lib/libpopt.0.dylib
 )
 
 mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"

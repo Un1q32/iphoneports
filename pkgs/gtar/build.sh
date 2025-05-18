@@ -13,8 +13,7 @@ esac
 (
 cd pkg/var/usr
 rm -rf share
-"$_TARGET-strip" bin/gtar 2>/dev/null || true
-ldid -S"$_ENT" bin/gtar
+strip_sign bin/gtar
 )
 
 mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"

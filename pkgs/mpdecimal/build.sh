@@ -11,8 +11,7 @@ rm -rf share
 abi=4
 lib="$(realpath lib/libmpdec.$abi.dylib)"
 "$_TARGET-install_name_tool" -id /var/usr/lib/libmpdec.$abi.dylib "$lib"
-"$_TARGET-strip" "$lib" 2>/dev/null || true
-ldid -S"$_ENT" "$lib"
+strip_sign "$lib"
 )
 
 mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"

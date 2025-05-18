@@ -12,8 +12,7 @@ cp pax "$_PKGROOT/pkg/var/usr/bin"
 
 (
 cd pkg/var/usr/bin
-"$_TARGET-strip" pax 2>/dev/null || true
-ldid -S"$_ENT" pax
+strip_sign pax
 )
 
 mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"

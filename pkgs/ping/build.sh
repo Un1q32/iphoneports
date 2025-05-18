@@ -9,8 +9,7 @@ cp ping ping6 "$_PKGROOT/pkg/var/usr/sbin"
 
 (
 cd pkg/var/usr/sbin
-"$_TARGET-strip" ping ping6 2>/dev/null || true
-ldid -S"$_ENT" ping ping6
+strip_sign ping ping6
 )
 
 mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"

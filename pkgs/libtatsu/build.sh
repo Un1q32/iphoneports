@@ -8,8 +8,7 @@ cd src
 
 (
 cd pkg/var/usr/lib
-"$_TARGET-strip" libtatsu.0.dylib 2>/dev/null || true
-ldid -S"$_ENT" libtatsu.0.dylib
+strip_sign libtatsu.0.dylib
 )
 
 mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"

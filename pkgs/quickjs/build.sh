@@ -16,8 +16,7 @@ cp quickjs.h quickjs-libc.h "$_PKGROOT/pkg/var/usr/include/quickjs"
 
 (
 cd pkg/var/usr
-"$_TARGET-strip" bin/qjs bin/qjsc lib/quickjs/libquickjs.dylib 2>/dev/null || true
-ldid -S"$_ENT" bin/qjs bin/qjsc lib/quickjs/libquickjs.dylib
+strip_sign bin/qjs bin/qjsc lib/quickjs/libquickjs.dylib
 )
 
 mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"

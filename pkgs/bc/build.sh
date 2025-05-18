@@ -8,8 +8,7 @@ CC="$_TARGET-cc" HOSTCC=cc ./configure --prefix=/var/usr --enable-readline --dis
 
 (
 cd pkg/var/usr/bin
-"$_TARGET-strip" bc 2>/dev/null || true
-ldid -S"$_ENT" bc
+strip_sign bc
 )
 
 mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"

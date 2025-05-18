@@ -8,8 +8,7 @@ cp unrar "$_PKGROOT/pkg/var/usr/bin"
 
 (
 cd pkg/var/usr/bin
-"$_TARGET-strip" unrar 2>/dev/null || true
-ldid -S"$_ENT" unrar
+strip_sign unrar
 )
 
 mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"

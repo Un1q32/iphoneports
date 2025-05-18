@@ -8,8 +8,7 @@ cp whois "$_PKGROOT/pkg/var/usr/bin"
 
 (
 cd pkg/var/usr/bin
-"$_TARGET-strip" whois 2>/dev/null || true
-ldid -S"$_ENT" whois
+strip_sign whois
 )
 
 mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"

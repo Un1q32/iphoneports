@@ -10,8 +10,7 @@ autoreconf -fi
 (
 cd pkg/var/usr
 rm -rf share
-"$_TARGET-strip" bin/ideviceinstaller 2>/dev/null || true
-ldid -S"$_ENT" bin/ideviceinstaller
+strip_sign bin/ideviceinstaller
 )
 
 mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"

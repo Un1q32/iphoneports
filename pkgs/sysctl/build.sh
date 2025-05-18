@@ -8,8 +8,7 @@ cp sysctl "$_PKGROOT/pkg/var/usr/bin"
 
 (
 cd pkg/var/usr/bin
-"$_TARGET-strip" sysctl 2>/dev/null || true
-ldid -S"$_ENT" sysctl
+strip_sign sysctl
 )
 
 mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"

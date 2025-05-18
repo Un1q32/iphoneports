@@ -9,8 +9,7 @@ cd src
 (
 cd pkg/var/usr
 rm -rf share
-"$_TARGET-strip" bin/tcsh 2>/dev/null || true
-ldid -S"$_ENT" bin/tcsh
+strip_sign bin/tcsh
 )
 
 mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"

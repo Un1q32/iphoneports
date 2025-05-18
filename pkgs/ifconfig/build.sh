@@ -12,8 +12,7 @@ cp ifconfig "$_PKGROOT/pkg/var/usr/sbin"
 
 (
 cd pkg/var/usr/sbin
-"$_TARGET-strip" ifconfig 2>/dev/null || true
-ldid -S"$_ENT" ifconfig
+strip_sign ifconfig
 )
 
 mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"

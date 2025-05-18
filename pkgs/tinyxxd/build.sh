@@ -8,8 +8,7 @@ cp tinyxxd "$_PKGROOT"/pkg/var/usr/bin
 
 (
 cd pkg/var/usr/bin
-"$_TARGET-strip" tinyxxd 2>/dev/null || true
-ldid -S"$_ENT" tinyxxd
+strip_sign tinyxxd
 ln -s tinyxxd xxd
 )
 

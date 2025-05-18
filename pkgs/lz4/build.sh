@@ -7,8 +7,7 @@ cd src
 (
 cd pkg/var/usr
 rm -rf share
-"$_TARGET-strip" bin/lz4 lib/liblz4.1.*.dylib 2>/dev/null || true
-ldid -S"$_ENT" bin/lz4 lib/liblz4.1.*.dylib
+strip_sign bin/lz4 lib/liblz4.1.*.dylib
 )
 
 mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"

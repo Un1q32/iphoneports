@@ -63,8 +63,7 @@ DESTDIR="$_PKGROOT/pkg" ninja -j"$_JOBS" install
 
 (
 cd pkg/var/usr
-"$_TARGET-strip" bin/dav1d lib/libdav1d.7.dylib 2>/dev/null || true
-ldid -S"$_ENT" bin/dav1d lib/libdav1d.7.dylib
+strip_sign bin/dav1d lib/libdav1d.7.dylib
 )
 
 mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"

@@ -10,8 +10,7 @@ cd src
 (
 cd pkg/var/usr
 rm -rf share
-"$_TARGET-strip" bin/dash 2>/dev/null || true
-ldid -S"$_ENT" bin/dash
+strip_sign bin/dash
 ln -s dash bin/sh
 )
 

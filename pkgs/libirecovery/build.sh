@@ -8,8 +8,7 @@ cd src
 
 (
 cd pkg/var/usr
-"$_TARGET-strip" bin/irecovery lib/libirecovery-1.0.5.dylib 2>/dev/null || true
-ldid -S"$_ENT" bin/irecovery lib/libirecovery-1.0.5.dylib
+strip_sign bin/irecovery lib/libirecovery-1.0.5.dylib
 )
 
 mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"

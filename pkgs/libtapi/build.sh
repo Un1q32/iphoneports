@@ -11,8 +11,7 @@ DESTDIR="$_PKGROOT/pkg" ninja -j"$_JOBS" install-libtapi install-tapi-headers
 (
 cd pkg/var/usr/lib
 "$_TARGET-install_name_tool" -id /var/usr/lib/libtapi.dylib libtapi.dylib
-"$_TARGET-strip" libtapi.dylib 2>/dev/null || true
-ldid -S"$_ENT" libtapi.dylib
+strip_sign libtapi.dylib
 )
 
 mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"

@@ -11,8 +11,7 @@ cp vbindiff "$_PKGROOT/pkg/var/usr/bin"
 
 (
 cd pkg/var/usr/bin
-"$_TARGET-strip" vbindiff 2>/dev/null || true
-ldid -S"$_ENT" vbindiff
+strip_sign vbindiff
 )
 
 cp -r DEBIAN pkg

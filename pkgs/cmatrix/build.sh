@@ -10,8 +10,7 @@ autoreconf -fi
 (
 cd pkg/var/usr
 rm -rf share
-"$_TARGET-strip" bin/cmatrix 2>/dev/null || true
-ldid -S"$_ENT" bin/cmatrix
+strip_sign bin/cmatrix
 )
 
 mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"

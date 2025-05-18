@@ -9,8 +9,7 @@ cd src
 (
 cd pkg/var/usr
 rm -rf share
-"$_TARGET-strip" bin/* lib/libnettle.8.*.dylib lib/libhogweed.6.*.dylib 2>/dev/null || true
-ldid -S"$_ENT" bin/* lib/libnettle.8.*.dylib lib/libhogweed.6.*.dylib
+strip_sign bin/* lib/libnettle.8.*.dylib lib/libhogweed.6.*.dylib
 )
 
 mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"

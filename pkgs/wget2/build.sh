@@ -10,8 +10,7 @@ autoreconf -f
 (
 cd pkg/var/usr
 rm -rf share bin/wget2_noinstall
-"$_TARGET-strip" bin/wget2 lib/libwget.3.dylib 2>/dev/null || true
-ldid -S"$_ENT" bin/wget2 lib/libwget.3.dylib
+strip_sign bin/wget2 lib/libwget.3.dylib
 )
 
 mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"

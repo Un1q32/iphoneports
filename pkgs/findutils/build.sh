@@ -13,8 +13,7 @@ esac
 (
 cd pkg/var/usr
 rm -rf share var
-"$_TARGET-strip" bin/find bin/xargs bin/locate libexec/frcode 2>/dev/null || true
-ldid -S"$_ENT" bin/find bin/xargs bin/locate libexec/frcode
+strip_sign bin/find bin/xargs bin/locate libexec/frcode
 )
 
 mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"

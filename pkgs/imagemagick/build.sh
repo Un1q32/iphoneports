@@ -10,8 +10,7 @@ cd src
 (
 cd pkg/var/usr
 rm -rf share/doc share/man
-"$_TARGET-strip" bin/magick lib/libMagick++-7.Q16HDRI.5.dylib lib/libMagickCore-7.Q16HDRI.10.dylib lib/libMagickWand-7.Q16HDRI.10.dylib 2>/dev/null || true
-ldid -S"$_ENT" bin/magick lib/libMagick++-7.Q16HDRI.5.dylib lib/libMagickCore-7.Q16HDRI.10.dylib lib/libMagickWand-7.Q16HDRI.10.dylib
+strip_sign bin/magick lib/libMagick++-7.Q16HDRI.5.dylib lib/libMagickCore-7.Q16HDRI.10.dylib lib/libMagickWand-7.Q16HDRI.10.dylib
 )
 
 mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"

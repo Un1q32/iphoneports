@@ -9,8 +9,7 @@ cd src
 (
 cd pkg/var/usr
 rm -rf share bin
-"$_TARGET-strip" lib/libhistory.8.2.dylib lib/libreadline.8.2.dylib 2>/dev/null || true
-ldid -S"$_ENT" lib/libhistory.8.2.dylib lib/libreadline.8.2.dylib
+strip_sign lib/libhistory.8.2.dylib lib/libreadline.8.2.dylib
 )
 
 mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"
