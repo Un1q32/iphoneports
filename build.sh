@@ -67,17 +67,12 @@ if [ -z "$_JOBS" ]; then
     export _JOBS
 fi
 
-case $_DPKGARCH in
-    iphoneos-*) _ENT="$bsroot/ios-entitlements.xml" ;;
-    *) _ENT= ;;
-esac
-export _ENT
-
 : > "$bsroot/.builtpkgs"
 
 strip_and_sign() {
     "$_TARGET-strip" "$@" 2>/dev/null || true
     [ "$_SUBSYSTEM" != "macos" ] || [ "$_CPU" = "arm64" ] || [ "$_CPU" = "arm64e" ] && ldid -S"$_ENT" "$@"
+    echo $_ENT
 }
 
 error() {
@@ -174,7 +169,12 @@ fi
         ppc|powerpc) _DPKGARCH=darwin-powerpc ;;
     esac
 
-    export _MAKE _SUBSYSTEM _CPU _DPKGARCH
+    case $_DPKGARCH in
+        iphoneos-*) _ENT="$bsroot/ios-entitlements.xml" ;;
+        *) _ENT= ;;
+    esac
+
+    export _MAKE _SUBSYSTEM _CPU _DPKGARCH _ENT
 }
 
 build() {
