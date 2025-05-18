@@ -1,4 +1,5 @@
 #!/bin/sh
+# shellcheck disable=2031
 
 defaulttarget='armv6-apple-darwin10'
 
@@ -187,7 +188,10 @@ build() {
         [ -f fetch.sh ] && ./fetch.sh
         applypatches
         printf '%s\n' "Building $1"
-        ./build.sh || {
+        (
+            set -e
+            . ./build.sh
+        ) || {
             rm -rf pkg "$_SDK"
             return 2
         }
