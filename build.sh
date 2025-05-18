@@ -71,7 +71,7 @@ fi
 
 strip_and_sign() {
     "$_TARGET-strip" "$@" 2>/dev/null || true
-    [ "$_SUBSYSTEM" != "macos" ] || [ "$_CPU" = "arm64" ] || [ "$_CPU" = "arm64e" ] && ldid -S"$_ENT" "$@"
+    [ "$_SUBSYSTEM" != "macos" ] || [ "$_CPU" = "arm64" ] || [ "$_CPU" = "arm64e" ] && ldid -S"$entitlements" "$@"
 }
 
 error() {
@@ -169,11 +169,11 @@ fi
     esac
 
     case $_DPKGARCH in
-        iphoneos-*) _ENT="$bsroot/ios-entitlements.xml" ;;
-        *) _ENT= ;;
+        iphoneos-*) entitlements="$bsroot/ios-entitlements.xml" ;;
+        *) entitlements= ;;
     esac
 
-    export _MAKE _SUBSYSTEM _CPU _DPKGARCH _ENT
+    export _MAKE _SUBSYSTEM _CPU _DPKGARCH
 }
 
 build() {
