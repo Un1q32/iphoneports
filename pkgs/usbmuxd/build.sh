@@ -10,7 +10,7 @@ autoreconf -fi
 (
 cd pkg/var/usr
 rm -rf share
-strip_sign sbin/usbmuxd
+strip_and_sign sbin/usbmuxd
 )
 
 mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"

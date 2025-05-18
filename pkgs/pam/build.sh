@@ -15,7 +15,7 @@ rm -rf usr
 ln -s pam var/usr/include/security
 cd var/usr/lib
 mv libpam.1.0.dylib libpam.1.dylib
-strip_sign libpam.1.dylib security/*.so
+strip_and_sign libpam.1.dylib security/*.so
 )
 
 (
@@ -23,7 +23,7 @@ cd src/modules
 for module in launchd unix uwtmp; do
     "$_TARGET-cc" -bundle -o "pam_${module}.so" "pam_${module}"/*.c -I"$_PKGROOT/pkg/var/usr/include" "$_PKGROOT/pkg/var/usr/lib/libpam.dylib" -w
 done
-strip_sign ./*.so
+strip_and_sign ./*.so
 cp ./*.so "$_PKGROOT/pkg/var/usr/lib/security"
 )
 

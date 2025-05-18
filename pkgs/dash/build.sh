@@ -10,7 +10,7 @@ cd src
 (
 cd pkg/var/usr
 rm -rf share
-strip_sign bin/dash
+strip_and_sign bin/dash
 ln -s dash bin/sh
 )
 

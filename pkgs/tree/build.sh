@@ -7,7 +7,7 @@ cd src
 (
 cd pkg/var/usr
 rm -rf man
-strip_sign bin/tree
+strip_and_sign bin/tree
 )
 
 mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"

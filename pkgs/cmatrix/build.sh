@@ -10,7 +10,7 @@ autoreconf -fi
 (
 cd pkg/var/usr
 rm -rf share
-strip_sign bin/cmatrix
+strip_and_sign bin/cmatrix
 )
 
 mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"

@@ -9,7 +9,7 @@ cd src
 (
 cd pkg/var/usr
 rm -rf share
-strip_sign lib/libsodium.26.dylib
+strip_and_sign lib/libsodium.26.dylib
 )
 
 mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"

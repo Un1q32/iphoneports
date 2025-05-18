@@ -8,7 +8,7 @@ cd src
 
 (
 cd pkg/var/usr
-strip_sign bin/irecovery lib/libirecovery-1.0.5.dylib
+strip_and_sign bin/irecovery lib/libirecovery-1.0.5.dylib
 )
 
 mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"

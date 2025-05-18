@@ -9,7 +9,7 @@ cd src
 (
 cd pkg/var/usr
 rm -rf share/info share/man bin/gawk-* bin/gawkbug
-strip_sign bin/gawk lib/gawk/* libexec/awk/*
+strip_and_sign bin/gawk lib/gawk/* libexec/awk/*
 )
 
 mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"

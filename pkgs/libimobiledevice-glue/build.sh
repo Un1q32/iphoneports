@@ -8,7 +8,7 @@ cd src
 
 (
 cd pkg/var/usr
-strip_sign lib/libimobiledevice-glue-1.0.0.dylib
+strip_and_sign lib/libimobiledevice-glue-1.0.0.dylib
 )
 
 mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"

@@ -11,7 +11,7 @@ cd pkg/var/usr
 rm -rf share
 mv lib/libjpeg.62.*.dylib lib/libjpeg.62.dylib
 mv lib/libturbojpeg.0.*.dylib lib/libturbojpeg.0.dylib
-strip_sign lib/libjpeg.62.dylib lib/libturbojpeg.0.dylib bin/*
+strip_and_sign lib/libjpeg.62.dylib lib/libturbojpeg.0.dylib bin/*
 )
 
 mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"

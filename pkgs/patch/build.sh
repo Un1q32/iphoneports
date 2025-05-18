@@ -14,7 +14,7 @@ esac
 (
 cd pkg/var/usr
 rm -rf share
-strip_sign bin/patch
+strip_and_sign bin/patch
 )
 
 mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"

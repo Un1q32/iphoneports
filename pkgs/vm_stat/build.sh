@@ -8,7 +8,7 @@ cp vm_stat "$_PKGROOT/pkg/var/usr/bin"
 
 (
 cd pkg/var/usr/bin
-strip_sign vm_stat
+strip_and_sign vm_stat
 )
 
 mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"

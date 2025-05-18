@@ -8,7 +8,7 @@ cd src
 (
 cd pkg/var/usr
 rm -rf bin/xxd share/applications share/icons share/man
-strip_sign bin/vim
+strip_and_sign bin/vim
 )
 
 mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"

@@ -10,7 +10,7 @@ autoreconf -f
 (
 cd pkg/var/usr
 rm -rf share bin/wget2_noinstall
-strip_sign bin/wget2 lib/libwget.3.dylib
+strip_and_sign bin/wget2 lib/libwget.3.dylib
 )
 
 mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"

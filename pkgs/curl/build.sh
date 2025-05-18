@@ -9,7 +9,7 @@ cd src
 (
 cd pkg/var/usr
 rm -rf share/man
-strip_sign bin/curl lib/libcurl.4.dylib
+strip_and_sign bin/curl lib/libcurl.4.dylib
 )
 
 mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"

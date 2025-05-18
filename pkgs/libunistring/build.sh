@@ -10,7 +10,7 @@ autoreconf -fi
 (
 cd pkg/var/usr
 rm -rf share
-strip_sign lib/libunistring.5.dylib
+strip_and_sign lib/libunistring.5.dylib
 )
 
 mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"

@@ -8,7 +8,7 @@ cp vi "$_PKGROOT/pkg/var/usr/bin"
 
 (
 cd pkg/var/usr/bin
-strip_sign vi
+strip_and_sign vi
 )
 
 mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"

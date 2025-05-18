@@ -9,7 +9,7 @@ cp boxes-config "$_PKGROOT/pkg/var/usr/etc"
 
 (
 cd pkg/var/usr/bin
-strip_sign boxes
+strip_and_sign boxes
 )
 
 mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"

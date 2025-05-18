@@ -8,7 +8,7 @@ cp login "$_PKGROOT/pkg/var/usr/bin"
 
 (
 cd pkg/var/usr/bin
-strip_sign login
+strip_and_sign login
 chmod 4755 login
 )
 

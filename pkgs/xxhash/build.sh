@@ -7,7 +7,7 @@ cd src
 (
 cd pkg/var/usr
 rm -rf share lib/libxxhash.a
-strip_sign bin/xxhsum lib/libxxhash.0.*.dylib
+strip_and_sign bin/xxhsum lib/libxxhash.0.*.dylib
 )
 
 mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"

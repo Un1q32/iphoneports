@@ -7,7 +7,7 @@ cd src
 (
 cd pkg/var/usr
 rm -rf man
-strip_sign bin/bzip2 bin/bzip2recover lib/libbz2.1.0.dylib
+strip_and_sign bin/bzip2 bin/bzip2recover lib/libbz2.1.0.dylib
 )
 
 mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"

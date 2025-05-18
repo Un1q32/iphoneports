@@ -12,7 +12,7 @@ cp ifconfig "$_PKGROOT/pkg/var/usr/sbin"
 
 (
 cd pkg/var/usr/sbin
-strip_sign ifconfig
+strip_and_sign ifconfig
 )
 
 mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"

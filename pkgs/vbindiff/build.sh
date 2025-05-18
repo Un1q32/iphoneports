@@ -11,7 +11,7 @@ cp vbindiff "$_PKGROOT/pkg/var/usr/bin"
 
 (
 cd pkg/var/usr/bin
-strip_sign vbindiff
+strip_and_sign vbindiff
 )
 
 cp -r DEBIAN pkg

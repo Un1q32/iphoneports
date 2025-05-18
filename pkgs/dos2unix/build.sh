@@ -7,7 +7,7 @@ cd src
 (
 cd pkg/var/usr
 rm -rf share
-strip_sign bin/dos2unix bin/unix2dos
+strip_and_sign bin/dos2unix bin/unix2dos
 )
 
 mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"

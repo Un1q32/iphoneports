@@ -14,7 +14,7 @@ esac
 (
 cd pkg/var/usr
 rm -rf share
-strip_sign lib/libgmp.10.dylib
+strip_and_sign lib/libgmp.10.dylib
 )
 
 mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"

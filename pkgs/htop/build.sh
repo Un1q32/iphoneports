@@ -10,7 +10,7 @@ cp htop "$_PKGROOT/pkg/var/usr/bin"
 
 (
 cd pkg/var/usr/bin
-strip_sign htop
+strip_and_sign htop
 )
 
 mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"

@@ -9,7 +9,7 @@ cd src
 (
 cd pkg/var/usr
 rm -rf share/info share/man share/doc
-strip_sign bin/nano
+strip_and_sign bin/nano
 )
 
 mkdir -p pkg/var/usr/etc

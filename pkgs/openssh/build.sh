@@ -9,7 +9,7 @@ cd src
 (
 cd pkg/var/usr
 rm -rf share
-strip_sign bin/* sbin/* libexec/*
+strip_and_sign bin/* sbin/* libexec/*
 chmod 4711 libexec/ssh-keysign
 )
 

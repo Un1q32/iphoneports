@@ -13,7 +13,7 @@ cryptoabi=56
 sslabi=59
 mv lib/libcrypto.$cryptoabi.*.dylib lib/libcrypto.$cryptoabi.dylib
 mv lib/libssl.$sslabi.*.dylib lib/libssl.$sslabi.dylib
-strip_sign bin/openssl lib/libcrypto.$cryptoabi.dylib lib/libssl.$sslabi.dylib
+strip_and_sign bin/openssl lib/libcrypto.$cryptoabi.dylib lib/libssl.$sslabi.dylib
 )
 
 mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"

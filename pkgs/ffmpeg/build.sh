@@ -10,7 +10,7 @@ export PKG_CONFIG_LIBDIR="$_SDK/var/usr/lib/pkgconfig"
 (
 cd pkg/var/usr
 rm -rf share
-strip_sign bin/ffmpeg bin/ffprobe
+strip_and_sign bin/ffmpeg bin/ffprobe
 for lib in lib/*.dylib; do
     if ! [ -h "$lib" ]; then
         strip_and_sign "$lib"

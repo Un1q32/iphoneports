@@ -8,7 +8,7 @@ cp pstree "$_PKGROOT/pkg/var/usr/bin"
 
 (
 cd pkg/var/usr/bin
-strip_sign pstree
+strip_and_sign pstree
 )
 
 mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"

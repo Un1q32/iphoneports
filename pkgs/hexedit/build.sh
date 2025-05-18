@@ -10,7 +10,7 @@ cd src
 (
 cd pkg/var/usr
 rm -rf share
-strip_sign bin/hexedit
+strip_and_sign bin/hexedit
 )
 
 mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"

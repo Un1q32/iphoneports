@@ -9,7 +9,7 @@ cd src
 (
 cd pkg/var/usr
 rm -rf share
-strip_sign bin/m4
+strip_and_sign bin/m4
 )
 
 mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"

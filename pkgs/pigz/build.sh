@@ -9,7 +9,7 @@ cp pigz "$_PKGROOT/pkg/var/usr/bin"
 (
 cd pkg/var/usr/bin
 ln -s pigz unpigz
-strip_sign pigz
+strip_and_sign pigz
 )
 
 mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"

@@ -11,7 +11,7 @@ export PATH="$PATH:$PWD/tmpbin"
 (
 cd pkg/var/usr
 rm -rf share lib/libzstd.a
-strip_sign bin/zstd lib/libzstd.1.*.dylib
+strip_and_sign bin/zstd lib/libzstd.1.*.dylib
 )
 
 mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"

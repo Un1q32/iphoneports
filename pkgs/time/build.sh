@@ -8,7 +8,7 @@ cp time "$_PKGROOT/pkg/var/usr/bin"
 
 (
 cd pkg/var/usr/bin
-strip_sign time
+strip_and_sign time
 )
 
 mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"

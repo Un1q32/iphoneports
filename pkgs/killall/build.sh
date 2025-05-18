@@ -8,7 +8,7 @@ cp killall "$_PKGROOT/pkg/var/usr/bin"
 
 (
 cd pkg/var/usr/bin
-strip_sign killall
+strip_and_sign killall
 )
 
 mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"

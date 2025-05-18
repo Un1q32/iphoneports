@@ -8,7 +8,7 @@ cd src
 (
 cd pkg/var/usr
 rm -rf man
-strip_sign bin/lua bin/luac "$(realpath lib/liblua.dylib)"
+strip_and_sign bin/lua bin/luac "$(realpath lib/liblua.dylib)"
 )
 
 mkdir -p pkg/var/usr/lib/pkgconfig

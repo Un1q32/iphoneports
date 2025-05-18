@@ -12,7 +12,7 @@ cp doasedit "$_PKGROOT/pkg/var/usr/bin"
 
 (
 cd pkg/var/usr/bin
-strip_sign doas
+strip_and_sign doas
 chmod 4755 doas
 )
 

@@ -9,7 +9,7 @@ cp ping ping6 "$_PKGROOT/pkg/var/usr/sbin"
 
 (
 cd pkg/var/usr/sbin
-strip_sign ping ping6
+strip_and_sign ping ping6
 )
 
 mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"

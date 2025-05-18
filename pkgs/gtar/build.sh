@@ -13,7 +13,7 @@ esac
 (
 cd pkg/var/usr
 rm -rf share
-strip_sign bin/gtar
+strip_and_sign bin/gtar
 )
 
 mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"

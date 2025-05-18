@@ -9,7 +9,7 @@ cd src
 (
 cd pkg/var/usr
 rm -rf share
-strip_sign lib/libmpfr.6.dylib
+strip_and_sign lib/libmpfr.6.dylib
 )
 
 mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"

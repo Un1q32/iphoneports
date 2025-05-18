@@ -14,7 +14,7 @@ for script in bin/*; do
     sed -i -e 's|^#!/usr/bin/env sh$|#!/var/usr/bin/sh|' "$script"
 done
 sed -i -e 's|^#!/bin/sh$|#!/var/usr/bin/sh|' bin/bunzip3
-strip_sign bin/bzip3 lib/libbzip3.1.dylib
+strip_and_sign bin/bzip3 lib/libbzip3.1.dylib
 )
 
 mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"

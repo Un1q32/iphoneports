@@ -10,7 +10,7 @@ cd src
 (
 cd pkg/var/usr
 rm -rf share
-strip_sign bin/* lib/libpkgconf.*.dylib
+strip_and_sign bin/* lib/libpkgconf.*.dylib
 ln -s pkgconf bin/pkg-config
 )
 

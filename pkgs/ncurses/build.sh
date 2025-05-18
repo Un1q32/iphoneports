@@ -9,7 +9,7 @@ unset TERMINFO
 
 (
 cd pkg/var/usr
-strip_sign bin/tabs bin/tput bin/tic bin/tset bin/toe bin/clear bin/infocmp lib/libncursesw.6.dylib lib/libncurses++w.6.dylib lib/libformw.6.dylib lib/libmenuw.6.dylib lib/libpanelw.6.dylib
+strip_and_sign bin/tabs bin/tput bin/tic bin/tset bin/toe bin/clear bin/infocmp lib/libncursesw.6.dylib lib/libncurses++w.6.dylib lib/libformw.6.dylib lib/libmenuw.6.dylib lib/libpanelw.6.dylib
 ln -s libncursesw.dylib lib/libtinfow.dylib
 for lib in ncurses ncurses++ form menu panel tinfo; do
     ln -s "lib${lib}w.dylib" "lib/lib${lib}.dylib"

@@ -9,7 +9,7 @@ cd src
 (
 cd pkg/var/usr
 rm -rf share bin/psl-make-dafsa
-strip_sign bin/psl lib/libpsl.5.dylib
+strip_and_sign bin/psl lib/libpsl.5.dylib
 )
 
 mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"

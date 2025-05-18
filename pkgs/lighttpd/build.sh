@@ -10,7 +10,7 @@ cd src
 (
 cd pkg/var/usr
 rm -rf share
-strip_sign sbin/lighttpd sbin/lighttpd-angel lib/liblightcomp.dylib lib/*.so
+strip_and_sign sbin/lighttpd sbin/lighttpd-angel lib/liblightcomp.dylib lib/*.so
 )
 
 mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"

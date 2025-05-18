@@ -8,7 +8,7 @@ cp su "$_PKGROOT/pkg/var/usr/bin"
 
 (
 cd pkg/var/usr/bin
-strip_sign su
+strip_and_sign su
 chmod 4755 su
 )
 

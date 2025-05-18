@@ -8,7 +8,7 @@ cp sysctl "$_PKGROOT/pkg/var/usr/bin"
 
 (
 cd pkg/var/usr/bin
-strip_sign sysctl
+strip_and_sign sysctl
 )
 
 mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"

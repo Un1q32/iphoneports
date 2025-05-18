@@ -8,7 +8,7 @@ cp hostname "$_PKGROOT/pkg/var/usr/bin"
 
 (
 cd pkg/var/usr/bin
-strip_sign hostname
+strip_and_sign hostname
 )
 
 mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"

@@ -8,7 +8,7 @@ cp tinyxxd "$_PKGROOT"/pkg/var/usr/bin
 
 (
 cd pkg/var/usr/bin
-strip_sign tinyxxd
+strip_and_sign tinyxxd
 ln -s tinyxxd xxd
 )
 

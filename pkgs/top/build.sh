@@ -8,7 +8,7 @@ cp top "$_PKGROOT/pkg/var/usr/bin"
 
 (
 cd pkg/var/usr/bin
-strip_sign top
+strip_and_sign top
 chmod 4755 top
 )
 

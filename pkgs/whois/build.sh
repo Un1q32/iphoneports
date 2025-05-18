@@ -8,7 +8,7 @@ cp whois "$_PKGROOT/pkg/var/usr/bin"
 
 (
 cd pkg/var/usr/bin
-strip_sign whois
+strip_and_sign whois
 )
 
 mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"

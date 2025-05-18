@@ -15,7 +15,7 @@ export PATH="$_PKGROOT/src/native/bin:$PATH"
 (
 cd pkg/var/usr
 rm -rf share/man
-strip_sign bin/file lib/libmagic.1.dylib
+strip_and_sign bin/file lib/libmagic.1.dylib
 )
 
 mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"

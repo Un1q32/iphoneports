@@ -9,7 +9,7 @@ cd src
 (
 cd pkg/var/usr
 rm -rf share/doc share/man
-strip_sign bin/rogue
+strip_and_sign bin/rogue
 chmod 2755 bin/rogue
 )
 

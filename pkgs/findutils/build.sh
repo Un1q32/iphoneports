@@ -13,7 +13,7 @@ esac
 (
 cd pkg/var/usr
 rm -rf share var
-strip_sign bin/find bin/xargs bin/locate libexec/frcode
+strip_and_sign bin/find bin/xargs bin/locate libexec/frcode
 )
 
 mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"

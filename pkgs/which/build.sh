@@ -8,7 +8,7 @@ cp which "$_PKGROOT/pkg/var/usr/bin"
 
 (
 cd pkg/var/usr/bin
-strip_sign which
+strip_and_sign which
 )
 
 mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"

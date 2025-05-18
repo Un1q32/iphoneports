@@ -12,7 +12,7 @@ cp ed "$_PKGROOT/pkg/var/usr/bin"
 
 (
 cd pkg/var/usr/bin
-strip_sign ed
+strip_and_sign ed
 )
 
 mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"

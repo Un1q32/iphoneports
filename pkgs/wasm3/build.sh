@@ -8,7 +8,7 @@ DESTDIR="$_PKGROOT/pkg" ninja -j"$_JOBS" install
 
 (
 cd pkg/var/usr/bin
-strip_sign wasm3
+strip_and_sign wasm3
 )
 
 mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"

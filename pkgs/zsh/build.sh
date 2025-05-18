@@ -9,7 +9,7 @@ cd src
 (
 cd pkg/var/usr
 rm -rf bin/zsh-5.9 share/man
-strip_sign bin/zsh
+strip_and_sign bin/zsh
 mkdir -p etc/zsh
 )
 

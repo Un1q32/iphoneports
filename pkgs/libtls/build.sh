@@ -13,7 +13,7 @@ cd pkg/var/usr
 rm -rf include/openssl
 tlsabi=32
 mv lib/libtls.$tlsabi.*.dylib lib/libtls.$tlsabi.dylib
-strip_sign lib/libtls.$tlsabi.dylib
+strip_and_sign lib/libtls.$tlsabi.dylib
 )
 
 mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"

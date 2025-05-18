@@ -15,7 +15,7 @@ rm include/foreign/machine/_structs.h
 (
 cd pkg/var/usr
 rm -rf share
-strip_sign bin/*
+strip_and_sign bin/*
 )
 
 mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"

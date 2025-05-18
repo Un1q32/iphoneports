@@ -8,7 +8,7 @@ DESTDIR="$_PKGROOT/pkg" ninja -j"$_JOBS" install
 
 (
 cd pkg/var/usr
-strip_sign bin/ccache
+strip_and_sign bin/ccache
 mkdir -p share/ccache etc/profile.d
 cp "$_PKGROOT/files/ccache.sh" etc/profile.d
 for cc in cc c++ gcc g++ clang clang++; do

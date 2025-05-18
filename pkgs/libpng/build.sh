@@ -9,7 +9,7 @@ cd src
 (
 cd pkg/var/usr
 rm -rf share
-strip_sign bin/pngfix bin/png-fix-itxt lib/libpng16.16.dylib
+strip_and_sign bin/pngfix bin/png-fix-itxt lib/libpng16.16.dylib
 )
 
 mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"

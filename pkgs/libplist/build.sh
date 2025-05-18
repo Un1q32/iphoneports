@@ -10,7 +10,7 @@ cd src
 (
 cd pkg/var/usr
 rm -rf share
-strip_sign bin/plistutil lib/libplist-2.0.4.dylib lib/libplist++-2.0.4.dylib
+strip_and_sign bin/plistutil lib/libplist-2.0.4.dylib lib/libplist++-2.0.4.dylib
 )
 
 mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"

@@ -10,7 +10,7 @@ autoreconf -fi
 (
 cd pkg/var/usr
 rm -rf share
-strip_sign bin/ideviceinstaller
+strip_and_sign bin/ideviceinstaller
 )
 
 mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"

@@ -12,7 +12,7 @@ cp ncal "$_PKGROOT/pkg/var/usr/bin"
 
 (
 cd pkg/var/usr/bin
-strip_sign ncal
+strip_and_sign ncal
 ln -s ncal cal
 )
 

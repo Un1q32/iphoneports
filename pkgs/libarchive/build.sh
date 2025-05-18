@@ -9,7 +9,7 @@ cd src
 (
 cd pkg/var/usr/bin
 rm -rf ../share
-strip_sign bsdcat bsdcpio bsdtar bsdunzip ../lib/libarchive.13.dylib
+strip_and_sign bsdcat bsdcpio bsdtar bsdunzip ../lib/libarchive.13.dylib
 for prog in tar cpio unzip; do
     ln -s "bsd$prog" "$prog"
 done

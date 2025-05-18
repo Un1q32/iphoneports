@@ -8,7 +8,7 @@ cp sw_vers "$_PKGROOT/pkg/var/usr/bin"
 
 (
 cd pkg/var/usr/bin
-strip_sign sw_vers
+strip_and_sign sw_vers
 )
 
 mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"

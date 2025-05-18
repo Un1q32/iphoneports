@@ -10,7 +10,7 @@ DESTDIR="$_PKGROOT/pkg" ninja -j"$_JOBS" install
 cd pkg/var/usr
 rm -rf share
 mv lib/libnghttp3.9.*.dylib lib/libnghttp3.9.dylib
-strip_sign lib/libnghttp3.9.dylib
+strip_and_sign lib/libnghttp3.9.dylib
 )
 
 mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"

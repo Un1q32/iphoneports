@@ -9,7 +9,7 @@ cd src
 (
 cd pkg/var/usr
 rm -rf share
-strip_sign bin/inetcat bin/iproxy lib/libusbmuxd-2.0.7.dylib
+strip_and_sign bin/inetcat bin/iproxy lib/libusbmuxd-2.0.7.dylib
 )
 
 mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"

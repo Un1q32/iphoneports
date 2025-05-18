@@ -10,7 +10,7 @@ autoreconf -fi
 (
 cd pkg/var/usr
 rm -rf share
-strip_sign bin/lzop
+strip_and_sign bin/lzop
 )
 
 mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"

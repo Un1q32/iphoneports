@@ -13,7 +13,7 @@ esac
 (
 cd pkg/var/usr
 rm -rf share
-strip_sign bin/coreutils libexec/coreutils/libstdbuf.so
+strip_and_sign bin/coreutils libexec/coreutils/libstdbuf.so
 )
 
 mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"

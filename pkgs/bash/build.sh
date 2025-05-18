@@ -9,7 +9,7 @@ cp bash "$_PKGROOT/pkg/var/usr/bin"
 
 (
 cd pkg/var/usr
-strip_sign bin/bash
+strip_and_sign bin/bash
 mkdir -p etc/bash/bashrc.d
 )
 

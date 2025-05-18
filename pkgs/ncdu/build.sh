@@ -9,7 +9,7 @@ cd src
 (
 cd pkg/var/usr
 rm -rf share
-strip_sign bin/ncdu
+strip_and_sign bin/ncdu
 )
 
 mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"

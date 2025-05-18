@@ -10,7 +10,7 @@ ln -s . include/xar
 (
 cd pkg/var/usr
 rm -rf share
-strip_sign bin/xar lib/libxar.1.dylib
+strip_and_sign bin/xar lib/libxar.1.dylib
 )
 
 mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"
