@@ -1,7 +1,7 @@
 #!/bin/sh -e
 
 mkdir -p "$_PKGROOT/src/iphoneports-fakebin"
-printf '#!/bin/sh\necho 10.5.0\n' > "$_PKGROOT/src/iphoneports-fakebin/sw_vers"
+printf '#!/bin/sh\necho %s\n' "$_MACVER" > "$_PKGROOT/src/iphoneports-fakebin/sw_vers"
 chmod +x "$_PKGROOT/src/iphoneports-fakebin/sw_vers"
 export PATH="$_PKGROOT/src/iphoneports-fakebin:$PATH"
 

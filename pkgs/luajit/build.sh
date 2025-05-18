@@ -4,7 +4,7 @@ cd src
 hostcc="$(command -v "$_TARGET-sdkpath")"
 hostcc="${hostcc%/*}/../share/iphoneports/bin/clang"
 "$_TARGET-cc" -dM -E - < /dev/null | grep -q __LP64__ && arg=-m64
-"$_MAKE" amalg TARGET_SYS=Darwin HOST_CC="$hostcc ${arg:--m32}" CROSS="$_TARGET-" BUILDMODE=dynamic CCOPT=-O3 PREFIX=/var/usr DESTDIR="$_PKGROOT/pkg" TARGET_CFLAGS="-DLUAJIT_ENABLE_JIT" MACOSX_DEPLOYMENT_TARGET=10.5 -j"$_JOBS"
+"$_MAKE" amalg TARGET_SYS=Darwin HOST_CC="$hostcc ${arg:--m32}" CROSS="$_TARGET-" BUILDMODE=dynamic CCOPT=-O3 PREFIX=/var/usr DESTDIR="$_PKGROOT/pkg" TARGET_CFLAGS="-DLUAJIT_ENABLE_JIT" MACOSX_DEPLOYMENT_TARGET="$_MACVER" -j"$_JOBS"
 "$_MAKE" install PREFIX=/var/usr DESTDIR="$_PKGROOT/pkg" TARGET_SYS=Darwin
 )
 

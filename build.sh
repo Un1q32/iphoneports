@@ -131,6 +131,7 @@ depcheck() {
 
     sdk="$("$_TARGET-sdkpath")"
 
+    osver=
     eval "$(printf '%s' '\
 if [ TARGET_OS_IOS = 1 ]; then
     _SUBSYSTEM=ios
@@ -144,7 +145,74 @@ else
     echo "UNSUPPORTED PLATFORM"
     exit 1
 fi
+osver=__ENVIRONMENT_OS_VERSION_MIN_REQUIRED__
 ' | "$_TARGET-cc" -E -xc -)"
+
+    case $_SUBSYSTEM in
+        (ios|tvos)
+            case $osver in
+                ([12]????|30[01]??) _MACVER='10.5'  ;;
+                (3????|40[012]??)   _MACVER='10.6'  ;;
+                ([45]????)          _MACVER='10.7'  ;;
+                (6????)             _MACVER='10.9'  ;;
+                ([78]????)          _MACVER='10.10' ;;
+                (9????)             _MACVER='10.11' ;;
+                (10????)            _MACVER='10.12' ;;
+                (11????)            _MACVER='10.13' ;;
+                (12????)            _MACVER='10.14' ;;
+                (13????)            _MACVER='10.15' ;;
+                (14????)            _MACVER='11.0'  ;;
+                (15????)            _MACVER='12.0'  ;;
+                (16????)            _MACVER='13.0'  ;;
+                (17????)            _MACVER='14.0'  ;;
+                (18????)            _MACVER='15.0'  ;;
+                (19????)            _MACVER='16.0'  ;;
+                (20????)            _MACVER='17.0'  ;;
+            esac
+        ;;
+
+        (macos)
+            case $osver in
+                (104?)   _MACVER='10.4'  ;;
+                (105?)   _MACVER='10.5'  ;;
+                (106?)   _MACVER='10.6'  ;;
+                (107?)   _MACVER='10.7'  ;;
+                (108?)   _MACVER='10.8'  ;;
+                (109?)   _MACVER='10.9'  ;;
+                (1010??) _MACVER='10.10' ;;
+                (1011??) _MACVER='10.11' ;;
+                (1012??) _MACVER='10.12' ;;
+                (1013??) _MACVER='10.13' ;;
+                (1014??) _MACVER='10.14' ;;
+                (1015??) _MACVER='10.15' ;;
+                (11????) _MACVER='11.0'  ;;
+                (12????) _MACVER='12.0'  ;;
+                (13????) _MACVER='13.0'  ;;
+                (14????) _MACVER='14.0'  ;;
+                (15????) _MACVER='15.0'  ;;
+                (16????) _MACVER='16.0'  ;;
+                (17????) _MACVER='17.0'  ;;
+            esac
+        ;;
+
+        (watchos)
+            case $osver in
+                (2????)  _MACVER='10.11' ;;
+                (3????)  _MACVER='10.12' ;;
+                (4????)  _MACVER='10.13' ;;
+                (5????)  _MACVER='10.14' ;;
+                (6????)  _MACVER='10.15' ;;
+                (7????)  _MACVER='11.0'  ;;
+                (8????)  _MACVER='12.0'  ;;
+                (9????)  _MACVER='13.0'  ;;
+                (10????) _MACVER='14.0'  ;;
+                (11????) _MACVER='15.0'  ;;
+                (12????) _MACVER='16.0'  ;;
+                (13????) _MACVER='17.0'  ;;
+            esac
+        ;;
+    esac
+
     _CPU="${_TARGET%%-*}"
 
     case $_CPU in

@@ -2,7 +2,7 @@
 
 case $1 in
     *-productVersion)
-        echo 10.5
+        echo "$_IPHONEPORTS_MACVER"
     ;;
 
     *)
