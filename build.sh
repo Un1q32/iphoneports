@@ -75,6 +75,11 @@ export _ENT
 
 : > "$bsroot/.builtpkgs"
 
+ldid() {
+    [ "$_SUBSYSTEM" = "macos" ] && [ "$_CPU" != "arm64" ] && [ "$_CPU" != "arm64e" ] && return
+    command ldid "$@"
+}
+
 error() {
     printf '\033[1;31mError:\033[0m %s\n' "$1"
     rm -f "$bsroot/pkglock"

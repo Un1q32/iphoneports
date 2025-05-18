@@ -14,9 +14,9 @@ cp ps "$_PKGROOT/pkg/var/usr/bin"
 cd pkg/var/usr/bin
 "$_TARGET-strip" ps 2>/dev/null || true
 if [ "$_SUBSYSTEM" = "macos" ]; then
-    ldid -S"$_PKGROOT/files/macos-entitlements.xml" ps
+    command ldid -S"$_PKGROOT/files/macos-entitlements.xml" ps
 else
-    ldid -S"$_PKGROOT/files/ios-entitlements.xml" ps
+    command ldid -S"$_PKGROOT/files/ios-entitlements.xml" ps
 fi
 chmod 4755 ps
 )
