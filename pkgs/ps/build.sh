@@ -13,10 +13,11 @@ cp ps "$_PKGROOT/pkg/var/usr/bin"
 (
 cd pkg/var/usr/bin
 if [ "$_SUBSYSTEM" = "macos" ]; then
-    ldid -S"$_PKGROOT/files/macos-entitlements.xml" ps
+    _ENTITLEMENTS="$_PKGROOT/files/macos-entitlements.xml"
 else
-    ldid -S"$_PKGROOT/files/ios-entitlements.xml" ps
+    _ENTITLEMENTS="$_PKGROOT/files/ios-entitlements.xml"
 fi
+strip_and_sign ps
 chmod 4755 ps
 )
 
