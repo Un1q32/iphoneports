@@ -1,4 +1,5 @@
-#!/bin/sh -e
+#!/bin/sh
+set -e
 (
 cd src
 export PKG_CONFIG_LIBDIR="$_SDK/var/usr/lib/pkgconfig"

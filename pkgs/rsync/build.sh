@@ -1,4 +1,5 @@
-#!/bin/sh -e
+#!/bin/sh
+set -e
 (
 cd src
 ./configure --host="$_TARGET" --prefix=/var/usr --disable-md2man --with-included-zlib=no

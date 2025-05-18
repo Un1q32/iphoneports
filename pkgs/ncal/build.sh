@@ -1,4 +1,5 @@
-#!/bin/sh -e
+#!/bin/sh
+set -e
 (
 cd src
 for src in ncal.c calendar.c easter.c; do

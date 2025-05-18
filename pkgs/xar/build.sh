@@ -1,4 +1,5 @@
-#!/bin/sh -e
+#!/bin/sh
+set -e
 (
 cd src/xar
 ln -s . include/xar

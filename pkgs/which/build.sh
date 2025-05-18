@@ -1,4 +1,5 @@
-#!/bin/sh -e
+#!/bin/sh
+set -e
 (
 cd src
 "$_TARGET-cc" -Os -flto which.c -o which -D'__FBSDID(x)='

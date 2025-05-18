@@ -1,4 +1,5 @@
-#!/bin/sh -e
+#!/bin/sh
+set -e
 (
 cd src
 ./configure --host="$_TARGET" --prefix=/var/usr --enable-etcdir=/var/usr/etc/zsh --enable-zshenv=/var/usr/etc/zsh/zshenv --enable-zlogin=/var/usr/etc/zsh/zlogin --enable-zlogout=/var/usr/etc/zsh/zlogout --enable-zprofile=/var/usr/etc/zsh/zprofile --enable-zshrc=/var/usr/etc/zsh/zshrc --enable-zsh-secure-free --enable-multibyte --enable-pcre PCRECONF=true LIBS="-lpcre"

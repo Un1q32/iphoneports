@@ -1,4 +1,5 @@
-#!/bin/sh -e
+#!/bin/sh
+set -e
 (
 cd src
 ./configure --host="$_TARGET" --prefix=/var/usr --with-libpcre2 --with-curl --with-openssl --with-zlib CURL_CONFIG="$_SDK/var/usr/bin/curl-config" ac_cv_snprintf_returns_bogus=y ac_cv_iconv_omits_bom=y ac_cv_fread_reads_directories=y

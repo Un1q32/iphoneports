@@ -1,4 +1,5 @@
-#!/bin/sh -e
+#!/bin/sh
+set -e
 (
 cd src
 mkdir -p "$_PKGROOT/pkg/var/usr/bin"

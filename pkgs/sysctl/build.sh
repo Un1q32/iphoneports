@@ -1,4 +1,5 @@
-#!/bin/sh -e
+#!/bin/sh
+set -e
 (
 cd src
 "$_TARGET-cc" sysctl.c -o sysctl -Os -flto -D'__FBSDID(x)=' -Wno-pointer-sign

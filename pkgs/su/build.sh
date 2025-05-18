@@ -1,4 +1,5 @@
-#!/bin/sh -e
+#!/bin/sh
+set -e
 (
 cd src
 "$_TARGET-cc" -o su -Os -flto su.c -lpam

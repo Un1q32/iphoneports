@@ -1,4 +1,5 @@
-#!/bin/sh -e
+#!/bin/sh
+set -e
 
 mkdir -p "$_PKGROOT/src/iphoneports-fakebin"
 printf '#!/bin/sh\necho %s\n' "$_MACVER" > "$_PKGROOT/src/iphoneports-fakebin/sw_vers"

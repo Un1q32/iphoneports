@@ -1,4 +1,5 @@
-#!/bin/sh -e
+#!/bin/sh
+set -e
 # shellcheck disable=2086
 (
 cd src

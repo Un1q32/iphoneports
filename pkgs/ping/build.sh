@@ -1,4 +1,5 @@
-#!/bin/sh -e
+#!/bin/sh
+set -e
 (
 cd src
 "$_TARGET-cc" ping.c -o ping -Os -flto -Wno-deprecated-non-prototype

@@ -1,4 +1,5 @@
-#!/bin/sh -e
+#!/bin/sh
+set -e
 mkdir -p pkg/var/usr/bin
 cp src/neofetch pkg/var/usr/bin
 

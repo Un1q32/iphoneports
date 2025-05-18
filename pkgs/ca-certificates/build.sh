@@ -1,4 +1,5 @@
-#!/bin/sh -e
+#!/bin/sh
+set -e
 mkdir -p pkg/var/usr/etc/ssl
 cp src/cert.pem pkg/var/usr/etc/ssl
 

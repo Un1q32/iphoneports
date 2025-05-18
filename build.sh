@@ -257,7 +257,6 @@ build() {
         applypatches
         printf '%s\n' "Building $1"
         (
-            set -e
             . ./build.sh
         ) || {
             rm -rf pkg "$_SDK"

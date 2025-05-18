@@ -1,4 +1,5 @@
-#!/bin/sh -e
+#!/bin/sh
+set -e
 mkdir -p src/build
 (
 cd src/build

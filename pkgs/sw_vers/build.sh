@@ -1,4 +1,5 @@
-#!/bin/sh -e
+#!/bin/sh
+set -e
 (
 cd src
 "$_TARGET-cc" sw_vers.c -o sw_vers -Os -flto -framework CoreFoundation

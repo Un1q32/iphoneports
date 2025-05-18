@@ -1,4 +1,5 @@
-#!/bin/sh -e
+#!/bin/sh
+set -e
 unset SUDO_PROMPT
 (
 cd src

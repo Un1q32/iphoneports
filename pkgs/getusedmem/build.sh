@@ -1,4 +1,5 @@
-#!/bin/sh -e
+#!/bin/sh
+set -e
 mkdir -p "$_PKGROOT/pkg/var/usr/bin"
 "$_TARGET-cc" -Os -flto "$_PKGROOT/files/getusedmem.c" -o "$_PKGROOT/pkg/var/usr/bin/getusedmem"
 

@@ -1,4 +1,5 @@
-#!/bin/sh -e
+#!/bin/sh
+set -e
 read -r llvmver < src/iphoneports-llvmversion.txt
 mkdir -p src/compiler-rt/build "pkg/var/usr/lib/clang/$llvmver/lib/darwin"
 (

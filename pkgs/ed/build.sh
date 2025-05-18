@@ -1,4 +1,5 @@
-#!/bin/sh -e
+#!/bin/sh
+set -e
 (
 cd src
 for src in main.c io.c buf.c re.c glbl.c undo.c sub.c; do

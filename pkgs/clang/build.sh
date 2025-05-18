@@ -1,4 +1,5 @@
-#!/bin/sh -e
+#!/bin/sh
+set -e
 
 _get_distribution_components() {
     ninja -t targets | grep -Po 'install-\K.*(?=-stripped:)' | while read -r target; do

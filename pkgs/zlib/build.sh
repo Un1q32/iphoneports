@@ -1,4 +1,5 @@
-#!/bin/sh -e
+#!/bin/sh
+set -e
 (
 cd src
 CHOST="$_TARGET" ./configure --prefix=/var/usr --zlib-compat --force-sse2

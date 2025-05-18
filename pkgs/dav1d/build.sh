@@ -1,4 +1,5 @@
-#!/bin/sh -e
+#!/bin/sh
+set -e
 mkdir -p src/build src/tmpbin
 
 case $_CPU in

@@ -1,4 +1,5 @@
-#!/bin/sh -e
+#!/bin/sh
+set -e
 (
 cd src
 ./configure --host="$_TARGET" --prefix=/var/usr --enable-silent-rules --disable-static --disable-doc gl_cv_posix_shell=/var/usr/bin/sh
