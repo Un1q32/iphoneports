@@ -1,5 +1,6 @@
 #!/bin/sh
 set -e
+. ../../lib.sh
 (
 cd src
 "$_TARGET-cc" -Os -flto killall.c -o killall -D'__FBSDID(x)='

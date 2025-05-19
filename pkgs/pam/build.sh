@@ -1,5 +1,6 @@
 #!/bin/sh
 set -e
+. ../../lib.sh
 (
 cd src/pam
 autoconf

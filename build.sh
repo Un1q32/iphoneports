@@ -35,13 +35,13 @@ export TERM="xterm-256color"
 [ -f defaulttarget.txt ] && IFS= read -r defaulttarget < defaulttarget.txt
 
 case "$*" in
-    *--no-tmpfs*) _TMP="$bsroot" ;;
-    *) _TMP="/tmp" ;;
+    *--no-tmpfs*) export _TMP="$bsroot" ;;
+    *) export _TMP="/tmp" ;;
 esac
 
 case "$*" in
-    *--target=*) _TARGET="$*" ; _TARGET="${_TARGET#*--target=}" ; _TARGET="${_TARGET%% *}" ;;
-    *) _TARGET="$defaulttarget" ;;
+    *--target=*) _TARGET="$*" ; _TARGET="${_TARGET#*--target=}" ; export _TARGET="${_TARGET%% *}" ;;
+    *) export _TARGET="$defaulttarget" ;;
 esac
 
 case "$*" in
@@ -49,6 +49,7 @@ case "$*" in
         _JOBS="$*" ; _JOBS="${_JOBS#*-j}" ; _JOBS="${_JOBS%% *}"
         case $_JOBS in
             ''|*[!0-9]*) unset _JOBS ;;
+            *) export _JOBS ;;
         esac
     ;;
 esac
@@ -63,6 +64,7 @@ if [ -z "$_JOBS" ]; then
 
     _JOBS=$((cpus * 2 / 3))
     [ "$_JOBS" = 0 ] && _JOBS=1
+    export _JOBS
 fi
 
 : > "$bsroot/.builtpkgs"
@@ -223,7 +225,7 @@ osver=__ENVIRONMENT_OS_VERSION_MIN_REQUIRED__
                 _DPKGARCH=darwin-arm64
             fi
             if "$_TARGET-cc" -dM -E - < /dev/null | grep -q __arm64e__; then
-                _CPU=arm64e
+                export _CPU=arm64e
             fi
         ;;
 
@@ -238,6 +240,8 @@ osver=__ENVIRONMENT_OS_VERSION_MIN_REQUIRED__
         iphoneos-*) _ENTITLEMENTS="$bsroot/ios-entitlements.xml" ;;
         *) _ENTITLEMENTS= ;;
     esac
+
+    export _MAKE _SUBSYSTEM _CPU _DPKGARCH _MACVER _ENTITLEMENTS
 }
 
 build() {
@@ -246,8 +250,8 @@ build() {
     fi
 
     (
-    _PKGROOT="$pkgdir/$1"
-    _PKGNAME="$1"
+    export _PKGROOT="$pkgdir/$1"
+    export _PKGNAME="$1"
     cd "$_PKGROOT" || error "Failed to cd to package directory: $1"
     includedeps
     if [ -n "$dryrun" ]; then
@@ -256,9 +260,7 @@ build() {
         [ -f fetch.sh ] && ./fetch.sh
         applypatches
         printf '%s\n' "Building $1"
-        (
-            . ./build.sh
-        ) || {
+        ./build.sh || {
             rm -rf pkg "$_SDK"
             return 2
         }
@@ -300,7 +302,7 @@ applypatches() {
 includedeps() {
     if [ -z "$dryrun" ]; then
         if [ -d "$sdk" ]; then
-            _SDK="$_TMP/iphoneports-sdk-$_TARGET"
+            export _SDK="$_TMP/iphoneports-sdk-$_TARGET"
             mkdir -p "$_SDK"
             cp -a "$sdk"/* "$_SDK"
         else

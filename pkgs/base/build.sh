@@ -1,5 +1,6 @@
 #!/bin/sh
 set -e
+. ../../lib.sh
 
 mkdir -p pkg/usr/local/bin pkg/usr/local/libexec/iphoneports pkg/var/usr/bin pkg/var/usr/etc/profile.d
 

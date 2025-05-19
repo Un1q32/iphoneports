@@ -1,5 +1,6 @@
 #!/bin/sh
 set -e
+. ../../lib.sh
 mkdir -p src/build src/tmpbin
 
 case $_CPU in

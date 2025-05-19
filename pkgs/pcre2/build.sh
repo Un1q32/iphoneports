@@ -1,5 +1,6 @@
 #!/bin/sh
 set -e
+. ../../lib.sh
 (
 cd src
 ./configure --host="$_TARGET" --prefix=/var/usr --disable-static --enable-pcre2grep-libbz2 --enable-pcre2grep-libz --enable-pcre2test-libreadline --enable-pcre2-16 --enable-pcre2-32

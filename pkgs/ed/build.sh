@@ -1,5 +1,6 @@
 #!/bin/sh
 set -e
+. ../../lib.sh
 (
 cd src
 for src in main.c io.c buf.c re.c glbl.c undo.c sub.c; do

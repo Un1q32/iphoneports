@@ -1,5 +1,6 @@
 #!/bin/sh
 set -e
+. ../../lib.sh
 (
 cd src
 ./configure --host="$_TARGET" --prefix=/var/usr --disable-static --disable-static-shell --enable-silent-rules

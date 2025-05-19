@@ -1,5 +1,6 @@
 #!/bin/sh
 set -e
+. ../../lib.sh
 (
 cd src
 "$_TARGET-cc" -Os -shared -o libduktape.dylib src/duktape.c -install_name /var/usr/lib/libduktape.207.dylib -current_version 207 -compatibility_version 207

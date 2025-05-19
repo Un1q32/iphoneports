@@ -1,5 +1,6 @@
 #!/bin/sh
 set -e
+. ../../lib.sh
 (
 cd src
 hostcc="$(command -v "$_TARGET-sdkpath")"

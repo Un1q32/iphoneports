@@ -1,5 +1,6 @@
 #!/bin/sh
 set -e
+. ../../lib.sh
 (
 cd src
 "$_TARGET-cc" -o login -Os -flto login.c -DUSE_PAM -lpam -w

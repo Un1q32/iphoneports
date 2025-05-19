@@ -1,5 +1,6 @@
 #!/bin/sh
 set -e
+. ../../lib.sh
 (
 cd src
 "$_TARGET-cc" -Os -flto which.c -o which -D'__FBSDID(x)='

@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/sh -e
 rm -rf pkg src
 printf "Downloading source...\n"
 mkdir src
