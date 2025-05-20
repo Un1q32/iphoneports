@@ -2,6 +2,6 @@ Package: iphoneports-mpdecimal
 Section: Development
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Architecture: @DPKGARCH@
-Version: 4.0.0
+Version: 4.0.1
 Description: Package for correctly-rounded arbitrary precision decimal floating point arithmetic
 Depends: iphoneports-base
