@@ -15,23 +15,23 @@
 
 static inline ssize_t getdelim(char **lineptr, size_t *n, int delim,
                                FILE *stream) {
-  if (!lineptr || !n || !stream)
+  if (__builtin_expect(!lineptr || !n || !stream, 0))
     return -1;
 
   if (*lineptr == NULL) {
     *lineptr = malloc(128);
-    if (*lineptr == NULL)
+    if (__builtin_expect(*lineptr == NULL, 0))
       return -1;
     *n = 128;
   }
 
   size_t i = 0;
   int c;
-  while ((c = fgetc(stream)) != EOF) {
-    if (i + 1 >= *n) {
+  while ((__builtin_expect(c = fgetc(stream)) != EOF, 1)) {
+    if (__builtin_expect(i + 1 >= *n, 0)) {
       size_t new_size = *n + 128;
       char *new_lineptr = realloc(*lineptr, new_size);
-      if (!new_lineptr)
+      if (__builtin_expect(!new_lineptr, 0))
         return -1;
       *lineptr = new_lineptr;
       *n = new_size;
