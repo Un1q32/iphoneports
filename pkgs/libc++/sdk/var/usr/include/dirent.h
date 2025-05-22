@@ -15,7 +15,7 @@
 
 static inline DIR *fdopendir(int fd) {
   char fdpath[PATH_MAX];
-  if (__builtin_expect(fcntl(fd, F_GETPATH, fdpath) == -1, 0))
+  if (fcntl(fd, F_GETPATH, fdpath) == -1)
     return NULL;
 
   return opendir(fdpath);

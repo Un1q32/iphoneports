@@ -21,7 +21,7 @@ static inline int unlinkat(int fd, const char *path, int flags) {
   }
 
   struct stat st;
-  if (__builtin_expect(fstat(fd, &st) == -1 || !S_ISDIR(st.st_mode), 0))
+  if (fstat(fd, &st) == -1 || !S_ISDIR(st.st_mode))
     return -1;
 
   char fdpath[PATH_MAX + strlen(path) + 2];

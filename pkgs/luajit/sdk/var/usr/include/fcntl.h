@@ -19,12 +19,12 @@ static inline int __iphoneports_open(const char *path, int flags, ...) {
     va_end(va_args);
   }
   bool cloexec = false;
-  if (__builtin_expect(flags & O_CLOEXEC, 0)) {
+  if (flags & O_CLOEXEC) {
     flags &= ~O_CLOEXEC;
     cloexec = true;
   }
   int fd = open(path, flags, mode);
-  if (cloexec && __builtin_expect(fd != -1, 1))
+  if (cloexec && fd != -1)
     fcntl(fd, F_SETFD, FD_CLOEXEC);
   return fd;
 }

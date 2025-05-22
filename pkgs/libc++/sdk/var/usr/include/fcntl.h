@@ -37,7 +37,7 @@ static inline int openat(int fd, const char *path, int flags, ...) {
 
 #ifdef __NO_O_CLOEXEC
   bool cloexec = false;
-  if (__builtin_expect(flags & O_CLOEXEC, 0)) {
+  if (flags & O_CLOEXEC) {
     flags &= ~O_CLOEXEC;
     cloexec = true;
   }
@@ -46,14 +46,14 @@ static inline int openat(int fd, const char *path, int flags, ...) {
   if (fd == AT_FDCWD || path[0] == '/') {
     int ret = open(path, flags, mode);
 #ifdef __NO_O_CLOEXEC
-    if (cloexec && __builtin_expect(ret != -1, 1))
+    if (cloexec && ret != -1)
       fcntl(ret, F_SETFD, FD_CLOEXEC);
 #endif
     return ret;
   }
 
   struct stat st;
-  if (__builtin_expect(fstat(fd, &st) == -1 || !S_ISDIR(st.st_mode), 0))
+  if (fstat(fd, &st) == -1 || !S_ISDIR(st.st_mode))
     return -1;
 
   char fdpath[PATH_MAX + strlen(path) + 2];
@@ -63,7 +63,7 @@ static inline int openat(int fd, const char *path, int flags, ...) {
   strcat(fdpath, path);
   int ret = open(fdpath, flags, mode);
 #ifdef __NO_O_CLOEXEC
-  if (cloexec && __builtin_expect(ret != -1, 1))
+  if (cloexec && ret != -1)
     fcntl(ret, F_SETFD, FD_CLOEXEC);
 #endif
   return ret;

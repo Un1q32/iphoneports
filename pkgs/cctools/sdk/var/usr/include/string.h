@@ -20,7 +20,7 @@ static inline size_t strnlen(const char *str, size_t maxlen) {
 static inline char *strndup(const char *str, size_t maxlen) {
   size_t len = strnlen(str, maxlen);
   char *newstr = (char *)malloc(len + 1);
-  if (__builtin_expect(!newstr, 0))
+  if (!newstr)
     return NULL;
   memcpy(newstr, str, len);
   newstr[len] = '\0';
