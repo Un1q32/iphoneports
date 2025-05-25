@@ -14,6 +14,7 @@ cp ps "$_PKGROOT/pkg/var/usr/bin"
 
 (
 cd pkg/var/usr/bin
+_ALWAYSSIGN=1
 if [ "$_SUBSYSTEM" = "macos" ]; then
     _ENTITLEMENTS="$_PKGROOT/files/macos-entitlements.xml"
 else
