@@ -1,4 +1,7 @@
 export PATH='/var/usr/sbin:/var/usr/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/bin/X11:/usr/games'
+if [ -d /opt/local/bin ]; then
+    export PATH="$PATH:/opt/local/bin"
+fi
 umask 022
 
 for sh in /var/usr/etc/profile.d/*.sh; do
