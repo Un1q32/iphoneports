@@ -1,2 +1,3 @@
 zlib
 readline
+ncurses
