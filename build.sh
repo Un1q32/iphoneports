@@ -170,6 +170,7 @@ osver=__ENVIRONMENT_OS_VERSION_MIN_REQUIRED__
                 (18????)            _MACVER='15.0'  ;;
                 (19????)            _MACVER='16.0'  ;;
                 (20????)            _MACVER='17.0'  ;;
+                (*) error "Unsupported OS version" ;;
             esac
         ;;
 
@@ -194,6 +195,7 @@ osver=__ENVIRONMENT_OS_VERSION_MIN_REQUIRED__
                 (15????) _MACVER='15.0'  ;;
                 (16????) _MACVER='16.0'  ;;
                 (17????) _MACVER='17.0'  ;;
+                (*) error "Unsupported OS version" ;;
             esac
         ;;
 
@@ -211,7 +213,12 @@ osver=__ENVIRONMENT_OS_VERSION_MIN_REQUIRED__
                 (11????) _MACVER='15.0'  ;;
                 (12????) _MACVER='16.0'  ;;
                 (13????) _MACVER='17.0'  ;;
+                (*) error "Unsupported OS version" ;;
             esac
+        ;;
+
+        (*)
+            error "Unsupported platform"
         ;;
     esac
 
