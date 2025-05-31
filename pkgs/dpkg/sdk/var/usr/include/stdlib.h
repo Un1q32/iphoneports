@@ -14,9 +14,10 @@ static inline char *__iphoneports_realpath(const char *restrict path,
                                            char *restrict resolved_path) {
   if (!resolved_path) {
     char buf[PATH_MAX];
-    if (!realpath(path, buf))
+    char *ret = realpath(path, buf);
+    if (!ret)
       return NULL;
-    return strdup(buf);
+    return strdup(ret);
   }
   return realpath(path, resolved_path);
 }
