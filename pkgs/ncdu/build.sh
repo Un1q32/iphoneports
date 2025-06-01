@@ -8,11 +8,8 @@ cd src
 "$_MAKE" DESTDIR="$_PKGROOT/pkg" install
 )
 
-(
-cd pkg/var/usr
-rm -rf share
-strip_and_sign bin/ncdu
-)
+rm -rf pkg/var/usr/share
+strip_and_sign pkg/var/usr/bin/ncdu
 
 mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"
 cp src/COPYING "pkg/var/usr/share/licenses/$_PKGNAME"

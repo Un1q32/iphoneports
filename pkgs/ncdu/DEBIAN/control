@@ -2,6 +2,6 @@ Package: iphoneports-ncdu
 Section: Utilities
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Architecture: @DPKGARCH@
-Version: 1.21
+Version: 1.22
 Depends: iphoneports-base, iphoneports-ncurses
 Description: Disk usage analyzer with an ncurses interface
