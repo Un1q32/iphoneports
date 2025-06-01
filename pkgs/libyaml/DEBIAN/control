@@ -1,0 +1,7 @@
+Package: iphoneports-libyaml
+Section: Development
+Maintainer: Uniq <joey.t.reinhart@gmail.com>
+Architecture: @DPKGARCH@
+Version: 0.2.5
+Description: YAML 1.1 library
+Depends: iphoneports-base
