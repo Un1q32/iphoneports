@@ -1,0 +1,7 @@
+Package: iphoneports-oniguruma
+Section: Development
+Maintainer: Uniq <joey.t.reinhart@gmail.com>
+Architecture: @DPKGARCH@
+Version: 6.9.10
+Description: a regular expressions library
+Depends: iphoneports-base
