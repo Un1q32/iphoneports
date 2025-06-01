@@ -1,0 +1,4 @@
+pcre2
+libxml2
+libyaml
+jansson
