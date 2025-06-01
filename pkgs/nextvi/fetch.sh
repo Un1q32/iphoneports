@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/sh -e
 commit=ecaa425765d6029be82f4e0fc3905502ca74f2c0
 rm -rf pkg src
 printf "Downloading source...\n"

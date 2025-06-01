@@ -1,6 +1,9 @@
-#!/bin/sh
+#!/bin/sh -e
+commit=f9140a622a0c44a99efb391cc1c2358bc8098ab7
 rm -rf pkg src
 printf "Downloading source...\n"
-git clone https://luajit.org/git/luajit.git src
-cd src || exit 1
-git -c advice.detachedHead=false checkout a4f56a459a588ae768801074b46ba0adcfb49eb1
+curl -L -# -o src.tar.gz "https://github.com/LuaJIT/LuaJIT/archive/${commit}.tar.gz"
+printf "Unpacking source...\n"
+tar -xf src.tar.gz
+rm src.tar.gz
+mv "LuaJIT-${commit}" src
