@@ -1,6 +1,6 @@
 --- src/libusb/os/darwin_usb.c.orig
 +++ src/libusb/os/darwin_usb.c
-@@ -2172,7 +2172,7 @@
+@@ -2171,7 +2171,7 @@
    IOReturn kresult;
    enum libusb_error ret;
  
