@@ -1,0 +1,7 @@
+Package: iphoneports-jansson
+Section: Development
+Maintainer: Uniq <joey.t.reinhart@gmail.com>
+Architecture: @DPKGARCH@
+Version: 2.14.1
+Description: C library for encoding, decoding and manipulating JSON data
+Depends: iphoneports-base
