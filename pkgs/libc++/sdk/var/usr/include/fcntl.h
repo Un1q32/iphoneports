@@ -9,9 +9,18 @@
 #define AT_REMOVEDIR 0x0080
 #endif
 #ifndef O_CLOEXEC
-#include <stdbool.h>
 #define O_CLOEXEC 0x1000000
+#endif
+
+#if (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                \
+     __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ < 40300) ||                \
+    (defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) &&                 \
+     __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ < 1070)
+
+#include <stdbool.h>
+
 #define __NO_O_CLOEXEC
+
 #endif
 
 #if (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                \

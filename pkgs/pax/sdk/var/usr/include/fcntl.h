@@ -3,12 +3,16 @@
 #include_next <fcntl.h>
 
 #ifndef O_CLOEXEC
+#define O_CLOEXEC 0x1000000
+#endif
+
+#if (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                \
+     __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ < 40300) ||                \
+    (defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) &&                 \
+     __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ < 1070)
 
 #include <stdarg.h>
 #include <stdbool.h>
-#include <unistd.h>
-
-#define O_CLOEXEC 0x1000000
 
 static inline int __iphoneports_open(const char *path, int flags, ...) {
   int mode;
