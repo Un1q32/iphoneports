@@ -1,0 +1,8 @@
+--- src/src/yacc.in.orig
++++ src/src/yacc.in
+@@ -1,4 +1,4 @@
+-#! /bin/sh
++#! /var/usr/bin/sh
+ 
+ @relocatable_sh@
+ if test "@RELOCATABLE@" = yes; then

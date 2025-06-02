@@ -1,0 +1,7 @@
+Package: iphoneports-bison
+Section: Development
+Maintainer: Uniq <joey.t.reinhart@gmail.com>
+Architecture: @DPKGARCH@
+Version: 3.8.2
+Description: The GNU general-purpose parser generator
+Depends: iphoneports-base, iphoneports-m4
