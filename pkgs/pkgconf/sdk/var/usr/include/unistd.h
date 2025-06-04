@@ -7,6 +7,7 @@
     (defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) &&                 \
      __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ < 101000)
 
+#include <errno.h>
 #include <fcntl.h>
 #include <limits.h>
 #include <string.h>
@@ -19,8 +20,10 @@ static inline ssize_t readlinkat(int fd, const char *path, char *buf,
     return readlink(path, buf, bufsize);
 
   struct stat st;
-  if (fstat(fd, &st) == -1 || !S_ISDIR(st.st_mode))
+  if (fstat(fd, &st) == -1 || !S_ISDIR(st.st_mode)) {
+    errno = ENOTDIR;
     return -1;
+  }
 
   char fdpath[PATH_MAX + strlen(path) + 2];
   fcntl(fd, F_GETPATH, fdpath);

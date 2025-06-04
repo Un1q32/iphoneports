@@ -28,6 +28,7 @@
     (defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) &&                 \
      __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ < 101000)
 
+#include <errno.h>
 #include <limits.h>
 #include <stdarg.h>
 #include <string.h>
@@ -62,8 +63,10 @@ static inline int openat(int fd, const char *path, int flags, ...) {
   }
 
   struct stat st;
-  if (fstat(fd, &st) == -1 || !S_ISDIR(st.st_mode))
+  if (fstat(fd, &st) == -1 || !S_ISDIR(st.st_mode)) {
+    errno = ENOTDIR;
     return -1;
+  }
 
   char fdpath[PATH_MAX + strlen(path) + 2];
   fcntl(fd, F_GETPATH, fdpath);
