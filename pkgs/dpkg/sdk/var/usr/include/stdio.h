@@ -7,6 +7,7 @@
     (defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) &&                 \
      __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ < 1070)
 
+#include <errno.h>
 #include <stdlib.h>
 #include <sys/types.h>
 
@@ -15,8 +16,10 @@
 
 static inline ssize_t getdelim(char **lineptr, size_t *n, int delim,
                                FILE *stream) {
-  if (!lineptr || !n || !stream)
+  if (!lineptr || !n || !stream) {
+    errno = EINVAL;
     return -1;
+  }
 
   if (*lineptr == NULL) {
     *lineptr = malloc(128);
