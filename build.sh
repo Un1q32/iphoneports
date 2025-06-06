@@ -249,7 +249,11 @@ osver=__ENVIRONMENT_OS_VERSION_MIN_REQUIRED__
         *) _ENTITLEMENTS= ;;
     esac
 
-    export _MAKE _SUBSYSTEM _CPU _DPKGARCH _MACVER _MACVERNUM _ENTITLEMENTS
+    iphoneportspath="$(command -v "$_TARGET-sdkpath")"
+    iphoneportspath="${iphoneportspath%/*}/../share/iphoneports/bin"
+    PATH="$iphoneportspath:$PATH"
+
+    export _MAKE _SUBSYSTEM _CPU _DPKGARCH _MACVER _MACVERNUM _ENTITLEMENTS PATH
 }
 
 build() {
