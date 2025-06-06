@@ -7,8 +7,8 @@ mkdir -p pkg/usr/local/bin pkg/usr/local/libexec/iphoneports pkg/var/usr/bin pkg
 (
 cd pkg
 
-"$_TARGET-cc" -Wall -Wextra -Wpedantic -std=c99 -Os -flto -o usr/local/bin/iphoneports-shell "$_PKGROOT/files/iphoneports-shell.c"
-"$_TARGET-cc" -Wall -Wextra -Wpedantic -std=c99 -Os -flto -o usr/local/libexec/iphoneports/iphoneports-chsh "$_PKGROOT/files/iphoneports-chsh.c"
+"$_TARGET-cc" -Wall -Wextra -pedantic -std=c99 -Os -flto -o usr/local/bin/iphoneports-shell "$_PKGROOT/files/iphoneports-shell.c"
+"$_TARGET-cc" -Wall -Wextra -pedantic -std=c99 -Os -flto -o usr/local/libexec/iphoneports/iphoneports-chsh "$_PKGROOT/files/iphoneports-chsh.c"
 
 strip_and_sign usr/local/bin/iphoneports-shell usr/local/libexec/iphoneports/iphoneports-chsh
 chmod 4755 usr/local/libexec/iphoneports/iphoneports-chsh
