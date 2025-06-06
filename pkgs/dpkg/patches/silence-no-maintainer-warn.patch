@@ -1,0 +1,10 @@
+--- src/lib/dpkg/parse.c.orig
++++ src/lib/dpkg/parse.c
+@@ -174,7 +174,6 @@
+       (pkg->status != PKG_STAT_NOTINSTALLED &&
+        pkg->status != PKG_STAT_HALFINSTALLED)) {
+     parse_ensure_have_field(ps, &pkgbin->description, "Description");
+-    parse_ensure_have_field(ps, &pkgbin->maintainer, "Maintainer");
+     parse_must_have_field(ps, pkgbin->version.version, "Version");
+   }
+ 
