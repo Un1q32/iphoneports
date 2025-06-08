@@ -1,7 +1,7 @@
 #!/bin/sh
 set -e
 . ../../lib.sh
-mkdir -p src/build src/tmpbin
+mkdir -p src/build
 
 case $_CPU in
     arm64*|aarch64*)
@@ -44,18 +44,6 @@ sed -e "s|@CC@|$_TARGET-cc|g" \
     -e "s|@CPU_FAMILY@|$cpu_family|g" \
     -e "s|@SUBSYSTEM@|$_SUBSYSTEM|g" \
     files/iphoneports.meson > src/iphoneports.meson
-
-printf '%s' "\
-#!/bin/sh
-exec \"$(command -v "$_TARGET-install_name_tool")\" \"\$@\"
-" > src/tmpbin/install_name_tool && chmod +x src/tmpbin/install_name_tool
-
-printf '%s' "\
-#!/bin/sh
-exec \"$(command -v "$_TARGET-otool")\" \"\$@\"
-" > src/tmpbin/otool && chmod +x src/tmpbin/otool
-
-export PATH="$_PKGROOT/src/tmpbin:$PATH"
 
 (
 cd src/build
