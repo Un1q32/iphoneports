@@ -12,7 +12,7 @@ cd pkg/var/usr
 rm -rf share
 abi=4
 lib="$(realpath lib/libmpdec.$abi.dylib)"
-"$_TARGET-install_name_tool" -id /var/usr/lib/libmpdec.$abi.dylib "$lib"
+install_name_tool -id /var/usr/lib/libmpdec.$abi.dylib "$lib"
 strip_and_sign "$lib"
 )
 

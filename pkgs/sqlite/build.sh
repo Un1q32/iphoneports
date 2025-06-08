@@ -14,8 +14,8 @@ cd pkg/var/usr
 rm -rf share
 mv lib/libsqlite3.*.*.*.dylib lib/libsqlite3.0.dylib
 ln -sf libsqlite3.0.dylib lib/libsqlite3.dylib
-"$_TARGET-install_name_tool" -id /var/usr/lib/libsqlite3.0.dylib lib/libsqlite3.0.dylib
-"$_TARGET-install_name_tool" -change /var/usr/lib/libsqlite3.dylib /var/usr/lib/libsqlite3.0.dylib bin/sqlite3
+install_name_tool -id /var/usr/lib/libsqlite3.0.dylib lib/libsqlite3.0.dylib
+install_name_tool -change /var/usr/lib/libsqlite3.dylib /var/usr/lib/libsqlite3.0.dylib bin/sqlite3
 strip_and_sign bin/sqlite3 lib/libsqlite3.0.dylib
 )
 
