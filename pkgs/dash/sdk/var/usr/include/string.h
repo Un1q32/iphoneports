@@ -9,8 +9,7 @@
 
 #define stpncpy __iphoneports_stpncpy
 
-static inline char *stpncpy(char *restrict s1, const char *restrict s2,
-                            size_t n) {
+static inline char *stpncpy(char *s1, const char *s2, size_t n) {
   char *s = s1;
   const char *p = s2;
 

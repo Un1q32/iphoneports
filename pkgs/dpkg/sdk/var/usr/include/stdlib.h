@@ -10,8 +10,8 @@
 #include <limits.h>
 #include <string.h>
 
-static inline char *__iphoneports_realpath(const char *restrict path,
-                                           char *restrict resolved_path) {
+static inline char *__iphoneports_realpath(const char *path,
+                                           char *resolved_path) {
   if (!resolved_path) {
     char buf[PATH_MAX];
     char *ret = realpath(path, buf);
