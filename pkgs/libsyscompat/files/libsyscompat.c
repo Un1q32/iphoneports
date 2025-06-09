@@ -138,8 +138,10 @@ void arc4random_buf(void *buf, size_t size) {
   }
 
   uint32_t *cbuf = buf;
-  while (size >= sizeof(uint32_t))
+  while (size >= sizeof(uint32_t)) {
     *cbuf++ = arc4random();
+    size -= sizeof(uint32_t);
+  }
   if (size != 0) {
     uint32_t random = arc4random();
     memcpy(cbuf, &random, size);
