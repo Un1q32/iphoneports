@@ -3,5 +3,5 @@ Section: Utilities
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Architecture: @DPKGARCH@
 Version: 14.1.1
-Depends: iphoneports-base, iphoneports-pcre2
+Depends: iphoneports-base
 Description: A blazing fast regex search tool
