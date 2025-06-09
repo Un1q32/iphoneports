@@ -1,3 +1,7 @@
+#define realpath __dont_define_realpath
+#include <stdlib.h>
+#undef realpath
+
 #if (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                \
      __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ < 100000) ||               \
     (defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) &&                 \
@@ -78,6 +82,18 @@ int clock_gettime(int clockid, struct timespec *ts) {
 }
 
 #if (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                \
+     __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ < 80000) ||                \
+    (defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) &&                 \
+     __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ < 101000)
+
+void arc4random_buf(void *, size_t);
+
+int CCRandomGenerateBytes(void *buf, size_t size) {
+  arc4random_buf(buf, size);
+  return 0;
+}
+
+#if (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                \
      __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ < 60000) ||                \
     (defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) &&                 \
      __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ < 1080)
@@ -101,6 +117,36 @@ int dirfd(DIR *dirp) {
 }
 
 #if (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                \
+     __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ < 40300) ||                \
+    (defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) &&                 \
+     __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ < 1070)
+
+#include <string.h>
+
+void arc4random_buf(void *buf, size_t size) {
+  static bool init = false;
+  static void (*func)(void *, size_t);
+
+  if (!init) {
+    func = (void (*)(void *, size_t))dlsym(RTLD_NEXT, "arc4random_buf");
+    init = true;
+  }
+
+  if (func) {
+    func(buf, size);
+    return;
+  }
+
+  uint32_t *cbuf = buf;
+  while (size >= sizeof(uint32_t))
+    *cbuf++ = arc4random();
+  if (size != 0) {
+    uint32_t random = arc4random();
+    memcpy(cbuf, &random, size);
+  }
+}
+
+#if (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                \
      __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ < 30200) ||                \
     (defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) &&                 \
      __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ < 1060)
@@ -120,7 +166,6 @@ int pthread_setname_np(const char *name) {
 }
 
 #include <limits.h>
-#include <string.h>
 
 char *realpath(const char *restrict path, char *restrict resolved_path) {
   static char *(*func)(const char *, char *) = NULL;
@@ -145,7 +190,8 @@ char *realpath_extsn(const char *restrict path, char *restrict resolved_path) {
   static char *(*func)(const char *, char *) = NULL;
 
   if (!func)
-    func = (char *(*)(const char *, char *))dlsym(RTLD_NEXT, "realpath$DARWIN_EXTSN");
+    func = (char *(*)(const char *, char *))dlsym(RTLD_NEXT,
+                                                  "realpath$DARWIN_EXTSN");
 
   if (!resolved_path) {
     char buf[PATH_MAX];
@@ -160,8 +206,6 @@ char *realpath_extsn(const char *restrict path, char *restrict resolved_path) {
 #if (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                \
      __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ < 30000) ||                \
     defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__)
-
-#include <stdlib.h>
 
 int posix_memalign(void **memptr, size_t align, size_t size) {
   static bool init = false;
@@ -191,6 +235,10 @@ int posix_memalign(void **memptr, size_t align, size_t size) {
     return 0;
   }
 }
+
+#endif
+
+#endif
 
 #endif
 
