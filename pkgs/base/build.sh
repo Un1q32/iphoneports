@@ -24,9 +24,12 @@ done
 
 cp -r DEBIAN pkg
 sed -e "s|@DPKGARCH@|$_DPKGARCH|" DEBIAN/control > pkg/DEBIAN/control
-if [ "$_CPU" = "armv6" ]; then
-    sed -i '/^Depends:/ s/$/, firmware (>= 3.0)/' pkg/DEBIAN/control
-elif [ "$_CPU" = "armv7" ]; then
-    sed -i '/^Depends:/ s/$/, firmware (>= 3.1)/' pkg/DEBIAN/control
+if [ "$_SUBSYSTEM" = "ios" ]; then
+    case $_CPU in
+        (armv6)  minver=3.0 ;;
+        (armv7)  minver=3.1 ;;
+        (armv7s) minver=6.0 ;;
+    esac
+    sed -i "/^Depends:/ s/$/, firmware (>= $minver)/" pkg/DEBIAN/control
 fi
 dpkg-deb -b --root-owner-group -Zgzip pkg "$_PKGNAME.deb"
