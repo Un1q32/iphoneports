@@ -18,11 +18,15 @@ cp "$_PKGROOT/files/profile" var/usr/etc
 cp "$_PKGROOT/files/path-wrapper" var/usr/bin
 
 for link in apt-cache apt-cdrom apt-config apt-extracttemplates apt-ftparchive apt-get apt-key apt-mark apt-sortpkgs dselect; do
-  ln -s path-wrapper "var/usr/bin/$link"
+    ln -s path-wrapper "var/usr/bin/$link"
 done
 )
 
 cp -r DEBIAN pkg
 sed -e "s|@DPKGARCH@|$_DPKGARCH|" DEBIAN/control > pkg/DEBIAN/control
-[ "$_DPKGARCH" = "iphoneos-arm" ] && sed -i '/^Depends:/ s/$/, firmware (>= 3.0)/' pkg/DEBIAN/control
+if [ "$_CPU" = "armv6" ]; then
+    sed -i '/^Depends:/ s/$/, firmware (>= 3.0)/' pkg/DEBIAN/control
+elif [ "$_CPU" = "armv7" ]; then
+    sed -i '/^Depends:/ s/$/, firmware (>= 3.1)/' pkg/DEBIAN/control
+fi
 dpkg-deb -b --root-owner-group -Zgzip pkg "$_PKGNAME.deb"
