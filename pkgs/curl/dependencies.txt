@@ -1,7 +1,6 @@
 libressl
 zstd
 zlib
-libssh2
 nghttp2
 nghttp3
 ngtcp2
