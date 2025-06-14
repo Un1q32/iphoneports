@@ -2,6 +2,6 @@ Package: iphoneports-unrar
 Section: Archiving
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Architecture: @DPKGARCH@
-Version: 7.1.6
+Version: 7.1.7
 Description: de-compresses files in rar format
 Depends: iphoneports-base, iphoneports-libc++
