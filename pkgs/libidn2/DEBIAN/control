@@ -1,8 +1,7 @@
 Package: iphoneports-libidn2
-Version: 2.3.7
+Version: 2.3.8
 Architecture: @DPKGARCH@
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Depends: iphoneports-base, iphoneports-libunistring
 Section: Development
-Homepage: http://www.gnu.org/software/libidn/
 Description: A free software implementation of IDNA2008, Punycode and TR46
