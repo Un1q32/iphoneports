@@ -63,13 +63,16 @@ static inline int openat(int fd, const char *path, int flags, ...) {
   }
 
   struct stat st;
-  if (fstat(fd, &st) == -1 || !S_ISDIR(st.st_mode)) {
+  if (fstat(fd, &st) == -1)
+    return -1;
+  if (!S_ISDIR(st.st_mode)) {
     errno = ENOTDIR;
     return -1;
   }
 
   char fdpath[PATH_MAX + strlen(path) + 2];
-  fcntl(fd, F_GETPATH, fdpath);
+  if (fcntl(fd, F_GETPATH, fdpath) == -1)
+    return -1;
 
   strcat(fdpath, "/");
   strcat(fdpath, path);

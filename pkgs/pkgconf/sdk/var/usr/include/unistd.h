@@ -20,13 +20,16 @@ static inline ssize_t readlinkat(int fd, const char *path, char *buf,
     return readlink(path, buf, bufsize);
 
   struct stat st;
-  if (fstat(fd, &st) == -1 || !S_ISDIR(st.st_mode)) {
+  if (fstat(fd, &st) == -1)
+    return -1;
+  if (!S_ISDIR(st.st_mode)) {
     errno = ENOTDIR;
     return -1;
   }
 
   char fdpath[PATH_MAX + strlen(path) + 2];
-  fcntl(fd, F_GETPATH, fdpath);
+  if (fcntl(fd, F_GETPATH, fdpath) == -1)
+    return -1;
 
   if (path[0] != '\0') {
     strcat(fdpath, "/");
