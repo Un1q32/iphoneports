@@ -28,8 +28,7 @@ static inline ssize_t readlinkat(int fd, const char *path, char *buf,
   }
 
   char fdpath[PATH_MAX + strlen(path) + 2];
-  if (fcntl(fd, F_GETPATH, fdpath) == -1)
-    return -1;
+  fcntl(fd, F_GETPATH, fdpath);
 
   if (path[0] != '\0') {
     strcat(fdpath, "/");
