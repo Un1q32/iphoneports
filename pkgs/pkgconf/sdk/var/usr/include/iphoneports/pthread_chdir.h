@@ -6,7 +6,8 @@
      __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ < 101200)
 
 #include <sys/syscall.h>
-#include <unistd.h>
+
+int syscall(int, ...);
 
 #define pthread_fchdir_np __iphoneports_pthread_fchdir_np
 

@@ -28,8 +28,10 @@
     (defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) &&                 \
      __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ < 101000)
 
-#include <iphoneports/pthread_chdir.h>
 #include <stdarg.h>
+#include <unistd.h>
+
+#include <iphoneports/pthread_chdir.h>
 
 #define openat __iphoneports_openat
 
