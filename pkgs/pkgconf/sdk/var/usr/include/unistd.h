@@ -9,6 +9,7 @@
 
 #include <fcntl.h>
 #include <iphoneports/pthread_chdir.h>
+#include <limits.h>
 
 #define readlinkat __iphoneports_readlinkat
 
