@@ -28,11 +28,8 @@
     (defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) &&                 \
      __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ < 101000)
 
-#include <errno.h>
-#include <limits.h>
+#include <iphoneports/pthread_chdir.h>
 #include <stdarg.h>
-#include <string.h>
-#include <sys/stat.h>
 
 #define openat __iphoneports_openat
 
@@ -62,24 +59,28 @@ static inline int openat(int fd, const char *path, int flags, ...) {
     return ret;
   }
 
-  struct stat st;
-  if (fstat(fd, &st) == -1)
-    return -1;
-  if (!S_ISDIR(st.st_mode)) {
-    errno = ENOTDIR;
+  int cwd = open(".", O_RDONLY);
+  if (pthread_fchdir_np(-1) < 0 && cwd != -1) {
+    close(cwd);
+    cwd = -1;
+  }
+  if (pthread_fchdir_np(fd) < 0) {
+    pthread_fchdir_np(cwd);
+    if (cwd != -1)
+      close(cwd);
     return -1;
   }
 
-  char fdpath[PATH_MAX + strlen(path) + 2];
-  fcntl(fd, F_GETPATH, fdpath);
-
-  strcat(fdpath, "/");
-  strcat(fdpath, path);
-  int ret = open(fdpath, flags, mode);
+  int ret = open(path, flags, mode);
 #ifdef __NO_O_CLOEXEC
   if (cloexec && ret != -1)
     fcntl(ret, F_SETFD, FD_CLOEXEC);
 #endif
+
+  pthread_fchdir_np(cwd);
+  if (cwd != -1)
+    close(cwd);
+
   return ret;
 }
 

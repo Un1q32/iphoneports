@@ -7,10 +7,8 @@
     (defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) &&                 \
      __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ < 101000)
 
-#include <errno.h>
 #include <fcntl.h>
-#include <limits.h>
-#include <string.h>
+#include <iphoneports/pthread_chdir.h>
 
 #define unlinkat __iphoneports_unlinkat
 
@@ -21,22 +19,29 @@ static inline int unlinkat(int fd, const char *path, int flags) {
     return unlink(path);
   }
 
-  struct stat st;
-  if (fstat(fd, &st) == -1)
-    return -1;
-  if (!S_ISDIR(st.st_mode)) {
-    errno = ENOTDIR;
+  int cwd = open(".", O_RDONLY);
+  if (pthread_fchdir_np(-1) < 0 && cwd != -1) {
+    close(cwd);
+    cwd = -1;
+  }
+  if (pthread_fchdir_np(fd) < 0) {
+    pthread_fchdir_np(cwd);
+    if (cwd != -1)
+      close(cwd);
     return -1;
   }
 
-  char fdpath[PATH_MAX + strlen(path) + 2];
-  fcntl(fd, F_GETPATH, fdpath);
-
-  strcat(fdpath, "/");
-  strcat(fdpath, path);
+  int ret;
   if (flags & AT_REMOVEDIR)
-    return rmdir(fdpath);
-  return unlink(fdpath);
+    ret = rmdir(path);
+  else
+    ret = unlink(path);
+
+  pthread_fchdir_np(cwd);
+  if (cwd != -1)
+    close(cwd);
+
+  return ret;
 }
 
 #endif
