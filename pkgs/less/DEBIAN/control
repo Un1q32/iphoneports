@@ -2,6 +2,6 @@ Package: iphoneports-less
 Section: Utilities
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Architecture: @DPKGARCH@
-Version: 668
+Version: 679
 Depends: iphoneports-base, iphoneports-ncurses, iphoneports-pcre2
 Description: provides less information than more does
