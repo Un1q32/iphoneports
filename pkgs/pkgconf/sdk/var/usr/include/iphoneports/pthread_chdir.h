@@ -7,8 +7,6 @@
 
 #include <sys/syscall.h>
 
-int syscall(int, ...);
-
 #define pthread_fchdir_np __iphoneports_pthread_fchdir_np
 
 static inline int pthread_fchdir_np(int fd) {
