@@ -24,7 +24,7 @@ mkdir -p src/build
 cd src/build
 tblgendir="$(command -v "$_TARGET-sdkpath")"
 tblgendir="${tblgendir%/*}/../share/iphoneports/bin"
-case ${_TARGET%%-*} in
+case $_CPU in
     arm64*|x86_64*) ltoopt='ON' ;;
     *) ltoopt='OFF' ;;
 esac

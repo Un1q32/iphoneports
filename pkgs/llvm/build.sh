@@ -18,7 +18,7 @@ mkdir -p src/build
 cd src/build
 tblgen="$(command -v "$_TARGET-sdkpath")"
 tblgen="${tblgen%/*}/../share/iphoneports/bin/llvm-tblgen"
-case ${_TARGET%%-*} in
+case $_CPU in
     arm64*|x86_64*) ltoopt='ON' ;;
     *) ltoopt='OFF' ;;
 esac

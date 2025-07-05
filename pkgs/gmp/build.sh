@@ -4,7 +4,7 @@ set -e
 # shellcheck disable=2086
 (
 cd src
-case ${_TARGET%%-*} in
+case $_CPU in
     arm64*) ;;
     arm*) disableasm='--disable-assembly' ;;
 esac
