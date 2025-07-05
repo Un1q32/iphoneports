@@ -3,6 +3,7 @@ set -e
 . ../../lib.sh
 (
 cd src
+autoreconf -f
 ./configure --host="$_TARGET" --prefix=/var/usr
 "$_MAKE" -j"$_JOBS"
 "$_MAKE" DESTDIR="$_PKGROOT/pkg" install
