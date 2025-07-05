@@ -7,12 +7,25 @@
     (defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) &&                 \
      __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ < 101000)
 
+#include <dlfcn.h>
 #include <fcntl.h>
 #include <iphoneports/pthread_chdir.h>
+#include <stdbool.h>
 
 #define unlinkat __iphoneports_unlinkat
 
-static inline int unlinkat(int fd, const char *path, int flags) {
+static int unlinkat(int fd, const char *path, int flags) {
+  static bool init = false;
+  static int (*func)(int, const char *, int);
+
+  if (!init) {
+    func = (int (*)(int, const char *, int))dlsym(RTLD_NEXT, "unlinkat");
+    init = true;
+  }
+
+  if (func)
+    return func(fd, path, flags);
+
   if (fd == AT_FDCWD || path[0] == '/') {
     if (flags & AT_REMOVEDIR)
       return rmdir(path);

@@ -7,15 +7,28 @@
     (defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) &&                 \
      __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ < 101000)
 
+#include <dlfcn.h>
 #include <fcntl.h>
 #include <iphoneports/pthread_chdir.h>
 #include <limits.h>
+#include <stdbool.h>
 #include <string.h>
 
 #define readlinkat __iphoneports_readlinkat
 
-static inline ssize_t readlinkat(int fd, const char *path, char *buf,
-                                 size_t bufsize) {
+static ssize_t readlinkat(int fd, const char *path, char *buf, size_t bufsize) {
+  static bool init = false;
+  static ssize_t (*func)(int, const char *, char *, size_t);
+
+  if (!init) {
+    func = (ssize_t (*)(int, const char *, char *, size_t))dlsym(RTLD_NEXT,
+                                                                 "readlinkat");
+    init = true;
+  }
+
+  if (func)
+    return func(fd, path, buf, bufsize);
+
   if (fd == AT_FDCWD || path[0] == '/')
     return readlink(path, buf, bufsize);
 

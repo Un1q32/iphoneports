@@ -17,8 +17,6 @@
     (defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) &&                 \
      __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ < 1070)
 
-#include <stdbool.h>
-
 #define __NO_O_CLOEXEC
 
 #endif
@@ -28,14 +26,16 @@
     (defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) &&                 \
      __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ < 101000)
 
+#include <dlfcn.h>
 #include <stdarg.h>
+#include <stdbool.h>
 #include <unistd.h>
 
 #include <iphoneports/pthread_chdir.h>
 
 #define openat __iphoneports_openat
 
-static inline int openat(int fd, const char *path, int flags, ...) {
+static int openat(int fd, const char *path, int flags, ...) {
   int mode;
   if (flags & O_CREAT) {
     va_list va_args;
@@ -43,6 +43,17 @@ static inline int openat(int fd, const char *path, int flags, ...) {
     mode = va_arg(va_args, int);
     va_end(va_args);
   }
+
+  static bool init = false;
+  static int (*func)(int, const char *, int, ...);
+
+  if (!init) {
+    func = (int (*)(int, const char *, int, ...))dlsym(RTLD_NEXT, "openat");
+    init = true;
+  }
+
+  if (func)
+    return func(fd, path, flags, mode);
 
 #ifdef __NO_O_CLOEXEC
   bool cloexec = false;
