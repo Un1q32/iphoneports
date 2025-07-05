@@ -28,6 +28,7 @@ case $_CPU in
     arm64*|x86_64*) ltoopt='ON' ;;
     arm*)
         ltoopt='OFF'
+        # ld64 fails to link when built for thumb, so explicitly specify arm here
         export CFLAGS="-marm"
         export CXXFLAGS="$CFLAGS"
     ;;
