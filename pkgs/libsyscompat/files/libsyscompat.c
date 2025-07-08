@@ -36,15 +36,6 @@
 #define CLOCK_UPTIME_RAW_APROX 9
 #endif
 
-#if (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                \
-     __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ < 80000) ||                \
-    (defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) &&                 \
-     __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ < 101000)
-
-static uint64_t mach_approximate_time(void) { return mach_absolute_time(); }
-
-#endif
-
 int clock_gettime(int clockid, struct timespec *ts) {
   static bool init = false;
   static int (*func)(int, struct timespec *);
@@ -69,14 +60,19 @@ int clock_gettime(int clockid, struct timespec *ts) {
     ts->tv_nsec = tv.tv_usec * 1000;
     return 0;
   }
+  case CLOCK_MONOTONIC_RAW_APROX:
+  case CLOCK_UPTIME_RAW_APROX:
+#if (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                \
+     __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ < 80000) ||                \
+    (defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) &&                 \
+     __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ < 101000)
+    mach_time = mach_approximate_time();
+    break;
+#endif
   case CLOCK_MONOTONIC:
   case CLOCK_MONOTONIC_RAW:
   case CLOCK_UPTIME_RAW:
     mach_time = mach_absolute_time();
-    break;
-  case CLOCK_MONOTONIC_RAW_APROX:
-  case CLOCK_UPTIME_RAW_APROX:
-    mach_time = mach_approximate_time();
     break;
   default:
     errno = EINVAL;
