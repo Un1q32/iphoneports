@@ -9,6 +9,7 @@ cd src
 
 (
 cd pkg/var/usr
+rm -rf share/perl5
 strip_and_sign bin/git bin/git-shell bin/scalar libexec/git-core/git-remote-http libexec/git-core/git-sh-i18n--envsubst libexec/git-core/git-http-backend libexec/git-core/git-http-fetch libexec/git-core/git-imap-send libexec/git-core/git-daemon
 )
 
