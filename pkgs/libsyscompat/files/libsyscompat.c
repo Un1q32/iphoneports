@@ -36,6 +36,15 @@
 #define CLOCK_UPTIME_RAW_APROX 9
 #endif
 
+#if (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                \
+     __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ < 80000) ||                \
+    (defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) &&                 \
+     __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ < 101000)
+
+static uint64_t mach_approximate_time(void) { return mach_absolute_time(); }
+
+#endif
+
 int clock_gettime(int clockid, struct timespec *ts) {
   static bool init = false;
   static int (*func)(int, struct timespec *);
@@ -47,6 +56,8 @@ int clock_gettime(int clockid, struct timespec *ts) {
 
   if (func)
     return func(clockid, ts);
+
+  uint64_t mach_time;
 
   switch (clockid) {
   case CLOCK_REALTIME: {
@@ -60,25 +71,28 @@ int clock_gettime(int clockid, struct timespec *ts) {
   }
   case CLOCK_MONOTONIC:
   case CLOCK_MONOTONIC_RAW:
-  case CLOCK_MONOTONIC_RAW_APROX:
   case CLOCK_UPTIME_RAW:
-  case CLOCK_UPTIME_RAW_APROX: {
-    mach_timebase_info_data_t machinfo;
-    mach_timebase_info(&machinfo);
-    uint64_t nsec;
-    if (machinfo.numer == machinfo.denom)
-      nsec = mach_absolute_time();
-    else
-      nsec = mach_absolute_time() *
-             (long double)((long double)machinfo.numer / machinfo.denom);
-    ts->tv_sec = nsec / 1000000000;
-    ts->tv_nsec = nsec % 1000000000;
-    return 0;
-  }
+    mach_time = mach_absolute_time();
+    break;
+  case CLOCK_MONOTONIC_RAW_APROX:
+  case CLOCK_UPTIME_RAW_APROX:
+    mach_time = mach_approximate_time();
+    break;
   default:
     errno = EINVAL;
     return -1;
   }
+
+  mach_timebase_info_data_t machinfo;
+  mach_timebase_info(&machinfo);
+  uint64_t nsec;
+  if (machinfo.numer == machinfo.denom)
+    nsec = mach_time;
+  else
+    nsec = mach_time * (double)((double)machinfo.numer / machinfo.denom);
+  ts->tv_sec = nsec / 1000000000;
+  ts->tv_nsec = nsec % 1000000000;
+  return 0;
 }
 
 #if (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                \
