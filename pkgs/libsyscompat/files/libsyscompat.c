@@ -63,9 +63,9 @@ int clock_gettime(int clockid, struct timespec *ts) {
   case CLOCK_MONOTONIC_RAW_APROX:
   case CLOCK_UPTIME_RAW_APROX:
 #if (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                \
-     __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ < 80000) ||                \
+     __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ >= 80000) ||               \
     (defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) &&                 \
-     __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ < 101000)
+     __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ >= 101000)
     mach_time = mach_approximate_time();
     break;
 #endif
