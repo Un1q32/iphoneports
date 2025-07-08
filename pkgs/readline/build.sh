@@ -11,7 +11,7 @@ cd src
 (
 cd pkg/var/usr
 rm -rf share bin
-strip_and_sign lib/libhistory.8.2.dylib lib/libreadline.8.2.dylib
+strip_and_sign lib/libhistory.8.*.dylib lib/libreadline.8.*.dylib
 )
 
 mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"

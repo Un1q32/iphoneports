@@ -1,6 +1,6 @@
 --- src/config-top.h.orig
 +++ src/config-top.h
-@@ -63,7 +63,7 @@
+@@ -58,7 +58,7 @@
  /* The default value of the PATH variable. */
  #ifndef DEFAULT_PATH_VALUE
  #define DEFAULT_PATH_VALUE \
@@ -9,16 +9,23 @@
  #endif
  
  /* If you want to unconditionally set a value for PATH in every restricted
-@@ -74,7 +74,7 @@
+@@ -69,13 +69,13 @@
     the Posix.2 confstr () function, or CS_PATH define are not present. */
  #ifndef STANDARD_UTILS_PATH
  #define STANDARD_UTILS_PATH \
--  "/bin:/usr/bin:/sbin:/usr/sbin:/etc:/usr/etc"
+-  "/bin:/usr/bin:/sbin:/usr/sbin"
 +  "/var/usr/bin:/var/usr/sbin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin"
  #endif
  
  /* The default path for enable -f */
-@@ -97,10 +97,10 @@
+ #ifndef DEFAULT_LOADABLE_BUILTINS_PATH
+ #define DEFAULT_LOADABLE_BUILTINS_PATH \
+-  "/usr/local/lib/bash:/usr/lib/bash:/opt/local/lib/bash:/usr/pkg/lib/bash:/opt/pkg/lib/bash:."
++  "/var/usr/lib/bash:/usr/local/lib/bash:/usr/lib/bash:/opt/local/lib/bash:/usr/pkg/lib/bash:/opt/pkg/lib/bash:."
+ #endif
+ 
+ /* Default primary and secondary prompt strings. */
+@@ -92,10 +92,10 @@
  #define DEFAULT_BASHRC "~/.bashrc"
  
  /* System-wide .bashrc file for interactive shells. */
