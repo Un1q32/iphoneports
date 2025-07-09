@@ -65,7 +65,9 @@ int clock_gettime(int clockid, struct timespec *ts) {
 #if (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                \
      __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ >= 80000) ||               \
     (defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) &&                 \
-     __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ >= 101000)
+     __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ >= 101000) ||               \
+    defined(__ENVIRONMENT_TV_OS_VERSION_MIN_REQUIRED__) ||                     \
+    defined(__ENVIRONMENT_WATCH_OS_VERSION_MIN_REQUIRED__)
     mach_time = mach_approximate_time();
     break;
 #endif
