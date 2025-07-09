@@ -42,6 +42,7 @@ int main(void) {
   strcpy(shellname, ptr);
   shellname[0] = '-';
   setenv("SHELL", shell, 1);
+  setenv("LANG", "C", 0);
   execl(shell, shellname, NULL);
   perror("exec");
   return EXIT_FAILURE;
