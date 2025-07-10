@@ -90,6 +90,7 @@ static int clock_gettime(int clockid, struct timespec *ts) {
     nsec = mach_time;
   else
     nsec = mach_time * (double)((double)machinfo.numer / machinfo.denom);
+
   ts->tv_sec = nsec / 1000000000;
   ts->tv_nsec = nsec % 1000000000;
   return 0;
