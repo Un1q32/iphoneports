@@ -4,7 +4,7 @@
 
 ## Setup
 
-You will need an iPhonePorts toolchain to use the build scripts in this repo, you can build one with https://github.com/Un1q32/iphoneports-toolchain-build.
+You will need an iPhonePorts toolchain to use the build scripts in this repo, you can build one with https://github.com/Un1q32/iphoneports-toolchain-builder.
 
 ## Usage
 
