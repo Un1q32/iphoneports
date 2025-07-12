@@ -16,8 +16,7 @@ _get_distribution_components() {
 mkdir -p src/build
 (
 cd src/build
-tblgen="$(command -v "$_TARGET-sdkpath")"
-tblgen="${tblgen%/*}/../share/iphoneports/bin/llvm-tblgen"
+tblgen="$(command -v llvm-tblgen)"
 case $_CPU in
     arm64*|x86_64*) ltoopt='ON' ;;
     arm*)
