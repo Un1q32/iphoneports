@@ -1,3 +1,0 @@
-ncurses
-libunistring
-pcre2
