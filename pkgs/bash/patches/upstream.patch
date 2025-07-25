@@ -1,5 +1,5 @@
---- a/jobs.c.orig
-+++ b/jobs.c
+--- src/jobs.c.orig
++++ src/jobs.c
 @@ -3538,7 +3538,7 @@ return_procsub:
    /* There aren't any dead jobs in the jobs table, but let's see if there's
       one in bgpids. We can do this in posix mode because we'll remove any
@@ -9,8 +9,8 @@
      {
        pid = t->pid;
        r = t->status;
---- a/lib/sh/anonfile.c.orig
-+++ b/lib/sh/anonfile.c
+--- src/lib/sh/anonfile.c.orig
++++ src/lib/sh/anonfile.c
 @@ -25,7 +25,7 @@
  #endif
  #include <bashtypes.h>
@@ -84,8 +84,8 @@
    fd = anonshmopen (name, flag, fn);
    if (fd >= 0)
      return fd;		/* anonshmopen sets *FN appropriately */
---- a/patchlevel.h.orig
-+++ b/patchlevel.h
+--- src/patchlevel.h.orig
++++ src/patchlevel.h
 @@ -25,6 +25,6 @@
     regexp `^#define[ 	]*PATCHLEVEL', since that's what support/mkversion.sh
     looks for to find the patch level (for the sccs version string). */
@@ -94,8 +94,8 @@
 +#define PATCHLEVEL 3
  
  #endif /* _PATCHLEVEL_H_ */
---- a/subst.c.orig
-+++ b/subst.c
+--- src/subst.c.orig
++++ src/subst.c
 @@ -3795,9 +3795,9 @@ pos_params (const char *string, int start, int end, int quoted, int pflags)
  #define EXP_CHAR(s) (s == '$' || s == '`' || s == CTLESC || s == '~')
  #endif
@@ -124,8 +124,8 @@
  	  if (((quoted & (Q_HERE_DOCUMENT|Q_DOUBLE_QUOTES)) || dquote) && (sh_syntaxtab[c] & CBSDQUOTE) == 0)
  	    *r++ = '\\';
  	  /* FALLTHROUGH */
---- a/tests/quotearray.right.orig
-+++ b/tests/quotearray.right
+--- src/tests/quotearray.right.orig
++++ src/tests/quotearray.right
 @@ -44,7 +44,7 @@ declare -A assoc=(["\` echo >&2 foo\`"]="128" [0]="0" ["]"]="12" ["x],b[\$(echo
  foo
  0
