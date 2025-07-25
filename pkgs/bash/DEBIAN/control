@@ -1,5 +1,5 @@
 Package: iphoneports-bash
-Version: 5.3
+Version: 5.3.3
 Architecture: @DPKGARCH@
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Depends: iphoneports-base, iphoneports-ncurses, iphoneports-readline
