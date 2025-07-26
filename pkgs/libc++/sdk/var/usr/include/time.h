@@ -84,7 +84,8 @@ static int clock_gettime(int clockid, struct timespec *ts) {
   }
 
   mach_timebase_info_data_t machinfo;
-  mach_timebase_info(&machinfo);
+  if (mach_timebase_info(&machinfo) != KERN_SUCCESS)
+    return -1;
   uint64_t nsec;
   if (machinfo.numer == machinfo.denom)
     nsec = mach_time;
