@@ -13,8 +13,12 @@
 
 #include <dlfcn.h>
 #include <errno.h>
+#include <mach/mach_init.h>
+#include <mach/mach_port.h>
 #include <mach/mach_time.h>
+#include <mach/thread_act.h>
 #include <stdbool.h>
+#include <sys/resource.h>
 #include <sys/time.h>
 
 #ifndef CLOCK_REALTIME
