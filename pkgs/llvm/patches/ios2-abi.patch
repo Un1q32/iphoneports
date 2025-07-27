@@ -1,0 +1,24 @@
+--- src/llvm/lib/Target/ARM/ARMSubtarget.cpp.orig
++++ src/llvm/lib/Target/ARM/ARMSubtarget.cpp
+@@ -226,9 +226,6 @@
+ 
+   SupportsTailCall = !isThumb1Only() || hasV8MBaselineOps();
+ 
+-  if (isTargetMachO() && isTargetIOS() && getTargetTriple().isOSVersionLT(5, 0))
+-    SupportsTailCall = false;
+-
+   switch (IT) {
+   case DefaultIT:
+     RestrictIT = false;
+@@ -244,7 +241,10 @@
+       (Options.UnsafeFPMath || isTargetDarwin()))
+     HasNEONForFP = true;
+ 
+-  if (isRWPI())
++  if (isRWPI() ||
++      (isTargetIOS() &&
++       ARM::parseArch(TargetTriple.getArchName()) == ARM::ArchKind::ARMV6K &&
++       TargetTriple.isOSVersionLT(3, 0)))
+     ReserveR9 = true;
+ 
+   // If MVEVectorCostFactor is still 0 (has not been set to anything else), default it to 2

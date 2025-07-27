@@ -12,7 +12,7 @@ x32srcs="$x64srcs atomic.c"
 arm64srcs="emutls.c"
 armv7ssrcs="$arm64srcs atomic.c extendhfsf2.c truncsfhf2.c"
 armv7srcs="$armv7ssrcs"
-armv6srcs="$armv7srcs"
+armv6srcs="$armv7srcs floatundidf.c"
 
 for src in $armv6srcs; do
     while [ "$(pgrep clang | wc -l)" -ge "$_JOBS" ]; do
