@@ -46,6 +46,8 @@
 #define CLOCK_THREAD_CPUTIME_ID 16
 #endif
 
+extern uint64_t syscall64(int, ...) __asm("_syscall");
+
 int clock_gettime(int clockid, struct timespec *ts) {
   static bool init = false;
   static int (*func)(int, struct timespec *);
@@ -84,12 +86,9 @@ int clock_gettime(int clockid, struct timespec *ts) {
      __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ >= 101000) ||               \
     defined(__ENVIRONMENT_TV_OS_VERSION_MIN_REQUIRED__) ||                     \
     defined(__ENVIRONMENT_WATCH_OS_VERSION_MIN_REQUIRED__)
-  case CLOCK_THREAD_CPUTIME_ID: {
-    static uint64_t (*syscall64)(int, ...) = NULL;
-    if (!syscall64)
-      syscall64 = dlsym(RTLD_NEXT, "syscall");
+  case CLOCK_THREAD_CPUTIME_ID:
     mach_time = syscall64(SYS_thread_selfusage);
-  } break;
+    break;
   case CLOCK_MONOTONIC_RAW_APROX:
   case CLOCK_UPTIME_RAW_APROX:
     mach_time = mach_approximate_time();
