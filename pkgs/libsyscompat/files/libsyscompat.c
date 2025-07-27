@@ -81,19 +81,10 @@ int clock_gettime(int clockid, struct timespec *ts) {
     return ret;
   }
 #if (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                \
-     __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ >= 80000) ||               \
+     __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ < 80000) ||                \
     (defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) &&                 \
-     __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ >= 101000) ||               \
-    defined(__ENVIRONMENT_TV_OS_VERSION_MIN_REQUIRED__) ||                     \
-    defined(__ENVIRONMENT_WATCH_OS_VERSION_MIN_REQUIRED__)
-  case CLOCK_THREAD_CPUTIME_ID:
-    mach_time = syscall64(SYS_thread_selfusage);
-    break;
-  case CLOCK_MONOTONIC_RAW_APROX:
-  case CLOCK_UPTIME_RAW_APROX:
-    mach_time = mach_approximate_time();
-    break;
-#else
+     __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ < 101000) ||                \
+    defined(__i386__)
   case CLOCK_THREAD_CPUTIME_ID: {
     thread_basic_info_data_t info;
     mach_msg_type_number_t count = THREAD_BASIC_INFO_COUNT;
@@ -116,6 +107,23 @@ int clock_gettime(int clockid, struct timespec *ts) {
 
     return 0;
   }
+#endif
+#if (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                \
+     __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ >= 80000) ||               \
+    (defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) &&                 \
+     __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ >= 101000) ||               \
+    defined(__ENVIRONMENT_TV_OS_VERSION_MIN_REQUIRED__) ||                     \
+    defined(__ENVIRONMENT_WATCH_OS_VERSION_MIN_REQUIRED__)
+#ifndef __i386__
+  case CLOCK_THREAD_CPUTIME_ID:
+    mach_time = __iphoneports_syscall64(SYS_thread_selfusage);
+    break;
+#endif
+  case CLOCK_MONOTONIC_RAW_APROX:
+  case CLOCK_UPTIME_RAW_APROX:
+    mach_time = mach_approximate_time();
+    break;
+#else
   case CLOCK_MONOTONIC_RAW_APROX:
   case CLOCK_UPTIME_RAW_APROX:
 #endif
@@ -137,6 +145,7 @@ int clock_gettime(int clockid, struct timespec *ts) {
     nsec = mach_time;
   else
     nsec = mach_time * (double)((double)machinfo.numer / machinfo.denom);
+
   ts->tv_sec = nsec / 1000000000;
   ts->tv_nsec = nsec % 1000000000;
   return 0;
