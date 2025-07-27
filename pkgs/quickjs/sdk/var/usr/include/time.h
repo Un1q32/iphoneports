@@ -89,7 +89,7 @@ static int clock_gettime(int clockid, struct timespec *ts) {
   case CLOCK_THREAD_CPUTIME_ID: {
     static uint64_t (*syscall64)(int, ...) = NULL;
     if (!syscall64)
-      syscall64 = dlfcn(RTLD_NEXT, "syscall");
+      syscall64 = dlsym(RTLD_NEXT, "syscall");
     mach_time = syscall64(SYS_thread_selfusage);
   } break;
   case CLOCK_MONOTONIC_RAW_APROX:
