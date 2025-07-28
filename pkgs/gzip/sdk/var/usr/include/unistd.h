@@ -7,7 +7,9 @@
     (defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) &&                 \
      __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ < 1060)
 
+#include <dlfcn.h>
 #include <limits.h>
+#include <stdbool.h>
 #include <sys/attr.h>
 #include <sys/fcntl.h>
 
