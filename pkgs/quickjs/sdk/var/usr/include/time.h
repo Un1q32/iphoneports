@@ -48,7 +48,7 @@
 
 #define clock_gettime __iphoneports_clock_gettime
 
-extern uint64_t __iphoneports_syscall64(int, ...) __asm("_syscall");
+extern uint64_t __thread_selfusage(void);
 
 static int clock_gettime(int clockid, struct timespec *ts) {
   static bool init = false;
@@ -89,7 +89,7 @@ static int clock_gettime(int clockid, struct timespec *ts) {
     defined(__ENVIRONMENT_TV_OS_VERSION_MIN_REQUIRED__) ||                     \
     defined(__ENVIRONMENT_WATCH_OS_VERSION_MIN_REQUIRED__)
   case CLOCK_THREAD_CPUTIME_ID:
-    mach_time = __iphoneports_syscall64(SYS_thread_selfusage);
+    mach_time = __thread_selfusage();
     break;
   case CLOCK_MONOTONIC_RAW_APROX:
   case CLOCK_UPTIME_RAW_APROX:
