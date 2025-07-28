@@ -150,6 +150,7 @@ fi
 osver=__ENVIRONMENT_OS_VERSION_MIN_REQUIRED__
 ' | "$_TARGET-cc" -E -xc -)"
 
+    export _TRUEOSVER="$osver"
     case $_SUBSYSTEM in
         (ios|tvos)
             case $osver in
