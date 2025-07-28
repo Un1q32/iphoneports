@@ -299,6 +299,26 @@ int posix_memalign(void **memptr, size_t align, size_t size) {
   }
 }
 
+#ifdef __arm__
+
+#include <unwind.h>
+
+_Unwind_Ptr _Unwind_GetIPInfo (struct _Unwind_Context *context, int *ipbefore) {
+  static bool init = false;
+  static _Unwind_Ptr (*func)(struct _Unwind_Context *, int *);
+  if (!init) {
+    func = (_Unwind_Ptr (*)(struct _Unwind_Context *, int *))dlsym(RTLD_NEXT, "_Unwind_GetIPInfo");
+    init = true;
+  }
+
+  if (func)
+    return func(context, ipbefore);
+
+  abort();
+}
+
+#endif
+
 #endif
 
 #endif
