@@ -1,7 +1,7 @@
 #!/bin/sh
 # shellcheck disable=2031,2034
 
-defaulttarget='armv6-apple-darwin10'
+defaulttarget='armv6-apple-darwin9'
 
 [ "${0%/*}" = "$0" ] && bsroot="." || bsroot="${0%/*}"
 cd "$bsroot" || exit 1

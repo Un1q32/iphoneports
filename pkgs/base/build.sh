@@ -26,7 +26,8 @@ cp -r DEBIAN pkg
 sed -e "s|@DPKGARCH@|$_DPKGARCH|" DEBIAN/control > pkg/DEBIAN/control
 if [ "$_SUBSYSTEM" = "ios" ]; then
     case $_CPU in
-        (armv[67])       minver=3.0  ;;
+        (armv6)          minver=2.0  ;;
+        (armv7)          minver=3.0  ;;
         (armv7s)         minver=6.0  ;;
         (arm64|aarch64*) minver=7.0  ;;
         (arm64e)         minver=12.0 ;;
