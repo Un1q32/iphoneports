@@ -20,8 +20,23 @@
 #define FLAGSTYPE long
 #endif
 
+/* these 2 functions have race conditions if the file is moved
+ * or renamed between the fcntl call and attrlist call */
+
 static inline int fgetattrlist(int fd, struct attrlist *attrList, void *attrBuf,
                                size_t attrBufSize, unsigned FLAGSTYPE flags) {
+  static bool init = false;
+  static int (*func)(int, struct attrlist *, void *, size_t,
+                     unsigned FLAGSTYPE);
+  if (!init) {
+    func = (int (*)(int, struct attrlist *, void *, size_t,
+                    unsigned FLAGSTYPE))dlsym(RTLD_NEXT, "fgetattrlist");
+    init = true;
+  }
+
+  if (func)
+    return func(fd, attrList, attrBuf, attrBufSize, flags);
+
   char fdpath[PATH_MAX];
   if (fcntl(fd, F_GETPATH, fdpath) == -1)
     return -1;
@@ -31,6 +46,18 @@ static inline int fgetattrlist(int fd, struct attrlist *attrList, void *attrBuf,
 
 static inline int fsetattrlist(int fd, struct attrlist *attrList, void *attrBuf,
                                size_t attrBufSize, unsigned FLAGSTYPE flags) {
+  static bool init = false;
+  static int (*func)(int, struct attrlist *, void *, size_t,
+                     unsigned FLAGSTYPE);
+  if (!init) {
+    func = (int (*)(int, struct attrlist *, void *, size_t,
+                    unsigned FLAGSTYPE))dlsym(RTLD_NEXT, "fsetattrlist");
+    init = true;
+  }
+
+  if (func)
+    return func(fd, attrList, attrBuf, attrBufSize, flags);
+
   char fdpath[PATH_MAX];
   if (fcntl(fd, F_GETPATH, fdpath) == -1)
     return -1;
