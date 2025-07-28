@@ -23,7 +23,7 @@
 #endif
 
 /* these 2 functions have race conditions if the file is moved
- * or renamed between the fcntl call and attrlist call */
+ * or deleted between the fcntl call and attrlist call */
 
 static inline int fgetattrlist(int fd, struct attrlist *attrList, void *attrBuf,
                                size_t attrBufSize, unsigned FLAGSTYPE flags) {
