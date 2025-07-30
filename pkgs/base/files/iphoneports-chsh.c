@@ -31,10 +31,16 @@ int main(int argc, const char *argv[]) {
     fprintf(stderr, "Error: cannot stat %s\n", shell);
     return EXIT_FAILURE;
   }
+#if (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                \
+     __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ >= 20000) ||               \
+    defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) ||                  \
+    defined(__ENVIRONMENT_WATCH_OS_VERSION_MIN_REQUIRED__) ||                  \
+    defined(__ENVIRONMENT_TV_OS_VERSION_MIN_REQUIRED__)
   if (!S_ISREG(st.st_mode)) {
     fprintf(stderr, "Error: %s is not a regular file\n", shell);
     return EXIT_FAILURE;
   }
+#endif
   if (!(st.st_mode & S_IXUSR)) {
     fprintf(stderr, "Error: %s is not executable\n", shell);
     return EXIT_FAILURE;
