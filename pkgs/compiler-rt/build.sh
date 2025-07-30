@@ -18,7 +18,7 @@ for src in $armv6srcs; do
     while [ "$(pgrep clang | wc -l)" -ge "$_JOBS" ]; do
         sleep 0.1
     done
-    clang -isysroot "$_PKGROOT/iossysroot" -target armv6-apple-ios1 "../lib/builtins/$src" -c -O3 -o "armv6-${src%\.c}.o" &
+    clang -isysroot "$_PKGROOT/iossysroot" -target armv6-apple-ios2 "../lib/builtins/$src" -c -O3 -o "armv6-${src%\.c}.o" &
 done
 for src in $armv7srcs; do
     while [ "$(pgrep clang | wc -l)" -ge "$_JOBS" ]; do
