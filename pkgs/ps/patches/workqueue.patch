@@ -13,8 +13,8 @@
  		printf("%*s", v->width, "-");
  }
 +#endif
---- src/keyword.c.orig	2025-01-18 11:40:16.371975648 -0500
-+++ src/keyword.c	2025-01-18 11:40:34.925510491 -0500
+--- src/keyword.c.orig
++++ src/keyword.c
 @@ -195,9 +195,11 @@
  	{"vsize", "", "vsz"},
  	{"vsz", "VSZ", NULL, 0, vsize, NULL, 8},
