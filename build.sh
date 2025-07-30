@@ -69,10 +69,7 @@ fi
 
 : > "$bsroot/.builtpkgs"
 
-strip_and_sign() {
-    "$_TARGET-strip" "$@" 2>/dev/null || true
-    [ "$_SUBSYSTEM" != "macos" ] || [ "$_CPU" = "arm64" ] || [ "$_CPU" = "arm64e" ] && ldid -S"$_ENTITLEMENTS" "$@"
-}
+rm -rf "$_TMP/iphoneports-sdk-$_TARGET-*"
 
 error() {
     printf '\033[1;31mError:\033[0m %s\n' "$1"
