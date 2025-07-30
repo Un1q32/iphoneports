@@ -14,18 +14,12 @@ static bool checkshell(const char *shell, bool exitonfail) {
       exit(EXIT_FAILURE);
     return false;
   }
-#if (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                \
-     __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ >= 20000) ||               \
-    defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) ||                  \
-    defined(__ENVIRONMENT_WATCH_OS_VERSION_MIN_REQUIRED__) ||                  \
-    defined(__ENVIRONMENT_TV_OS_VERSION_MIN_REQUIRED__)
   if (!S_ISREG(st.st_mode)) {
     printf("Error: %s is not a regular file!\n", shell);
     if (exitonfail)
       exit(EXIT_FAILURE);
     return false;
   }
-#endif
   if (!(st.st_mode & S_IXUSR)) {
     printf("Error: %s is not executable!\n", shell);
     if (exitonfail)
