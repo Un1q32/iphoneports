@@ -69,7 +69,7 @@ fi
 
 : > "$bsroot/.builtpkgs"
 
-rm -rf "$_TMP/iphoneports-sdk-$_TARGET"-*
+rm -rf "$_TMP/iphoneports-sdk-$_TARGET"*
 
 error() {
     printf '\033[1;31mError:\033[0m %s\n' "$1"
