@@ -40,11 +40,11 @@ int main(int argc, const char *argv[]) {
     fprintf(stderr, "Error: %s is not a regular file\n", shell);
     return EXIT_FAILURE;
   }
-#endif
   if (!(st.st_mode & S_IXUSR)) {
     fprintf(stderr, "Error: %s is not executable\n", shell);
     return EXIT_FAILURE;
   }
+#endif
   if (unlink("/var/usr/shell") != 0 && errno != ENOENT) {
     perror("Error: unlink");
     return EXIT_FAILURE;
