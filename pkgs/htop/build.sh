@@ -3,7 +3,7 @@ set -e
 . ../../lib.sh
 
 if [ "$_SUBSYSTEM" = "ios" ] && [ "$_TRUEOSVER" -lt 20000 ]; then
-    printf 'Requires libproc, which is present on Mac OS X 10.5+ and iPhone OS 2+\n'
+    printf 'htop requires libproc, which is present on Mac OS X 10.5+ and iPhone OS 2+\n'
     mkdir pkg
     exit 0
 fi
