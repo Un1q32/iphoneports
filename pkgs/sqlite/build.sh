@@ -3,7 +3,7 @@ set -e
 . ../../lib.sh
 (
 cd src
-./configure --host="$_TARGET" --prefix=/var/usr --disable-static --disable-static-shell --with-readline-header="$_SDK/var/usr/include/readline/readline.h"
+./configure --host="$_TARGET" --prefix=/var/usr --disable-static --disable-static-shell --with-readline-header="$_SDK/var/usr/include/readline/readline.h" CPPFLAGS='-DHAVE_GETHOSTUUID=1'
 "$_MAKE" -j"$_JOBS"
 "$_MAKE" install DESTDIR="$_PKGROOT/pkg"
 )

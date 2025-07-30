@@ -3,15 +3,3 @@ zlib
 curl
 libarchive
 libuv
-zstd
-lz4
-xz
-libxml2
-nghttp3
-ngtcp2
-nghttp2
-libidn2
-libpsl
-libressl
-brotli
-libunistring

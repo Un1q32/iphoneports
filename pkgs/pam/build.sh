@@ -22,13 +22,7 @@ strip_and_sign libpam.1.dylib security/*.so
 
 (
 cd src/modules
-modules='unix uwtmp'
-if { [ "$_SUBSYSTEM" = "ios" ] && [ "$_TRUEOSVER" -ge 20000 ]; } ||
-    { [ "$_SUBSYSTEM" = "macos" ] && [ "$_TRUEOSVER" -ge 1050 ]; } ||
-    { [ "$_SUBSYSTEM" != "macos" ] && [ "$_SUBSYSTEM" != "ios" ]; }; then
-    modules="$modules launchd"
-fi
-for module in $modules; do
+for module in launchd unix uwtmp; do
     "$_TARGET-cc" -bundle -o "pam_${module}.so" "pam_${module}"/*.c -I"$_PKGROOT/pkg/var/usr/include" "$_PKGROOT/pkg/var/usr/lib/libpam.dylib" -w
 done
 strip_and_sign ./*.so

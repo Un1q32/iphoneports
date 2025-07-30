@@ -8,4 +8,3 @@ zstd
 libidn2
 xz
 bzip2
-libunistring

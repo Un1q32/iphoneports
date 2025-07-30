@@ -4,7 +4,7 @@ set -e
 
 (
 cd src
-./configure --host="$_TARGET" --prefix=/var/usr --sysconfdir=/var/usr/etc/ssh --with-privsep-user="_sshd" --with-sandbox=no ac_cv_func_getsid=yes
+./configure --host="$_TARGET" --prefix=/var/usr --sysconfdir=/var/usr/etc/ssh --with-privsep-user="_sshd" --with-sandbox=no
 "$_MAKE" -j"$_JOBS"
 "$_MAKE" DESTDIR="$_PKGROOT/pkg" install-nokeys STRIP_OPT=
 )

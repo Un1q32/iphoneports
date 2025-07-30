@@ -4,5 +4,3 @@ libusbmuxd
 libplist
 libressl
 libzip
-xz
-zstd

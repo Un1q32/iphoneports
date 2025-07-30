@@ -2,11 +2,3 @@ libressl
 curl
 pcre2
 zlib
-nghttp3
-ngtcp2
-nghttp2
-libidn2
-libpsl
-brotli
-libunistring
-zstd

@@ -16,5 +16,3 @@ nghttp2
 nghttp3
 ngtcp2
 libtatsu
-xz
-libunistring

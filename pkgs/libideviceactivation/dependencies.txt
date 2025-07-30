@@ -14,4 +14,3 @@ libpsl
 nghttp2
 nghttp3
 ngtcp2
-libunistring

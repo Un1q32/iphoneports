@@ -1,16 +1,6 @@
 --- src/print.c.orig
 +++ src/print.c
-@@ -56,7 +56,9 @@
- #endif /* FIXME */
- #include <err.h>
- #include <langinfo.h>
-+#if __has_include(<libproc.h>)
- #include <libproc.h>
-+#endif
- #include <math.h>
- #include <nlist.h>
- #include <stddef.h>
-@@ -1179,6 +1181,12 @@
+@@ -1179,6 +1179,12 @@
  		(void)printf("%*s", v->width, "-");
  }
  
@@ -23,7 +13,7 @@
  void
  wq(KINFO *k, VARENT *ve)
  {
-@@ -1204,3 +1212,4 @@
+@@ -1204,3 +1210,4 @@
  	} else
  		printf("%*s", v->width, "-");
  }
