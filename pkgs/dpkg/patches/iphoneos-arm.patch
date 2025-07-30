@@ -6,7 +6,7 @@
  base-bsd-darwin-amd64		darwin-amd64
 -base-bsd-darwin-arm		darwin-arm
 -base-bsd-darwin-arm64		darwin-arm64
-+base-bsd-darwin-arm		iphoneos-arm
++base-bsd-darwin-arm		@DPKGARCH@
 +base-bsd-darwin-arm64		@DPKGARCH@
  base-bsd-darwin-i386		darwin-i386
  base-bsd-darwin-powerpc		darwin-powerpc

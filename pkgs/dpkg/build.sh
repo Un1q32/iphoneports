@@ -17,7 +17,7 @@ export TAR=gtar
 for script in src/dpkg-maintscript-helper.sh src/dpkg-db-backup.sh src/dpkg-db-keeper.sh; do
     sed -i -e 's|^#!/bin/sh$|#!/var/usr/bin/sh|' "$script"
 done
-sed -i -e "s|@DPKGARCH@|$_DPKGARCH|" data/tupletable
+sed -i -e "s|@DPKGARCH@|$_DPKGARCH|g" data/tupletable
 
 autoreconf -fi
 ./configure --host="$_TARGET" --prefix=/var/usr --with-admindir=/var/lib/dpkg --disable-start-stop-daemon --disable-dselect --with-deb-compressor=gzip CPPFLAGS='-Wno-incompatible-function-pointer-types' PERL=/usr/bin/perl
