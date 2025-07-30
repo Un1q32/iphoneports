@@ -2,6 +2,12 @@
 set -e
 . ../../lib.sh
 
+if { [ "$_SUBSYSTEM" = "ios" ] && [ "$_TRUEOSVER" -lt 20000 ]; } || { [ "$_SUBSYSTEM" = "macos" ] && [ "$_TRUEOSVER" -lt 1050 ]; }; then
+    printf 'python requires 64-bit inodes, which are only present on Mac OS X 10.5+ and iPhone OS 2+\n'
+    mkdir pkg
+    exit 0
+fi
+
 mkdir -p "$_PKGROOT/src/iphoneports-fakebin"
 printf '#!/bin/sh\necho %s\n' "$_MACVER" > "$_PKGROOT/src/iphoneports-fakebin/sw_vers"
 chmod +x "$_PKGROOT/src/iphoneports-fakebin/sw_vers"
