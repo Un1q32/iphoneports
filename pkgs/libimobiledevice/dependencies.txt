@@ -4,3 +4,12 @@ libressl
 libimobiledevice-glue
 readline
 libtatsu
+curl
+nghttp3
+ngtcp2
+nghttp2
+libidn2
+libpsl
+brotli
+libunistring
+zstd

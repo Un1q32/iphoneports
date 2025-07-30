@@ -2,3 +2,4 @@ readline
 libusb
 libimobiledevice-glue
 libplist
+ncurses

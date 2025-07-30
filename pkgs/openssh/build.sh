@@ -1,9 +1,10 @@
 #!/bin/sh
 set -e
 . ../../lib.sh
+
 (
 cd src
-./configure --host="$_TARGET" --prefix=/var/usr --sysconfdir=/var/usr/etc/ssh --with-privsep-user="_sshd" --with-sandbox=no
+./configure --host="$_TARGET" --prefix=/var/usr --sysconfdir=/var/usr/etc/ssh --with-privsep-user="_sshd" --with-sandbox=no ac_cv_func_getsid=yes
 "$_MAKE" -j"$_JOBS"
 "$_MAKE" DESTDIR="$_PKGROOT/pkg" install-nokeys STRIP_OPT=
 )

@@ -8,3 +8,4 @@ libpng
 libjpeg-turbo
 libwebp
 libc++
+zstd

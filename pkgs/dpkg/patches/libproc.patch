@@ -1,0 +1,27 @@
+--- src/lib/dpkg/execname.c.orig
++++ src/lib/dpkg/execname.c
+@@ -42,7 +42,14 @@
+ #include <ps.h>
+ #endif
+ 
+-#if defined(__APPLE__) && defined(__MACH__)
++#if defined(__APPLE__) && defined(__MACH__) && \
++	(defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                \
++     __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ >= 20000) ||               \
++    (defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) &&                 \
++     __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ >= 1050) ||               \
++    defined(__ENVIRONMENT_TV_OS_VERSION_MIN_REQUIRED__) ||                     \
++    defined(__ENVIRONMENT_WATCH_OS_VERSION_MIN_REQUIRED__)
++#define APPLE_HAS_LIBPROC
+ #include <libproc.h>
+ #endif
+ 
+@@ -145,7 +152,7 @@
+ 		return NULL;
+ 
+ 	return varbuf_detach(&vb);
+-#elif defined(__APPLE__) && defined(__MACH__)
++#elif defined(APPLE_HAS_LIBPROC)
+ 	char pathname[_POSIX_PATH_MAX];
+ 
+ 	if (proc_pidpath(pid, pathname, sizeof(pathname)) < 0)

@@ -3,3 +3,4 @@ pcre2
 zlib
 libpsl
 libunistring
+libidn2
