@@ -235,7 +235,13 @@ osver=__ENVIRONMENT_OS_VERSION_MIN_REQUIRED__
             fi
         ;;
 
-        arm*) _DPKGARCH=iphoneos-arm ;;
+        arm*)
+            if [ "$_TRUEOSVER" -lt 20000 ]; then
+                _DPKGARCH=darwin-arm
+            else
+                _DPKGARCH=iphoneos-arm
+            fi
+        ;;
         x86_64*) _DPKGARCH=darwin-amd64 ;;
         i386) _DPKGARCH=darwin-i386 ;;
         ppc64) _DPKGARCH=darwin-ppc64 ;;
