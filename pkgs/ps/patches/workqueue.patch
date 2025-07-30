@@ -1,25 +1,35 @@
 --- src/print.c.orig
 +++ src/print.c
-@@ -1179,6 +1179,7 @@
+@@ -1179,6 +1179,12 @@
  		(void)printf("%*s", v->width, "-");
  }
  
-+#ifdef PROC_PIDWORKQUEUEINFO
++#if (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) && \
++     __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ >= 30000) || \
++    (defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) && \
++     __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ >= 1060) || \
++    defined(__ENVIRONMENT_TV_OS_VERSION_MIN_REQUIRED__) || \
++    defined(__ENVIRONMENT_WATCH_OS_VERSION_MIN_REQUIRED__)
  void
  wq(KINFO *k, VARENT *ve)
  {
-@@ -1204,3 +1205,4 @@
+@@ -1204,3 +1210,4 @@
  	} else
  		printf("%*s", v->width, "-");
  }
 +#endif
 --- src/keyword.c.orig
 +++ src/keyword.c
-@@ -195,9 +195,11 @@
+@@ -195,9 +195,16 @@
  	{"vsize", "", "vsz"},
  	{"vsz", "VSZ", NULL, 0, vsize, NULL, 8},
  	{"wchan", "WCHAN", NULL, LJUST, wchan, NULL, 6},
-+#ifdef PROC_PIDWORKQUEUEINFO
++#if (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) && \
++     __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ >= 30000) || \
++    (defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) && \
++     __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ >= 1060) || \
++    defined(__ENVIRONMENT_TV_OS_VERSION_MIN_REQUIRED__) || \
++    defined(__ENVIRONMENT_WATCH_OS_VERSION_MIN_REQUIRED__)
  	{"wq", "WQ", NULL, 0, wq, NULL, 2, 0, CHAR, NULL, 0},
  	{"wqb", "WQB", NULL, 0, wq, NULL, 2, 0, CHAR, NULL, 0},
  	{"wqr", "WQR", NULL, 0, wq, NULL, 2, 0, CHAR, NULL, 0},
