@@ -1,12 +1,17 @@
 --- src/CMakeLists.txt.orig
 +++ src/CMakeLists.txt
-@@ -362,6 +362,11 @@
+@@ -362,6 +362,16 @@
  	add_definitions(-DHAVE_NETINET_IP_H)
  endif()
  
 +check_include_files(resolv.h HAVE_RESOLV_H)
 +if(HAVE_RESOLV_H)
 +	add_definitions(-DHAVE_RESOLV_H)
++endif()
++
++check_include_files(arpa/nameser.h HAVE_ARPA_NAMESER_H)
++if(HAVE_ARPA_NAMESER_H)
++	add_definitions(-DHAVE_ARPA_NAMESER_H)
 +endif()
 +
  # This isn't ready for universal binaries yet, since we do conditional
