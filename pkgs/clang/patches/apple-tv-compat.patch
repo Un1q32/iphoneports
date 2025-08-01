@@ -1,0 +1,11 @@
+--- src/clang/lib/Driver/ToolChains/Arch/X86.cpp.orig
++++ src/clang/lib/Driver/ToolChains/Arch/X86.cpp
+@@ -85,7 +85,7 @@
+       return "nehalem";
+ 
+     // The oldest x86_64 Macs have core2/Merom; the oldest x86 Macs have Yonah.
+-    return Is64Bit ? "core2" : "yonah";
++    return Is64Bit ? "core2" : "pentium-m";
+   }
+ 
+   // Set up default CPU name for PS4/PS5 compilers.
