@@ -1,11 +1,20 @@
 --- src/clang/lib/Driver/ToolChains/Arch/X86.cpp.orig
 +++ src/clang/lib/Driver/ToolChains/Arch/X86.cpp
-@@ -85,7 +85,7 @@
+@@ -84,8 +84,15 @@
+     if (Triple.isDriverKit())
        return "nehalem";
  
-     // The oldest x86_64 Macs have core2/Merom; the oldest x86 Macs have Yonah.
+-    // The oldest x86_64 Macs have core2/Merom; the oldest x86 Macs have Yonah.
 -    return Is64Bit ? "core2" : "yonah";
-+    return Is64Bit ? "core2" : "pentium-m";
++    // The oldest x86_64 Macs have core2/Merom
++    if (Is64Bit)
++      return "core2";
++
++    // The 1st generation Apple TV can run up to Mac OS X 10.6 with some
++    // effort, and has a Pentium M. Everything else has at least a Yonah.
++    if (Triple.isMacOSX() && Triple.isOSVersionLT(10, 7))
++      return "pentium-m";
++    return "yonah";
    }
  
    // Set up default CPU name for PS4/PS5 compilers.
