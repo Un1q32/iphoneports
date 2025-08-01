@@ -288,6 +288,7 @@ build() {
     export _PKGROOT="$pkgdir/$1"
     export _PKGNAME="$1"
     cd "$_PKGROOT" || error "Failed to cd to package directory: $1"
+    [ -f build.sh ] || error "$1 has no build.sh"
     includedeps
     if [ -n "$dryrun" ]; then
         printf '%s\n' "Building $1"
