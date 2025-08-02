@@ -1,17 +1,14 @@
 --- src/Python/pylifecycle.c.orig
 +++ src/Python/pylifecycle.c
-@@ -47,13 +47,8 @@
- #  include <TargetConditionals.h>
- #  include <mach-o/loader.h>
+@@ -49,11 +49,7 @@
  // The os_log unified logging APIs were introduced in macOS 10.12, iOS 10.0,
--// tvOS 10.0, and watchOS 3.0; we enable the use of the system logger
--// automatically on non-macOS platforms.
+ // tvOS 10.0, and watchOS 3.0; we enable the use of the system logger
+ // automatically on non-macOS platforms.
 -#  if defined(TARGET_OS_IPHONE) && TARGET_OS_IPHONE
 -#    define USE_APPLE_SYSTEM_LOG 1
 -#  else
 -#    define USE_APPLE_SYSTEM_LOG 0
 -#  endif
-+// tvOS 10.0, and watchOS 3.0;
 +#  define USE_APPLE_SYSTEM_LOG 0
  
  #  if USE_APPLE_SYSTEM_LOG
