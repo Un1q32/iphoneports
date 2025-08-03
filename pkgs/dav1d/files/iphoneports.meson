@@ -5,6 +5,7 @@ objc = '@CC@'
 objcpp = '@CXX@'
 ar = '@AR@'
 ranlib = '@RANLIB@'
+pkg-config = 'pkg-config'
 strip = 'true'
 
 [properties]
