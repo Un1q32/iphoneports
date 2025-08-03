@@ -43,6 +43,8 @@ sed -e "s|@CC@|$_TARGET-cc|g" \
     -e "s|@CPU@|$_CPU|g" \
     -e "s|@CPU_FAMILY@|$cpu_family|g" \
     -e "s|@SUBSYSTEM@|$_SUBSYSTEM|g" \
+    -e "s|@SYSROOT@|$_SDK|g" \
+    -e "s|@PKGCONFIG_LIBDIR@|$_SDK/var/usr/lib/pkgconfig|g" \
     files/iphoneports.meson > src/iphoneports.meson
 
 (

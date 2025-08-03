@@ -10,6 +10,8 @@ strip = 'true'
 [properties]
 root = '@SDK@'
 needs_exe_wrapper = true
+sys_root = '@SYSROOT@'
+pkg_config_libdir = '@PKGCONFIG_LIBDIR@'
 
 [host_machine]
 system = 'darwin'
