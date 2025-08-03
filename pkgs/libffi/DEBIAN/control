@@ -1,0 +1,7 @@
+Package: iphoneports-libffi
+Section: Development
+Maintainer: Uniq <joey.t.reinhart@gmail.com>
+Architecture: @DPKGARCH@
+Version: 3.5.2
+Description: A portable foreign-function interface library
+Depends: iphoneports-base
