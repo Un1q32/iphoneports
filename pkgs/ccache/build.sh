@@ -4,7 +4,13 @@ set -e
 mkdir -p src/build
 (
 cd src/build
-cmake -GNinja .. -DCMAKE_BUILD_TYPE=Release -DCMAKE_C_COMPILER="$_TARGET-cc" -DCMAKE_SYSTEM_NAME=Darwin -DCMAKE_INSTALL_PREFIX=/var/usr -DCMAKE_FIND_ROOT_PATH_MODE_INCLUDE=ONLY -DCMAKE_FIND_ROOT_PATH="$_SDK/var/usr"
+cmake -GNinja .. \
+  -DCMAKE_BUILD_TYPE=Release \
+  -DCMAKE_C_COMPILER="$_TARGET-cc" \
+  -DCMAKE_SYSTEM_NAME=Darwin \
+  -DCMAKE_INSTALL_PREFIX=/var/usr \
+  -DCMAKE_FIND_ROOT_PATH_MODE_INCLUDE=ONLY \
+  -DCMAKE_FIND_ROOT_PATH="$_SDK/var/usr"
 DESTDIR="$_PKGROOT/pkg" ninja -j"$_JOBS" install
 )
 

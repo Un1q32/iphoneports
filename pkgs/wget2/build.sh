@@ -4,7 +4,17 @@ set -e
 (
 cd src
 autoreconf -f
-./configure --host="$_TARGET" --prefix=/var/usr --with-ssl=openssl --with-openssl --with-lzma --with-bzip2 --without-gpgme --disable-static CPPFLAGS='-Wno-unknown-attributes' PKG_CONFIG_LIBDIR="$_SDK/var/usr/lib/pkgconfig"
+./configure \
+    --host="$_TARGET" \
+    --prefix=/var/usr \
+    --with-ssl=openssl \
+    --with-openssl \
+    --with-lzma \
+    --with-bzip2 \
+    --without-gpgme \
+    --disable-static \
+    CPPFLAGS='-Wno-unknown-attributes' \
+    PKG_CONFIG_LIBDIR="$_SDK/var/usr/lib/pkgconfig"
 "$_MAKE" -j"$_JOBS"
 "$_MAKE" DESTDIR="$_PKGROOT/pkg" install
 )

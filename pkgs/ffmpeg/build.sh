@@ -4,7 +4,29 @@ set -e
 (
 cd src
 export PKG_CONFIG_LIBDIR="$_SDK/var/usr/lib/pkgconfig"
-./configure --prefix=/var/usr --cross-prefix="$_TARGET-" --arch="$_CPU" --target-os=darwin --stdc=c23 --disable-stripping --disable-debug --disable-doc --disable-avdevice --disable-static --enable-shared --enable-lto --enable-zlib --enable-lzma --enable-bzlib --enable-libxml2 --enable-openssl --enable-libdav1d --enable-libwebp --pkg-config='pkg-config' --enable-gpl --enable-version3
+./configure \
+    --prefix=/var/usr \
+    --cross-prefix="$_TARGET-" \
+    --arch="$_CPU" \
+    --target-os=darwin \
+    --stdc=c23 \
+    --disable-stripping \
+    --disable-debug \
+    --disable-doc \
+    --disable-avdevice \
+    --disable-static \
+    --enable-shared \
+    --enable-lto \
+    --enable-zlib \
+    --enable-lzma \
+    --enable-bzlib \
+    --enable-libxml2 \
+    --enable-openssl \
+    --enable-libdav1d \
+    --enable-libwebp \
+    --pkg-config='pkg-config' \
+    --enable-gpl \
+    --enable-version3
 "$_MAKE" -j"$_JOBS"
 "$_MAKE" DESTDIR="$_PKGROOT/pkg" install
 )
@@ -14,9 +36,7 @@ cd pkg/var/usr
 rm -rf share
 strip_and_sign bin/ffmpeg bin/ffprobe
 for lib in lib/*.dylib; do
-    if ! [ -h "$lib" ]; then
-        strip_and_sign "$lib"
-    fi
+    [ -h "$lib" ] || strip_and_sign "$lib"
 done
 )
 

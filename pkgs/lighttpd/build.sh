@@ -4,7 +4,20 @@ set -e
 (
 cd src
 ./autogen.sh
-./configure --host="$_TARGET" --enable-silent-rules --prefix=/var/usr --with-openssl --with-zlib --with-bzip2 --with-brotli --with-zstd --with-lua --with-sqlite --with-webdav-props --with-xxhash PKG_CONFIG_LIBDIR="$_SDK/var/usr/lib/pkgconfig"
+./configure \
+    --host="$_TARGET" \
+    --enable-silent-rules \
+    --prefix=/var/usr \
+    --with-openssl \
+    --with-zlib \
+    --with-bzip2 \
+    --with-brotli \
+    --with-zstd \
+    --with-lua \
+    --with-sqlite \
+    --with-webdav-props \
+    --with-xxhash \
+    PKG_CONFIG_LIBDIR="$_SDK/var/usr/lib/pkgconfig"
 "$_MAKE" -j"$_JOBS"
 "$_MAKE" install DESTDIR="$_PKGROOT/pkg"
 )

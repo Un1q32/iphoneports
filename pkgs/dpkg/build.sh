@@ -20,7 +20,15 @@ done
 sed -i -e "s|@DPKGARCH@|$_DPKGARCH|g" data/tupletable
 
 autoreconf -fi
-./configure --host="$_TARGET" --prefix=/var/usr --with-admindir=/var/lib/dpkg --disable-start-stop-daemon --disable-dselect --with-deb-compressor=gzip CPPFLAGS='-Wno-incompatible-function-pointer-types' PERL=/usr/bin/perl
+./configure \
+    --host="$_TARGET" \
+    --prefix=/var/usr \
+    --with-admindir=/var/lib/dpkg \
+    --disable-start-stop-daemon \
+    --disable-dselect \
+    --with-deb-compressor=gzip \
+    CPPFLAGS='-Wno-incompatible-function-pointer-types' \
+    PERL=/usr/bin/perl
 "$_MAKE" -j"$_JOBS"
 "$_MAKE" DESTDIR="$_PKGROOT/pkg" install
 )

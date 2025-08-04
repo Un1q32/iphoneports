@@ -3,7 +3,23 @@ set -e
 . ../../lib.sh
 (
 cd src
-"$_TARGET-cc" -Os -flto top.c libtop.c log.c samp.c disp.c ch.c dch.c -o top -DTOP_DEPRECATED -Wno-invalid-pp-token -Wno-implicit-function-declaration -Wno-constant-conversion -Wno-tautological-constant-out-of-range-compare -lncurses -lutil -lpanel -framework IOKit -framework CoreFoundation
+"$_TARGET-cc" \
+    -Os -flto \
+    top.c \
+    libtop.c \
+    log.c \
+    samp.c \
+    disp.c \
+    ch.c \
+    dch.c \
+    -o top \
+    -DTOP_DEPRECATED \
+    -w \
+    -lncurses \
+    -lutil \
+    -lpanel \
+    -framework IOKit \
+    -framework CoreFoundation
 mkdir -p "$_PKGROOT/pkg/var/usr/bin"
 cp top "$_PKGROOT/pkg/var/usr/bin"
 )

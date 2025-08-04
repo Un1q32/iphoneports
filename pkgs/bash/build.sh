@@ -3,7 +3,13 @@ set -e
 . ../../lib.sh
 (
 cd src
-./configure --host="$_TARGET" --prefix=/var/usr --with-installed-readline CFLAGS="-Wno-parentheses -Wno-format-security -Wno-deprecated-non-prototype -O3" CC_FOR_BUILD='clang' CFLAGS_FOR_BUILD='-std=c99 -O2'
+./configure \
+    --host="$_TARGET" \
+    --prefix=/var/usr \
+    --with-installed-readline \
+    CFLAGS="-Wno-parentheses -Wno-format-security -Wno-deprecated-non-prototype -O3" \
+    CC_FOR_BUILD='clang' \
+    CFLAGS_FOR_BUILD='-std=c99 -O2'
 "$_MAKE" -j"$_JOBS"
 mkdir -p "$_PKGROOT/pkg/var/usr/bin"
 cp bash "$_PKGROOT/pkg/var/usr/bin"

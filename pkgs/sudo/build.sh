@@ -4,7 +4,19 @@ set -e
 unset SUDO_PROMPT
 (
 cd src
-./configure --host="$_TARGET" --prefix=/var/usr --sysconfdir=/var/usr/etc --with-rundir=/var/usr/run/sudo --with-vardir=/var/usr/db/sudo --with-passprompt="Password:" --disable-tmpfiles.d --with-env-editor --with-editor='nano:vim:vi' --enable-zlib --enable-openssl ax_cv_check_cflags___static_libgcc=no
+./configure \
+    --host="$_TARGET" \
+    --prefix=/var/usr \
+    --sysconfdir=/var/usr/etc \
+    --with-rundir=/var/usr/run/sudo \
+    --with-vardir=/var/usr/db/sudo \
+    --with-passprompt='Password:' \
+    --disable-tmpfiles.d \
+    --with-env-editor \
+    --with-editor='nano:vim:vi' \
+    --enable-zlib \
+    --enable-openssl \
+    ax_cv_check_cflags___static_libgcc=no
 "$_MAKE" -j"$_JOBS"
 fakeroot "$_MAKE" DESTDIR="$_PKGROOT/pkg" install
 )
