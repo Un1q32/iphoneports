@@ -6,3 +6,4 @@ zlib
 libressl
 mpdecimal
 libffi
+libb2
