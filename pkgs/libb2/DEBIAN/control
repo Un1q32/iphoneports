@@ -1,0 +1,7 @@
+Package: iphoneports-libb2
+Section: Development
+Maintainer: Uniq <joey.t.reinhart@gmail.com>
+Architecture: @DPKGARCH@
+Version: 0.98.1
+Description: C library providing BLAKE2b, BLAKE2s, BLAKE2bp, BLAKE2sp hash functions
+Depends: iphoneports-base
