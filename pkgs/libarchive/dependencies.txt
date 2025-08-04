@@ -4,3 +4,4 @@ xz
 zstd
 lz4
 libxml2
+libb2
