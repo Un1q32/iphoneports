@@ -2,12 +2,11 @@
 
 #include_next <stdio.h>
 
-#if (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                \
-     __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ < 110000) ||               \
+#if ((defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) ||               \
+      defined(__ENVIRONMENT_TV_OS_VERSION_MIN_REQUIRED__)) &&                  \
+     __ENVIRONMENT_OS_VERSION_MIN_REQUIRED__ < 110000) ||                      \
     (defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) &&                 \
      __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ < 101300) ||                \
-    (defined(__ENVIRONMENT_TV_OS_VERSION_MIN_REQUIRED__) &&                    \
-     __ENVIRONMENT_TV_OS_VERSION_MIN_REQUIRED__ < 110000) ||                   \
     (defined(__ENVIRONMENT_WATCH_OS_VERSION_MIN_REQUIRED__) &&                 \
      __ENVIRONMENT_WATCH_OS_VERSION_MIN_REQUIRED__ < 40000)
 
