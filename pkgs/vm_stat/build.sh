@@ -3,7 +3,7 @@ set -e
 . ../../lib.sh
 (
 cd src
-"$_TARGET-cc" vm_stat.c -o vm_stat -Os -flto
+"$_TARGET-cc" vm_stat.c -o vm_stat -Os -flto -Wno-format
 mkdir -p "$_PKGROOT/pkg/var/usr/bin"
 cp vm_stat "$_PKGROOT/pkg/var/usr/bin"
 )
