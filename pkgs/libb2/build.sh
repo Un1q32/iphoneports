@@ -3,6 +3,7 @@ set -e
 . ../../lib.sh
 (
 cd src
+autoreconf -fi
 ./configure --host="$_TARGET" --prefix=/var/usr --disable-static --disable-native --enable-silent-rules
 "$_MAKE" -j"$_JOBS"
 "$_MAKE" DESTDIR="$_PKGROOT/pkg" install
