@@ -1,0 +1,20 @@
+--- src/vm_stat.c.orig
++++ src/vm_stat.c
+@@ -109,7 +109,7 @@
+ {
+ 	get_stats(&vm_stat);
+ 	printf("Mach Virtual Memory Statistics: ");
+-	printf("(page size of %d bytes, cache hits %u%%)\n",
++	printf("(page size of %zu bytes, cache hits %u%%)\n",
+ 				pageSize, percent);
+ 	printf("%6s %6s %4s %4s %8s %8s %8s %8s %8s %8s\n",
+ 		"free",
+@@ -130,7 +130,7 @@
+ {
+ 
+ 	get_stats(&vm_stat);
+-	printf("Mach Virtual Memory Statistics: (page size of %d bytes)\n",
++	printf("Mach Virtual Memory Statistics: (page size of %zu bytes)\n",
+ 				pageSize);
+ 
+ 	pstat("Pages free:", vm_stat.free_count);
