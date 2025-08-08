@@ -30,7 +30,7 @@ strip_and_sign libc++.1.0.dylib libc++abi.1.0.dylib
 )
 
 mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"
-cp src/libc++/LICENSE.TXT "pkg/var/usr/share/licenses/$_PKGNAME"
+cp src/libcxx/LICENSE.TXT "pkg/var/usr/share/licenses/$_PKGNAME"
 
 cp -r DEBIAN pkg
 sed -e "s|@DPKGARCH@|$_DPKGARCH|" DEBIAN/control > pkg/DEBIAN/control
