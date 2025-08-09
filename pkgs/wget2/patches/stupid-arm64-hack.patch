@@ -1,0 +1,44 @@
+--- src/lib/sha512.c.orig
++++ src/lib/sha512.c
+@@ -24,7 +24,7 @@
+ 
+ /* Specification.  */
+ #if HAVE_OPENSSL_SHA512
+-# define GL_OPENSSL_INLINE _GL_EXTERN_INLINE
++# define GL_OPENSSL_INLINE extern inline __attribute ((__gnu_inline__))
+ #endif
+ #include "sha512.h"
+ 
+--- src/lib/sha256.c.orig
++++ src/lib/sha256.c
+@@ -24,7 +24,7 @@
+ 
+ /* Specification.  */
+ #if HAVE_OPENSSL_SHA256
+-# define GL_OPENSSL_INLINE _GL_EXTERN_INLINE
++# define GL_OPENSSL_INLINE extern inline __attribute ((__gnu_inline__))
+ #endif
+ #include "sha256.h"
+ 
+--- src/lib/sha1.c.orig
++++ src/lib/sha1.c
+@@ -25,7 +25,7 @@
+ 
+ /* Specification.  */
+ #if HAVE_OPENSSL_SHA1
+-# define GL_OPENSSL_INLINE _GL_EXTERN_INLINE
++# define GL_OPENSSL_INLINE extern inline __attribute ((__gnu_inline__))
+ #endif
+ #include "sha1.h"
+ 
+--- src/lib/md5.c.orig
++++ src/lib/md5.c
+@@ -23,7 +23,7 @@
+ 
+ /* Specification.  */
+ #if HAVE_OPENSSL_MD5
+-# define GL_OPENSSL_INLINE _GL_EXTERN_INLINE
++# define GL_OPENSSL_INLINE extern inline __attribute ((__gnu_inline__))
+ #endif
+ #include "md5.h"
+ 
