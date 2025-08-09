@@ -10,9 +10,7 @@
     (defined(__ENVIRONMENT_WATCH_OS_VERSION_MIN_REQUIRED__) &&                 \
      __ENVIRONMENT_WATCH_OS_VERSION_MIN_REQUIRED__ < 40000)
 
-#include <dlfcn.h>
 #include <errno.h>
-#include <stdbool.h>
 #include <stddef.h>
 #include <sys/stat.h>
 #include <sys/time.h>
@@ -25,18 +23,6 @@
 #endif
 
 static int futimens(int fd, const struct timespec times[2]) {
-  static bool init = false;
-  static int (*realfunc)(int, const struct timespec[2]);
-
-  if (!init) {
-    realfunc =
-        (int (*)(int, const struct timespec[2]))dlsym(RTLD_NEXT, "futimens");
-    init = true;
-  }
-
-  if (realfunc)
-    return realfunc(fd, times);
-
   if (!times ||
       (times[0].tv_nsec == UTIME_NOW && times[1].tv_nsec == UTIME_NOW))
     return futimes(fd, NULL);
