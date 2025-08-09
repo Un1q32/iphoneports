@@ -13,6 +13,7 @@ autoreconf -f
     --with-bzip2 \
     --without-gpgme \
     --disable-static \
+    --disable-doc \
     CPPFLAGS='-Wno-unknown-attributes' \
     PKG_CONFIG_LIBDIR="$_SDK/var/usr/lib/pkgconfig" \
     PKG_CONFIG_SYSROOT_DIR="$_SDK"
