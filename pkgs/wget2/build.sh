@@ -14,7 +14,8 @@ autoreconf -f
     --without-gpgme \
     --disable-static \
     CPPFLAGS='-Wno-unknown-attributes' \
-    PKG_CONFIG_LIBDIR="$_SDK/var/usr/lib/pkgconfig"
+    PKG_CONFIG_LIBDIR="$_SDK/var/usr/lib/pkgconfig" \
+    PKG_CONFIG_SYSROOT_DIR="$_SDK"
 "$_MAKE" -j"$_JOBS"
 "$_MAKE" DESTDIR="$_PKGROOT/pkg" install
 )
