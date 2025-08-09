@@ -36,7 +36,7 @@ autoreconf -fi
 (
 cd pkg/var/usr
 rm -rf share/man share/doc share/perl5 share/polkit-1 libexec/dpkg/methods ../lib/dpkg/methods
-grep -Erl '#! ?/usr/bin/perl' | while IFS= read -r file; do
+grep -Erl '#! ?/usr/bin/perl' bin | while IFS= read -r file; do
     rm -f "$file"
 done
 for bin in bin/*; do
