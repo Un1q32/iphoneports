@@ -14,6 +14,7 @@ autoreconf -f
     --without-gpgme \
     --disable-static \
     --disable-doc \
+    --disable-valgrind-tests \
     CPPFLAGS='-Wno-unknown-attributes' \
     PKG_CONFIG_LIBDIR="$_SDK/var/usr/lib/pkgconfig" \
     PKG_CONFIG_SYSROOT_DIR="$_SDK"
