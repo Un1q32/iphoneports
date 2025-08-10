@@ -9,8 +9,9 @@
 
 #include <dlfcn.h>
 #include <fcntl.h>
-#include <iphoneports/pthread_chdir.h>
 #include <stdbool.h>
+
+#include <iphoneports/pthread_chdir.h>
 
 #define unlinkat __iphoneports_unlinkat
 
