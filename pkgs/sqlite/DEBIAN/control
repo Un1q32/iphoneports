@@ -2,6 +2,6 @@ Package: iphoneports-sqlite
 Version: 3.50.4
 Architecture: @DPKGARCH@
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
-Section: Utilities
+Section: Data_Storage
 Description: SQL database engine
 Depends: iphoneports-base, iphoneports-zlib, iphoneports-readline
