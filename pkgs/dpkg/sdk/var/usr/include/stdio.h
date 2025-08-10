@@ -33,7 +33,7 @@ static inline ssize_t getdelim(char **lineptr, size_t *n, int delim,
   while (c = fgetc(stream) != EOF) {
     if (i + 1 >= *n) {
       size_t new_size = *n + 128;
-      char *new_lineptr = realloc(*lineptr, new_size);
+      char *new_lineptr = (char *)realloc(*lineptr, new_size);
       if (!new_lineptr)
         return -1;
       *lineptr = new_lineptr;
