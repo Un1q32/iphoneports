@@ -1,7 +1,0 @@
-zlib
-zstd
-gmp
-libunistring
-nettle
-brotli
-libidn2
