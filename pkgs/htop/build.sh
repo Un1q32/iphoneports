@@ -11,10 +11,7 @@ mkdir -p "$_PKGROOT/pkg/var/usr/bin"
 cp htop "$_PKGROOT/pkg/var/usr/bin"
 )
 
-(
-cd pkg/var/usr/bin
-strip_and_sign htop
-)
+strip_and_sign pkg/var/usr/bin/htop
 
 mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"
 cp src/COPYING "pkg/var/usr/share/licenses/$_PKGNAME"
