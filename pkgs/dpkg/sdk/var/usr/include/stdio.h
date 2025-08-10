@@ -22,7 +22,7 @@ static inline ssize_t getdelim(char **lineptr, size_t *n, int delim,
   }
 
   if (*lineptr == NULL) {
-    *lineptr = malloc(128);
+    *lineptr = (char *)malloc(128);
     if (*lineptr == NULL)
       return -1;
     *n = 128;
