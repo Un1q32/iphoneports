@@ -1,8 +1,8 @@
 Package: iphoneports-vim
-Version: 9.1.1518
+Version: 9.1.1627
 Architecture: @DPKGARCH@
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Section: Text_Editors
 Description: Vi Improved, a highly configurable, improved version of the vi text editor
-Depends: iphoneports-base, iphoneports-tinyxxd
+Depends: iphoneports-base, iphoneports-ncurses, iphoneports-tinyxxd
 Replaces: iphoneports-nextvi

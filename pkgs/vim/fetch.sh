@@ -1,5 +1,5 @@
 #!/bin/sh
-commit=e2c0f81dd014b03a40af6b2c42463b7a0d92f5d6
+commit=7e0df5eee9eab872261fd5eb0068cec967a2ba77
 rm -rf pkg src
 printf "Downloading source...\n"
 curl -L -# -o src.tar.gz "https://github.com/vim/vim/archive/${commit}.tar.gz"

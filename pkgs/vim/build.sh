@@ -18,7 +18,8 @@ cd src
     vim_cv_timer_create_with_lrt=no \
     vim_cv_stat_ignores_slash=no \
     vim_cv_memmove_handles_overlap=yes \
-    vim_cv_uname_output=generic
+    vim_cv_uname_output=generic \
+    PKG_CONFIG_LIBDIR="$_SDK/var/usr/lib/pkgconfig"
 "$_MAKE" install DESTDIR="$_PKGROOT/pkg" -j"$_JOBS"
 )
 
