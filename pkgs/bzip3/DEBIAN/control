@@ -2,6 +2,6 @@ Package: iphoneports-bzip3
 Section: Archiving
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Architecture: @DPKGARCH@
-Version: 1.5.2
+Version: 1.5.3
 Description: A better and stronger spiritual successor to BZip2.
 Depends: iphoneports-base
