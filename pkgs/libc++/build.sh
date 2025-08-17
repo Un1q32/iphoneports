@@ -18,15 +18,16 @@ cmake -GNinja ../runtimes \
     -DLIBCXX_INCLUDE_BENCHMARKS=OFF \
     -DLIBCXXABI_USE_LLVM_UNWINDER=OFF \
     -DLIBCXX_ENABLE_STATIC=OFF \
-    -DLIBCXXABI_ENABLE_STATIC=OFF \
+    -DLIBCXXABI_ENABLE_SHARED=OFF \
+    -DLIBCXX_ENABLE_STATIC_ABI_LIBRARY=ON \
     -DCMAKE_OSX_ARCHITECTURES="$_CPU"
-DESTDIR="$_PKGROOT/pkg" ninja -j"$_JOBS" install-cxx install-cxxabi
+DESTDIR="$_PKGROOT/pkg" ninja -j"$_JOBS" install-cxx install-cxxabi-headers
 )
 
 (
 cd pkg/var/usr/lib
 rm -rf libc++experimental.a ../include/c++/v1/experimental
-strip_and_sign libc++.1.0.dylib libc++abi.1.0.dylib
+strip_and_sign libc++.1.0.dylib
 )
 
 mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"
