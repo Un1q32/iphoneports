@@ -2,12 +2,11 @@
 #include <stdlib.h>
 #undef realpath
 
-#if (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                \
-     __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ < 100000) ||               \
+#if ((defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) ||               \
+      defined(__ENVIRONMENT_TV_OS_VERSION_MIN_REQUIRED__)) &&                  \
+     __ENVIRONMENT_OS_VERSION_MIN_REQUIRED__ < 100000) ||                      \
     (defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) &&                 \
      __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ < 101200) ||                \
-    (defined(__ENVIRONMENT_TV_OS_VERSION_MIN_REQUIRED__) &&                    \
-     __ENVIRONMENT_TV_OS_VERSION_MIN_REQUIRED__ < 100000) ||                   \
     (defined(__ENVIRONMENT_WATCH_OS_VERSION_MIN_REQUIRED__) &&                 \
      __ENVIRONMENT_WATCH_OS_VERSION_MIN_REQUIRED__ < 30000)
 
@@ -303,11 +302,12 @@ int posix_memalign(void **memptr, size_t align, size_t size) {
 
 #include <unwind.h>
 
-_Unwind_Ptr _Unwind_GetIPInfo (struct _Unwind_Context *context, int *ipbefore) {
+_Unwind_Ptr _Unwind_GetIPInfo(struct _Unwind_Context *context, int *ipbefore) {
   static bool init = false;
   static _Unwind_Ptr (*func)(struct _Unwind_Context *, int *);
   if (!init) {
-    func = (_Unwind_Ptr (*)(struct _Unwind_Context *, int *))dlsym(RTLD_NEXT, "_Unwind_GetIPInfo");
+    func = (_Unwind_Ptr (*)(struct _Unwind_Context *, int *))dlsym(
+        RTLD_NEXT, "_Unwind_GetIPInfo");
     init = true;
   }
 
