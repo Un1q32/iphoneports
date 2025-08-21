@@ -38,7 +38,7 @@ for src in $arm64srcs; do
     done
     clang -isysroot "$_PKGROOT/iossysroot" -target arm64-apple-ios7 "../lib/builtins/$src" -c -O3 -o "arm64-${src%\.c}.o" &
 done
-clang -target arm64e-apple-ios12 -xc /dev/null -c -o nothing.o &
+clang -target arm64e-apple-ios14 -xc /dev/null -c -o nothing.o &
 wait
 
 "$_TARGET-libtool" -static -o libclang_rt.ios.a ./*.o 2>/dev/null
