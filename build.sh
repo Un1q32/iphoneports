@@ -472,7 +472,10 @@ main() {
             build "$2" || error "Failed to build package: $2"
             cp -f "$pkgdir/$2"/*.deb "$bsroot/debs" 2> /dev/null
             for pkg in $deppkgs; do
-                rm -rf "$pkgdir/$pkg/pkg" "$pkgdir/$pkg/src" "$pkgdir/$pkg"/*.deb
+                rm -rf "$pkgdir/$pkg/pkg" "$pkgdir/$pkg/src" "$pkgdir/$pkg"/*.deb &
+            done
+            wait
+            for pkg in $deppkgs; do
                 build "$pkg" || error "Failed to build package: $pkg"
                 cp -f "$pkgdir/$pkg"/*.deb debs 2> /dev/null
             done
