@@ -9,7 +9,6 @@ cmake -GNinja .. \
     -DCMAKE_C_COMPILER="$_TARGET-cc" \
     -DCMAKE_SYSTEM_NAME=Darwin \
     -DCMAKE_INSTALL_PREFIX=/var/usr \
-    -DCMAKE_INSTALL_NAME_TOOL="$_TARGET-install_name_tool" \
     -DCMAKE_INSTALL_NAME_DIR=/var/usr/lib \
     -DCMAKE_FIND_ROOT_PATH_MODE_LIBRARY=ONLY \
     -DCMAKE_FIND_ROOT_PATH_MODE_INCLUDE=ONLY \
@@ -22,7 +21,6 @@ DESTDIR="$_PKGROOT/pkg" ninja -j"$_JOBS" install
 cd pkg/var/usr
 rm -rf share
 mv lib/libnghttp2.14.*.dylib lib/libnghttp2.14.dylib
-"$_TARGET-install_name_tool" -id /var/usr/lib/libnghttp2.14.dylib lib/libnghttp2.14.dylib
 strip_and_sign lib/libnghttp2.14.dylib
 )
 
