@@ -9,8 +9,6 @@ cmake -GNinja .. \
     -DCMAKE_CXX_COMPILER="$_TARGET-c++" \
     -DCMAKE_SYSTEM_NAME=Darwin \
     -DCMAKE_INSTALL_PREFIX=/var/usr \
-    -DCMAKE_INSTALL_NAME_TOOL="$_TARGET-install_name_tool" \
-    -DCMAKE_INSTALL_NAME_DIR=/var/usr/lib \
     -DCMAKE_FIND_ROOT_PATH_MODE_INCLUDE=ONLY \
     -DCMAKE_FIND_ROOT_PATH="$_SDK/var/usr" \
     -DCMAKE_CXX_COMPILER_AR="$(command -v "$_TARGET-ar")" \
@@ -19,10 +17,7 @@ cmake -GNinja .. \
 DESTDIR="$_PKGROOT/pkg" ninja -j"$_JOBS" install
 )
 
-(
-cd pkg/var/usr/bin
-strip_and_sign ninja
-)
+strip_and_sign pkg/var/usr/bin/ninja
 
 mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"
 cp src/COPYING "pkg/var/usr/share/licenses/$_PKGNAME"
