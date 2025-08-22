@@ -2,4 +2,4 @@ zlib
 xz
 bzip2
 zstd
-libressl
+openssl

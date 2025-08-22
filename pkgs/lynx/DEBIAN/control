@@ -2,6 +2,6 @@ Package: iphoneports-lynx
 Version: 2.9.2
 Architecture: @DPKGARCH@
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
-Depends: iphoneports-base, iphoneports-ncurses, iphoneports-libressl, iphoneports-brotli, iphoneports-zlib
+Depends: iphoneports-base, iphoneports-ncurses, iphoneports-openssl, iphoneports-brotli, iphoneports-zlib
 Section: Networking
 Description: A text browser for the World Wide Web

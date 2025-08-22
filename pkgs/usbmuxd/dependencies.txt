@@ -3,4 +3,4 @@ libusbmuxd
 libplist
 libusb
 libimobiledevice-glue
-libressl
+openssl

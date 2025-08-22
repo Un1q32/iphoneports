@@ -4,4 +4,4 @@ Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Architecture: @DPKGARCH@
 Version: 1.9.17p2
 Description: temporarily assume root priviledges
-Depends: iphoneports-base, iphoneports-zlib, iphoneports-libressl
+Depends: iphoneports-base, iphoneports-zlib, iphoneports-openssl

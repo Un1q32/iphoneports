@@ -1,4 +1,4 @@
 ncurses
-libressl
+openssl
 brotli
 zlib

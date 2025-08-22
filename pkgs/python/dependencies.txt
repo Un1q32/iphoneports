@@ -3,7 +3,7 @@ readline
 bzip2
 xz
 zlib
-libressl
+openssl
 mpdecimal
 libffi
 libb2

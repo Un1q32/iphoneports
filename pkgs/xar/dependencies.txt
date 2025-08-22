@@ -2,4 +2,4 @@ zlib
 libxml2
 xz
 bzip2
-libressl
+openssl

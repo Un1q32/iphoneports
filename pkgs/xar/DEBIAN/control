@@ -4,4 +4,4 @@ Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Architecture: @DPKGARCH@
 Version: 501-2
 Description: eXtensible ARchive format
-Depends: iphoneports-base, iphoneports-zlib, iphoneports-xz, iphoneports-bzip2, iphoneports-libxml2, iphoneports-libressl
+Depends: iphoneports-base, iphoneports-zlib, iphoneports-xz, iphoneports-bzip2, iphoneports-libxml2, iphoneports-openssl

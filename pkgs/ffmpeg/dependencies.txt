@@ -2,6 +2,6 @@ zlib
 xz
 bzip2
 libxml2
-libressl
+openssl
 dav1d
 libwebp

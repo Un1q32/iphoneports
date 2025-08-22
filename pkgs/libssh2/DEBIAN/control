@@ -4,5 +4,4 @@ Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Architecture: @DPKGARCH@
 Version: 1.11.1-2
 Description: A library implementing the SSH2 protocol
-Homepage: http://www.libssh2.org/
-Depends: iphoneports-base, iphoneports-zlib, iphoneports-libressl
+Depends: iphoneports-base, iphoneports-zlib, iphoneports-openssl

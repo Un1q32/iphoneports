@@ -1,4 +1,4 @@
-libressl
+openssl
 pcre2
 zlib
 libpsl

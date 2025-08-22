@@ -1,4 +1,4 @@
-libressl
+openssl
 nghttp2
 brotli
 pcre2

@@ -1,6 +1,6 @@
 libplist
 libusbmuxd
-libressl
+openssl
 libimobiledevice-glue
 readline
 libtatsu

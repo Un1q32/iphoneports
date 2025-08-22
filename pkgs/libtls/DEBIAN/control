@@ -2,7 +2,7 @@ Package: iphoneports-libtls
 Section: Security
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Architecture: @DPKGARCH@
-Version: 4.1.0
+Version: 4.1.0-1
 Description: A new TLS library, designed to make it easier to write foolproof applications
-Depends: iphoneports-base, iphoneports-libressl
+Depends: iphoneports-base
 Replaces: iphoneports-libressl

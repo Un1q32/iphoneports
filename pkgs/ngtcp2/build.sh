@@ -1,29 +1,20 @@
 #!/bin/sh
 set -e
 . ../../lib.sh
-mkdir -p src/build
+
 (
-cd src/build
-cmake -GNinja .. \
-    -DCMAKE_BUILD_TYPE=Release \
-    -DCMAKE_C_COMPILER="$_TARGET-cc" \
-    -DCMAKE_SYSTEM_NAME=Darwin \
-    -DCMAKE_INSTALL_PREFIX=/var/usr \
-    -DCMAKE_INSTALL_NAME_DIR=/var/usr/lib \
-    -DCMAKE_FIND_ROOT_PATH_MODE_LIBRARY=ONLY \
-    -DCMAKE_FIND_ROOT_PATH_MODE_INCLUDE=ONLY \
-    -DCMAKE_FIND_ROOT_PATH="$_SDK/var/usr" \
-    -DENABLE_STATIC_LIB=OFF \
-    -DENABLE_OPENSSL=ON
-DESTDIR="$_PKGROOT/pkg" ninja -j"$_JOBS" install
+cd src
+./configure --host="$_TARGET" --prefix=/var/usr --disable-static
+"$_MAKE" -j"$_JOBS"
+"$_MAKE" DESTDIR="$_PKGROOT/pkg" install
 )
 
 (
 cd pkg/var/usr
 rm -rf share
-mv lib/libngtcp2.16.*.dylib lib/libngtcp2.16.dylib
-mv lib/libngtcp2_crypto_quictls.2.*.dylib lib/libngtcp2_crypto_quictls.2.dylib
-strip_and_sign lib/libngtcp2.16.dylib lib/libngtcp2_crypto_quictls.2.dylib
+for lib in lib/*.dylib; do
+    [ -h "$lib" ] || strip_and_sign "$lib"
+done
 )
 
 mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"

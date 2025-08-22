@@ -1,6 +1,7 @@
 #!/bin/sh
 set -e
 . ../../lib.sh
+
 (
 cd src
 ./configure --host="$_TARGET" --prefix=/var/usr gl_cv_func_strcasecmp_works=yes

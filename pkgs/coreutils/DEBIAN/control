@@ -4,5 +4,4 @@ Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Architecture: @DPKGARCH@
 Version: 9.7-1
 Description: The basic file, shell and text manipulation utilities of the GNU operating system
-Homepage: http://www.gnu.org/software/coreutils/
-Depends: iphoneports-base, iphoneports-libressl, iphoneports-gmp
+Depends: iphoneports-base, iphoneports-openssl, iphoneports-gmp

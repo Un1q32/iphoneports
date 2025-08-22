@@ -1,0 +1,16 @@
+--- src/apps/nc/Makefile.am.orig
++++ src/apps/nc/Makefile.am
+@@ -16,11 +16,9 @@
+ EXTRA_DIST = nc.1
+ EXTRA_DIST += CMakeLists.txt
+ 
+-nc_LDADD = $(libcrypto_la_objects)
+-nc_LDADD += $(libcompat_la_objects)
++nc_LDADD = $(libcompat_la_objects)
+ nc_LDADD += $(libcompatnoopt_la_objects)
+-nc_LDADD += $(libssl_la_objects)
+-nc_LDADD += $(libtls_la_objects)
++nc_LDADD += $(abs_top_builddir)/tls/libtls.la
+ 
+ nc_LDADD += $(PLATFORM_LDADD) $(PROG_LDADD)
+ 

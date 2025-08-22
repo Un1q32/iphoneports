@@ -2,6 +2,6 @@ Package: iphoneports-libzip
 Version: 1.11.4
 Architecture: @DPKGARCH@
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
-Depends: iphoneports-base, iphoneports-xz, iphoneports-libressl
+Depends: iphoneports-base, iphoneports-xz, iphoneports-openssl
 Section: Development
 Description: A C library for reading, creating, and modifying zip archives.

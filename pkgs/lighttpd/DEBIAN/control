@@ -4,4 +4,4 @@ Architecture: @DPKGARCH@
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Section: Networking
 Description: Lightweight high-performance web server
-Depends: iphoneports-base, iphoneports-libressl, iphoneports-zlib, iphoneports-bzip2, iphoneports-zstd, iphoneports-brotli, iphoneports-lua, iphoneports-pcre2, iphoneports-libxml2, iphoneports-sqlite, iphoneports-xxhash
+Depends: iphoneports-base, iphoneports-openssl, iphoneports-zlib, iphoneports-bzip2, iphoneports-zstd, iphoneports-brotli, iphoneports-lua, iphoneports-pcre2, iphoneports-libxml2, iphoneports-sqlite, iphoneports-xxhash

@@ -3,6 +3,6 @@ Section: Networking
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Architecture: @DPKGARCH@
 Version: 10.0p2
-Depends: iphoneports-base, iphoneports-libressl, iphoneports-zlib
+Depends: iphoneports-base, iphoneports-openssl, iphoneports-zlib
 Description: secure remote access between machines
 Replaces: openssh

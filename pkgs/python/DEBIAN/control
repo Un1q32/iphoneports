@@ -1,7 +1,7 @@
 Package: iphoneports-python
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Architecture: @DPKGARCH@
-Depends: iphoneports-base, iphoneports-ncurses, iphoneports-readline, iphoneports-bzip2, iphoneports-xz, iphoneports-zlib, iphoneports-libressl, iphoneports-mpdecimal, iphoneports-libffi, iphoneports-libb2
+Depends: iphoneports-base, iphoneports-ncurses, iphoneports-readline, iphoneports-bzip2, iphoneports-xz, iphoneports-zlib, iphoneports-openssl, iphoneports-mpdecimal, iphoneports-libffi, iphoneports-libb2
 Description: The Python programming language
 Section: Scripting
 Version: 3.13.7

@@ -1,6 +1,6 @@
 pcre2
 zlib
-libressl
+openssl
 libxml2
 sqlite
 brotli

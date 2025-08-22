@@ -1,4 +1,4 @@
-libressl
+openssl
 zstd
 zlib
 nghttp2

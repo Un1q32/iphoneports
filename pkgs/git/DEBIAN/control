@@ -3,5 +3,5 @@ Section: Data_Storage
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Architecture: @DPKGARCH@
 Version: 2.51.0
-Depends: iphoneports-base, iphoneports-curl, iphoneports-libressl, iphoneports-grep, iphoneports-pcre2, iphoneports-zlib
+Depends: iphoneports-base, iphoneports-curl, iphoneports-openssl, iphoneports-grep, iphoneports-pcre2, iphoneports-zlib
 Description: fast content-addressable filesystem

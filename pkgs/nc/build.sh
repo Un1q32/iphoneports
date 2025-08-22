@@ -1,27 +1,18 @@
 #!/bin/sh
 set -e
 . ../../lib.sh
-mkdir -p src/build
+
 (
-cd src/build
-cmake -GNinja .. \
-    -DCMAKE_BUILD_TYPE=Release \
-    -DCMAKE_C_COMPILER="$_TARGET-cc" \
-    -DCMAKE_SYSTEM_NAME=Darwin \
-    -DCMAKE_INSTALL_PREFIX=/var/usr \
-    -DCMAKE_INSTALL_NAME_DIR=/var/usr/lib \
-    -DCMAKE_SYSTEM_PROCESSOR="$_CPU" \
-    -DCMAKE_FIND_ROOT_PATH_MODE_INCLUDE=ONLY \
-    -DCMAKE_FIND_ROOT_PATH="$_SDK/var/usr" \
-    -DBUILD_SHARED_LIBS=yes \
-    -DLIBRESSL_TESTS=OFF \
-    -DENABLE_NC=ON
-DESTDIR="$_PKGROOT/pkg" ninja -j"$_JOBS" apps/nc/install
+cd src
+autoreconf -fi
+./configure --host="$_TARGET" --prefix=/var/usr --enable-libtls-only --disable-static --enable-nc
+"$_MAKE" -j"$_JOBS"
+"$_MAKE" DESTDIR="$_PKGROOT/pkg" install
 )
 
 (
 cd pkg/var/usr
-rm -rf share
+rm -rf etc share include lib
 strip_and_sign bin/nc
 )
 

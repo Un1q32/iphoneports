@@ -1,4 +1,4 @@
-libressl
+openssl
 zstd
 lz4
 zlib

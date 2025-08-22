@@ -4,5 +4,4 @@ Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Architecture: @DPKGARCH@
 Version: 3.4.1-2
 Description: A fast and versatile file copying tool for remote and local files
-Homepage: http://www.samba.org/rsync/
-Depends: iphoneports-base, iphoneports-libressl, iphoneports-lz4, iphoneports-zstd, iphoneports-zlib, iphoneports-xxhash, iphoneports-popt, iphoneports-bash
+Depends: iphoneports-base, iphoneports-openssl, iphoneports-lz4, iphoneports-zstd, iphoneports-zlib, iphoneports-xxhash, iphoneports-popt, iphoneports-bash

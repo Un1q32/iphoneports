@@ -4,7 +4,7 @@ libimobiledevice
 libusbmuxd
 libplist
 libzip
-libressl
+openssl
 curl
 zlib
 libimobiledevice-glue
