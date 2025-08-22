@@ -33,7 +33,6 @@ cmake -GNinja ../llvm \
     -DCMAKE_C_COMPILER="$_TARGET-cc" \
     -DCMAKE_SYSTEM_NAME=Darwin \
     -DCMAKE_INSTALL_PREFIX=/var/usr \
-    -DCMAKE_INSTALL_NAME_TOOL="$_TARGET-install_name_tool" \
     -DCMAKE_FIND_ROOT_PATH_MODE_INCLUDE=ONLY \
     -DCMAKE_FIND_ROOT_PATH="$_SDK/var/usr" \
     -DLLVM_ENABLE_THREADS=OFF \
@@ -54,7 +53,6 @@ cmake -GNinja ../llvm \
     -DCMAKE_C_COMPILER="$_TARGET-cc" \
     -DCMAKE_SYSTEM_NAME=Darwin \
     -DCMAKE_INSTALL_PREFIX=/var/usr \
-    -DCMAKE_INSTALL_NAME_TOOL="$_TARGET-install_name_tool" \
     -DCMAKE_FIND_ROOT_PATH_MODE_INCLUDE=ONLY \
     -DCMAKE_FIND_ROOT_PATH="$_SDK/var/usr" \
     -DLLVM_ENABLE_THREADS=OFF \

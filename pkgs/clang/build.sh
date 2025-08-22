@@ -41,7 +41,6 @@ cmake -GNinja ../clang \
     -DCMAKE_RANLIB="$(command -v "$_TARGET-ranlib")" \
     -DCMAKE_SYSTEM_NAME=Darwin \
     -DCMAKE_INSTALL_PREFIX=/var/usr \
-    -DCMAKE_INSTALL_NAME_TOOL="$_TARGET-install_name_tool" \
     -DCMAKE_FIND_ROOT_PATH_MODE_INCLUDE=ONLY \
     -DCMAKE_FIND_ROOT_PATH="$_SDK/var/usr" \
     -DCLANG_LINK_CLANG_DYLIB=ON \
@@ -58,7 +57,6 @@ cmake -GNinja ../clang \
     -DCMAKE_RANLIB="$(command -v "$_TARGET-ranlib")" \
     -DCMAKE_SYSTEM_NAME=Darwin \
     -DCMAKE_INSTALL_PREFIX=/var/usr \
-    -DCMAKE_INSTALL_NAME_TOOL="$_TARGET-install_name_tool" \
     -DCMAKE_FIND_ROOT_PATH_MODE_INCLUDE=ONLY \
     -DCMAKE_FIND_ROOT_PATH="$_SDK/var/usr" \
     -DCLANG_LINK_CLANG_DYLIB=ON \
