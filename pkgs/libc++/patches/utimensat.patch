@@ -1,17 +1,19 @@
 --- src/libcxx/src/filesystem/time_utils.h.orig
 +++ src/libcxx/src/filesystem/time_utils.h
-@@ -32,8 +32,16 @@
+@@ -32,8 +32,18 @@
  #  include <sys/time.h> // for ::utimes as used in __last_write_time
  #endif
  
-+#if defined(__APPLE__) &&                                                                                              \
-+        ((defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) ||                                                   \
-+          defined(__ENVIRONMENT_TV_OS_VERSION_MIN_REQUIRED__)) &&                                                      \
-+         __ENVIRONMENT_OS_VERSION_MIN_REQUIRED__ < 110000) ||                                                          \
-+    (defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) &&                                                         \
-+     __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ < 101300) ||                                                        \
-+    (defined(__ENVIRONMENT_WATCH_OS_VERSION_MIN_REQUIRED__) && __ENVIRONMENT_WATCH_OS_VERSION_MIN_REQUIRED__ < 40000)
-+#  define _LIBCPP_USE_UTIMENSAT
++#if defined(__APPLE__)
++#  if ((defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) ||                                                     \
++        defined(__ENVIRONMENT_TV_OS_VERSION_MIN_REQUIRED__)) &&                                                        \
++       __ENVIRONMENT_OS_VERSION_MIN_REQUIRED__ >= 110000) ||                                                           \
++      (defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) &&                                                       \
++       __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ >= 101300) ||                                                     \
++      (defined(__ENVIRONMENT_WATCH_OS_VERSION_MIN_REQUIRED__) &&                                                       \
++       __ENVIRONMENT_WATCH_OS_VERSION_MIN_REQUIRED__ >= 40000)
++#    define _LIBCPP_USE_UTIMENSAT
++#  endif
  // We can use the presence of UTIME_OMIT to detect platforms that provide utimensat.
 -#if defined(UTIME_OMIT)
 +#elif defined(UTIME_OMIT)
