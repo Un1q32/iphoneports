@@ -17,7 +17,8 @@ autoreconf -f
     --disable-valgrind-tests \
     CPPFLAGS='-Wno-unknown-attributes' \
     PKG_CONFIG_LIBDIR="$_SDK/var/usr/lib/pkgconfig" \
-    PKG_CONFIG_SYSROOT_DIR="$_SDK"
+    PKG_CONFIG_SYSROOT_DIR="$_SDK" \
+    gl_cv_onwards_func_futimens=yes
 "$_MAKE" -j"$_JOBS"
 "$_MAKE" DESTDIR="$_PKGROOT/pkg" install
 )
