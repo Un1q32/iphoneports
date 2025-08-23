@@ -12,7 +12,7 @@ cd src
     --disable-static \
     --with-nghttp2 \
     --with-nghttp3 \
-    --with-ngtcp2 \
+    --with-openssl-quic \
     --with-libidn2 \
     --with-ca-bundle=/var/usr/etc/ssl/cert.pem \
     PKG_CONFIG_LIBDIR="$_SDK/var/usr/lib/pkgconfig"

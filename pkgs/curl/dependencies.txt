@@ -3,7 +3,6 @@ zstd
 zlib
 nghttp2
 nghttp3
-ngtcp2
 libpsl
 libidn2
 brotli
