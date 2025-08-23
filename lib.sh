@@ -6,7 +6,14 @@ if [ -z "$_PKGNAME" ]; then
 fi
 
 strip_and_sign() {
-    "$_TARGET-strip" -no_code_signature_warning "$@" 2>/dev/null || true
+    for file in "$@"; do
+        magic=$(od -An -tx1 -j12 -N4 "$file" | tr -d ' \n')
+        if [ "$magic" = "02000000" ]; then
+            "$_TARGET-strip" -no_code_signature_warning "$file"
+        else
+            "$_TARGET-strip" -no_code_signature_warning -x "$file"
+        fi
+    done
     if { [ "$_SUBSYSTEM" != "macos" ] && [ "$_TRUEOSVER" -ge 20000 ]; } ||
         [ "$_CPU" = "arm64" ] || [ "$_CPU" = "arm64e" ] ||
         [ "$_ALWAYSSIGN" = 1 ]; then
