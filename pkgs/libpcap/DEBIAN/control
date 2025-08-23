@@ -1,7 +1,0 @@
-Package: iphoneports-libpcap
-Section: Development
-Maintainer: Uniq <joey.t.reinhart@gmail.com>
-Architecture: @DPKGARCH@
-Version: 1.10.5
-Description: A system-independent interface for user-level packet capture
-Depends: iphoneports-base
