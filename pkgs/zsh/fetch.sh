@@ -5,7 +5,7 @@ curl -L -# -o src.tar.xz https://downloads.sourceforge.net/project/zsh/zsh/5.9/z
 printf "Unpacking source...\n"
 tar -xf src.tar.xz
 rm src.tar.xz
-mv zsh-5.9 src
-curl -L -s -o src/config.guess 'https://git.savannah.gnu.org/gitweb/?p=config.git;a=blob_plain;f=config.guess;hb=a2287c3041a3f2a204eb942e09c015eab00dc7dd' &
-curl -L -s -o src/config.sub 'https://git.savannah.gnu.org/gitweb/?p=config.git;a=blob_plain;f=config.sub;hb=a2287c3041a3f2a204eb942e09c015eab00dc7dd'
+mv zsh-* src
+curl -L -s -o src/xar/config.guess https://raw.githubusercontent.com/tianon/mirror-gnu-config/a2287c3041a3f2a204eb942e09c015eab00dc7dd/config.guess &
+curl -L -s -o src/xar/config.sub https://raw.githubusercontent.com/tianon/mirror-gnu-config/a2287c3041a3f2a204eb942e09c015eab00dc7dd/config.sub
 wait
