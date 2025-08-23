@@ -6,8 +6,7 @@ set -e
 cd src
 autoreconf -fi
 ./configure --host="$_TARGET" --prefix=/var/usr --enable-libtls-only --disable-static --enable-nc
-"$_MAKE" -j"$_JOBS"
-"$_MAKE" DESTDIR="$_PKGROOT/pkg" install
+"$_MAKE" -j"$_JOBS" install DESTDIR="$_PKGROOT/pkg"
 )
 
 (
