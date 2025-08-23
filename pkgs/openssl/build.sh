@@ -1,4 +1,5 @@
 #!/bin/sh
+# shellcheck disable=2086
 set -e
 . ../../lib.sh
 
@@ -15,6 +16,7 @@ case $_CPU in
     ;;
     (arm*)
         sys=ios-cross
+        noasm=no-asm
     ;;
     (i386)
         sys=darwin-i386
@@ -24,7 +26,7 @@ case $_CPU in
     ;;
 esac
 
-./Configure "$sys" --prefix=/var/usr --openssldir=/var/usr/etc/ssl CROSS_COMPILE="$_TARGET"-
+./Configure "$sys" $noasm --prefix=/var/usr --openssldir=/var/usr/etc/ssl CROSS_COMPILE="$_TARGET"-
 "$_MAKE" CNF_CFLAGS= PROGRAMS=apps/openssl -j"$_JOBS"
 "$_MAKE" CNF_CFLAGS= PROGRAMS=apps/openssl DESTDIR="$_PKGROOT/pkg" install_sw install_ssldirs
 )
