@@ -13,14 +13,14 @@ autoreconf -fi
 
 (
 mkdir _buildpython && cd _buildpython || exit 1
-../configure --prefix="$_PKGROOT/src/buildpython" --without-ensurepip
+../configure --prefix="$_PKGROOT/src/buildpython" --without-ensurepip CC=clang
 "$_MAKE" install -j"$_JOBS"
 )
 
 ./configure \
     --host="$_TARGET" \
     --prefix=/var/usr \
-    --build="$(cc -dumpmachine)" \
+    --build="$(clang -dumpmachine)" \
     --with-build-python="$_PKGROOT/src/buildpython/bin/python3" \
     --without-mimalloc \
     --with-lto \
