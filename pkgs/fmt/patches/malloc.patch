@@ -1,0 +1,10 @@
+--- src/include/fmt/format.h.orig
++++ src/include/fmt/format.h
+@@ -39,6 +39,7 @@
+ #endif
+ 
+ #include "base.h"
++#include <cstdlib>
+ 
+ #ifndef FMT_MODULE
+ #  include <cmath>    // std::signbit

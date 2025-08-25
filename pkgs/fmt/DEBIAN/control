@@ -1,0 +1,7 @@
+Package: iphoneports-fmt
+Section: Development
+Maintainer: Uniq <joey.t.reinhart@gmail.com>
+Architecture: @DPKGARCH@
+Version: 11.2.0
+Description: Open-source formatting library for C++
+Depends: iphoneports-base, iphoneports-libc++
