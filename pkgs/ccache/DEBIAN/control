@@ -4,4 +4,4 @@ Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Architecture: @DPKGARCH@
 Version: 4.11.3-1
 Description: Compiler cache that speeds up recompilation by caching previous compilations
-Depends: iphoneports-base, iphoneports-libc++, iphoneports-zstd, iphoneports-xxhash
+Depends: iphoneports-base, iphoneports-libc++, iphoneports-zstd, iphoneports-xxhash, iphoneports-fmt
