@@ -1,5 +1,5 @@
 #!/bin/sh
-# shellcheck disable=2031,2034
+# shellcheck disable=2034
 
 defaulttarget='armv6-apple-darwin9'
 
