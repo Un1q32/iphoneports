@@ -280,7 +280,7 @@ osver=__ENVIRONMENT_OS_VERSION_MIN_REQUIRED__
 }
 
 build() {
-    if hasbeenbuilt "$1" "$2"; then
+    if hasbeenbuilt "$1"; then
         return 0
     fi
 
