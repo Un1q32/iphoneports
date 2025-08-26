@@ -1,6 +1,6 @@
 # iPhonePorts build system
 
-> Build scripts for the packages at https://cydia.uniq.gay/
+> Build scripts for the packages at http://cydia.uniq.gay/
 
 ## Setup
 
