@@ -34,16 +34,7 @@
  
 --- src/libcxx/include/__config.orig
 +++ src/libcxx/include/__config
-@@ -663,11 +663,22 @@
- #    if (defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) &&                                                     \
-          __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ < 101500) ||                                                    \
-         (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                                                    \
--         __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ < 130000)
-+         __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ < 130000) ||                                                   \
-+        (defined(__ENVIRONMENT_WATCH_OS_VERSION_MIN_REQUIRED__) &&                                                     \
-+         __ENVIRONMENT_WATCH_OS_VERSION_MIN_REQUIRED__ < 60000) ||                                                     \
-+        (defined(__ENVIRONMENT_TV_OS_VERSION_MIN_REQUIRED__) && __ENVIRONMENT_TV_OS_VERSION_MIN_REQUIRED__ < 130000)
- #      define _LIBCPP_HAS_C11_ALIGNED_ALLOC 0
+@@ -687,6 +687,14 @@
  #    else
  #      define _LIBCPP_HAS_C11_ALIGNED_ALLOC 1
  #    endif
@@ -60,10 +51,10 @@
  #    define _LIBCPP_HAS_C11_ALIGNED_ALLOC 0
 --- src/libcxx/include/__cxx03/__memory/aligned_alloc.h.orig
 +++ src/libcxx/include/__cxx03/__memory/aligned_alloc.h
-@@ -41,19 +41,29 @@
-   // Rounding up could have wrapped around to zero, so we have to add another
-   // max() ternary to the actual call site to avoid succeeded in that case.
-   return ::aligned_alloc(__alignment, __size > __rounded_size ? __size : __rounded_size);
+@@ -30,19 +30,29 @@
+ inline _LIBCPP_HIDE_FROM_ABI void* __libcpp_aligned_alloc(std::size_t __alignment, std::size_t __size) {
+ #  if defined(_LIBCPP_MSVCRT_LIKE)
+   return ::_aligned_malloc(__size, __alignment);
 -#  else
 +#  elif !defined(_LIBCPP_HAS_NO_POSIX_MEMALIGN)
    void* __result = nullptr;
@@ -84,7 +75,7 @@
  #  if defined(_LIBCPP_MSVCRT_LIKE)
    ::_aligned_free(__ptr);
 -#  else
-+#  elif !defined(_LIBCPP_HAS_NO_POSIX_MEMALIGN) || (_LIBCPP_STD_VER >= 17 && !defined(_LIBCPP_HAS_NO_C11_ALIGNED_ALLOC))
++#  elif !defined(_LIBCPP_HAS_NO_POSIX_MEMALIGN)
    ::free(__ptr);
 +#  else
 +  if (__ptr)
@@ -94,7 +85,7 @@
  
 --- src/libcxx/include/__cxx03/__config.orig
 +++ src/libcxx/include/__cxx03/__config
-@@ -662,6 +662,24 @@
+@@ -629,6 +629,24 @@
           __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ < 101500)
  #      define _LIBCPP_HAS_NO_C11_ALIGNED_ALLOC
  #    endif

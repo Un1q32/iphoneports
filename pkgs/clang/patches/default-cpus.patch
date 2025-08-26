@@ -1,6 +1,6 @@
 --- src/clang/lib/Driver/ToolChains/Arch/X86.cpp.orig
 +++ src/clang/lib/Driver/ToolChains/Arch/X86.cpp
-@@ -84,8 +84,20 @@
+@@ -82,8 +82,20 @@
      if (Triple.isDriverKit())
        return "nehalem";
  

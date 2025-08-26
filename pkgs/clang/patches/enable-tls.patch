@@ -37,7 +37,7 @@
  
 --- src/clang/lib/CodeGen/ItaniumCXXABI.cpp.orig
 +++ src/clang/lib/CodeGen/ItaniumCXXABI.cpp
-@@ -2836,7 +2836,7 @@
+@@ -2856,7 +2856,7 @@
    const char *Name = "__cxa_atexit";
    if (TLS) {
      const llvm::Triple &T = CGF.getTarget().getTriple();

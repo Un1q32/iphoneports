@@ -1,6 +1,6 @@
 --- src/llvm/include/llvm/TargetParser/Triple.h.orig
 +++ src/llvm/include/llvm/TargetParser/Triple.h
-@@ -1120,7 +1120,15 @@
+@@ -1164,7 +1164,15 @@
    /// Note: Android API level 29 (10) introduced ELF TLS.
    bool hasDefaultEmulatedTLS() const {
      return (isAndroid() && isAndroidVersionLT(29)) || isOSOpenBSD() ||
@@ -16,10 +16,10 @@
 +           isDriverKit();
    }
  
-   /// True if the target supports both general-dynamic and TLSDESC, and TLSDESC
+   /// True if the target uses TLSDESC by default.
 --- src/llvm/lib/LTO/LTOBackend.cpp.orig
 +++ src/llvm/lib/LTO/LTOBackend.cpp
-@@ -545,6 +545,8 @@
+@@ -557,6 +557,8 @@
      return TOrErr.takeError();
  
    std::unique_ptr<TargetMachine> TM = createTargetMachine(C, *TOrErr, Mod);
