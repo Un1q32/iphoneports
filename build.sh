@@ -396,7 +396,7 @@ main() {
             for pkg in "$pkgdir"/*; do
                 unset dontbuild
                 for exclude in "$@"; do
-                    [ "$pkg" = "$exclude" ] && dontbuild=1
+                    [ "${pkg##*/}" = "$exclude" ] && dontbuild=1
                 done
                 [ -n "$dontbuild" ] && continue
 
