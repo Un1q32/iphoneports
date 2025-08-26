@@ -413,7 +413,6 @@ main() {
             wait
 
             for pkg in $pkglist; do
-                [ "$kind" = "all-noclean" ] && hasbeenbuilt "$pkg" && continue
                 build "$pkg" || error "Failed to build package: $pkg"
                 cp -f "$pkgdir/$pkg"/*.deb debs 2> /dev/null
             done
