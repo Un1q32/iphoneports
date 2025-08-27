@@ -9,7 +9,14 @@ cp "$_SDK/var/usr/include/llvm-c/lto.h" "$_SDK/var/usr/include/llvm-c/ExternC.h"
 cd src/cctools
 rm include/foreign/machine/_structs.h
 ./autogen.sh
-./configure --host="$_TARGET" --prefix=/var/usr --enable-silent-rules LLVM_INCLUDE_DIR="$_SDK/var/usr/include" LLVM_LIB_DIR="$_SDK/var/usr/lib" CFLAGS='-O3 -flto'
+./configure \
+    --host="$_TARGET" \
+    --prefix=/var/usr \
+    --enable-silent-rules \
+    LLVM_INCLUDE_DIR="$_SDK/var/usr/include" \
+    LLVM_LIB_DIR="$_SDK/var/usr/lib" \
+    CFLAGS='-O3 -flto' \
+    CXXFLAGS='-O3 -flto=thin'
 "$_MAKE" -j"$_JOBS"
 "$_MAKE" install DESTDIR="$_PKGROOT/pkg"
 )
