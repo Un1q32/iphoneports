@@ -18,14 +18,12 @@ mkdir -p src/build
 cd src/build
 tblgen="$(command -v llvm-tblgen)"
 case $_CPU in
-    arm64*|x86_64*) ltoopt='ON' ;;
+    arm64*) ;;
     arm*)
-        ltoopt='OFF'
         # ld64 fails to link when built for thumb, so explicitly specify arm here
         export CFLAGS="-marm"
         export CXXFLAGS="$CFLAGS"
     ;;
-    *) ltoopt='OFF' ;;
 esac
 
 cmake -GNinja ../llvm \
@@ -45,7 +43,7 @@ cmake -GNinja ../llvm \
     -DLLVM_ENABLE_ZSTD=ON \
     -DLLVM_TARGETS_TO_BUILD='X86;ARM;AArch64' \
     -DLLVM_TABLEGEN="$tblgen" \
-    -DLLVM_ENABLE_LTO="$ltoopt" \
+    -DLLVM_ENABLE_LTO=Thin \
     -DLLVM_ENABLE_LIBCXX=ON
 
 cmake -GNinja ../llvm \
@@ -65,7 +63,7 @@ cmake -GNinja ../llvm \
     -DLLVM_ENABLE_ZSTD=ON \
     -DLLVM_TARGETS_TO_BUILD='X86;ARM;AArch64' \
     -DLLVM_TABLEGEN="$tblgen" \
-    -DLLVM_ENABLE_LTO="$ltoopt" \
+    -DLLVM_ENABLE_LTO=Thin \
     -DLLVM_ENABLE_LIBCXX=ON \
     -DLLVM_DISTRIBUTION_COMPONENTS="$(_get_distribution_components)"
 

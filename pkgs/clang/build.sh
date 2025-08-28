@@ -25,14 +25,12 @@ cd src/build
 llvmtblgen="$(command -v llvm-tblgen)"
 clangtblgen="$(command -v clang-tblgen)"
 case $_CPU in
-    arm64*|x86_64*) ltoopt='ON' ;;
+    arm64*) ;;
     arm*)
-        ltoopt='OFF'
         # ld64 fails to link when built for thumb, so explicitly specify arm here
         export CFLAGS="-marm"
         export CXXFLAGS="$CFLAGS"
     ;;
-    *) ltoopt='OFF' ;;
 esac
 
 cmake -GNinja ../clang \
@@ -48,7 +46,7 @@ cmake -GNinja ../clang \
     -DLLVM_INCLUDE_TESTS=OFF \
     -DLLVM_TABLEGEN_EXE="$llvmtblgen" \
     -DCLANG_TABLEGEN_EXE="$clangtblgen" \
-    -DLLVM_ENABLE_LTO="$ltoopt" \
+    -DLLVM_ENABLE_LTO=Thin \
     -DLLVM_ENABLE_LIBCXX=ON
 
 cmake -GNinja ../clang \
@@ -64,7 +62,7 @@ cmake -GNinja ../clang \
     -DLLVM_INCLUDE_TESTS=OFF \
     -DLLVM_TABLEGEN_EXE="$llvmtblgen" \
     -DCLANG_TABLEGEN_EXE="$clangtblgen" \
-    -DLLVM_ENABLE_LTO="$ltoopt" \
+    -DLLVM_ENABLE_LTO=Thin \
     -DLLVM_ENABLE_LIBCXX=ON \
     -DLLVM_DISTRIBUTION_COMPONENTS="$(_get_distribution_components)"
 
@@ -74,6 +72,9 @@ DESTDIR="$_PKGROOT/pkg" ninja -j"$_JOBS" install-distribution
 (
 cd pkg/var/usr
 rm -rf share bin/git-clang-format
+for link in clang++ clang-cl clang-cpp; do
+    ln -sf clang "bin/$link"
+done
 for file in bin/* lib/*.dylib; do
     [ -h "$file" ] || strip_and_sign "$file"
 done
