@@ -23,8 +23,19 @@
      return TOrErr.takeError();
  
    std::unique_ptr<TargetMachine> TM = createTargetMachine(C, *TOrErr, Mod);
-+  if (TM->Options.EmulatedTLS == 0)
++  if (TM->Options.EmulatedTLS == 0 && TM->getTargetTriple().isOSDarwin())
 +    TM->Options.EmulatedTLS = TM->getTargetTriple().hasDefaultEmulatedTLS();
  
    LLVM_DEBUG(dbgs() << "Running regular LTO\n");
    if (!C.CodeGenOnly) {
+--- src/llvm/lib/LTO/ThinLTOCodeGenerator.cpp.orig
++++ src/llvm/lib/LTO/ThinLTOCodeGenerator.cpp
+@@ -589,6 +589,8 @@
+       TheTarget->createTargetMachine(TheTriple, MCpu, FeatureStr, Options,
+                                      RelocModel, std::nullopt, CGOptLevel));
+   assert(TM && "Cannot create target machine");
++  if (TM->Options.EmulatedTLS == 0 && TM->getTargetTriple().isOSDarwin())
++    TM->Options.EmulatedTLS = TM->getTargetTriple().hasDefaultEmulatedTLS();
+ 
+   return TM;
+ }
