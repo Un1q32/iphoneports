@@ -1,0 +1,12 @@
+--- src/clang/lib/Driver/ToolChains/CommonArgs.cpp.orig
++++ src/clang/lib/Driver/ToolChains/CommonArgs.cpp
+@@ -155,6 +155,9 @@
+       (Triple.isAndroid() && !Triple.isARM()))
+     return false;
+ 
++  if ((Triple.isThumb() || Triple.isARM()) && Triple.isOSBinFormatMachO())
++    return false;
++
+   return true;
+ }
+ 
