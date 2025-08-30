@@ -16,7 +16,4 @@ cp src/UNLICENSE "pkg/var/usr/share/licenses/$_PKGNAME"
 
 cp -r DEBIAN pkg
 sed -e "s|@DPKGARCH@|$_DPKGARCH|" DEBIAN/control > pkg/DEBIAN/control
-if [ "$_SUBSYSTEM" = "ios" ] && [ "$_CPU" = "armv6" ]; then
-    sed -i "/^Depends:/ s/$/, firmware (>= 3.0)/" pkg/DEBIAN/control
-fi
 dpkg-deb -b --root-owner-group -Zgzip pkg "$_PKGNAME.deb"
