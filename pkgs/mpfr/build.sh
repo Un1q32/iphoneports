@@ -3,7 +3,7 @@ set -e
 . ../../lib.sh
 (
 cd src
-./configure --host="$_TARGET" --prefix=/var/usr --disable-static CC="$_TARGET-cc"
+./configure --host="$_TARGET" --prefix=/var/usr --disable-static --enable-silent-rules CC="$_TARGET-cc"
 "$_MAKE" -j"$_JOBS"
 "$_MAKE" install DESTDIR="$_PKGROOT/pkg"
 )
