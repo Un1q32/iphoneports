@@ -6,3 +6,4 @@ nghttp3
 libpsl
 libidn2
 brotli
+ngtcp2
