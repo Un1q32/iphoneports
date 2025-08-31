@@ -4,7 +4,12 @@ set -e
 
 (
 cd src
-./configure --host="$_TARGET" --prefix=/var/usr --disable-static
+./configure \
+    --host="$_TARGET" \
+    --prefix=/var/usr \
+    --disable-static \
+    PKG_CONFIG_LIBDIR="$_SDK/var/usr/lib/pkgconfig" \
+    PKG_CONFIG_SYSROOT_DIR="$_SDK"
 "$_MAKE" install DESTDIR="$_PKGROOT/pkg" -j"$_JOBS"
 )
 
