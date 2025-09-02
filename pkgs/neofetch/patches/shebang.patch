@@ -1,0 +1,8 @@
+--- src/neofetch.orig	2025-09-02 17:31:39.552486170 -0400
++++ src/neofetch	2025-09-02 17:31:44.748486093 -0400
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env bash
++#!/var/usr/bin/bash
+ # vim: noai:ts=4:sw=4:expandtab
+ # shellcheck source=/dev/null
+ # shellcheck disable=2009 disable=2153 disable=2154 disable=2243 disable=2244 disable=2317
