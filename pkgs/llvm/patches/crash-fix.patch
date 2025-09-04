@@ -1,0 +1,26 @@
+--- src/llvm/lib/CodeGen/StackProtector.cpp.orig
++++ src/llvm/lib/CodeGen/StackProtector.cpp
+@@ -588,7 +588,14 @@
+       continue;
+     Instruction *CheckLoc = dyn_cast<ReturnInst>(BB.getTerminator());
+     if (!CheckLoc && !DisableCheckNoReturn)
+-      for (auto &Inst : BB)
++      for (auto &Inst : BB) {
++        if (IntrinsicInst *IB = dyn_cast<IntrinsicInst>(&Inst);
++            IB && (IB->getIntrinsicID() == Intrinsic::eh_sjlj_callsite)) {
++          // eh_sjlj_callsite has to be in same BB as the
++          // bb terminator. Don't insert within this range.
++          CheckLoc = IB;
++          break;
++        }
+         if (auto *CB = dyn_cast<CallBase>(&Inst))
+           // Do stack check before noreturn calls that aren't nounwind (e.g:
+           // __cxa_throw).
+@@ -596,6 +603,7 @@
+             CheckLoc = CB;
+             break;
+           }
++      }
+ 
+     if (!CheckLoc)
+       continue;
