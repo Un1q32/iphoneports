@@ -69,6 +69,12 @@ fi
 
 : > "$bsroot/.builtpkgs"
 
+export _DLCACHE="$bsroot/dlcache"
+if [ ! -d "$_DLCACHE" ]; then
+    rm -rf "$_DLCACHE"
+    mkdir -p "$_DLCACHE"
+fi
+
 rm -rf "$_TMP/iphoneports-sdk-$_TARGET"*
 
 error() {
@@ -78,7 +84,7 @@ error() {
 }
 
 depcheck() {
-    for dep in "$_TARGET-cc" "$_TARGET-sdkpath" ldid dpkg-deb fakeroot automake autoreconf m4 yacc ctags tar gzip bzip2 xz zstd ninja sed pgrep meson cmake curl git pkg-config perl; do
+    for dep in "$_TARGET-cc" "$_TARGET-sdkpath" sha256sum ldid dpkg-deb fakeroot automake autoreconf m4 yacc ctags tar gzip bzip2 xz zstd ninja sed pgrep meson cmake curl git pkg-config perl; do
         if ! command -v "$dep" > /dev/null; then
             error "Missing dependency: $dep"
         fi

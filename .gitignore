@@ -6,3 +6,4 @@ pkg
 /pkglock
 /sysroot
 /defaulttarget.txt
+/dlcache
