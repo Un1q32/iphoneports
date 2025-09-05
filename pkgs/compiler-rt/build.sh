@@ -6,13 +6,13 @@ mkdir -p src/compiler-rt/build "pkg/var/usr/lib/clang/$llvmver/lib/darwin"
 (
 cd src/compiler-rt/build
 
-x64srcs="emutls.c eprintf.c int_util.c"
+x64srcs="emutls.c eprintf.c int_util.c extendhfsf2.c truncsfhf2.c truncdfhf2.c truncxfhf2.c"
 x32srcs="$x64srcs atomic.c"
 
 arm64srcs="emutls.c"
-armv7ssrcs="$arm64srcs atomic.c extendhfsf2.c truncsfhf2.c"
+armv7ssrcs="$arm64srcs atomic.c extendhfsf2.c truncsfhf2.c truncdfhf2.c"
 armv7srcs="$armv7ssrcs"
-armv6srcs="$armv7srcs floatundidf.c floatundisf.c"
+armv6srcs="$armv7srcs floatundisf.c floatundidf.c"
 
 clang() {
     printf " \033[1;32mCC\033[0m %s\n" "$2"
