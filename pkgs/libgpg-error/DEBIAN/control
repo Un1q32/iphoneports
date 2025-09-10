@@ -1,7 +1,0 @@
-Package: iphoneports-libgpg-error
-Section: Security
-Maintainer: Uniq <joey.t.reinhart@gmail.com>
-Architecture: @DPKGARCH@
-Version: 1.55
-Description: Support library for libgcrypt
-Depends: iphoneports-base
