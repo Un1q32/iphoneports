@@ -6,7 +6,7 @@
  #
  # pfetch - Simple POSIX sh fetch script.
  
-@@ -948,36 +948,40 @@
+@@ -949,36 +949,40 @@
          # Used memory is calculated using the following "formula":
          # (app + wired + occupied) * pagesize / 1024 / 1024
          (Darwin*)
