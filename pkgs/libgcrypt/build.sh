@@ -3,7 +3,10 @@ set -e
 . ../../lib.sh
 (
 cd src
-./configure --host="$_TARGET" --prefix=/var/usr --disable-static --disable-doc --enable-silent-rules
+if [ "$_CPU" = "i386" ]; then
+    disable=--disable-avx2-support
+fi
+./configure --host="$_TARGET" --prefix=/var/usr --disable-static --disable-doc --enable-silent-rules $disable
 "$_MAKE" -j"$_JOBS"
 "$_MAKE" DESTDIR="$_PKGROOT/pkg" install
 )
