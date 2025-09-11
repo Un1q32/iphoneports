@@ -1,0 +1,11 @@
+--- src/CMake/FindBerkeley.cmake.orig
++++ src/CMake/FindBerkeley.cmake
+@@ -47,8 +47,6 @@
+   ${CMAKE_INSTALL_FULL_INCLUDEDIR}
+   /usr/local/include
+   /usr/include
+-
+-  NO_DEFAULT_PATH
+ )
+ 
+ find_library(BERKELEY_LIBRARIES NAMES db db-5)
