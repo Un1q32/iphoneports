@@ -1,0 +1,7 @@
+Package: iphoneports-apt
+Section: Packaging
+Maintainer: Uniq <joey.t.reinhart@gmail.com>
+Architecture: @DPKGARCH@
+Version: 2.1.18
+Description: Command-line package manager used on Debian-based systems
+Depends: iphoneports-base, iphoneports-dpkg
