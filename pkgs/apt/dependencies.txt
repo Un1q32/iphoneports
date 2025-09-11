@@ -1,7 +1,0 @@
-openssl
-berkeleydb
-bzip2
-xz
-lz4
-xxhash
-libc++
