@@ -1,0 +1,14 @@
+readline
+zlib
+bzip2
+libgpg-error
+libgcrypt
+sqlite
+gnutls
+nettle
+brotli
+libidn2
+zstd
+npth
+libassuan
+libksba

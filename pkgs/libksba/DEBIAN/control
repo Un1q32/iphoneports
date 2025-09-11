@@ -1,0 +1,7 @@
+Package: iphoneports-libksba
+Section: Development
+Maintainer: Uniq <joey.t.reinhart@gmail.com>
+Architecture: @DPKGARCH@
+Version: 1.8
+Description: Library for working with X.509 certificates, CMS data and related objects
+Depends: iphoneports-base, iphoneports-libgpg-error

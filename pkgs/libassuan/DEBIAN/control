@@ -1,0 +1,7 @@
+Package: iphoneports-libassuan
+Section: Development
+Maintainer: Uniq <joey.t.reinhart@gmail.com>
+Architecture: @DPKGARCH@
+Version: 3.0.2
+Description: IPC library used by some GnuPG related software
+Depends: iphoneports-base, iphoneports-libgpg-error

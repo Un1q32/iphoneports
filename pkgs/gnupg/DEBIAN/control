@@ -1,0 +1,7 @@
+Package: iphoneports-gnupg
+Section: Security
+Maintainer: Uniq <joey.t.reinhart@gmail.com>
+Architecture: @DPKGARCH@
+Version: 2.4.8
+Description: Complete and free implementation of the OpenPGP standard
+Depends: iphoneports-base, iphoneports-readline, iphoneports-gnutls, iphoneports-sqlite, iphoneports-npth, iphoneports-libassuan, iphoneports-libksba, iphoneports-libgcrypt, iphoneports-libgpg-error, iphoneports-zlib, iphoneports-bzip2
