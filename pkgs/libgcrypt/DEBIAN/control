@@ -1,7 +1,0 @@
-Package: iphoneports-libgcrypt
-Section: Security
-Maintainer: Uniq <joey.t.reinhart@gmail.com>
-Architecture: @DPKGARCH@
-Version: 3.7.11
-Description: General purpose cryptographic library based on the code from GnuPG
-Depends: iphoneports-base
