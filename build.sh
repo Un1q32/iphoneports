@@ -1,5 +1,4 @@
 #!/bin/sh
-# shellcheck disable=2034
 
 defaulttarget='armv6-apple-darwin9'
 
@@ -258,25 +257,6 @@ osver=__ENVIRONMENT_OS_VERSION_MIN_REQUIRED__
         iphoneos-*) _ENTITLEMENTS="$bsroot/ios-entitlements.xml" ;;
         *) _ENTITLEMENTS= ;;
     esac
-
-    if [ "$_SUBSYSTEM" = "macos" ]; then
-        rustsys='darwin'
-        if [ "$_CPU" = 'i386' ]; then
-            rustcpu='i686'
-        else
-            rustcpu="$_CPU"
-        fi
-    else
-        rustsys='ios'
-        rustcpu="$_CPU"
-    fi
-    [ "$rustcpu" = 'arm64' ] && rustcpu='aarch64'
-
-    export _RUSTTARGET="$rustcpu-apple-$rustsys"
-
-    rusttargetupper="$(printf '%s' "$_RUSTTARGET" | tr '[:lower:]-' '[:upper:]_')"
-
-    eval 'export "CARGO_TARGET_${rusttargetupper}_LINKER"="$_TARGET-cc"'
 
     iphoneportspath="$(command -v "$_TARGET-sdkpath")"
     iphoneportspath="${iphoneportspath%/*}/../share/iphoneports/bin"
