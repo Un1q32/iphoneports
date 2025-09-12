@@ -10,6 +10,7 @@ cd src
     --disable-static \
     --disable-doc \
     --enable-silent-rules \
+    --disable-ldap \
     SYSROOT="$_SDK" \
     PKG_CONFIG_LIBDIR="$_SDK/var/usr/lib/pkgconfig" \
     PKG_CONFIG_SYSROOT_DIR="$_SDK/var/usr/lib/pkgconfig" \
