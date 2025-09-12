@@ -4,4 +4,4 @@ Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Architecture: @DPKGARCH@
 Version: 3.7.11
 Description: A library which provides a secure layer over a reliable transport layer
-Depends: iphoneports-base, iphoneports-ca-certificates
+Depends: iphoneports-base, iphoneports-ca-certificates, iphoneports-libc++, iphoneports-gmp, iphoneports-zlib, iphoneports-zstd, iphoneports-libidn2, iphoneports-brotli, iphoneports-nettle, iphoneports-libunistring

@@ -1,9 +1,20 @@
 #!/bin/sh
 set -e
 . ../../lib.sh
+
 (
 cd src
-./configure --host="$_TARGET" --prefix=/var/usr --disable-static --disable-nls --disable-doc --with-included-libtasn1 --without-tpm2 --without-p11-kit ac_cv_func_malloc_0_nonnull=yes ac_cv_func_realloc_0_nonnull=yes
+./configure \
+    --host="$_TARGET" \
+    --prefix=/var/usr \
+    --disable-static \
+    --disable-nls \
+    --disable-doc \
+    --with-included-libtasn1 \
+    --without-tpm2 \
+    --without-p11-kit \
+    ac_cv_func_malloc_0_nonnull=yes \
+    ac_cv_func_realloc_0_nonnull=yes
 "$_MAKE" -j"$_JOBS"
 "$_MAKE" DESTDIR="$_PKGROOT/pkg" install
 )

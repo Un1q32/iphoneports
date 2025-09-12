@@ -5,3 +5,4 @@ libunistring
 nettle
 brotli
 libidn2
+libc++
