@@ -13,18 +13,19 @@ _get_distribution_components() {
     done
 }
 
-mkdir -p src/build
 (
+mkdir -p src/build
 cd src/build
 tblgen="$(command -v llvm-tblgen)"
 case $_CPU in
-    arm64*) ;;
-    arm*)
+    (arm64*) ;;
+    (arm*)
         # ld64 fails to link when built for thumb, so explicitly specify arm here
         export CFLAGS="-marm"
         export CXXFLAGS="$CFLAGS"
     ;;
 esac
+defaulttarget="$_CPU-apple-$_SUBSYSTEM$_SUBSYSTEMVER"
 
 cmake -GNinja ../llvm \
     -DCMAKE_BUILD_TYPE=MinSizeRel \
@@ -38,7 +39,7 @@ cmake -GNinja ../llvm \
     -DLLVM_INCLUDE_BENCHMARKS=OFF \
     -DLLVM_LINK_LLVM_DYLIB=ON \
     -DLLVM_NO_INSTALL_NAME_DIR_FOR_BUILD_TREE=ON \
-    -DLLVM_DEFAULT_TARGET_TRIPLE="$_TARGET" \
+    -DLLVM_DEFAULT_TARGET_TRIPLE="$defaulttarget" \
     -DLLVM_ENABLE_ZLIB=ON \
     -DLLVM_ENABLE_ZSTD=ON \
     -DLLVM_TARGETS_TO_BUILD='X86;ARM;AArch64' \
@@ -58,7 +59,7 @@ cmake -GNinja ../llvm \
     -DLLVM_INCLUDE_BENCHMARKS=OFF \
     -DLLVM_LINK_LLVM_DYLIB=ON \
     -DLLVM_NO_INSTALL_NAME_DIR_FOR_BUILD_TREE=ON \
-    -DLLVM_DEFAULT_TARGET_TRIPLE="$_TARGET" \
+    -DLLVM_DEFAULT_TARGET_TRIPLE="$defaulttarget" \
     -DLLVM_ENABLE_ZLIB=ON \
     -DLLVM_ENABLE_ZSTD=ON \
     -DLLVM_TARGETS_TO_BUILD='X86;ARM;AArch64' \

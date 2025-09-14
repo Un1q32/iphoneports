@@ -19,14 +19,14 @@ printf '#!/bin/sh\nexit 1\n' > "$_PKGROOT/src/iphoneports-fakebin/git"
 chmod +x "$_PKGROOT/src/iphoneports-fakebin/git"
 export PATH="$_PKGROOT/src/iphoneports-fakebin:$PATH"
 
-mkdir -p src/build
 (
+mkdir -p src/build
 cd src/build
 llvmtblgen="$(command -v llvm-tblgen)"
 clangtblgen="$(command -v clang-tblgen)"
 case $_CPU in
-    arm64*) ;;
-    arm*)
+    (arm64*) ;;
+    (arm*)
         # ld64 fails to link when built for thumb, so explicitly specify arm here
         export CFLAGS="-marm"
         export CXXFLAGS="$CFLAGS"
