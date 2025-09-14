@@ -1,7 +1,7 @@
 #!/bin/sh
 rm -rf pkg src
 printf "Downloading source...\n"
-curl -L -# -o src.tar.xz https://github.com/ccache/ccache/releases/download/v4.11.3/ccache-4.11.3.tar.xz
+curl -L -# -o src.tar.xz https://github.com/ccache/ccache/archive/refs/tags/v4.12.tar.gz
 printf "Unpacking source...\n"
 tar -xf src.tar.xz
 rm src.tar.xz

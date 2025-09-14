@@ -2,3 +2,4 @@ libc++
 zstd
 xxhash
 fmt
+hiredis
