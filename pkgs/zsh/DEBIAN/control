@@ -2,6 +2,6 @@ Package: iphoneports-zsh
 Section: Terminal_Support
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Architecture: @DPKGARCH@
-Version: 5.9-1
+Version: 5.9-2
 Depends: iphoneports-base, iphoneports-ncurses, iphoneports-pcre
 Description: A very advanced and programmable command interpreter (shell) for UNIX
