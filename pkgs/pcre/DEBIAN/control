@@ -2,6 +2,6 @@ Package: iphoneports-pcre
 Section: Development
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Architecture: @DPKGARCH@
-Version: 8.45-2
+Version: 8.45-3
 Depends: iphoneports-base, iphoneports-readline, iphoneports-bzip2, iphoneports-zlib
 Description: A library that implements Perl 5-style regular expressions

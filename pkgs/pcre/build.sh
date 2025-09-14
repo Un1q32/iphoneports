@@ -1,9 +1,21 @@
 #!/bin/sh
+# shellcheck disable=2086
 set -e
 . ../../lib.sh
+
 (
+[ "$_SUBSYSTEM" = "macos" ] && jit=--enable-jit
 cd src
-./configure --host="$_TARGET" --prefix=/var/usr --enable-utf --disable-static --enable-pcretest-libreadline --enable-pcregrep-libbz2 --enable-pcregrep-libz --disable-cpp
+./configure \
+    --host="$_TARGET" \
+    --prefix=/var/usr \
+    --enable-utf \
+    --disable-static \
+    --enable-pcretest-libreadline \
+    --enable-pcregrep-libbz2 \
+    --enable-pcregrep-libz \
+    --disable-cpp \
+    $jit
 "$_MAKE" -j"$_JOBS"
 "$_MAKE" DESTDIR="$_PKGROOT/pkg" install
 )
