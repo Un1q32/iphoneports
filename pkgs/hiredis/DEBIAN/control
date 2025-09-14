@@ -1,0 +1,7 @@
+Package: iphoneports-hiredis
+Section: Development
+Maintainer: Uniq <joey.t.reinhart@gmail.com>
+Architecture: @DPKGARCH@
+Version: 1.3.0
+Description: Minimalistic C client for Redis
+Depends: iphoneports-base
