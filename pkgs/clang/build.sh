@@ -72,7 +72,7 @@ DESTDIR="$_PKGROOT/pkg" ninja -j"$_JOBS" install-distribution
 (
 cd pkg/var/usr
 rm -rf share bin/git-clang-format
-for link in clang++ clang-cl clang-cpp; do
+for link in clang++ clang-cl clang-cpp cc c++ gcc g++; do
     ln -sf clang "bin/$link"
 done
 for file in bin/* lib/*.dylib; do
