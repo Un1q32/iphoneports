@@ -1,0 +1,7 @@
+Package: iphoneports-lld
+Section: Development
+Maintainer: Uniq <joey.t.reinhart@gmail.com>
+Architecture: @DPKGARCH@
+Version: 21.1.1
+Description: The LLVM linker
+Depends: iphoneports-base, iphoneports-libc++, iphoneports-llvm, iphoneports-zlib, iphoneports-zstd
