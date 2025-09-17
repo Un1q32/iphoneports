@@ -3,5 +3,5 @@ Section: Development
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Architecture: @DPKGARCH@
 Version: 21.1.1-2
-Description: LLVM C/C++/ObjC/ObjC++ compiler
+Description: The LLVM C/C++/ObjC/ObjC++ compiler
 Depends: iphoneports-base, iphoneports-libc++, iphoneports-llvm, iphoneports-compiler-rt, iphoneports-libxml2, iphoneports-zlib, iphoneports-cctools, iphoneports-sdk
