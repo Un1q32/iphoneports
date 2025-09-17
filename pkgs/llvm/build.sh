@@ -13,6 +13,12 @@ _get_distribution_components() {
     done
 }
 
+# awful hack to make llvm not define some macros with git revisions
+mkdir -p "$_PKGROOT/src/iphoneports-fakebin"
+printf '#!/bin/sh\nexit 1\n' > "$_PKGROOT/src/iphoneports-fakebin/git"
+chmod +x "$_PKGROOT/src/iphoneports-fakebin/git"
+export PATH="$_PKGROOT/src/iphoneports-fakebin:$PATH"
+
 (
 mkdir -p src/build
 cd src/build
