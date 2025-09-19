@@ -2,6 +2,6 @@ Package: iphoneports-neofetch
 Section: Utilities
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Architecture: all
-Version: 8.0.2
+Version: 8.0.2-1
 Depends: iphoneports-base, iphoneports-bash, iphoneports-gawk, iphoneports-sed, iphoneports-grep, iphoneports-coreutils, iphoneports-sysctl, iphoneports-getusedmem
 Description: A command line system information tool
