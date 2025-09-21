@@ -1,4 +1,4 @@
-[ -z "$BASH_VERSION" ] && [ -z "$ZSH_VERSION" ] && return
+command -v alias || return
 
 alias ls='ls --color=auto'
 alias grep='grep --color=auto'
