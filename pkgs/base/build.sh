@@ -25,14 +25,4 @@ done
 
 cp -r DEBIAN pkg
 sed -e "s|@DPKGARCH@|$_DPKGARCH|" DEBIAN/control > pkg/DEBIAN/control
-if [ "$_SUBSYSTEM" = "ios" ] && [ "$_TRUEOSVER" -ge 20000 ]; then
-    case $_CPU in
-        (armv6)  minver=2.0  ;;
-        (armv7)  minver=3.0  ;;
-        (armv7s) minver=6.0  ;;
-        (arm64)  minver=7.0  ;;
-        (arm64e) minver=14.0 ;;
-    esac
-    sed -i "/^Depends:/ s/$/, firmware (>= $minver)/" pkg/DEBIAN/control
-fi
 dpkg-deb -b --root-owner-group -Zgzip pkg "$_PKGNAME.deb"
