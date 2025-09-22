@@ -31,7 +31,7 @@ if [ "$_SUBSYSTEM" = "ios" ] && [ "$_TRUEOSVER" -ge 20000 ]; then
         (armv7)  minver=3.0  ;;
         (armv7s) minver=6.0  ;;
         (arm64)  minver=7.0  ;;
-        (arm64e) minver=12.0 ;;
+        (arm64e) minver=14.0 ;;
     esac
     sed -i "/^Depends:/ s/$/, firmware (>= $minver)/" pkg/DEBIAN/control
 fi
