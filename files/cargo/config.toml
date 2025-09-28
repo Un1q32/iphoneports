@@ -1,2 +1,0 @@
-[patch.crates-io]
-cc_1_1_18 = { git = 'https://github.com/Un1q32/cc-rs.git', package = 'cc', branch = '1.1.18' }

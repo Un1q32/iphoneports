@@ -5,7 +5,6 @@ set -e
 (
 cd src
 SDKROOT="$_SDK" \
-    TARGET_CC="$_TARGET-cc" \
     TARGET_PKG_CONFIG=pkg-config \
     PKG_CONFIG_LIBDIR="$_SDK/var/usr/lib/pkgconfig" \
     PKG_CONFIG_SYSROOT_DIR="$_SDK" \
