@@ -2,6 +2,12 @@
 set -e
 . ../../files/lib.sh
 
+# hack to make ripgrep not include the iphoneports git rev
+mkdir -p "$_PKGROOT/src/iphoneports-fakebin"
+printf '#!/bin/sh\nexit 1\n' > "$_PKGROOT/src/iphoneports-fakebin/git"
+chmod +x "$_PKGROOT/src/iphoneports-fakebin/git"
+export PATH="$_PKGROOT/src/iphoneports-fakebin:$PATH"
+
 (
 cd src
 SDKROOT="$_SDK" \
