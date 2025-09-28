@@ -66,7 +66,7 @@ if [ -z "$_JOBS" ]; then
     export _JOBS
 fi
 
-: > "$bsroot/.builtpkgs"
+: > "$bsroot/files/.builtpkgs"
 
 export _DLCACHE="$bsroot/dlcache"
 if [ ! -d "$_DLCACHE" ]; then
@@ -311,7 +311,7 @@ build() {
         2) return 1 ;;
     esac
 
-    [ -n "$dryrun" ] && printf '%s\n' "$1" >> "$bsroot/.builtpkgs"
+    [ -n "$dryrun" ] && printf '%s\n' "$1" >> "$bsroot/files/.builtpkgs"
     return 0
 }
 
@@ -321,7 +321,7 @@ hasbeenbuilt() {
             if [ "$pkg" = "$1" ]; then
                 return 0
             fi
-        done < "$bsroot/.builtpkgs"
+        done < "$bsroot/files/.builtpkgs"
     elif [ -d "$pkgdir/$1/pkg" ]; then
         return 0
     fi
@@ -430,7 +430,7 @@ main() {
         ;;
 
         cleanall)
-            rm -rf "$pkgdir"/*/pkg "$pkgdir"/*/src "$pkgdir"/*/*.deb "$bsroot"/debs/*.deb "$_TMP"/iphoneports-sdk-* "$bsroot/.builtpkgs"
+            rm -rf "$pkgdir"/*/pkg "$pkgdir"/*/src "$pkgdir"/*/*.deb "$bsroot"/debs/*.deb "$_TMP"/iphoneports-sdk-* "$bsroot/files/.builtpkgs"
         ;;
 
         dryrun)
