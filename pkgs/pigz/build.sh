@@ -1,6 +1,6 @@
 #!/bin/sh
 set -e
-. ../../lib.sh
+. ../../files/lib.sh
 (
 cd src
 "$_MAKE" CC="$_TARGET-cc"

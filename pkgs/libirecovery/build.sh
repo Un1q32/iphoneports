@@ -1,6 +1,6 @@
 #!/bin/sh
 set -e
-. ../../lib.sh
+. ../../files/lib.sh
 (
 cd src
 ./configure --host="$_TARGET" --prefix=/var/usr --disable-static --without-udev --without-iokit PKG_CONFIG_LIBDIR="$_SDK/var/usr/lib/pkgconfig"

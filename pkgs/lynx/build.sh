@@ -1,6 +1,6 @@
 #!/bin/sh
 set -e
-. ../../lib.sh
+. ../../files/lib.sh
 (
 cd src
 ./configure --host="$_TARGET" --prefix=/var/usr --enable-ipv6 --with-ssl --with-brotli --with-zlib

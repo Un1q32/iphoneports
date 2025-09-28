@@ -1,6 +1,6 @@
 #!/bin/sh
 set -e
-. ../../lib.sh
+. ../../files/lib.sh
 unset SUDO_PROMPT
 (
 cd src

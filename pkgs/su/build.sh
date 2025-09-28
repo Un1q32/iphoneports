@@ -1,6 +1,6 @@
 #!/bin/sh
 set -e
-. ../../lib.sh
+. ../../files/lib.sh
 (
 cd src
 "$_TARGET-cc" -o su -Os -flto su.c -lpam

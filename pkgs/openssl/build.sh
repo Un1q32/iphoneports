@@ -1,7 +1,7 @@
 #!/bin/sh
 # shellcheck disable=2086
 set -e
-. ../../lib.sh
+. ../../files/lib.sh
 
 (
 cd src

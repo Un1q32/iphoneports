@@ -1,6 +1,6 @@
 #!/bin/sh
 set -e
-. ../../lib.sh
+. ../../files/lib.sh
 (
 cd src
 if [ "$_CPU" = "i386" ]; then

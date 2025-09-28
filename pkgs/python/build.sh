@@ -1,6 +1,6 @@
 #!/bin/sh
 set -e
-. ../../lib.sh
+. ../../files/lib.sh
 
 mkdir -p "$_PKGROOT/src/iphoneports-fakebin"
 printf '#!/bin/sh\necho %s\n' "$_MACVER" > "$_PKGROOT/src/iphoneports-fakebin/sw_vers"

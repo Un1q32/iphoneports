@@ -1,6 +1,6 @@
 #!/bin/sh -e
 set -e
-. ../../lib.sh
+. ../../files/lib.sh
 
 (
 cd src

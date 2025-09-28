@@ -1,6 +1,6 @@
 #!/bin/sh
 set -e
-. ../../lib.sh
+. ../../files/lib.sh
 (
 cd src
 "$_TARGET-cc" ping.c -o ping -Os -flto -Wno-deprecated-non-prototype

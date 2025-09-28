@@ -1,6 +1,6 @@
 #!/bin/sh
 set -e
-. ../../lib.sh
+. ../../files/lib.sh
 mkdir -p pkg/var/usr/bin
 cp src/neofetch pkg/var/usr/bin
 

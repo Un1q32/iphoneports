@@ -1,6 +1,6 @@
 #!/bin/sh
 set -e
-. ../../lib.sh
+. ../../files/lib.sh
 
 _get_distribution_components() {
     ninja -t targets | grep -Po 'install-\K.*(?=-stripped:)' | while read -r target; do

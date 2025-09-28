@@ -270,7 +270,7 @@ _TRUEOSVER=__ENVIRONMENT_OS_VERSION_MIN_REQUIRED__
     esac
 
     case $_DPKGARCH in
-        iphoneos-*) _ENTITLEMENTS="$bsroot/ios-entitlements.xml" ;;
+        iphoneos-*) _ENTITLEMENTS="$bsroot/files/ios-entitlements.xml" ;;
         *) _ENTITLEMENTS= ;;
     esac
 
