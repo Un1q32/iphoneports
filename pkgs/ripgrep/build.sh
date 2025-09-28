@@ -4,7 +4,7 @@ set -e
 
 (
 cd src
-SDKROOT="$_SDK" cargo build --target "$_RUSTTARGET" --release -j "$_JOBS"
+SDKROOT="$_SDK" cargo build --target "$_RUSTTARGET" --release --features 'pcre2' -j "$_JOBS"
 mkdir -p "$_PKGROOT/pkg/var/usr/bin"
 cp "target/$_RUSTTARGET/release/rg" "$_PKGROOT/pkg/var/usr/bin"
 )

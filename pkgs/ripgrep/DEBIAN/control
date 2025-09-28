@@ -2,6 +2,6 @@ Package: iphoneports-ripgrep
 Section: Utilities
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Architecture: @DPKGARCH@
-Version: 14.1.1
+Version: 14.1.1-1
 Depends: iphoneports-base
 Description: A blazing fast regex search tool

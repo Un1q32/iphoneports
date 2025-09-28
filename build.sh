@@ -294,6 +294,8 @@ _TRUEOSVER=__ENVIRONMENT_OS_VERSION_MIN_REQUIRED__
 
     eval 'export "CARGO_TARGET_${rusttargetupper}_LINKER"="$_TARGET-cc"'
 
+    export CARGO_HOME="$bsroot/files/cargo"
+
     iphoneportspath="$(command -v "$_TARGET-sdkpath")"
     iphoneportspath="${iphoneportspath%/*}/../share/iphoneports/bin"
     PATH="$iphoneportspath:$PATH"
