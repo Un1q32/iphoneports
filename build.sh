@@ -16,8 +16,8 @@ if ! command -v "$EDITOR" >/dev/null 2>&1; then
     command -v "$EDITOR" >/dev/null 2>&1 || EDITOR=none
 fi
 
-if [ -f pkglock ]; then
-    read -r lockpid < pkglock
+if [ -f files/pkglock ]; then
+    read -r lockpid < files/pkglock
     if kill -0 "$lockpid" 2> /dev/null; then
         printf '%s\n' "Waiting for PID $lockpid to finish..."
         while kill -0 "$lockpid" 2> /dev/null; do
@@ -26,7 +26,7 @@ if [ -f pkglock ]; then
     fi
 fi
 
-printf '%s' "$$" > pkglock
+printf '%s' "$$" > files/pkglock
 
 pkgdir="$bsroot/pkgs"
 export TERM="xterm-256color"
@@ -34,7 +34,7 @@ export TERM="xterm-256color"
 [ -f defaulttarget.txt ] && IFS= read -r defaulttarget < defaulttarget.txt
 
 case "$*" in
-    *--no-tmpfs*) export _TMP="$bsroot" ;;
+    *--no-tmpfs*) export _TMP="$bsroot/files" ;;
     *) export _TMP="/tmp" ;;
 esac
 
