@@ -1,4 +1,20 @@
 #define realpath __dont_define_realpath
+
+#if (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                \
+     __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ < 40300) ||                \
+    (defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) &&                 \
+     __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ < 1070)
+#define open __dont_define_open
+#include <fcntl.h>
+#undef open
+int open(const char *path, int flags, ...)
+#ifdef __i386__
+    __asm("_open$UNIX2003")
+#endif
+        ;
+#endif
+#include <fcntl.h>
+
 #include <stdlib.h>
 #undef realpath
 
@@ -146,7 +162,6 @@ int clock_gettime(int clockid, struct timespec *ts) {
     (defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) &&                 \
      __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ < 101000)
 
-#include <fcntl.h>
 #include <sys/stat.h>
 #include <sys/syscall.h>
 #include <unistd.h>
@@ -314,9 +329,6 @@ int dirfd(DIR *dirp) {
 #define O_CLOEXEC 0x1000000
 #endif
 
-#ifdef __i386__
-int open(const char *path, int flags, ...) __asm("_open$UNIX2003");
-#endif
 int open(const char *path, int flags, ...) {
   static int (*func)(const char *, int, ...) = NULL;
 
