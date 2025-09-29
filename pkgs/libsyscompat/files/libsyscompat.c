@@ -451,6 +451,8 @@ char *realpath_extsn(const char *restrict path, char *restrict resolved_path) {
      __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ < 30000) ||                \
     defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__)
 
+#include <mach/mach_host.h>
+
 int posix_memalign(void **memptr, size_t align, size_t size) {
   static bool init = false;
   static int (*func)(void **, size_t, size_t);
@@ -478,6 +480,28 @@ int posix_memalign(void **memptr, size_t align, size_t size) {
     *memptr = mem;
     return 0;
   }
+}
+
+kern_return_t host_statistics64(host_t host_priv, host_flavor_t flavor,
+                                host_info_t host_info64_out,
+                                mach_msg_type_number_t *host_info64_outCnt) {
+  static bool init = false;
+  static kern_return_t (*func)(host_t, host_flavor_t, host_info_t,
+                               mach_msg_type_number_t *);
+
+  if (!init) {
+    func =
+        (kern_return_t (*)(host_t, host_flavor_t, host_info_t,
+                           mach_msg_type_number_t *))dlsym(RTLD_NEXT,
+                                                           "host_statistics64");
+    init = true;
+  }
+
+  if (func)
+    return func(host_priv, flavor, host_info64_out, host_info64_outCnt);
+
+  return host_statistics(host_priv, flavor, host_info64_out,
+                         host_info64_outCnt);
 }
 
 #ifdef __arm__
