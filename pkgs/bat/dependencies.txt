@@ -1,0 +1,5 @@
+libsyscompat
+zlib
+libgit2
+openssl
+pcre2

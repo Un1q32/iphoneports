@@ -1,0 +1,7 @@
+Package: iphoneports-bat
+Section: Utilities
+Maintainer: Uniq <joey.t.reinhart@gmail.com>
+Architecture: @DPKGARCH@
+Version: 0.25.0
+Depends: iphoneports-base, iphoneports-zlib, iphoneports-libgit2
+Description: Cat clone with syntax highlighting and git integration
