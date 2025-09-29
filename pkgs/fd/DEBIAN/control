@@ -1,0 +1,7 @@
+Package: iphoneports-fd
+Section: Utilities
+Maintainer: Uniq <joey.t.reinhart@gmail.com>
+Architecture: @DPKGARCH@
+Version: 10.3.0
+Depends: iphoneports-base
+Description: Simple, fast and user-friendly alternative to find
