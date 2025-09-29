@@ -310,6 +310,41 @@ int dirfd(DIR *dirp) {
 
 #include <string.h>
 
+#ifndef O_CLOEXEC
+#define O_CLOEXEC 0x1000000
+#endif
+
+#ifdef __i386__
+int open(const char *path, int flags, ...) __asm("_open$UNIX2003");
+#endif
+int open(const char *path, int flags, ...) {
+  static int (*func)(const char *, int, ...) = NULL;
+
+  if (!func)
+    func = (int (*)(const char *, int, ...))dlsym(RTLD_NEXT, "open"
+#ifdef __i386__
+                                                             "$UNIX2003"
+#endif
+    );
+
+  int mode = mode;
+  if (flags & O_CREAT) {
+    va_list va_args;
+    va_start(va_args, flags);
+    mode = va_arg(va_args, int);
+    va_end(va_args);
+  }
+  bool cloexec = false;
+  if (flags & O_CLOEXEC) {
+    flags &= ~O_CLOEXEC;
+    cloexec = true;
+  }
+  int fd = func(path, flags, mode);
+  if (cloexec && fd != -1)
+    fcntl(fd, F_SETFD, FD_CLOEXEC);
+  return fd;
+}
+
 void arc4random_buf(void *buf, size_t size) {
   static bool init = false;
   static void (*func)(void *, size_t);
@@ -356,11 +391,19 @@ int pthread_setname_np(const char *name) {
 
 #include <limits.h>
 
+#ifdef __i386__
+char *realpath(const char *restrict path,
+               char *restrict resolved_path) __asm("_realpath$UNIX2003");
+#endif
 char *realpath(const char *restrict path, char *restrict resolved_path) {
   static char *(*func)(const char *, char *) = NULL;
 
   if (!func)
-    func = (char *(*)(const char *, char *))dlsym(RTLD_NEXT, "realpath");
+    func = (char *(*)(const char *, char *))dlsym(RTLD_NEXT, "realpath"
+#ifdef __i386__
+                                                             "$UNIX2003"
+#endif
+    );
 
   if (!resolved_path) {
     char buf[PATH_MAX];
