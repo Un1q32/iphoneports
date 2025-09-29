@@ -15,7 +15,7 @@
 #include <stdbool.h>
 
 static inline int __iphoneports_open(const char *path, int flags, ...) {
-  int mode;
+  int mode = mode;
   if (flags & O_CREAT) {
     va_list va_args;
     va_start(va_args, flags);
