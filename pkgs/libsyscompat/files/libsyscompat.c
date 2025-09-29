@@ -147,6 +147,7 @@ int clock_gettime(int clockid, struct timespec *ts) {
      __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ < 101000)
 
 #include <fcntl.h>
+#include <sys/stat.h>
 #include <sys/syscall.h>
 #include <unistd.h>
 
@@ -156,9 +157,56 @@ int clock_gettime(int clockid, struct timespec *ts) {
 #ifndef AT_EACCESS
 #define AT_EACCESS 0x0010
 #endif
+#ifndef AT_SYMLINK_NOFOLLOW
+#define AT_SYMLINK_NOFOLLOW 0x0020
+#endif
 
 static inline int pthread_fchdir_np(int fd) {
   return syscall(SYS___pthread_fchdir, fd);
+}
+
+int fstatat(int fd, const char *path, struct stat *st, int flags) {
+  static bool init = false;
+  static int (*func)(int, const char *, struct stat *, int);
+
+  if (!init) {
+    func = (int (*)(int, const char *, struct stat *, int))dlsym(RTLD_NEXT,
+                                                                 "fstatat");
+    init = true;
+  }
+
+  if (func)
+    return func(fd, path, st, flags);
+
+  if (fd == AT_FDCWD || path[0] == '/') {
+    if (flags & AT_SYMLINK_NOFOLLOW)
+      return lstat(path, st);
+    return stat(path, st);
+  }
+
+  int cwd = open(".", O_RDONLY);
+  if (pthread_fchdir_np(-1) < 0 && cwd != -1) {
+    close(cwd);
+    cwd = -1;
+  }
+  if (pthread_fchdir_np(fd) < 0) {
+    pthread_fchdir_np(cwd);
+    if (cwd != -1)
+      close(cwd);
+    return -1;
+  }
+
+  int ret;
+  if (flags & AT_SYMLINK_NOFOLLOW)
+    ret = lstat(path, st);
+  else
+    ret = stat(path, st);
+
+  pthread_fchdir_np(cwd);
+  if (cwd != -1)
+    close(cwd);
+
+  return ret;
 }
 
 int faccessat(int fd, const char *path, int mode, int flags) {
