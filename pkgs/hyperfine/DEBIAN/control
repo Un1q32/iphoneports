@@ -1,0 +1,7 @@
+Package: iphoneports-hyperfine
+Section: Utilities
+Maintainer: Uniq <joey.t.reinhart@gmail.com>
+Architecture: @DPKGARCH@
+Version: 1.19.0
+Depends: iphoneports-base
+Description: A command-line benchmarking tool

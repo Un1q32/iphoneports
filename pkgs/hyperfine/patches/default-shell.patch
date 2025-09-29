@@ -1,0 +1,11 @@
+--- src/src/options.rs.orig
++++ src/src/options.rs
+@@ -14,7 +14,7 @@
+ use anyhow::Result;
+ 
+ #[cfg(not(windows))]
+-pub const DEFAULT_SHELL: &str = "sh";
++pub const DEFAULT_SHELL: &str = "/var/usr/bin/sh";
+ 
+ #[cfg(windows)]
+ pub const DEFAULT_SHELL: &str = "cmd.exe";
