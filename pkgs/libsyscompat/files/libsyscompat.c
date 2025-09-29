@@ -536,3 +536,65 @@ _Unwind_Ptr _Unwind_GetIPInfo(struct _Unwind_Context *context, int *ipbefore) {
 #endif
 
 #endif
+
+#if ((defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) ||               \
+      defined(__ENVIRONMENT_TV_OS_VERSION_MIN_REQUIRED__)) &&                  \
+     __ENVIRONMENT_OS_VERSION_MIN_REQUIRED__ < 100000) ||                      \
+    (defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) &&                 \
+     __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ < 101200) ||                \
+    (defined(__ENVIRONMENT_WATCH_OS_VERSION_MIN_REQUIRED__) &&                 \
+     __ENVIRONMENT_WATCH_OS_VERSION_MIN_REQUIRED__ < 30000)
+
+
+#if (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                \
+     __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ < 12000) ||                \
+    (defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) &&                 \
+     __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ < 1070)
+#define __iphoneports_SecRandomCopyBytes SecRandomCopyBytes
+#endif
+
+int __iphoneports_SecRandomCopyBytes(void *rnd, size_t size, void *buf) {
+#if !(defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&               \
+      __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ < 12000)
+  static bool init = false;
+  static int (*func)(void *, size_t, void *);
+
+  if (!init) {
+    func =
+        (int (*)(void *, size_t, void *))dlsym(RTLD_NEXT, "SecRandomCopyBytes");
+    if (!func) {
+      void *handle = dlopen(
+          "/System/Library/Frameworks/Security.framework/Security", RTLD_LAZY);
+      if (handle)
+        func = (int (*)(void *, size_t, void *))dlsym(handle,
+                                                      "SecRandomCopyBytes");
+      if (!func)
+        dlclose(handle);
+    }
+    init = true;
+  }
+
+  if (func)
+    return func(rnd, size, buf);
+#endif
+
+  uint32_t *cbuf = buf;
+  while (size >= sizeof(uint32_t)) {
+    *cbuf++ = arc4random();
+    size -= sizeof(uint32_t);
+  }
+  if (size != 0) {
+    uint32_t random = arc4random();
+    memcpy(cbuf, &random, size);
+  }
+  return 0;
+}
+
+int getentropy(void *buf, size_t size) {
+  int ret = __iphoneports_SecRandomCopyBytes(NULL, size, buf);
+  if (ret != 0)
+    return -1;
+  return 0;
+}
+
+#endif
