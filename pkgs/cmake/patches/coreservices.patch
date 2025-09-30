@@ -25,7 +25,7 @@
  add_subdirectory(libarchive)
 --- src/Source/CMakeLists.txt.orig
 +++ src/Source/CMakeLists.txt
-@@ -1056,7 +1056,9 @@
+@@ -1058,7 +1058,9 @@
  # On Apple we need CoreFoundation and CoreServices
  if(APPLE)
    target_link_libraries(CMakeLib PUBLIC "-framework CoreFoundation")
