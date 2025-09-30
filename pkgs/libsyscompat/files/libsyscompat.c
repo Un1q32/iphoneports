@@ -551,6 +551,8 @@ _Unwind_Ptr _Unwind_GetIPInfo(struct _Unwind_Context *context, int *ipbefore) {
     (defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) &&                 \
      __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ < 1070)
 #define __iphoneports_SecRandomCopyBytes SecRandomCopyBytes
+#else
+static
 #endif
 
 int __iphoneports_SecRandomCopyBytes(void *rnd, size_t size, void *buf) {
