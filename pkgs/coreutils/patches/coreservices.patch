@@ -1,0 +1,11 @@
+--- src/m4/intlmacosx.m4.orig
++++ src/m4/intlmacosx.m4
+@@ -65,7 +65,7 @@
+     dnl and we have to link it in explicitly, otherwise an exception
+     dnl NSInvalidArgumentException "unrecognized selector sent to instance"
+     dnl occurs.
+-    INTL_MACOSX_LIBS="-Wl,-framework -Wl,CoreFoundation -Wl,-framework -Wl,CoreServices"
++    INTL_MACOSX_LIBS="-Wl,-framework -Wl,CoreFoundation"
+   fi
+   AC_SUBST([INTL_MACOSX_LIBS])
+ ])
