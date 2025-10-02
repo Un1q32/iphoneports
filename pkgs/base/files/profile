@@ -4,6 +4,8 @@ if [ -d /opt/local/bin ]; then
 fi
 umask 022
 
+eval "$(dircolors -b)"
+
 for sh in /var/usr/etc/profile.d/*.sh; do
     [ -r "$sh" ] && . "$sh"
 done
