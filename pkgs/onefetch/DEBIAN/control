@@ -3,5 +3,5 @@ Section: Utilities
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Architecture: @DPKGARCH@
 Version: 2.25.0
-Depends: iphoneports-base, iphoneports-zstd
+Depends: iphoneports-base, iphoneports-zstd, iphoneports-git
 Description: Git repository summary on your terminal
