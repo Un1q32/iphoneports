@@ -32,8 +32,7 @@ mkdir _buildpython && cd _buildpython || exit 1
     ac_cv_buggy_getaddrinfo=no \
     ac_cv_file__dev_ptmx=yes \
     ac_cv_file__dev_ptc=no \
-    PKG_CONFIG_LIBDIR="$_SDK/var/usr/lib/pkgconfig" \
-    CPPFLAGS=-D_DARWIN_USE_64_BIT_INODE
+    PKG_CONFIG_LIBDIR="$_SDK/var/usr/lib/pkgconfig"
 "$_MAKE" DESTDIR="$_PKGROOT/pkg" install -j"$_JOBS"
 )
 
