@@ -160,7 +160,7 @@ int clock_gettime(int clockid, struct timespec *ts) {
 void arc4random_buf(void *, size_t);
 
 int getentropy(void *buf, size_t size) {
-  arc4random_buf();
+  arc4random_buf(buf, size);
   return 0;
 }
 
@@ -330,7 +330,7 @@ int dirfd(DIR *dirp) {
 
 #if (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                \
      __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ < 12000) ||                \
-    defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__
+    defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__)
 
 int SecRandomCopyBytes(void *rnd, size_t size, void *buf) {
 #ifndef __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__
