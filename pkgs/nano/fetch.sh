@@ -1,8 +1,12 @@
 #!/bin/sh
-rm -rf pkg src files/syntax
-printf "Downloading source...\n"
-curl -L -# -o src.tar.gz https://ftpmirror.gnu.org/gnu/nano/nano-8.4.tar.gz
+rm -rf pkg src
+ver='8.4'
+[ -z "$_DLCACHE" ] && _DLCACHE=/tmp
+if [ ! -f "$_DLCACHE/nano-$ver.tar.gz" ] ||
+    [ "$(sha256sum "$_DLCACHE/nano-$ver.tar.gz" | awk '{print $1}')" != "35acc088bc190943382b4da2752563d28cf31351c1478419c4c82908fba94456" ]; then
+    printf "Downloading source...\n"
+    curl -L -# -o "$_DLCACHE/nano-$ver.tar.gz" "https://ftpmirror.gnu.org/gnu/nano/nano-$ver.tar.gz"
+fi
 printf "Unpacking source...\n"
-tar -xf src.tar.gz
-rm src.tar.gz
+tar -xf "$_DLCACHE/nano-$ver.tar.gz"
 mv nano-* src
