@@ -1,8 +1,12 @@
 #!/bin/sh
 rm -rf pkg src
-printf "Downloading source...\n"
-curl -L -# -o src.tar.gz https://www.sudo.ws/dist/sudo-1.9.17p2.tar.gz
+ver='1.9.17p2'
+[ -z "$_DLCACHE" ] && _DLCACHE=/tmp
+if [ ! -f "$_DLCACHE/sudo-$ver.tar.gz" ] ||
+    [ "$(sha256sum "$_DLCACHE/sudo-$ver.tar.gz" | awk '{print $1}')" != "4a38a1ab3adb1199257edc2a7c4a2bd714665eb605b04368843b06dada2cfcfb" ]; then
+    printf "Downloading source...\n"
+    curl -L -# -o "$_DLCACHE/sudo-$ver.tar.gz" "https://www.sudo.ws/dist/sudo-$ver.tar.gz"
+fi
 printf "Unpacking source...\n"
-tar -xf src.tar.gz
-rm src.tar.gz
+tar -xf "$_DLCACHE/sudo-$ver.tar.gz"
 mv sudo-* src
