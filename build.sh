@@ -317,7 +317,12 @@ build() {
     if [ -n "$dryrun" ]; then
         printf '%s\n' "Building $1"
     else
-        [ -f fetch.sh ] && ./fetch.sh
+        if [ -f fetch.sh ]; then
+            ./fetch.sh || {
+                rm -rf src "$_SDK"
+                return 2
+            }
+        fi
         applypatches
         printf '%s\n' "Building $1"
         ./build.sh || {
