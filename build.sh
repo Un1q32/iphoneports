@@ -159,23 +159,23 @@ _TRUEOSVER=__ENVIRONMENT_OS_VERSION_MIN_REQUIRED__
     case $_SUBSYSTEM in
         (ios|tvos)
             case $_TRUEOSVER in
-                ([12]????|30[01]??) _MACVER='10.5'  ;;
-                (3????|40[012]??)   _MACVER='10.6'  ;;
-                ([45]????)          _MACVER='10.7'  ;;
-                (6????)             _MACVER='10.9'  ;;
-                ([78]????)          _MACVER='10.10' ;;
-                (9????)             _MACVER='10.11' ;;
-                (10????)            _MACVER='10.12' ;;
-                (11????)            _MACVER='10.13' ;;
-                (12????)            _MACVER='10.14' ;;
-                (13????)            _MACVER='10.15' ;;
-                (14????)            _MACVER='11.0'  ;;
-                (15????)            _MACVER='12.0'  ;;
-                (16????)            _MACVER='13.0'  ;;
-                (17????)            _MACVER='14.0'  ;;
-                (18????)            _MACVER='15.0'  ;;
-                (19????)            _MACVER='16.0'  ;;
-                (20????)            _MACVER='17.0'  ;;
+                ([12]????)        _MACVER='10.5'  ;;
+                (3????|40[012]??) _MACVER='10.6'  ;;
+                ([45]????)        _MACVER='10.7'  ;;
+                (6????)           _MACVER='10.9'  ;;
+                ([78]????)        _MACVER='10.10' ;;
+                (9????)           _MACVER='10.11' ;;
+                (10????)          _MACVER='10.12' ;;
+                (11????)          _MACVER='10.13' ;;
+                (12????)          _MACVER='10.14' ;;
+                (13????)          _MACVER='10.15' ;;
+                (14????)          _MACVER='11.0'  ;;
+                (15????)          _MACVER='12.0'  ;;
+                (16????)          _MACVER='13.0'  ;;
+                (17????)          _MACVER='14.0'  ;;
+                (18????)          _MACVER='15.0'  ;;
+                (19????)          _MACVER='16.0'  ;;
+                (20????)          _MACVER='17.0'  ;;
                 (*) error "Unsupported OS version"  ;;
             esac
             major=$((_TRUEOSVER / 10000))
