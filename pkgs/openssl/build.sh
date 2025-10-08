@@ -24,6 +24,11 @@ case $_CPU in
     (x86_64)
         sys=darwin64-x86_64
     ;;
+
+    (*)
+        echo "UNSUPPORTED ARCHITECTURE"
+        exit 1
+    ;;
 esac
 
 ./Configure "$sys" $noasm --prefix=/var/usr --openssldir=/var/usr/etc/ssl CROSS_COMPILE="$_TARGET"-

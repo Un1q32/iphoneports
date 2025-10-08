@@ -1,9 +1,9 @@
 #!/bin/sh
 rm -rf pkg src
-ver='3.5.4'
+ver='3.6.0'
 [ -z "$_DLCACHE" ] && _DLCACHE=/tmp
 if [ ! -f "$_DLCACHE/openssl-$ver.tar.gz" ] ||
-    [ "$(sha256sum "$_DLCACHE/openssl-$ver.tar.gz" | awk '{print $1}')" != "967311f84955316969bdb1d8d4b983718ef42338639c621ec4c34fddef355e99" ]; then
+    [ "$(sha256sum "$_DLCACHE/openssl-$ver.tar.gz" | awk '{print $1}')" != "b6a5f44b7eb69e3fa35dbf15524405b44837a481d43d81daddde3ff21fcbb8e9" ]; then
     printf "Downloading source...\n"
     curl -L -# -o "$_DLCACHE/openssl-$ver.tar.gz" "https://github.com/openssl/openssl/releases/download/openssl-$ver/openssl-$ver.tar.gz" || exit 1
 fi
