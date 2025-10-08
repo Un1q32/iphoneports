@@ -182,15 +182,22 @@ fi
 _TRUEOSVER=__ENVIRONMENT_OS_VERSION_MIN_REQUIRED__
 ' | "$_TARGET-cc" -E -xc -)"
 
-    if [ "$_TRUEOSVER" -ge 260000 ]; then
+    if [ "$_TRUEOSVER" -lt 10000 ]; then
+        major=10
+        minor=$(((_TRUEOSVER - 1000) / 10))
+        patch=$(((_TRUEOSVER - 1000) % 10))
+    else
         major=$((_TRUEOSVER / 10000))
         minor=$(((_TRUEOSVER % 10000) / 100))
         patch=$((_TRUEOSVER % 100))
-        if [ "$patch" != "0" ]; then
-            _SUBSYSTEMVER="$major.$minor.$patch"
-        else
-            _SUBSYSTEMVER="$major.$minor"
-        fi
+    fi
+    if [ $patch != 0 ]; then
+        _SUBSYSTEMVER="$major.$minor.$patch"
+    else
+        _SUBSYSTEMVER="$major.$minor"
+    fi
+
+    if [ "$_TRUEOSVER" -ge 260000 ] || [ "$_SUBSYSTEM" = "macos" ]; then
         _MACVER=$_SUBSYSTEMVER
     else
         case $_SUBSYSTEM in
@@ -213,42 +220,6 @@ _TRUEOSVER=__ENVIRONMENT_OS_VERSION_MIN_REQUIRED__
                     (18????)          _MACVER='15.0'  ;;
                     (*) error "Unsupported OS version"  ;;
                 esac
-                major=$((_TRUEOSVER / 10000))
-                minor=$(((_TRUEOSVER % 10000) / 100))
-                patch=$((_TRUEOSVER % 100))
-                if [ "$patch" != "0" ]; then
-                    _SUBSYSTEMVER="$major.$minor.$patch"
-                else
-                    _SUBSYSTEMVER="$major.$minor"
-                fi
-            ;;
-
-            (macos)
-                case $_TRUEOSVER in
-                    (100?)   _MACVER='10.0'  ;;
-                    (101?)   _MACVER='10.1'  ;;
-                    (102?)   _MACVER='10.2'  ;;
-                    (103?)   _MACVER='10.3'  ;;
-                    (104?)   _MACVER='10.4'  ;;
-                    (105?)   _MACVER='10.5'  ;;
-                    (106?)   _MACVER='10.6'  ;;
-                    (107?)   _MACVER='10.7'  ;;
-                    (108?)   _MACVER='10.8'  ;;
-                    (109?)   _MACVER='10.9'  ;;
-                    (1010??) _MACVER='10.10' ;;
-                    (1011??) _MACVER='10.11' ;;
-                    (1012??) _MACVER='10.12' ;;
-                    (1013??) _MACVER='10.13' ;;
-                    (1014??) _MACVER='10.14' ;;
-                    (1015??) _MACVER='10.15' ;;
-                    (11????) _MACVER='11.0'  ;;
-                    (12????) _MACVER='12.0'  ;;
-                    (13????) _MACVER='13.0'  ;;
-                    (14????) _MACVER='14.0'  ;;
-                    (15????) _MACVER='15.0'  ;;
-                    (*) error "Unsupported OS version" ;;
-                esac
-                _SUBSYSTEMVER=$_MACVER
             ;;
 
             (watchos)
@@ -265,14 +236,6 @@ _TRUEOSVER=__ENVIRONMENT_OS_VERSION_MIN_REQUIRED__
                     (11????) _MACVER='15.0'  ;;
                     (*) error "Unsupported OS version" ;;
                 esac
-                major=$((_TRUEOSVER / 10000))
-                minor=$(((_TRUEOSVER % 10000) / 100))
-                patch=$((_TRUEOSVER % 100))
-                if [ "$patch" != "0" ]; then
-                    _SUBSYSTEMVER="$major.$minor.$patch"
-                else
-                    _SUBSYSTEMVER="$major.$minor"
-                fi
             ;;
 
             (*)
