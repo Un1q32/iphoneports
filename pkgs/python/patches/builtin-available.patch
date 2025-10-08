@@ -1,8 +1,8 @@
 --- src/Modules/posixmodule.c.orig
 +++ src/Modules/posixmodule.c
-@@ -7,6 +7,9 @@
-    of the compiler used.  Different compilers define their own feature
-    test macro, e.g. '_MSC_VER'. */
+@@ -9,6 +9,9 @@
+ 
+ // --- Python includes ------------------------------------------------------
  
 +#ifdef __APPLE__
 +#include <sys/socket.h>
@@ -10,7 +10,7 @@
  #include "Python.h"
  
  #ifdef __VXWORKS__
-@@ -101,11 +104,6 @@
+@@ -451,11 +454,6 @@
  
  #include <mach/mach.h>
  

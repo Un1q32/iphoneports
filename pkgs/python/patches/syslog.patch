@@ -1,15 +1,29 @@
 --- src/Python/pylifecycle.c.orig
 +++ src/Python/pylifecycle.c
-@@ -49,11 +49,7 @@
+@@ -49,16 +49,17 @@
+ #  include <mach-o/loader.h>
  // The os_log unified logging APIs were introduced in macOS 10.12, iOS 10.0,
- // tvOS 10.0, and watchOS 3.0; we enable the use of the system logger
- // automatically on non-macOS platforms.
+ // tvOS 10.0, and watchOS 3.0;
 -#  if defined(TARGET_OS_IPHONE) && TARGET_OS_IPHONE
--#    define USE_APPLE_SYSTEM_LOG 1
+-#    define HAS_APPLE_SYSTEM_LOG 1
+-#  elif defined(TARGET_OS_OSX) && TARGET_OS_OSX
+-#    if defined(MAC_OS_X_VERSION_10_12) && MAC_OS_X_VERSION_MIN_REQUIRED >= MAC_OS_X_VERSION_10_12
+-#      define HAS_APPLE_SYSTEM_LOG 1
+-#    else
+-#      define HAS_APPLE_SYSTEM_LOG 0
+-#    endif
 -#  else
--#    define USE_APPLE_SYSTEM_LOG 0
--#  endif
-+#  define USE_APPLE_SYSTEM_LOG 0
++#  if (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) && \
++     __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ < 100000) ||  \
++    (defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) &&    \
++     __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ < 101200) ||   \
++    (defined(__ENVIRONMENT_TV_OS_VERSION_MIN_REQUIRED__) &&       \
++     __ENVIRONMENT_TV_OS_VERSION_MIN_REQUIRED__ < 100000) ||      \
++    (defined(__ENVIRONMENT_WATCH_OS_VERSION_MIN_REQUIRED__) &&    \
++     __ENVIRONMENT_WATCH_OS_VERSION_MIN_REQUIRED__ < 30000)
+ #    define HAS_APPLE_SYSTEM_LOG 0
++#  else
++#    define HAS_APPLE_SYSTEM_LOG 1
+ #  endif
  
- #  if USE_APPLE_SYSTEM_LOG
- #    include <os/log.h>
+ #  if HAS_APPLE_SYSTEM_LOG
