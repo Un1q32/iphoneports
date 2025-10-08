@@ -23,7 +23,7 @@ mkdir _buildpython && cd _buildpython || exit 1
     --build="$(clang -dumpmachine)" \
     --with-build-python="$_PKGROOT/src/buildpython/bin/python3" \
     --without-mimalloc \
-    --with-lto \
+    --with-lto=full \
     --enable-shared \
     --without-ensurepip \
     LDSHARED="$_TARGET-cc -shared -undefined dynamic_lookup" \
