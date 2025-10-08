@@ -1,5 +1,5 @@
 #!/bin/sh
-commit=cdc4e7b80552b740b06bb664c5dc758b283b0cdc
+commit=b693954f5f86262e3e300b322e3264c210bc6262
 rm -rf pkg src
 printf "Downloading source...\n"
 curl -L -# -o src.tar.gz "https://github.com/Un1q32/cctools-port/archive/${commit}.tar.gz"
