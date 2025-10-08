@@ -1,0 +1,12 @@
+--- src/Python/remote_debug.h.orig
++++ src/Python/remote_debug.h
+@@ -77,6 +77,9 @@
+ #include <sys/stat.h>
+ #include <sys/types.h>
+ #include <unistd.h>
++#ifdef __APPLE__
++extern int getpagesize(void) __attribute__((const));
++#endif
+ #endif
+ 
+ #ifndef HAVE_PROCESS_VM_READV
