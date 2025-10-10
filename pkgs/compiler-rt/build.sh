@@ -21,7 +21,7 @@ clang() {
 }
 
 for src in $armv6srcs; do
-    clang -o "armv6-${src%\.c}.o" -isysroot "$_PKGROOT/sysroot" -target armv6-apple-ios2 "../lib/builtins/$src" -c -O3 &
+    clang -o "armv6-${src%\.c}.o" -isysroot "$_PKGROOT/sysroot" -target armv6-apple-ios1 "../lib/builtins/$src" -c -O3 &
 done
 for src in $armv7srcs; do
     clang -o "armv7-${src%\.c}.o" -isysroot "$_PKGROOT/sysroot" -target armv7-apple-ios3 "../lib/builtins/$src" -c -O3 &
