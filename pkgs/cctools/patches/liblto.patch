@@ -1,0 +1,11 @@
+--- src/cctools/ld64/src/ld/parsers/lto_file.cpp.orig
++++ src/cctools/ld64/src/ld/parsers/lto_file.cpp
+@@ -1824,7 +1824,7 @@
+ 
+ }; // namespace lto
+ 
+-static const char *sLTODylib = "@rpath/libLTO.dylib";
++static const char *sLTODylib = "/var/usr/lib/libLTO.dylib";
+ static std::atomic<bool> sLTOIsLoaded(false);
+ 
+ static void *getHandle() {
