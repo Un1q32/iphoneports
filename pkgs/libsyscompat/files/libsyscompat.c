@@ -187,7 +187,7 @@ static inline int pthread_fchdir_np(int fd) {
   return syscall(SYS___pthread_fchdir, fd);
 }
 
-int fstatat(int fd, const char *path, struct stat *st, int flags) {
+int fstatat(int fd, const char *path, struct stat *statbuf, int flags) {
   static bool init = false;
   static int (*func)(int, const char *, struct stat *, int);
 
@@ -198,12 +198,12 @@ int fstatat(int fd, const char *path, struct stat *st, int flags) {
   }
 
   if (func)
-    return func(fd, path, st, flags);
+    return func(fd, path, statbuf, flags);
 
   if (fd == AT_FDCWD || path[0] == '/') {
     if (flags & AT_SYMLINK_NOFOLLOW)
-      return lstat(path, st);
-    return stat(path, st);
+      return lstat(path, statbuf);
+    return stat(path, statbuf);
   }
 
   int cwd = open(".", O_RDONLY);
@@ -220,9 +220,9 @@ int fstatat(int fd, const char *path, struct stat *st, int flags) {
 
   int ret;
   if (flags & AT_SYMLINK_NOFOLLOW)
-    ret = lstat(path, st);
+    ret = lstat(path, statbuf);
   else
-    ret = stat(path, st);
+    ret = stat(path, statbuf);
 
   pthread_fchdir_np(cwd);
   if (cwd != -1)
