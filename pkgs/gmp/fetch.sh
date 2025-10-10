@@ -1,8 +1,12 @@
 #!/bin/sh
 rm -rf pkg src
-printf "Downloading source...\n"
-curl -L -# -o src.tar.xz https://gmplib.org/download/gmp/gmp-6.3.0.tar.xz
+ver='6.3.0'
+[ -z "$_DLCACHE" ] && _DLCACHE=/tmp
+if [ ! -f "$_DLCACHE/gmp-$ver.tar.xz" ] ||
+    [ "$(sha256sum "$_DLCACHE/gmp-$ver.tar.xz" | awk '{print $1}')" != "a3c2b80201b89e68616f4ad30bc66aee4927c3ce50e33929ca819d5c43538898" ]; then
+    printf "Downloading source...\n"
+    curl -L -# -o "$_DLCACHE/gmp-$ver.tar.xz" "https://ftpmirror.gnu.org/gnu/gmp/gmp-$ver.tar.xz" || exit 1
+fi
 printf "Unpacking source...\n"
-tar -xf src.tar.xz
-rm src.tar.xz
-mv gmp-6.3.0 src
+tar -xf "$_DLCACHE/gmp-$ver.tar.xz"
+mv gmp-* src
