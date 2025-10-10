@@ -1,6 +1,7 @@
 #!/bin/sh
 set -e
 . ../../files/lib.sh
+
 (
 cd src
 mkdir tmpbin
