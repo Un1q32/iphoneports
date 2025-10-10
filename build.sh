@@ -374,7 +374,7 @@ _includedeps() {
         while IFS= read -r dep; do
             if [ -n "$recursivedeps" ]; then
                 case $includeddeps in
-                    (*\ $dep\ *) return ;;
+                    (*\ $dep\ *) continue ;;
                 esac
             fi
             if [ -d "$pkgdir/$dep" ]; then
