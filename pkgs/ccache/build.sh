@@ -1,8 +1,9 @@
 #!/bin/sh
 set -e
 . ../../files/lib.sh
-mkdir -p src/build
+
 (
+mkdir -p src/build
 cd src/build
 cmake -GNinja .. \
   -DCMAKE_BUILD_TYPE=Release \
