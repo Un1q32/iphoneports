@@ -1,6 +1,7 @@
 #!/bin/sh
 set -e
 . ../../files/lib.sh
+
 (
 cd src
 CC="$_TARGET-cc" HOSTCC=cc ./configure --prefix=/var/usr --enable-readline --disable-nls --disable-strip --disable-man-pages
