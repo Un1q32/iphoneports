@@ -246,6 +246,9 @@ _TRUEOSVER=__ENVIRONMENT_OS_VERSION_MIN_REQUIRED__
         esac
     fi
 
+    { [ "$_SUBSYSTEM" = "ios" ] && [ "$_TRUEOSVER" -lt 20000 ]; } ||
+        { [ "$_SUBSYSTEM" = "macos" ] || [ "$_TRUEOSVER" -lt 1050 ]; } && recursivedeps=1
+
     case $_CPU in
         (arm64*|aarch64*)
             if [ "$_SUBSYSTEM" = "ios" ]; then
@@ -366,19 +369,14 @@ applypatches() {
     fi
 }
 
-includedeps() {
-    if [ -z "$dryrun" ]; then
-        if [ -d "$sdk" ]; then
-            export _SDK="$_TMP/iphoneports-sdk-$_TARGET"
-            mkdir -p "$_SDK"
-            cp -a "$sdk"/* "$_SDK"
-        else
-            error "SDK not found"
-        fi
-    fi
-
-    if [ -f dependencies.txt ]; then
+_includedeps() {
+    if [ -f "$1" ]; then
         while IFS= read -r dep; do
+            if [ -n "$recursivedeps" ]; then
+                case $includeddeps in
+                    (*\ $dep\ *) return ;;
+                esac
+            fi
             if [ -d "$pkgdir/$dep" ]; then
                 if ! hasbeenbuilt "$dep"; then
                     printf '%s\n' "Building dependency $dep"
@@ -393,11 +391,30 @@ includedeps() {
                 fi
                 printf '%s\n' "Including dependency $dep"
                 [ -z "$dryrun" ] && cp -a "$pkgdir/$dep/pkg/"* "$_SDK"
+                if [ -n "$recursivedeps" ]; then
+                    includeddeps="$includeddeps $dep "
+                    _includedeps "../$dep/dependencies.txt"
+                fi
             else
                 error "Dependency not found: $dep"
             fi
-        done < dependencies.txt
+        done < "$1"
     fi
+}
+
+includedeps() {
+    unset includeddeps
+    if [ -z "$dryrun" ]; then
+        if [ -d "$sdk" ]; then
+            export _SDK="$_TMP/iphoneports-sdk-$_TARGET"
+            mkdir -p "$_SDK"
+            cp -a "$sdk"/* "$_SDK"
+        else
+            error "SDK not found"
+        fi
+    fi
+
+    _includedeps dependencies.txt
 
     if [ -z "$dryrun" ]; then
         if [ -d sdk ]; then
@@ -462,6 +479,7 @@ main() {
 
         (dryrun)
             dryrun=1
+            depcheck
             if [ -z "$2" ]; then
                 for pkg in "$pkgdir"/*; do
                     build "${pkg##*/}" || error "Failed to build package: ${pkg##*/}"
