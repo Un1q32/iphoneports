@@ -364,7 +364,7 @@ applypatches() {
     if [ -d patches ]; then
         for patch in patches/*; do
             printf '%s\n' "Applying patch ${patch##*/}"
-            "$gpatch" -p0 < "$patch"
+            "$gpatch" -fp0 < "$patch" || error "Failed to apply patch ${patch##*/}"
         done
     fi
 }
