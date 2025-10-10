@@ -1,3 +1,0 @@
-#!/var/usr/bin/sh
-/var/usr/bin/ssh-keygen -A
-exec /var/usr/sbin/sshd "$@"
