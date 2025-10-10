@@ -35,21 +35,21 @@ export TERM="xterm-256color"
 [ -f defaulttarget.txt ] && IFS= read -r defaulttarget < defaulttarget.txt
 
 case "$*" in
-    *--no-tmpfs*) export _TMP="$bsroot/files" ;;
-    *) export _TMP="/tmp" ;;
+    (*--no-tmpfs*) export _TMP="$bsroot/files" ;;
+    (*) export _TMP="/tmp" ;;
 esac
 
 case "$*" in
-    *--target=*) _TARGET="$*" ; _TARGET="${_TARGET#*--target=}" ; export _TARGET="${_TARGET%% *}" ;;
-    *) export _TARGET="$defaulttarget" ;;
+    (*--target=*) _TARGET="$*" ; _TARGET="${_TARGET#*--target=}" ; export _TARGET="${_TARGET%% *}" ;;
+    (*) export _TARGET="$defaulttarget" ;;
 esac
 
 case "$*" in
     *-j*)
         _JOBS="$*" ; _JOBS="${_JOBS#*-j}" ; _JOBS="${_JOBS%% *}"
         case $_JOBS in
-            ''|*[!0-9]*) unset _JOBS ;;
-            *) export _JOBS ;;
+            (''|*[!0-9]*) unset _JOBS ;;
+            (*) export _JOBS ;;
         esac
     ;;
 esac
@@ -119,8 +119,10 @@ depcheck() {
         fi
     done
 
-    case $_TARGET in
-        x86_64*|i386-*)
+    _CPU="${_TARGET%%-*}"
+
+    case $_CPU in
+        (x86_64*|i386)
             if ! command -v nasm > /dev/null; then
                 error "Missing dependency: nasm"
             fi
@@ -132,8 +134,8 @@ depcheck() {
     elif command -v make > /dev/null; then
         _make_version="$(make --version 2>/dev/null)"
         case "$_make_version" in
-            *GNU*) _MAKE="make" ;;
-            *) error "Missing dependency: GNU make" ;;
+            (*GNU*) _MAKE="make" ;;
+            (*) error "Missing dependency: GNU make" ;;
         esac
     else
         error "Missing dependency: GNU make"
@@ -144,8 +146,8 @@ depcheck() {
     elif command -v patch > /dev/null; then
         _patch_version="$(patch --version 2>/dev/null)"
         case "$_patch_version" in
-            *GNU*) gpatch="patch" ;;
-            *) error "Missing dependency: GNU patch" ;;
+            (*GNU*) gpatch="patch" ;;
+            (*) error "Missing dependency: GNU patch" ;;
         esac
     else
         error "Missing dependency: GNU patch"
@@ -156,8 +158,8 @@ depcheck() {
     elif command -v make > /dev/null; then
         _tar_version="$(tar --version 2>/dev/null)"
         case "$_tar_version" in
-            *GNU*) gtar="tar" ;;
-            *) error "Missing dependency: GNU tar" ;;
+            (*GNU*) gtar="tar" ;;
+            (*) error "Missing dependency: GNU tar" ;;
         esac
     else
         error "Missing dependency: GNU tar"
@@ -244,10 +246,8 @@ _TRUEOSVER=__ENVIRONMENT_OS_VERSION_MIN_REQUIRED__
         esac
     fi
 
-    _CPU="${_TARGET%%-*}"
-
     case $_CPU in
-        arm64*|aarch64*)
+        (arm64*|aarch64*)
             if [ "$_SUBSYSTEM" = "ios" ]; then
                 _DPKGARCH=iphoneos-arm
             else
@@ -258,22 +258,23 @@ _TRUEOSVER=__ENVIRONMENT_OS_VERSION_MIN_REQUIRED__
             fi
         ;;
 
-        arm*)
+        (arm*)
             if [ "$_TRUEOSVER" -lt 20000 ]; then
                 _DPKGARCH=darwin-arm
             else
                 _DPKGARCH=iphoneos-arm
             fi
         ;;
-        x86_64*) _DPKGARCH=darwin-amd64 ;;
-        i386) _DPKGARCH=darwin-i386 ;;
-        ppc64) _DPKGARCH=darwin-ppc64 ;;
-        ppc|powerpc) _DPKGARCH=darwin-powerpc ;;
+
+        (x86_64*) _DPKGARCH=darwin-amd64 ;;
+        (i386) _DPKGARCH=darwin-i386 ;;
+        (ppc64|powerpc64) _DPKGARCH=darwin-ppc64 ;;
+        (ppc|powerpc) _DPKGARCH=darwin-powerpc ;;
     esac
 
     case $_DPKGARCH in
-        iphoneos-*) _ENTITLEMENTS="$bsroot/files/ios-entitlements.xml" ;;
-        *) _ENTITLEMENTS= ;;
+        (iphoneos-*) _ENTITLEMENTS="$bsroot/files/ios-entitlements.xml" ;;
+        (*) _ENTITLEMENTS= ;;
     esac
 
     if [ "$_SUBSYSTEM" = "macos" ]; then
@@ -335,8 +336,8 @@ build() {
     )
 
     case $? in
-        1) exit 1 ;;
-        2) return 1 ;;
+        (1) exit 1 ;;
+        (2) return 1 ;;
     esac
 
     [ -n "$dryrun" ] && printf '%s\n' "$1" >> "$bsroot/files/.builtpkgs"
@@ -419,7 +420,7 @@ sysroot() {
 
 main() {
     case "$1" in
-        all|all-noclean)
+        (all|all-noclean)
             depcheck
             kind=$1
             shift
@@ -448,7 +449,7 @@ main() {
             done
         ;;
 
-        clean)
+        (clean)
             [ -z "$2" ] && error "No package specified"
             shift
             for pkg in "$@"; do
@@ -457,11 +458,11 @@ main() {
             done
         ;;
 
-        cleanall)
+        (cleanall)
             rm -rf "$pkgdir"/*/pkg "$pkgdir"/*/src "$pkgdir"/*/*.deb "$bsroot"/debs/*.deb "$_TMP"/iphoneports-sdk-* "$bsroot/files/.builtpkgs"
         ;;
 
-        dryrun)
+        (dryrun)
             dryrun=1
             if [ -z "$2" ]; then
                 for pkg in "$pkgdir"/*; do
@@ -478,7 +479,7 @@ main() {
             fi
         ;;
 
-        abibreak)
+        (abibreak)
             [ -z "$2" ] && error "You must specify a package"
             [ "$EDITOR" = "none" ] && error "No suitable text editor found"
             depcheck
@@ -510,7 +511,7 @@ main() {
             done
         ;;
 
-        sysroot)
+        (sysroot)
             [ -z "$2" ] && error "You must specify a package"
             depcheck
             shift
@@ -535,7 +536,7 @@ main() {
             printf 'Done!\n'
         ;;
 
-        bootstrap)
+        (bootstrap)
             depcheck
             pkgs='base bzip2 ca-certificates coreutils dash diffutils dpkg gmp grep gtar gzip less libmd openssl ncurses pcre2 readline sed xz zlib zstd lz4 xxhash'
             for pkg in $pkgs; do
@@ -561,12 +562,12 @@ main() {
             printf 'Done!\n'
         ;;
 
-        -*)
+        (-*)
             shift
             main "$@"
         ;;
 
-        '')
+        ('')
             printf '%s' "\
 Usage: build.sh [options] <command>
     <pkg> [pkgs...]         - Build specified packages
@@ -588,7 +589,7 @@ Usage: build.sh [options] <command>
             exit 1
         ;;
 
-        *)
+        (*)
             if [ "$1" = "build" ]; then
                 shift
             fi

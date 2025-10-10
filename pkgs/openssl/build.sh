@@ -21,7 +21,7 @@ case $_CPU in
     (i386)
         sys=darwin-i386
     ;;
-    (x86_64)
+    (x86_64*)
         sys=darwin64-x86_64
     ;;
 
