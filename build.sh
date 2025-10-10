@@ -384,13 +384,11 @@ includedeps() {
                     printf '%s\n' "Building dependency $dep"
                     [ -z "$dryrun" ] && mv "$_SDK" "$_SDK.$dep"
                     build "$dep" || fail=1
-                    if [ -z "$dryrun" ]; then
-                        if [ -n "$fail" ]; then
-                            rm -rf "$_SDK.$dep"
-                            error "Failed to build package: $dep"
-                        else
-                            mv "$_SDK.$dep" "$_SDK"
-                        fi
+                    if [ -n "$fail" ]; then
+                        [ -z "$dryrun" ] && rm -rf "$_SDK.$dep"
+                        error "Failed to build package: $dep"
+                    elif [ -z "$dryrun" ]; then
+                        mv "$_SDK.$dep" "$_SDK"
                     fi
                 fi
                 printf '%s\n' "Including dependency $dep"
