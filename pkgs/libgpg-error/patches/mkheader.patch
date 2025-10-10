@@ -1,6 +1,6 @@
 --- src/src/mkheader.c.orig
 +++ src/src/mkheader.c
-@@ -617,7 +617,7 @@
+@@ -618,7 +618,7 @@
        if (cross_building
            || try_include_file (fname, lnr,
                                 "./lock-obj-pub.native.h", write_line))
