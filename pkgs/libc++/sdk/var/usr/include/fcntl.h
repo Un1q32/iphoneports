@@ -36,7 +36,7 @@
 #define openat __iphoneports_openat
 
 static int openat(int fd, const char *path, int flags, ...) {
-  int mode;
+  int mode = mode;
   if (flags & O_CREAT) {
     va_list va_args;
     va_start(va_args, flags);
