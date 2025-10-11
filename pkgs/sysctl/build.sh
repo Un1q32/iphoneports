@@ -3,7 +3,7 @@ set -e
 . ../../files/lib.sh
 (
 cd src
-"$_TARGET-cc" sysctl.c -o sysctl -Os -flto -D'__FBSDID(x)=' -Wno-pointer-sign
+"$_TARGET-cc" sysctl.c -o sysctl -Os -flto -D'__FBSDID(x)=' -w
 mkdir -p "$_PKGROOT/pkg/var/usr/bin"
 cp sysctl "$_PKGROOT/pkg/var/usr/bin"
 )

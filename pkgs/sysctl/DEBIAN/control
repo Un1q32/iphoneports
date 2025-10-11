@@ -1,5 +1,5 @@
 Package: iphoneports-sysctl
-Version: 979.100.8-1
+Version: 980
 Architecture: @DPKGARCH@
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Section: Utilities
