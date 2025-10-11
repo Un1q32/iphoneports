@@ -1,5 +1,5 @@
 #!/bin/sh
-version=ac81ef3551a8070e4ec118ee56379c263a48469e
+version=3b1fc529abca667fb8147cc48594c929d7c0392e
 rm -rf pkg src
 printf "Downloading source...\n"
 mkdir -p src
