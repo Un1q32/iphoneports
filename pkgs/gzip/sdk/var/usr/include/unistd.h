@@ -27,6 +27,11 @@
 
 static inline int fgetattrlist(int fd, struct attrlist *attrList, void *attrBuf,
                                size_t attrBufSize, unsigned FLAGSTYPE flags) {
+
+#if (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                \
+     __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ >= 20000) ||               \
+    !defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__)
+
   static bool init = false;
   static int (*func)(int, struct attrlist *, void *, size_t,
                      unsigned FLAGSTYPE);
@@ -39,6 +44,8 @@ static inline int fgetattrlist(int fd, struct attrlist *attrList, void *attrBuf,
   if (func)
     return func(fd, attrList, attrBuf, attrBufSize, flags);
 
+#endif
+
   char fdpath[PATH_MAX];
   if (fcntl(fd, F_GETPATH, fdpath) == -1)
     return -1;
@@ -48,6 +55,11 @@ static inline int fgetattrlist(int fd, struct attrlist *attrList, void *attrBuf,
 
 static inline int fsetattrlist(int fd, struct attrlist *attrList, void *attrBuf,
                                size_t attrBufSize, unsigned FLAGSTYPE flags) {
+
+#if (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                \
+     __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ >= 20000) ||               \
+    !defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__)
+
   static bool init = false;
   static int (*func)(int, struct attrlist *, void *, size_t,
                      unsigned FLAGSTYPE);
@@ -59,6 +71,8 @@ static inline int fsetattrlist(int fd, struct attrlist *attrList, void *attrBuf,
 
   if (func)
     return func(fd, attrList, attrBuf, attrBufSize, flags);
+
+#endif
 
   char fdpath[PATH_MAX];
   if (fcntl(fd, F_GETPATH, fdpath) == -1)

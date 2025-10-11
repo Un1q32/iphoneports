@@ -8,6 +8,12 @@ printf '#!/bin/sh\nexit 1\n' > "$_PKGROOT/src/iphoneports-fakebin/git"
 chmod +x "$_PKGROOT/src/iphoneports-fakebin/git"
 export PATH="$_PKGROOT/src/iphoneports-fakebin:$PATH"
 
+if [ "$_SUBSYSTEM" = "ios" ] && [ "$_TRUEOSVER" -lt 20000 ]; then
+    printf 'Rust is not supported on iPhone OS 1.x\n'
+    mkdir pkg
+    exit 0
+fi
+
 (
 cd src
 SDKROOT="$_SDK" \

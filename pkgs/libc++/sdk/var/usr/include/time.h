@@ -50,6 +50,11 @@
 extern uint64_t __thread_selfusage(void);
 
 static int clock_gettime(int clockid, struct timespec *ts) {
+
+#if (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                \
+     __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ >= 20000) ||               \
+    !defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__)
+
   static bool init = false;
   static int (*func)(int, struct timespec *);
 
@@ -60,6 +65,8 @@ static int clock_gettime(int clockid, struct timespec *ts) {
 
   if (func)
     return func(clockid, ts);
+
+#endif
 
   uint64_t mach_time;
 

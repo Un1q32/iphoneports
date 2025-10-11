@@ -31,7 +31,20 @@
 #include <stdbool.h>
 #include <unistd.h>
 
+#if (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                \
+     __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ >= 20000) ||               \
+    (defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) &&                 \
+     __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ >= 1050)
+
 #include <iphoneports/pthread_chdir.h>
+
+#else
+
+#include <errno.h>
+#include <limits.h>
+#include <sys/stat.h>
+
+#endif
 
 #define openat __iphoneports_openat
 
@@ -44,6 +57,10 @@ static int openat(int fd, const char *path, int flags, ...) {
     va_end(va_args);
   }
 
+#if (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                \
+     __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ >= 20000) ||               \
+    !defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__)
+
   static bool init = false;
   static int (*func)(int, const char *, int, ...);
 
@@ -54,6 +71,8 @@ static int openat(int fd, const char *path, int flags, ...) {
 
   if (func)
     return func(fd, path, flags, mode);
+
+#endif
 
 #ifdef __NO_O_CLOEXEC
   bool cloexec = false;
@@ -71,6 +90,11 @@ static int openat(int fd, const char *path, int flags, ...) {
 #endif
     return ret;
   }
+
+#if (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                \
+     __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ >= 20000) ||               \
+    (defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) &&                 \
+     __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ >= 1050)
 
   int cwd = open(".", O_RDONLY);
   if (pthread_fchdir_np(-1) < 0 && cwd != -1) {
@@ -95,6 +119,30 @@ static int openat(int fd, const char *path, int flags, ...) {
     close(cwd);
 
   return ret;
+
+#else
+
+  /* the Mac OS X 10.4 / iPhone OS 1 version has a race condition */
+
+  struct stat st;
+  if (fstat(fd, &st) == -1)
+    return -1;
+  if (!S_ISDIR(st.st_mode)) {
+    errno = ENOTDIR;
+    return -1;
+  }
+
+  char fdpath[PATH_MAX + strlen(path) + 2];
+  fcntl(fd, F_GETPATH, fdpath);
+  strcat(fdpath, "/");
+  strcat(fdpath, path);
+
+  int ret = open(fdpath, flags, mode);
+  if (cloexec && ret != -1)
+    fcntl(ret, F_SETFD, FD_CLOEXEC);
+  return ret;
+
+#endif
 }
 
 #endif

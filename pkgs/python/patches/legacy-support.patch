@@ -1,0 +1,62 @@
+--- src/Modules/posixmodule.c.orig
++++ src/Modules/posixmodule.c
+@@ -9,6 +9,9 @@
+ 
+ // --- Python includes ------------------------------------------------------
+ 
++#ifdef __APPLE__
++#include <sys/socket.h>
++#endif
+ #include "Python.h"
+ 
+ #ifdef __VXWORKS__
+@@ -451,11 +454,6 @@
+ 
+ #include <mach/mach.h>
+ 
+-#if defined(__has_builtin)
+-#if __has_builtin(__builtin_available)
+-#define HAVE_BUILTIN_AVAILABLE 1
+-#endif
+-#endif
+ 
+ #ifdef HAVE_BUILTIN_AVAILABLE
+ #  define HAVE_FSTATAT_RUNTIME __builtin_available(macOS 10.10, iOS 8.0, *)
+@@ -13363,7 +13363,12 @@
+         flags |= ST_NOSUID;
+     }
+ 
++#if !((defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) && \
++    __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ < 20000) ||    \
++    (defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) &&    \
++    __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ < 1050))
+     _Static_assert(sizeof(st.f_blocks) == sizeof(long long), "assuming large file");
++#endif
+ 
+ #define SET_ITEM(SEQ, INDEX, EXPR)                       \
+     do {                                                 \
+@@ -13377,12 +13382,24 @@
+ 
+     SET_ITEM(v, 0, PyLong_FromLong((long) st.f_iosize));
+     SET_ITEM(v, 1, PyLong_FromLong((long) st.f_bsize));
++#if (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) && \
++    __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ < 20000) ||  \
++    (defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) &&  \
++    __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ < 1050)
++    SET_ITEM(v, 2, PyLong_FromLong((long) st.f_blocks));
++    SET_ITEM(v, 3, PyLong_FromLong((long) st.f_bfree));
++    SET_ITEM(v, 4, PyLong_FromLong((long) st.f_bavail));
++    SET_ITEM(v, 5, PyLong_FromLong((long) st.f_files));
++    SET_ITEM(v, 6, PyLong_FromLong((long) st.f_ffree));
++    SET_ITEM(v, 7, PyLong_FromLong((long) st.f_ffree));
++#else
+     SET_ITEM(v, 2, PyLong_FromLongLong((long long) st.f_blocks));
+     SET_ITEM(v, 3, PyLong_FromLongLong((long long) st.f_bfree));
+     SET_ITEM(v, 4, PyLong_FromLongLong((long long) st.f_bavail));
+     SET_ITEM(v, 5, PyLong_FromLongLong((long long) st.f_files));
+     SET_ITEM(v, 6, PyLong_FromLongLong((long long) st.f_ffree));
+     SET_ITEM(v, 7, PyLong_FromLongLong((long long) st.f_ffree));
++#endif
+     SET_ITEM(v, 8, PyLong_FromLong((long) flags));
+ 
+     SET_ITEM(v, 9, PyLong_FromLong((long) NAME_MAX));

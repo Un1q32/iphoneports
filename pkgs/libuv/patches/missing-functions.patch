@@ -1,0 +1,22 @@
+--- src/src/unix/core.c.orig
++++ src/src/unix/core.c
+@@ -586,7 +586,9 @@
+  * by making the system call directly. Musl libc is unaffected.
+  */
+ int uv__close_nocancel(int fd) {
+-#if defined(__APPLE__)
++#if defined(__APPLE__) && \
++  ((defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) && __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ >= 20000) || \
++   (defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) && __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ >= 1050))
+ #pragma GCC diagnostic push
+ #pragma GCC diagnostic ignored "-Wdollar-in-identifier-extension"
+ #if defined(__LP64__) || TARGET_OS_IPHONE
+@@ -1272,7 +1274,7 @@
+ 
+ 
+ int uv_os_get_group(uv_group_t* grp, uv_uid_t gid) {
+-#if defined(__ANDROID__) && __ANDROID_API__ < 24
++#if (defined(__ANDROID__) && __ANDROID_API__ < 24) || (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) && __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ < 20000)
+   /* This function getgrgid_r() was added in Android N (level 24) */
+   return UV_ENOSYS;
+ #else

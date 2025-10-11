@@ -12,7 +12,8 @@ cmake -GNinja .. \
     -DCMAKE_INSTALL_NAME_DIR=/var/usr/lib \
     -DCMAKE_FIND_ROOT_PATH_MODE_LIBRARY=ONLY \
     -DCMAKE_FIND_ROOT_PATH_MODE_INCLUDE=ONLY \
-    -DCMAKE_FIND_ROOT_PATH="$_SDK/var/usr"
+    -DCMAKE_FIND_ROOT_PATH="$_SDK/var/usr" \
+    -DCMAKE_SKIP_RPATH=ON
 DESTDIR="$_PKGROOT/pkg" ninja -j"$_JOBS" install
 )
 

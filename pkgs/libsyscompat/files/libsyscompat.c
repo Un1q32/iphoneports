@@ -64,6 +64,11 @@ int open(const char *path, int flags, ...)
 extern uint64_t __thread_selfusage(void);
 
 int clock_gettime(int clockid, struct timespec *ts) {
+
+#if (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                \
+     __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ >= 20000) ||               \
+    !defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__)
+
   static bool init = false;
   static int (*func)(int, struct timespec *);
 
@@ -74,6 +79,8 @@ int clock_gettime(int clockid, struct timespec *ts) {
 
   if (func)
     return func(clockid, ts);
+
+#endif
 
   uint64_t mach_time;
 
@@ -183,11 +190,27 @@ int getentropy(void *buf, size_t size) {
 #define AT_SYMLINK_NOFOLLOW 0x0020
 #endif
 
+#if (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                \
+     __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ >= 20000) ||               \
+    (defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) &&                 \
+     __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ >= 1050)
+
 static inline int pthread_fchdir_np(int fd) {
   return syscall(SYS___pthread_fchdir, fd);
 }
 
+#else
+
+#include <limits.h>
+
+#endif
+
 int fstatat(int fd, const char *path, struct stat *statbuf, int flags) {
+
+#if (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                \
+     __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ >= 20000) ||               \
+    !defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__)
+
   static bool init = false;
   static int (*func)(int, const char *, struct stat *, int);
 
@@ -200,11 +223,18 @@ int fstatat(int fd, const char *path, struct stat *statbuf, int flags) {
   if (func)
     return func(fd, path, statbuf, flags);
 
+#endif
+
   if (fd == AT_FDCWD || path[0] == '/') {
     if (flags & AT_SYMLINK_NOFOLLOW)
       return lstat(path, statbuf);
     return stat(path, statbuf);
   }
+
+#if (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                \
+     __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ >= 20000) ||               \
+    (defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) &&                 \
+     __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ >= 1050)
 
   int cwd = open(".", O_RDONLY);
   if (pthread_fchdir_np(-1) < 0 && cwd != -1) {
@@ -229,9 +259,37 @@ int fstatat(int fd, const char *path, struct stat *statbuf, int flags) {
     close(cwd);
 
   return ret;
+
+#else
+
+  /* the Mac OS X 10.4 / iPhone OS 1 version has a race condition */
+
+  struct stat st;
+  if (fstat(fd, &st) == -1)
+    return -1;
+  if (!S_ISDIR(st.st_mode)) {
+    errno = ENOTDIR;
+    return -1;
+  }
+
+  char fdpath[PATH_MAX + strlen(path) + 2];
+  fcntl(fd, F_GETPATH, fdpath);
+  strcat(fdpath, "/");
+  strcat(fdpath, path);
+
+  if (flags & AT_SYMLINK_NOFOLLOW)
+    return lstat(fdpath, statbuf);
+  return stat(fdpath, statbuf);
+
+#endif
 }
 
 int faccessat(int fd, const char *path, int mode, int flags) {
+
+#if (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                \
+     __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ >= 20000) ||               \
+    !defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__)
+
   static bool init = false;
   static int (*func)(int, const char *, int, int);
 
@@ -242,6 +300,8 @@ int faccessat(int fd, const char *path, int mode, int flags) {
 
   if (func)
     return func(fd, path, mode, flags);
+
+#endif
 
   if (flags & ~AT_EACCESS) {
     errno = EINVAL;
@@ -268,6 +328,11 @@ int faccessat(int fd, const char *path, int mode, int flags) {
     return ret;
   }
 
+#if (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                \
+     __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ >= 20000) ||               \
+    (defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) &&                 \
+     __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ >= 1050)
+
   int cwd = open(".", O_RDONLY);
   if (pthread_fchdir_np(-1) < 0 && cwd != -1) {
     close(cwd);
@@ -293,6 +358,34 @@ int faccessat(int fd, const char *path, int mode, int flags) {
     close(cwd);
 
   return ret;
+
+#else
+
+  /* the Mac OS X 10.4 / iPhone OS 1 version has a race condition */
+
+  struct stat st;
+  if (fstat(fd, &st) == -1)
+    return -1;
+  if (!S_ISDIR(st.st_mode)) {
+    errno = ENOTDIR;
+    return -1;
+  }
+
+  char fdpath[PATH_MAX + strlen(path) + 2];
+  fcntl(fd, F_GETPATH, fdpath);
+  strcat(fdpath, "/");
+  strcat(fdpath, path);
+
+  int ret = access(fdpath, mode);
+  int errnobak = errno;
+  if (check_euid)
+    setreuid(ruid, euid);
+  if (check_egid)
+    setregid(rgid, egid);
+  errno = errnobak;
+  return ret;
+
+#endif
 }
 
 int CCRandomGenerateBytes(void *buf, size_t size) {
@@ -333,7 +426,9 @@ int dirfd(DIR *dirp) {
     defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__)
 
 int SecRandomCopyBytes(void *rnd, size_t size, void *buf) {
+
 #ifndef __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__
+
   static bool init = false;
   static int (*func)(void *, size_t, void *);
 
@@ -354,6 +449,11 @@ int SecRandomCopyBytes(void *rnd, size_t size, void *buf) {
 
   if (func)
     return func(rnd, size, buf);
+
+#else
+
+  (void)rnd;
+
 #endif
 
   uint32_t *cbuf = buf;
@@ -405,6 +505,11 @@ int open(const char *path, int flags, ...) {
 }
 
 void arc4random_buf(void *buf, size_t size) {
+
+#if (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                \
+     __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ >= 20000) ||               \
+    !defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__)
+
   static bool init = false;
   static void (*func)(void *, size_t);
 
@@ -417,6 +522,8 @@ void arc4random_buf(void *buf, size_t size) {
     func(buf, size);
     return;
   }
+
+#endif
 
   uint32_t *cbuf = buf;
   while (size >= sizeof(uint32_t)) {
@@ -435,6 +542,11 @@ void arc4random_buf(void *buf, size_t size) {
      __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ < 1060)
 
 int pthread_setname_np(const char *name) {
+
+#if (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                \
+     __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ >= 20000) ||               \
+    !defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__)
+
   static bool init = false;
   static int (*func)(const char *);
 
@@ -445,6 +557,13 @@ int pthread_setname_np(const char *name) {
 
   if (func)
     return func(name);
+
+#else
+
+  (void)name;
+
+#endif
+
   return 0;
 }
 
@@ -501,6 +620,11 @@ char *realpath_extsn(const char *restrict path, char *restrict resolved_path) {
 #include <mach/mach_host.h>
 
 int posix_memalign(void **memptr, size_t align, size_t size) {
+
+#if (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                \
+     __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ >= 20000) ||               \
+    !defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__)
+
   static bool init = false;
   static int (*func)(void **, size_t, size_t);
 
@@ -511,6 +635,8 @@ int posix_memalign(void **memptr, size_t align, size_t size) {
 
   if (func)
     return func(memptr, align, size);
+
+#endif
 
   if (align < sizeof(void *) || (align & (align - 1)) != 0)
     return EINVAL;
@@ -532,6 +658,11 @@ int posix_memalign(void **memptr, size_t align, size_t size) {
 kern_return_t host_statistics64(host_t host_priv, host_flavor_t flavor,
                                 host_info_t host_info64_out,
                                 mach_msg_type_number_t *host_info64_outCnt) {
+
+#if (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                \
+     __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ >= 20000) ||               \
+    !defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__)
+
   static bool init = false;
   static kern_return_t (*func)(host_t, host_flavor_t, host_info_t,
                                mach_msg_type_number_t *);
@@ -546,6 +677,8 @@ kern_return_t host_statistics64(host_t host_priv, host_flavor_t flavor,
 
   if (func)
     return func(host_priv, flavor, host_info64_out, host_info64_outCnt);
+
+#endif
 
   return host_statistics(host_priv, flavor, host_info64_out,
                          host_info64_outCnt);

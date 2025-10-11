@@ -2,6 +2,12 @@
 set -e
 . ../../files/lib.sh
 
+if [ "$_SUBSYSTEM" = "ios" ] && [ "$_TRUEOSVER" -lt 20000 ]; then
+    printf 'htop requires libproc, which is present on Mac OS X 10.5+ and iPhone OS 2+\n'
+    mkdir pkg
+    exit 0
+fi
+
 (
 cd src
 ./autogen.sh

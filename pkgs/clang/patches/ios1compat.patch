@@ -1,0 +1,12 @@
+--- src/clang/lib/Driver/ToolChains/Darwin.cpp.orig
++++ src/clang/lib/Driver/ToolChains/Darwin.cpp
+@@ -1636,6 +1636,9 @@
+     CmdArgs.push_back("DriverKit");
+   }
+ 
++  if (isTargetIOSBased() && isIPhoneOSVersionLT(2, 0))
++    CmdArgs.push_back("-lios1compat");
++
+   // Otherwise link libSystem, then the dynamic runtime library, and finally any
+   // target specific static runtime library.
+   if (!isTargetDriverKit())

@@ -13,6 +13,7 @@ cmake -GNinja ../lld \
     -DCMAKE_INSTALL_PREFIX=/var/usr \
     -DCMAKE_FIND_ROOT_PATH_MODE_INCLUDE=ONLY \
     -DCMAKE_FIND_ROOT_PATH="$_SDK/var/usr" \
+    -DCMAKE_SKIP_RPATH=ON \
     -DLLVM_INCLUDE_TESTS=OFF \
     -DLLVM_TABLEGEN_EXE="$(command -v llvm-tblgen)" \
     -DLLVM_ENABLE_LTO=Thin

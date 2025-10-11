@@ -1,0 +1,21 @@
+--- src/sqlite3.c.orig
++++ src/sqlite3.c
+@@ -38963,11 +38963,13 @@
+ */
+ #ifndef HAVE_GETHOSTUUID
+ # define HAVE_GETHOSTUUID 0
+-# if defined(__APPLE__) && ((__MAC_OS_X_VERSION_MIN_REQUIRED > 1050) || \
+-                            (__IPHONE_OS_VERSION_MIN_REQUIRED > 2000))
+-#    if (!defined(TARGET_OS_EMBEDDED) || (TARGET_OS_EMBEDDED==0)) \
+-        && (!defined(TARGET_IPHONE_SIMULATOR) || (TARGET_IPHONE_SIMULATOR==0))\
+-        && (!defined(TARGET_OS_MACCATALYST) || (TARGET_OS_MACCATALYST==0))
++# if defined(__APPLE__)
++#  if (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) && \
++     __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ >= 20000) || \
++    (defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) && \
++     __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ >= 1050) || \
++    defined(__ENVIRONMENT_TV_OS_VERSION_MIN_REQUIRED__) || \
++    defined(__ENVIRONMENT_WATCH_OS_VERSION_MIN_REQUIRED__)
+ #      undef HAVE_GETHOSTUUID
+ #      define HAVE_GETHOSTUUID 1
+ #    else

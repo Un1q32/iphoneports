@@ -11,6 +11,7 @@ cmake -GNinja .. \
     -DCMAKE_INSTALL_PREFIX=/var/usr \
     -DCMAKE_FIND_ROOT_PATH_MODE_INCLUDE=ONLY \
     -DCMAKE_FIND_ROOT_PATH="$_SDK/var/usr" \
+    -DCMAKE_SKIP_RPATH=ON \
     -DBROTLI_DISABLE_TESTS=ON
 DESTDIR="$_PKGROOT/pkg" ninja -j"$_JOBS" install
 )

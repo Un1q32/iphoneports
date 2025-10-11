@@ -13,6 +13,7 @@ cmake -GNinja .. \
     -DCMAKE_FIND_ROOT_PATH_MODE_INCLUDE=ONLY \
     -DCMAKE_FIND_ROOT_PATH="$_SDK/var/usr" \
     -DCMAKE_SYSTEM_PROCESSOR="$_CPU" \
+    -DCMAKE_SKIP_RPATH=ON \
     -DENABLE_STATIC=OFF
 DESTDIR="$_PKGROOT/pkg" ninja -j"$_JOBS" install
 )
