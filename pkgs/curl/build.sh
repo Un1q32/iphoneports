@@ -1,9 +1,13 @@
 #!/bin/sh -e
+# shellcheck disable=2086
 set -e
 . ../../files/lib.sh
 
 (
 cd src
+if [ "$_SUBSYSTEM" = "ios" ] && [ "$_TRUEOSVER" -lt 20000 ]; then
+    ipv6='--disable-ipv6'
+fi
 ./configure \
     --host="$_TARGET" \
     --prefix=/var/usr \
@@ -15,6 +19,7 @@ cd src
     --with-ngtcp2 \
     --with-libidn2 \
     --with-ca-bundle=/var/usr/etc/ssl/cert.pem \
+    $ipv6 \
     PKG_CONFIG_LIBDIR="$_SDK/var/usr/lib/pkgconfig"
 "$_MAKE" -j"$_JOBS"
 "$_MAKE" DESTDIR="$_PKGROOT/pkg" install
