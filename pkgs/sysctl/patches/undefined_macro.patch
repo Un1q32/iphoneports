@@ -1,0 +1,13 @@
+--- src/sysctl.c.orig
++++ src/sysctl.c
+@@ -118,6 +118,10 @@
+ #include <sys/resource.h>
+ #include <err.h>
+ 
++#ifndef GPROF_STATE
++#define GPROF_STATE 0
++#endif
++
+ struct ctlname topname[] = CTL_NAMES;
+ struct ctlname kernname[] = CTL_KERN_NAMES;
+ struct ctlname vmname[] = CTL_VM_NAMES;
