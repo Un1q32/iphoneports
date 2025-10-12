@@ -1,9 +1,14 @@
 #!/bin/sh
+# shellcheck disable=2086
 set -e
 . ../../files/lib.sh
+
 (
 cd src
-./configure --host="$_TARGET" --prefix=/var/usr
+if [ "$_SUBSYSTEM" = "ios" ] && [ "$_TRUEOSVER" -lt 20000 ]; then
+    posix_spawn='--disable-posix-spawn'
+fi
+./configure --host="$_TARGET" --prefix=/var/usr $posix_spawn
 "$_MAKE" -j"$_JOBS"
 "$_MAKE" DESTDIR="$_PKGROOT/pkg" install
 )
