@@ -407,14 +407,18 @@ int CCRandomGenerateBytes(void *buf, size_t size) {
 
 #undef dirfd
 
+#define dd_fd __dd_fd
+
 int dirfd(DIR *dirp) {
   int ret = -1;
-  if (!dirp || dirp->__dd_fd < 0)
+  if (!dirp || dirp->dd_fd < 0)
     errno = EINVAL;
   else
-    ret = dirp->__dd_fd;
+    ret = dirp->dd_fd;
   return ret;
 }
+
+#undef dd_fd
 
 #if (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                \
      __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ < 40300) ||                \
