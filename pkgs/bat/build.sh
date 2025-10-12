@@ -8,8 +8,9 @@ printf '#!/bin/sh\nexit 1\n' > "$_PKGROOT/src/iphoneports-fakebin/git"
 chmod +x "$_PKGROOT/src/iphoneports-fakebin/git"
 export PATH="$_PKGROOT/src/iphoneports-fakebin:$PATH"
 
-if [ "$_SUBSYSTEM" = "ios" ] && [ "$_TRUEOSVER" -lt 20000 ]; then
-    printf 'Rust is not supported on iPhone OS 1.x\n'
+if { [ "$_SUBSYSTEM" = "ios" ] && [ "$_TRUEOSVER" -lt 20000 ]; } ||
+    { [ "$_SUBSYSTEM" = "macos" ] && [ "$_TRUEOSVER" -lt 1050 ]; }; then
+    printf 'Rust requires at least Mac OS X 10.5 or iPhone OS 2.0\n'
     mkdir pkg
     exit 0
 fi
