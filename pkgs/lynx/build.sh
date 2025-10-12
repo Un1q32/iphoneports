@@ -1,9 +1,16 @@
 #!/bin/sh
+# shellcheck disable=2086
 set -e
 . ../../files/lib.sh
+
 (
 cd src
-./configure --host="$_TARGET" --prefix=/var/usr --enable-ipv6 --with-ssl --with-brotli --with-zlib
+if [ "$_SUBSYSTEM" = "ios" ] && [ "$_TRUEOSVER" -lt 20000 ]; then
+    ipv6='--disable-ipv6'
+else
+    ipv6='--enable-ipv6'
+fi
+./configure --host="$_TARGET" --prefix=/var/usr --with-ssl --with-brotli --with-zlib $ipv6
 "$_MAKE" -j"$_JOBS"
 "$_MAKE" DESTDIR="$_PKGROOT/pkg" install
 )
