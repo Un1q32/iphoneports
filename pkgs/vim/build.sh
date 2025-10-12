@@ -1,8 +1,13 @@
 #!/bin/sh
+# shellcheck disable=2086
 set -e
 . ../../files/lib.sh
+
 (
 cd src
+if [ "$_SUBSYSTEM" = "ios" ] && [ "$_TRUEOSVER" -lt 20000 ]; then
+    ipv6='vim_cv_ipv6_networking=no'
+fi
 ./configure \
     --host="$_TARGET" \
     --prefix=/var/usr \
@@ -19,6 +24,7 @@ cd src
     vim_cv_stat_ignores_slash=no \
     vim_cv_memmove_handles_overlap=yes \
     vim_cv_uname_output=generic \
+    $ipv6 \
     PKG_CONFIG_LIBDIR="$_SDK/var/usr/lib/pkgconfig"
 "$_MAKE" install DESTDIR="$_PKGROOT/pkg" -j"$_JOBS"
 )
