@@ -398,7 +398,9 @@ int CCRandomGenerateBytes(void *buf, size_t size) {
     (defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) &&                 \
      __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ < 1080)
 
+#define __dd_fd dd_fd
 #include <dirent.h>
+#undef __dd_fd
 
 /*
  * dirfd exists on old darwins as a macro function, the symbol
@@ -406,8 +408,6 @@ int CCRandomGenerateBytes(void *buf, size_t size) {
  */
 
 #undef dirfd
-
-#define dd_fd __dd_fd
 
 int dirfd(DIR *dirp) {
   int ret = -1;
@@ -417,8 +417,6 @@ int dirfd(DIR *dirp) {
     ret = dirp->dd_fd;
   return ret;
 }
-
-#undef dd_fd
 
 #if (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                \
      __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ < 40300) ||                \
