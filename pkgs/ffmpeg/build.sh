@@ -1,6 +1,7 @@
 #!/bin/sh
 set -e
 . ../../files/lib.sh
+
 (
 cd src
 export PKG_CONFIG_LIBDIR="$_SDK/var/usr/lib/pkgconfig"
