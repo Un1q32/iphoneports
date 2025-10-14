@@ -5,7 +5,14 @@ set -e
 cd src/pam
 autoconf
 ln -s . pam
-./configure --prefix=/var/usr --enable-read-both-confs --enable-giant-libpam --enable-fakeroot="$_PKGROOT/pkg" --enable-sconfigdir=/var/usr/etc/pam --disable-libcrack ac_cv_header_features_h=no
+./configure \
+    --prefix=/var/usr \
+    --enable-read-both-confs \
+    --enable-giant-libpam \
+    --enable-fakeroot="$_PKGROOT/pkg" \
+    --enable-sconfigdir=/var/usr/etc/pam \
+    --disable-libcrack \
+    ac_cv_header_features_h=no
 "$_MAKE" CC="$_TARGET-cc" AR="$_TARGET-ar" RANLIB="$_TARGET-ranlib" LD="$_TARGET-ld"
 "$_MAKE" install
 )
