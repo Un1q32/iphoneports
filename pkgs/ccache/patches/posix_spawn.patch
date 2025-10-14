@@ -1,0 +1,43 @@
+--- src/src/ccache/execute.cpp.orig
++++ src/src/ccache/execute.cpp
+@@ -287,6 +287,31 @@
+ {
+   LOG("Executing {}", util::format_argv_for_logging(argv));
+ 
++#if (defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) && __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ < 1050) || \
++    (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) && __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ < 20000)
++  {
++    SignalHandlerBlocker signal_handler_blocker;
++    ctx.compiler_pid = fork();
++  }
++
++  if (ctx.compiler_pid == -1) {
++    throw core::Fatal(FMT("Failed to fork: {}", strerror(errno)));
++  }
++
++  if (ctx.compiler_pid == 0) {
++    // Child.
++    dup2(*fd_out, STDOUT_FILENO);
++    fd_out.close();
++    dup2(*fd_err, STDERR_FILENO);
++    fd_err.close();
++    exit(execv(argv[0], const_cast<char* const*>(argv)));
++  }
++
++  fd_out.close();
++  fd_err.close();
++
++#else
++
+   util::Fd out(std::move(fd_out));
+   util::Fd err(std::move(fd_err));
+ 
+@@ -335,6 +360,8 @@
+     return -1;
+   }
+ 
++#endif
++
+   int status;
+   while (waitpid(ctx.compiler_pid, &status, 0) == -1) {
+     if (errno != EINTR) {
