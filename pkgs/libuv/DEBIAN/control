@@ -1,5 +1,5 @@
 Package: iphoneports-libuv
-Version: 1.49.1-5
+Version: 1.49.1-6
 Architecture: @DPKGARCH@
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Section: Development
