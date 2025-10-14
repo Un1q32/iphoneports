@@ -41,3 +41,44 @@
    int status;
    while (waitpid(ctx.compiler_pid, &status, 0) == -1) {
      if (errno != EINTR) {
+--- src/src/ccache/util/exec.cpp.orig
++++ src/src/ccache/util/exec.cpp
+@@ -118,6 +118,30 @@
+     return tl::unexpected(FMT("Non-zero exit code: {}", exitcode));
+   }
+ #else
++#if (defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) && __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ < 1050) || \
++    (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) && __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ < 20000)
++  int pipefd[2];
++  if (pipe(pipefd) == -1) {
++    return tl::unexpected(FMT("pipe failed: {}", strerror(errno)));
++  }
++
++  pid_t pid = fork();
++  if (pid == -1) {
++    return tl::unexpected(FMT("fork failed: {}", strerror(errno)));
++  }
++
++  if (pid == 0) {
++    // Child.
++    close(pipefd[0]);
++    close(0);
++    dup2(pipefd[1], 1);
++    dup2(pipefd[1], 2);
++    _exit(execvp(argv[0], const_cast<char* const*>(argv.data())));
++    // Never reached.
++  }
++  // Parent
++  close(pipefd[1]);
++#else
+   int pipefd[2];
+   CHECK_LIB_CALL(pipe, pipefd);
+ 
+@@ -141,6 +165,7 @@
+     return tl::unexpected(
+       FMT("posix_spawnp failed: {}", strerror(saved_errno)));
+   }
++#endif
+ 
+   auto read_result = read_fd(pipefd[0], [&](auto data) {
+     output.append(reinterpret_cast<const char*>(data.data()), data.size());
