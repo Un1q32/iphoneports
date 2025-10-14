@@ -1,0 +1,23 @@
+--- src/Source/cmSystemTools.cxx.orig
++++ src/Source/cmSystemTools.cxx
+@@ -280,7 +280,20 @@
+ {
+   // macOS (and *BSD) offer a syscall to get an on-disk path to
+   // a descriptor's file.
++#ifndef O_SYMLINK
++  struct stat st;
++  int ret = lstat(path.c_str(), &st);
++  if (ret != 0) {
++    return cmsys::Status::POSIX(errno);
++  }
++  if (S_ISLNK(st.st_mode)) {
++    name = cmSystemTools::GetFilenameName(path.c_str());
++    return cmsys::Status::Success();
++  }
++  int fd = open(path.c_str(), O_RDONLY);
++#else
+   int fd = open(path.c_str(), O_SYMLINK | O_RDONLY);
++#endif
+   if (fd == -1) {
+     return cmsys::Status::POSIX(errno);
+   }
