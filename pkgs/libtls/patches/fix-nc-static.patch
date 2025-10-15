@@ -1,6 +1,6 @@
 --- src/apps/nc/Makefile.am.orig
 +++ src/apps/nc/Makefile.am
-@@ -16,11 +16,9 @@
+@@ -31,11 +31,9 @@
  EXTRA_DIST = nc.1
  EXTRA_DIST += CMakeLists.txt
  
