@@ -1,5 +1,5 @@
 Package: iphoneports-sdk
-Version: 6
+Version: 7
 Architecture: @DPKGARCH@
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Section: Development
