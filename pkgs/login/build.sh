@@ -1,9 +1,10 @@
 #!/bin/sh
 set -e
 . ../../files/lib.sh
+
 (
 cd src
-"$_TARGET-cc" -o login -Os -flto login.c -DUSE_PAM -lpam -w
+"$_TARGET-cc" -o login -Os -flto login.c -DUSE_PAM -DUSE_BSM -lpam -lbsm -w
 mkdir -p "$_PKGROOT/pkg/var/usr/bin"
 cp login "$_PKGROOT/pkg/var/usr/bin"
 )
