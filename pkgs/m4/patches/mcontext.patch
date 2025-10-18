@@ -1,0 +1,11 @@
+--- src/lib/sigsegv.c.orig
++++ src/lib/sigsegv.c
+@@ -662,7 +662,7 @@
+      - 'struct __darwin_x86_thread_state64' in <mach/i386/_structs.h>.  */
+ #  define SIGSEGV_FAULT_STACKPOINTER  ((ucontext_t *) ucp)->uc_mcontext->__ss.__rsp
+ 
+-# elif defined __i386__
++# elif defined __i386__ && !(defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) && __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ < 1050)
+ 
+ /* See the definitions of
+      - 'ucontext_t' and 'struct __darwin_ucontext' in <sys/_types/_ucontext.h>,

@@ -2,6 +2,12 @@
 set -e
 . ../../files/lib.sh
 
+if [ "$_SUBSYSTEM" = "macos" ] && [ "$_TRUEOSVER" -lt 1050 ]; then
+    printf 'ffmpeg requires at least Mac OS X 10.5\n'
+    mkdir pkg
+    exit 0
+fi
+
 (
 cd src
 export PKG_CONFIG_LIBDIR="$_SDK/var/usr/lib/pkgconfig"

@@ -1,0 +1,13 @@
+--- src/lib/system/certs.c.orig
++++ src/lib/system/certs.c
+@@ -47,8 +47,10 @@
+ #ifdef __APPLE__
+ # include <CoreFoundation/CoreFoundation.h>
+ # include <Security/Security.h>
++#if __has_include(<Availability.h>)
+ # include <Availability.h>
+ #endif
++#endif
+ 
+ /* System specific function wrappers for certificate stores.
+  */
