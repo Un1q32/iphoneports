@@ -6,9 +6,9 @@ set -e
 (
 cd src
 if [ "$_SUBSYSTEM" = "ios" ] && [ "$_TRUEOSVER" -lt 20000 ]; then
-    ipv6='--disable-ipv6'
+    flags='--disable-ipv6 ac_cv_func_posix_spawn=no'
 fi
-./configure --host="$_TARGET" --prefix=/var/usr --with-ssl=openssl --disable-iri $ipv6
+./configure --host="$_TARGET" --prefix=/var/usr --with-ssl=openssl --disable-iri $flags
 "$_MAKE" -j"$_JOBS"
 "$_MAKE" DESTDIR="$_PKGROOT/pkg" install
 )

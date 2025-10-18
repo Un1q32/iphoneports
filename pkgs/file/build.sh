@@ -1,6 +1,8 @@
 #!/bin/sh
+# shellcheck disable=2086
 set -e
 . ../../files/lib.sh
+
 (
 cd src
 ./configure --prefix="$_PKGROOT/src/native"
@@ -9,7 +11,10 @@ cd src
 "$_MAKE" clean
 export PATH="$_PKGROOT/src/native/bin:$PATH"
 
-./configure --host="$_TARGET" --prefix=/var/usr --enable-xzlib --enable-bzlib --enable-zlib --enable-zstdlib
+if [ "$_SUBSYSTEM" = "ios" ] && [ "$_TRUEOSVER" -lt 20000 ]; then
+    posix_spawn='ac_cv_func_posix_spawnp=no'
+fi
+./configure --host="$_TARGET" --prefix=/var/usr --enable-xzlib --enable-bzlib --enable-zlib --enable-zstdlib $posix_spawn
 "$_MAKE" -j"$_JOBS"
 "$_MAKE" DESTDIR="$_PKGROOT/pkg" install
 )

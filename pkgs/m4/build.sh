@@ -1,10 +1,15 @@
 #!/bin/sh
+# shellcheck disable=2086
 set -e
 . ../../files/lib.sh
+
 (
 cd src
 autoreconf -f
-./configure --host="$_TARGET" --prefix=/var/usr
+if [ "$_SUBSYSTEM" = "ios" ] && [ "$_TRUEOSVER" -lt 20000 ]; then
+    posix_spawn='ac_cv_func_posix_spawn=no'
+fi
+./configure --host="$_TARGET" --prefix=/var/usr $posix_spawn
 "$_MAKE" -j"$_JOBS"
 "$_MAKE" DESTDIR="$_PKGROOT/pkg" install
 )

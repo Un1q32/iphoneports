@@ -1,9 +1,14 @@
 #!/bin/sh
+# shellcheck disable=2086
 set -e
 . ../../files/lib.sh
+
 (
 cd src
 ./autogen.sh
+if [ "$_SUBSYSTEM" = "ios" ] && [ "$_TRUEOSVER" -lt 20000 ]; then
+    posix_spawn='ac_cv_func_posix_spawn=no'
+fi
 ./configure \
     --host="$_TARGET" \
     --enable-silent-rules \
@@ -17,7 +22,8 @@ cd src
     --with-sqlite \
     --with-webdav-props \
     --with-xxhash \
-    PKG_CONFIG_LIBDIR="$_SDK/var/usr/lib/pkgconfig"
+    PKG_CONFIG_LIBDIR="$_SDK/var/usr/lib/pkgconfig" \
+    $posix_spawn
 "$_MAKE" -j"$_JOBS"
 "$_MAKE" install DESTDIR="$_PKGROOT/pkg"
 )

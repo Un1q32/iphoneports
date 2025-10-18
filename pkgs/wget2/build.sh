@@ -1,9 +1,14 @@
 #!/bin/sh
+# shellcheck disable=2086
 set -e
 . ../../files/lib.sh
+
 (
 cd src
 autoreconf -f
+if [ "$_SUBSYSTEM" = "ios" ] && [ "$_TRUEOSVER" -lt 20000 ]; then
+    posix_spawn='ac_cv_func_posix_spawn=no'
+fi
 ./configure \
     --host="$_TARGET" \
     --prefix=/var/usr \
@@ -18,7 +23,8 @@ autoreconf -f
     CPPFLAGS='-Wno-unknown-attributes' \
     PKG_CONFIG_LIBDIR="$_SDK/var/usr/lib/pkgconfig" \
     PKG_CONFIG_SYSROOT_DIR="$_SDK" \
-    gl_cv_onwards_func_futimens=yes
+    gl_cv_onwards_func_futimens=yes \
+    $posix_spawn
 "$_MAKE" -j"$_JOBS"
 "$_MAKE" DESTDIR="$_PKGROOT/pkg" install
 )

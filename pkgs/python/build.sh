@@ -1,4 +1,5 @@
 #!/bin/sh
+# shellcheck disable=2086
 set -e
 . ../../files/lib.sh
 
@@ -17,6 +18,9 @@ mkdir _buildpython && cd _buildpython || exit 1
 "$_MAKE" install -j"$_JOBS"
 )
 
+if [ "$_SUBSYSTEM" = "ios" ] && [ "$_TRUEOSVER" -lt 20000 ]; then
+    posix_spawn='ac_cv_func_posix_spawn=no ac_cv_func_posix_spawnp=no'
+fi
 ./configure \
     --host="$_TARGET" \
     --prefix=/var/usr \
@@ -32,7 +36,8 @@ mkdir _buildpython && cd _buildpython || exit 1
     ac_cv_buggy_getaddrinfo=no \
     ac_cv_file__dev_ptmx=yes \
     ac_cv_file__dev_ptc=no \
-    PKG_CONFIG_LIBDIR="$_SDK/var/usr/lib/pkgconfig"
+    PKG_CONFIG_LIBDIR="$_SDK/var/usr/lib/pkgconfig" \
+    $posix_spawn
 "$_MAKE" DESTDIR="$_PKGROOT/pkg" install -j"$_JOBS"
 )
 

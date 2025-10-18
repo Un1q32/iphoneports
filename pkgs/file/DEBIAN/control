@@ -2,6 +2,6 @@ Package: iphoneports-file
 Section: Utilities
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Architecture: @DPKGARCH@
-Version: 5.46
+Version: 5.46-1
 Description: guesses the type of a file from contents
 Depends: iphoneports-base, iphoneports-xz, iphoneports-bzip2, iphoneports-zlib, iphoneports-zstd
