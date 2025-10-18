@@ -1,11 +1,30 @@
 --- src/src/subprocess-posix.cc.orig
 +++ src/src/subprocess-posix.cc
-@@ -72,6 +72,56 @@
+@@ -23,7 +23,11 @@
+ #include <stdio.h>
+ #include <string.h>
+ #include <sys/wait.h>
++#if !((defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) && __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ < 1050) || \
++      (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) && __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ < 20000))
+ #include <spawn.h>
++#define USE_POSIX_SPAWN
++#endif
+ 
+ #if defined(USE_PPOLL)
+ #include <poll.h>
+@@ -72,6 +76,7 @@
      SetCloseOnExec(fd_);
    }
  
-+#if (defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) && __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ < 1050) || \
-+    (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) && __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ < 20000)
++#ifdef USE_POSIX_SPAWN
+   posix_spawn_file_actions_t action;
+   int err = posix_spawn_file_actions_init(&action);
+   if (err != 0)
+@@ -141,6 +146,55 @@
+   err = posix_spawn_file_actions_destroy(&action);
+   if (err != 0)
+     Fatal("posix_spawn_file_actions_destroy: %s", strerror(err));
++#else
 +  pid_t pid = fork();
 +  if (pid < 0) {
 +    perror("fork");
@@ -53,14 +72,6 @@
 +    _exit(127);
 +  }
 +  pid_ = pid;
-+#else
-   posix_spawn_file_actions_t action;
-   int err = posix_spawn_file_actions_init(&action);
-   if (err != 0)
-@@ -141,6 +191,7 @@
-   err = posix_spawn_file_actions_destroy(&action);
-   if (err != 0)
-     Fatal("posix_spawn_file_actions_destroy: %s", strerror(err));
 +#endif
  
    if (!use_console_)
