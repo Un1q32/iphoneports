@@ -7,7 +7,7 @@
 +#if !((defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) && __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ < 1050) || \
 +      (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) && __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ < 20000))
  #include <spawn.h>
-+#define USE_POSIX_SPAWN
++#define IPHONEPORTS_USE_POSIX_SPAWN
 +#endif
  
  #if defined(USE_PPOLL)
@@ -16,7 +16,7 @@
      SetCloseOnExec(fd_);
    }
  
-+#ifdef USE_POSIX_SPAWN
++#ifdef IPHONEPORTS_USE_POSIX_SPAWN
    posix_spawn_file_actions_t action;
    int err = posix_spawn_file_actions_init(&action);
    if (err != 0)
