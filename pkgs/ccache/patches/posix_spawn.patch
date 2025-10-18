@@ -1,6 +1,6 @@
 --- src/src/ccache/execute.cpp.orig
 +++ src/src/ccache/execute.cpp
-@@ -287,6 +287,31 @@
+@@ -287,6 +287,38 @@
  {
    LOG("Executing {}", util::format_argv_for_logging(argv));
  
@@ -21,6 +21,13 @@
 +    fd_out.close();
 +    dup2(*fd_err, STDERR_FILENO);
 +    fd_err.close();
++    sigset_t sigmask;
++    sigemptyset(&sigmask);
++    sigprocmask(SIG_SETMASK, &sigmask, NULL);
++    for (int signum : SignalHandler::get_handled_signals()) {
++      signal(signum, SIG_DFL);
++    }
++
 +    exit(execv(argv[0], const_cast<char* const*>(argv)));
 +  }
 +
@@ -32,7 +39,7 @@
    util::Fd out(std::move(fd_out));
    util::Fd err(std::move(fd_err));
  
-@@ -335,6 +360,8 @@
+@@ -335,6 +367,8 @@
      return -1;
    }
  
