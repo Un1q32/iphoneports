@@ -1,0 +1,10 @@
+--- src/gzip.c.orig
++++ src/gzip.c
+@@ -78,7 +78,6 @@
+ #include <sys/attr.h>
+ #include <copyfile.h>
+ #include <get_compat.h>
+-int futimens(int fd, const struct timespec times[2]);
+ 
+ #define	st_atim	st_atimespec
+ #define	st_mtim	st_mtimespec

@@ -26,7 +26,6 @@ mkdir _buildpython && cd _buildpython || exit 1
     --with-lto=full \
     --enable-shared \
     --without-ensurepip \
-    --without-remote-debug \
     LDSHARED="$_TARGET-cc -shared -undefined dynamic_lookup" \
     MACHDEP=darwin \
     ac_sys_system=Darwin \

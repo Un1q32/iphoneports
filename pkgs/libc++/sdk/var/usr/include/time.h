@@ -20,8 +20,6 @@
 #include <sys/resource.h>
 #include <sys/time.h>
 
-int gettimeofday(struct timeval *__restrict, struct timezone *__restrict);
-
 #ifndef CLOCK_REALTIME
 #define CLOCK_REALTIME 0
 #endif
