@@ -1,6 +1,7 @@
 #!/bin/sh
 set -e
 . ../../files/lib.sh
+
 (
 cd src
 for src in ps.c print.c nlist.c tasks.c keyword.c; do
