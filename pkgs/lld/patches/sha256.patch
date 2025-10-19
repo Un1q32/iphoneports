@@ -1,0 +1,27 @@
+--- src/lld/MachO/SyntheticSections.cpp.orig
++++ src/lld/MachO/SyntheticSections.cpp
+@@ -29,11 +29,15 @@
+ #if defined(__APPLE__)
+ #include <sys/mman.h>
+ 
++#if !(defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) && __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ < 1050)
+ #define COMMON_DIGEST_FOR_OPENSSL
+ #include <CommonCrypto/CommonDigest.h>
+ #else
+ #include "llvm/Support/SHA256.h"
+ #endif
++#else
++#include "llvm/Support/SHA256.h"
++#endif
+ 
+ using namespace llvm;
+ using namespace llvm::MachO;
+@@ -44,7 +48,7 @@
+ 
+ // Reads `len` bytes at data and writes the 32-byte SHA256 checksum to `output`.
+ static void sha256(const uint8_t *data, size_t len, uint8_t *output) {
+-#if defined(__APPLE__)
++#if defined(__APPLE__) && !(defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) && __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ < 1050)
+   // FIXME: Make LLVM's SHA256 faster and use it unconditionally. See PR56121
+   // for some notes on this.
+   CC_SHA256(data, len, output);

@@ -1,0 +1,40 @@
+--- src/Modules/posixmodule.c.orig
++++ src/Modules/posixmodule.c
+@@ -114,7 +114,7 @@
+ #  include <sys/sendfile.h>       // sendfile()
+ #endif
+ 
+-#if defined(__APPLE__)
++#if defined(__APPLE__) && __has_include(<copyfile.h>)
+ #  include <copyfile.h>           // fcopyfile()
+ #endif
+ 
+@@ -12044,7 +12044,7 @@
+ #endif /* HAVE_SENDFILE */
+ 
+ 
+-#if defined(__APPLE__)
++#if defined(__APPLE__) && __has_include(<copyfile.h>)
+ /*[clinic input]
+ os._fcopyfile
+ 
+@@ -17815,7 +17815,7 @@
+ #endif
+ #endif  /* HAVE_EVENTFD && EFD_CLOEXEC */
+ 
+-#if defined(__APPLE__)
++#if defined(__APPLE__) && defined(COPYFILE_DATA)
+     if (PyModule_AddIntConstant(m, "_COPYFILE_DATA", COPYFILE_DATA)) return -1;
+     if (PyModule_AddIntConstant(m, "_COPYFILE_STAT", COPYFILE_STAT)) return -1;
+     if (PyModule_AddIntConstant(m, "_COPYFILE_ACL", COPYFILE_ACL)) return -1;
+--- src/Modules/clinic/posixmodule.c.h.orig
++++ src/Modules/clinic/posixmodule.c.h
+@@ -8284,7 +8284,7 @@
+ 
+ #endif /* defined(HAVE_SENDFILE) && !defined(__APPLE__) && !(defined(__FreeBSD__) || defined(__DragonFly__)) */
+ 
+-#if defined(__APPLE__)
++#if defined(__APPLE__) && __has_include(<copyfile.h>)
+ 
+ PyDoc_STRVAR(os__fcopyfile__doc__,
+ "_fcopyfile($module, in_fd, out_fd, flags, /)\n"

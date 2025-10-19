@@ -2,8 +2,8 @@
 set -e
 . ../../files/lib.sh
 
-if [ "$_SUBSYSTEM" = "macos" ] && [ "$_TRUEOSVER" -lt 1050 ]; then
-    printf 'ps requires at least Mac OS X 10.5\n'
+if [ "$_SUBSYSTEM" = "macos" ] && [ "$_TRUEOSVER" -ge 1050 ]; then
+    printf 'ps-tiger is only for Mac OS X 10.4\n'
     mkdir pkg
     exit 0
 fi
@@ -11,7 +11,7 @@ fi
 (
 cd src
 for src in ps.c print.c nlist.c tasks.c keyword.c; do
-    "$_TARGET-cc" -Os -flto -c "$src" -D'__FBSDID(x)=' -Wno-deprecated-non-prototype -Wno-#warnings &
+    "$_TARGET-cc" -Os -flto -c "$src" -D'__FBSDID(x)=' -w -Wno-implicit-int &
 done
 wait
 "$_TARGET-cc" -o ps -Os -flto ./*.o
@@ -22,11 +22,7 @@ cp ps "$_PKGROOT/pkg/var/usr/bin"
 (
 cd pkg/var/usr/bin
 _ALWAYSSIGN=1
-if [ "$_SUBSYSTEM" = "macos" ]; then
-    _ENTITLEMENTS="$_PKGROOT/files/macos-entitlements.xml"
-else
-    _ENTITLEMENTS="$_PKGROOT/files/ios-entitlements.xml"
-fi
+_ENTITLEMENTS="$_PKGROOT/files/entitlements.xml"
 strip_and_sign ps
 chmod 4755 ps
 )

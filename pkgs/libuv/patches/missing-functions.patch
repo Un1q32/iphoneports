@@ -1,6 +1,6 @@
 --- src/src/unix/core.c.orig
 +++ src/src/unix/core.c
-@@ -586,7 +586,9 @@
+@@ -587,7 +587,9 @@
   * by making the system call directly. Musl libc is unaffected.
   */
  int uv__close_nocancel(int fd) {
@@ -11,7 +11,7 @@
  #pragma GCC diagnostic push
  #pragma GCC diagnostic ignored "-Wdollar-in-identifier-extension"
  #if defined(__LP64__) || TARGET_OS_IPHONE
-@@ -1272,7 +1274,7 @@
+@@ -1273,7 +1275,7 @@
  
  
  int uv_os_get_group(uv_group_t* grp, uv_uid_t gid) {

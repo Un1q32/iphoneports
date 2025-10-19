@@ -1,0 +1,11 @@
+--- src/llvm/lib/Support/Unix/Signals.inc.orig
++++ src/llvm/lib/Support/Unix/Signals.inc
+@@ -927,7 +927,7 @@
+ 
+   AddSignalHandler(PrintStackTraceSignalHandler, nullptr);
+ 
+-#if defined(__APPLE__) && ENABLE_CRASH_OVERRIDES
++#if defined(__APPLE__) && ENABLE_CRASH_OVERRIDES && defined(MACH_EXCEPTION_CODES)
+   // Environment variable to disable any kind of crash dialog.
+   if (DisableCrashReporting || getenv("LLVM_DISABLE_CRASH_REPORT")) {
+     mach_port_t self = mach_task_self();

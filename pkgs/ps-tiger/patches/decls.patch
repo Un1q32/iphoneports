@@ -1,0 +1,11 @@
+--- src/ps.c.orig
++++ src/ps.c
+@@ -162,6 +162,8 @@
+ static void	 scanvars(void);
+ static void	 sizevars(void);
+ static void	 usage(int);
++VAR *findvar(char *);
++int get_task_info (KINFO *ki);
+ 
+ /* p_ == POSIX/SUSv3/UNIX2003 format */
+ static char dfmt[] = "pid,tt,state,time,command";

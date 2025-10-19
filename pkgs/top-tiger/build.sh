@@ -3,19 +3,8 @@
 set -e
 . ../../files/lib.sh
 
-if [ "$_SUBSYSTEM" = "macos" ] && [ "$_TRUEOSVER" -lt 1050 ]; then
-    printf 'top requires at least Mac OS X 10.5\n'
-    mkdir pkg
-    exit 0
-fi
-
 (
 cd src
-if [ -f "$_SDK/usr/lib/libutil.dylib" ] || [ -f "$_SDK/usr/lib/libutil.tbd" ]; then
-    libutil="$_PKGROOT/files/humanize_number.c"
-else
-    libutil="-lutil"
-fi
 "$_TARGET-cc" \
     -Os -flto \
     top.c \
@@ -32,7 +21,8 @@ fi
     -lpanel \
     -framework IOKit \
     -framework CoreFoundation \
-    $libutil
+    -Wno-incompatible-function-pointer-types \
+    -Wno-int-conversion
 mkdir -p "$_PKGROOT/pkg/var/usr/bin"
 cp top "$_PKGROOT/pkg/var/usr/bin"
 )
@@ -49,9 +39,6 @@ ln -s ../../../../usr/libexec/iphoneports/top pkg/var/usr/bin/top
 
 mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"
 cp files/LICENSE "pkg/var/usr/share/licenses/$_PKGNAME"
-if [ -f "$_SDK/usr/lib/libutil.dylib" ] || [ -f "$_SDK/usr/lib/libutil.tbd" ]; then
-    cp files/LICENSE-LIBBSD "pkg/var/usr/share/licenses/$_PKGNAME"
-fi
 
 cp -r DEBIAN pkg
 sed -e "s|@DPKGARCH@|$_DPKGARCH|" DEBIAN/control > pkg/DEBIAN/control

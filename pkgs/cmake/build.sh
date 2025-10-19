@@ -4,7 +4,10 @@ set -e
 mkdir -p src/build
 (
 cd src/build
-[ "$_SUBSYSTEM" = "macos" ] && hascoreservices=ON
+if [ "$_SUBSYSTEM" = "macos" ]; then
+    hascoreservices=ON
+    [ "$_TRUEOSVER" -lt 1050 ] && export LDFLAGS='-framework ApplicationServices'
+fi
 cmake -GNinja .. \
     -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_C_COMPILER="$_TARGET-cc" \
