@@ -4,4 +4,4 @@ Architecture: @DPKGARCH@
 Depends: iphoneports-base, iphoneports-ncurses, iphoneports-readline, iphoneports-bzip2, iphoneports-xz, iphoneports-zlib, iphoneports-openssl, iphoneports-mpdecimal, iphoneports-libffi, iphoneports-libb2
 Description: The Python programming language
 Section: Scripting
-Version: 3.14.0
+Version: 3.14.0-1

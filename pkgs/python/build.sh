@@ -19,7 +19,7 @@ mkdir _buildpython && cd _buildpython || exit 1
 )
 
 if [ "$_SUBSYSTEM" = "ios" ] && [ "$_TRUEOSVER" -lt 20000 ]; then
-    posix_spawn='ac_cv_func_posix_spawn=no ac_cv_func_posix_spawnp=no'
+    posix_spawn='ac_cv_func_posix_spawn=no ac_cv_func_posix_spawnp=no --disable-ipv6'
 fi
 ./configure \
     --host="$_TARGET" \
