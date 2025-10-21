@@ -17,6 +17,4 @@ strip_and_sign bc
 mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"
 cp src/LICENSE.md "pkg/var/usr/share/licenses/$_PKGNAME"
 
-cp -r DEBIAN pkg
-sed -e "s|@DPKGARCH@|$_DPKGARCH|" DEBIAN/control > pkg/DEBIAN/control
-dpkg-deb -b --root-owner-group -Zgzip pkg "$_PKGNAME.deb"
+builddeb

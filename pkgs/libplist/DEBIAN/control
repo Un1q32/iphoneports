@@ -2,6 +2,6 @@ Package: iphoneports-libplist
 Version: 2.7.0
 Architecture: @DPKGARCH@
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
-Depends: iphoneports-base
+Depends: iphoneports-base, iphoneports-libc++
 Section: Development
 Description: A library to handle Apple Property List format in binary or XML

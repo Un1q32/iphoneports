@@ -29,6 +29,4 @@ strip_and_sign bin/pcre2test bin/pcre2grep lib/libpcre2-8.0.dylib lib/libpcre2-1
 mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"
 cp src/LICENCE.md "pkg/var/usr/share/licenses/$_PKGNAME"
 
-cp -r DEBIAN pkg
-sed -e "s|@DPKGARCH@|$_DPKGARCH|" DEBIAN/control > pkg/DEBIAN/control
-dpkg-deb -b --root-owner-group -Zgzip pkg "$_PKGNAME.deb"
+builddeb

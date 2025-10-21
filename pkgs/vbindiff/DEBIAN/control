@@ -4,4 +4,4 @@ Architecture: @DPKGARCH@
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Section: Utilities
 Description: displays files in hexadecimal and ASCII (or EBCDIC) and highlight the differences between them
-Depends: iphoneports-base, iphoneports-ncurses
+Depends: iphoneports-base, iphoneports-ncurses, iphoneports-libc++

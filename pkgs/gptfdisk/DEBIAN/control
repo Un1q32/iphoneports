@@ -1,7 +1,7 @@
 Package: iphoneports-gptfdisk
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Architecture: @DPKGARCH@
-Depends: iphoneports-base, iphoneports-ncurses, iphoneports-popt
+Depends: iphoneports-base, iphoneports-ncurses, iphoneports-popt, iphoneports-libc++
 Description: A text-mode partitioning tool that works on GUID Partition Table (GPT) disks
 Section: Utilities
 Version: 1.0.10-1

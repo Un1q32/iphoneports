@@ -4,4 +4,4 @@ Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Architecture: @DPKGARCH@
 Version: 1.25
 Description: A lossless file compressor based on the LZMA algorithm
-Depends: iphoneports-base
+Depends: iphoneports-base, iphoneports-libc++

@@ -24,6 +24,4 @@ strip_and_sign "bin/luajit-2.1.$ver" "lib/libluajit-5.1.2.1.$ver.dylib"
 mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"
 cp src/COPYRIGHT "pkg/var/usr/share/licenses/$_PKGNAME"
 
-cp -r DEBIAN pkg
-sed -e "s|@DPKGARCH@|$_DPKGARCH|" DEBIAN/control > pkg/DEBIAN/control
-dpkg-deb -b --root-owner-group -Zgzip pkg "$_PKGNAME.deb"
+builddeb
