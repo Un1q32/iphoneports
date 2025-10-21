@@ -6,3 +6,4 @@ Version: 10.2p1
 Depends: iphoneports-base, iphoneports-openssl, iphoneports-zlib
 Description: secure remote access between machines
 Replaces: openssh
+Conflicts: openssh
