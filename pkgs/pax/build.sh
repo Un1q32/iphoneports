@@ -1,5 +1,6 @@
 #!/bin/sh
 . ../../files/lib.sh
+
 (
 cd src
 for src in *.c; do

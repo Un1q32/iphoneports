@@ -1,5 +1,6 @@
 #!/bin/sh
 . ../../files/lib.sh
+
 (
 cd src
 "$_TARGET-cc" sw_vers.c -o sw_vers -Os -flto -framework CoreFoundation

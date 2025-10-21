@@ -1,5 +1,6 @@
 #!/bin/sh
 . ../../files/lib.sh
+
 (
 cd src
 mkdir -p "$_PKGROOT/pkg/var/usr/bin"

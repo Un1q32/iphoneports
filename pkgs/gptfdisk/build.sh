@@ -1,5 +1,6 @@
 #!/bin/sh
 . ../../files/lib.sh
+
 (
 cd src
 for src in crc32.cc support.cc guid.cc gptpart.cc mbrpart.cc basicmbr.cc mbr.cc gpt.cc bsd.cc parttypes.cc attributes.cc diskio.cc diskio-unix.cc; do

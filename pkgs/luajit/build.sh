@@ -1,5 +1,6 @@
 #!/bin/sh
 . ../../files/lib.sh
+
 (
 cd src
 "$_TARGET-cc" -dM -E - < /dev/null | grep -q __LP64__ && arg=-m64

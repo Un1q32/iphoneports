@@ -1,5 +1,6 @@
 #!/bin/sh
 . ../../files/lib.sh
+
 (
 cd src
 "$_TARGET-cc" -Os -flto hostname.c -o hostname -D'__FBSDID(x)='

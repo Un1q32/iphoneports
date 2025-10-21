@@ -1,5 +1,6 @@
 #!/bin/sh
 . ../../files/lib.sh
+
 (
 cd src
 "$_TARGET-cc" -std=c11 -O3 -flto -o tinyxxd main.c

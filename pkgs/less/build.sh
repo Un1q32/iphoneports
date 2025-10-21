@@ -1,5 +1,6 @@
 #!/bin/sh
 . ../../files/lib.sh
+
 (
 cd src
 ./configure --host="$_TARGET" --prefix=/var/usr --with-regex=pcre2

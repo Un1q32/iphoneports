@@ -1,5 +1,6 @@
 #!/bin/sh
 . ../../files/lib.sh
+
 (
 cd src
 "$_TARGET-cc" vm_stat.c -o vm_stat -Os -flto -Wno-format
