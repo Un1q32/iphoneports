@@ -1,5 +1,7 @@
 #!/bin/sh
 
+set -e
+
 if [ -z "$_PKGNAME" ]; then
     printf 'Do not run this script directly, use the main build.sh\n'
     exit 1

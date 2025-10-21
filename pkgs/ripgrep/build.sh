@@ -1,5 +1,4 @@
 #!/bin/sh
-set -e
 . ../../files/lib.sh
 
 # hack to make ripgrep not include the iphoneports git rev

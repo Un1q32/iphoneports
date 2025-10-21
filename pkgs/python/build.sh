@@ -1,6 +1,5 @@
 #!/bin/sh
 # shellcheck disable=2086
-set -e
 . ../../files/lib.sh
 
 mkdir -p "$_PKGROOT/src/iphoneports-fakebin"

@@ -1,5 +1,4 @@
 #!/bin/sh
-set -e
 . ../../files/lib.sh
 
 cp files/configure.h src/cctools/ld64/src

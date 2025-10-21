@@ -1,5 +1,4 @@
 #!/bin/sh
-set -e
 . ../../files/lib.sh
 
 if { [ "$_SUBSYSTEM" = "ios" ] && [ "$_TRUEOSVER" -lt 20000 ]; } ||

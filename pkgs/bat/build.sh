@@ -1,5 +1,4 @@
 #!/bin/sh
-set -e
 . ../../files/lib.sh
 
 # hack to make bat not include the iphoneports git rev

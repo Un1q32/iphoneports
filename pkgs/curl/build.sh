@@ -1,6 +1,5 @@
 #!/bin/sh -e
 # shellcheck disable=2086
-set -e
 . ../../files/lib.sh
 
 (

@@ -1,5 +1,4 @@
 #!/bin/sh
-set -e
 . ../../files/lib.sh
 mkdir -p pkg/var/usr/bin
 cp src/pfetch pkg/var/usr/bin
