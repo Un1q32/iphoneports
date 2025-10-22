@@ -246,7 +246,8 @@ _TRUEOSVER=__ENVIRONMENT_OS_VERSION_MIN_REQUIRED__
         esac
     fi
 
-    [ "$_SUBSYSTEM" = "macos" ] && [ "$_TRUEOSVER" -lt 1050 ] && recursivedeps=1
+    { [ "$_SUBSYSTEM" = "ios" ] && [ "$_TRUEOSVER" -lt 20000 ]; } ||
+        { [ "$_SUBSYSTEM" = "macos" ] && [ "$_TRUEOSVER" -lt 1050 ]; } && recursivedeps=1
 
     case $_CPU in
         (arm64*|aarch64*)
