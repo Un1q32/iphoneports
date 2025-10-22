@@ -1,9 +1,9 @@
 #!/bin/sh
-version=ba88581ed43497b6ce2583ee13c1e961b8eae4d8
+ver=2.0.4
 rm -rf pkg src
 printf "Downloading source...\n"
 mkdir -p src
-curl -L -s -o src/neofetch "https://raw.githubusercontent.com/hykilpikonna/hyfetch/$version/neofetch" &
-curl -L -s -o src/LICENSE.md "https://raw.githubusercontent.com/hykilpikonna/hyfetch/$version/LICENSE.md"
+curl -L -s -o src/neofetch "https://raw.githubusercontent.com/hykilpikonna/hyfetch/refs/tags/$ver/neofetch" &
+curl -L -s -o src/LICENSE.md "https://raw.githubusercontent.com/hykilpikonna/hyfetch/refs/tags/$ver/LICENSE.md"
 wait
 chmod 755 src/neofetch
