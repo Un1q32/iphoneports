@@ -1,9 +1,9 @@
 Package: iphoneports-base
-Version: 32
+Version: 33
 Architecture: @DPKGARCH@
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Section: System
 Description: iPhonePorts base
-Depends: iphoneports-dash, iphoneports-coreutils
+Depends: iphoneports-dash, iphoneports-coreutils, iphoneports-bash
 Replaces: iphoneports-chsh
 Conflicts: iphoneports-chsh

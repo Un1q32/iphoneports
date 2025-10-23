@@ -30,11 +30,11 @@ static bool checkshell(const char *shell, bool exitonfail) {
 }
 
 int main(void) {
-  char shell[PATH_MAX] = "/var/usr/bin/sh";
+  char shell[PATH_MAX] = "/var/usr/bin/bash";
   if (access("/var/usr/shell", F_OK) == 0) {
     if (readlink("/var/usr/shell", shell, PATH_MAX) == -1 ||
         !checkshell(shell, false))
-      strcpy(shell, "/var/usr/bin/sh");
+      strcpy(shell, "/var/usr/bin/bash");
   }
   checkshell(shell, true);
   const char *ptr = strrchr(shell, '/');
