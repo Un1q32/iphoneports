@@ -497,7 +497,14 @@
 #define __DARWIN_ONLY_UNIX_CONFORMANCE  1
 #define __DARWIN_ONLY_VERS_1050         0
 #else
+#if defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) && __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ < 20000
+#define __DARWIN_ONLY_64_BIT_INO_T      0
+#define _DARWIN_NO_64_BIT_INODE         1
+#undef _DARWIN_USE_64_BIT_INODE
+#undef __DARWIN_64_BIT_INO_T
+#else
 #define __DARWIN_ONLY_64_BIT_INO_T      1
+#endif
 #define __DARWIN_ONLY_UNIX_CONFORMANCE  1
 #define __DARWIN_ONLY_VERS_1050         1
 #endif
@@ -536,7 +543,11 @@
 #  elif defined(_NONSTD_SOURCE)
 #    define __DARWIN_UNIX03     0
 #  else /* default */
-#    define __DARWIN_UNIX03   1
+#    if defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) && ((__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ - 0) < 1040)
+#      define __DARWIN_UNIX03   0
+#    else /* __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ >= 1040 */
+#      define __DARWIN_UNIX03   1
+#    endif /* __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ >= 1040 */
 #  endif /* _DARWIN_C_SOURCE || _XOPEN_SOURCE || _POSIX_C_SOURCE || __LP64__ */
 #endif /* !__DARWIN_UNIX03 */
 
@@ -554,7 +565,7 @@
 #  else /* default */
 #    if __DARWIN_ONLY_64_BIT_INO_T
 #      define __DARWIN_64_BIT_INO_T 1
-#    elif defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) && ((__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ - 0) < 1060) || __DARWIN_UNIX03 == 0
+#    elif defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) && ((__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ - 0) < 1050) || __DARWIN_UNIX03 == 0
 #      define __DARWIN_64_BIT_INO_T 0
 #    else /* default */
 #      define __DARWIN_64_BIT_INO_T 1
