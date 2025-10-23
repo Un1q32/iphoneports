@@ -6,24 +6,27 @@
 #include <sys/stat.h>
 #include <unistd.h>
 
-static bool checkshell(const char *shell, bool exitonfail) {
+static bool checkshell(const char *shell, bool fatal) {
   struct stat st;
   if (stat(shell, &st) != 0) {
-    printf("Error: %s not found!\n", shell);
-    if (exitonfail)
+    if (fatal) {
+      printf("Error: %s not found!\n", shell);
       exit(EXIT_FAILURE);
+    }
     return false;
   }
   if (!S_ISREG(st.st_mode)) {
-    printf("Error: %s is not a regular file!\n", shell);
-    if (exitonfail)
+    if (fatal) {
+      printf("Error: %s is not a regular file!\n", shell);
       exit(EXIT_FAILURE);
+    }
     return false;
   }
   if (!(st.st_mode & S_IXUSR)) {
-    printf("Error: %s is not executable!\n", shell);
-    if (exitonfail)
+    if (fatal) {
+      printf("Error: %s is not executable!\n", shell);
       exit(EXIT_FAILURE);
+    }
     return false;
   }
   return true;
