@@ -30,5 +30,5 @@ builddeb() {
 }
 
 make() {
-    "$_MAKE" "$@"
+    command "$_MAKE" "$@"
 }
