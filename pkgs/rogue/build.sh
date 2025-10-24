@@ -4,8 +4,8 @@
 (
 cd src
 ./configure --host="$_TARGET" --prefix=/var/usr --enable-scorefile=/var/usr/share/rogue/scores --enable-setgid
-"$_MAKE" -j"$_JOBS"
-"$_MAKE" DESTDIR="$_PKGROOT/pkg" install
+make -j"$_JOBS"
+make DESTDIR="$_PKGROOT/pkg" install
 )
 
 (

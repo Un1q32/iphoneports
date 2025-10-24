@@ -4,8 +4,8 @@
 (
 cd src
 ./configure --host="$_TARGET" --prefix=/var/usr --with-shell=/var/usr/bin/sh --enable-silent-rules PKG_CONFIG_LIBDIR="$_SDK/var/usr/lib/pkgconfig"
-"$_MAKE" -j"$_JOBS"
-"$_MAKE" DESTDIR="$_PKGROOT/pkg" install
+make -j"$_JOBS"
+make DESTDIR="$_PKGROOT/pkg" install
 )
 
 rm -rf pkg/var/usr/share

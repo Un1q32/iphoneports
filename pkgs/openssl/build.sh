@@ -31,8 +31,8 @@ case $_CPU in
 esac
 
 ./Configure "$sys" $noasm --prefix=/var/usr --openssldir=/var/usr/etc/ssl CROSS_COMPILE="$_TARGET"-
-"$_MAKE" CNF_CFLAGS= PROGRAMS=apps/openssl -j"$_JOBS"
-"$_MAKE" CNF_CFLAGS= PROGRAMS=apps/openssl DESTDIR="$_PKGROOT/pkg" install_sw install_ssldirs
+make CNF_CFLAGS= PROGRAMS=apps/openssl -j"$_JOBS"
+make CNF_CFLAGS= PROGRAMS=apps/openssl DESTDIR="$_PKGROOT/pkg" install_sw install_ssldirs
 )
 
 (

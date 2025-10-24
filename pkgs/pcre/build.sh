@@ -15,8 +15,8 @@ cd src
     --enable-pcregrep-libz \
     --disable-cpp \
     $jit
-"$_MAKE" -j"$_JOBS"
-"$_MAKE" DESTDIR="$_PKGROOT/pkg" install
+make -j"$_JOBS"
+make DESTDIR="$_PKGROOT/pkg" install
 )
 
 (

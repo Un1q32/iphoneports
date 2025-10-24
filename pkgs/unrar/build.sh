@@ -3,7 +3,7 @@
 
 (
 cd src
-"$_MAKE" CXX="$_TARGET-c++" STRIP=true CXXFLAGS="-O3 -flto -Wno-dangling-else -Wno-switch" LIBFLAGS= -j"$_JOBS"
+make CXX="$_TARGET-c++" STRIP=true CXXFLAGS="-O3 -flto -Wno-dangling-else -Wno-switch" LIBFLAGS= -j"$_JOBS"
 mkdir -p "$_PKGROOT/pkg/var/usr/bin"
 cp unrar "$_PKGROOT/pkg/var/usr/bin"
 )

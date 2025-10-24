@@ -4,8 +4,8 @@
 (
 cd src
 ./configure --host="$_TARGET" --prefix=/var/usr --disable-static --disable-arch-native
-"$_MAKE" -j"$_JOBS"
-"$_MAKE" DESTDIR="$_PKGROOT/pkg" install
+make -j"$_JOBS"
+make DESTDIR="$_PKGROOT/pkg" install
 )
 
 (

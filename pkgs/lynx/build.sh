@@ -10,8 +10,8 @@ else
     ipv6='--enable-ipv6'
 fi
 ./configure --host="$_TARGET" --prefix=/var/usr --with-ssl --with-brotli --with-zlib $ipv6
-"$_MAKE" -j"$_JOBS"
-"$_MAKE" DESTDIR="$_PKGROOT/pkg" install
+make -j"$_JOBS"
+make DESTDIR="$_PKGROOT/pkg" install
 )
 
 rm -rf pkg/var/usr/share

@@ -4,8 +4,8 @@
 (
 cd src
 ./configure --host="$_TARGET" --prefix=/var/usr --with-readline
-"$_MAKE" -j"$_JOBS"
-"$_MAKE" DESTDIR="$_PKGROOT/pkg" install
+make -j"$_JOBS"
+make DESTDIR="$_PKGROOT/pkg" install
 )
 
 (

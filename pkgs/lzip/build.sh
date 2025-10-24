@@ -4,7 +4,7 @@
 (
 cd src
 ./configure --prefix=/var/usr CXX="$_TARGET-c++"
-"$_MAKE" DESTDIR="$_PKGROOT/pkg" install -j"$_JOBS"
+make DESTDIR="$_PKGROOT/pkg" install -j"$_JOBS"
 )
 
 (

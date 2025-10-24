@@ -4,7 +4,7 @@
 (
 cd src
 ./configure --prefix=/var/usr
-"$_MAKE" install DESTDIR="$_PKGROOT/pkg" -j"$_JOBS"
+make install DESTDIR="$_PKGROOT/pkg" -j"$_JOBS"
 )
 
 mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"

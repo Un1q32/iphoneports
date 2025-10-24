@@ -13,8 +13,8 @@ esac
 cp "src/syscfg/lock-obj-pub.$cpu-apple-darwin.h" src/syscfg/lock-obj-pub.cross-os.h
 
 ./configure --host="$_TARGET" --prefix=/var/usr --disable-static --disable-nls --disable-doc --disable-tests --enable-silent-rules
-"$_MAKE" -j"$_JOBS"
-"$_MAKE" DESTDIR="$_PKGROOT/pkg" install
+make -j"$_JOBS"
+make DESTDIR="$_PKGROOT/pkg" install
 )
 
 (

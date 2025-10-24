@@ -16,8 +16,8 @@ rm include/foreign/machine/_structs.h
     LLVM_LIB_DIR="$_SDK/var/usr/lib" \
     CFLAGS='-O3 -flto' \
     CXXFLAGS='-O3 -flto=thin'
-"$_MAKE" -j"$_JOBS"
-"$_MAKE" install DESTDIR="$_PKGROOT/pkg"
+make -j"$_JOBS"
+make install DESTDIR="$_PKGROOT/pkg"
 )
 
 (

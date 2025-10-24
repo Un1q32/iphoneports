@@ -5,7 +5,7 @@
 cd src
 ./autogen.sh
 ./configure --host="$_TARGET" --prefix=/var/usr --disable-static CPPFLAGS=-Wno-incompatible-function-pointer-types
-"$_MAKE" install DESTDIR="$_PKGROOT/pkg" -j"$_JOBS"
+make install DESTDIR="$_PKGROOT/pkg" -j"$_JOBS"
 )
 
 (

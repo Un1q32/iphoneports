@@ -4,7 +4,7 @@
 (
 cd src
 libqjs_objs='.obj/quickjs.o .obj/libregexp.o .obj/libunicode.o .obj/cutils.o .obj/quickjs-libc.o .obj/libbf.o'
-"$_MAKE" \
+make \
     CROSS_PREFIX="$_TARGET-" \
     PREFIX=/var/usr \
     CC="$_TARGET-cc -Wno-implicit-const-int-float-conversion" \

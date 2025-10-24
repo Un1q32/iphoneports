@@ -4,8 +4,8 @@
 (
 cd src
 ./configure --host="$_TARGET" --prefix=/var/usr --disable-static --disable-static-shell --with-readline-header="$_SDK/var/usr/include/readline/readline.h"
-"$_MAKE" -j"$_JOBS"
-"$_MAKE" install DESTDIR="$_PKGROOT/pkg"
+make -j"$_JOBS"
+make install DESTDIR="$_PKGROOT/pkg"
 )
 
 (

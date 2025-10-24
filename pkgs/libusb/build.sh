@@ -5,8 +5,8 @@
 cd src
 grep -q kUSBDeviceSpeedSuper "$_SDK/System/Library/Frameworks/IOKit.framework/Headers/usb/USB.h" || superspeeddef='CPPFLAGS=-DkUSBDeviceSpeedSuper=3'
 ./configure --host="$_TARGET" --prefix=/var/usr --disable-static "$superspeeddef"
-"$_MAKE" -j"$_JOBS"
-"$_MAKE" install DESTDIR="$_PKGROOT/pkg"
+make -j"$_JOBS"
+make install DESTDIR="$_PKGROOT/pkg"
 )
 
 (

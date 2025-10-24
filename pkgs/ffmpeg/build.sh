@@ -33,8 +33,8 @@ export PKG_CONFIG_LIBDIR="$_SDK/var/usr/lib/pkgconfig"
     --pkg-config='pkg-config' \
     --enable-gpl \
     --enable-version3
-"$_MAKE" -j"$_JOBS"
-"$_MAKE" DESTDIR="$_PKGROOT/pkg" install
+make -j"$_JOBS"
+make DESTDIR="$_PKGROOT/pkg" install
 )
 
 (

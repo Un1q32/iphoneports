@@ -4,7 +4,7 @@
 (
 cd src
 ./configure --host="$_TARGET" --prefix=/var/usr --disable-cxx --disable-static --disable-doc
-"$_MAKE" DESTDIR="$_PKGROOT/pkg" install -j"$_JOBS"
+make DESTDIR="$_PKGROOT/pkg" install -j"$_JOBS"
 )
 
 (

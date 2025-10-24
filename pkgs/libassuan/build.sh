@@ -9,8 +9,8 @@ cd src
     --disable-static \
     --disable-doc \
     GPGRT_CONFIG="$_SDK/var/usr/bin/gpgrt-config"
-"$_MAKE" -j"$_JOBS"
-"$_MAKE" DESTDIR="$_PKGROOT/pkg" install
+make -j"$_JOBS"
+make DESTDIR="$_PKGROOT/pkg" install
 )
 
 strip_and_sign pkg/var/usr/lib/libassuan.9.dylib

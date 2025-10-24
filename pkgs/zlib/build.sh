@@ -4,8 +4,8 @@
 (
 cd src
 CHOST="$_TARGET" ./configure --prefix=/var/usr --zlib-compat --force-sse2
-"$_MAKE" -j"$_JOBS"
-"$_MAKE" DESTDIR="$_PKGROOT/pkg" install
+make -j"$_JOBS"
+make DESTDIR="$_PKGROOT/pkg" install
 )
 
 (

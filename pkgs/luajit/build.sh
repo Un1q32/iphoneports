@@ -9,8 +9,8 @@ if [ "$_SUBSYSTEM" = "ios" ]; then
 else
     sys='Darwin'
 fi
-"$_MAKE" amalg TARGET_SYS="$sys" HOST_CC="clang ${arg:--m32}" CROSS="$_TARGET-" BUILDMODE=dynamic CCOPT=-O3 PREFIX=/var/usr DESTDIR="$_PKGROOT/pkg" MACOSX_DEPLOYMENT_TARGET="$_MACVER" -j"$_JOBS"
-"$_MAKE" install PREFIX=/var/usr DESTDIR="$_PKGROOT/pkg" TARGET_SYS=Darwin
+make amalg TARGET_SYS="$sys" HOST_CC="clang ${arg:--m32}" CROSS="$_TARGET-" BUILDMODE=dynamic CCOPT=-O3 PREFIX=/var/usr DESTDIR="$_PKGROOT/pkg" MACOSX_DEPLOYMENT_TARGET="$_MACVER" -j"$_JOBS"
+make install PREFIX=/var/usr DESTDIR="$_PKGROOT/pkg" TARGET_SYS=Darwin
 )
 
 (

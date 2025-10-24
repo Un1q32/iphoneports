@@ -24,8 +24,8 @@ fi
     PKG_CONFIG_SYSROOT_DIR="$_SDK" \
     gl_cv_onwards_func_futimens=yes \
     $posix_spawn
-"$_MAKE" -j"$_JOBS"
-"$_MAKE" DESTDIR="$_PKGROOT/pkg" install
+make -j"$_JOBS"
+make DESTDIR="$_PKGROOT/pkg" install
 )
 
 (

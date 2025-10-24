@@ -17,8 +17,8 @@ unset TERMINFO
     --without-manpages \
     --enable-pc-files \
     --with-pkg-config-libdir=/var/usr/lib/pkgconfig
-"$_MAKE" -j"$_JOBS"
-"$_MAKE" DESTDIR="$_PKGROOT/pkg" install -j"$_JOBS"
+make -j"$_JOBS"
+make DESTDIR="$_PKGROOT/pkg" install -j"$_JOBS"
 )
 
 (

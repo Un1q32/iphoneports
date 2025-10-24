@@ -4,8 +4,8 @@
 (
 cd src
 ./configure --host="$_TARGET" --prefix=/var/usr --enable-telnet --enable-utmp
-"$_MAKE" -j"$_JOBS"
-"$_MAKE" DESTDIR="$_PKGROOT/pkg" install
+make -j"$_JOBS"
+make DESTDIR="$_PKGROOT/pkg" install
 mkdir -p "$_PKGROOT/pkg/var/usr/etc"
 cp etc/etcscreenrc "$_PKGROOT/pkg/var/usr/etc/screenrc"
 )

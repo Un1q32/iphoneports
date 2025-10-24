@@ -29,8 +29,8 @@ autoreconf -fi
     --with-deb-compressor=gzip \
     CPPFLAGS='-Wno-incompatible-function-pointer-types' \
     PERL=/usr/bin/perl
-"$_MAKE" -j"$_JOBS"
-"$_MAKE" DESTDIR="$_PKGROOT/pkg" install
+make -j"$_JOBS"
+make DESTDIR="$_PKGROOT/pkg" install
 )
 
 (

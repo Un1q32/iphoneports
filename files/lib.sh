@@ -28,3 +28,7 @@ builddeb() {
     sed -e "s|@DPKGARCH@|$_DPKGARCH|" DEBIAN/control > pkg/DEBIAN/control
     dpkg-deb -b --root-owner-group -Zgzip pkg "$_PKGNAME.deb"
 }
+
+make() {
+    "$_MAKE" "$@"
+}

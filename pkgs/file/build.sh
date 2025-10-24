@@ -5,17 +5,17 @@
 (
 cd src
 ./configure --prefix="$_PKGROOT/src/native"
-"$_MAKE" -j"$_JOBS"
-"$_MAKE" install
-"$_MAKE" clean
+make -j"$_JOBS"
+make install
+make clean
 export PATH="$_PKGROOT/src/native/bin:$PATH"
 
 if [ "$_SUBSYSTEM" = "ios" ] && [ "$_TRUEOSVER" -lt 20000 ]; then
     posix_spawn='ac_cv_func_posix_spawnp=no'
 fi
 ./configure --host="$_TARGET" --prefix=/var/usr --enable-xzlib --enable-bzlib --enable-zlib --enable-zstdlib $posix_spawn
-"$_MAKE" -j"$_JOBS"
-"$_MAKE" DESTDIR="$_PKGROOT/pkg" install
+make -j"$_JOBS"
+make DESTDIR="$_PKGROOT/pkg" install
 )
 
 (

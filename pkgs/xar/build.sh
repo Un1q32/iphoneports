@@ -5,8 +5,8 @@
 cd src/xar
 ln -s . include/xar
 ./configure --host="$_TARGET" --prefix=/var/usr --with-xml2-config="$_SDK/var/usr/bin/xml2-config" --disable-static PKG_CONFIG_LIBDIR="$_SDK/var/usr/lib/pkgconfig" LIBS=-lcrypto CPPFLAGS=-Ilib
-"$_MAKE" -j"$_JOBS"
-"$_MAKE" DESTDIR="$_PKGROOT/pkg" install
+make -j"$_JOBS"
+make DESTDIR="$_PKGROOT/pkg" install
 )
 
 (

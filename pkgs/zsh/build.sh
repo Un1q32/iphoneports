@@ -18,9 +18,9 @@ cd src
     PCRECONF=true \
     LIBS="-lpcre"
 sed -i -e '/^name=zsh\/regex/ s/link=no/link=static/' -e '/^name=zsh\/pcre/ s/link=no/link=static/' config.modules
-"$_MAKE" prep
-"$_MAKE" -j"$_JOBS"
-"$_MAKE" DESTDIR="$_PKGROOT/pkg" install
+make prep
+make -j"$_JOBS"
+make DESTDIR="$_PKGROOT/pkg" install
 )
 
 (

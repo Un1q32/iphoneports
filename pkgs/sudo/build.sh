@@ -16,8 +16,8 @@ cd src
     --enable-zlib \
     --enable-openssl \
     ax_cv_check_cflags___static_libgcc=no
-"$_MAKE" -j"$_JOBS"
-fakeroot "$_MAKE" DESTDIR="$_PKGROOT/pkg" install
+make -j"$_JOBS"
+fakeroot make DESTDIR="$_PKGROOT/pkg" install
 )
 
 (

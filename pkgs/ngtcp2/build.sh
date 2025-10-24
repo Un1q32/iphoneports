@@ -9,7 +9,7 @@ cd src
     --disable-static \
     PKG_CONFIG_LIBDIR="$_SDK/var/usr/lib/pkgconfig" \
     PKG_CONFIG_SYSROOT_DIR="$_SDK"
-"$_MAKE" install DESTDIR="$_PKGROOT/pkg" -j"$_JOBS"
+make install DESTDIR="$_PKGROOT/pkg" -j"$_JOBS"
 )
 
 (

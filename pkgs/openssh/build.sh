@@ -9,8 +9,8 @@ else
     privsepuser="_sshd"
 fi
 ./configure --host="$_TARGET" --prefix=/var/usr --sysconfdir=/var/usr/etc/ssh --with-privsep-user="$privsepuser" --with-sandbox=no
-"$_MAKE" -j"$_JOBS"
-"$_MAKE" DESTDIR="$_PKGROOT/pkg" install-nokeys STRIP_OPT=
+make -j"$_JOBS"
+make DESTDIR="$_PKGROOT/pkg" install-nokeys STRIP_OPT=
 )
 
 (
