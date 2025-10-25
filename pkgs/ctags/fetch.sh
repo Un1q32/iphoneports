@@ -1,9 +1,9 @@
 #!/bin/sh
 rm -rf pkg src
-ver='6.2.0'
+ver='6.2.1'
 [ -z "$_DLCACHE" ] && _DLCACHE=/tmp
 if [ ! -f "$_DLCACHE/ctags-$ver.tar.gz" ] ||
-    [ "$(sha256sum "$_DLCACHE/ctags-$ver.tar.gz" | awk '{print $1}')" != "ae550fb8c5fdb5dfca2b1fc51a5de69300eddca9eb04bda9cc47b9703041763e" ]; then
+    [ "$(sha256sum "$_DLCACHE/ctags-$ver.tar.gz" | awk '{print $1}')" != "2c63efe9e0e083dc50e6fdd8c5414781cc8873d8c8940cf553c01870ed962f8c" ]; then
     printf "Downloading source...\n"
     curl -L -# -o "$_DLCACHE/ctags-$ver.tar.gz" "https://github.com/universal-ctags/ctags/releases/download/v$ver/universal-ctags-$ver.tar.gz" || exit 1
 fi

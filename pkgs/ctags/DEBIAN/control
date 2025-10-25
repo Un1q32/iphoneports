@@ -2,6 +2,6 @@ Package: iphoneports-ctags
 Section: Development
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Architecture: @DPKGARCH@
-Version: 6.2.0
+Version: 6.2.1
 Description: Generates an index file of language objects found in source files
 Depends: iphoneports-base, iphoneports-libxml2, iphoneports-pcre2, iphoneports-libyaml, iphoneports-jansson
