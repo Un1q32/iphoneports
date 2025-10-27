@@ -1,7 +1,8 @@
 #!/bin/sh
 . ../../files/lib.sh
-mkdir -p src/build
+
 (
+mkdir -p src/build
 cd src/build
 cmake -GNinja ../runtimes \
     -DLLVM_ENABLE_RUNTIMES='libcxx;libcxxabi' \
