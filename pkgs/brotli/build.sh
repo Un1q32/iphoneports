@@ -1,7 +1,8 @@
 #!/bin/sh
 . ../../files/lib.sh
-mkdir -p src/build
+
 (
+mkdir -p src/build
 cd src/build
 cmake -GNinja .. \
     -DCMAKE_BUILD_TYPE=Release \
@@ -17,7 +18,9 @@ DESTDIR="$_PKGROOT/pkg" ninja -j"$_JOBS" install
 
 (
 cd pkg/var/usr
-strip_and_sign bin/brotli lib/libbrotlicommon.1.1.0.dylib lib/libbrotlidec.1.1.0.dylib lib/libbrotlienc.1.1.0.dylib
+for bin in bin/brotli lib/libbrotlicommon.dylib lib/libbrotlidec.dylib lib/libbrotlienc.dylib; do
+    strip_and_sign "$(realpath $bin)"
+done
 )
 
 mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"
