@@ -17,12 +17,9 @@ cmake -GNinja .. \
 DESTDIR="$_PKGROOT/pkg" ninja -j"$_JOBS" install
 )
 
-(
-cd pkg/var/usr
-for bin in bin/brotli lib/libbrotlicommon.dylib lib/libbrotlidec.dylib lib/libbrotlienc.dylib; do
-    strip_and_sign "$(realpath $bin)"
+for bin in pkg/var/usr/bin/brotli pkg/var/usr/lib/*.dylib; do
+    [ -h "$bin" ] || strip_and_sign "$bin"
 done
-)
 
 mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"
 cp src/LICENSE "pkg/var/usr/share/licenses/$_PKGNAME"
