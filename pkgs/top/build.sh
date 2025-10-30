@@ -42,9 +42,9 @@ strip_and_sign top
 chmod 4755 top
 )
 
-mkdir -p pkg/usr/libexec/iphoneports
-mv pkg/var/usr/bin/top pkg/usr/libexec/iphoneports/top
-ln -s ../../../../usr/libexec/iphoneports/top pkg/var/usr/bin/top
+mkdir -p pkg/usr/local/libexec/iphoneports
+mv pkg/var/usr/bin/top pkg/usr/local/libexec/iphoneports/top
+ln -s ../../../../usr/local/libexec/iphoneports/top pkg/var/usr/bin/top
 
 mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"
 cp files/LICENSE "pkg/var/usr/share/licenses/$_PKGNAME"

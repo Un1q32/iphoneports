@@ -1,5 +1,5 @@
 Package: iphoneports-top
-Version: 17.4
+Version: 17.4-1
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Architecture: @DPKGARCH@
 Depends: iphoneports-base, iphoneports-ncurses

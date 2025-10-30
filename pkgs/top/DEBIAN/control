@@ -1,5 +1,5 @@
 Package: iphoneports-top
-Version: 39-4
+Version: 39-5
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Architecture: @DPKGARCH@
 Depends: iphoneports-base, iphoneports-ncurses
