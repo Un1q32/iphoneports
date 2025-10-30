@@ -1,7 +1,8 @@
 #!/bin/sh
 . ../../files/lib.sh
 
-if [ "$_SUBSYSTEM" = "macos" ] && [ "$_TRUEOSVER" -ge 1050 ]; then
+if { [ "$_SUBSYSTEM" = "macos" ] && [ "$_TRUEOSVER" -ge 1050 ]; } ||
+    [ "$_SUBSYSTEM" != "macos" ]; then
     printf 'login-tiger is only for Mac OS X 10.4\n'
     mkdir pkg
     exit 0
