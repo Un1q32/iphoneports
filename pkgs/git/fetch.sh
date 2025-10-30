@@ -3,7 +3,7 @@ rm -rf pkg src
 ver='2.51.2'
 [ -z "$_DLCACHE" ] && _DLCACHE=/tmp
 if [ ! -f "$_DLCACHE/git-$ver.tar.xz" ] ||
-    [ "$(sha256sum "$_DLCACHE/git-$ver.tar.xz" | awk '{print $1}')" != "a83fd9ffaed7eee679ed92ceb06f75b4615ebf66d3ac4fbdbfbc9567dc533f4a" ]; then
+    [ "$(sha256sum "$_DLCACHE/git-$ver.tar.xz" | awk '{print $1}')" != "233d7143a2d58e60755eee9b76f559ec73ea2b3c297f5b503162ace95966b4e3" ]; then
     printf "Downloading source...\n"
     curl -L -# -o "$_DLCACHE/git-$ver.tar.xz" "https://mirrors.edge.kernel.org/pub/software/scm/git/git-$ver.tar.xz" || exit 1
 fi
