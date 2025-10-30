@@ -1,6 +1,6 @@
 #!/bin/sh
 rm -rf pkg src
-ver='2.51.1'
+ver='2.51.2'
 [ -z "$_DLCACHE" ] && _DLCACHE=/tmp
 if [ ! -f "$_DLCACHE/git-$ver.tar.xz" ] ||
     [ "$(sha256sum "$_DLCACHE/git-$ver.tar.xz" | awk '{print $1}')" != "a83fd9ffaed7eee679ed92ceb06f75b4615ebf66d3ac4fbdbfbc9567dc533f4a" ]; then
