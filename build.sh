@@ -364,7 +364,7 @@ hasbeenbuilt() {
 
 applypatches() {
     if [ -d patches ]; then
-        for patch in ../patches/*; do
+        for patch in patches/*; do
             printf '%s\n' "Applying patch ${patch##*/}"
             "$gpatch" -d "$_SRCDIR" -fNp1 < "$patch" || error "Failed to apply patch ${patch##*/}"
         done
