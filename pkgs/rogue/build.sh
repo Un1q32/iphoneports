@@ -15,9 +15,7 @@ strip_and_sign bin/rogue
 chmod 2755 bin/rogue
 )
 
-mkdir -p pkg/usr/local/libexec/iphoneports
-mv pkg/var/usr/bin/rogue pkg/usr/local/libexec/iphoneports
-ln -s ../../../../usr/local/libexec/iphoneports/rogue pkg/var/usr/bin/rogue
+installsuid "$_DESTDIR/var/usr/bin/rogue"
 
 installlicense src/LICENSE.TXT
 

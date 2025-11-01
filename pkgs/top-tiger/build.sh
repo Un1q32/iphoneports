@@ -33,15 +33,10 @@ mkdir -p "$_DESTDIR/var/usr/bin"
 cp top "$_DESTDIR/var/usr/bin"
 )
 
-(
-cd "$_DESTDIR/var/usr"/bin
-strip_and_sign top
-chmod 4755 top
-)
+strip_and_sign "$_DESTDIR/var/usr/bin/top"
+chmod 4755 "$_DESTDIR/var/usr/bin/top"
 
-mkdir -p pkg/usr/local/libexec/iphoneports
-mv pkg/var/usr/bin/top pkg/usr/local/libexec/iphoneports/top
-ln -s ../../../../usr/local/libexec/iphoneports/top pkg/var/usr/bin/top
+installsuid "$_DESTDIR/var/usr/bin/top"
 
 installlicense files/LICENSE
 

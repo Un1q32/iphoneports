@@ -20,16 +20,14 @@ cp ps "$_DESTDIR/var/usr/bin"
 )
 
 (
-cd "$_DESTDIR/var/usr"/bin
+cd "$_DESTDIR/var/usr/bin"
 _ALWAYSSIGN=1
 _ENTITLEMENTS="$_PKGROOT/files/entitlements.xml"
 strip_and_sign ps
 chmod 4755 ps
 )
 
-mkdir -p pkg/usr/local/libexec/iphoneports
-mv pkg/var/usr/bin/ps pkg/usr/local/libexec/iphoneports
-ln -s ../../../../usr/local/libexec/iphoneports/ps pkg/var/usr/bin/ps
+installsuid "$_DESTDIR/var/usr/bin/ps"
 
 installlicense files/LICENSE
 

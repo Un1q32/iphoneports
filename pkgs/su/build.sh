@@ -14,10 +14,10 @@ strip_and_sign su
 chmod 4755 su
 )
 
-mkdir -p "$_DESTDIR/usr/local/libexec/iphoneports" "$_DESTDIR/var/usr/etc/pam.d"
-mv "$_DESTDIR/var/usr/bin/su" "$_DESTDIR/usr/local/libexec/iphoneports/su"
-ln -s ../../../../usr/local/libexec/iphoneports/su "$_DESTDIR/var/usr/bin/su"
+mkdir -p "$_DESTDIR/var/usr/etc/pam.d"
 cp files/su.pam "$_DESTDIR/var/usr/etc/pam.d/su"
+
+installsuid "$_DESTDIR/var/usr/bin/su"
 
 installlicense files/LICENSE
 

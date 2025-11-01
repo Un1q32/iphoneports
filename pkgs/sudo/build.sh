@@ -1,7 +1,8 @@
 #!/bin/sh
 . ../../files/lib.sh
-unset SUDO_PROMPT
+
 (
+unset SUDO_PROMPT
 cd src
 ./configure \
     --host="$_TARGET" \
@@ -17,7 +18,7 @@ cd src
     --enable-openssl \
     ax_cv_check_cflags___static_libgcc=no
 make -j"$_JOBS"
-fakeroot make DESTDIR="$_DESTDIR" install
+fakeroot "$_MAKE" DESTDIR="$_DESTDIR" install
 )
 
 (
@@ -27,12 +28,10 @@ strip_and_sign bin/sudo bin/cvtsudoers bin/sudoreplay sbin/sudo_logsrvd sbin/sud
 chmod 4755 bin/sudo
 )
 
-mkdir -p pkg/usr/local/libexec/iphoneports
-mv pkg/var/usr/bin/sudo pkg/usr/local/libexec/iphoneports
-ln -s ../../../../usr/local/libexec/iphoneports/sudo pkg/var/usr/bin/sudo
+installsuid "$_DESTDIR/var/usr/bin/sudo"
 
-cp files/sudoers pkg/var/usr/etc/sudoers
-chmod 440 pkg/var/usr/etc/sudoers
+cp files/sudoers "$_DESTDIR/var/usr/etc/sudoers"
+chmod 440 "$_DESTDIR/var/usr/etc/sudoers"
 
 installlicense "$_SRCDIR/LICENSE.md"
 

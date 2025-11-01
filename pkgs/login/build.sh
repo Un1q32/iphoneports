@@ -14,15 +14,12 @@ mkdir -p "$_DESTDIR/var/usr/bin"
 cp login "$_DESTDIR/var/usr/bin"
 )
 
-(
-cd "$_DESTDIR/var/usr"/bin
-strip_and_sign login
-chmod 4755 login
-)
+strip_and_sign "$_DESTDIR/var/usr/bin/login"
+chmod 4755 "$_DESTDIR/var/usr/bin/login"
 
-mkdir -p pkg/usr/local/libexec/iphoneports pkg/var/usr/etc/pam.d
-mv pkg/var/usr/bin/login pkg/usr/local/libexec/iphoneports/login
-ln -s ../../../../usr/local/libexec/iphoneports/login pkg/var/usr/bin/login
+installsuid "$_DESTDIR/var/usr/bin/login"
+
+mkdir -p pkg/var/usr/etc/pam.d
 cp files/login.pam pkg/var/usr/etc/pam.d/login
 
 installlicense files/LICENSE-*

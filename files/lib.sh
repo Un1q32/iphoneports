@@ -34,6 +34,14 @@ installlicense() {
     cp "$@" "$_DESTDIR/var/usr/share/licenses/$_PKGNAME"
 }
 
+installsuid() {
+    mkdir -p "$_DESTDIR/usr/local/libexec/iphoneports"
+    for bin in "$@"; do
+        mv "$bin" "$_DESTDIR/usr/local/libexec/iphoneports"
+        ln -s "../../../../usr/local/libexec/iphoneports/${bin##*/}" "$bin"
+    done
+}
+
 make() {
     command "$_MAKE" "$@"
 }

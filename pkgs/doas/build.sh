@@ -28,18 +28,15 @@ cp vidoas "$_DESTDIR/var/usr/bin"
 cp doasedit "$_DESTDIR/var/usr/bin"
 )
 
-(
-cd "$_DESTDIR/var/usr"/bin
-strip_and_sign doas
-chmod 4755 doas
-)
+strip_and_sign "$_DESTDIR/var/usr/bin/doas"
+chmod 4755 "$_DESTDIR/var/usr/bin/doas"
 
-mkdir -p pkg/usr/local/libexec/iphoneports pkg/var/usr/etc/pam.d
-mv pkg/var/usr/bin/doas pkg/usr/local/libexec/iphoneports
-ln -s ../../../../usr/local/libexec/iphoneports/doas pkg/var/usr/bin/doas
-cp files/doas.pam pkg/var/usr/etc/pam.d/doas
-cp files/doas.conf pkg/var/usr/etc
-chmod 440 pkg/var/usr/etc/doas.conf
+installsuid "$_DESTDIR/var/usr/bin/doas"
+
+mkdir -p "$_DESTDIR/var/usr/etc/pam.d"
+cp files/doas.pam "$_DESTDIR/var/usr/etc/pam.d/doas"
+cp files/doas.conf "$_DESTDIR/var/usr/etc"
+chmod 440 "$_DESTDIR/var/usr/etc/doas.conf"
 
 installlicense "$_SRCDIR/LICENSE"
 
