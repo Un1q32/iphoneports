@@ -15,7 +15,9 @@ fi
 (
 cd "$_DESTDIR/var/usr/sbin"
 strip_and_sign ping
-[ -f ping6 ] && strip_and_sign ping6
+if [ -f ping6 ]; then
+    strip_and_sign ping6
+fi
 )
 
 installlicense files/*
