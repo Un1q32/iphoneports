@@ -15,11 +15,13 @@ fi
 (
 cd "$_DESTDIR/var/usr/sbin"
 strip_and_sign ping
-if [ -f ping6 ]; then
-    strip_and_sign ping6
-fi
 chmod 4755 ping
 installsuid ping
+if [ -f ping6 ]; then
+    strip_and_sign ping6
+    chmod 4755 ping6
+    installsuid ping6
+fi
 )
 
 installlicense files/*
