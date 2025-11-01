@@ -9,7 +9,7 @@ cp ldid "$_DESTDIR/var/usr/bin"
 )
 
 (
-cd "$_DESTDIR/var/usr"/bin
+cd "$_DESTDIR/var/usr/bin"
 ln -s ldid ldid2
 strip_and_sign ldid
 )

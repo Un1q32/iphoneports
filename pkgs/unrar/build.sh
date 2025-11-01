@@ -9,7 +9,7 @@ cp unrar "$_DESTDIR/var/usr/bin"
 )
 
 (
-cd "$_DESTDIR/var/usr"/bin
+cd "$_DESTDIR/var/usr/bin"
 strip_and_sign unrar
 )
 

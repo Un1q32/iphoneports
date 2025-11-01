@@ -11,7 +11,7 @@ cp vbindiff "$_DESTDIR/var/usr/bin"
 )
 
 (
-cd "$_DESTDIR/var/usr"/bin
+cd "$_DESTDIR/var/usr/bin"
 strip_and_sign vbindiff
 )
 

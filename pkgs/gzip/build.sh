@@ -12,7 +12,7 @@ done
 )
 
 (
-cd "$_DESTDIR/var/usr"/bin
+cd "$_DESTDIR/var/usr/bin"
 strip_and_sign gzip
 for link in gunzip gzcat zgrep zegrep zfgrep; do
     ln -s gzip "$link"

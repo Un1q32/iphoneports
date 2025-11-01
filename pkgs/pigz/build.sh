@@ -9,7 +9,7 @@ cp pigz "$_DESTDIR/var/usr/bin"
 )
 
 (
-cd "$_DESTDIR/var/usr"/bin
+cd "$_DESTDIR/var/usr/bin"
 ln -s pigz unpigz
 strip_and_sign pigz
 )

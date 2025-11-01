@@ -9,7 +9,7 @@ make DESTDIR="$_DESTDIR" install
 )
 
 (
-cd "$_DESTDIR/var/usr"/bin
+cd "$_DESTDIR/var/usr/bin"
 rm -rf ../share
 strip_and_sign bsdcat bsdcpio bsdtar bsdunzip ../lib/libarchive.13.dylib
 for prog in tar cpio unzip; do

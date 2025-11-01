@@ -13,7 +13,7 @@ cp ncal "$_DESTDIR/var/usr/bin"
 )
 
 (
-cd "$_DESTDIR/var/usr"/bin
+cd "$_DESTDIR/var/usr/bin"
 strip_and_sign ncal
 ln -s ncal cal
 )

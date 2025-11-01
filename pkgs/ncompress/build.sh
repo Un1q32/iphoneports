@@ -9,7 +9,7 @@ cp compress "$_DESTDIR/var/usr/bin"
 )
 
 (
-cd "$_DESTDIR/var/usr"/bin
+cd "$_DESTDIR/var/usr/bin"
 strip_and_sign compress
 ln -s compress uncompress
 ln -s compress zcat

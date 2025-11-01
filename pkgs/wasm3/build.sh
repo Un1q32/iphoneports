@@ -18,7 +18,7 @@ DESTDIR="$_DESTDIR" ninja -j"$_JOBS" install
 )
 
 (
-cd "$_DESTDIR/var/usr"/bin
+cd "$_DESTDIR/var/usr/bin"
 strip_and_sign wasm3
 )
 

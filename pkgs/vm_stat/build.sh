@@ -9,7 +9,7 @@ cp vm_stat "$_DESTDIR/var/usr/bin"
 )
 
 (
-cd "$_DESTDIR/var/usr"/bin
+cd "$_DESTDIR/var/usr/bin"
 strip_and_sign vm_stat
 )
 
