@@ -10,4 +10,4 @@ fi
 printf "Unpacking source...\n"
 tar -xf "$_DLCACHE/llvm-$ver.tar.gz"
 mv llvm-project-llvmorg-* "$_SRCDIR"
-printf '%s\n' "${ver%%.*}" > src/iphoneports-llvmversion.txt
+printf '%s\n' "${ver%%.*}" > "$_SRCDIR/iphoneports-llvmversion.txt"
