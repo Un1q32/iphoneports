@@ -8,11 +8,8 @@ mkdir -p "$_DESTDIR/var/usr/bin"
 cp ldid "$_DESTDIR/var/usr/bin"
 )
 
-(
-cd "$_DESTDIR/var/usr/bin"
-ln -s ldid ldid2
-strip_and_sign ldid
-)
+strip_and_sign "$_DESTDIR/var/usr/bin/ldid"
+ln -s ldid "$_DESTDIR/var/usr/bin/ldid2"
 
 installlicense "$_SRCDIR/COPYING"
 

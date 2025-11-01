@@ -10,9 +10,6 @@ mkdir -p "$_DESTDIR/var/usr/bin"
 cp vbindiff "$_DESTDIR/var/usr/bin"
 )
 
-(
-cd "$_DESTDIR/var/usr/bin"
-strip_and_sign vbindiff
-)
+strip_and_sign "$_DESTDIR/var/usr/bin/vbindiff"
 
 builddeb

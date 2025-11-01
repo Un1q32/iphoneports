@@ -8,10 +8,7 @@ mkdir -p "$_DESTDIR/var/usr/bin"
 cp hostname "$_DESTDIR/var/usr/bin"
 )
 
-(
-cd "$_DESTDIR/var/usr/bin"
-strip_and_sign hostname
-)
+strip_and_sign "$_DESTDIR/var/usr/bin/hostname"
 
 installlicense files/LICENSE
 

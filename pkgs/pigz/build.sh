@@ -8,11 +8,8 @@ mkdir -p "$_DESTDIR/var/usr/bin"
 cp pigz "$_DESTDIR/var/usr/bin"
 )
 
-(
-cd "$_DESTDIR/var/usr/bin"
-ln -s pigz unpigz
-strip_and_sign pigz
-)
+strip_and_sign "$_DESTDIR/var/usr/bin/pigz"
+ln -s pigz "$_DESTDIR/var/usr/bin/unpigz"
 
 installlicense files/LICENSE
 

@@ -8,10 +8,7 @@ mkdir -p "$_DESTDIR/var/usr/bin"
 cp time "$_DESTDIR/var/usr/bin"
 )
 
-(
-cd "$_DESTDIR/var/usr/bin"
-strip_and_sign time
-)
+strip_and_sign "$_DESTDIR/var/usr/bin/time"
 
 installlicense files/LICENSE
 

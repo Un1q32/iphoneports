@@ -8,10 +8,7 @@ mkdir -p "$_DESTDIR/var/usr/bin"
 cp sw_vers "$_DESTDIR/var/usr/bin"
 )
 
-(
-cd "$_DESTDIR/var/usr/bin"
-strip_and_sign sw_vers
-)
+strip_and_sign "$_DESTDIR/var/usr/bin/sw_vers"
 
 installlicense files/LICENSE
 

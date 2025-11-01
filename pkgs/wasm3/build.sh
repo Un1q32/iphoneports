@@ -17,10 +17,7 @@ cmake -GNinja .. \
 DESTDIR="$_DESTDIR" ninja -j"$_JOBS" install
 )
 
-(
-cd "$_DESTDIR/var/usr/bin"
-strip_and_sign wasm3
-)
+strip_and_sign "$_DESTDIR/var/usr/bin/wasm3"
 
 installlicense "$_SRCDIR/LICENSE"
 

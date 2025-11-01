@@ -8,12 +8,9 @@ mkdir -p "$_DESTDIR/var/usr/bin"
 cp compress "$_DESTDIR/var/usr/bin"
 )
 
-(
-cd "$_DESTDIR/var/usr/bin"
-strip_and_sign compress
-ln -s compress uncompress
-ln -s compress zcat
-)
+strip_and_sign "$_DESTDIR/var/usr/bin/compress"
+ln -s compress "$_DESTDIR/var/usr/bin/uncompress"
+ln -s compress "$_DESTDIR/var/usr/bin/zcat"
 
 installlicense src/UNLICENSE
 

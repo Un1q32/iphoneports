@@ -8,10 +8,7 @@ mkdir -p "$_DESTDIR/var/usr/bin"
 cp unrar "$_DESTDIR/var/usr/bin"
 )
 
-(
-cd "$_DESTDIR/var/usr/bin"
-strip_and_sign unrar
-)
+strip_and_sign "$_DESTDIR/var/usr/bin/unrar"
 
 installlicense src/license.txt
 

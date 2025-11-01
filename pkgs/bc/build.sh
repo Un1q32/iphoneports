@@ -8,10 +8,7 @@ make -j"$_JOBS"
 make DESTDIR="$_DESTDIR" install
 )
 
-(
-cd "$_DESTDIR/var/usr/bin"
-strip_and_sign bc
-)
+strip_and_sign "$_DESTDIR/var/usr/bin/bc"
 
 installlicense "$_SRCDIR/LICENSE.md"
 

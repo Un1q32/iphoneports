@@ -12,10 +12,7 @@ mkdir -p "$_DESTDIR/var/usr/bin"
 cp ed "$_DESTDIR/var/usr/bin"
 )
 
-(
-cd "$_DESTDIR/var/usr/bin"
-strip_and_sign ed
-)
+strip_and_sign "$_DESTDIR/var/usr/bin/ed"
 
 installlicense files/LICENSE
 

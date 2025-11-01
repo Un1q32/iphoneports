@@ -12,11 +12,8 @@ mkdir -p "$_DESTDIR/var/usr/bin"
 cp ncal "$_DESTDIR/var/usr/bin"
 )
 
-(
-cd "$_DESTDIR/var/usr/bin"
-strip_and_sign ncal
-ln -s ncal cal
-)
+strip_and_sign "$_DESTDIR/var/usr/bin/ncal"
+ln -s ncal "$_DESTDIR/var/usr/bin/cal"
 
 installlicense files/LICENSE
 

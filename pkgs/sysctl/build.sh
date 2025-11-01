@@ -8,10 +8,7 @@ mkdir -p "$_DESTDIR/var/usr/bin"
 cp sysctl "$_DESTDIR/var/usr/bin"
 )
 
-(
-cd "$_DESTDIR/var/usr/bin"
-strip_and_sign sysctl
-)
+strip_and_sign "$_DESTDIR/var/usr/bin/sysctl"
 
 installlicense files/LICENSE-*
 

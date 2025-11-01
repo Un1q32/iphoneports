@@ -8,10 +8,7 @@ mkdir -p "$_DESTDIR/var/usr/bin"
 cp killall "$_DESTDIR/var/usr/bin"
 )
 
-(
-cd "$_DESTDIR/var/usr/bin"
-strip_and_sign killall
-)
+strip_and_sign "$_DESTDIR/var/usr/bin/killall"
 
 installlicense files/LICENSE
 

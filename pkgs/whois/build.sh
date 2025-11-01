@@ -8,10 +8,7 @@ mkdir -p "$_DESTDIR/var/usr/bin"
 cp whois "$_DESTDIR/var/usr/bin"
 )
 
-(
-cd "$_DESTDIR/var/usr/bin"
-strip_and_sign whois
-)
+strip_and_sign "$_DESTDIR/var/usr/bin/whois"
 
 installlicense files/LICENSE
 

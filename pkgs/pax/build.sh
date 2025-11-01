@@ -12,10 +12,7 @@ mkdir -p "$_DESTDIR/var/usr/bin"
 cp pax "$_DESTDIR/var/usr/bin"
 )
 
-(
-cd "$_DESTDIR/var/usr/bin"
-strip_and_sign pax
-)
+strip_and_sign "$_DESTDIR/var/usr/bin/pax"
 
 installlicense files/LICENSE
 

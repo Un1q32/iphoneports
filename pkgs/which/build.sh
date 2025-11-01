@@ -8,10 +8,7 @@ mkdir -p "$_DESTDIR/var/usr/bin"
 cp which "$_DESTDIR/var/usr/bin"
 )
 
-(
-cd "$_DESTDIR/var/usr/bin"
-strip_and_sign which
-)
+strip_and_sign "$_DESTDIR/var/usr/bin/which"
 
 installlicense files/LICENSE
 
