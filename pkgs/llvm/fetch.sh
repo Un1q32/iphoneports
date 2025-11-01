@@ -7,6 +7,6 @@ if [ ! -f "$_DLCACHE/llvm-$ver.tar.gz" ] ||
     curl -L -# -o "$_DLCACHE/llvm-$ver.tar.gz" "https://github.com/llvm/llvm-project/archive/refs/tags/llvmorg-$ver.tar.gz" || exit 1
 fi
 printf "Unpacking source...\n"
-tar -xf "$_DLCACHE/llvm-$ver.tar.gz"
-mv llvm-project-llvmorg-* "$_SRCDIR"
+tar -C "$_TMP" -xf "$_DLCACHE/llvm-$ver.tar.gz"
+mv "$_TMP"/llvm-project-llvmorg-* "$_SRCDIR"
 printf '%s\n' "${ver%%.*}" > "$_SRCDIR/iphoneports-llvmversion.txt"
