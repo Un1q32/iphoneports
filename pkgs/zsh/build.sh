@@ -20,11 +20,11 @@ cd src
 sed -i -e '/^name=zsh\/regex/ s/link=no/link=static/' -e '/^name=zsh\/pcre/ s/link=no/link=static/' config.modules
 make prep
 make -j"$_JOBS"
-make DESTDIR="$_PKGROOT/pkg" install
+make DESTDIR="$_DESTDIR" install
 )
 
 (
-cd pkg/var/usr
+cd "$_DESTDIR/var/usr"
 rm -rf bin/zsh-5.9 share/man
 strip_and_sign bin/zsh
 mkdir -p etc/zsh

@@ -21,8 +21,8 @@ SDKROOT="$_SDK" \
     PKG_CONFIG_LIBDIR="$_SDK/var/usr/lib/pkgconfig" \
     PKG_CONFIG_SYSROOT_DIR="$_SDK" \
     cargo build --target "$_RUSTTARGET" --release --features 'pcre2' -j "$_JOBS"
-mkdir -p "$_PKGROOT/pkg/var/usr/bin"
-cp "target/$_RUSTTARGET/release/rg" "$_PKGROOT/pkg/var/usr/bin"
+mkdir -p "$_DESTDIR/var/usr/bin"
+cp "target/$_RUSTTARGET/release/rg" "$_DESTDIR/var/usr/bin"
 )
 
 strip_and_sign pkg/var/usr/bin/rg

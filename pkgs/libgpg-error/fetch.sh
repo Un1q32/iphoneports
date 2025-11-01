@@ -1,5 +1,5 @@
 #!/bin/sh
-rm -rf pkg src
+rm -rf "$_DESTDIR" "$_SRCDIR"
 ver='1.56'
 [ -z "$_DLCACHE" ] && _DLCACHE=/tmp
 if [ ! -f "$_DLCACHE/libgpg-error-$ver.tar.bz2" ] ||
@@ -9,4 +9,4 @@ if [ ! -f "$_DLCACHE/libgpg-error-$ver.tar.bz2" ] ||
 fi
 printf "Unpacking source...\n"
 tar -xf "$_DLCACHE/libgpg-error-$ver.tar.bz2"
-mv libgpg-error-* src
+mv libgpg-error-* "$_SRCDIR"

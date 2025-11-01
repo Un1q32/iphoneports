@@ -6,11 +6,11 @@ cd src
 autoreconf -fi
 ./configure --host="$_TARGET" --prefix=/var/usr
 make -j"$_JOBS"
-make DESTDIR="$_PKGROOT/pkg" install
+make DESTDIR="$_DESTDIR" install
 )
 
 (
-cd pkg/var/usr
+cd "$_DESTDIR/var/usr"
 rm -rf share
 strip_and_sign bin/lzop
 )

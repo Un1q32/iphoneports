@@ -1,5 +1,5 @@
 #!/bin/sh
-rm -rf pkg src
+rm -rf "$_DESTDIR" "$_SRCDIR"
 ver='6.3.0'
 [ -z "$_DLCACHE" ] && _DLCACHE=/tmp
 if [ ! -f "$_DLCACHE/gmp-$ver.tar.xz" ] ||
@@ -9,4 +9,4 @@ if [ ! -f "$_DLCACHE/gmp-$ver.tar.xz" ] ||
 fi
 printf "Unpacking source...\n"
 tar -xf "$_DLCACHE/gmp-$ver.tar.xz"
-mv gmp-* src
+mv gmp-* "$_SRCDIR"

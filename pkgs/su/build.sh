@@ -2,24 +2,24 @@
 . ../../files/lib.sh
 
 (
-cd src
+cd "$_SRCDIR"
 "$_TARGET-cc" -o su -Os -flto su.c -lpam
-mkdir -p "$_PKGROOT/pkg/var/usr/bin"
-cp su "$_PKGROOT/pkg/var/usr/bin"
+mkdir -p "$_DESTDIR/var/usr/bin"
+cp su "$_DESTDIR/var/usr/bin"
 )
 
 (
-cd pkg/var/usr/bin
+cd "$_DESTDIR/var/usr/bin"
 strip_and_sign su
 chmod 4755 su
 )
 
-mkdir -p pkg/usr/local/libexec/iphoneports pkg/var/usr/etc/pam.d
-mv pkg/var/usr/bin/su pkg/usr/local/libexec/iphoneports/su
-ln -s ../../../../usr/local/libexec/iphoneports/su pkg/var/usr/bin/su
-cp files/su.pam pkg/var/usr/etc/pam.d/su
+mkdir -p "$_DESTDIR/usr/local/libexec/iphoneports" "$_DESTDIR/var/usr/etc/pam.d"
+mv "$_DESTDIR/var/usr/bin/su" "$_DESTDIR/usr/local/libexec/iphoneports/su"
+ln -s ../../../../usr/local/libexec/iphoneports/su "$_DESTDIR/var/usr/bin/su"
+cp files/su.pam "$_DESTDIR/var/usr/etc/pam.d/su"
 
-mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"
-cp files/LICENSE "pkg/var/usr/share/licenses/$_PKGNAME"
+mkdir -p "$_DESTDIR/var/usr/share/licenses/$_PKGNAME"
+cp files/LICENSE "$_DESTDIR/var/usr/share/licenses/$_PKGNAME"
 
 builddeb

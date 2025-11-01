@@ -40,11 +40,11 @@ fi
     PKG_CONFIG_LIBDIR="$_SDK/var/usr/lib/pkgconfig" \
     $posix_spawn \
     $remote_debug
-make DESTDIR="$_PKGROOT/pkg" install -j"$_JOBS"
+make DESTDIR="$_DESTDIR" install -j"$_JOBS"
 )
 
 (
-cd pkg/var/usr
+cd "$_DESTDIR/var/usr"
 rm -rf share lib/python*/test lib/python*/idlelib/idle_test
 strip_and_sign "bin/$(readlink bin/python3)" lib/*.dylib lib/python3.*/lib-dynload/*.so
 )

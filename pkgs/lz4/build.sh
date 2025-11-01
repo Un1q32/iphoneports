@@ -3,11 +3,11 @@
 
 (
 cd src
-make CC="$_TARGET-cc" RANLIB="$_TARGET-ranlib" PREFIX=/var/usr DESTDIR="$_PKGROOT/pkg" BUILD_STATIC=no TARGET_OS=Darwin install -j"$_JOBS"
+make CC="$_TARGET-cc" RANLIB="$_TARGET-ranlib" PREFIX=/var/usr DESTDIR="$_DESTDIR" BUILD_STATIC=no TARGET_OS=Darwin install -j"$_JOBS"
 )
 
 (
-cd pkg/var/usr
+cd "$_DESTDIR/var/usr"
 rm -rf share
 strip_and_sign bin/lz4 lib/liblz4.1.*.dylib
 )

@@ -13,11 +13,11 @@ cmake -GNinja .. \
     -DCMAKE_FIND_ROOT_PATH_MODE_INCLUDE=ONLY \
     -DCMAKE_FIND_ROOT_PATH="$_SDK/var/usr" \
     -DENABLE_FAILMALLOC=OFF
-DESTDIR="$_PKGROOT/pkg" ninja -j"$_JOBS" install
+DESTDIR="$_DESTDIR" ninja -j"$_JOBS" install
 )
 
 (
-cd pkg/var/usr
+cd "$_DESTDIR/var/usr"
 rm -rf share
 mv lib/libnghttp2.14.*.dylib lib/libnghttp2.14.dylib
 strip_and_sign lib/libnghttp2.14.dylib

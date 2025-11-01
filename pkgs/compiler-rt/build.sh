@@ -49,7 +49,7 @@ wait
 "$_TARGET-libtool" -static -o libclang_rt.osx.a ./*.o 2>/dev/null
 rm ./*.o
 
-cp ./*.a "$_PKGROOT/pkg/var/usr/lib/clang/$llvmver/lib/darwin"
+cp ./*.a "$_DESTDIR/var/usr/lib/clang/$llvmver/lib/darwin"
 )
 
 mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"

@@ -25,11 +25,11 @@ fi
     gl_cv_onwards_func_futimens=yes \
     $posix_spawn
 make -j"$_JOBS"
-make DESTDIR="$_PKGROOT/pkg" install
+make DESTDIR="$_DESTDIR" install
 )
 
 (
-cd pkg/var/usr
+cd "$_DESTDIR/var/usr"
 rm -rf share bin/wget2_noinstall
 strip_and_sign bin/wget2 lib/libwget.3.dylib
 )

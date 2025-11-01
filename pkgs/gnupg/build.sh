@@ -15,11 +15,11 @@ cd src
     PKG_CONFIG_SYSROOT_DIR="$_SDK/var/usr/lib/pkgconfig" \
     GPGRT_CONFIG="$_SDK/var/usr/bin/gpgrt-config"
 make -j"$_JOBS"
-make DESTDIR="$_PKGROOT/pkg" install
+make DESTDIR="$_DESTDIR" install
 )
 
 (
-cd pkg/var/usr
+cd "$_DESTDIR/var/usr"
 rm -rf share/doc
 strip_and_sign bin/*
 for bin in libexec/*; do

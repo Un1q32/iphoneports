@@ -10,11 +10,11 @@ else
 fi
 ./configure --host="$_TARGET" --prefix=/var/usr --sysconfdir=/var/usr/etc/ssh --with-privsep-user="$privsepuser" --with-sandbox=no
 make -j"$_JOBS"
-make DESTDIR="$_PKGROOT/pkg" install-nokeys STRIP_OPT=
+make DESTDIR="$_DESTDIR" install-nokeys STRIP_OPT=
 )
 
 (
-cd pkg/var/usr
+cd "$_DESTDIR/var/usr"
 rm -rf share
 strip_and_sign bin/* sbin/* libexec/*
 chmod 4711 libexec/ssh-keysign

@@ -9,11 +9,11 @@ case $_CPU in
 esac
 ./configure --host="$_TARGET" --prefix=/var/usr $y2038
 make -j"$_JOBS"
-make DESTDIR="$_PKGROOT/pkg" install
+make DESTDIR="$_DESTDIR" install
 )
 
 (
-cd pkg/var/usr
+cd "$_DESTDIR/var/usr"
 rm -rf share var
 strip_and_sign bin/find bin/xargs bin/locate libexec/frcode
 )

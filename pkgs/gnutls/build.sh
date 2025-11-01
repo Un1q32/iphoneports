@@ -16,11 +16,11 @@ cd src
     ac_cv_func_malloc_0_nonnull=yes \
     ac_cv_func_realloc_0_nonnull=yes
 make -j"$_JOBS"
-make DESTDIR="$_PKGROOT/pkg" install
+make DESTDIR="$_DESTDIR" install
 )
 
 (
-cd pkg/var/usr
+cd "$_DESTDIR/var/usr"
 strip_and_sign bin/*
 for lib in lib/*.dylib; do
     [ -h "$lib" ] || strip_and_sign "$lib"

@@ -1,5 +1,5 @@
 #!/bin/sh
-rm -rf pkg src
+rm -rf "$_DESTDIR" "$_SRCDIR"
 ver='3.8.2'
 [ -z "$_DLCACHE" ] && _DLCACHE=/tmp
 if [ ! -f "$_DLCACHE/libarchive-$ver.tar.xz" ] ||
@@ -9,4 +9,4 @@ if [ ! -f "$_DLCACHE/libarchive-$ver.tar.xz" ] ||
 fi
 printf "Unpacking source...\n"
 tar -xf "$_DLCACHE/libarchive-$ver.tar.xz"
-mv libarchive-* src
+mv libarchive-* "$_SRCDIR"

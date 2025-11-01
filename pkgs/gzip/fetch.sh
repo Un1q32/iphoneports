@@ -1,5 +1,5 @@
 #!/bin/sh
-rm -rf pkg src
+rm -rf "$_DESTDIR" "$_SRCDIR"
 printf "Downloading source...\n"
 mkdir src
 for src in gzip.c unbzip2.c zuncompress.c unpack.c unxz.c unlz.c gzexe zdiff zforce zmore znew; do

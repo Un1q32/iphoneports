@@ -30,11 +30,11 @@ autoreconf -fi
     CPPFLAGS='-Wno-incompatible-function-pointer-types' \
     PERL=/usr/bin/perl
 make -j"$_JOBS"
-make DESTDIR="$_PKGROOT/pkg" install
+make DESTDIR="$_DESTDIR" install
 )
 
 (
-cd pkg/var/usr
+cd "$_DESTDIR/var/usr"
 rm -rf share/man share/doc share/perl5 share/polkit-1 libexec/dpkg/methods ../lib/dpkg/methods
 grep -Erl '#! ?/usr/bin/perl' bin | while IFS= read -r file; do
     rm -f "$file"

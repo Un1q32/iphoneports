@@ -8,12 +8,12 @@ for src in *.c; do
 done
 wait
 "$_TARGET-cc" -o pax -Os -flto ./*.o
-mkdir -p "$_PKGROOT/pkg/var/usr/bin"
-cp pax "$_PKGROOT/pkg/var/usr/bin"
+mkdir -p "$_DESTDIR/var/usr/bin"
+cp pax "$_DESTDIR/var/usr/bin"
 )
 
 (
-cd pkg/var/usr/bin
+cd "$_DESTDIR/var/usr"/bin
 strip_and_sign pax
 )
 

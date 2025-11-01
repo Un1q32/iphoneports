@@ -5,11 +5,11 @@
 cd src
 ./autogen.sh
 ./configure --host="$_TARGET" --prefix=/var/usr --disable-static CPPFLAGS=-Wno-incompatible-function-pointer-types
-make install DESTDIR="$_PKGROOT/pkg" -j"$_JOBS"
+make install DESTDIR="$_DESTDIR" -j"$_JOBS"
 )
 
 (
-cd pkg/var/usr/lib
+cd "$_DESTDIR/var/usr"/lib
 strip_and_sign libuv.1.dylib
 )
 

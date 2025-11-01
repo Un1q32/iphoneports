@@ -1,5 +1,5 @@
 #!/bin/sh
-rm -rf pkg src
+rm -rf "$_DESTDIR" "$_SRCDIR"
 ver='21.1.4'
 [ -z "$_DLCACHE" ] && _DLCACHE=/tmp
 if [ ! -f "$_DLCACHE/llvm-$ver.tar.gz" ] ||
@@ -9,5 +9,5 @@ if [ ! -f "$_DLCACHE/llvm-$ver.tar.gz" ] ||
 fi
 printf "Unpacking source...\n"
 tar -xf "$_DLCACHE/llvm-$ver.tar.gz"
-mv llvm-project-llvmorg-* src
+mv llvm-project-llvmorg-* "$_SRCDIR"
 printf '%s\n' "${ver%%.*}" > src/iphoneports-llvmversion.txt

@@ -1,5 +1,5 @@
 #!/bin/sh
-rm -rf pkg src
+rm -rf "$_DESTDIR" "$_SRCDIR"
 ver='3.14.0'
 [ -z "$_DLCACHE" ] && _DLCACHE=/tmp
 if [ ! -f "$_DLCACHE/python-$ver.tar.xz" ] ||
@@ -9,4 +9,4 @@ if [ ! -f "$_DLCACHE/python-$ver.tar.xz" ] ||
 fi
 printf "Unpacking source...\n"
 tar -xf "$_DLCACHE/python-$ver.tar.xz"
-mv Python-* src
+mv Python-* "$_SRCDIR"

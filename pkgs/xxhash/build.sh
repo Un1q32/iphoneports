@@ -3,11 +3,11 @@
 
 (
 cd src
-make install UNAME=Darwin CC="$_TARGET-cc" AR="$_TARGET-ar" PREFIX=/var/usr DESTDIR="$_PKGROOT/pkg" -j"$_JOBS"
+make install UNAME=Darwin CC="$_TARGET-cc" AR="$_TARGET-ar" PREFIX=/var/usr DESTDIR="$_DESTDIR" -j"$_JOBS"
 )
 
 (
-cd pkg/var/usr
+cd "$_DESTDIR/var/usr"
 rm -rf share lib/libxxhash.a
 strip_and_sign bin/xxhsum lib/libxxhash.0.*.dylib
 )

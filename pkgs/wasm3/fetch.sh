@@ -1,5 +1,5 @@
 #!/bin/sh
-rm -rf pkg src
+rm -rf "$_DESTDIR" "$_SRCDIR"
 ver='79d412ea5fcf92f0efe658d52827a0e0a96ff442'
 [ -z "$_DLCACHE" ] && _DLCACHE=/tmp
 if [ ! -f "$_DLCACHE/wasm3-$ver.tar.gz" ] ||
@@ -9,4 +9,4 @@ if [ ! -f "$_DLCACHE/wasm3-$ver.tar.gz" ] ||
 fi
 printf "Unpacking source...\n"
 tar -xf "$_DLCACHE/wasm3-$ver.tar.gz"
-mv wasm3-* src
+mv wasm3-* "$_SRCDIR"

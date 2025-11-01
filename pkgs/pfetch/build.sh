@@ -1,9 +1,10 @@
 #!/bin/sh
 . ../../files/lib.sh
-mkdir -p pkg/var/usr/bin
-cp src/pfetch pkg/var/usr/bin
 
-mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"
-cp src/LICENSE "pkg/var/usr/share/licenses/$_PKGNAME"
+mkdir -p "$_DESTDIR/var/usr/bin"
+cp "$_SRCDIR/pfetch" "$_DESTDIR/var/usr/bin"
+
+mkdir -p "$_DESTDIR/var/usr/share/licenses/$_PKGNAME"
+cp "$_SRCDIR/LICENSE" "$_DESTDIR/var/usr/share/licenses/$_PKGNAME"
 
 builddeb

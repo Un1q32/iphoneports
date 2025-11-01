@@ -24,9 +24,9 @@ strip_and_sign() {
 }
 
 builddeb() {
-    cp -r DEBIAN pkg
-    sed -e "s|@DPKGARCH@|$_DPKGARCH|" DEBIAN/control > pkg/DEBIAN/control
-    dpkg-deb -b --root-owner-group -Zgzip pkg "$_PKGNAME.deb"
+    cp -r DEBIAN "$_DESTDIR"
+    sed -e "s|@DPKGARCH@|$_DPKGARCH|" DEBIAN/control > "$_DESTDIR/DEBIAN/control"
+    dpkg-deb -b --root-owner-group -Zgzip "$_DESTDIR" "$_PKGNAME.deb"
 }
 
 make() {

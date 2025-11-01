@@ -4,12 +4,12 @@
 (
 cd src
 "$_TARGET-cc" -Os -flto killall.c -o killall -D'__FBSDID(x)='
-mkdir -p "$_PKGROOT/pkg/var/usr/bin"
-cp killall "$_PKGROOT/pkg/var/usr/bin"
+mkdir -p "$_DESTDIR/var/usr/bin"
+cp killall "$_DESTDIR/var/usr/bin"
 )
 
 (
-cd pkg/var/usr/bin
+cd "$_DESTDIR/var/usr"/bin
 strip_and_sign killall
 )
 

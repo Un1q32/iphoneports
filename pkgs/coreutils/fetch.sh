@@ -1,5 +1,5 @@
 #!/bin/sh
-rm -rf pkg src
+rm -rf "$_DESTDIR" "$_SRCDIR"
 ver='9.8'
 [ -z "$_DLCACHE" ] && _DLCACHE=/tmp
 if [ ! -f "$_DLCACHE/coreutils-$ver.tar.xz" ] ||
@@ -9,4 +9,4 @@ if [ ! -f "$_DLCACHE/coreutils-$ver.tar.xz" ] ||
 fi
 printf "Unpacking source...\n"
 tar -xf "$_DLCACHE/coreutils-$ver.tar.xz"
-mv coreutils-* src
+mv coreutils-* "$_SRCDIR"

@@ -21,11 +21,11 @@ fi
     $ipv6 \
     PKG_CONFIG_LIBDIR="$_SDK/var/usr/lib/pkgconfig"
 make -j"$_JOBS"
-make DESTDIR="$_PKGROOT/pkg" install
+make DESTDIR="$_DESTDIR" install
 )
 
 (
-cd pkg/var/usr
+cd "$_DESTDIR/var/usr"
 rm -rf share/man
 strip_and_sign bin/curl lib/libcurl.4.dylib
 )

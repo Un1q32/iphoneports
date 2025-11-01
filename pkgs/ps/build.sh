@@ -14,12 +14,12 @@ for src in ps.c print.c nlist.c tasks.c keyword.c; do
 done
 wait
 "$_TARGET-cc" -o ps -Os -flto ./*.o
-mkdir -p "$_PKGROOT/pkg/var/usr/bin"
-cp ps "$_PKGROOT/pkg/var/usr/bin"
+mkdir -p "$_DESTDIR/var/usr/bin"
+cp ps "$_DESTDIR/var/usr/bin"
 )
 
 (
-cd pkg/var/usr/bin
+cd "$_DESTDIR/var/usr"/bin
 _ALWAYSSIGN=1
 if [ "$_SUBSYSTEM" = "macos" ]; then
     _ENTITLEMENTS="$_PKGROOT/files/macos-entitlements.xml"

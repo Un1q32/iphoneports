@@ -1,5 +1,5 @@
 #!/bin/sh
-rm -rf pkg src
+rm -rf "$_DESTDIR" "$_SRCDIR"
 ver='1.13.1'
 [ -z "$_DLCACHE" ] && _DLCACHE=/tmp
 if [ ! -f "$_DLCACHE/ninja-$ver.tar.gz" ] ||
@@ -9,4 +9,4 @@ if [ ! -f "$_DLCACHE/ninja-$ver.tar.gz" ] ||
 fi
 printf "Unpacking source...\n"
 tar -xf "$_DLCACHE/ninja-$ver.tar.gz"
-mv ninja-* src
+mv ninja-* "$_SRCDIR"

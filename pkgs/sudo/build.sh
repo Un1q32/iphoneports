@@ -17,11 +17,11 @@ cd src
     --enable-openssl \
     ax_cv_check_cflags___static_libgcc=no
 make -j"$_JOBS"
-fakeroot make DESTDIR="$_PKGROOT/pkg" install
+fakeroot make DESTDIR="$_DESTDIR" install
 )
 
 (
-cd pkg/var/usr
+cd "$_DESTDIR/var/usr"
 rm -rf share
 strip_and_sign bin/sudo bin/cvtsudoers bin/sudoreplay sbin/sudo_logsrvd sbin/sudo_sendlog sbin/visudo libexec/sudo/libsudo_util.0.dylib libexec/sudo/*.so
 chmod 4755 bin/sudo

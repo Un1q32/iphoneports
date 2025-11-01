@@ -16,11 +16,11 @@ cmake -GNinja ../lld \
     -DLLVM_INCLUDE_TESTS=OFF \
     -DLLVM_TABLEGEN_EXE="$(command -v llvm-tblgen)" \
     -DLLVM_ENABLE_LTO=Thin
-DESTDIR="$_PKGROOT/pkg" ninja -j"$_JOBS" install
+DESTDIR="$_DESTDIR" ninja -j"$_JOBS" install
 )
 
 (
-cd pkg/var/usr
+cd "$_DESTDIR/var/usr"
 rm -rf include lib
 strip_and_sign bin/lld
 for link in ld.lld ld64.lld lld-link wasm-ld; do

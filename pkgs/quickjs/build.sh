@@ -35,14 +35,14 @@ make \
     -current_version 1
 "$_TARGET-cc" -O3 -flto -o qjs .obj/repl.o .obj/qjs.o .obj/qjscalc.o libquickjs.dylib
 "$_TARGET-cc" -O3 -flto -o qjsc .obj/qjsc.o libquickjs.dylib
-mkdir -p "$_PKGROOT/pkg/var/usr/bin" "$_PKGROOT/pkg/var/usr/lib/quickjs" "$_PKGROOT/pkg/var/usr/include/quickjs"
-cp qjs qjsc "$_PKGROOT/pkg/var/usr/bin"
-cp libquickjs.dylib "$_PKGROOT/pkg/var/usr/lib/quickjs"
-cp quickjs.h quickjs-libc.h "$_PKGROOT/pkg/var/usr/include/quickjs"
+mkdir -p "$_DESTDIR/var/usr/bin" "$_DESTDIR/var/usr/lib/quickjs" "$_DESTDIR/var/usr/include/quickjs"
+cp qjs qjsc "$_DESTDIR/var/usr/bin"
+cp libquickjs.dylib "$_DESTDIR/var/usr/lib/quickjs"
+cp quickjs.h quickjs-libc.h "$_DESTDIR/var/usr/include/quickjs"
 )
 
 (
-cd pkg/var/usr
+cd "$_DESTDIR/var/usr"
 strip_and_sign bin/qjs bin/qjsc lib/quickjs/libquickjs.dylib
 )
 

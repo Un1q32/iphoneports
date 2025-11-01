@@ -1,5 +1,5 @@
 #!/bin/sh
-rm -rf pkg src
+rm -rf "$_DESTDIR" "$_SRCDIR"
 ver='ffc0710084719443b27fddad8d8c4fb9c1046b50'
 [ -z "$_DLCACHE" ] && _DLCACHE=/tmp
 if [ ! -f "$_DLCACHE/nextvi-$ver.tar.gz" ] ||
@@ -9,4 +9,4 @@ if [ ! -f "$_DLCACHE/nextvi-$ver.tar.gz" ] ||
 fi
 printf "Unpacking source...\n"
 tar -xf "$_DLCACHE/nextvi-$ver.tar.gz"
-mv nextvi-* src
+mv nextvi-* "$_SRCDIR"

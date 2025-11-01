@@ -32,11 +32,11 @@ esac
 
 ./Configure "$sys" $noasm --prefix=/var/usr --openssldir=/var/usr/etc/ssl CROSS_COMPILE="$_TARGET"-
 make CNF_CFLAGS= PROGRAMS=apps/openssl -j"$_JOBS"
-make CNF_CFLAGS= PROGRAMS=apps/openssl DESTDIR="$_PKGROOT/pkg" install_sw install_ssldirs
+make CNF_CFLAGS= PROGRAMS=apps/openssl DESTDIR="$_DESTDIR" install_sw install_ssldirs
 )
 
 (
-cd pkg/var/usr
+cd "$_DESTDIR/var/usr"
 rm -rf bin/c_rehash lib/*.a etc/ssl/misc
 for bin in bin/* lib/*.dylib lib/*/*.dylib; do
     [ -h "$bin" ] || strip_and_sign "$bin"

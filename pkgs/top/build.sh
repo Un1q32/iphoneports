@@ -32,12 +32,12 @@ fi
     -framework IOKit \
     -framework CoreFoundation \
     $libutil
-mkdir -p "$_PKGROOT/pkg/var/usr/bin"
-cp top "$_PKGROOT/pkg/var/usr/bin"
+mkdir -p "$_DESTDIR/var/usr/bin"
+cp top "$_DESTDIR/var/usr/bin"
 )
 
 (
-cd pkg/var/usr/bin
+cd "$_DESTDIR/var/usr"/bin
 strip_and_sign top
 chmod 4755 top
 )

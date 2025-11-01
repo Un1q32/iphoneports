@@ -14,7 +14,7 @@ cmake -GNinja .. \
     -DCMAKE_SKIP_RPATH=ON \
     -DCMAKE_INSTALL_NAME_DIR=/var/usr/lib \
     -DBROTLI_DISABLE_TESTS=ON
-DESTDIR="$_PKGROOT/pkg" ninja -j"$_JOBS" install
+DESTDIR="$_DESTDIR" ninja -j"$_JOBS" install
 )
 
 for bin in pkg/var/usr/bin/brotli pkg/var/usr/lib/*.dylib; do

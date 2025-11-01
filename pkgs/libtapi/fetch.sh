@@ -1,5 +1,5 @@
 #!/bin/sh
-rm -rf pkg src
+rm -rf "$_DESTDIR" "$_SRCDIR"
 ver='aa37c11ad1a817248c9d1578ac99e133875b4eb5'
 [ -z "$_DLCACHE" ] && _DLCACHE=/tmp
 if [ ! -f "$_DLCACHE/libtapi-$ver.tar.gz" ] ||
@@ -9,4 +9,4 @@ if [ ! -f "$_DLCACHE/libtapi-$ver.tar.gz" ] ||
 fi
 printf "Unpacking source...\n"
 tar -xf "$_DLCACHE/libtapi-$ver.tar.gz"
-mv apple-libtapi-* src
+mv apple-libtapi-* "$_SRCDIR"

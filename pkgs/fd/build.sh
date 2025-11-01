@@ -11,8 +11,8 @@ fi
 (
 cd src
 SDKROOT="$_SDK" cargo build --target "$_RUSTTARGET" --release -j "$_JOBS"
-mkdir -p "$_PKGROOT/pkg/var/usr/bin"
-cp "target/$_RUSTTARGET/release/fd" "$_PKGROOT/pkg/var/usr/bin"
+mkdir -p "$_DESTDIR/var/usr/bin"
+cp "target/$_RUSTTARGET/release/fd" "$_DESTDIR/var/usr/bin"
 )
 
 strip_and_sign pkg/var/usr/bin/fd

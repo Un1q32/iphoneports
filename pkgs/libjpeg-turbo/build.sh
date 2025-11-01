@@ -14,11 +14,11 @@ cmake -GNinja .. \
     -DCMAKE_SYSTEM_PROCESSOR="$_CPU" \
     -DCMAKE_SKIP_RPATH=ON \
     -DENABLE_STATIC=OFF
-DESTDIR="$_PKGROOT/pkg" ninja -j"$_JOBS" install
+DESTDIR="$_DESTDIR" ninja -j"$_JOBS" install
 )
 
 (
-cd pkg/var/usr
+cd "$_DESTDIR/var/usr"
 rm -rf share
 mv lib/libjpeg.62.*.dylib lib/libjpeg.62.dylib
 mv lib/libturbojpeg.0.*.dylib lib/libturbojpeg.0.dylib

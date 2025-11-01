@@ -1,5 +1,5 @@
 #!/bin/sh
-rm -rf pkg src
+rm -rf "$_DESTDIR" "$_SRCDIR"
 printf "Downloading source...\n"
 mkdir src
 curl -L -s -o src/login.c https://raw.githubusercontent.com/apple-oss-distributions/system_cmds/system_cmds-433/login.tproj/login.c &

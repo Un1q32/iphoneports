@@ -3,11 +3,11 @@
 
 (
 cd src
-make CC="$_TARGET-cc" STRIP=true CPP="$_TARGET-cc -E" DESTDIR="$_PKGROOT/pkg" prefix=/var/usr ENABLE_NLS= install -j"$_JOBS"
+make CC="$_TARGET-cc" STRIP=true CPP="$_TARGET-cc -E" DESTDIR="$_DESTDIR" prefix=/var/usr ENABLE_NLS= install -j"$_JOBS"
 )
 
 (
-cd pkg/var/usr
+cd "$_DESTDIR/var/usr"
 rm -rf share
 strip_and_sign bin/dos2unix bin/unix2dos
 )

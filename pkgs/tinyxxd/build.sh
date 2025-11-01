@@ -9,7 +9,7 @@ cp tinyxxd "$_PKGROOT"/pkg/var/usr/bin
 )
 
 (
-cd pkg/var/usr/bin
+cd "$_DESTDIR/var/usr"/bin
 strip_and_sign tinyxxd
 ln -s tinyxxd xxd
 )

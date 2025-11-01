@@ -4,12 +4,12 @@
 (
 cd src
 make CXX="$_TARGET-c++" STRIP=true CXXFLAGS="-O3 -flto -Wno-dangling-else -Wno-switch" LIBFLAGS= -j"$_JOBS"
-mkdir -p "$_PKGROOT/pkg/var/usr/bin"
-cp unrar "$_PKGROOT/pkg/var/usr/bin"
+mkdir -p "$_DESTDIR/var/usr/bin"
+cp unrar "$_DESTDIR/var/usr/bin"
 )
 
 (
-cd pkg/var/usr/bin
+cd "$_DESTDIR/var/usr"/bin
 strip_and_sign unrar
 )
 

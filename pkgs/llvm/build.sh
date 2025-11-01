@@ -75,11 +75,11 @@ cmake -GNinja ../llvm \
     -DLLVM_ENABLE_LIBCXX=ON \
     -DLLVM_DISTRIBUTION_COMPONENTS="$(_get_distribution_components)"
 
-DESTDIR="$_PKGROOT/pkg" ninja -j"$_JOBS" install-distribution
+DESTDIR="$_DESTDIR" ninja -j"$_JOBS" install-distribution
 )
 
 (
-cd pkg/var/usr
+cd "$_DESTDIR/var/usr"
 rm -rf share
 for file in bin/* lib/*.dylib; do
     [ -h "$file" ] || strip_and_sign "$file"

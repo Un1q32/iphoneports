@@ -18,11 +18,11 @@ unset TERMINFO
     --enable-pc-files \
     --with-pkg-config-libdir=/var/usr/lib/pkgconfig
 make -j"$_JOBS"
-make DESTDIR="$_PKGROOT/pkg" install -j"$_JOBS"
+make DESTDIR="$_DESTDIR" install -j"$_JOBS"
 )
 
 (
-cd pkg/var/usr
+cd "$_DESTDIR/var/usr"
 strip_and_sign \
     bin/tabs \
     bin/tput \

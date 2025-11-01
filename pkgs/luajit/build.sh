@@ -9,12 +9,12 @@ if [ "$_SUBSYSTEM" = "ios" ]; then
 else
     sys='Darwin'
 fi
-make amalg TARGET_SYS="$sys" HOST_CC="clang ${arg:--m32}" CROSS="$_TARGET-" BUILDMODE=dynamic CCOPT=-O3 PREFIX=/var/usr DESTDIR="$_PKGROOT/pkg" MACOSX_DEPLOYMENT_TARGET="$_MACVER" -j"$_JOBS"
-make install PREFIX=/var/usr DESTDIR="$_PKGROOT/pkg" TARGET_SYS=Darwin
+make amalg TARGET_SYS="$sys" HOST_CC="clang ${arg:--m32}" CROSS="$_TARGET-" BUILDMODE=dynamic CCOPT=-O3 PREFIX=/var/usr DESTDIR="$_DESTDIR" MACOSX_DEPLOYMENT_TARGET="$_MACVER" -j"$_JOBS"
+make install PREFIX=/var/usr DESTDIR="$_DESTDIR" TARGET_SYS=Darwin
 )
 
 (
-cd pkg/var/usr
+cd "$_DESTDIR/var/usr"
 rm -rf share/man
 ver="$(echo bin/luajit-2.1.*)"
 ver="${ver#bin/luajit-2.1.}"

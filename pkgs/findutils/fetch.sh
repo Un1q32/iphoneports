@@ -1,5 +1,5 @@
 #!/bin/sh
-rm -rf pkg src
+rm -rf "$_DESTDIR" "$_SRCDIR"
 ver='4.10.0'
 [ -z "$_DLCACHE" ] && _DLCACHE=/tmp
 if [ ! -f "$_DLCACHE/findutils-$ver.tar.xz" ] ||
@@ -9,4 +9,4 @@ if [ ! -f "$_DLCACHE/findutils-$ver.tar.xz" ] ||
 fi
 printf "Unpacking source...\n"
 tar -xf "$_DLCACHE/findutils-$ver.tar.xz"
-mv findutils-* src
+mv findutils-* "$_SRCDIR"

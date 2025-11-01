@@ -4,11 +4,11 @@
 (
 cd src
 ./configure --prefix=/var/usr CXX="$_TARGET-c++"
-make DESTDIR="$_PKGROOT/pkg" install -j"$_JOBS"
+make DESTDIR="$_DESTDIR" install -j"$_JOBS"
 )
 
 (
-cd pkg/var/usr
+cd "$_DESTDIR/var/usr"
 rm -rf share
 strip_and_sign bin/lzip
 )

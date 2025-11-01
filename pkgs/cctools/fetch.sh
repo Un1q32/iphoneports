@@ -1,5 +1,5 @@
 #!/bin/sh
-rm -rf pkg src
+rm -rf "$_DESTDIR" "$_SRCDIR"
 ver='961fe37b068bd635aee1ad20d4ab1d410216c2e5'
 [ -z "$_DLCACHE" ] && _DLCACHE=/tmp
 if [ ! -f "$_DLCACHE/cctools-$ver.tar.gz" ] ||
@@ -9,4 +9,4 @@ if [ ! -f "$_DLCACHE/cctools-$ver.tar.gz" ] ||
 fi
 printf "Unpacking source...\n"
 tar -xf "$_DLCACHE/cctools-$ver.tar.gz"
-mv cctools-port-* src
+mv cctools-port-* "$_SRCDIR"

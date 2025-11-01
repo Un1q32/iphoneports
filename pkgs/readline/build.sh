@@ -5,11 +5,11 @@
 cd src
 ./configure --host="$_TARGET" --prefix=/var/usr --disable-install-examples --disable-static
 make -j"$_JOBS"
-make DESTDIR="$_PKGROOT/pkg" install
+make DESTDIR="$_DESTDIR" install
 )
 
 (
-cd pkg/var/usr
+cd "$_DESTDIR/var/usr"
 rm -rf share bin
 strip_and_sign lib/libhistory.8.*.dylib lib/libreadline.8.*.dylib
 )

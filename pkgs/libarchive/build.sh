@@ -5,11 +5,11 @@
 cd src
 ./configure --host="$_TARGET" --prefix=/var/usr --disable-static PKG_CONFIG_LIBDIR="$_SDK/var/usr/lib/pkgconfig"
 make -j"$_JOBS"
-make DESTDIR="$_PKGROOT/pkg" install
+make DESTDIR="$_DESTDIR" install
 )
 
 (
-cd pkg/var/usr/bin
+cd "$_DESTDIR/var/usr"/bin
 rm -rf ../share
 strip_and_sign bsdcat bsdcpio bsdtar bsdunzip ../lib/libarchive.13.dylib
 for prog in tar cpio unzip; do

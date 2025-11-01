@@ -20,11 +20,11 @@ cmake -GNinja ../llvm \
     -DTAPI_REPOSITORY_STRING="$tapiversion" \
     -DCROSS_TOOLCHAIN_FLAGS_NATIVE='-DLLVM_INCLUDE_TESTS=OFF' \
     -DLLVM_ENABLE_LIBCXX=ON
-DESTDIR="$_PKGROOT/pkg" ninja -j"$_JOBS" install-libtapi install-tapi-headers
+DESTDIR="$_DESTDIR" ninja -j"$_JOBS" install-libtapi install-tapi-headers
 )
 
 (
-cd pkg/var/usr/lib
+cd "$_DESTDIR/var/usr"/lib
 install_name_tool -id /var/usr/lib/libtapi.dylib libtapi.dylib
 strip_and_sign libtapi.dylib
 )

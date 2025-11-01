@@ -3,11 +3,11 @@
 
 (
 cd src
-make install CXX="$_TARGET-c++" PREFIX=/var/usr FILESDIR=/var/usr/share/cppcheck DESTDIR="$_PKGROOT/pkg" HAVE_RULES=yes uname_S=Darwin -j"$_JOBS" PCRE_CONFIG="$_SDK/var/usr/bin/pcre-config"
+make install CXX="$_TARGET-c++" PREFIX=/var/usr FILESDIR=/var/usr/share/cppcheck DESTDIR="$_DESTDIR" HAVE_RULES=yes uname_S=Darwin -j"$_JOBS" PCRE_CONFIG="$_SDK/var/usr/bin/pcre-config"
 )
 
 (
-cd pkg/var/usr/bin
+cd "$_DESTDIR/var/usr"/bin
 strip_and_sign cppcheck
 )
 

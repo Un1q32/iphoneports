@@ -25,11 +25,11 @@ fi
     vim_cv_uname_output=generic \
     $ipv6 \
     PKG_CONFIG_LIBDIR="$_SDK/var/usr/lib/pkgconfig"
-make install DESTDIR="$_PKGROOT/pkg" -j"$_JOBS"
+make install DESTDIR="$_DESTDIR" -j"$_JOBS"
 )
 
 (
-cd pkg/var/usr
+cd "$_DESTDIR/var/usr"
 rm -rf bin/xxd share/applications share/icons share/man
 strip_and_sign bin/vim
 )

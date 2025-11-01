@@ -52,11 +52,11 @@ meson setup .. --cross-file="$_PKGROOT/src/iphoneports.meson" --prefix=/var/usr 
 if { [ "$_SUBSYSTEM" = "ios" ] && [ "$_TRUEOSVER" -lt 20000 ]; } || { [ "$_SUBSYSTEM" = "macos" ] && [ "$_TRUEOSVER" -lt 1050 ]; }; then
     sed -i 's/-Wl,-rpath[^[:space:]]*//g' build.ninja
 fi
-DESTDIR="$_PKGROOT/pkg" ninja -j"$_JOBS" install
+DESTDIR="$_DESTDIR" ninja -j"$_JOBS" install
 )
 
 (
-cd pkg/var/usr
+cd "$_DESTDIR/var/usr"
 strip_and_sign bin/dav1d lib/libdav1d.7.dylib
 )
 

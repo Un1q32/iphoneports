@@ -28,18 +28,18 @@ cd src
     -Iextras/console \
     -Iextras/logging \
     -Iextras/module-duktape
-mkdir -p "$_PKGROOT/pkg/var/usr/bin" "$_PKGROOT/pkg/var/usr/lib/pkgconfig" "$_PKGROOT/pkg/var/usr/include"
+mkdir -p "$_DESTDIR/var/usr/bin" "$_DESTDIR/var/usr/lib/pkgconfig" "$_DESTDIR/var/usr/include"
 version="$(grep 'DUK_VERSION_FORMATTED =' Makefile.sharedlibrary)"
 version="${version#*= }"
-sed -e 's|@PREFIX@|/var/usr|' -e 's|@LIBDIR@|/lib|' -e "s|@VERSION@|$version|" duktape.pc.in > "$_PKGROOT/pkg/var/usr/lib/pkgconfig/duktape.pc"
-cp src/*.h "$_PKGROOT/pkg/var/usr/include"
-cp libduktape.dylib "$_PKGROOT/pkg/var/usr/lib/libduktape.207.dylib"
-ln -s libduktape.207.dylib "$_PKGROOT/pkg/var/usr/lib/libduktape.dylib"
-cp duk "$_PKGROOT/pkg/var/usr/bin"
+sed -e 's|@PREFIX@|/var/usr|' -e 's|@LIBDIR@|/lib|' -e "s|@VERSION@|$version|" duktape.pc.in > "$_DESTDIR/var/usr/lib/pkgconfig/duktape.pc"
+cp src/*.h "$_DESTDIR/var/usr/include"
+cp libduktape.dylib "$_DESTDIR/var/usr/lib/libduktape.207.dylib"
+ln -s libduktape.207.dylib "$_DESTDIR/var/usr/lib/libduktape.dylib"
+cp duk "$_DESTDIR/var/usr/bin"
 )
 
 (
-cd pkg/var/usr
+cd "$_DESTDIR/var/usr"
 strip_and_sign bin/duk lib/libduktape.207.dylib
 )
 

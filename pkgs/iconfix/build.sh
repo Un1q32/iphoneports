@@ -9,8 +9,8 @@ if [ "$_SUBSYSTEM" != "ios" ] ||
     exit 0
 fi
 
-mkdir -p "$_PKGROOT/pkg/usr/bin" "$_PKGROOT/pkg/usr/share/iconfix"
-cp "$_PKGROOT/src/iconfix.sh" "$_PKGROOT/pkg/usr/bin/iconfix"
-cp "$_PKGROOT"/src/*.png "$_PKGROOT/pkg/usr/share/iconfix"
+mkdir -p "$_DESTDIR/usr/bin" "$_DESTDIR/usr/share/iconfix"
+cp "$_PKGROOT/src/iconfix.sh" "$_DESTDIR/usr/bin/iconfix"
+cp "$_PKGROOT"/src/*.png "$_DESTDIR/usr/share/iconfix"
 
 builddeb

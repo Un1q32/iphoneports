@@ -3,11 +3,11 @@
 
 (
 cd src
-make CC="$_TARGET-cc" DESTDIR="$_PKGROOT/pkg" PREFIX=/var/usr install -j"$_JOBS"
+make CC="$_TARGET-cc" DESTDIR="$_DESTDIR" PREFIX=/var/usr install -j"$_JOBS"
 )
 
 (
-cd pkg/var/usr
+cd "$_DESTDIR/var/usr"
 rm -rf man
 strip_and_sign bin/bzip2 bin/bzip2recover lib/libbz2.1.0.dylib
 )

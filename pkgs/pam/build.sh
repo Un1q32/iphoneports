@@ -9,7 +9,7 @@ ln -s . pam
     --prefix=/var/usr \
     --enable-read-both-confs \
     --enable-giant-libpam \
-    --enable-fakeroot="$_PKGROOT/pkg" \
+    --enable-fakeroot="$_DESTDIR" \
     --enable-sconfigdir=/var/usr/etc/pam \
     --disable-libcrack \
     ac_cv_header_features_h=no
@@ -36,10 +36,10 @@ if { [ "$_SUBSYSTEM" = "ios" ] && [ "$_TRUEOSVER" -ge 20000 ]; } ||
     modules="$modules launchd"
 fi
 for module in $modules; do
-    "$_TARGET-cc" -bundle -o "pam_${module}.so" "pam_${module}"/*.c -I"$_PKGROOT/pkg/var/usr/include" "$_PKGROOT/pkg/var/usr/lib/libpam.dylib" -w
+    "$_TARGET-cc" -bundle -o "pam_${module}.so" "pam_${module}"/*.c -I"$_DESTDIR/var/usr/include" "$_DESTDIR/var/usr/lib/libpam.dylib" -w
 done
 strip_and_sign ./*.so
-cp ./*.so "$_PKGROOT/pkg/var/usr/lib/security"
+cp ./*.so "$_DESTDIR/var/usr/lib/security"
 )
 
 mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"

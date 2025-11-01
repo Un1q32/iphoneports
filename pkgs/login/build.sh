@@ -10,12 +10,12 @@ fi
 (
 cd src
 "$_TARGET-cc" -o login -Os -flto login.c -DUSE_PAM -DUSE_BSM -lpam -lbsm -w
-mkdir -p "$_PKGROOT/pkg/var/usr/bin"
-cp login "$_PKGROOT/pkg/var/usr/bin"
+mkdir -p "$_DESTDIR/var/usr/bin"
+cp login "$_DESTDIR/var/usr/bin"
 )
 
 (
-cd pkg/var/usr/bin
+cd "$_DESTDIR/var/usr"/bin
 strip_and_sign login
 chmod 4755 login
 )

@@ -14,11 +14,11 @@ cmake -GNinja .. \
     -DBUILD_NATIVE=OFF \
     -DLIBUV_LIBRARIES= \
     -DLIBUV_INCLUDE_DIR="$_SDK/var/usr/include"
-DESTDIR="$_PKGROOT/pkg" ninja -j"$_JOBS" install
+DESTDIR="$_DESTDIR" ninja -j"$_JOBS" install
 )
 
 (
-cd pkg/var/usr/bin
+cd "$_DESTDIR/var/usr"/bin
 strip_and_sign wasm3
 )
 

@@ -5,11 +5,11 @@
 cd src
 ./configure --host="$_TARGET" --prefix=/var/usr --disable-static --disable-arch-native
 make -j"$_JOBS"
-make DESTDIR="$_PKGROOT/pkg" install
+make DESTDIR="$_DESTDIR" install
 )
 
 (
-cd pkg/var/usr
+cd "$_DESTDIR/var/usr"
 rm -rf share
 for script in bin/*; do
     [ "$script" = 'bin/bzip3' ] || [ "$script" = 'bin/bunzip3' ] && continue

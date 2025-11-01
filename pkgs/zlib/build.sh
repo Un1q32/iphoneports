@@ -5,11 +5,11 @@
 cd src
 CHOST="$_TARGET" ./configure --prefix=/var/usr --zlib-compat --force-sse2
 make -j"$_JOBS"
-make DESTDIR="$_PKGROOT/pkg" install
+make DESTDIR="$_DESTDIR" install
 )
 
 (
-cd pkg/var/usr
+cd "$_DESTDIR/var/usr"
 rm -rf share lib/libz.a
 for lib in lib/*.dylib; do
     if [ -f "$lib" ] && [ ! -h "$lib" ]; then

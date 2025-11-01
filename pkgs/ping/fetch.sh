@@ -1,5 +1,5 @@
 #!/bin/sh
-rm -rf pkg src
+rm -rf "$_DESTDIR" "$_SRCDIR"
 printf "Downloading source...\n"
 mkdir src
 curl -L -s -o src/ping.c https://raw.githubusercontent.com/apple-oss-distributions/network_cmds/network_cmds-307/ping.tproj/ping.c &

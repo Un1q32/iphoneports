@@ -9,11 +9,11 @@ cd src
     --disable-static \
     PKG_CONFIG_LIBDIR="$_SDK/var/usr/lib/pkgconfig" \
     PKG_CONFIG_SYSROOT_DIR="$_SDK"
-make install DESTDIR="$_PKGROOT/pkg" -j"$_JOBS"
+make install DESTDIR="$_DESTDIR" -j"$_JOBS"
 )
 
 (
-cd pkg/var/usr
+cd "$_DESTDIR/var/usr"
 rm -rf share
 for lib in lib/*.dylib; do
     [ -h "$lib" ] || strip_and_sign "$lib"

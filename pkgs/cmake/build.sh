@@ -20,11 +20,11 @@ cmake -GNinja .. \
     -DCMAKE_USE_SYSTEM_LIBARCHIVE=ON \
     -DHAVE_CoreServices="${hascoreservices:-OFF}" \
     -DBUILD_TESTING=OFF
-DESTDIR="$_PKGROOT/pkg" ninja -j"$_JOBS" install
+DESTDIR="$_DESTDIR" ninja -j"$_JOBS" install
 )
 
 (
-cd pkg/var/usr
+cd "$_DESTDIR/var/usr"
 rm -rf doc share/cmake-*/Help
 strip_and_sign bin/*
 )

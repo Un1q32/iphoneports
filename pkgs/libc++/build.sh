@@ -19,11 +19,11 @@ cmake -GNinja ../runtimes \
     -DLIBCXX_ENABLE_STATIC=OFF \
     -DLIBCXX_ENABLE_STATIC_ABI_LIBRARY=ON \
     -DCMAKE_OSX_ARCHITECTURES="$_CPU"
-DESTDIR="$_PKGROOT/pkg" ninja -j"$_JOBS" install-cxx install-cxxabi-headers
+DESTDIR="$_DESTDIR" ninja -j"$_JOBS" install-cxx install-cxxabi-headers
 )
 
 (
-cd pkg/var/usr/lib
+cd "$_DESTDIR/var/usr"/lib
 rm -rf libc++experimental.a ../include/c++/v1/experimental
 strip_and_sign libc++.1.0.dylib
 )

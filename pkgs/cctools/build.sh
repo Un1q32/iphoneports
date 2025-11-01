@@ -17,11 +17,11 @@ rm include/foreign/machine/_structs.h
     CFLAGS='-O3 -flto' \
     CXXFLAGS='-O3 -flto=thin'
 make -j"$_JOBS"
-make install DESTDIR="$_PKGROOT/pkg"
+make install DESTDIR="$_DESTDIR"
 )
 
 (
-cd pkg/var/usr
+cd "$_DESTDIR/var/usr"
 rm -rf share
 strip_and_sign bin/*
 )

@@ -322,6 +322,8 @@ build() {
     if [ -n "$dryrun" ]; then
         printf '%s\n' "Building $1"
     else
+        export _DESTDIR="$_PKGROOT/pkg"
+        export _SRCDIR="$_PKGROOT/src"
         if [ -f fetch.sh ]; then
             ./fetch.sh || {
                 rm -rf src "$_SDK"

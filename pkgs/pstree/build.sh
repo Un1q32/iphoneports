@@ -2,18 +2,15 @@
 . ../../files/lib.sh
 
 (
-cd src
+cd "$_SRCDIR"
 "$_TARGET-cc" -Os -flto -o pstree pstree.c
-mkdir -p "$_PKGROOT/pkg/var/usr/bin"
-cp pstree "$_PKGROOT/pkg/var/usr/bin"
+mkdir -p "$_DESTDIR/var/usr/bin"
+cp pstree "$_DESTDIR/var/usr/bin"
 )
 
-(
-cd pkg/var/usr/bin
-strip_and_sign pstree
-)
+strip_and_sign "$_DESTDIR/var/usr/bin/pstree"
 
-mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"
-cp src/LICENSE "pkg/var/usr/share/licenses/$_PKGNAME"
+mkdir -p "$_DESTDIR/var/usr/share/licenses/$_PKGNAME"
+cp "$_SRCDIR/LICENSE" "$_DESTDIR/var/usr/share/licenses/$_PKGNAME"
 
 builddeb

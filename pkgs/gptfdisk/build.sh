@@ -17,13 +17,13 @@ wait
 "$_TARGET-c++" libgptfdisk.dylib cgdisk.cc gptcurses.cc -o cgdisk -Os -flto -lncurses
 "$_TARGET-c++" libgptfdisk.dylib sgdisk.cc gptcl.cc -o sgdisk -Os -flto -lpopt
 "$_TARGET-c++" libgptfdisk.dylib fixparts.cc -o fixparts -Os -flto
-mkdir -p "$_PKGROOT/pkg/var/usr/sbin" "$_PKGROOT/pkg/var/usr/lib"
-cp gdisk cgdisk sgdisk fixparts "$_PKGROOT/pkg/var/usr/sbin"
-cp libgptfdisk.dylib "$_PKGROOT/pkg/var/usr/lib"
+mkdir -p "$_DESTDIR/var/usr/sbin" "$_DESTDIR/var/usr/lib"
+cp gdisk cgdisk sgdisk fixparts "$_DESTDIR/var/usr/sbin"
+cp libgptfdisk.dylib "$_DESTDIR/var/usr/lib"
 )
 
 (
-cd pkg/var/usr
+cd "$_DESTDIR/var/usr"
 strip_and_sign sbin/* lib/libgptfdisk.dylib
 )
 

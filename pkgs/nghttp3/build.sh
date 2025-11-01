@@ -13,11 +13,11 @@ cmake -GNinja .. \
     -DCMAKE_FIND_ROOT_PATH="$_SDK/var/usr" \
     -DENABLE_STATIC_LIB=OFF \
     -DENABLE_LIB_ONLY=ON
-DESTDIR="$_PKGROOT/pkg" ninja -j"$_JOBS" install
+DESTDIR="$_DESTDIR" ninja -j"$_JOBS" install
 )
 
 (
-cd pkg/var/usr
+cd "$_DESTDIR/var/usr"
 rm -rf share
 mv lib/libnghttp3.9.*.dylib lib/libnghttp3.9.dylib
 strip_and_sign lib/libnghttp3.9.dylib

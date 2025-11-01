@@ -25,8 +25,8 @@ SDKROOT="$_SDK" \
     cargo build --target "$_RUSTTARGET" --release -j "$_JOBS" \
     --config 'patch.crates-io.cc.git="https://github.com/Un1q32/cc-rs.git"' \
     --config 'patch.crates-io.cc.branch="1.0.83"'
-mkdir -p "$_PKGROOT/pkg/var/usr/bin"
-cp "target/$_RUSTTARGET/release/bat" "$_PKGROOT/pkg/var/usr/bin"
+mkdir -p "$_DESTDIR/var/usr/bin"
+cp "target/$_RUSTTARGET/release/bat" "$_DESTDIR/var/usr/bin"
 )
 
 strip_and_sign pkg/var/usr/bin/bat

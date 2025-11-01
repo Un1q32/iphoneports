@@ -5,11 +5,11 @@
 cd src
 ./configure --host="$_TARGET" --prefix=/var/usr --disable-static
 make -j"$_JOBS"
-make install DESTDIR="$_PKGROOT/pkg"
+make install DESTDIR="$_DESTDIR"
 )
 
 (
-cd pkg/var/usr
+cd "$_DESTDIR/var/usr"
 strip_and_sign lib/libimobiledevice-glue-1.0.0.dylib
 )
 

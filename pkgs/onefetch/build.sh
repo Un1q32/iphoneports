@@ -16,8 +16,8 @@ SDKROOT="$_SDK" \
     PKG_CONFIG_SYSROOT_DIR="$_SDK" \
     ZSTD_SYS_USE_PKG_CONFIG=1 \
     cargo build --target "$_RUSTTARGET" --release -j "$_JOBS"
-mkdir -p "$_PKGROOT/pkg/var/usr/bin"
-cp "target/$_RUSTTARGET/release/onefetch" "$_PKGROOT/pkg/var/usr/bin"
+mkdir -p "$_DESTDIR/var/usr/bin"
+cp "target/$_RUSTTARGET/release/onefetch" "$_DESTDIR/var/usr/bin"
 )
 
 strip_and_sign pkg/var/usr/bin/onefetch

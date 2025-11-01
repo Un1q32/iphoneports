@@ -8,11 +8,11 @@ if [ "$_CPU" = "i386" ]; then
 fi
 ./configure --host="$_TARGET" --prefix=/var/usr --disable-static --disable-doc --enable-silent-rules $disable
 make -j"$_JOBS"
-make DESTDIR="$_PKGROOT/pkg" install
+make DESTDIR="$_DESTDIR" install
 )
 
 (
-cd pkg/var/usr
+cd "$_DESTDIR/var/usr"
 strip_and_sign bin/*
 for lib in lib/*.dylib; do
     [ -h "$lib" ] || strip_and_sign "$lib"

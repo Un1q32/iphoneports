@@ -8,12 +8,12 @@ for src in ifconfig.c ifmedia.c; do
 done
 wait
 "$_TARGET-cc" -o ifconfig -Os -flto ./*.o
-mkdir -p "$_PKGROOT/pkg/var/usr/sbin"
-cp ifconfig "$_PKGROOT/pkg/var/usr/sbin"
+mkdir -p "$_DESTDIR/var/usr/sbin"
+cp ifconfig "$_DESTDIR/var/usr/sbin"
 )
 
 (
-cd pkg/var/usr/sbin
+cd "$_DESTDIR/var/usr"/sbin
 strip_and_sign ifconfig
 )
 

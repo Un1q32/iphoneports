@@ -67,11 +67,11 @@ cmake -GNinja ../clang \
     -DLLVM_ENABLE_LIBCXX=ON \
     -DLLVM_DISTRIBUTION_COMPONENTS="$(_get_distribution_components)"
 
-DESTDIR="$_PKGROOT/pkg" ninja -j"$_JOBS" install-distribution
+DESTDIR="$_DESTDIR" ninja -j"$_JOBS" install-distribution
 )
 
 (
-cd pkg/var/usr
+cd "$_DESTDIR/var/usr"
 rm -rf share bin/git-clang-format
 for link in clang++ clang-cl clang-cpp cc c++ gcc g++; do
     ln -sf clang "bin/$link"

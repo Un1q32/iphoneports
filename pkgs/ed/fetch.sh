@@ -1,5 +1,5 @@
 #!/bin/sh -e
-rm -rf pkg src
+rm -rf "$_DESTDIR" "$_SRCDIR"
 printf "Downloading source...\n"
 mkdir src
 for src in main.c ed.h io.c buf.c re.c glbl.c undo.c sub.c; do

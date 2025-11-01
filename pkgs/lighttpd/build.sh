@@ -24,11 +24,11 @@ fi
     PKG_CONFIG_LIBDIR="$_SDK/var/usr/lib/pkgconfig" \
     $posix_spawn
 make -j"$_JOBS"
-make install DESTDIR="$_PKGROOT/pkg"
+make install DESTDIR="$_DESTDIR"
 )
 
 (
-cd pkg/var/usr
+cd "$_DESTDIR/var/usr"
 rm -rf share
 strip_and_sign sbin/lighttpd sbin/lighttpd-angel lib/liblightcomp.dylib lib/*.so
 )

@@ -13,8 +13,8 @@ cd src
 ./autogen.sh
 ./configure --host="$_TARGET" --prefix=/var/usr --disable-unicode --disable-linux-affinity
 make -j"$_JOBS"
-mkdir -p "$_PKGROOT/pkg/var/usr/bin"
-cp htop "$_PKGROOT/pkg/var/usr/bin"
+mkdir -p "$_DESTDIR/var/usr/bin"
+cp htop "$_DESTDIR/var/usr/bin"
 )
 
 strip_and_sign pkg/var/usr/bin/htop

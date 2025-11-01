@@ -10,7 +10,7 @@ cd src
     --disable-doc \
     GPGRT_CONFIG="$_SDK/var/usr/bin/gpgrt-config"
 make -j"$_JOBS"
-make DESTDIR="$_PKGROOT/pkg" install
+make DESTDIR="$_DESTDIR" install
 )
 
 strip_and_sign pkg/var/usr/lib/libassuan.9.dylib

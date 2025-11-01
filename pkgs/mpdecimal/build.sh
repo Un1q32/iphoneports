@@ -4,11 +4,11 @@
 (
 cd src
 ./configure --host="$_TARGET" --prefix=/var/usr --disable-cxx --disable-static --disable-doc
-make DESTDIR="$_PKGROOT/pkg" install -j"$_JOBS"
+make DESTDIR="$_DESTDIR" install -j"$_JOBS"
 )
 
 (
-cd pkg/var/usr
+cd "$_DESTDIR/var/usr"
 rm -rf share
 abi=4
 lib="$(realpath lib/libmpdec.$abi.dylib)"

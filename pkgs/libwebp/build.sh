@@ -15,11 +15,11 @@ cmake -GNinja .. \
     -DCMAKE_SKIP_RPATH=ON \
     -DBUILD_SHARED_LIBS=ON \
     -DWEBP_BUILD_EXTRAS=OFF
-DESTDIR="$_PKGROOT/pkg" ninja -j"$_JOBS" install
+DESTDIR="$_DESTDIR" ninja -j"$_JOBS" install
 )
 
 (
-cd pkg/var/usr
+cd "$_DESTDIR/var/usr"
 rm -rf share
 for lib in lib/*.dylib; do
     [ -h "$lib" ] || strip_and_sign "$lib"

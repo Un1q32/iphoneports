@@ -1,5 +1,5 @@
 #!/bin/sh
-rm -rf pkg src
+rm -rf "$_DESTDIR" "$_SRCDIR"
 ver='2.4.8'
 [ -z "$_DLCACHE" ] && _DLCACHE=/tmp
 if [ ! -f "$_DLCACHE/gnupg-$ver.tar.bz2" ] ||
@@ -9,4 +9,4 @@ if [ ! -f "$_DLCACHE/gnupg-$ver.tar.bz2" ] ||
 fi
 printf "Unpacking source...\n"
 tar -xf "$_DLCACHE/gnupg-$ver.tar.bz2"
-mv gnupg-* src
+mv gnupg-* "$_SRCDIR"

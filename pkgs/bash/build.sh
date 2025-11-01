@@ -11,8 +11,8 @@ cd src
     CC_FOR_BUILD='clang' \
     CFLAGS_FOR_BUILD='-std=c99 -O2'
 make -j"$_JOBS"
-mkdir -p "$_PKGROOT/pkg/var/usr/bin"
-cp bash "$_PKGROOT/pkg/var/usr/bin"
+mkdir -p "$_DESTDIR/var/usr/bin"
+cp bash "$_DESTDIR/var/usr/bin"
 )
 
 strip_and_sign pkg/var/usr/bin/bash

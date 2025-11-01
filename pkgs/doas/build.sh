@@ -22,14 +22,14 @@ yacc parse.y
     -DGLOBAL_PATH='"/var/usr/sbin:/var/usr/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"' \
     -DSAFE_PATH='"/var/usr/bin:/var/usr/sbin:/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin"'
 sed -i 's,@DOAS_CONF@,/var/usr/etc/doas.conf,g' vidoas
-mkdir -p "$_PKGROOT/pkg/var/usr/bin"
-cp doas "$_PKGROOT/pkg/var/usr/bin"
-cp vidoas "$_PKGROOT/pkg/var/usr/bin"
-cp doasedit "$_PKGROOT/pkg/var/usr/bin"
+mkdir -p "$_DESTDIR/var/usr/bin"
+cp doas "$_DESTDIR/var/usr/bin"
+cp vidoas "$_DESTDIR/var/usr/bin"
+cp doasedit "$_DESTDIR/var/usr/bin"
 )
 
 (
-cd pkg/var/usr/bin
+cd "$_DESTDIR/var/usr"/bin
 strip_and_sign doas
 chmod 4755 doas
 )

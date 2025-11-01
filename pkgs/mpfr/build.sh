@@ -5,11 +5,11 @@
 cd src
 ./configure --host="$_TARGET" --prefix=/var/usr --disable-static --enable-silent-rules CC="$_TARGET-cc"
 make -j"$_JOBS"
-make install DESTDIR="$_PKGROOT/pkg"
+make install DESTDIR="$_DESTDIR"
 )
 
 (
-cd pkg/var/usr
+cd "$_DESTDIR/var/usr"
 rm -rf share
 strip_and_sign lib/libmpfr.6.dylib
 )

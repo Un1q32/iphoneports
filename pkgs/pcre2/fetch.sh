@@ -1,5 +1,5 @@
 #!/bin/sh
-rm -rf pkg src
+rm -rf "$_DESTDIR" "$_SRCDIR"
 ver='10.47'
 [ -z "$_DLCACHE" ] && _DLCACHE=/tmp
 if [ ! -f "$_DLCACHE/pcre2-$ver.tar.bz2" ] ||
@@ -9,4 +9,4 @@ if [ ! -f "$_DLCACHE/pcre2-$ver.tar.bz2" ] ||
 fi
 printf "Unpacking source...\n"
 tar -xf "$_DLCACHE/pcre2-$ver.tar.bz2"
-mv pcre2-* src
+mv pcre2-* "$_SRCDIR"

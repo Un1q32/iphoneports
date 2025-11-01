@@ -12,11 +12,11 @@ cmake -GNinja .. \
   -DCMAKE_FIND_ROOT_PATH_MODE_INCLUDE=ONLY \
   -DCMAKE_FIND_ROOT_PATH="$_SDK/var/usr" \
   -DENABLE_DOCUMENTATION=OFF
-DESTDIR="$_PKGROOT/pkg" ninja -j"$_JOBS" install
+DESTDIR="$_DESTDIR" ninja -j"$_JOBS" install
 )
 
 (
-cd pkg/var/usr
+cd "$_DESTDIR/var/usr"
 strip_and_sign bin/ccache
 mkdir -p share/ccache etc/profile.d
 cp "$_PKGROOT/files/ccache.sh" etc/profile.d
