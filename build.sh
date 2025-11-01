@@ -40,9 +40,11 @@ export TERM="xterm-256color"
 [ -f defaulttarget.txt ] && IFS= read -r defaulttarget < defaulttarget.txt
 
 case "$*" in
-    (*--no-tmpfs*) export _TMP="$bsroot/files" ;;
-    (*) export _TMP="/tmp" ;;
+    (*--no-tmpfs*) export _TMP="$bsroot/files/iphoneports-tmp-$_TARGET" ;;
+    (*) export _TMP="/tmp/iphoneports-tmp-$_TARGET" ;;
 esac
+rm -rf "$_TMP"
+mkdir -p "$_TMP"
 
 case "$*" in
     (*-j*)
@@ -67,19 +69,15 @@ if [ -z "$_JOBS" ]; then
     export _JOBS
 fi
 
-: > "$bsroot/files/.builtpkgs"
-
 export _DLCACHE="$bsroot/dlcache"
 if [ ! -d "$_DLCACHE" ]; then
     rm -rf "$_DLCACHE"
     mkdir -p "$_DLCACHE"
 fi
 
-rm -rf "$_TMP/iphoneports-sdk-$_TARGET"*
-
 error() {
     printf '\033[1;31mError:\033[0m %s\n' "$1"
-    rm -f "$bsroot/files/pkglock-$_TARGET"
+    rm -rf "$bsroot/files/pkglock-$_TARGET" "$_TMP"
     exit 1
 }
 
@@ -346,7 +344,7 @@ build() {
         (2) return 1 ;;
     esac
 
-    [ -n "$dryrun" ] && printf '%s\n' "$1" >> "$bsroot/files/.builtpkgs"
+    [ -n "$dryrun" ] && printf '%s\n' "$1" >> "$_TMP/.builtpkgs"
     return 0
 }
 
@@ -356,7 +354,7 @@ hasbeenbuilt() {
             if [ "$pkg" = "$1" ]; then
                 return 0
             fi
-        done < "$bsroot/files/.builtpkgs"
+        done < "$_TMP/.builtpkgs"
     elif [ -d "$pkgdir/$1/pkg-$_TARGET" ]; then
         return 0
     fi
@@ -409,7 +407,7 @@ includedeps() {
     unset includeddeps
     if [ -z "$dryrun" ]; then
         if [ -d "$sdk" ]; then
-            export _SDK="$_TMP/iphoneports-sdk-$_TARGET"
+            export _SDK="$_TMP/iphoneports-sdk"
             mkdir -p "$_SDK"
             cp -a "$sdk"/* "$_SDK"
         else
@@ -477,7 +475,7 @@ main() {
         ;;
 
         (cleanall)
-            rm -rf "$pkgdir"/*/pkg-* "$pkgdir"/*/src-* "$pkgdir"/*/*.deb "$bsroot"/debs/*.deb "$_TMP"/iphoneports-sdk-* "$bsroot/files/.builtpkgs"
+            rm -rf "$pkgdir"/*/pkg-* "$pkgdir"/*/src-* "$pkgdir"/*/*.deb "$bsroot"/debs/*.deb "$_TMP"
         ;;
 
         (dryrun)
@@ -630,4 +628,4 @@ Usage: build.sh [options] <command>
 }
 
 main "$@"
-rm -f "$bsroot/files/pkglock-$_TARGET"
+rm -rf "$bsroot/files/pkglock-$_TARGET" "$_TMP"

@@ -1,8 +1,7 @@
 src-*
 pkg-*
 *.deb
-/files/iphoneports-sdk*
-/files/.builtpkgs
+/files/iphoneports-tmp-*
 /files/pkglock
 /sysroot
 /defaulttarget.txt
