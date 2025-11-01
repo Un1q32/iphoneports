@@ -7,4 +7,4 @@ printf "Unpacking source...\n"
 tar -xf src.tar.bz2
 rm src.tar.bz2
 mv dpkg-* "$_SRCDIR"
-printf '%s\n' "$dpkgver" > src/.dist-version
+printf '%s\n' "$dpkgver" > "$_SRCDIR/.dist-version"
