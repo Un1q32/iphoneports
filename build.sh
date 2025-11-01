@@ -1,5 +1,5 @@
 #!/bin/sh
-# shellcheck disable=2034
+# shellcheck disable=2030,2031,2034
 
 defaulttarget='armv6-apple-darwin9'
 
@@ -364,9 +364,9 @@ hasbeenbuilt() {
 
 applypatches() {
     if [ -d patches ]; then
-        for patch in patches/*; do
+        for patch in ../patches/*; do
             printf '%s\n' "Applying patch ${patch##*/}"
-            "$gpatch" -fp0 < "$patch" || error "Failed to apply patch ${patch##*/}"
+            "$gpatch" -d "$_SRCDIR" -fNp1 < "$patch" || error "Failed to apply patch ${patch##*/}"
         done
     fi
 }
