@@ -1,10 +1,12 @@
 #!/bin/sh
 rm -rf "$_DESTDIR" "$_SRCDIR"
-printf "Downloading source...\n"
-dpkgver='1.22.21'
-curl -L -# -o src.tar.bz2 "https://salsa.debian.org/dpkg-team/dpkg/-/archive/$dpkgver/dpkg-$dpkgver.tar.bz2"
+ver='1.22.21'
+if [ ! -f "$_DLCACHE/dpkg-$ver.tar.bz2" ] ||
+    [ "$(sha256sum "$_DLCACHE/dpkg-$ver.tar.bz2" | awk '{print $1}')" != "0b451c7b21c641b4c048f887f1d841c6c60a2b2a1501f744d6e2ab6b6c5295a2" ]; then
+    printf "Downloading source...\n"
+    curl -L -# -o "$_DLCACHE/dpkg-$ver.tar.bz2" "https://salsa.debian.org/dpkg-team/dpkg/-/archive/$ver/dpkg-$ver.tar.bz2" || exit 1
+fi
 printf "Unpacking source...\n"
-tar -xf src.tar.bz2
-rm src.tar.bz2
+tar -xf "$_DLCACHE/dpkg-$ver.tar.bz2"
 mv dpkg-* "$_SRCDIR"
-printf '%s\n' "$dpkgver" > "$_SRCDIR/.dist-version"
+printf '%s\n' "$ver" > "$_SRCDIR/.dist-version"
