@@ -6,3 +6,4 @@ pkg-*
 /sysroot
 /defaulttarget.txt
 /dlcache
+/targets.txt
