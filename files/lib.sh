@@ -26,7 +26,7 @@ strip_and_sign() {
 builddeb() {
     cp -r DEBIAN "$_DESTDIR"
     sed -e "s|@DPKGARCH@|$_DPKGARCH|" DEBIAN/control > "$_DESTDIR/DEBIAN/control"
-    dpkg-deb -b --root-owner-group -Zgzip "$_DESTDIR" "$_PKGNAME.deb"
+    dpkg-deb -b --root-owner-group -Zgzip "$_DESTDIR" "$_PKGNAME-$_TARGET.deb"
 }
 
 installlicense() {

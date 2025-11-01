@@ -322,8 +322,8 @@ build() {
     if [ -n "$dryrun" ]; then
         printf '%s\n' "Building $1"
     else
-        export _DESTDIR="$_PKGROOT/pkg"
-        export _SRCDIR="$_PKGROOT/src"
+        export _DESTDIR="$_PKGROOT/pkg-$_TARGET"
+        export _SRCDIR="$_PKGROOT/src-$_TARGET"
         if [ -f fetch.sh ]; then
             ./fetch.sh || {
                 rm -rf "$_SRCDIR" "$_SDK"
@@ -356,7 +356,7 @@ hasbeenbuilt() {
                 return 0
             fi
         done < "$bsroot/files/.builtpkgs"
-    elif [ -d "$pkgdir/$1/pkg" ]; then
+    elif [ -d "$pkgdir/$1/pkg-$_TARGET" ]; then
         return 0
     fi
     return 1
@@ -392,7 +392,7 @@ _includedeps() {
                     fi
                 fi
                 printf '%s\n' "Including dependency $dep"
-                [ -z "$dryrun" ] && cp -a "$pkgdir/$dep/pkg/"* "$_SDK"
+                [ -z "$dryrun" ] && cp -a "$pkgdir/$dep/pkg-$_TARGET/"* "$_SDK"
                 if [ -n "$recursivedeps" ]; then
                     includeddeps="$includeddeps $dep "
                     _includedeps "../$dep/dependencies.txt"
@@ -426,13 +426,13 @@ includedeps() {
 }
 
 sysroot() {
-    [ -d "$pkgdir/$1/pkg" ] || build "$1" || error "Failed to build package: $1"
+    [ -d "$pkgdir/$1/pkg-$_TARGET" ] || build "$1" || error "Failed to build package: $1"
     if [ -f "$pkgdir/$1/dependencies.txt" ]; then
         while IFS= read -r dep; do
             sysroot "$dep"
         done < "$pkgdir/$1/dependencies.txt"
     fi
-    cp -a "$pkgdir/$1/pkg"/* sysroot
+    cp -a "$pkgdir/$1/pkg-$_TARGET"/* sysroot
 }
 
 main() {
@@ -455,7 +455,7 @@ main() {
                 fi
 
                 if [ "$kind" != "all-noclean" ]; then
-                    rm -rf "$pkg/pkg" "$pkg/src" "$pkg"/*.deb &
+                    rm -rf "$pkg/pkg-$_TARGET" "$pkg/src-$_TARGET" "$pkg/$pkg-$_TARGET.deb" &
                 fi
             done
             wait
@@ -471,12 +471,12 @@ main() {
             shift
             for pkg in "$@"; do
                 [ -d "$pkgdir/$pkg" ] || error "Package not found: $pkg"
-                rm -rf "$pkgdir/$pkg/pkg" "$pkgdir/$pkg/src" "$pkgdir/$pkg"/*.deb
+                rm -rf "$pkgdir/$pkg"/pkg-* "$pkgdir/$pkg"/src-* "$pkgdir/$pkg"/*.deb
             done
         ;;
 
         (cleanall)
-            rm -rf "$pkgdir"/*/pkg "$pkgdir"/*/src "$pkgdir"/*/*.deb "$bsroot"/debs/*.deb "$_TMP"/iphoneports-sdk-* "$bsroot/files/.builtpkgs"
+            rm -rf "$pkgdir"/*/pkg-* "$pkgdir"/*/src-* "$pkgdir"/*/*.deb "$bsroot"/debs/*.deb "$_TMP"/iphoneports-sdk-* "$bsroot/files/.builtpkgs"
         ;;
 
         (dryrun)
@@ -516,11 +516,11 @@ main() {
                     done < "$pkg/dependencies.txt"
                 fi
             done
-            rm -rf "$pkgdir/$2/pkg" "$pkgdir/$2/src"
+            rm -rf "$pkgdir/$2"/pkg-* "$pkgdir/$2"/src-*
             build "$2" || error "Failed to build package: $2"
             cp -f "$pkgdir/$2"/*.deb "$bsroot/debs" 2> /dev/null
             for pkg in $deppkgs; do
-                rm -rf "$pkgdir/$pkg/pkg" "$pkgdir/$pkg/src" "$pkgdir/$pkg"/*.deb &
+                rm -rf "$pkgdir/$pkg"/pkg-* "$pkgdir/$pkg"/src-* "$pkgdir/$pkg"/*.deb &
             done
             wait
             for pkg in $deppkgs; do
@@ -617,7 +617,7 @@ Usage: build.sh [options] <command>
                 [ -d "$pkgdir/$pkg" ] || error "Package not found: $pkg"
             done
             for pkg in "$@"; do
-                rm -rf "$pkgdir/$pkg/pkg" "$pkgdir/$pkg/src" "$pkgdir/$pkg"/*.deb &
+                rm -rf "$pkgdir/$pkg/pkg-$_TARGET" "$pkgdir/$pkg/src-$_TARGET" "$pkgdir/$pkg/$pkg-$_TARGET.deb" &
             done
             wait
             for pkg in "$@"; do
