@@ -3,7 +3,7 @@ pkg-*
 *.deb
 /files/iphoneports-tmp-*
 /files/pkglock-*
-/sysroot
+/sysroot-*
 /defaulttarget.txt
 /dlcache
 /targets.txt
