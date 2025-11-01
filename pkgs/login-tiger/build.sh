@@ -4,7 +4,7 @@
 if { [ "$_SUBSYSTEM" = "macos" ] && [ "$_TRUEOSVER" -ge 1050 ]; } ||
     [ "$_SUBSYSTEM" != "macos" ]; then
     printf 'login-tiger is only for Mac OS X 10.4\n'
-    mkdir pkg
+    mkdir "$_DESTDIR"
     exit 0
 fi
 
@@ -20,8 +20,8 @@ chmod 4755 "$_DESTDIR/var/usr/bin/login"
 
 installsuid "$_DESTDIR/var/usr/bin/login"
 
-mkdir -p pkg/var/usr/etc/pam.d
-cp files/login.pam pkg/var/usr/etc/pam.d/login
+mkdir -p "$_DESTDIR/var/usr/etc/pam.d"
+cp files/login.pam "$_DESTDIR/var/usr/etc/pam.d/login"
 
 installlicense files/LICENSE-*
 

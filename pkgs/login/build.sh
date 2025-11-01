@@ -3,7 +3,7 @@
 
 if [ "$_SUBSYSTEM" = "macos" ] && [ "$_TRUEOSVER" -lt 1050 ]; then
     printf 'login requires at least Mac OS X 10.5\n'
-    mkdir pkg
+    mkdir "$_DESTDIR"
     exit 0
 fi
 
@@ -19,8 +19,8 @@ chmod 4755 "$_DESTDIR/var/usr/bin/login"
 
 installsuid "$_DESTDIR/var/usr/bin/login"
 
-mkdir -p pkg/var/usr/etc/pam.d
-cp files/login.pam pkg/var/usr/etc/pam.d/login
+mkdir -p "$_DESTDIR/var/usr/etc/pam.d"
+cp files/login.pam "$_DESTDIR/var/usr/etc/pam.d/login"
 
 installlicense files/LICENSE-*
 

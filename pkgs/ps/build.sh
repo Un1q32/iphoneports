@@ -3,7 +3,7 @@
 
 if [ "$_SUBSYSTEM" = "macos" ] && [ "$_TRUEOSVER" -lt 1050 ]; then
     printf 'ps requires at least Mac OS X 10.5\n'
-    mkdir pkg
+    mkdir "$_DESTDIR"
     exit 0
 fi
 
