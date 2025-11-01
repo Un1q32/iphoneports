@@ -12,10 +12,7 @@ mkdir -p "$_DESTDIR/var/usr/sbin"
 cp ifconfig "$_DESTDIR/var/usr/sbin"
 )
 
-(
-cd "$_DESTDIR/var/usr"/sbin
-strip_and_sign ifconfig
-)
+strip_and_sign "$_DESTDIR/var/usr/sbin/ifconfig"
 
 installlicense files/LICENSE
 
