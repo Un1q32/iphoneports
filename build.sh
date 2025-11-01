@@ -17,8 +17,13 @@ if ! command -v "$EDITOR" >/dev/null 2>&1; then
     command -v "$EDITOR" >/dev/null 2>&1 || EDITOR=none
 fi
 
-if [ -f files/pkglock ]; then
-    read -r lockpid < files/pkglock
+case "$*" in
+    (*--target=*) _TARGET="$*" ; _TARGET="${_TARGET#*--target=}" ; export _TARGET="${_TARGET%% *}" ;;
+    (*) export _TARGET="$defaulttarget" ;;
+esac
+
+if [ -f "files/pkglock-$_TARGET" ]; then
+    read -r lockpid < "files/pkglock-$_TARGET"
     if kill -0 "$lockpid" 2> /dev/null; then
         printf '%s\n' "Waiting for PID $lockpid to finish..."
         while kill -0 "$lockpid" 2> /dev/null; do
@@ -27,7 +32,7 @@ if [ -f files/pkglock ]; then
     fi
 fi
 
-printf '%s' "$$" > files/pkglock
+printf '%s' "$$" > "files/pkglock-$_TARGET"
 
 pkgdir="$bsroot/pkgs"
 export TERM="xterm-256color"
@@ -37,11 +42,6 @@ export TERM="xterm-256color"
 case "$*" in
     (*--no-tmpfs*) export _TMP="$bsroot/files" ;;
     (*) export _TMP="/tmp" ;;
-esac
-
-case "$*" in
-    (*--target=*) _TARGET="$*" ; _TARGET="${_TARGET#*--target=}" ; export _TARGET="${_TARGET%% *}" ;;
-    (*) export _TARGET="$defaulttarget" ;;
 esac
 
 case "$*" in
@@ -79,7 +79,7 @@ rm -rf "$_TMP/iphoneports-sdk-$_TARGET"*
 
 error() {
     printf '\033[1;31mError:\033[0m %s\n' "$1"
-    rm -f "$bsroot/pkglock"
+    rm -f "$bsroot/files/pkglock-$_TARGET"
     exit 1
 }
 
@@ -630,4 +630,4 @@ Usage: build.sh [options] <command>
 }
 
 main "$@"
-rm -f "$bsroot/pkglock"
+rm -f "$bsroot/files/pkglock-$_TARGET"
