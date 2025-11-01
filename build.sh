@@ -432,7 +432,7 @@ sysroot() {
             sysroot "$dep"
         done < "$pkgdir/$1/dependencies.txt"
     fi
-    cp -a "$pkgdir/$1/pkg-$_TARGET"/* sysroot
+    cp -a "$pkgdir/$1/pkg-$_TARGET"/* "sysroot-$_TARGET"
 }
 
 main() {
@@ -539,16 +539,16 @@ main() {
             for pkg in "$@"; do
                 build "$pkg" || error "Failed to build package: $pkg"
             done
-            rm -rf sysroot
-            mkdir sysroot
+            rm -rf "sysroot-$_TARGET"
+            mkdir "sysroot-$_TARGET"
             printf 'Building sysroot...\n'
             for pkg in "$@"; do
                 sysroot "$pkg"
             done
-            rm -rf sysroot/DEBIAN
+            rm -rf "sysroot-$_TARGET/DEBIAN"
             printf 'Making tarball...\n'
             (
-            cd sysroot || exit 1
+            cd "sysroot-$_TARGET" || exit 1
             "$gtar" --owner 0 --group 0 -czf sysroot.tar.gz ./*
             ) || error "Failed to build sysroot tarball"
             printf 'Done!\n'
@@ -560,17 +560,17 @@ main() {
             for pkg in $pkgs; do
                 build "$pkg" || error "Failed to build package: $pkg"
             done
-            rm -rf sysroot
-            mkdir sysroot
+            rm -rf "sysroot-$_TARGET"
+            mkdir "sysroot-$_TARGET"
             printf 'Building sysroot...\n'
             for pkg in $pkgs; do
                 sysroot "$pkg"
                 cp -f "$pkgdir/$pkg"/*.deb debs 2> /dev/null
             done
-            rm -rf sysroot/DEBIAN
+            rm -rf "sysroot-$_TARGET/DEBIAN"
             printf 'Making tarballs...\n'
             (
-            cd sysroot || exit 1
+            cd "sysroot-$_TARGET" || exit 1
             "$gtar" --owner 0 --group 0 -czf bootstrap.tar.gz ./*
             ) || error "Failed to build bootstrap tarball"
             (
