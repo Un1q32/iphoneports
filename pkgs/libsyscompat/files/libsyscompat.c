@@ -539,6 +539,8 @@ void arc4random_buf(void *buf, size_t size) {
     (defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) &&                 \
      __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ < 1060)
 
+#include <pthread.h>
+
 int pthread_threadid_np(pthread_t thread, uint64_t *tid) {
 
 #if !(defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&               \
