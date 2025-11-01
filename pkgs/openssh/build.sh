@@ -20,8 +20,7 @@ strip_and_sign bin/* sbin/* libexec/*
 chmod 4711 libexec/ssh-keysign
 )
 
-mkdir -p pkg/Library/LaunchDaemons
-
+mkdir -p "$_DESTDIR/Library/LaunchDaemons"
 cp files/com.openssh.sshd.plist "$_DESTDIR/Library/LaunchDaemons/com.openssh.sshd.plist"
 cp files/sshd_config "$_DESTDIR/var/usr/etc/ssh/sshd_config"
 
