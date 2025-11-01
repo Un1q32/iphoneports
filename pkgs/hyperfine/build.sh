@@ -17,7 +17,6 @@ cp "target/$_RUSTTARGET/release/hyperfine" "$_DESTDIR/var/usr/bin"
 
 strip_and_sign pkg/var/usr/bin/hyperfine
 
-mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"
-cp src/LICENSE-* "pkg/var/usr/share/licenses/$_PKGNAME"
+installlicense src/LICENSE-*
 
 builddeb

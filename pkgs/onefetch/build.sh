@@ -22,7 +22,6 @@ cp "target/$_RUSTTARGET/release/onefetch" "$_DESTDIR/var/usr/bin"
 
 strip_and_sign pkg/var/usr/bin/onefetch
 
-mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"
-cp src/LICENSE.md "pkg/var/usr/share/licenses/$_PKGNAME"
+installlicense "$_SRCDIR/LICENSE.md"
 
 builddeb

@@ -28,7 +28,6 @@ for link in ld.lld ld64.lld lld-link wasm-ld; do
 done
 )
 
-mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"
-cp src/lld/LICENSE.TXT "pkg/var/usr/share/licenses/$_PKGNAME"
+installlicense src/lld/LICENSE.TXT
 
 builddeb

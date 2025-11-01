@@ -14,7 +14,6 @@ rm -rf share
 strip_and_sign bin/inetcat bin/iproxy lib/libusbmuxd-2.0.7.dylib
 )
 
-mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"
-cp src/COPYING "pkg/var/usr/share/licenses/$_PKGNAME"
+installlicense "$_SRCDIR/COPYING"
 
 builddeb

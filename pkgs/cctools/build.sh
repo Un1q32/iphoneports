@@ -26,7 +26,6 @@ rm -rf share
 strip_and_sign bin/*
 )
 
-mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"
-cp src/cctools/COPYING "pkg/var/usr/share/licenses/$_PKGNAME"
+installlicense src/cctools/COPYING
 
 builddeb

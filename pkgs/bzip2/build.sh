@@ -12,7 +12,6 @@ rm -rf man
 strip_and_sign bin/bzip2 bin/bzip2recover lib/libbz2.1.0.dylib
 )
 
-mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"
-cp src/LICENSE "pkg/var/usr/share/licenses/$_PKGNAME"
+installlicense "$_SRCDIR/LICENSE"
 
 builddeb

@@ -34,7 +34,6 @@ ln -s ../../../../usr/local/libexec/iphoneports/sudo pkg/var/usr/bin/sudo
 cp files/sudoers pkg/var/usr/etc/sudoers
 chmod 440 pkg/var/usr/etc/sudoers
 
-mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"
-cp src/LICENSE.md "pkg/var/usr/share/licenses/$_PKGNAME"
+installlicense "$_SRCDIR/LICENSE.md"
 
 builddeb

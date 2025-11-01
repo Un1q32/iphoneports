@@ -49,7 +49,6 @@ rm -rf share lib/python*/test lib/python*/idlelib/idle_test
 strip_and_sign "bin/$(readlink bin/python3)" lib/*.dylib lib/python3.*/lib-dynload/*.so
 )
 
-mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"
-cp src/LICENSE "pkg/var/usr/share/licenses/$_PKGNAME"
+installlicense "$_SRCDIR/LICENSE"
 
 builddeb

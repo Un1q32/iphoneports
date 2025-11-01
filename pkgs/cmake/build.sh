@@ -29,7 +29,6 @@ rm -rf doc share/cmake-*/Help
 strip_and_sign bin/*
 )
 
-mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"
-cp src/LICENSE.rst "pkg/var/usr/share/licenses/$_PKGNAME"
+installlicense src/LICENSE.rst
 
 builddeb

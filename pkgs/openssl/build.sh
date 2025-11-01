@@ -43,7 +43,6 @@ for bin in bin/* lib/*.dylib lib/*/*.dylib; do
 done
 )
 
-mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"
-cp src/LICENSE.txt "pkg/var/usr/share/licenses/$_PKGNAME"
+installlicense src/LICENSE.txt
 
 builddeb

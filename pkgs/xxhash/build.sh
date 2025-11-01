@@ -12,7 +12,6 @@ rm -rf share lib/libxxhash.a
 strip_and_sign bin/xxhsum lib/libxxhash.0.*.dylib
 )
 
-mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"
-cp src/LICENSE "pkg/var/usr/share/licenses/$_PKGNAME"
+installlicense "$_SRCDIR/LICENSE"
 
 builddeb

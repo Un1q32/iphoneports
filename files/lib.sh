@@ -29,6 +29,11 @@ builddeb() {
     dpkg-deb -b --root-owner-group -Zgzip "$_DESTDIR" "$_PKGNAME.deb"
 }
 
+installlicense() {
+    mkdir -p "$_DESTDIR/var/usr/share/licenses/$_PKGNAME"
+    cp "$@" "$_DESTDIR/var/usr/share/licenses/$_PKGNAME"
+}
+
 make() {
     command "$_MAKE" "$@"
 }

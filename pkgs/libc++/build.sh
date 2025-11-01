@@ -28,7 +28,6 @@ rm -rf libc++experimental.a ../include/c++/v1/experimental
 strip_and_sign libc++.1.0.dylib
 )
 
-mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"
-cp src/libcxx/LICENSE.TXT "pkg/var/usr/share/licenses/$_PKGNAME"
+installlicense src/libcxx/LICENSE.TXT
 
 builddeb

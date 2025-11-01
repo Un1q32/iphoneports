@@ -52,7 +52,6 @@ rm ./*.o
 cp ./*.a "$_DESTDIR/var/usr/lib/clang/$llvmver/lib/darwin"
 )
 
-mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"
-cp src/compiler-rt/LICENSE.TXT "pkg/var/usr/share/licenses/$_PKGNAME"
+installlicense src/compiler-rt/LICENSE.TXT
 
 builddeb

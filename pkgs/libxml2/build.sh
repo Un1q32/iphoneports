@@ -15,7 +15,6 @@ ln -s libxml2/libxml include/libxml
 strip_and_sign bin/xmlcatalog bin/xmllint lib/libxml2.*.dylib
 )
 
-mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"
-cp src/Copyright "pkg/var/usr/share/licenses/$_PKGNAME"
+installlicense src/Copyright
 
 builddeb

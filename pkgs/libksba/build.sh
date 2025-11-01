@@ -10,7 +10,6 @@ make DESTDIR="$_DESTDIR" install
 
 strip_and_sign pkg/var/usr/lib/libksba.8.dylib
 
-mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"
-cp src/COPYING.* "pkg/var/usr/share/licenses/$_PKGNAME"
+installlicense "$_SRCDIR/COPYING".*
 
 builddeb

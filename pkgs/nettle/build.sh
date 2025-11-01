@@ -14,7 +14,6 @@ rm -rf share
 strip_and_sign bin/* lib/libnettle.8.*.dylib lib/libhogweed.6.*.dylib
 )
 
-mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"
-cp src/COPYING.LESSERv3 "pkg/var/usr/share/licenses/$_PKGNAME"
+installlicense "$_SRCDIR/COPYING".LESSERv3
 
 builddeb

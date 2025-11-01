@@ -15,8 +15,7 @@ rm -rf share
 strip_and_sign lib/libimobiledevice-1.0.6.dylib bin/*
 )
 
-mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"
-cp src/COPYING "pkg/var/usr/share/licenses/$_PKGNAME"
+installlicense "$_SRCDIR/COPYING"
 
 cp -r DEBIAN pkg
 sed -e "s|@DPKGARCH@|$_DPKGARCH|" DEBIAN/control > pkg/DEBIAN/control

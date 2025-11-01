@@ -19,7 +19,6 @@ ln -sf lua54.pc pkg/var/usr/lib/pkgconfig/lua5.4.pc
 ln -sf lua54.pc pkg/var/usr/lib/pkgconfig/lua-5.4.pc
 ln -sf lua54.pc pkg/var/usr/lib/pkgconfig/lua.pc
 
-mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"
-cp files/LICENSE "pkg/var/usr/share/licenses/$_PKGNAME"
+installlicense files/LICENSE
 
 builddeb

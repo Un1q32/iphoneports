@@ -14,7 +14,6 @@ rm -rf share/doc share/man
 strip_and_sign bin/jq lib/libjq.*.dylib
 )
 
-mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"
-cp src/COPYING "pkg/var/usr/share/licenses/$_PKGNAME"
+installlicense "$_SRCDIR/COPYING"
 
 builddeb

@@ -22,7 +22,6 @@ for lib in pkg/var/usr/lib/*.dylib; do
     [ -h "$lib" ] || strip_and_sign "$lib"
 done
 
-mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"
-cp src/LICENSE "pkg/var/usr/share/licenses/$_PKGNAME"
+installlicense "$_SRCDIR/LICENSE"
 
 builddeb

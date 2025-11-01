@@ -21,7 +21,6 @@ ln -s zdiff zcmp
 ln -s zmore zless
 )
 
-mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"
-cp files/LICENSE "pkg/var/usr/share/licenses/$_PKGNAME"
+installlicense files/LICENSE
 
 builddeb

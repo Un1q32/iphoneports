@@ -18,7 +18,6 @@ DESTDIR="$_DESTDIR" ninja -j"$_JOBS" install
 
 strip_and_sign pkg/var/usr/bin/ninja
 
-mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"
-cp src/COPYING "pkg/var/usr/share/licenses/$_PKGNAME"
+installlicense "$_SRCDIR/COPYING"
 
 builddeb

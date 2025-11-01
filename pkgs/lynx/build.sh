@@ -17,7 +17,6 @@ make DESTDIR="$_DESTDIR" install
 rm -rf pkg/var/usr/share
 strip_and_sign pkg/var/usr/bin/lynx
 
-mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"
-cp src/COPYING "pkg/var/usr/share/licenses/$_PKGNAME"
+installlicense "$_SRCDIR/COPYING"
 
 builddeb

@@ -15,7 +15,6 @@ ln -s compress uncompress
 ln -s compress zcat
 )
 
-mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"
-cp src/UNLICENSE "pkg/var/usr/share/licenses/$_PKGNAME"
+installlicense src/UNLICENSE
 
 builddeb

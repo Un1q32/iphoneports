@@ -19,7 +19,6 @@ cp htop "$_DESTDIR/var/usr/bin"
 
 strip_and_sign pkg/var/usr/bin/htop
 
-mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"
-cp src/COPYING "pkg/var/usr/share/licenses/$_PKGNAME"
+installlicense "$_SRCDIR/COPYING"
 
 builddeb

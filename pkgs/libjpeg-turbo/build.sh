@@ -25,7 +25,6 @@ mv lib/libturbojpeg.0.*.dylib lib/libturbojpeg.0.dylib
 strip_and_sign lib/libjpeg.62.dylib lib/libturbojpeg.0.dylib bin/*
 )
 
-mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"
-cp src/LICENSE.md "pkg/var/usr/share/licenses/$_PKGNAME"
+installlicense "$_SRCDIR/LICENSE.md"
 
 builddeb

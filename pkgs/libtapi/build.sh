@@ -29,7 +29,6 @@ install_name_tool -id /var/usr/lib/libtapi.dylib libtapi.dylib
 strip_and_sign libtapi.dylib
 )
 
-mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"
-cp src/LICENSE.* "pkg/var/usr/share/licenses/$_PKGNAME"
+installlicense src/LICENSE.*
 
 builddeb

@@ -18,7 +18,6 @@ install_name_tool -change /var/usr/lib/libsqlite3.dylib /var/usr/lib/libsqlite3.
 strip_and_sign bin/sqlite3 lib/libsqlite3.0.dylib
 )
 
-mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"
-cp files/LICENSE "pkg/var/usr/share/licenses/$_PKGNAME"
+installlicense files/LICENSE
 
 builddeb

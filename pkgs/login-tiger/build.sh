@@ -26,7 +26,6 @@ mv pkg/var/usr/bin/login pkg/usr/local/libexec/iphoneports/login
 ln -s ../../../../usr/local/libexec/iphoneports/login pkg/var/usr/bin/login
 cp files/login.pam pkg/var/usr/etc/pam.d/login
 
-mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"
-cp files/LICENSE-* "pkg/var/usr/share/licenses/$_PKGNAME"
+installlicense files/LICENSE-*
 
 builddeb

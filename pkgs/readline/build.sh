@@ -14,7 +14,6 @@ rm -rf share bin
 strip_and_sign lib/libhistory.8.*.dylib lib/libreadline.8.*.dylib
 )
 
-mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"
-cp src/COPYING "pkg/var/usr/share/licenses/$_PKGNAME"
+installlicense "$_SRCDIR/COPYING"
 
 builddeb

@@ -16,7 +16,6 @@ strip_and_sign libusb-1.0.0.dylib
 
 ln -s libusb-1.0/libusb.h pkg/var/usr/include/libusb.h
 
-mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"
-cp src/COPYING "pkg/var/usr/share/licenses/$_PKGNAME"
+installlicense "$_SRCDIR/COPYING"
 
 builddeb

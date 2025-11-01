@@ -46,7 +46,6 @@ for lib in lib/*.dylib; do
 done
 )
 
-mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"
-cp src/COPYING.GPLv3 "pkg/var/usr/share/licenses/$_PKGNAME"
+installlicense "$_SRCDIR/COPYING".GPLv3
 
 builddeb

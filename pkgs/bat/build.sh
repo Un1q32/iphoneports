@@ -31,7 +31,6 @@ cp "target/$_RUSTTARGET/release/bat" "$_DESTDIR/var/usr/bin"
 
 strip_and_sign pkg/var/usr/bin/bat
 
-mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"
-cp src/LICENSE-* "pkg/var/usr/share/licenses/$_PKGNAME"
+installlicense src/LICENSE-*
 
 builddeb

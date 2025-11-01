@@ -12,7 +12,6 @@ rm -rf share
 strip_and_sign bin/dos2unix bin/unix2dos
 )
 
-mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"
-cp src/COPYING.txt "pkg/var/usr/share/licenses/$_PKGNAME"
+installlicense "$_SRCDIR/COPYING".txt
 
 builddeb

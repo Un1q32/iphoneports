@@ -27,7 +27,6 @@ cp "target/$_RUSTTARGET/release/rg" "$_DESTDIR/var/usr/bin"
 
 strip_and_sign pkg/var/usr/bin/rg
 
-mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"
-cp src/UNLICENSE "pkg/var/usr/share/licenses/$_PKGNAME"
+installlicense src/UNLICENSE
 
 builddeb

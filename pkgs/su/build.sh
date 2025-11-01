@@ -19,7 +19,6 @@ mv "$_DESTDIR/var/usr/bin/su" "$_DESTDIR/usr/local/libexec/iphoneports/su"
 ln -s ../../../../usr/local/libexec/iphoneports/su "$_DESTDIR/var/usr/bin/su"
 cp files/su.pam "$_DESTDIR/var/usr/etc/pam.d/su"
 
-mkdir -p "$_DESTDIR/var/usr/share/licenses/$_PKGNAME"
-cp files/LICENSE "$_DESTDIR/var/usr/share/licenses/$_PKGNAME"
+installlicense files/LICENSE
 
 builddeb

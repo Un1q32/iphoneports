@@ -41,7 +41,6 @@ cp files/doas.pam pkg/var/usr/etc/pam.d/doas
 cp files/doas.conf pkg/var/usr/etc
 chmod 440 pkg/var/usr/etc/doas.conf
 
-mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"
-cp src/LICENSE "pkg/var/usr/share/licenses/$_PKGNAME"
+installlicense "$_SRCDIR/LICENSE"
 
 builddeb

@@ -27,7 +27,6 @@ cd "$_DESTDIR/var/usr"
 strip_and_sign sbin/* lib/libgptfdisk.dylib
 )
 
-mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"
-cp src/COPYING "pkg/var/usr/share/licenses/$_PKGNAME"
+installlicense "$_SRCDIR/COPYING"
 
 builddeb

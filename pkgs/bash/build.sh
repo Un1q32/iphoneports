@@ -19,7 +19,6 @@ strip_and_sign pkg/var/usr/bin/bash
 mkdir -p pkg/var/usr/etc/bash/bashrc.d
 cp files/bashrc pkg/var/usr/etc/bash
 
-mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"
-cp src/COPYING "pkg/var/usr/share/licenses/$_PKGNAME"
+installlicense "$_SRCDIR/COPYING"
 
 builddeb

@@ -21,7 +21,6 @@ for bin in pkg/var/usr/bin/*; do
     [ -h "$bin" ] || strip_and_sign "$bin"
 done
 
-mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"
-cp src/COPYING "pkg/var/usr/share/licenses/$_PKGNAME"
+installlicense "$_SRCDIR/COPYING"
 
 builddeb

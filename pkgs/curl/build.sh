@@ -30,7 +30,6 @@ rm -rf share/man
 strip_and_sign bin/curl lib/libcurl.4.dylib
 )
 
-mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"
-cp src/COPYING "pkg/var/usr/share/licenses/$_PKGNAME"
+installlicense "$_SRCDIR/COPYING"
 
 builddeb

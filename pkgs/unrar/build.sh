@@ -13,7 +13,6 @@ cd "$_DESTDIR/var/usr"/bin
 strip_and_sign unrar
 )
 
-mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"
-cp src/license.txt "pkg/var/usr/share/licenses/$_PKGNAME"
+installlicense src/license.txt
 
 builddeb

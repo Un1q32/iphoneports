@@ -25,7 +25,6 @@ for cc in cc c++ gcc g++ clang clang++; do
 done
 )
 
-mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"
-cp src/GPL-3.0.txt "pkg/var/usr/share/licenses/$_PKGNAME"
+installlicense src/GPL-3.0.txt
 
 builddeb

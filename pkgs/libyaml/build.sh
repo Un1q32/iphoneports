@@ -14,7 +14,6 @@ cd "$_DESTDIR/var/usr"
 strip_and_sign lib/libyaml-0.2.dylib
 )
 
-mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"
-cp src/License "pkg/var/usr/share/licenses/$_PKGNAME"
+installlicense src/License
 
 builddeb

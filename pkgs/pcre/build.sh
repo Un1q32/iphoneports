@@ -25,7 +25,6 @@ rm -rf share
 strip_and_sign bin/pcretest bin/pcregrep lib/libpcre.1.dylib lib/libpcreposix.0.dylib
 )
 
-mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"
-cp src/LICENCE "pkg/var/usr/share/licenses/$_PKGNAME"
+installlicense src/LICENCE
 
 builddeb

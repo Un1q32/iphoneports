@@ -46,10 +46,9 @@ mkdir -p pkg/usr/local/libexec/iphoneports
 mv pkg/var/usr/bin/top pkg/usr/local/libexec/iphoneports/top
 ln -s ../../../../usr/local/libexec/iphoneports/top pkg/var/usr/bin/top
 
-mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"
-cp files/LICENSE "pkg/var/usr/share/licenses/$_PKGNAME"
+installlicense files/LICENSE
 if [ -f "$_SDK/usr/lib/libutil.dylib" ] || [ -f "$_SDK/usr/lib/libutil.tbd" ]; then
-    cp files/LICENSE-LIBBSD "pkg/var/usr/share/licenses/$_PKGNAME"
+    installlicense files/LICENSE-LIBBSD
 fi
 
 builddeb

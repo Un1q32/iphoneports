@@ -42,8 +42,6 @@ strip_and_sign ./*.so
 cp ./*.so "$_DESTDIR/var/usr/lib/security"
 )
 
-mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"
-cp src/pam/Copyright "pkg/var/usr/share/licenses/$_PKGNAME/LICENSE-BSD3"
-cp files/* "pkg/var/usr/share/licenses/$_PKGNAME"
+installlicense src/pam/Copyright files/*
 
 builddeb

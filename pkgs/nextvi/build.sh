@@ -10,7 +10,6 @@ cp vi "$_DESTDIR/var/usr/bin"
 
 strip_and_sign pkg/var/usr/bin/vi
 
-mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"
-cp src/LICENSE "pkg/var/usr/share/licenses/$_PKGNAME"
+installlicense "$_SRCDIR/LICENSE"
 
 builddeb

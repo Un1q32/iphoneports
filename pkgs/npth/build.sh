@@ -10,7 +10,6 @@ make DESTDIR="$_DESTDIR" install
 
 strip_and_sign pkg/var/usr/lib/libnpth.0.dylib
 
-mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"
-cp src/COPYING.LIB "pkg/var/usr/share/licenses/$_PKGNAME"
+installlicense "$_SRCDIR/COPYING".LIB
 
 builddeb

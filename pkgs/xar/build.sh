@@ -15,7 +15,6 @@ rm -rf share
 strip_and_sign bin/xar lib/libxar.1.dylib
 )
 
-mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"
-cp src/xar/LICENSE "pkg/var/usr/share/licenses/$_PKGNAME"
+installlicense src/xar/LICENSE
 
 builddeb

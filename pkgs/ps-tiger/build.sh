@@ -31,7 +31,6 @@ mkdir -p pkg/usr/local/libexec/iphoneports
 mv pkg/var/usr/bin/ps pkg/usr/local/libexec/iphoneports
 ln -s ../../../../usr/local/libexec/iphoneports/ps pkg/var/usr/bin/ps
 
-mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"
-cp files/LICENSE "pkg/var/usr/share/licenses/$_PKGNAME"
+installlicense files/LICENSE
 
 builddeb

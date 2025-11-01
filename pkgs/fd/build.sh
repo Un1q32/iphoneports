@@ -17,7 +17,6 @@ cp "target/$_RUSTTARGET/release/fd" "$_DESTDIR/var/usr/bin"
 
 strip_and_sign pkg/var/usr/bin/fd
 
-mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"
-cp src/LICENSE-MIT "pkg/var/usr/share/licenses/$_PKGNAME"
+installlicense src/LICENSE-MIT
 
 builddeb

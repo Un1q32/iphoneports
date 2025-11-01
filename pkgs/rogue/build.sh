@@ -19,7 +19,6 @@ mkdir -p pkg/usr/local/libexec/iphoneports
 mv pkg/var/usr/bin/rogue pkg/usr/local/libexec/iphoneports
 ln -s ../../../../usr/local/libexec/iphoneports/rogue pkg/var/usr/bin/rogue
 
-mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"
-cp src/LICENSE.TXT "pkg/var/usr/share/licenses/$_PKGNAME"
+installlicense src/LICENSE.TXT
 
 builddeb

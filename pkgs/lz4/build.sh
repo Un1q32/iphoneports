@@ -12,7 +12,6 @@ rm -rf share
 strip_and_sign bin/lz4 lib/liblz4.1.*.dylib
 )
 
-mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"
-cp src/LICENSE "pkg/var/usr/share/licenses/$_PKGNAME"
+installlicense "$_SRCDIR/LICENSE"
 
 builddeb

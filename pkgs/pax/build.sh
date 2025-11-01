@@ -17,7 +17,6 @@ cd "$_DESTDIR/var/usr"/bin
 strip_and_sign pax
 )
 
-mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"
-cp files/LICENSE "pkg/var/usr/share/licenses/$_PKGNAME"
+installlicense files/LICENSE
 
 builddeb

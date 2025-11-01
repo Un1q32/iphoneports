@@ -14,7 +14,6 @@ rm -rf share/info share/man bin/gawk-* bin/gawkbug
 strip_and_sign bin/gawk lib/gawk/* libexec/awk/*
 )
 
-mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"
-cp src/COPYING "pkg/var/usr/share/licenses/$_PKGNAME"
+installlicense "$_SRCDIR/COPYING"
 
 builddeb

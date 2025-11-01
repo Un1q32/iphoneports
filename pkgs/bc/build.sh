@@ -13,7 +13,6 @@ cd "$_DESTDIR/var/usr"/bin
 strip_and_sign bc
 )
 
-mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"
-cp src/LICENSE.md "pkg/var/usr/share/licenses/$_PKGNAME"
+installlicense "$_SRCDIR/LICENSE.md"
 
 builddeb

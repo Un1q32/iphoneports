@@ -10,7 +10,6 @@ cp 2048 "$_DESTDIR/var/usr/bin"
 
 strip_and_sign pkg/var/usr/bin/2048
 
-mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"
-cp src/LICENSE "pkg/var/usr/share/licenses/$_PKGNAME"
+installlicense "$_SRCDIR/LICENSE"
 
 builddeb

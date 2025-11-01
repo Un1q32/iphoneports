@@ -19,7 +19,6 @@ sed -i -e 's|^#!/bin/sh$|#!/var/usr/bin/sh|' bin/bunzip3
 strip_and_sign bin/bzip3 lib/libbzip3.1.dylib
 )
 
-mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"
-cp src/LICENSE "pkg/var/usr/share/licenses/$_PKGNAME"
+installlicense "$_SRCDIR/LICENSE"
 
 builddeb

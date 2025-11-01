@@ -86,7 +86,6 @@ for file in bin/* lib/*.dylib; do
 done
 )
 
-mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"
-cp src/llvm/LICENSE.TXT "pkg/var/usr/share/licenses/$_PKGNAME"
+installlicense src/llvm/LICENSE.TXT
 
 builddeb

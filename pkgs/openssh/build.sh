@@ -25,7 +25,6 @@ mkdir -p pkg/Library/LaunchDaemons
 cp files/com.openssh.sshd.plist pkg/Library/LaunchDaemons/com.openssh.sshd.plist
 cp files/sshd_config pkg/var/usr/etc/ssh/sshd_config
 
-mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"
-cp src/LICENCE "pkg/var/usr/share/licenses/$_PKGNAME"
+installlicense src/LICENCE
 
 builddeb

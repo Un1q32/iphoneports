@@ -14,7 +14,6 @@ ln -s pigz unpigz
 strip_and_sign pigz
 )
 
-mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"
-cp files/LICENSE "pkg/var/usr/share/licenses/$_PKGNAME"
+installlicense files/LICENSE
 
 builddeb

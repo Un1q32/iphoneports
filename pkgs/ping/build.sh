@@ -14,7 +14,6 @@ cd "$_DESTDIR/var/usr"/sbin
 strip_and_sign ping ping6
 )
 
-mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"
-cp files/* "pkg/var/usr/share/licenses/$_PKGNAME"
+installlicense files/*
 
 builddeb

@@ -14,7 +14,6 @@ rm -rf share
 strip_and_sign bin/tcsh
 )
 
-mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"
-cp src/Copyright "pkg/var/usr/share/licenses/$_PKGNAME"
+installlicense src/Copyright
 
 builddeb

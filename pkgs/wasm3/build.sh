@@ -22,7 +22,6 @@ cd "$_DESTDIR/var/usr"/bin
 strip_and_sign wasm3
 )
 
-mkdir -p "pkg/var/usr/share/licenses/$_PKGNAME"
-cp src/LICENSE "pkg/var/usr/share/licenses/$_PKGNAME"
+installlicense "$_SRCDIR/LICENSE"
 
 builddeb
