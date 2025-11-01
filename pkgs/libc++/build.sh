@@ -2,8 +2,8 @@
 . ../../files/lib.sh
 
 (
-mkdir -p src/build
-cd src/build
+mkdir -p "$_SRCDIR/build"
+cd "$_SRCDIR/build"
 cmake -GNinja ../runtimes \
     -DLLVM_ENABLE_RUNTIMES='libcxx;libcxxabi' \
     -DCMAKE_BUILD_TYPE=Release \
@@ -23,11 +23,11 @@ DESTDIR="$_DESTDIR" ninja -j"$_JOBS" install-cxx install-cxxabi-headers
 )
 
 (
-cd "$_DESTDIR/var/usr"/lib
+cd "$_DESTDIR/var/usr/lib"
 rm -rf libc++experimental.a ../include/c++/v1/experimental
 strip_and_sign libc++.1.0.dylib
 )
 
-installlicense src/libcxx/LICENSE.TXT
+installlicense "$_SRCDIR/libcxx/LICENSE.TXT"
 
 builddeb

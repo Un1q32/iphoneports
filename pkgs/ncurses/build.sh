@@ -2,7 +2,7 @@
 . ../../files/lib.sh
 
 (
-cd src
+cd "$_SRCDIR"
 unset TERMINFO
 ./configure \
     --host="$_TARGET" \

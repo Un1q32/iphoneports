@@ -2,7 +2,7 @@
 . ../../files/lib.sh
 
 (
-cd src
+cd "$_SRCDIR"
 "$_TARGET-cc" -Os -flto which.c -o which -D'__FBSDID(x)='
 mkdir -p "$_DESTDIR/var/usr/bin"
 cp which "$_DESTDIR/var/usr/bin"

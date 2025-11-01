@@ -9,7 +9,7 @@ if { [ "$_SUBSYSTEM" = "macos" ] && [ "$_TRUEOSVER" -ge 1050 ]; } ||
 fi
 
 (
-cd src
+cd "$_SRCDIR"
 "$_TARGET-cc" -o login -Os -flto login.c -DUSE_PAM -lpam -lbsm -w
 mkdir -p "$_DESTDIR/var/usr/bin"
 cp login "$_DESTDIR/var/usr/bin"

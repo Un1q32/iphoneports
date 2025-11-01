@@ -4,7 +4,7 @@
 
 (
 [ "$_SUBSYSTEM" = "macos" ] && jit=--enable-jit
-cd src
+cd "$_SRCDIR"
 ./configure \
     --host="$_TARGET" \
     --prefix=/var/usr \

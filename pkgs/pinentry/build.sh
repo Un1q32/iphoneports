@@ -2,7 +2,7 @@
 . ../../files/lib.sh
 
 (
-cd src
+cd "$_SRCDIR"
 mkdir iphoneports-bin
 ln -s "$(command -v "$_TARGET-ar")" iphoneports-bin/ar
 export PATH="$PWD/iphoneports-bin:$PATH"

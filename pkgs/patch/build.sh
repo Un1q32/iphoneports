@@ -2,7 +2,7 @@
 . ../../files/lib.sh
 
 (
-cd src
+cd "$_SRCDIR"
 autoreconf -fi
 case $_CPU in
     *64) ;;

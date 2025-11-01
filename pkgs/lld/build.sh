@@ -2,8 +2,8 @@
 . ../../files/lib.sh
 
 (
-mkdir -p src/build
-cd src/build
+mkdir -p "$_SRCDIR/build"
+cd "$_SRCDIR/build"
 cmake -GNinja ../lld \
     -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_C_COMPILER="$_TARGET-cc" \
@@ -28,6 +28,6 @@ for link in ld.lld ld64.lld lld-link wasm-ld; do
 done
 )
 
-installlicense src/lld/LICENSE.TXT
+installlicense "$_SRCDIR/lld/LICENSE.TXT"
 
 builddeb

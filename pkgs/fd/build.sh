@@ -9,7 +9,7 @@ if { [ "$_SUBSYSTEM" = "ios" ] && [ "$_TRUEOSVER" -lt 20000 ]; } ||
 fi
 
 (
-cd src
+cd "$_SRCDIR"
 SDKROOT="$_SDK" cargo build --target "$_RUSTTARGET" --release -j "$_JOBS"
 mkdir -p "$_DESTDIR/var/usr/bin"
 cp "target/$_RUSTTARGET/release/fd" "$_DESTDIR/var/usr/bin"

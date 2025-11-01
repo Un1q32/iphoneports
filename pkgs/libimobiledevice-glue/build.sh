@@ -2,7 +2,7 @@
 . ../../files/lib.sh
 
 (
-cd src
+cd "$_SRCDIR"
 ./configure --host="$_TARGET" --prefix=/var/usr --disable-static
 make -j"$_JOBS"
 make install DESTDIR="$_DESTDIR"

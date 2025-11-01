@@ -2,7 +2,7 @@
 . ../../files/lib.sh
 
 (
-cd src
+cd "$_SRCDIR"
 "$_TARGET-cc" -Os -flto time.c -o time -Wno-deprecated-non-prototype -D'__FBSDID(x)='
 mkdir -p "$_DESTDIR/var/usr/bin"
 cp time "$_DESTDIR/var/usr/bin"

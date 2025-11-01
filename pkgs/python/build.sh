@@ -8,7 +8,7 @@ chmod +x "$_PKGROOT/src/iphoneports-fakebin/sw_vers"
 export PATH="$_PKGROOT/src/iphoneports-fakebin:$PATH"
 
 (
-cd src
+cd "$_SRCDIR"
 autoreconf -fi
 
 (

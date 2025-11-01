@@ -9,7 +9,7 @@ if { [ "$_SUBSYSTEM" = "ios" ] && [ "$_TRUEOSVER" -lt 20000 ]; } ||
 fi
 
 (
-cd src
+cd "$_SRCDIR"
 ./autogen.sh
 ./configure --host="$_TARGET" --prefix=/var/usr --disable-unicode --disable-linux-affinity
 make -j"$_JOBS"

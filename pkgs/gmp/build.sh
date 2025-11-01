@@ -2,7 +2,7 @@
 . ../../files/lib.sh
 # shellcheck disable=2086
 (
-cd src
+cd "$_SRCDIR"
 case $_CPU in
     arm64*) ;;
     arm*) disableasm='--disable-assembly' ;;

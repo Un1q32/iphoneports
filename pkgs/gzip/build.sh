@@ -2,7 +2,7 @@
 . ../../files/lib.sh
 
 (
-cd src
+cd "$_SRCDIR"
 mkdir -p "$_DESTDIR/var/usr/bin"
 "$_TARGET-cc" -Os -flto -o gzip gzip.c -lz -lbz2 -llzma -DGZIP_APPLE_VERSION='"448.0.3"' -D'__FBSDID(x)='
 for prog in gzip gzexe zdiff zforce zmore znew; do

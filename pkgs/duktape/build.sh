@@ -2,7 +2,7 @@
 . ../../files/lib.sh
 
 (
-cd src
+cd "$_SRCDIR"
 "$_TARGET-cc" -Os \
     -shared \
     -o libduktape.dylib \

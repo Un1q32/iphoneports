@@ -2,7 +2,7 @@
 . ../../files/lib.sh
 
 (
-cd src
+cd "$_SRCDIR"
 ./configure --host="$_TARGET" --prefix=/var/usr gl_cv_func_strcasecmp_works=yes
 make -j"$_JOBS"
 make DESTDIR="$_DESTDIR" install

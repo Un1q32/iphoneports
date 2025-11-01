@@ -2,8 +2,8 @@
 . ../../files/lib.sh
 
 (
-mkdir -p src/build
-cd src/build
+mkdir -p "$_SRCDIR/build"
+cd "$_SRCDIR/build"
 cmake -GNinja .. \
     -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_C_COMPILER="$_TARGET-cc" \
@@ -18,7 +18,7 @@ cmake -GNinja .. \
 DESTDIR="$_DESTDIR" ninja -j"$_JOBS" install
 )
 
-strip_and_sign pkg/var/usr/bin/git2 "pkg/var/usr/lib/$(readlink pkg/var/usr/lib/libgit2.dylib)"
+strip_and_sign "$_DESTDIR/var/usr/bin/git2" "$(realpath "$_DESTDIR/var/usr/lib/libgit2.dylib")"
 
 installlicense "$_SRCDIR/COPYING"
 

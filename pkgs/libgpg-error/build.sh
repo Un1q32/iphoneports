@@ -2,7 +2,7 @@
 . ../../files/lib.sh
 
 (
-cd src
+cd "$_SRCDIR"
 
 case $_CPU in
     (arm64*) cpu=aarch64 ;;

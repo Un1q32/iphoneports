@@ -8,7 +8,7 @@ if [ "$_SUBSYSTEM" = "macos" ] && [ "$_TRUEOSVER" -lt 1050 ]; then
 fi
 
 (
-cd src
+cd "$_SRCDIR"
 "$_TARGET-cc" -o login -Os -flto login.c -DUSE_PAM -DUSE_BSM -lpam -lbsm -w
 mkdir -p "$_DESTDIR/var/usr/bin"
 cp login "$_DESTDIR/var/usr/bin"

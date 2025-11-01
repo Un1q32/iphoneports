@@ -1,11 +1,11 @@
 #!/bin/sh
 . ../../files/lib.sh
 
-cp files/configure.h src/cctools/ld64/src
-cp "$_SDK/var/usr/include/llvm-c/lto.h" "$_SDK/var/usr/include/llvm-c/ExternC.h" src/cctools/include/llvm-c
+cp files/configure.h "$_SRCDIR/cctools/ld64/src"
+cp "$_SDK/var/usr/include/llvm-c/lto.h" "$_SDK/var/usr/include/llvm-c/ExternC.h" "$_SRCDIR/cctools/include/llvm-c"
 
 (
-cd src/cctools
+cd "$_SRCDIR/cctools"
 rm include/foreign/machine/_structs.h
 ./autogen.sh
 ./configure \
@@ -26,6 +26,6 @@ rm -rf share
 strip_and_sign bin/*
 )
 
-installlicense src/cctools/COPYING
+installlicense "$_SRCDIR/cctools/COPYING"
 
 builddeb

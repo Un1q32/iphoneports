@@ -2,7 +2,7 @@
 . ../../files/lib.sh
 
 (
-cd src
+cd "$_SRCDIR"
 if ! command -v gtar >/dev/null; then
     mkdir tmpbin
     printf '%s' "\

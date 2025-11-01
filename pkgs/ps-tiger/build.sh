@@ -9,7 +9,7 @@ if { [ "$_SUBSYSTEM" = "macos" ] && [ "$_TRUEOSVER" -ge 1050 ]; } ||
 fi
 
 (
-cd src
+cd "$_SRCDIR"
 for src in ps.c print.c nlist.c tasks.c keyword.c; do
     "$_TARGET-cc" -Os -flto -c "$src" -D'__FBSDID(x)=' -w -Wno-implicit-int &
 done

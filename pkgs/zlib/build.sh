@@ -2,7 +2,7 @@
 . ../../files/lib.sh
 
 (
-cd src
+cd "$_SRCDIR"
 CHOST="$_TARGET" ./configure --prefix=/var/usr --zlib-compat --force-sse2
 make -j"$_JOBS"
 make DESTDIR="$_DESTDIR" install

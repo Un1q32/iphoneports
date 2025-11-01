@@ -2,7 +2,7 @@
 . ../../files/lib.sh
 
 (
-cd src
+cd "$_SRCDIR"
 make CC="$_TARGET-cc" DESTDIR="$_DESTDIR" PREFIX=/var/usr install -j"$_JOBS"
 )
 

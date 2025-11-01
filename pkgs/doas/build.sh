@@ -2,7 +2,7 @@
 . ../../files/lib.sh
 
 (
-cd src
+cd "$_SRCDIR"
 yacc parse.y
 "$_TARGET-cc" \
     -o doas \

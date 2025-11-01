@@ -2,7 +2,7 @@
 . ../../files/lib.sh
 
 (
-cd src
+cd "$_SRCDIR"
 "$_TARGET-cc" -dM -E - < /dev/null | grep -q __LP64__ && arg=-m64
 if [ "$_SUBSYSTEM" = "ios" ]; then
     sys='iOS'

@@ -3,7 +3,7 @@
 . ../../files/lib.sh
 
 (
-cd src
+cd "$_SRCDIR"
 if [ "$_SUBSYSTEM" = "ios" ] && [ "$_TRUEOSVER" -lt 20000 ]; then
     flags='--disable-ipv6 ac_cv_func_posix_spawn=no'
 fi

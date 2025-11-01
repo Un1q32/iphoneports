@@ -1,8 +1,9 @@
 #!/bin/sh
 . ../../files/lib.sh
-mkdir -p src/build
+
 (
-cd src/build
+mkdir -p "$_SRCDIR/build"
+cd "$_SRCDIR/build"
 if [ "$_SUBSYSTEM" = "macos" ]; then
     hascoreservices=ON
     [ "$_TRUEOSVER" -lt 1050 ] && export LDFLAGS='-framework ApplicationServices'
@@ -29,6 +30,6 @@ rm -rf doc share/cmake-*/Help
 strip_and_sign bin/*
 )
 
-installlicense src/LICENSE.rst
+installlicense "$_SRCDIR/LICENSE.rst"
 
 builddeb

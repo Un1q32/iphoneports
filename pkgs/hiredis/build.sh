@@ -2,8 +2,8 @@
 . ../../files/lib.sh
 
 (
-mkdir -p src/build
-cd src/build
+mkdir -p "$_SRCDIR/build"
+cd "$_SRCDIR/build"
 cmake -GNinja .. \
     -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_C_COMPILER="$_TARGET-cc" \
@@ -17,7 +17,7 @@ cmake -GNinja .. \
 DESTDIR="$_DESTDIR" ninja -j"$_JOBS" install
 )
 
-for lib in pkg/var/usr/lib/*.dylib; do
+for lib in "$_DESTDIR/var/usr/lib"/*.dylib; do
     [ -h "$lib" ] || strip_and_sign "$lib"
 done
 

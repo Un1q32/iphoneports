@@ -2,7 +2,7 @@
 . ../../files/lib.sh
 
 (
-cd src
+cd "$_SRCDIR"
 make CC="$_TARGET-cc"
 mkdir -p "$_DESTDIR/var/usr/bin"
 cp pigz "$_DESTDIR/var/usr/bin"

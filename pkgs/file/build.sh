@@ -3,7 +3,7 @@
 . ../../files/lib.sh
 
 (
-cd src
+cd "$_SRCDIR"
 ./configure --prefix="$_PKGROOT/src/native"
 make -j"$_JOBS"
 make install

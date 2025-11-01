@@ -2,8 +2,8 @@
 . ../../files/lib.sh
 
 (
-mkdir -p src/build
-cd src/build
+mkdir -p "$_SRCDIR/build"
+cd "$_SRCDIR/build"
 cmake -GNinja .. \
     -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_CXX_COMPILER="$_TARGET-c++" \

@@ -3,7 +3,7 @@
 . ../../files/lib.sh
 
 (
-cd src
+cd "$_SRCDIR"
 [ "$_SUBSYSTEM" = "macos" ] && jit=--enable-jit
 ./configure \
     --host="$_TARGET" \

@@ -2,7 +2,7 @@
 . ../../files/lib.sh
 
 (
-cd src
+cd "$_SRCDIR"
 mkdir tmpbin
 ln -s "$(command -v md5sum)" tmpbin/md5
 export PATH="$PATH:$PWD/tmpbin"

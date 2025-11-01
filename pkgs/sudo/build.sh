@@ -3,7 +3,7 @@
 
 (
 unset SUDO_PROMPT
-cd src
+cd "$_SRCDIR"
 ./configure \
     --host="$_TARGET" \
     --prefix=/var/usr \

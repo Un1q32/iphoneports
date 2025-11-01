@@ -2,7 +2,7 @@
 . ../../files/lib.sh
 
 (
-cd src
+cd "$_SRCDIR"
 autoreconf -fi
 ./configure --host="$_TARGET" --prefix=/var/usr --enable-libtls-only --disable-static --enable-nc
 make -j"$_JOBS" install DESTDIR="$_DESTDIR"

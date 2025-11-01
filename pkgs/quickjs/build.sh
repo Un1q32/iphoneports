@@ -2,7 +2,7 @@
 . ../../files/lib.sh
 # shellcheck disable=2086
 (
-cd src
+cd "$_SRCDIR"
 libqjs_objs='.obj/quickjs.o .obj/libregexp.o .obj/libunicode.o .obj/cutils.o .obj/quickjs-libc.o .obj/libbf.o'
 make \
     CROSS_PREFIX="$_TARGET-" \

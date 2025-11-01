@@ -9,7 +9,7 @@ if [ "$_SUBSYSTEM" = "macos" ] && [ "$_TRUEOSVER" -lt 1050 ]; then
 fi
 
 (
-cd src
+cd "$_SRCDIR"
 if [ -f "$_SDK/usr/lib/libutil.dylib" ] || [ -f "$_SDK/usr/lib/libutil.tbd" ]; then
     libutil="$_PKGROOT/files/humanize_number.c"
 else

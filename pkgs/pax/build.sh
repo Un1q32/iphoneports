@@ -2,7 +2,7 @@
 . ../../files/lib.sh
 
 (
-cd src
+cd "$_SRCDIR"
 for src in *.c; do
   "$_TARGET-cc" -Os -flto -c "$src" -D'__FBSDID(x)=' &
 done

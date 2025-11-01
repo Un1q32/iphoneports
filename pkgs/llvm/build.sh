@@ -13,14 +13,15 @@ _get_distribution_components() {
 }
 
 # awful hack to make llvm not define some macros with git revisions
-mkdir -p "$_PKGROOT/src/iphoneports-fakebin"
-printf '#!/bin/sh\nexit 1\n' > "$_PKGROOT/src/iphoneports-fakebin/git"
-chmod +x "$_PKGROOT/src/iphoneports-fakebin/git"
-export PATH="$_PKGROOT/src/iphoneports-fakebin:$PATH"
+mkdir -p "$_SRCDIR/iphoneports-fakebin"
+printf '#!/bin/sh\nexit 1\n' > "$_SRCDIR/iphoneports-fakebin/git"
+chmod +x "$_SRCDIR/iphoneports-fakebin/git"
+export PATH="$_SRCDIR/iphoneports-fakebin:$PATH"
 
 (
-mkdir -p src/build
-cd src/build
+mkdir -p "$_SRCDIR/build"
+cd "$_SRCDIR/build"
+
 tblgen="$(command -v llvm-tblgen)"
 case $_CPU in
     (arm64*) ;;
@@ -86,6 +87,6 @@ for file in bin/* lib/*.dylib; do
 done
 )
 
-installlicense src/llvm/LICENSE.TXT
+installlicense "$_SRCDIR/llvm/LICENSE.TXT"
 
 builddeb

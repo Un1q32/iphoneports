@@ -8,7 +8,7 @@ if [ "$_SUBSYSTEM" = "macos" ] && [ "$_TRUEOSVER" -lt 1050 ]; then
 fi
 
 (
-cd src
+cd "$_SRCDIR"
 export PKG_CONFIG_LIBDIR="$_SDK/var/usr/lib/pkgconfig"
 ./configure \
     --prefix=/var/usr \

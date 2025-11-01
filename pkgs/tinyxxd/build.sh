@@ -2,10 +2,10 @@
 . ../../files/lib.sh
 
 (
-cd src
+cd "$_SRCDIR"
 "$_TARGET-cc" -std=c11 -O3 -flto -o tinyxxd main.c
-mkdir -p "$_PKGROOT"/pkg/var/usr/bin
-cp tinyxxd "$_PKGROOT"/pkg/var/usr/bin
+mkdir -p "$_DESTDIR/var/usr/bin"
+cp tinyxxd "$_DESTDIR/var/usr/bin"
 )
 
 strip_and_sign "$_DESTDIR/var/usr/bin/tinyxxd"

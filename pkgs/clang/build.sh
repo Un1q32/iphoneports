@@ -13,14 +13,15 @@ _get_distribution_components() {
 }
 
 # awful hack to make clang not print git info in version string
-mkdir -p "$_PKGROOT/src/iphoneports-fakebin"
-printf '#!/bin/sh\nexit 1\n' > "$_PKGROOT/src/iphoneports-fakebin/git"
-chmod +x "$_PKGROOT/src/iphoneports-fakebin/git"
-export PATH="$_PKGROOT/src/iphoneports-fakebin:$PATH"
+mkdir -p "$_SRCDIR/iphoneports-fakebin"
+printf '#!/bin/sh\nexit 1\n' > "$_SRCDIR/iphoneports-fakebin/git"
+chmod +x "$_SRCDIR/iphoneports-fakebin/git"
+export PATH="$_SRCDIR/iphoneports-fakebin:$PATH"
 
 (
-mkdir -p src/build
-cd src/build
+mkdir -p "$_SRCDIR/build"
+cd "$_SRCDIR/build"
+
 llvmtblgen="$(command -v llvm-tblgen)"
 clangtblgen="$(command -v clang-tblgen)"
 case $_CPU in
@@ -81,6 +82,6 @@ for file in bin/* lib/*.dylib; do
 done
 )
 
-installlicense src/clang/LICENSE.TXT
+installlicense "$_SRCDIR/clang/LICENSE.TXT"
 
 builddeb

@@ -2,7 +2,7 @@
 . ../../files/lib.sh
 
 (
-cd src
+cd "$_SRCDIR"
 ./configure --host="$_TARGET" --prefix=/var/usr --with-regex=pcre2
 make -j"$_JOBS"
 make DESTDIR="$_DESTDIR" install

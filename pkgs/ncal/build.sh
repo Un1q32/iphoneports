@@ -2,7 +2,7 @@
 . ../../files/lib.sh
 
 (
-cd src
+cd "$_SRCDIR"
 for src in ncal.c calendar.c easter.c; do
   "$_TARGET-cc" -c "$src" -Os -flto -I. -D'__FBSDID(x)=' &
 done

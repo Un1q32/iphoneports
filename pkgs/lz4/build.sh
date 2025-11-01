@@ -2,7 +2,7 @@
 . ../../files/lib.sh
 
 (
-cd src
+cd "$_SRCDIR"
 make CC="$_TARGET-cc" RANLIB="$_TARGET-ranlib" PREFIX=/var/usr DESTDIR="$_DESTDIR" BUILD_STATIC=no TARGET_OS=Darwin install -j"$_JOBS"
 )
 

@@ -2,8 +2,8 @@
 . ../../files/lib.sh
 
 (
-mkdir -p src/build
-cd src/build
+mkdir -p "$_SRCDIR/build"
+cd "$_SRCDIR/build"
 cmake -GNinja .. \
     -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_C_COMPILER="$_TARGET-cc" \
@@ -17,7 +17,7 @@ cmake -GNinja .. \
 DESTDIR="$_DESTDIR" ninja -j"$_JOBS" install
 )
 
-for bin in pkg/var/usr/bin/brotli pkg/var/usr/lib/*.dylib; do
+for bin in "$_DESTDIR/var/usr/bin/brotli" "$_DESTDIR/var/usr/lib"/*.dylib; do
     [ -h "$bin" ] || strip_and_sign "$bin"
 done
 

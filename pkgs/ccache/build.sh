@@ -2,8 +2,8 @@
 . ../../files/lib.sh
 
 (
-mkdir -p src/build
-cd src/build
+mkdir -p "$_SRCDIR/build"
+cd "$_SRCDIR/build"
 cmake -GNinja .. \
   -DCMAKE_BUILD_TYPE=Release \
   -DCMAKE_C_COMPILER="$_TARGET-cc" \
@@ -25,6 +25,6 @@ for cc in cc c++ gcc g++ clang clang++; do
 done
 )
 
-installlicense src/GPL-3.0.txt
+installlicense "$_SRCDIR/GPL-3.0.txt"
 
 builddeb

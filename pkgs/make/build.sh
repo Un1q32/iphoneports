@@ -3,7 +3,7 @@
 . ../../files/lib.sh
 
 (
-cd src
+cd "$_SRCDIR"
 if [ "$_SUBSYSTEM" = "ios" ] && [ "$_TRUEOSVER" -lt 20000 ]; then
     posix_spawn='--disable-posix-spawn'
 fi

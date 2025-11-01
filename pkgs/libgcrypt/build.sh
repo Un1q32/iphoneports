@@ -2,7 +2,7 @@
 . ../../files/lib.sh
 
 (
-cd src
+cd "$_SRCDIR"
 if [ "$_CPU" = "i386" ]; then
     disable=--disable-avx2-support
 fi

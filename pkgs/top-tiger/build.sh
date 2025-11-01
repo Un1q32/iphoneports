@@ -10,7 +10,7 @@ if { [ "$_SUBSYSTEM" = "macos" ] && [ "$_TRUEOSVER" -ge 1050 ]; } ||
 fi
 
 (
-cd src
+cd "$_SRCDIR"
 "$_TARGET-cc" \
     -Os -flto \
     top.c \

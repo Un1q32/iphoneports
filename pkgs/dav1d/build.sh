@@ -1,6 +1,5 @@
 #!/bin/sh
 . ../../files/lib.sh
-mkdir -p src/build
 
 case $_CPU in
     arm64*|aarch64*)
@@ -44,10 +43,11 @@ sed -e "s|@CC@|$_TARGET-cc|g" \
     -e "s|@SUBSYSTEM@|$_SUBSYSTEM|g" \
     -e "s|@SYSROOT@|$_SDK|g" \
     -e "s|@PKGCONFIG_LIBDIR@|$_SDK/var/usr/lib/pkgconfig|g" \
-    files/iphoneports.meson > src/iphoneports.meson
+    files/iphoneports.meson > "$_SRCDIR/iphoneports.meson"
 
 (
-cd src/build
+mkdir -p "$_SRCDIR/build"
+cd "$_SRCDIR/build"
 meson setup .. --cross-file="$_PKGROOT/src/iphoneports.meson" --prefix=/var/usr -Denable_asm="$asm" -Denable_tests=false
 if { [ "$_SUBSYSTEM" = "ios" ] && [ "$_TRUEOSVER" -lt 20000 ]; } || { [ "$_SUBSYSTEM" = "macos" ] && [ "$_TRUEOSVER" -lt 1050 ]; }; then
     sed -i 's/-Wl,-rpath[^[:space:]]*//g' build.ninja

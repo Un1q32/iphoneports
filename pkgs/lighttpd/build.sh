@@ -3,7 +3,7 @@
 . ../../files/lib.sh
 
 (
-cd src
+cd "$_SRCDIR"
 ./autogen.sh
 if [ "$_SUBSYSTEM" = "ios" ] && [ "$_TRUEOSVER" -lt 20000 ]; then
     posix_spawn='ac_cv_func_posix_spawn=no'

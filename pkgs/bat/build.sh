@@ -2,10 +2,10 @@
 . ../../files/lib.sh
 
 # hack to make bat not include the iphoneports git rev
-mkdir -p "$_PKGROOT/src/iphoneports-fakebin"
-printf '#!/bin/sh\nexit 1\n' > "$_PKGROOT/src/iphoneports-fakebin/git"
-chmod +x "$_PKGROOT/src/iphoneports-fakebin/git"
-export PATH="$_PKGROOT/src/iphoneports-fakebin:$PATH"
+mkdir -p "$_SRCDIR/iphoneports-fakebin"
+printf '#!/bin/sh\nexit 1\n' > "$_SRCDIR/iphoneports-fakebin/git"
+chmod +x "$_SRCDIR/iphoneports-fakebin/git"
+export PATH="$_SRCDIR/iphoneports-fakebin:$PATH"
 
 if { [ "$_SUBSYSTEM" = "ios" ] && [ "$_TRUEOSVER" -lt 20000 ]; } ||
     { [ "$_SUBSYSTEM" = "macos" ] && [ "$_TRUEOSVER" -lt 1050 ]; }; then

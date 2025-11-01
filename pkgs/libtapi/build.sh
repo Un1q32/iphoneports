@@ -1,8 +1,9 @@
 #!/bin/sh
 . ../../files/lib.sh
-mkdir -p src/src/build
+
 (
-cd src/src/build
+mkdir -p "$_SRCDIR/src/build"
+cd "$_SRCDIR/src/build"
 tapiversion=1300.6.5
 export PATH="$_PKGROOT/files:$PATH"
 cmake -GNinja ../llvm \
@@ -24,11 +25,11 @@ DESTDIR="$_DESTDIR" ninja -j"$_JOBS" install-libtapi install-tapi-headers
 )
 
 (
-cd "$_DESTDIR/var/usr"/lib
+cd "$_DESTDIR/var/usr/lib"
 install_name_tool -id /var/usr/lib/libtapi.dylib libtapi.dylib
 strip_and_sign libtapi.dylib
 )
 
-installlicense src/LICENSE.*
+installlicense "$_SRCDIR"/LICENSE.*
 
 builddeb

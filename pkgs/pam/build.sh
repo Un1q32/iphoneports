@@ -2,7 +2,7 @@
 . ../../files/lib.sh
 
 (
-cd src/pam
+cd "$_SRCDIR/pam"
 autoconf
 ln -s . pam
 ./configure \
@@ -18,7 +18,7 @@ make install
 )
 
 (
-cd pkg
+cd "$_DESTDIR"
 mv usr/include var/usr
 rm -rf usr
 ln -s pam var/usr/include/security
@@ -28,7 +28,7 @@ strip_and_sign libpam.1.dylib security/*.so
 )
 
 (
-cd src/modules
+cd "$_SRCDIR/modules"
 modules='unix uwtmp'
 if { [ "$_SUBSYSTEM" = "ios" ] && [ "$_TRUEOSVER" -ge 20000 ]; } ||
     { [ "$_SUBSYSTEM" = "macos" ] && [ "$_TRUEOSVER" -ge 1050 ]; } ||
@@ -42,6 +42,6 @@ strip_and_sign ./*.so
 cp ./*.so "$_DESTDIR/var/usr/lib/security"
 )
 
-installlicense src/pam/Copyright files/*
+installlicense "$_SRCDIR/pam/Copyright" files/*
 
 builddeb

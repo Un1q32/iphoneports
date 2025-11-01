@@ -8,7 +8,7 @@ if [ "$_SUBSYSTEM" = "macos" ] && [ "$_TRUEOSVER" -lt 1050 ]; then
 fi
 
 (
-cd src
+cd "$_SRCDIR"
 for src in ps.c print.c nlist.c tasks.c keyword.c; do
     "$_TARGET-cc" -Os -flto -c "$src" -D'__FBSDID(x)=' -Wno-deprecated-non-prototype -Wno-#warnings &
 done
