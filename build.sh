@@ -336,6 +336,7 @@ build() {
             rm -rf "$_DESTDIR" "$_SDK"
             return 2
         }
+        rm -rf "$_SRCDIR"
     fi
     rm -rf "$_SDK"
     )
