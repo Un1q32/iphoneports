@@ -16,7 +16,7 @@ strip_and_sign() {
             "$_TARGET-strip" -no_code_signature_warning -x "$file" # other, probably dylib
         fi
     done
-    if { [ "$_SUBSYSTEM" != "macos" ] && [ "$_TRUEOSVER" -ge 20000 ]; } ||
+    if { [ "$_SUBSYSTEM" != "macos" ] && [ "$_OSVER" -ge 20000 ]; } ||
         [ "$_CPU" = "arm64" ] || [ "$_CPU" = "arm64e" ] ||
         [ "$_ALWAYSSIGN" = 1 ]; then
         ldid -S"$_ENTITLEMENTS" "$@"
