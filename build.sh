@@ -45,7 +45,7 @@ case "$*" in
 esac
 
 case "$*" in
-    *-j*)
+    (*-j*)
         _JOBS="$*" ; _JOBS="${_JOBS#*-j}" ; _JOBS="${_JOBS%% *}"
         case $_JOBS in
             (''|*[!0-9]*) unset _JOBS ;;
