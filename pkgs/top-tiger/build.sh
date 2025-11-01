@@ -2,7 +2,7 @@
 # shellcheck disable=2086
 . ../../files/lib.sh
 
-if { [ "$_SUBSYSTEM" = "macos" ] && [ "$_TRUEOSVER" -ge 1050 ]; } ||
+if { [ "$_SUBSYSTEM" = "macos" ] && [ "$_OSVER" -ge 1050 ]; } ||
     [ "$_SUBSYSTEM" != "macos" ]; then
     printf 'top-tiger is only for Mac OS X 10.4\n'
     mkdir "$_DESTDIR"

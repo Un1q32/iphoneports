@@ -1,9 +1,7 @@
 #!/bin/sh
 . ../../files/lib.sh
 
-if [ "$_SUBSYSTEM" != "ios" ] ||
-    { [ "$_SUBSYSTEM" = "ios" ] &&
-    { [ "$_TRUEOSVER" -ge 70000 ] || [ "$_TRUEOSVER" -lt 20000 ]; }; }; then
+if ! { [ "$_SUBSYSTEM" = "ios" ] && [ "$_OSVER" -ge 20000 ] && [ "$_OSVER" -lt 70000 ]; }; then
     printf 'iconfix is for iOS 2 through 6\n'
     mkdir "$_DESTDIR"
     exit 0

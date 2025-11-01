@@ -2,7 +2,7 @@
 # shellcheck disable=2086
 . ../../files/lib.sh
 
-if [ "$_SUBSYSTEM" = "macos" ] && [ "$_TRUEOSVER" -lt 1050 ]; then
+if [ "$_SUBSYSTEM" = "macos" ] && [ "$_OSVER" -lt 1050 ]; then
     printf 'top requires at least Mac OS X 10.5\n'
     mkdir "$_DESTDIR"
     exit 0

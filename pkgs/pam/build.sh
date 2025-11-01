@@ -30,8 +30,8 @@ strip_and_sign libpam.1.dylib security/*.so
 (
 cd "$_SRCDIR/modules"
 modules='unix uwtmp'
-if { [ "$_SUBSYSTEM" = "ios" ] && [ "$_TRUEOSVER" -ge 20000 ]; } ||
-    { [ "$_SUBSYSTEM" = "macos" ] && [ "$_TRUEOSVER" -ge 1050 ]; } ||
+if { [ "$_SUBSYSTEM" = "ios" ] && [ "$_OSVER" -ge 20000 ]; } ||
+    { [ "$_SUBSYSTEM" = "macos" ] && [ "$_OSVER" -ge 1050 ]; } ||
     { [ "$_SUBSYSTEM" != "macos" ] && [ "$_SUBSYSTEM" != "ios" ]; }; then
     modules="$modules launchd"
 fi

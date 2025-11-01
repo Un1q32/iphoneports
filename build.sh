@@ -165,7 +165,7 @@ depcheck() {
 
     sdk="$("$_TARGET-sdkpath")"
 
-    _TRUEOSVER=
+    _OSVER=
     eval "$(printf '%s' '\
 if [ TARGET_OS_IOS = 1 ]; then
     _SUBSYSTEM=ios
@@ -179,17 +179,17 @@ else
     echo "UNSUPPORTED PLATFORM"
     exit 1
 fi
-_TRUEOSVER=__ENVIRONMENT_OS_VERSION_MIN_REQUIRED__
+_OSVER=__ENVIRONMENT_OS_VERSION_MIN_REQUIRED__
 ' | "$_TARGET-cc" -E -xc -)"
 
-    if [ "$_TRUEOSVER" -lt 10000 ]; then
+    if [ "$_OSVER" -lt 10000 ]; then
         major=10
-        minor=$(((_TRUEOSVER - 1000) / 10))
-        patch=$(((_TRUEOSVER - 1000) % 10))
+        minor=$(((_OSVER - 1000) / 10))
+        patch=$(((_OSVER - 1000) % 10))
     else
-        major=$((_TRUEOSVER / 10000))
-        minor=$(((_TRUEOSVER % 10000) / 100))
-        patch=$((_TRUEOSVER % 100))
+        major=$((_OSVER / 10000))
+        minor=$(((_OSVER % 10000) / 100))
+        patch=$((_OSVER % 100))
     fi
     if [ $patch != 0 ]; then
         _SUBSYSTEMVER="$major.$minor.$patch"
@@ -197,12 +197,12 @@ _TRUEOSVER=__ENVIRONMENT_OS_VERSION_MIN_REQUIRED__
         _SUBSYSTEMVER="$major.$minor"
     fi
 
-    if [ "$_TRUEOSVER" -ge 260000 ] || [ "$_SUBSYSTEM" = "macos" ]; then
+    if [ "$_OSVER" -ge 260000 ] || [ "$_SUBSYSTEM" = "macos" ]; then
         _MACVER=$_SUBSYSTEMVER
     else
         case $_SUBSYSTEM in
             (ios|tvos)
-                case $_TRUEOSVER in
+                case $_OSVER in
                     ([12]????)        _MACVER='10.5'  ;;
                     (3????|40[012]??) _MACVER='10.6'  ;;
                     ([45]????)        _MACVER='10.7'  ;;
@@ -224,7 +224,7 @@ _TRUEOSVER=__ENVIRONMENT_OS_VERSION_MIN_REQUIRED__
             ;;
 
             (watchos)
-                case $_TRUEOSVER in
+                case $_OSVER in
                     (2????)  _MACVER='10.11' ;;
                     (3????)  _MACVER='10.12' ;;
                     (4????)  _MACVER='10.13' ;;
@@ -245,8 +245,8 @@ _TRUEOSVER=__ENVIRONMENT_OS_VERSION_MIN_REQUIRED__
         esac
     fi
 
-    { [ "$_SUBSYSTEM" = "ios" ] && [ "$_TRUEOSVER" -lt 20000 ]; } ||
-        { [ "$_SUBSYSTEM" = "macos" ] && [ "$_TRUEOSVER" -lt 1050 ]; } && recursivedeps=1
+    { [ "$_SUBSYSTEM" = "ios" ] && [ "$_OSVER" -lt 20000 ]; } ||
+        { [ "$_SUBSYSTEM" = "macos" ] && [ "$_OSVER" -lt 1050 ]; } && recursivedeps=1
 
     case $_CPU in
         (arm64*|aarch64*)
@@ -261,7 +261,7 @@ _TRUEOSVER=__ENVIRONMENT_OS_VERSION_MIN_REQUIRED__
         ;;
 
         (arm*)
-            if [ "$_TRUEOSVER" -lt 20000 ]; then
+            if [ "$_OSVER" -lt 20000 ]; then
                 _DPKGARCH=darwin-arm
             else
                 _DPKGARCH=iphoneos-arm
@@ -304,7 +304,7 @@ _TRUEOSVER=__ENVIRONMENT_OS_VERSION_MIN_REQUIRED__
     iphoneportspath="${iphoneportspath%/*}/../share/iphoneports/bin"
     PATH="$iphoneportspath:$PATH"
 
-    export _MAKE _SUBSYSTEM _SUBSYSTEMVER _CPU _DPKGARCH _MACVER _ENTITLEMENTS _TRUEOSVER PATH
+    export _MAKE _SUBSYSTEM _SUBSYSTEMVER _CPU _DPKGARCH _MACVER _ENTITLEMENTS _OSVER PATH
 }
 
 build() {

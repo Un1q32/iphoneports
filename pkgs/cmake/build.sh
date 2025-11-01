@@ -6,7 +6,7 @@ mkdir -p "$_SRCDIR/build"
 cd "$_SRCDIR/build"
 if [ "$_SUBSYSTEM" = "macos" ]; then
     hascoreservices=ON
-    [ "$_TRUEOSVER" -lt 1050 ] && export LDFLAGS='-framework ApplicationServices'
+    [ "$_OSVER" -lt 1050 ] && export LDFLAGS='-framework ApplicationServices'
 fi
 cmake -GNinja .. \
     -DCMAKE_BUILD_TYPE=Release \

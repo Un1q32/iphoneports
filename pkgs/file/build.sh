@@ -10,7 +10,7 @@ make install
 make clean
 export PATH="$_SRCDIR/native/bin:$PATH"
 
-if [ "$_SUBSYSTEM" = "ios" ] && [ "$_TRUEOSVER" -lt 20000 ]; then
+if [ "$_SUBSYSTEM" = "ios" ] && [ "$_OSVER" -lt 20000 ]; then
     posix_spawn='ac_cv_func_posix_spawnp=no'
 fi
 ./configure --host="$_TARGET" --prefix=/var/usr --enable-xzlib --enable-bzlib --enable-zlib --enable-zstdlib $posix_spawn

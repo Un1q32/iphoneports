@@ -49,7 +49,7 @@ sed -e "s|@CC@|$_TARGET-cc|g" \
 mkdir -p "$_SRCDIR/build"
 cd "$_SRCDIR/build"
 meson setup .. --cross-file="$_SRCDIR/iphoneports.meson" --prefix=/var/usr -Denable_asm="$asm" -Denable_tests=false
-if { [ "$_SUBSYSTEM" = "ios" ] && [ "$_TRUEOSVER" -lt 20000 ]; } || { [ "$_SUBSYSTEM" = "macos" ] && [ "$_TRUEOSVER" -lt 1050 ]; }; then
+if { [ "$_SUBSYSTEM" = "ios" ] && [ "$_OSVER" -lt 20000 ]; } || { [ "$_SUBSYSTEM" = "macos" ] && [ "$_OSVER" -lt 1050 ]; }; then
     sed -i 's/-Wl,-rpath[^[:space:]]*//g' build.ninja
 fi
 DESTDIR="$_DESTDIR" ninja -j"$_JOBS" install

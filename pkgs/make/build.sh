@@ -4,7 +4,7 @@
 
 (
 cd "$_SRCDIR"
-if [ "$_SUBSYSTEM" = "ios" ] && [ "$_TRUEOSVER" -lt 20000 ]; then
+if [ "$_SUBSYSTEM" = "ios" ] && [ "$_OSVER" -lt 20000 ]; then
     posix_spawn='--disable-posix-spawn'
 fi
 ./configure --host="$_TARGET" --prefix=/var/usr $posix_spawn

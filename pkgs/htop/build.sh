@@ -1,8 +1,8 @@
 #!/bin/sh
 . ../../files/lib.sh
 
-if { [ "$_SUBSYSTEM" = "ios" ] && [ "$_TRUEOSVER" -lt 20000 ]; } ||
-    { [ "$_SUBSYSTEM" = "macos" ] && [ "$_TRUEOSVER" -lt 1050 ]; }; then
+if { [ "$_SUBSYSTEM" = "ios" ] && [ "$_OSVER" -lt 20000 ]; } ||
+    { [ "$_SUBSYSTEM" = "macos" ] && [ "$_OSVER" -lt 1050 ]; }; then
     printf 'htop requires libproc, which is present on Mac OS X 10.5+ and iPhone OS 2.0+\n'
     mkdir "$_DESTDIR"
     exit 0

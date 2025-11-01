@@ -4,7 +4,7 @@
 
 (
 cd "$_SRCDIR"
-if [ "$_SUBSYSTEM" = "ios" ] && [ "$_TRUEOSVER" -lt 20000 ]; then
+if [ "$_SUBSYSTEM" = "ios" ] && [ "$_OSVER" -lt 20000 ]; then
     ipv6='--disable-ipv6'
 fi
 ./configure \

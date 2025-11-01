@@ -17,9 +17,9 @@ mkdir _buildpython && cd _buildpython || exit 1
 make install -j"$_JOBS"
 )
 
-if [ "$_SUBSYSTEM" = "ios" ] && [ "$_TRUEOSVER" -lt 20000 ]; then
+if [ "$_SUBSYSTEM" = "ios" ] && [ "$_OSVER" -lt 20000 ]; then
     posix_spawn='ac_cv_func_posix_spawn=no ac_cv_func_posix_spawnp=no --disable-ipv6'
-elif [ "$_SUBSYSTEM" = "macos" ] && [ "$_TRUEOSVER" -lt 1050 ]; then
+elif [ "$_SUBSYSTEM" = "macos" ] && [ "$_OSVER" -lt 1050 ]; then
     remote_debug='--without-remote-debug py_cv_module__remote_debugging=n/a'
 fi
 ./configure \
