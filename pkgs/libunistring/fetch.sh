@@ -3,6 +3,6 @@ rm -rf "$_DESTDIR" "$_SRCDIR"
 printf "Downloading source...\n"
 curl -L -# -o src.tar.xz https://ftpmirror.gnu.org/gnu/libunistring/libunistring-1.3.tar.xz
 printf "Unpacking source...\n"
-tar -xf src.tar.xz
+tar -C "$_TMP" -xf src.tar.xz
 rm src.tar.xz
-mv libunistring-* "$_SRCDIR"
+mv "$_TMP"/libunistring-* "$_SRCDIR"

@@ -3,6 +3,6 @@ rm -rf "$_DESTDIR" "$_SRCDIR"
 printf "Downloading source...\n"
 curl -L -# -o src.tar.gz https://github.com/sharkdp/bat/archive/refs/tags/v0.25.0.tar.gz
 printf "Unpacking source...\n"
-tar -xf src.tar.gz
+tar -C "$_TMP" -xf src.tar.gz
 rm src.tar.gz
-mv bat-* "$_SRCDIR"
+mv "$_TMP"/bat-* "$_SRCDIR"

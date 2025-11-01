@@ -3,6 +3,6 @@ rm -rf "$_DESTDIR" "$_SRCDIR"
 printf "Downloading source...\n"
 curl -L -# -o src.tar.xz https://curl.se/download/curl-8.16.0.tar.xz
 printf "Unpacking source...\n"
-tar -xf src.tar.xz
+tar -C "$_TMP" -xf src.tar.xz
 rm src.tar.xz
-mv curl-* "$_SRCDIR"
+mv "$_TMP"/curl-* "$_SRCDIR"

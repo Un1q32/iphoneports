@@ -3,6 +3,6 @@ rm -rf "$_DESTDIR" "$_SRCDIR"
 printf "Downloading source...\n"
 curl -L -# -o src.tar.gz https://github.com/pixel/hexedit/archive/refs/tags/1.6.tar.gz
 printf "Unpacking source...\n"
-tar -xf src.tar.gz
+tar -C "$_TMP" -xf src.tar.gz
 rm src.tar.gz
-mv hexedit-1.6 "$_SRCDIR"
+mv "$_TMP"/hexedit-1.6 "$_SRCDIR"
