@@ -7,5 +7,5 @@ if [ ! -f "$_DLCACHE/gmp-$ver.tar.xz" ] ||
     curl -L -# -o "$_DLCACHE/gmp-$ver.tar.xz" "https://ftpmirror.gnu.org/gnu/gmp/gmp-$ver.tar.xz" || exit 1
 fi
 printf "Unpacking source...\n"
-tar -xf "$_DLCACHE/gmp-$ver.tar.xz"
-mv gmp-* "$_SRCDIR"
+tar -C "$_TMP" -xf "$_DLCACHE/gmp-$ver.tar.xz"
+mv "$_TMP"/gmp-* "$_SRCDIR"

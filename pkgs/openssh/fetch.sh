@@ -7,5 +7,5 @@ if [ ! -f "$_DLCACHE/openssh-$ver.tar.gz" ] ||
     curl -L -# -o "$_DLCACHE/openssh-$ver.tar.gz" "https://cdn.openbsd.org/pub/OpenBSD/OpenSSH/portable/openssh-$ver.tar.gz" || exit 1
 fi
 printf "Unpacking source...\n"
-tar -xf "$_DLCACHE/openssh-$ver.tar.gz"
-mv openssh-* "$_SRCDIR"
+tar -C "$_TMP" -xf "$_DLCACHE/openssh-$ver.tar.gz"
+mv "$_TMP"/openssh-* "$_SRCDIR"

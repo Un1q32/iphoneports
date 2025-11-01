@@ -7,5 +7,5 @@ if [ ! -f "$_DLCACHE/ncurses-$ver.tar.gz" ] ||
     curl -L -# -o "$_DLCACHE/ncurses-$ver.tar.gz" "https://ftpmirror.gnu.org/gnu/ncurses/ncurses-$ver.tar.gz" || exit 1
 fi
 printf "Unpacking source...\n"
-tar -xf "$_DLCACHE/ncurses-$ver.tar.gz"
-mv ncurses-* "$_SRCDIR"
+tar -C "$_TMP" -xf "$_DLCACHE/ncurses-$ver.tar.gz"
+mv "$_TMP"/ncurses-* "$_SRCDIR"

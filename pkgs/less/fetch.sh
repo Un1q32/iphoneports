@@ -7,5 +7,5 @@ if [ ! -f "$_DLCACHE/less-$ver.tar.gz" ] ||
     curl -L -# -o "$_DLCACHE/less-$ver.tar.gz" "https://www.greenwoodsoftware.com/less/less-$ver.tar.gz" || exit 1
 fi
 printf "Unpacking source...\n"
-tar -xf "$_DLCACHE/less-$ver.tar.gz"
-mv less-* "$_SRCDIR"
+tar -C "$_TMP" -xf "$_DLCACHE/less-$ver.tar.gz"
+mv "$_TMP"/less-* "$_SRCDIR"

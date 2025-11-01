@@ -7,5 +7,5 @@ if [ ! -f "$_DLCACHE/libtapi-$ver.tar.gz" ] ||
     curl -L -# -o "$_DLCACHE/libtapi-$ver.tar.gz" "https://github.com/tpoechtrager/apple-libtapi/archive/$ver.tar.gz" || exit 1
 fi
 printf "Unpacking source...\n"
-tar -xf "$_DLCACHE/libtapi-$ver.tar.gz"
-mv apple-libtapi-* "$_SRCDIR"
+tar -C "$_TMP" -xf "$_DLCACHE/libtapi-$ver.tar.gz"
+mv "$_TMP"/apple-libtapi-* "$_SRCDIR"

@@ -7,5 +7,5 @@ if [ ! -f "$_DLCACHE/findutils-$ver.tar.xz" ] ||
     curl -L -# -o "$_DLCACHE/findutils-$ver.tar.xz" "https://ftpmirror.gnu.org/gnu/findutils/findutils-$ver.tar.xz" || exit 1
 fi
 printf "Unpacking source...\n"
-tar -xf "$_DLCACHE/findutils-$ver.tar.xz"
-mv findutils-* "$_SRCDIR"
+tar -C "$_TMP" -xf "$_DLCACHE/findutils-$ver.tar.xz"
+mv "$_TMP"/findutils-* "$_SRCDIR"

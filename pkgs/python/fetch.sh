@@ -7,5 +7,5 @@ if [ ! -f "$_DLCACHE/python-$ver.tar.xz" ] ||
     curl -L -# -o "$_DLCACHE/python-$ver.tar.xz" "https://www.python.org/ftp/python/$ver/Python-$ver.tar.xz" || exit 1
 fi
 printf "Unpacking source...\n"
-tar -xf "$_DLCACHE/python-$ver.tar.xz"
-mv Python-* "$_SRCDIR"
+tar -C "$_TMP" -xf "$_DLCACHE/python-$ver.tar.xz"
+mv "$_TMP"/Python-* "$_SRCDIR"

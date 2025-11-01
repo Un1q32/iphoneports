@@ -7,5 +7,5 @@ if [ ! -f "$_DLCACHE/ffmpeg-$ver.tar.xz" ] ||
     curl -L -# -o "$_DLCACHE/ffmpeg-$ver.tar.xz" "https://ffmpeg.org/releases/ffmpeg-$ver.tar.xz" || exit 1
 fi
 printf "Unpacking source...\n"
-tar -xf "$_DLCACHE/ffmpeg-$ver.tar.xz"
-mv ffmpeg-* "$_SRCDIR"
+tar -C "$_TMP" -xf "$_DLCACHE/ffmpeg-$ver.tar.xz"
+mv "$_TMP"/ffmpeg-* "$_SRCDIR"

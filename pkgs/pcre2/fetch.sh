@@ -7,5 +7,5 @@ if [ ! -f "$_DLCACHE/pcre2-$ver.tar.bz2" ] ||
     curl -L -# -o "$_DLCACHE/pcre2-$ver.tar.bz2" "https://github.com/PCRE2Project/pcre2/releases/download/pcre2-$ver/pcre2-$ver.tar.bz2" || exit 1
 fi
 printf "Unpacking source...\n"
-tar -xf "$_DLCACHE/pcre2-$ver.tar.bz2"
-mv pcre2-* "$_SRCDIR"
+tar -C "$_TMP" -xf "$_DLCACHE/pcre2-$ver.tar.bz2"
+mv "$_TMP"/pcre2-* "$_SRCDIR"

@@ -7,5 +7,5 @@ if [ ! -f "$_DLCACHE/luajit-$ver.tar.gz" ] ||
     curl -L -# -o "$_DLCACHE/luajit-$ver.tar.gz" "https://github.com/LuaJIT/LuaJIT/archive/$ver.tar.gz" || exit 1
 fi
 printf "Unpacking source...\n"
-tar -xf "$_DLCACHE/luajit-$ver.tar.gz"
-mv LuaJIT-* "$_SRCDIR"
+tar -C "$_TMP" -xf "$_DLCACHE/luajit-$ver.tar.gz"
+mv "$_TMP"/LuaJIT-* "$_SRCDIR"

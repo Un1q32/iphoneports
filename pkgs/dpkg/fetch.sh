@@ -7,6 +7,6 @@ if [ ! -f "$_DLCACHE/dpkg-$ver.tar.bz2" ] ||
     curl -L -# -o "$_DLCACHE/dpkg-$ver.tar.bz2" "https://salsa.debian.org/dpkg-team/dpkg/-/archive/$ver/dpkg-$ver.tar.bz2" || exit 1
 fi
 printf "Unpacking source...\n"
-tar -xf "$_DLCACHE/dpkg-$ver.tar.bz2"
-mv dpkg-* "$_SRCDIR"
+tar -C "$_TMP" -xf "$_DLCACHE/dpkg-$ver.tar.bz2"
+mv "$_TMP"/dpkg-* "$_SRCDIR"
 printf '%s\n' "$ver" > "$_SRCDIR/.dist-version"

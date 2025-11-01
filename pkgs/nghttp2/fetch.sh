@@ -7,5 +7,5 @@ if [ ! -f "$_DLCACHE/nghttp2-$ver.tar.xz" ] ||
     curl -L -# -o "$_DLCACHE/nghttp2-$ver.tar.xz" "https://github.com/nghttp2/nghttp2/releases/download/v$ver/nghttp2-$ver.tar.xz" || exit 1
 fi
 printf "Unpacking source...\n"
-tar -xf "$_DLCACHE/nghttp2-$ver.tar.xz"
-mv nghttp2-* "$_SRCDIR"
+tar -C "$_TMP" -xf "$_DLCACHE/nghttp2-$ver.tar.xz"
+mv "$_TMP"/nghttp2-* "$_SRCDIR"

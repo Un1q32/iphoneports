@@ -7,5 +7,5 @@ if [ ! -f "$_DLCACHE/nano-$ver.tar.gz" ] ||
     curl -L -# -o "$_DLCACHE/nano-$ver.tar.gz" "https://ftpmirror.gnu.org/gnu/nano/nano-$ver.tar.gz" || exit 1
 fi
 printf "Unpacking source...\n"
-tar -xf "$_DLCACHE/nano-$ver.tar.gz"
-mv nano-* "$_SRCDIR"
+tar -C "$_TMP" -xf "$_DLCACHE/nano-$ver.tar.gz"
+mv "$_TMP"/nano-* "$_SRCDIR"

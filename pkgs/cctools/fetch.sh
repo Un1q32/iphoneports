@@ -7,5 +7,5 @@ if [ ! -f "$_DLCACHE/cctools-$ver.tar.gz" ] ||
     curl -L -# -o "$_DLCACHE/cctools-$ver.tar.gz" "https://github.com/Un1q32/cctools-port/archive/$ver.tar.gz" || exit 1
 fi
 printf "Unpacking source...\n"
-tar -xf "$_DLCACHE/cctools-$ver.tar.gz"
-mv cctools-port-* "$_SRCDIR"
+tar -C "$_TMP" -xf "$_DLCACHE/cctools-$ver.tar.gz"
+mv "$_TMP"/cctools-port-* "$_SRCDIR"

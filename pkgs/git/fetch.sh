@@ -7,5 +7,5 @@ if [ ! -f "$_DLCACHE/git-$ver.tar.xz" ] ||
     curl -L -# -o "$_DLCACHE/git-$ver.tar.xz" "https://mirrors.edge.kernel.org/pub/software/scm/git/git-$ver.tar.xz" || exit 1
 fi
 printf "Unpacking source...\n"
-tar -xf "$_DLCACHE/git-$ver.tar.xz"
-mv git-* "$_SRCDIR"
+tar -C "$_TMP" -xf "$_DLCACHE/git-$ver.tar.xz"
+mv "$_TMP"/git-* "$_SRCDIR"

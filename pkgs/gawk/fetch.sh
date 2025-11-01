@@ -7,5 +7,5 @@ if [ ! -f "$_DLCACHE/gawk-$ver.tar.xz" ] ||
     curl -L -# -o "$_DLCACHE/gawk-$ver.tar.xz" "https://ftpmirror.gnu.org/gnu/gawk/gawk-$ver.tar.xz" || exit 1
 fi
 printf "Unpacking source...\n"
-tar -xf "$_DLCACHE/gawk-$ver.tar.xz"
-mv gawk-* "$_SRCDIR"
+tar -C "$_TMP" -xf "$_DLCACHE/gawk-$ver.tar.xz"
+mv "$_TMP"/gawk-* "$_SRCDIR"

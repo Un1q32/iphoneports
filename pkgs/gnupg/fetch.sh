@@ -7,5 +7,5 @@ if [ ! -f "$_DLCACHE/gnupg-$ver.tar.bz2" ] ||
     curl -L -# -o "$_DLCACHE/gnupg-$ver.tar.bz2" "https://gnupg.org/ftp/gcrypt/gnupg/gnupg-$ver.tar.bz2" || exit 1
 fi
 printf "Unpacking source...\n"
-tar -xf "$_DLCACHE/gnupg-$ver.tar.bz2"
-mv gnupg-* "$_SRCDIR"
+tar -C "$_TMP" -xf "$_DLCACHE/gnupg-$ver.tar.bz2"
+mv "$_TMP"/gnupg-* "$_SRCDIR"

@@ -7,5 +7,5 @@ if [ ! -f "$_DLCACHE/ngtcp2-$ver.tar.xz" ] ||
     curl -L -# -o "$_DLCACHE/ngtcp2-$ver.tar.xz" "https://github.com/ngtcp2/ngtcp2/releases/download/v$ver/ngtcp2-$ver.tar.xz" || exit 1
 fi
 printf "Unpacking source...\n"
-tar -xf "$_DLCACHE/ngtcp2-$ver.tar.xz"
-mv ngtcp2-* "$_SRCDIR"
+tar -C "$_TMP" -xf "$_DLCACHE/ngtcp2-$ver.tar.xz"
+mv "$_TMP"/ngtcp2-* "$_SRCDIR"

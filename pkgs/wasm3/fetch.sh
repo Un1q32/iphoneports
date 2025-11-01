@@ -7,5 +7,5 @@ if [ ! -f "$_DLCACHE/wasm3-$ver.tar.gz" ] ||
     curl -L -# -o "$_DLCACHE/wasm3-$ver.tar.gz" "https://github.com/wasm3/wasm3/archive/$ver.tar.gz" || exit 1
 fi
 printf "Unpacking source...\n"
-tar -xf "$_DLCACHE/wasm3-$ver.tar.gz"
-mv wasm3-* "$_SRCDIR"
+tar -C "$_TMP" -xf "$_DLCACHE/wasm3-$ver.tar.gz"
+mv "$_TMP"/wasm3-* "$_SRCDIR"

@@ -7,5 +7,5 @@ if [ ! -f "$_DLCACHE/bash-completion-$ver.tar.xz" ] ||
     curl -L -# -o "$_DLCACHE/bash-completion-$ver.tar.xz" "https://github.com/scop/bash-completion/releases/download/$ver/bash-completion-$ver.tar.xz" || exit 1
 fi
 printf "Unpacking source...\n"
-tar -xf "$_DLCACHE/bash-completion-$ver.tar.xz"
-mv bash-completion-* "$_SRCDIR"
+tar -C "$_TMP" -xf "$_DLCACHE/bash-completion-$ver.tar.xz"
+mv "$_TMP"/bash-completion-* "$_SRCDIR"

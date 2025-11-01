@@ -7,5 +7,5 @@ if [ ! -f "$_DLCACHE/openssl-$ver.tar.gz" ] ||
     curl -L -# -o "$_DLCACHE/openssl-$ver.tar.gz" "https://github.com/openssl/openssl/releases/download/openssl-$ver/openssl-$ver.tar.gz" || exit 1
 fi
 printf "Unpacking source...\n"
-tar -xf "$_DLCACHE/openssl-$ver.tar.gz"
-mv openssl-* "$_SRCDIR"
+tar -C "$_TMP" -xf "$_DLCACHE/openssl-$ver.tar.gz"
+mv "$_TMP"/openssl-* "$_SRCDIR"

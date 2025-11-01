@@ -7,5 +7,5 @@ if [ ! -f "$_DLCACHE/coreutils-$ver.tar.xz" ] ||
     curl -L -# -o "$_DLCACHE/coreutils-$ver.tar.xz" "https://ftpmirror.gnu.org/gnu/coreutils/coreutils-$ver.tar.xz" || exit 1
 fi
 printf "Unpacking source...\n"
-tar -xf "$_DLCACHE/coreutils-$ver.tar.xz"
-mv coreutils-* "$_SRCDIR"
+tar -C "$_TMP" -xf "$_DLCACHE/coreutils-$ver.tar.xz"
+mv "$_TMP"/coreutils-* "$_SRCDIR"

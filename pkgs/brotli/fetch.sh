@@ -7,5 +7,5 @@ if [ ! -f "$_DLCACHE/brotli-$ver.tar.gz" ] ||
     curl -L -# -o "$_DLCACHE/brotli-$ver.tar.gz" "https://github.com/google/brotli/archive/refs/tags/v$ver.tar.gz" || exit 1
 fi
 printf "Unpacking source...\n"
-tar -xf "$_DLCACHE/brotli-$ver.tar.gz"
-mv brotli-* "$_SRCDIR"
+tar -C "$_TMP" -xf "$_DLCACHE/brotli-$ver.tar.gz"
+mv "$_TMP"/brotli-* "$_SRCDIR"

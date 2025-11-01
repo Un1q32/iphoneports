@@ -7,5 +7,5 @@ if [ ! -f "$_DLCACHE/sudo-$ver.tar.gz" ] ||
     curl -L -# -o "$_DLCACHE/sudo-$ver.tar.gz" "https://www.sudo.ws/dist/sudo-$ver.tar.gz" || exit 1
 fi
 printf "Unpacking source...\n"
-tar -xf "$_DLCACHE/sudo-$ver.tar.gz"
-mv sudo-* "$_SRCDIR"
+tar -C "$_TMP" -xf "$_DLCACHE/sudo-$ver.tar.gz"
+mv "$_TMP"/sudo-* "$_SRCDIR"

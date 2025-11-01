@@ -7,5 +7,5 @@ if [ ! -f "$_DLCACHE/wget-$ver.tar.gz" ] ||
     curl -L -# -o "$_DLCACHE/wget-$ver.tar.gz" "https://ftpmirror.gnu.org/gnu/wget/wget-$ver.tar.gz" || exit 1
 fi
 printf "Unpacking source...\n"
-tar -xf "$_DLCACHE/wget-$ver.tar.gz"
-mv wget-* "$_SRCDIR"
+tar -C "$_TMP" -xf "$_DLCACHE/wget-$ver.tar.gz"
+mv "$_TMP"/wget-* "$_SRCDIR"

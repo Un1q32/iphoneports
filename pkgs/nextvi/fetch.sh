@@ -7,5 +7,5 @@ if [ ! -f "$_DLCACHE/nextvi-$ver.tar.gz" ] ||
     curl -L -# -o "$_DLCACHE/nextvi-$ver.tar.gz" "https://github.com/Un1q32/nextvi/archive/$ver.tar.gz" || exit 1
 fi
 printf "Unpacking source...\n"
-tar -xf "$_DLCACHE/nextvi-$ver.tar.gz"
-mv nextvi-* "$_SRCDIR"
+tar -C "$_TMP" -xf "$_DLCACHE/nextvi-$ver.tar.gz"
+mv "$_TMP"/nextvi-* "$_SRCDIR"

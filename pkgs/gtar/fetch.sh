@@ -7,5 +7,5 @@ if [ ! -f "$_DLCACHE/gtar-$ver.tar.xz" ] ||
     curl -L -# -o "$_DLCACHE/gtar-$ver.tar.xz" "https://ftpmirror.gnu.org/gnu/tar/tar-$ver.tar.xz" || exit 1
 fi
 printf "Unpacking source...\n"
-tar -xf "$_DLCACHE/gtar-$ver.tar.xz"
-mv tar-* "$_SRCDIR"
+tar -C "$_TMP" -xf "$_DLCACHE/gtar-$ver.tar.xz"
+mv "$_TMP"/tar-* "$_SRCDIR"

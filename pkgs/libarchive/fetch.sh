@@ -7,5 +7,5 @@ if [ ! -f "$_DLCACHE/libarchive-$ver.tar.xz" ] ||
     curl -L -# -o "$_DLCACHE/libarchive-$ver.tar.xz" "https://www.libarchive.org/downloads/libarchive-$ver.tar.xz" || exit 1
 fi
 printf "Unpacking source...\n"
-tar -xf "$_DLCACHE/libarchive-$ver.tar.xz"
-mv libarchive-* "$_SRCDIR"
+tar -C "$_TMP" -xf "$_DLCACHE/libarchive-$ver.tar.xz"
+mv "$_TMP"/libarchive-* "$_SRCDIR"

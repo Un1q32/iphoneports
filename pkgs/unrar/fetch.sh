@@ -7,5 +7,5 @@ if [ ! -f "$_DLCACHE/unrar-$ver.tar.gz" ] ||
     curl -L -# -o "$_DLCACHE/unrar-$ver.tar.gz" "https://www.rarlab.com/rar/unrarsrc-$ver.tar.gz" || exit 1
 fi
 printf "Unpacking source...\n"
-tar -xf "$_DLCACHE/unrar-$ver.tar.gz"
-mv unrar "$_SRCDIR"
+tar -C "$_TMP" -xf "$_DLCACHE/unrar-$ver.tar.gz"
+mv "$_TMP/unrar" "$_SRCDIR"

@@ -7,5 +7,5 @@ if [ ! -f "$_DLCACHE/cmake-$ver.tar.gz" ] ||
     curl -L -# -o "$_DLCACHE/cmake-$ver.tar.gz" "https://github.com/Kitware/CMake/archive/refs/tags/v$ver.tar.gz" || exit 1
 fi
 printf "Unpacking source...\n"
-tar -xf "$_DLCACHE/cmake-$ver.tar.gz"
-mv CMake-* "$_SRCDIR"
+tar -C "$_TMP" -xf "$_DLCACHE/cmake-$ver.tar.gz"
+mv "$_TMP"/CMake-* "$_SRCDIR"

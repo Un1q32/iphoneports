@@ -7,5 +7,5 @@ if [ ! -f "$_DLCACHE/fmt-$ver.tar.gz" ] ||
     curl -L -# -o "$_DLCACHE/fmt-$ver.tar.gz" "https://github.com/fmtlib/fmt/archive/refs/tags/$ver.tar.gz" || exit 1
 fi
 printf "Unpacking source...\n"
-tar -xf "$_DLCACHE/fmt-$ver.tar.gz"
-mv fmt-* "$_SRCDIR"
+tar -C "$_TMP" -xf "$_DLCACHE/fmt-$ver.tar.gz"
+mv "$_TMP"/fmt-* "$_SRCDIR"

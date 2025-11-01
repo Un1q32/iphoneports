@@ -7,5 +7,5 @@ if [ ! -f "$_DLCACHE/ctags-$ver.tar.gz" ] ||
     curl -L -# -o "$_DLCACHE/ctags-$ver.tar.gz" "https://github.com/universal-ctags/ctags/releases/download/v$ver/universal-ctags-$ver.tar.gz" || exit 1
 fi
 printf "Unpacking source...\n"
-tar -xf "$_DLCACHE/ctags-$ver.tar.gz"
-mv universal-ctags-* "$_SRCDIR"
+tar -C "$_TMP" -xf "$_DLCACHE/ctags-$ver.tar.gz"
+mv "$_TMP"/universal-ctags-* "$_SRCDIR"

@@ -7,5 +7,5 @@ if [ ! -f "$_DLCACHE/libpsl-$ver.tar.gz" ] ||
     curl -L -# -o "$_DLCACHE/libpsl-$ver.tar.gz" "https://github.com/rockdaboot/libpsl/releases/download/0.21.5/libpsl-$ver.tar.gz" || exit 1
 fi
 printf "Unpacking source...\n"
-tar -xf "$_DLCACHE/libpsl-$ver.tar.gz"
-mv libpsl-* "$_SRCDIR"
+tar -C "$_TMP" -xf "$_DLCACHE/libpsl-$ver.tar.gz"
+mv "$_TMP"/libpsl-* "$_SRCDIR"

@@ -7,5 +7,5 @@ if [ ! -f "$_DLCACHE/ripgrep-$ver.tar.gz" ] ||
     curl -L -# -o "$_DLCACHE/ripgrep-$ver.tar.gz" "https://github.com/BurntSushi/ripgrep/archive/refs/tags/$ver.tar.gz" || exit 1
 fi
 printf "Unpacking source...\n"
-tar -xf "$_DLCACHE/ripgrep-$ver.tar.gz"
-mv ripgrep-* "$_SRCDIR"
+tar -C "$_TMP" -xf "$_DLCACHE/ripgrep-$ver.tar.gz"
+mv "$_TMP"/ripgrep-* "$_SRCDIR"
