@@ -1,7 +1,6 @@
 #!/bin/sh
 rm -rf "$_DESTDIR" "$_SRCDIR"
 ver='2.51.2'
-[ -z "$_DLCACHE" ] && _DLCACHE=/tmp
 if [ ! -f "$_DLCACHE/git-$ver.tar.xz" ] ||
     [ "$(sha256sum "$_DLCACHE/git-$ver.tar.xz" | awk '{print $1}')" != "233d7143a2d58e60755eee9b76f559ec73ea2b3c297f5b503162ace95966b4e3" ]; then
     printf "Downloading source...\n"

@@ -1,7 +1,6 @@
 #!/bin/sh
 rm -rf "$_DESTDIR" "$_SRCDIR"
 ver='1.68.0'
-[ -z "$_DLCACHE" ] && _DLCACHE=/tmp
 if [ ! -f "$_DLCACHE/nghttp2-$ver.tar.xz" ] ||
     [ "$(sha256sum "$_DLCACHE/nghttp2-$ver.tar.xz" | awk '{print $1}')" != "5511d3128850e01b5b26ec92bf39df15381c767a63441438b25ad6235def902c" ]; then
     printf "Downloading source...\n"

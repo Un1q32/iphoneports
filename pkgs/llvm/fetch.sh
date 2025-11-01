@@ -1,7 +1,6 @@
 #!/bin/sh
 rm -rf "$_DESTDIR" "$_SRCDIR"
 ver='21.1.4'
-[ -z "$_DLCACHE" ] && _DLCACHE=/tmp
 if [ ! -f "$_DLCACHE/llvm-$ver.tar.gz" ] ||
     [ "$(sha256sum "$_DLCACHE/llvm-$ver.tar.gz" | awk '{print $1}')" != "3a0921d78be74302cb054da1dad59e706814d8fed3a6ac9b532e935825a0715c" ]; then
     printf "Downloading source...\n"

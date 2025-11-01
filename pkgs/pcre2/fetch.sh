@@ -1,7 +1,6 @@
 #!/bin/sh
 rm -rf "$_DESTDIR" "$_SRCDIR"
 ver='10.47'
-[ -z "$_DLCACHE" ] && _DLCACHE=/tmp
 if [ ! -f "$_DLCACHE/pcre2-$ver.tar.bz2" ] ||
     [ "$(sha256sum "$_DLCACHE/pcre2-$ver.tar.bz2" | awk '{print $1}')" != "47fe8c99461250d42f89e6e8fdaeba9da057855d06eb7fc08d9ca03fd08d7bc7" ]; then
     printf "Downloading source...\n"

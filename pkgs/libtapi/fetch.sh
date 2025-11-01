@@ -1,7 +1,6 @@
 #!/bin/sh
 rm -rf "$_DESTDIR" "$_SRCDIR"
 ver='aa37c11ad1a817248c9d1578ac99e133875b4eb5'
-[ -z "$_DLCACHE" ] && _DLCACHE=/tmp
 if [ ! -f "$_DLCACHE/libtapi-$ver.tar.gz" ] ||
     [ "$(sha256sum "$_DLCACHE/libtapi-$ver.tar.gz" | awk '{print $1}')" != "3ea293da90789055e847af48582a46ff296fc6dfa4ef8ee8db3167599dd93da3" ]; then
     printf "Downloading source...\n"

@@ -1,7 +1,6 @@
 #!/bin/sh
 rm -rf "$_DESTDIR" "$_SRCDIR"
 ver='10.2p1'
-[ -z "$_DLCACHE" ] && _DLCACHE=/tmp
 if [ ! -f "$_DLCACHE/openssh-$ver.tar.gz" ] ||
     [ "$(sha256sum "$_DLCACHE/openssh-$ver.tar.gz" | awk '{print $1}')" != "ccc42c0419937959263fa1dbd16dafc18c56b984c03562d2937ce56a60f798b2" ]; then
     printf "Downloading source...\n"

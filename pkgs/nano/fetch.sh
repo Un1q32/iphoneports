@@ -1,7 +1,6 @@
 #!/bin/sh
 rm -rf "$_DESTDIR" "$_SRCDIR"
 ver='8.6'
-[ -z "$_DLCACHE" ] && _DLCACHE=/tmp
 if [ ! -f "$_DLCACHE/nano-$ver.tar.gz" ] ||
     [ "$(sha256sum "$_DLCACHE/nano-$ver.tar.gz" | awk '{print $1}')" != "86608f72b77787bf15dde922077c62a679aa4536192942991f58a92062838187" ]; then
     printf "Downloading source...\n"
