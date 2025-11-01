@@ -43,6 +43,6 @@ cd "$_DESTDIR/var/usr"
 strip_and_sign bin/duk lib/libduktape.207.dylib
 )
 
-installlicense src/LICENSE.txt
+installlicense "$_SRCDIR/LICENSE.txt"
 
 builddeb
