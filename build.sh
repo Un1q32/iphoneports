@@ -408,7 +408,7 @@ includedeps() {
     unset includeddeps
     if [ -z "$dryrun" ]; then
         if [ -d "$sdk" ]; then
-            export _SDK="$_TMP/iphoneports-sdk"
+            export _SDK="$_TMP/sdk"
             mkdir -p "$_SDK"
             cp -a "$sdk"/* "$_SDK"
         else
