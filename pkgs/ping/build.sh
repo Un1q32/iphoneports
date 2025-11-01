@@ -18,6 +18,7 @@ strip_and_sign ping
 if [ -f ping6 ]; then
     strip_and_sign ping6
 fi
+chmod 4755 ping
 installsuid ping
 )
 
