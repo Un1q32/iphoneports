@@ -65,9 +65,8 @@ extern uint64_t __thread_selfusage(void);
 
 int clock_gettime(int clockid, struct timespec *ts) {
 
-#if (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                \
-     __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ >= 20000) ||               \
-    !defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__)
+#if !(defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&               \
+      __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ < 20000)
 
   static bool init = false;
   static int (*func)(int, struct timespec *);
@@ -207,9 +206,8 @@ static inline int pthread_fchdir_np(int fd) {
 
 int fstatat(int fd, const char *path, struct stat *statbuf, int flags) {
 
-#if (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                \
-     __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ >= 20000) ||               \
-    !defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__)
+#if !(defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&               \
+      __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ < 20000)
 
   static bool init = false;
   static int (*func)(int, const char *, struct stat *, int);
@@ -286,9 +284,8 @@ int fstatat(int fd, const char *path, struct stat *statbuf, int flags) {
 
 int faccessat(int fd, const char *path, int mode, int flags) {
 
-#if (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                \
-     __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ >= 20000) ||               \
-    !defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__)
+#if !(defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&               \
+      __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ < 20000)
 
   static bool init = false;
   static int (*func)(int, const char *, int, int);
@@ -508,9 +505,8 @@ int open(const char *path, int flags, ...) {
 
 void arc4random_buf(void *buf, size_t size) {
 
-#if (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                \
-     __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ >= 20000) ||               \
-    !defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__)
+#if !(defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&               \
+      __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ < 20000)
 
   static bool init = false;
   static void (*func)(void *, size_t);
@@ -543,11 +539,43 @@ void arc4random_buf(void *buf, size_t size) {
     (defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) &&                 \
      __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ < 1060)
 
+int pthread_threadid_np(pthread_t thread, uint64_t *tid) {
+
+#if !(defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&               \
+      __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ < 20000)
+
+  static bool init = false;
+  static int (*func)(pthread_t, uint64_t *);
+
+  if (!init) {
+    func =
+        (int (*)(pthread_t, uint64_t *))dlsym(RTLD_NEXT, "pthread_threadid_np");
+    init = true;
+  }
+
+  if (func)
+    return func(thread, tid);
+
+#endif
+
+  if (!tid)
+    return EINVAL;
+
+  if (!thread)
+    thread = pthread_self();
+
+  mach_port_t native_id = pthread_mach_thread_np(thread);
+  if (!native_id)
+    return ESRCH;
+
+  *tid = native_id;
+  return 0;
+}
+
 int pthread_setname_np(const char *name) {
 
-#if (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                \
-     __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ >= 20000) ||               \
-    !defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__)
+#if !(defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&               \
+      __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ < 20000)
 
   static bool init = false;
   static int (*func)(const char *);
@@ -623,9 +651,8 @@ char *realpath_extsn(const char *restrict path, char *restrict resolved_path) {
 
 int posix_memalign(void **memptr, size_t align, size_t size) {
 
-#if (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                \
-     __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ >= 20000) ||               \
-    !defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__)
+#if !(defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&               \
+      __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ < 20000)
 
   static bool init = false;
   static int (*func)(void **, size_t, size_t);
@@ -661,9 +688,8 @@ kern_return_t host_statistics64(host_t host_priv, host_flavor_t flavor,
                                 host_info_t host_info64_out,
                                 mach_msg_type_number_t *host_info64_outCnt) {
 
-#if (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                \
-     __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ >= 20000) ||               \
-    !defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__)
+#if !(defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&               \
+      __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ < 20000)
 
   static bool init = false;
   static kern_return_t (*func)(host_t, host_flavor_t, host_info_t,
