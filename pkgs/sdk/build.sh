@@ -1,8 +1,8 @@
 #!/bin/sh
 . ../../files/lib.sh
 
-mkdir -p pkg/var/usr/etc/profile.d
-cp "$_PKGROOT/files/sdkroot.sh" pkg/var/usr/etc/profile.d
-cp -a "$("$_TARGET-sdkpath")" pkg/var/usr/sdk
+mkdir -p "$_DESTDIR/var/usr/etc/profile.d"
+cp files/sdkroot.sh "$_DESTDIR/var/usr/etc/profile.d"
+cp -a "$("$_TARGET-sdkpath")" "$_DESTDIR/var/usr/sdk"
 
 builddeb

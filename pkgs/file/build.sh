@@ -4,11 +4,11 @@
 
 (
 cd "$_SRCDIR"
-./configure --prefix="$_PKGROOT/src/native"
+./configure --prefix="$_SRCDIR/native"
 make -j"$_JOBS"
 make install
 make clean
-export PATH="$_PKGROOT/src/native/bin:$PATH"
+export PATH="$_SRCDIR/native/bin:$PATH"
 
 if [ "$_SUBSYSTEM" = "ios" ] && [ "$_TRUEOSVER" -lt 20000 ]; then
     posix_spawn='ac_cv_func_posix_spawnp=no'

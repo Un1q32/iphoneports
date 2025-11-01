@@ -4,7 +4,7 @@
 if { [ "$_SUBSYSTEM" = "macos" ] && [ "$_TRUEOSVER" -ge 1050 ]; } ||
     [ "$_SUBSYSTEM" != "macos" ]; then
     printf 'ps-tiger is only for Mac OS X 10.4\n'
-    mkdir pkg
+    mkdir "$_DESTDIR"
     exit 0
 fi
 

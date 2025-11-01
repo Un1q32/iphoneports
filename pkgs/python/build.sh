@@ -2,10 +2,10 @@
 # shellcheck disable=2086
 . ../../files/lib.sh
 
-mkdir -p "$_PKGROOT/src/iphoneports-fakebin"
-printf '#!/bin/sh\necho %s\n' "$_MACVER" > "$_PKGROOT/src/iphoneports-fakebin/sw_vers"
-chmod +x "$_PKGROOT/src/iphoneports-fakebin/sw_vers"
-export PATH="$_PKGROOT/src/iphoneports-fakebin:$PATH"
+mkdir -p "$_SRCDIR/iphoneports-fakebin"
+printf '#!/bin/sh\necho %s\n' "$_MACVER" > "$_SRCDIR/iphoneports-fakebin/sw_vers"
+chmod +x "$_SRCDIR/iphoneports-fakebin/sw_vers"
+export PATH="$_SRCDIR/iphoneports-fakebin:$PATH"
 
 (
 cd "$_SRCDIR"
@@ -13,7 +13,7 @@ autoreconf -fi
 
 (
 mkdir _buildpython && cd _buildpython || exit 1
-../configure --prefix="$_PKGROOT/src/buildpython" --without-ensurepip CC=clang
+../configure --prefix="$_SRCDIR/buildpython" --without-ensurepip CC=clang
 make install -j"$_JOBS"
 )
 
@@ -26,7 +26,7 @@ fi
     --host="$_TARGET" \
     --prefix=/var/usr \
     --build="$(clang -dumpmachine)" \
-    --with-build-python="$_PKGROOT/src/buildpython/bin/python3" \
+    --with-build-python="$_SRCDIR/buildpython/bin/python3" \
     --without-mimalloc \
     --with-lto=full \
     --enable-shared \

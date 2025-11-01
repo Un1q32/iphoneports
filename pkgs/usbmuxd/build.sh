@@ -15,6 +15,6 @@ rm -rf share
 strip_and_sign sbin/usbmuxd
 )
 
-installlicense "$_SRCDIR/COPYING".GPLv3
+installlicense "$_SRCDIR/COPYING.GPLv3"
 
 builddeb

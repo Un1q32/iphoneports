@@ -12,6 +12,6 @@ rm -rf share
 strip_and_sign bin/dos2unix bin/unix2dos
 )
 
-installlicense "$_SRCDIR/COPYING".txt
+installlicense "$_SRCDIR/COPYING.txt"
 
 builddeb

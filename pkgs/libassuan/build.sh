@@ -15,6 +15,6 @@ make DESTDIR="$_DESTDIR" install
 
 strip_and_sign pkg/var/usr/lib/libassuan.9.dylib
 
-installlicense "$_SRCDIR/COPYING".LIB
+installlicense "$_SRCDIR/COPYING.LIB"
 
 builddeb

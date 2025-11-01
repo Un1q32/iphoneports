@@ -3,7 +3,7 @@
 
 if [ "$_SUBSYSTEM" = "macos" ] && [ "$_TRUEOSVER" -lt 1050 ]; then
     printf 'ffmpeg requires at least Mac OS X 10.5\n'
-    mkdir pkg
+    mkdir "$_DESTDIR"
     exit 0
 fi
 
@@ -46,6 +46,6 @@ for lib in lib/*.dylib; do
 done
 )
 
-installlicense "$_SRCDIR/COPYING".GPLv3
+installlicense "$_SRCDIR/COPYING.GPLv3"
 
 builddeb
