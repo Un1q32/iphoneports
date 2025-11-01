@@ -43,6 +43,6 @@ for bin in bin/* lib/*.dylib lib/*/*.dylib; do
 done
 )
 
-installlicense src/LICENSE.txt
+installlicense "$_SRCDIR/LICENSE.txt"
 
 builddeb

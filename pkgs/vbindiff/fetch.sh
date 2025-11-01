@@ -5,6 +5,6 @@ printf "Downloading source...\n"
 curl -L -s -o src.tar.gz https://github.com/madsen/vbindiff/archive/e478092dfbc0777b899783ba90d104d0a3bdd32f.tar.gz
 tar xf src.tar.gz
 mv vbindiff-e478092dfbc0777b899783ba90d104d0a3bdd32f "$_SRCDIR"
-rm -r src/GetOpt src.tar.gz
+rm -r "$_SRCDIR/GetOpt" src.tar.gz
 wait
-mv free-getopt-44a5db045fc7fda9ec757ea37b7cdbdf53c452b1 src/GetOpt
+mv free-getopt-44a5db045fc7fda9ec757ea37b7cdbdf53c452b1 "$_SRCDIR/GetOpt"

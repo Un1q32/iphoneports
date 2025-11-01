@@ -25,6 +25,6 @@ rm -rf share
 strip_and_sign bin/pcre2test bin/pcre2grep lib/libpcre2-8.0.dylib lib/libpcre2-16.0.dylib lib/libpcre2-32.0.dylib lib/libpcre2-posix.3.dylib
 )
 
-installlicense src/LICENCE.md
+installlicense "$_SRCDIR/LICENCE.md"
 
 builddeb

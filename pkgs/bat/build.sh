@@ -31,6 +31,6 @@ cp "target/$_RUSTTARGET/release/bat" "$_DESTDIR/var/usr/bin"
 
 strip_and_sign "$_DESTDIR/var/usr/bin/bat"
 
-installlicense src/LICENSE-*
+installlicense "$_SRCDIR"/LICENSE-*
 
 builddeb

@@ -21,6 +21,6 @@ ver="${ver#bin/luajit-2.1.}"
 strip_and_sign "bin/luajit-2.1.$ver" "lib/libluajit-5.1.2.1.$ver.dylib"
 )
 
-installlicense src/COPYRIGHT
+installlicense "$_SRCDIR/COPYRIGHT"
 
 builddeb

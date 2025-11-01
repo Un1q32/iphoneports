@@ -10,6 +10,6 @@ cp unrar "$_DESTDIR/var/usr/bin"
 
 strip_and_sign "$_DESTDIR/var/usr/bin/unrar"
 
-installlicense src/license.txt
+installlicense "$_SRCDIR/license.txt"
 
 builddeb

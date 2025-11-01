@@ -14,6 +14,6 @@ cd "$_DESTDIR/var/usr"
 strip_and_sign lib/libyaml-0.2.dylib
 )
 
-installlicense src/License
+installlicense "$_SRCDIR/License"
 
 builddeb

@@ -14,6 +14,6 @@ rm -rf share
 strip_and_sign bin/tcsh
 )
 
-installlicense src/Copyright
+installlicense "$_SRCDIR/Copyright"
 
 builddeb

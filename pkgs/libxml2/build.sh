@@ -15,6 +15,6 @@ ln -s libxml2/libxml include/libxml
 strip_and_sign bin/xmlcatalog bin/xmllint lib/libxml2.*.dylib
 )
 
-installlicense src/Copyright
+installlicense "$_SRCDIR/Copyright"
 
 builddeb

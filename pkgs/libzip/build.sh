@@ -1,8 +1,9 @@
 #!/bin/sh
 . ../../files/lib.sh
-mkdir -p src/build
+
 (
-cd "$_SRCDIR"/build
+mkdir -p "$_SRCDIR/build"
+cd "$_SRCDIR/build"
 cmake -GNinja .. \
     -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_C_COMPILER="$_TARGET-cc" \

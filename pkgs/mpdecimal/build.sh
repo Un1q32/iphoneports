@@ -16,6 +16,6 @@ install_name_tool -id /var/usr/lib/libmpdec.$abi.dylib "$lib"
 strip_and_sign "$lib"
 )
 
-installlicense src/COPYRIGHT.txt
+installlicense "$_SRCDIR/COPYRIGHT.txt"
 
 builddeb

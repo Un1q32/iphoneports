@@ -17,6 +17,6 @@ chmod 2755 bin/rogue
 
 installsuid "$_DESTDIR/var/usr/bin/rogue"
 
-installlicense src/LICENSE.TXT
+installlicense "$_SRCDIR/LICENSE.TXT"
 
 builddeb

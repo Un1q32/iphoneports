@@ -12,6 +12,6 @@ strip_and_sign "$_DESTDIR/var/usr/bin/compress"
 ln -s compress "$_DESTDIR/var/usr/bin/uncompress"
 ln -s compress "$_DESTDIR/var/usr/bin/zcat"
 
-installlicense src/UNLICENSE
+installlicense "$_SRCDIR/UNLICENSE"
 
 builddeb

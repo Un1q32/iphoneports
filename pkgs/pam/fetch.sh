@@ -6,7 +6,7 @@ printf "Unpacking source...\n"
 tar -xf src.tar.gz
 rm src.tar.gz
 mv pam-pam-* "$_SRCDIR"
-cd src || exit 1
+cd "$_SRCDIR" || exit 1
 printf "Downloading modules source...\n"
 curl -L -# -o src.tar.gz https://github.com/apple-oss-distributions/pam_modules/archive/refs/tags/pam_modules-36.2.tar.gz
 printf "Unpacking modules source...\n"

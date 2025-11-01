@@ -1,8 +1,8 @@
 #!/bin/sh -e
 rm -rf "$_DESTDIR" "$_SRCDIR"
 printf "Downloading source...\n"
-mkdir src
+mkdir "$_SRCDIR"
 for src in ps.c print.c nlist.c tasks.c keyword.c ps.h extern.h; do
-    curl -L -s -o "src/$src" "https://raw.githubusercontent.com/apple-oss-distributions/adv_cmds/adv_cmds-138.1/ps/$src" &
+    curl -L -s -o "$_SRCDIR/$src" "https://raw.githubusercontent.com/apple-oss-distributions/adv_cmds/adv_cmds-138.1/ps/$src" &
 done
 wait

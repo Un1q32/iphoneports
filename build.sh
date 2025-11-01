@@ -326,14 +326,14 @@ build() {
         export _SRCDIR="$_PKGROOT/src"
         if [ -f fetch.sh ]; then
             ./fetch.sh || {
-                rm -rf src "$_SDK"
+                rm -rf "$_SRCDIR" "$_SDK"
                 return 2
             }
         fi
         applypatches
         printf '%s\n' "Building $1"
         ./build.sh || {
-            rm -rf pkg "$_SDK"
+            rm -rf "$_DESTDIR" "$_SDK"
             return 2
         }
     fi
@@ -432,7 +432,7 @@ sysroot() {
             sysroot "$dep"
         done < "$pkgdir/$1/dependencies.txt"
     fi
-    cp -a "$pkgdir/$1"/pkg/* sysroot
+    cp -a "$pkgdir/$1/pkg"/* sysroot
 }
 
 main() {
