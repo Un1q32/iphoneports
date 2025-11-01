@@ -15,9 +15,10 @@ mkdir -p "$_DESTDIR/var/usr/bin"
 cp bash "$_DESTDIR/var/usr/bin"
 )
 
-strip_and_sign pkg/var/usr/bin/bash
-mkdir -p pkg/var/usr/etc/bash/bashrc.d
-cp files/bashrc pkg/var/usr/etc/bash
+strip_and_sign "$_DESTDIR/var/usr/bin/bash"
+
+mkdir -p "$_DESTDIR/var/usr/etc/bash/bashrc.d"
+cp files/bashrc "$_DESTDIR/var/usr/etc/bash"
 
 installlicense "$_SRCDIR/COPYING"
 

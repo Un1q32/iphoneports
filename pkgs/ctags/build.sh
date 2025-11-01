@@ -8,7 +8,7 @@ make -j"$_JOBS"
 make DESTDIR="$_DESTDIR" install
 )
 
-strip_and_sign pkg/var/usr/bin/*
+strip_and_sign "$_DESTDIR/var/usr/bin"/*
 
 installlicense "$_SRCDIR/COPYING"
 

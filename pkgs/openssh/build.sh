@@ -22,9 +22,9 @@ chmod 4711 libexec/ssh-keysign
 
 mkdir -p pkg/Library/LaunchDaemons
 
-cp files/com.openssh.sshd.plist pkg/Library/LaunchDaemons/com.openssh.sshd.plist
-cp files/sshd_config pkg/var/usr/etc/ssh/sshd_config
+cp files/com.openssh.sshd.plist "$_DESTDIR/Library/LaunchDaemons/com.openssh.sshd.plist"
+cp files/sshd_config "$_DESTDIR/var/usr/etc/ssh/sshd_config"
 
-installlicense src/LICENCE
+installlicense "$_SRCDIR/LICENCE"
 
 builddeb
