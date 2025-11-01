@@ -14,8 +14,8 @@ make -j"$_JOBS"
 make DESTDIR="$_DESTDIR" install
 )
 
-rm -rf pkg/var/usr/share
-strip_and_sign pkg/var/usr/bin/lynx
+rm -rf "$_DESTDIR/var/usr/share"
+strip_and_sign "$_DESTDIR/var/usr/bin/lynx"
 
 installlicense "$_SRCDIR/COPYING"
 

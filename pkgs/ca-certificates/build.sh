@@ -1,6 +1,7 @@
 #!/bin/sh
 . ../../files/lib.sh
-mkdir -p pkg/var/usr/etc/ssl
-cp src/cert.pem pkg/var/usr/etc/ssl
+
+mkdir -p "$_DESTDIR/var/usr/etc/ssl"
+cp "$_SRCDIR/cert.pem" "$_DESTDIR/var/usr/etc/ssl"
 
 builddeb
