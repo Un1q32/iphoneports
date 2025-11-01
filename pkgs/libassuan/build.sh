@@ -13,7 +13,7 @@ make -j"$_JOBS"
 make DESTDIR="$_DESTDIR" install
 )
 
-strip_and_sign pkg/var/usr/lib/libassuan.9.dylib
+strip_and_sign "$_DESTDIR/var/usr/lib/libassuan.9.dylib"
 
 installlicense "$_SRCDIR/COPYING.LIB"
 

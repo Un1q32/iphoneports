@@ -8,8 +8,8 @@ make -j"$_JOBS"
 make DESTDIR="$_DESTDIR" install
 )
 
-rm -rf pkg/var/usr/share
-strip_and_sign pkg/var/usr/bin/ncdu
+rm -rf "$_DESTDIR/var/usr/share"
+strip_and_sign "$_DESTDIR/var/usr/bin/ncdu"
 
 installlicense "$_SRCDIR/COPYING"
 

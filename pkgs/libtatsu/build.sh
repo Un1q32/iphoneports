@@ -8,10 +8,7 @@ make -j"$_JOBS"
 make install DESTDIR="$_DESTDIR"
 )
 
-(
-cd "$_DESTDIR/var/usr"/lib
-strip_and_sign libtatsu.0.dylib
-)
+strip_and_sign "$_DESTDIR/var/usr/lib/libtatsu.0.dylib"
 
 installlicense "$_SRCDIR/COPYING"
 

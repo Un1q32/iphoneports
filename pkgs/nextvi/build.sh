@@ -8,7 +8,7 @@ mkdir -p "$_DESTDIR/var/usr/bin"
 cp vi "$_DESTDIR/var/usr/bin"
 )
 
-strip_and_sign pkg/var/usr/bin/vi
+strip_and_sign "$_DESTDIR/var/usr/bin/vi"
 
 installlicense "$_SRCDIR/LICENSE"
 

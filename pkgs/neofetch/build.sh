@@ -1,7 +1,8 @@
 #!/bin/sh
 . ../../files/lib.sh
-mkdir -p pkg/var/usr/bin
-cp src/neofetch pkg/var/usr/bin
+
+mkdir -p "$_DESTDIR/var/usr/bin"
+cp "$_SRCDIR/neofetch" "$_DESTDIR/var/usr/bin"
 
 installlicense "$_SRCDIR/LICENSE.md"
 

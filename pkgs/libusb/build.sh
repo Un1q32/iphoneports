@@ -9,12 +9,9 @@ make -j"$_JOBS"
 make install DESTDIR="$_DESTDIR"
 )
 
-(
-cd "$_DESTDIR/var/usr"/lib
-strip_and_sign libusb-1.0.0.dylib
-)
+strip_and_sign "$_DESTDIR/var/usr/lib/libusb-1.0.0.dylib"
 
-ln -s libusb-1.0/libusb.h pkg/var/usr/include/libusb.h
+ln -s libusb-1.0/libusb.h "$_DESTDIR/var/usr/include/libusb.h"
 
 installlicense "$_SRCDIR/COPYING"
 

@@ -8,10 +8,7 @@ cd "$_SRCDIR"
 make install DESTDIR="$_DESTDIR" -j"$_JOBS"
 )
 
-(
-cd "$_DESTDIR/var/usr"/lib
-strip_and_sign libuv.1.dylib
-)
+strip_and_sign "$_DESTDIR/var/usr/lib/libuv.1.dylib"
 
 installlicense "$_SRCDIR/LICENSE"
 

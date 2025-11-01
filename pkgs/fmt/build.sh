@@ -18,7 +18,7 @@ cmake -GNinja .. \
 DESTDIR="$_DESTDIR" ninja -j"$_JOBS" install
 )
 
-for lib in pkg/var/usr/lib/*.dylib; do
+for lib in "$_DESTDIR/var/usr/lib"/*.dylib; do
     [ -h "$lib" ] || strip_and_sign "$lib"
 done
 

@@ -30,8 +30,8 @@ strip_and_sign bin/zsh
 mkdir -p etc/zsh
 )
 
-cp files/zprofile pkg/var/usr/etc/zsh
+cp files/zprofile "$_DESTDIR/var/usr/etc/zsh"
 
-installlicense src/LICENCE
+installlicense "$_SRCDIR/LICENCE"
 
 builddeb

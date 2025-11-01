@@ -17,7 +17,7 @@ make -j"$_JOBS"
 make DESTDIR="$_DESTDIR" install
 )
 
-for bin in pkg/var/usr/bin/*; do
+for bin in "$_DESTDIR/var/usr/bin"/*; do
     [ -h "$bin" ] || strip_and_sign "$bin"
 done
 
