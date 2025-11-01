@@ -1,8 +1,8 @@
 #!/bin/sh -e
 rm -rf "$_DESTDIR" "$_SRCDIR"
 printf "Downloading source...\n"
-mkdir src
+mkdir "$_SRCDIR"
 for src in main.c ed.h io.c buf.c re.c glbl.c undo.c sub.c; do
-    curl -L -s -o "src/$src" "https://raw.githubusercontent.com/apple-oss-distributions/text_cmds/text_cmds-154/ed/$src" &
+    curl -L -s -o "$_SRCDIR/$src" "https://raw.githubusercontent.com/apple-oss-distributions/text_cmds/text_cmds-154/ed/$src" &
 done
 wait
