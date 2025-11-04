@@ -674,7 +674,7 @@ int posix_memalign(void **memptr, size_t align, size_t size) {
 
   void *mem;
   if (align <= 16)
-    mem = malloc(size); /* macOS malloc always aligns to 16 bytes */
+    mem = malloc(size); /* Darwin malloc always aligns to 16 bytes */
   else
     mem = valloc(size); /* page aligned allocation */
 
