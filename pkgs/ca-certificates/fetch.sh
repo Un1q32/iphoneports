@@ -2,4 +2,4 @@
 rm -rf "$_DESTDIR" "$_SRCDIR"
 printf "Downloading source...\n"
 mkdir "$_SRCDIR"
-curl -L -# -o "$_SRCDIR/cert.pem" https://curl.se/ca/cacert-2025-09-09.pem
+curl -L -# -o "$_SRCDIR/cert.pem" https://curl.se/ca/cacert-2025-11-04.pem
