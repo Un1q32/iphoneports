@@ -1,6 +1,6 @@
 --- src/sqlite3.c.orig
 +++ src/sqlite3.c
-@@ -38963,11 +38963,13 @@
+@@ -39320,11 +39320,13 @@
  */
  #ifndef HAVE_GETHOSTUUID
  # define HAVE_GETHOSTUUID 0
