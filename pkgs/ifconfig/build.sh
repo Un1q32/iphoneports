@@ -1,10 +1,14 @@
 #!/bin/sh
+# shellcheck disable=2086
 . ../../files/lib.sh
 
 (
 cd "$_SRCDIR"
+if [ "$_SUBSYSTEM" != "ios" ] || [ "$_OSVER" -ge 20000 ]; then
+    inet6='-DINET6'
+fi
 for src in ifconfig.c ifmedia.c; do
-  "$_TARGET-cc" -c "$src" -Os -flto -DUSE_IF_MEDIA -DINET6 -DNO_IPX -Wno-deprecated-non-prototype -Wno-extra-tokens &
+    "$_TARGET-cc" -c "$src" -Os -flto -DUSE_IF_MEDIA -DNO_IPX $inet6 -Wno-deprecated-non-prototype -Wno-extra-tokens &
 done
 wait
 "$_TARGET-cc" -o ifconfig -Os -flto ./*.o

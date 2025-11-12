@@ -1,5 +1,5 @@
 Package: iphoneports-ifconfig
-Version: 325-2
+Version: 325-3
 Architecture: @DPKGARCH@
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Section: Utilities
