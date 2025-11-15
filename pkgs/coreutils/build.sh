@@ -9,7 +9,17 @@ case $_CPU in
     *) y2038='--disable-year2038' ;;
 esac
 autoreconf
-./configure --host="$_TARGET" --prefix=/var/usr --enable-single-binary=symlinks --with-openssl $y2038 fu_cv_sys_stat_statvfs=yes
+if [ "$_SUBSYSTEM" = "ios" ] && [ "$_OSVER" -lt 20000 ]; then
+    posix_spawn='ac_cv_func_posix_spawn=no'
+fi
+./configure \
+    --host="$_TARGET" \
+    --prefix=/var/usr \
+    --enable-single-binary=symlinks \
+    --with-openssl \
+    $y2038 \
+    $posix_spawn \
+    fu_cv_sys_stat_statvfs=yes
 make -j"$_JOBS"
 make DESTDIR="$_DESTDIR" install
 )

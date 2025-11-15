@@ -1,0 +1,10 @@
+--- src/lib/renameatu.c.orig
++++ src/lib/renameatu.c
+@@ -21,6 +21,7 @@
+ /* Specification.  */
+ #include "renameatu.h"
+ 
++#include <string.h>
+ #include <errno.h>
+ #include <stdio.h>
+ #include <sys/stat.h>
