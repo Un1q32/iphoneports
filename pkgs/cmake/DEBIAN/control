@@ -2,6 +2,6 @@ Package: iphoneports-cmake
 Section: Development
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Architecture: @DPKGARCH@
-Version: 4.1.2-1
+Version: 4.1.3
 Description: A cross-platform open-source make system
 Depends: iphoneports-base, iphoneports-libc++, iphoneports-libuv, iphoneports-zlib, iphoneports-libarchive, iphoneports-vm-stat
