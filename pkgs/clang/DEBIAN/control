@@ -2,6 +2,6 @@ Package: iphoneports-clang
 Section: Development
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Architecture: @DPKGARCH@
-Version: 21.1.5
+Version: 21.1.6
 Description: The LLVM C/C++/ObjC/ObjC++ compiler
 Depends: iphoneports-base, iphoneports-libc++, iphoneports-llvm, iphoneports-compiler-rt, iphoneports-libxml2, iphoneports-zlib, iphoneports-cctools, iphoneports-sdk
