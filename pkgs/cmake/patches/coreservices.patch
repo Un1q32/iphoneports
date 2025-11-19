@@ -1,6 +1,6 @@
 --- src/Utilities/cmcurl/CMakeLists.txt.orig
 +++ src/Utilities/cmcurl/CMakeLists.txt
-@@ -979,12 +979,6 @@
+@@ -987,12 +987,6 @@
    endif()
    list(APPEND CURL_LIBS "-framework CoreFoundation")
  
@@ -15,7 +15,7 @@
  if(CURL_USE_OPENSSL)
 --- src/Utilities/cmlibarchive/CMakeLists.txt.orig
 +++ src/Utilities/cmlibarchive/CMakeLists.txt
-@@ -2154,7 +2154,6 @@
+@@ -2207,7 +2207,6 @@
  
  # We need CoreServices on Mac OS.
  IF(APPLE)
@@ -25,7 +25,7 @@
  add_subdirectory(libarchive)
 --- src/Source/CMakeLists.txt.orig
 +++ src/Source/CMakeLists.txt
-@@ -1058,7 +1058,9 @@
+@@ -1080,7 +1080,9 @@
  # On Apple we need CoreFoundation and CoreServices
  if(APPLE)
    target_link_libraries(CMakeLib PUBLIC "-framework CoreFoundation")
