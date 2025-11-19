@@ -1,6 +1,6 @@
 --- src/t/unit-tests/clar/clar/fs.h.orig
 +++ src/t/unit-tests/clar/clar/fs.h
-@@ -317,7 +317,7 @@
+@@ -311,7 +311,7 @@
  # include <sys/sendfile.h>
  #endif
  
