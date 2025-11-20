@@ -1,8 +1,8 @@
 #!/bin/sh
 rm -rf "$_DESTDIR" "$_SRCDIR"
-ver='1.13.1'
+ver='1.13.2'
 if [ ! -f "$_DLCACHE/ninja-$ver.tar.gz" ] ||
-    [ "$(sha256sum "$_DLCACHE/ninja-$ver.tar.gz" | awk '{print $1}')" != "f0055ad0369bf2e372955ba55128d000cfcc21777057806015b45e4accbebf23" ]; then
+    [ "$(sha256sum "$_DLCACHE/ninja-$ver.tar.gz" | awk '{print $1}')" != "974d6b2f4eeefa25625d34da3cb36bdcebe7fbce40f4c16ac0835fd1c0cbae17" ]; then
     printf "Downloading source...\n"
     curl -L -# -o "$_DLCACHE/ninja-$ver.tar.gz" "https://github.com/ninja-build/ninja/archive/refs/tags/v$ver.tar.gz" || exit 1
 fi
