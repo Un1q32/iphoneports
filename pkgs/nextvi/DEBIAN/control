@@ -1,5 +1,5 @@
 Package: iphoneports-nextvi
-Version: 86
+Version: 87
 Architecture: @DPKGARCH@
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Section: Text_Editors
