@@ -1,0 +1,11 @@
+--- src/dist/Time-HiRes/HiRes.xs.orig
++++ src/dist/Time-HiRes/HiRes.xs
+@@ -89,7 +89,7 @@
+ #  undef ITIMER_REALPROF
+ #endif
+ 
+-#ifndef TIME_HIRES_CLOCKID_T
++#if !defined(TIME_HIRES_CLOCKID_T) && !defined(CLOCK_REALTIME)
+ typedef int clockid_t;
+ #endif
+ 

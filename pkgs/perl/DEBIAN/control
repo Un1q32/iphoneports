@@ -1,0 +1,7 @@
+Package: iphoneports-perl
+Maintainer: Uniq <joey.t.reinhart@gmail.com>
+Architecture: @DPKGARCH@
+Depends: iphoneports-base
+Description: A highly capable, feature-rich programming language
+Section: Scripting
+Version: 5.42.0

@@ -1,0 +1,83 @@
+--- src/Makefile.orig
++++ src/Makefile
+@@ -141,12 +141,6 @@
+ 
+ # ---[ site/perl ]--------------------------------------------------------------
+ 
+-ifeq ($(useshrplib),true)
+-ifeq ($(soname),)
+-perl$x: LDFLAGS += -Wl,-rpath,$(archlib)/CORE
+-endif
+-endif # or should it be "else"?
+-perl$x: LDFLAGS += -Wl,-E
+ 
+ perl$x: perlmain$o $(LIBPERL) $(static_modules) static.list ext.libs
+ 	$(eval extlibs=$(shell cat ext.libs))
+@@ -191,7 +185,7 @@
+ 
+ ifeq ($(useshrplib),true)
+ $(LIBPERL):
+-	$(CC) $(LDDLFLAGS) -o $@ $(filter %$o,$^) $(LIBS)
++	$(CC) $(LDDLFLAGS) -install_name $(archlib)/CORE/$@ -o $@ $(filter %$o,$^) $(LIBS)
+ else
+ $(LIBPERL):
+ 	$(AR) cru $@ $(filter %$o,$^)
+--- src/cnf/configure_tool.sh.orig
++++ src/cnf/configure_tool.sh
+@@ -88,8 +88,8 @@
+ whichprog ar AR ar || die "Cannot find ar"
+ whichprog nm NM nm
+ whichprog ranlib RANLIB ranlib
+-whichprog readelf READELF readelf || die "Cannot find readelf"
+-whichprog objdump OBJDUMP objdump || die "Cannot find objdump"
++whichprog readelf READELF readelf
++whichprog objdump OBJDUMP objdump
+ 
+ # XXX: this looks wrong, but the usemmldlt code depends on $ld being able
+ # to compile try.c. What kind of moron could have written that. Oh wait.
+@@ -154,7 +154,6 @@
+ 
+ # Used only for modules
+ define cccdlflags '-fPIC -Wno-unused-function'
+-define ccdlflags '-Wl,-E'
+ 
+ # Misc flags setup
+ predef lddlflags "-shared"	# modules
+@@ -262,6 +261,10 @@
+ 			define osname "netbsd"
+ 			result "NetBSD"
+ 			;;
++		*-darwin*)
++			define osname "darwin"
++			result "Darwin"
++			;;
+ 		*-bsd*)
+ 			define osname "bsd"
+ 			result "BSD"
+--- src/cnf/configure_func.sh.orig
++++ src/cnf/configure_func.sh
+@@ -191,6 +191,7 @@
+ checkfunc d_msgsnd 'msgsnd' '0,NULL,0,0' 'sys/msg.h'
+ checkfunc d_msync 'msync' 'NULL,0,0' 'sys/mman.h'
+ checkfunc d_munmap 'munmap' 'NULL,0' 'sys/mman.h'
++checkfunc d_nanosleep 'nanosleep' 'NULL,NULL' 'time.h'
+ checkfunc d_newlocale 'newlocale' '0,NULL,0' 'locale.h'
+ checkfunc d_nice 'nice' '0' 'unistd.h'
+ checkfunc d_nl_langinfo 'nl_langinfo' '0' 'langinfo.h'
+--- src/cnf/configure__f.sh.orig
++++ src/cnf/configure__f.sh
+@@ -309,12 +309,14 @@
+ }
+ 
+ try_readelf() {
++	[ "$osname" = "darwin" ] && return 1
+ 	require 'readelf'
+ 	require '_o'
+ 	run $readelf $* try$_o
+ }
+ 
+ try_objdump() {
++	[ "$osname" = "darwin" ] && return 1
+ 	require 'objdump'
+ 	require '_o'
+ 	run $objdump $* try.o > try.out
