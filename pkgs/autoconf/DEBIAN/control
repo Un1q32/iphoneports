@@ -1,0 +1,7 @@
+Package: iphoneports-autoconf
+Section: Development
+Maintainer: Uniq <joey.t.reinhart@gmail.com>
+Architecture: all
+Version: 2.72
+Description: A GNU tool for automatically configuring source code
+Depends: iphoneports-base, iphoneports-perl, iphoneports-m4, iphoneports-automake

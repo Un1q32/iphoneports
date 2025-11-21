@@ -1,0 +1,7 @@
+Package: iphoneports-automake
+Section: Development
+Maintainer: Uniq <joey.t.reinhart@gmail.com>
+Architecture: all
+Version: 1.18.1
+Description: A GNU tool for automatically creating Makefiles
+Depends: iphoneports-base, iphoneports-perl, iphoneports-m4
