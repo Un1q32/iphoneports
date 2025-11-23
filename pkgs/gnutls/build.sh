@@ -27,6 +27,6 @@ for lib in lib/*.dylib; do
 done
 )
 
-installlicense "$_SRCDIR/LICENSE"
+installlicense "$_SRCDIR/COPYING"
 
 builddeb
