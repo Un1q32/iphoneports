@@ -1,5 +1,5 @@
 Package: iphoneports-libpng
-Version: 1.6.49
+Version: 1.6.51
 Architecture: @DPKGARCH@
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Depends: iphoneports-base, iphoneports-zlib
