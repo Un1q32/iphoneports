@@ -34,9 +34,9 @@ Usage: build.sh [options] <command>
 ./build.sh curl
 ```
 
-#### Build ed and xxd
+#### Build ed and bash
 ```sh
-./build.sh ed xxd
+./build.sh ed bash
 ```
 
 #### Build gzip for i386-apple-darwin9
