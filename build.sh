@@ -462,7 +462,7 @@ main() {
 
             for pkg in $pkglist; do
                 build "$pkg" || error "Failed to build package: $pkg"
-                cp -f "$pkgdir/$pkg"/*.deb debs 2> /dev/null
+                cp -f "$pkgdir/$pkg"/*-"$_TARGET.deb" debs 2> /dev/null
             done
         ;;
 
@@ -622,7 +622,7 @@ Usage: build.sh [options] <command>
             wait
             for pkg in "$@"; do
                 build "$pkg" || error "Failed to build package: $pkg"
-                cp -f "$pkgdir/$pkg"/*.deb "$bsroot/debs" 2> /dev/null
+                cp -f "$pkgdir/$pkg"/*-"$_TARGET.deb" "$bsroot/debs" 2> /dev/null
             done
         ;;
     esac
