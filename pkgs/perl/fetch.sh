@@ -6,10 +6,10 @@ if [ ! -f "$_DLCACHE/perl-$ver.tar.gz" ] ||
     printf "Downloading source...\n"
     curl -L -# -o "$_DLCACHE/perl-$ver.tar.gz" "https://github.com/Perl/perl5/archive/refs/tags/v$ver.tar.gz" || exit 1
 fi
-crossver='add39339ed09334e6809b48b3f8474c01a7ea1a1'
+crossver='1.6.3'
 if [ ! -f "$_DLCACHE/perl-cross-$crossver.tar.gz" ] ||
-    [ "$(sha256sum "$_DLCACHE/perl-cross-$crossver.tar.gz" | awk '{print $1}')" != "da3ddc6a81e0e7e5db9463dfb26e97a009a7117d5a8d42784de86ee2e0277f59" ]; then
-    curl -L -# -o "$_DLCACHE/perl-cross-$crossver.tar.gz" "https://github.com/qnx-ports/perl-cross/archive/$crossver.tar.gz" || exit 1
+    [ "$(sha256sum "$_DLCACHE/perl-cross-$crossver.tar.gz" | awk '{print $1}')" != "3babe550dc39f7dd25df75f26c0b26220f903777bd199b0d10dd64c54899be2d" ]; then
+    curl -L -# -o "$_DLCACHE/perl-cross-$crossver.tar.gz" "https://github.com/arsv/perl-cross/archive/refs/tags/$crossver.tar.gz" || exit 1
 fi
 printf "Unpacking source...\n"
 tar -C "$_TMP" -xf "$_DLCACHE/perl-$ver.tar.gz"
