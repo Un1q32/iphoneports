@@ -13,8 +13,8 @@ cd "$_DESTDIR/var/usr"
 rm -rf share
 mv lib/libsqlite3.*.*.*.dylib lib/libsqlite3.0.dylib
 ln -sf libsqlite3.0.dylib lib/libsqlite3.dylib
-install_name_tool -id /var/usr/lib/libsqlite3.0.dylib lib/libsqlite3.0.dylib
-install_name_tool -change /var/usr/lib/libsqlite3.dylib /var/usr/lib/libsqlite3.0.dylib bin/sqlite3
+install_name_tool -id /var/usr/lib/libsqlite3.0.dylib lib/libsqlite3.0.dylib 2>/dev/null
+install_name_tool -change /var/usr/lib/libsqlite3.dylib /var/usr/lib/libsqlite3.0.dylib bin/sqlite3 2>/dev/null
 strip_and_sign bin/sqlite3 lib/libsqlite3.0.dylib
 )
 
