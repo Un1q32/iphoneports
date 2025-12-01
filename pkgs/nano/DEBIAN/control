@@ -2,6 +2,6 @@ Package: iphoneports-nano
 Section: Text_Editors
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Architecture: @DPKGARCH@
-Version: 8.6
+Version: 8.7
 Depends: iphoneports-base, iphoneports-ncurses
 Description: completely free, modern clone of Pico
