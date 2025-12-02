@@ -1,6 +1,6 @@
 #!/bin/sh
 rm -rf "$_DESTDIR" "$_SRCDIR"
-ver='2.3.1'
+ver='2.3.2'
 if [ ! -f "$_DLCACHE/zlib-ng-$ver.tar.gz" ] ||
     [ "$(sha256sum "$_DLCACHE/zlib-ng-$ver.tar.gz" | awk '{print $1}')" != "94cfa0a53a8265c813c8369d3963bf09ac6a357824ad1f93aee13486176e152e" ]; then
     printf "Downloading source...\n"
