@@ -22,7 +22,7 @@
  
  #ifdef HAVE_BUILTIN_AVAILABLE
  #  define HAVE_FSTATAT_RUNTIME __builtin_available(macOS 10.10, iOS 8.0, *)
-@@ -13363,7 +13363,12 @@
+@@ -13381,7 +13379,12 @@
          flags |= ST_NOSUID;
      }
  
@@ -35,7 +35,7 @@
  
  #define SET_ITEM(SEQ, INDEX, EXPR)                       \
      do {                                                 \
-@@ -13377,12 +13382,24 @@
+@@ -13395,12 +13398,24 @@
  
      SET_ITEM(v, 0, PyLong_FromLong((long) st.f_iosize));
      SET_ITEM(v, 1, PyLong_FromLong((long) st.f_bsize));
