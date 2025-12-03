@@ -2,7 +2,7 @@ Package: iphoneports-ca-certificates
 Section: Security
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Architecture: all
-Version: 2025-11-04
+Version: 2025-12-02
 Description: Common CA certificates
 Depends: iphoneports-base
 Replaces: iphoneports-libressl
