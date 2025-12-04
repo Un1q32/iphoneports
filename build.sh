@@ -605,6 +605,7 @@ Usage: build.sh [options] <command>
     bootstrap               - Make a sysroot with base, dpkg, and all their dependencies
     --target                - Specify a target (default: $defaulttarget)
     --no-tmp                - Do not use /tmp for anything, use the current directory instead
+    --keepsrc               - Do not delete sources after successful build (useful for debugging)
     -jN                     - Set the number of jobs passed to programs like make and ninja
 "
             exit 1
