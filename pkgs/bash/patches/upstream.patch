@@ -1,5 +1,22 @@
---- src/jobs.c.orig
-+++ src/jobs.c
+diff --git a/builtins/evalfile.c b/builtins/evalfile.c
+index 1fee988..3026c5f 100644
+--- a/builtins/evalfile.c
++++ b/builtins/evalfile.c
+@@ -160,8 +160,10 @@ file_error_and_exit:
+       nr = read (fd, string, file_size);
+       if (nr >= 0)
+ 	string[nr] = '\0';
++#if 0
+       if (nr != file_size)
+ 	nr = -1;		/* XXX - didn't get the whole file */
++#endif
+     }
+   else
+     nr = zmapfd (fd, &string, 0);
+diff --git a/jobs.c b/jobs.c
+index 528c90f..cbcc2c1 100644
+--- a/jobs.c
++++ b/jobs.c
 @@ -3538,7 +3538,7 @@ return_procsub:
    /* There aren't any dead jobs in the jobs table, but let's see if there's
       one in bgpids. We can do this in posix mode because we'll remove any
@@ -9,8 +26,23 @@
      {
        pid = t->pid;
        r = t->status;
---- src/lib/sh/anonfile.c.orig
-+++ src/lib/sh/anonfile.c
+diff --git a/lib/glob/smatch.c b/lib/glob/smatch.c
+index e42b8fc..af3856a 100644
+--- a/lib/glob/smatch.c
++++ b/lib/glob/smatch.c
+@@ -390,7 +390,7 @@ charcmp_wc (wint_t c1, wint_t c2, int forcecoll)
+   if (c1 == c2)
+     return 0;
+ 
+-  if (forcecoll == 0 && glob_asciirange && c1 <= UCHAR_MAX && c2 <= UCHAR_MAX)
++  if (forcecoll == 0 && glob_asciirange)
+     return ((int)(c1 - c2));
+ 
+   s1[0] = c1;
+diff --git a/lib/sh/anonfile.c b/lib/sh/anonfile.c
+index c3c3c69..4fe56bd 100644
+--- a/lib/sh/anonfile.c
++++ b/lib/sh/anonfile.c
 @@ -25,7 +25,7 @@
  #endif
  #include <bashtypes.h>
@@ -84,19 +116,185 @@
    fd = anonshmopen (name, flag, fn);
    if (fd >= 0)
      return fd;		/* anonshmopen sets *FN appropriately */
---- src/patchlevel.h.orig
-+++ src/patchlevel.h
+diff --git a/lib/sh/strtrans.c b/lib/sh/strtrans.c
+index af75dcf..e3d67b6 100644
+--- a/lib/sh/strtrans.c
++++ b/lib/sh/strtrans.c
+@@ -55,7 +55,7 @@ ansicstr (const char *string, size_t len, int flags, int *sawc, size_t *rlen)
+   const char *s;
+   unsigned long v;
+   size_t clen;
+-  int mb_cur_max;
++  size_t mb_cur_max;
+ #if defined (HANDLE_MULTIBYTE)
+   wchar_t wc;
+ #endif
+@@ -63,7 +63,7 @@ ansicstr (const char *string, size_t len, int flags, int *sawc, size_t *rlen)
+   if (string == 0 || *string == '\0')
+     return ((char *)0);
+ 
+-  mb_cur_max = MB_CUR_MAX;
++  mb_cur_max = locale_mb_cur_max;
+ #if defined (HANDLE_MULTIBYTE)
+   temp = 4*len + 4;
+   if (temp < 12)
+@@ -79,10 +79,14 @@ ansicstr (const char *string, size_t len, int flags, int *sawc, size_t *rlen)
+ 	{
+ 	  clen = 1;
+ #if defined (HANDLE_MULTIBYTE)
+-	  if ((locale_utf8locale && (c & 0x80)) ||
+-	      (locale_utf8locale == 0 && mb_cur_max > 0 && is_basic (c) == 0))
++	  /* We read an entire multibyte character at a time if we are in a
++	     locale where a backslash can possibly appear as part of a
++	     multibyte character. UTF-8 encodings prohibit this. */
++	  if (locale_utf8locale == 0 && mb_cur_max > 1 && is_basic (c) == 0)
+ 	    {
+ 	      clen = mbrtowc (&wc, s - 1, mb_cur_max, 0);
++	      if (MB_NULLWCH (clen))
++		break;			/* it apparently can happen */
+ 	      if (MB_INVALIDCH (clen))
+ 		clen = 1;
+ 	    }
+@@ -227,30 +231,24 @@ ansic_quote (const char *str, int flags, int *rlen)
+ {
+   char *r, *ret;
+   const char  *s;
+-  size_t l, rsize;
+   unsigned char c;
++#if defined (HANDLE_MULTIBYTE)
+   size_t clen;
+   int b;
+-#if defined (HANDLE_MULTIBYTE)
+   wchar_t wc;
++  DECLARE_MBSTATE;
+ #endif
+ 
+   if (str == 0 || *str == 0)
+     return ((char *)0);
+ 
+-  l = strlen (str);
+-  rsize = 4 * l + 4;
+-  r = ret = (char *)xmalloc (rsize);
++  r = ret = (char *)xmalloc (4 * strlen (str) + 4);
+ 
+   *r++ = '$';
+   *r++ = '\'';
+ 
+   for (s = str; c = *s; s++)
+     {
+-      b = 1;		/* 1 == add backslash; 0 == no backslash */
+-      l = 1;
+-      clen = 1;
+-
+       switch (c)
+ 	{
+ 	case ESC: c = 'E'; break;
+@@ -266,39 +264,42 @@ ansic_quote (const char *str, int flags, int *rlen)
+ 	  break;
+ 	default:
+ #if defined (HANDLE_MULTIBYTE)
+-	  b = is_basic (c);
+-	  /* XXX - clen comparison to 0 is dicey */
+-	  if ((b == 0 && ((clen = mbrtowc (&wc, s, MB_CUR_MAX, 0)) < 0 || MB_INVALIDCH (clen) || iswprint (wc) == 0)) ||
+-	      (b == 1 && ISPRINT (c) == 0))
+-#else
+-	  if (ISPRINT (c) == 0)
+-#endif
++	  if ((locale_utf8locale && (c & 0x80)) ||
++	      (locale_utf8locale == 0 && locale_mb_cur_max > 1 && is_basic (c) == 0))
+ 	    {
+-	      *r++ = '\\';
+-	      *r++ = TOCHAR ((c >> 6) & 07);
+-	      *r++ = TOCHAR ((c >> 3) & 07);
+-	      *r++ = TOCHAR (c & 07);
+-	      continue;
++	      clen = mbrtowc (&wc, s, locale_mb_cur_max, &state);
++	      if (MB_NULLWCH (clen))
++		goto quote_end;
++	      if (MB_INVALIDCH (clen))
++		INITIALIZE_MBSTATE;
++	      else if (iswprint (wc))
++		{
++		  for (b = 0; b < (int)clen; b++)
++		    *r++ = (unsigned char)s[b];
++		  s += clen - 1;	/* -1 because of the increment above */
++		  continue;
++		}
+ 	    }
+-	  l = 0;
+-	  break;
++	  else
++#endif
++	    if (ISPRINT (c))
++	      {
++		*r++ = c;
++		continue;
++	      }
++
++	  *r++ = '\\';
++	  *r++ = TOCHAR ((c >> 6) & 07);
++	  *r++ = TOCHAR ((c >> 3) & 07);
++	  *r++ = TOCHAR (c & 07);
++	  continue;
+ 	}
+-      if (b == 0 && clen == 0)
+-	break;
+ 
+-      if (l)
+-	*r++ = '\\';
+-
+-      if (clen == 1)
+-	*r++ = c;
+-      else
+-	{
+-	  for (b = 0; b < (int)clen; b++)
+-	    *r++ = (unsigned char)s[b];
+-	  s += clen - 1;	/* -1 because of the increment above */
+-	}
++      *r++ = '\\';
++      *r++ = c;
+     }
+ 
++quote_end:
+   *r++ = '\'';
+   *r = '\0';
+   if (rlen)
+@@ -348,7 +349,8 @@ ansic_shouldquote (const char *string)
+   for (s = string; c = *s; s++)
+     {
+ #if defined (HANDLE_MULTIBYTE)
+-      if (is_basic (c) == 0)
++      if ((locale_utf8locale && (c & 0x80)) ||
++	  (locale_utf8locale == 0 && locale_mb_cur_max > 1 && is_basic (c) == 0))
+ 	return (ansic_wshouldquote (s));
+ #endif
+       if (ISPRINT (c) == 0)
+diff --git a/patchlevel.h b/patchlevel.h
+index 4075274..4cc207f 100644
+--- a/patchlevel.h
++++ b/patchlevel.h
 @@ -25,6 +25,6 @@
     regexp `^#define[ 	]*PATCHLEVEL', since that's what support/mkversion.sh
     looks for to find the patch level (for the sccs version string). */
  
 -#define PATCHLEVEL 0
-+#define PATCHLEVEL 3
++#define PATCHLEVEL 8
  
  #endif /* _PATCHLEVEL_H_ */
---- src/subst.c.orig
-+++ src/subst.c
-@@ -3795,9 +3795,9 @@ pos_params (const char *string, int start, int end, int quoted, int pflags)
+diff --git a/subst.c b/subst.c
+index e9d3e75..dd5d57b 100644
+--- a/subst.c
++++ b/subst.c
+@@ -206,6 +206,8 @@ extern int wordexp_only;
+ extern int singlequote_translations;
+ extern int extended_quote;
+ 
++extern REDIRECT *exec_redirection_undo_list, *redirection_undo_list;
++
+ #if !defined (HAVE_WCSDUP) && defined (HANDLE_MULTIBYTE)
+ extern wchar_t *wcsdup (const wchar_t *);
+ #endif
+@@ -3795,9 +3797,9 @@ pos_params (const char *string, int start, int end, int quoted, int pflags)
  #define EXP_CHAR(s) (s == '$' || s == '`' || s == CTLESC || s == '~')
  #endif
  
@@ -109,7 +307,19 @@
  
  /* If there are any characters in STRING that require full expansion,
     then call FUNC to expand STRING; otherwise just perform quote
-@@ -12215,6 +12215,14 @@ string_quote_removal (const char *string, int quoted)
+@@ -7000,6 +7002,11 @@ function_substitute (char *string, int quoted, int flags)
+       add_unwind_protect (uw_restore_pipestatus_array, psa);
+     }
+ #endif
++
++  unwind_protect_pointer (redirection_undo_list);
++  redirection_undo_list = NULL;
++  unwind_protect_pointer (exec_redirection_undo_list);
++  exec_redirection_undo_list = NULL;
+   
+   subst_assign_varlist = 0;
+ 
+@@ -12215,6 +12222,14 @@ string_quote_removal (const char *string, int quoted)
  	      *r++ = '\\';
  	      break;
  	    }
@@ -124,8 +334,10 @@
  	  if (((quoted & (Q_HERE_DOCUMENT|Q_DOUBLE_QUOTES)) || dquote) && (sh_syntaxtab[c] & CBSDQUOTE) == 0)
  	    *r++ = '\\';
  	  /* FALLTHROUGH */
---- src/tests/quotearray.right.orig
-+++ src/tests/quotearray.right
+diff --git a/tests/quotearray.right b/tests/quotearray.right
+index a3cc93a..a75ef52 100644
+--- a/tests/quotearray.right
++++ b/tests/quotearray.right
 @@ -44,7 +44,7 @@ declare -A assoc=(["\` echo >&2 foo\`"]="128" [0]="0" ["]"]="12" ["x],b[\$(echo
  foo
  0
@@ -135,3 +347,15 @@
  declare -a array
  0
  0
+diff --git a/trap.c b/trap.c
+index 1b3365f..5cf8a1b 100644
+--- a/trap.c
++++ b/trap.c
+@@ -964,6 +964,7 @@ restore_default_signal (int sig)
+       original_signals[sig] = SIG_DFL;	/* XXX */
+       set_signal_handler (sig, SIG_DFL);
+       change_signal (sig, (char *)DEFAULT_SIG);
++      sigmodes[sig] &= ~SIG_TRAPPED;	/* no longer trapped */
+       return;
+     }
+     
