@@ -43,6 +43,9 @@ case "$*" in
     (*--no-tmpfs*) export _TMP="$bsroot/files/iphoneports-tmp-$_TARGET" ;;
     (*) export _TMP="/tmp/iphoneports-tmp-$_TARGET" ;;
 esac
+case "$*" in
+    (*--keepsrc*) keepsrc=1 ;;
+esac
 rm -rf "$_TMP"
 mkdir -p "$_TMP"
 
@@ -335,7 +338,7 @@ build() {
             rm -rf "$_DESTDIR" "$_SDK"
             return 2
         }
-        rm -rf "$_SRCDIR"
+        [ -z "$keepsrc" ] && rm -rf "$_SRCDIR"
     fi
     rm -rf "$_SDK"
     )
