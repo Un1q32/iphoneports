@@ -1,4 +1,5 @@
 #!/bin/sh
+# shellcheck disable=2086
 . ../../files/lib.sh
 
 (
@@ -8,13 +9,16 @@ if [ "$_SUBSYSTEM" = "ios" ] && [ "$_OSVER" -lt 20000 ]; then
 else
     privsepuser="_sshd"
 fi
+if [ "$_SUBSYSTEM" = "ios" ] && [ "$_OSVER" -ge 20000 ]; then
+    libutil='--disable-libutil'
+fi
 ./configure \
     --host="$_TARGET" \
     --prefix=/var/usr \
     --sysconfdir=/var/usr/etc/ssh \
     --with-privsep-user="$privsepuser" \
     --with-sandbox=no \
-    --disable-libutil
+    $libutil
 make -j"$_JOBS"
 make DESTDIR="$_DESTDIR" install-nokeys STRIP_OPT=
 )
