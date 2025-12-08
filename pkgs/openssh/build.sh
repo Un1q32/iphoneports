@@ -8,7 +8,13 @@ if [ "$_SUBSYSTEM" = "ios" ] && [ "$_OSVER" -lt 20000 ]; then
 else
     privsepuser="_sshd"
 fi
-./configure --host="$_TARGET" --prefix=/var/usr --sysconfdir=/var/usr/etc/ssh --with-privsep-user="$privsepuser" --with-sandbox=no
+./configure \
+    --host="$_TARGET" \
+    --prefix=/var/usr \
+    --sysconfdir=/var/usr/etc/ssh \
+    --with-privsep-user="$privsepuser" \
+    --with-sandbox=no \
+    --disable-libutil
 make -j"$_JOBS"
 make DESTDIR="$_DESTDIR" install-nokeys STRIP_OPT=
 )
