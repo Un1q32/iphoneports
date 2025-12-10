@@ -1,5 +1,5 @@
 Package: iphoneports-libjpeg-turbo
-Version: 3.1.2
+Version: 3.1.3
 Architecture: @DPKGARCH@
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Depends: iphoneports-base
