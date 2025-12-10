@@ -1,0 +1,7 @@
+Package: iphoneports-aria2
+Section: Networking
+Maintainer: Uniq <joey.t.reinhart@gmail.com>
+Architecture: @DPKGARCH@
+Version: 1.37.0
+Depends: iphoneports-base, iphoneports-libc++, iphoneports-c-ares, iphoneports-openssl, iphoneports-zlib
+Description: Download utility that supports HTTP(S), FTP, BitTorrent, and Metalink

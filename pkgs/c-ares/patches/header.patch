@@ -1,0 +1,51 @@
+--- src/src/lib/thirdparty/apple/dnsinfo.h.orig
++++ src/src/lib/thirdparty/apple/dnsinfo.h
+@@ -28,7 +28,6 @@
+  * These routines provide access to the systems DNS configuration
+  */
+ 
+-#include <Availability.h>
+ #include <sys/cdefs.h>
+ #include <stdint.h>
+ #include <sys/types.h>
+@@ -73,7 +72,10 @@
+ 	DNS_VAR(uint32_t,		search_order);	/* search_order */
+ 	DNS_VAR(uint32_t,		if_index);
+ 	DNS_VAR(uint32_t,		flags);
+-#if MAC_OS_X_VERSION_MIN_REQUIRED < 1080 /* MacOS 10.8 */
++#if (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) && \
++     __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ < 60000) || \
++    (defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) &&  \
++     __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ < 1080)
+ 	DNS_VAR(uint32_t,		reserved[6]);
+ #else
+ 	DNS_VAR(uint32_t,		reach_flags);	/* SCNetworkReachabilityFlags */
+@@ -103,18 +105,23 @@
+  * DNS configuration access APIs
+  */
+ const char *
+-dns_configuration_notify_key    (void)				__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_2_0);
++dns_configuration_notify_key    (void);
+ 
+ dns_config_t *
+-dns_configuration_copy		(void)				__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_2_0);
++dns_configuration_copy		(void);
+ 
+ void
+-dns_configuration_free		(dns_config_t	*config)	__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_2_0);
++dns_configuration_free		(dns_config_t	*config);
+ 
+-#if MAC_OS_X_VERSION_MIN_REQUIRED >= 1080
++#if (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&  \
++     __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ >= 60000) || \
++    (defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) &&   \
++     __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ >= 1080) ||   \
++	(!defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) &&  \
++	 !defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__))
+ void
+ _dns_configuration_ack		(dns_config_t	*config,
+-				 const char	*bundle_id)	__OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_6_0);
++				 const char	*bundle_id);
+ #endif
+ 
+ __END_DECLS

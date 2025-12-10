@@ -1,0 +1,7 @@
+Package: iphoneports-c-ares
+Section: Development
+Maintainer: Uniq <joey.t.reinhart@gmail.com>
+Architecture: @DPKGARCH@
+Version: 1.34.1
+Depends: iphoneports-base
+Description: A C library for asynchronous DNS requests

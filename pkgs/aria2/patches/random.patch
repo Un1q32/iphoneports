@@ -1,0 +1,28 @@
+--- src/src/SimpleRandomizer.cc.orig
++++ src/src/SimpleRandomizer.cc
+@@ -42,7 +42,12 @@
+ #include <iostream>
+ 
+ #ifdef __APPLE__
++#  if __has_include(<Security/SecRandom.h>)
+ #  include <Security/SecRandom.h>
++#  else
++#  define NO_SECRANDOM
++#  endif
++#  include <Security/SecBase.h>
+ #endif // __APPLE__
+ 
+ #ifdef HAVE_LIBGNUTLS
+@@ -107,8 +112,12 @@
+     abort();
+   }
+ #elif defined(__APPLE__)
++#ifdef NO_SECRANDOM
++  arc4random_buf(buf, len);
++#else
+   auto rv = SecRandomCopyBytes(kSecRandomDefault, len, buf);
+   assert(errSecSuccess == rv);
++#endif
+ #elif defined(HAVE_LIBGNUTLS)
+   auto rv = gnutls_rnd(GNUTLS_RND_RANDOM, buf, len);
+   if (rv != 0) {
