@@ -65,6 +65,17 @@ extern uint64_t __thread_selfusage(void);
 
 static double mach_time_factor = 0.0;
 
+#if (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                \
+     __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ >= 80000) ||               \
+    (defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) &&                 \
+     __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ >= 101000) ||               \
+    defined(__ENVIRONMENT_TV_OS_VERSION_MIN_REQUIRED__) ||                     \
+    defined(__ENVIRONMENT_WATCH_OS_VERSION_MIN_REQUIRED__)
+
+#define HIRES_THREAD_TIME
+
+#endif
+
 int clock_gettime(int clockid, struct timespec *ts) {
 
 #if !(defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&               \
@@ -103,12 +114,7 @@ int clock_gettime(int clockid, struct timespec *ts) {
     ts->tv_nsec = ru.ru_utime.tv_usec * 1000;
     return ret;
   }
-#if (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                \
-     __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ >= 80000) ||               \
-    (defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) &&                 \
-     __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ >= 101000) ||               \
-    defined(__ENVIRONMENT_TV_OS_VERSION_MIN_REQUIRED__) ||                     \
-    defined(__ENVIRONMENT_WATCH_OS_VERSION_MIN_REQUIRED__)
+#ifdef HIRES_THREAD_TIME
   case CLOCK_THREAD_CPUTIME_ID:
     mach_time = __thread_selfusage();
     break;
