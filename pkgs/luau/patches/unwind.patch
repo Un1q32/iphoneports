@@ -1,0 +1,19 @@
+--- src/CodeGen/src/CodeBlockUnwind.cpp.orig
++++ src/CodeGen/src/CodeBlockUnwind.cpp
+@@ -36,7 +36,6 @@
+ extern "C" void __register_frame(const void*) REGISTER_FRAME_WEAK;
+ extern "C" void __deregister_frame(const void*) REGISTER_FRAME_WEAK;
+ 
+-extern "C" void __unw_add_dynamic_fde() __attribute__((weak));
+ #endif
+ 
+ #if defined(__APPLE__) && defined(CODEGEN_TARGET_A64)
+@@ -88,7 +87,7 @@
+     // When using libc++ unwinder (libunwind), each FDE has to be handled separately
+     // libc++ unwinder is the macOS unwinder, but on Linux the unwinder depends on the library the executable is linked with
+     // __unw_add_dynamic_fde is specific to libc++ unwinder, as such we determine the library based on its existence
+-    if (__unw_add_dynamic_fde == nullptr)
++    if (1)
+         return cb(pos);
+ 
+     for (;;)
