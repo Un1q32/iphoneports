@@ -14,16 +14,16 @@
 #include <string.h>
 
 #if (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                \
-     __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ >= 20000) ||               \
+     __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ < 20000) ||                \
     (defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) &&                 \
-     __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ >= 1050)
-
-#include <iphoneports/pthread_chdir.h>
-
-#else
+     __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ < 1050)
 
 #include <errno.h>
 #include <sys/stat.h>
+
+#else
+
+#include <iphoneports/pthread_chdir.h>
 
 #endif
 
@@ -61,9 +61,29 @@ static ssize_t readlinkat(int fd, const char *path, char *buf, size_t bufsize) {
   }
 
 #if (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                \
-     __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ >= 20000) ||               \
+     __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ < 20000) ||                \
     (defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) &&                 \
-     __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ >= 1050)
+     __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ < 1050)
+
+  /* the Mac OS X 10.4 / iPhone OS 1 version has a race condition */
+
+  struct stat st;
+  if (fstat(fd, &st) == -1)
+    return -1;
+  if (!S_ISDIR(st.st_mode)) {
+    errno = ENOTDIR;
+    return -1;
+  }
+
+  char fdpath[PATH_MAX + strlen(path) + 2];
+  fcntl(fd, F_GETPATH, fdpath);
+  if (path[0] != '\0') {
+    strcat(fdpath, "/");
+    strcat(fdpath, path);
+  }
+  return readlink(fdpath, buf, bufsize);
+
+#else
 
   int cwd = open(".", O_RDONLY);
   if (pthread_fchdir_np(-1) < 0 && cwd != -1) {
@@ -84,26 +104,6 @@ static ssize_t readlinkat(int fd, const char *path, char *buf, size_t bufsize) {
     close(cwd);
 
   return ret;
-
-#else
-
-  /* the Mac OS X 10.4 / iPhone OS 1 version has a race condition */
-
-  struct stat st;
-  if (fstat(fd, &st) == -1)
-    return -1;
-  if (!S_ISDIR(st.st_mode)) {
-    errno = ENOTDIR;
-    return -1;
-  }
-
-  char fdpath[PATH_MAX + strlen(path) + 2];
-  fcntl(fd, F_GETPATH, fdpath);
-  if (path[0] != '\0') {
-    strcat(fdpath, "/");
-    strcat(fdpath, path);
-  }
-  return readlink(fdpath, buf, bufsize);
 
 #endif
 }
