@@ -4,7 +4,8 @@
 
 (
 cd "$_SRCDIR"
-if [ "$_SUBSYSTEM" = "ios" ] && [ "$_OSVER" -lt 20000 ]; then
+if { [ "$_SUBSYSTEM" = "ios" ] && [ "$_OSVER" -lt 20000 ]; } ||
+    { [ "$_SUBSYSTEM" = "macos" ] && [ "$_OSVER" -lt 1050 ]; }; then
     privsepuser="nobody"
 else
     privsepuser="_sshd"
