@@ -63,6 +63,8 @@ int open(const char *path, int flags, ...)
 
 extern uint64_t __thread_selfusage(void);
 
+static double mach_time_factor = 0.0;
+
 int clock_gettime(int clockid, struct timespec *ts) {
 
 #if !(defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&               \
@@ -150,14 +152,17 @@ int clock_gettime(int clockid, struct timespec *ts) {
     return -1;
   }
 
-  mach_timebase_info_data_t machinfo;
-  if (mach_timebase_info(&machinfo) != KERN_SUCCESS)
-    return -1;
-  uint64_t nsec;
-  if (machinfo.numer == machinfo.denom)
-    nsec = mach_time;
-  else
-    nsec = mach_time * (double)((double)machinfo.numer / machinfo.denom);
+  if (mach_time_factor == 0.0) {
+    mach_timebase_info_data_t machinfo;
+    if (mach_timebase_info(&machinfo) != KERN_SUCCESS)
+      return -1;
+    if (machinfo.numer == machinfo.denom)
+      mach_time_factor = 1.0;
+    else
+      mach_time_factor = (double)machinfo.numer / machinfo.denom;
+  }
+  uint64_t nsec = mach_time * mach_time_factor;
+
   ts->tv_sec = nsec / 1000000000;
   ts->tv_nsec = nsec % 1000000000;
   return 0;

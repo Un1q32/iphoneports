@@ -50,8 +50,11 @@ typedef int clockid_t;
 #endif
 
 #define clock_gettime __iphoneports_clock_gettime
+#define mach_time_factor __iphoneports_mach_time_factor
 
 extern uint64_t __thread_selfusage(void);
+
+static double mach_time_factor = 0.0;
 
 static int clock_gettime(clockid_t clockid, struct timespec *ts) {
 
@@ -141,18 +144,22 @@ static int clock_gettime(clockid_t clockid, struct timespec *ts) {
     return -1;
   }
 
-  mach_timebase_info_data_t machinfo;
-  if (mach_timebase_info(&machinfo) != KERN_SUCCESS)
-    return -1;
-  uint64_t nsec;
-  if (machinfo.numer == machinfo.denom)
-    nsec = mach_time;
-  else
-    nsec = mach_time * (double)((double)machinfo.numer / machinfo.denom);
+  if (mach_time_factor == 0.0) {
+    mach_timebase_info_data_t machinfo;
+    if (mach_timebase_info(&machinfo) != KERN_SUCCESS)
+      return -1;
+    if (machinfo.numer == machinfo.denom)
+      mach_time_factor = 1.0;
+    else
+      mach_time_factor = (double)machinfo.numer / machinfo.denom;
+  }
+  uint64_t nsec = mach_time * mach_time_factor;
 
   ts->tv_sec = nsec / 1000000000;
   ts->tv_nsec = nsec % 1000000000;
   return 0;
 }
+
+#undef mach_time_factor
 
 #endif
