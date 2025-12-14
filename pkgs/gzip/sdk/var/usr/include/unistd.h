@@ -50,7 +50,7 @@ static inline int fgetattrlist(int fd, struct attrlist *attrList, void *attrBuf,
   if (fcntl(fd, F_GETPATH, fdpath) == -1)
     return -1;
 
-  return getattrlist(fdpath, attrList, attrBuf, attrBufSize, flags);
+  return getattrlist(fdpath, attrList, attrBuf, attrBufSize, flags | FSOPT_NOFOLLOW);
 }
 
 static inline int fsetattrlist(int fd, struct attrlist *attrList, void *attrBuf,
@@ -78,7 +78,7 @@ static inline int fsetattrlist(int fd, struct attrlist *attrList, void *attrBuf,
   if (fcntl(fd, F_GETPATH, fdpath) == -1)
     return -1;
 
-  return setattrlist(fdpath, attrList, attrBuf, attrBufSize, flags);
+  return setattrlist(fdpath, attrList, attrBuf, attrBufSize, flags | FSOPT_NOFOLLOW);
 }
 
 #endif
