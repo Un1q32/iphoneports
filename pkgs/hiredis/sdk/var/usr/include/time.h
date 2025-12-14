@@ -21,6 +21,10 @@
 #include <sys/time.h>
 
 #ifndef CLOCK_REALTIME
+typedef int clockid_t;
+#endif
+
+#ifndef CLOCK_REALTIME
 #define CLOCK_REALTIME 0
 #endif
 #ifndef CLOCK_MONOTONIC_RAW
@@ -49,17 +53,17 @@
 
 extern uint64_t __thread_selfusage(void);
 
-static int clock_gettime(int clockid, struct timespec *ts) {
+static int clock_gettime(clockid_t clockid, struct timespec *ts) {
 
 #if (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                \
      __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ >= 20000) ||               \
     !defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__)
 
   static bool init = false;
-  static int (*func)(int, struct timespec *);
+  static int (*func)(clockid_t, struct timespec *);
 
   if (!init) {
-    func = (int (*)(int, struct timespec *))dlsym(RTLD_NEXT, "clock_gettime");
+    func = (int (*)(clockid_t, struct timespec *))dlsym(RTLD_NEXT, "clock_gettime");
     init = true;
   }
 
