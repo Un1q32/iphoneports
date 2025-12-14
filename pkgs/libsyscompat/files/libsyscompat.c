@@ -42,8 +42,8 @@ int open(const char *path, int flags, ...)
 #ifndef CLOCK_MONOTONIC_RAW
 #define CLOCK_MONOTONIC_RAW 4
 #endif
-#ifndef CLOCK_MONOTONIC_RAW_APROX
-#define CLOCK_MONOTONIC_RAW_APROX 5
+#ifndef CLOCK_MONOTONIC_RAW_APPROX
+#define CLOCK_MONOTONIC_RAW_APPROX 5
 #endif
 #ifndef CLOCK_MONOTONIC
 #define CLOCK_MONOTONIC 6
@@ -51,8 +51,8 @@ int open(const char *path, int flags, ...)
 #ifndef CLOCK_UPTIME_RAW
 #define CLOCK_UPTIME_RAW 8
 #endif
-#ifndef CLOCK_UPTIME_RAW_APROX
-#define CLOCK_UPTIME_RAW_APROX 9
+#ifndef CLOCK_UPTIME_RAW_APPROX
+#define CLOCK_UPTIME_RAW_APPROX 9
 #endif
 #ifndef CLOCK_PROCESS_CPUTIME_ID
 #define CLOCK_PROCESS_CPUTIME_ID 12
@@ -118,8 +118,8 @@ int clock_gettime(int clockid, struct timespec *ts) {
   case CLOCK_THREAD_CPUTIME_ID:
     mach_time = __thread_selfusage();
     break;
-  case CLOCK_MONOTONIC_RAW_APROX:
-  case CLOCK_UPTIME_RAW_APROX:
+  case CLOCK_MONOTONIC_RAW_APPROX:
+  case CLOCK_UPTIME_RAW_APPROX:
     mach_time = mach_approximate_time();
     break;
 #else
@@ -145,8 +145,8 @@ int clock_gettime(int clockid, struct timespec *ts) {
 
     return 0;
   }
-  case CLOCK_MONOTONIC_RAW_APROX:
-  case CLOCK_UPTIME_RAW_APROX:
+  case CLOCK_MONOTONIC_RAW_APPROX:
+  case CLOCK_UPTIME_RAW_APPROX:
 #endif
   case CLOCK_MONOTONIC:
   case CLOCK_MONOTONIC_RAW:
