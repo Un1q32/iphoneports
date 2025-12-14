@@ -1,0 +1,7 @@
+Package: iphoneports-wamr
+Section: Scripting
+Maintainer: Uniq <joey.t.reinhart@gmail.com>
+Architecture: @DPKGARCH@
+Version: 2.4.4
+Description: WebAssembly Micro Runtime
+Depends: iphoneports-base
