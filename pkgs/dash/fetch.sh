@@ -1,8 +1,11 @@
 #!/bin/sh
 rm -rf "$_DESTDIR" "$_SRCDIR"
-printf "Downloading source...\n"
-curl -L -# -o src.tar.gz https://git.kernel.org/pub/scm/utils/dash/dash.git/snapshot/dash-0.5.12.tar.gz
+ver='0.5.12'
+if [ ! -f "$_DLCACHE/dash-$ver.tar.gz" ] ||
+    [ "$(sha256sum "$_DLCACHE/dash-$ver.tar.gz" | awk '{print $1}')" != "0d632f6b945058d84809cac7805326775bd60cb4a316907d0bd4228ff7107154" ]; then
+    printf "Downloading source...\n"
+    curl -L -# -o "$_DLCACHE/dash-$ver.tar.gz" "https://git.kernel.org/pub/scm/utils/dash/dash.git/snapshot/dash-$ver.tar.gz" || exit 1
+fi
 printf "Unpacking source...\n"
-tar -C "$_TMP" -xf src.tar.gz
-rm src.tar.gz
-mv "$_TMP"/dash-0.5.12 "$_SRCDIR"
+tar -C "$_TMP" -xf "$_DLCACHE/dash-$ver.tar.gz"
+mv "$_TMP"/dash-* "$_SRCDIR"
