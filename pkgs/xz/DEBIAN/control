@@ -3,6 +3,5 @@ Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Architecture: @DPKGARCH@
 Depends: iphoneports-base, iphoneports-grep, iphoneports-sed
 Description: XZ-format compression utilities
-Homepage: http://tukaani.org/xz/
 Section: Archiving
-Version: 5.8.1
+Version: 5.8.2
