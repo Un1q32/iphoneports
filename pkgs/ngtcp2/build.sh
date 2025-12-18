@@ -7,8 +7,7 @@ cd "$_SRCDIR"
     --host="$_TARGET" \
     --prefix=/var/usr \
     --disable-static \
-    PKG_CONFIG_LIBDIR="$_SDK/var/usr/lib/pkgconfig" \
-    PKG_CONFIG_SYSROOT_DIR="$_SDK"
+    PKG_CONFIG_LIBDIR="$_SDK/var/usr/lib/pkgconfig"
 make install DESTDIR="$_DESTDIR" -j"$_JOBS"
 )
 
