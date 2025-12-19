@@ -17,7 +17,10 @@ armv6srcs="$armv7srcs floatundisf.c floatundidf.c"
 cc() {
     printf " \033[1;32mCC\033[0m %s\n" "$2"
     command -v ccache >/dev/null && ccache=ccache
-    $ccache clang -isysroot "$_PKGROOT/sysroot" "$@"
+    case $2 in
+        (*.mm|*.cc|*.cpp) cc=clang++ ;;
+    esac
+    $ccache "${cc:-clang}" -isysroot "$_PKGROOT/sysroot" "$@"
 }
 
 for src in $armv6srcs; do
@@ -48,6 +51,33 @@ cc -o nothing.o -target arm64-apple-macos11.0 -arch arm64 -arch arm64e -xc /dev/
 wait
 
 "$_TARGET-libtool" -static -o libclang_rt.osx.a ./*.o 2>/dev/null
+rm ./*.o
+
+cc \
+    -o ubsan_minimal_ios.o \
+    -target unknown-apple-ios \
+    -arch armv6 -Xarch_armv6 -mios-version-min=1.0 \
+    -arch armv7 -Xarch_armv7 -mios-version-min=3.0 \
+    -arch armv7s -Xarch_armv7s -mios-version-min=6.0 \
+    -arch arm64 -Xarch_arm64 -mios-version-min=7.0 \
+    -arch arm64e -Xarch_arm64e -mios-version-min=14.0 \
+    ../lib/ubsan_minimal/ubsan_minimal_handlers.cpp \
+    -O3 -c -I../lib &
+
+cc \
+    -o ubsan_minimal_osx.o \
+    -target unknown-apple-macos \
+    -arch i386 -Xarch_i386 -mmacos-version-min=10.4 \
+    -arch x86_64 -Xarch_x86_64 -mmacos-version-min=10.4 \
+    -arch arm64 -Xarch_arm64 -mmacos-version-min=11.0 \
+    -arch arm64e -Xarch_arm64e -mmacos-version-min=11.0 \
+    ../lib/ubsan_minimal/ubsan_minimal_handlers.cpp \
+    -O3 -c -I../lib
+
+wait
+
+"$_TARGET-libtool" -static -o libclang_rt.ubsan_minimal_ios.a ubsan_minimal_ios.o
+"$_TARGET-libtool" -static -o libclang_rt.ubsan_minimal_osx.a ubsan_minimal_osx.o
 rm ./*.o
 
 cp ./*.a "$_DESTDIR/var/usr/lib/clang/$llvmver/lib/darwin"

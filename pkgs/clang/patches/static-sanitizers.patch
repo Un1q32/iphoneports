@@ -1,0 +1,11 @@
+--- src/clang/lib/Driver/ToolChains/Darwin.h.orig
++++ src/clang/lib/Driver/ToolChains/Darwin.h
+@@ -684,7 +684,7 @@
+   void AddLinkSanitizerLibArgs(const llvm::opt::ArgList &Args,
+                                llvm::opt::ArgStringList &CmdArgs,
+                                StringRef Sanitizer,
+-                               bool shared = true) const;
++                               bool shared = false) const;
+ 
+   void
+   AddGnuCPlusPlusIncludePaths(const llvm::opt::ArgList &DriverArgs,
