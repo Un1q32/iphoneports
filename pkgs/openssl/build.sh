@@ -13,9 +13,13 @@ case $_CPU in
             sys=darwin64-arm64
         fi
     ;;
+    (armv7*)
+        sys=ios-cross
+        cflags='-O1'
+        noasm=no-asm
+    ;;
     (arm*)
         sys=ios-cross
-        noasm=no-asm
     ;;
     (i386)
         sys=darwin-i386
@@ -29,10 +33,11 @@ case $_CPU in
         exit 1
     ;;
 esac
+[ -z "$cflags" ] && cflags='-O2'
 
 ./Configure "$sys" $noasm --prefix=/var/usr --openssldir=/var/usr/etc/ssl CROSS_COMPILE="$_TARGET"-
-make CNF_CFLAGS= PROGRAMS=apps/openssl -j"$_JOBS"
-make CNF_CFLAGS= PROGRAMS=apps/openssl DESTDIR="$_DESTDIR" install_sw install_ssldirs
+make CNF_CFLAGS= CFLAGS="$cflags" PROGRAMS=apps/openssl -j"$_JOBS"
+make CNF_CFLAGS= CFLAGS="$cflags" PROGRAMS=apps/openssl DESTDIR="$_DESTDIR" install_sw install_ssldirs
 )
 
 (
