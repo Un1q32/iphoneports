@@ -72,12 +72,35 @@ cc \
     -arch arm64 -Xarch_arm64 -mmacos-version-min=11.0 \
     -arch arm64e -Xarch_arm64e -mmacos-version-min=11.0 \
     ../lib/ubsan_minimal/ubsan_minimal_handlers.cpp \
-    -O3 -c -I../lib
+    -O3 -c -I../lib &
+
+cc \
+    -o ubsan_ios.o \
+    -target unknown-apple-ios \
+    -arch armv6 -Xarch_armv6 -mios-version-min=1.0 \
+    -arch armv7 -Xarch_armv7 -mios-version-min=3.0 \
+    -arch armv7s -Xarch_armv7s -mios-version-min=6.0 \
+    -arch arm64 -Xarch_arm64 -mios-version-min=7.0 \
+    -arch arm64e -Xarch_arm64e -mios-version-min=14.0 \
+    ../ubsan.c \
+    -O3 -c &
+
+cc \
+    -o ubsan_osx.o \
+    -target unknown-apple-macos \
+    -arch i386 -Xarch_i386 -mmacos-version-min=10.4 \
+    -arch x86_64 -Xarch_x86_64 -mmacos-version-min=10.4 \
+    -arch arm64 -Xarch_arm64 -mmacos-version-min=11.0 \
+    -arch arm64e -Xarch_arm64e -mmacos-version-min=11.0 \
+    ../ubsan.c \
+    -O3 -c
 
 wait
 
 "$_TARGET-libtool" -static -o libclang_rt.ubsan_minimal_ios.a ubsan_minimal_ios.o
 "$_TARGET-libtool" -static -o libclang_rt.ubsan_minimal_osx.a ubsan_minimal_osx.o
+"$_TARGET-libtool" -static -o libclang_rt.ubsan_ios.a ubsan_ios.o
+"$_TARGET-libtool" -static -o libclang_rt.ubsan_osx.a ubsan_osx.o
 rm ./*.o
 
 cp ./*.a "$_DESTDIR/var/usr/lib/clang/$llvmver/lib/darwin"
