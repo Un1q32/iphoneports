@@ -3,6 +3,8 @@
 
 defaulttarget='armv6-apple-darwin9'
 
+[ -f defaulttarget.txt ] && IFS= read -r defaulttarget < defaulttarget.txt
+
 [ "${0%/*}" = "$0" ] && bsroot="." || bsroot="${0%/*}"
 cd "$bsroot" || exit 1
 bsroot="$PWD"
@@ -36,8 +38,6 @@ printf '%s' "$$" > "files/pkglock-$_TARGET"
 
 pkgdir="$bsroot/pkgs"
 export TERM="xterm-256color"
-
-[ -f defaulttarget.txt ] && IFS= read -r defaulttarget < defaulttarget.txt
 
 case "$*" in
     (*--no-tmpfs*) export _TMP="$bsroot/files/iphoneports-tmp-$_TARGET" ;;
