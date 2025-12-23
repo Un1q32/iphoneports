@@ -1,8 +1,8 @@
 #!/bin/sh
 rm -rf "$_DESTDIR" "$_SRCDIR"
-ver='1.13.1'
+ver='1.14.0'
 if [ ! -f "$_DLCACHE/nghttp3-$ver.tar.xz" ] ||
-    [ "$(sha256sum "$_DLCACHE/nghttp3-$ver.tar.xz" | awk '{print $1}')" != "020836668c711d5c166969f8b165fbfd989e6967d0601947bf608f29e2158518" ]; then
+    [ "$(sha256sum "$_DLCACHE/nghttp3-$ver.tar.xz" | awk '{print $1}')" != "b3083dae2ff30cf00d24d5fedd432479532c7b17d993d384103527b36c1ec82d" ]; then
     printf "Downloading source...\n"
     curl -L -# -o "$_DLCACHE/nghttp3-$ver.tar.xz" "https://github.com/ngtcp2/nghttp3/releases/download/v$ver/nghttp3-$ver.tar.xz" || exit 1
 fi
