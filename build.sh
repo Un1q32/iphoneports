@@ -568,7 +568,7 @@ main() {
             printf 'Building sysroot...\n'
             for pkg in $pkgs; do
                 sysroot "$pkg"
-                cp -f "$pkgdir/$pkg"/*.deb debs 2> /dev/null
+                cp -f "$pkgdir/$pkg"/*"-$_TARGET.deb" debs 2> /dev/null
             done
             rm -rf "sysroot-$_TARGET/DEBIAN"
             printf 'Making tarballs...\n'
