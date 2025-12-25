@@ -578,7 +578,7 @@ main() {
             ) || error "Failed to build bootstrap tarball"
             (
             cd debs || exit 1
-            "$gtar" --owner 0 --group 0 -czf ../sysroot/debs.tar.gz ./*
+            "$gtar" --owner 0 --group 0 -czf "../sysroot-$_TARGET/debs.tar.gz" ./*
             ) || error "Failed to build debs tarball"
             printf 'Done!\n'
         ;;
