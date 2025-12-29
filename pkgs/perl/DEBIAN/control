@@ -4,4 +4,4 @@ Architecture: @DPKGARCH@
 Depends: iphoneports-base
 Description: A highly capable, feature-rich programming language
 Section: Scripting
-Version: 5.42.0
+Version: 5.42.0-1

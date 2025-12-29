@@ -32,7 +32,8 @@ esac
     --sysroot="$_SDK" \
     -Duseshrplib=true \
     -Dosname=darwin \
-    -Dccflags='-DPERL_DARWIN -O1 -w' \
+    -Dccflags='-DPERL_DARWIN -fno-strict-aliasing -w' \
+    -Doptimize='-O2' \
     -Dcharsize=1 \
     -Dshortsize=2 \
     -Dintsize=4 \
