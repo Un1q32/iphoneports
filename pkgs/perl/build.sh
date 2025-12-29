@@ -33,7 +33,7 @@ esac
     -Duseshrplib=true \
     -Dosname=darwin \
     -Dccflags='-DPERL_DARWIN -fno-strict-aliasing -w' \
-    -Doptimize='-O2' \
+    -Doptimize='-Os' \
     -Dcharsize=1 \
     -Dshortsize=2 \
     -Dintsize=4 \
