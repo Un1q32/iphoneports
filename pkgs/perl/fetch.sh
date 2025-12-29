@@ -6,9 +6,9 @@ if [ ! -f "$_DLCACHE/perl-$ver.tar.gz" ] ||
     printf "Downloading source...\n"
     curl -L -# -o "$_DLCACHE/perl-$ver.tar.gz" "https://github.com/Perl/perl5/archive/refs/tags/v$ver.tar.gz" || exit 1
 fi
-crossver='1.6.3'
+crossver='1.6.4'
 if [ ! -f "$_DLCACHE/perl-cross-$crossver.tar.gz" ] ||
-    [ "$(sha256sum "$_DLCACHE/perl-cross-$crossver.tar.gz" | awk '{print $1}')" != "3babe550dc39f7dd25df75f26c0b26220f903777bd199b0d10dd64c54899be2d" ]; then
+    [ "$(sha256sum "$_DLCACHE/perl-cross-$crossver.tar.gz" | awk '{print $1}')" != "b176522bceb1fc3533eb85e4435e5ab06f7473633979122a8f5b18a2b4fc865a" ]; then
     curl -L -# -o "$_DLCACHE/perl-cross-$crossver.tar.gz" "https://github.com/arsv/perl-cross/archive/refs/tags/$crossver.tar.gz" || exit 1
 fi
 printf "Unpacking source...\n"
