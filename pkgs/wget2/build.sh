@@ -31,7 +31,7 @@ make DESTDIR="$_DESTDIR" install
 (
 cd "$_DESTDIR/var/usr"
 rm -rf share bin/wget2_noinstall
-strip_and_sign bin/wget2 lib/libwget.3.dylib
+strip_and_sign bin/wget2 lib/libwget.*.dylib
 )
 
 installlicense "$_SRCDIR/COPYING"
