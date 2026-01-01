@@ -10,8 +10,7 @@ unset TERMINFO
     --with-shared \
     --enable-widec \
     --disable-stripping \
-    --with-cxx-binding \
-    --with-cxx-shared \
+    --without-cxx \
     --without-normal \
     --without-debug \
     --without-manpages \
@@ -32,17 +31,15 @@ strip_and_sign \
     bin/clear \
     bin/infocmp \
     lib/libncursesw.6.dylib \
-    lib/libncurses++w.6.dylib \
     lib/libformw.6.dylib \
     lib/libmenuw.6.dylib \
     lib/libpanelw.6.dylib
 ln -s libncursesw.dylib lib/libtinfow.dylib
-for lib in ncurses ncurses++ form menu panel tinfo; do
-    ln -s "lib${lib}w.dylib" "lib/lib${lib}.dylib"
-done
+ln -s libncurses.dylib lib/libtinfo.dylib
 ln -s libncurses.dylib lib/libcurses.dylib
-for pc in form menu panel ncurses ncurses++; do
-    ln -s "${pc}w.pc" "lib/pkgconfig/${pc}.pc"
+for lib in ncurses form menu panel; do
+    ln -s "lib${lib}w.dylib" "lib/lib${lib}.dylib"
+    ln -s "${lib}w.pc" "lib/pkgconfig/${lib}.pc"
 done
 mv include/ncursesw/* include
 rm -rf include/ncursesw
