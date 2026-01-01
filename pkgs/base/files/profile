@@ -2,6 +2,9 @@ export PATH='/var/usr/sbin:/var/usr/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin
 if [ -d /opt/local/bin ]; then
     export PATH="$PATH:/opt/local/bin"
 fi
+if [ -d /opt/homebrew/bin ]; then
+    export PATH="$PATH:/opt/homebrew/bin:/opt/homebrew/sbin"
+fi
 umask 022
 
 eval "$(dircolors -b)"
