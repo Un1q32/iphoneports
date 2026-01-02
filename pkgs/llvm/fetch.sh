@@ -11,7 +11,7 @@ tar -C "$_TMP" -xf "$_DLCACHE/llvm-$ver.tar.gz"
 mv "$_TMP"/llvm-project-llvmorg-* "$_SRCDIR"
 if [ "$_PKGNAME" = 'compiler-rt' ]; then
     printf '%s\n' "${ver%%.*}" > "$_SRCDIR/iphoneports-llvmversion.txt"
-    ubsanver='731e93a71d47d291d7ec1ae0efd35df5ed6d22ed'
+    ubsanver='b156199ed109812c1c8270fe2ff47352913336b0'
     curl -L -s -o "$_SRCDIR/compiler-rt/ubsan.c" "https://raw.githubusercontent.com/Un1q32/ubsan/$ubsanver/ubsan.c" &
     curl -L -s -o "$_SRCDIR/compiler-rt/UBSAN-LICENSE" "https://raw.githubusercontent.com/Un1q32/ubsan/$ubsanver/LICENSE"
     wait
