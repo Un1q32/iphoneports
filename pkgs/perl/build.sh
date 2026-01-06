@@ -30,6 +30,7 @@ esac
     --target-tools-prefix="$_TARGET" \
     --prefix=/var/usr \
     --sysroot="$_SDK" \
+    --use-threads \
     -Duseshrplib=true \
     -Dosname=darwin \
     -Dccflags='-DPERL_DARWIN -fno-strict-aliasing -w' \
@@ -49,7 +50,7 @@ esac
     -Dgidsize=4 \
     -Dtimesize="$longsize" \
     -Dbyteorder="$byteorder" \
-    -Dlddlflags='-undefined dynamic_lookup -shared'
+    -Dlddlflags='-shared -undefined dynamic_lookup'
 make -j"$_JOBS"
 make install.perl DESTDIR="$_DESTDIR"
 )
