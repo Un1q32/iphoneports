@@ -24,7 +24,6 @@ case $_CPU in
         exit 1
     ;;
 esac
-# breaks at -O2 for some reason so we use -O1
 ./configure \
     --target="$_TARGET" \
     --target-tools-prefix="$_TARGET" \
