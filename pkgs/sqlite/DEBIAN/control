@@ -1,5 +1,5 @@
 Package: iphoneports-sqlite
-Version: 3.51.1
+Version: 3.51.2
 Architecture: @DPKGARCH@
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Section: Data_Storage
