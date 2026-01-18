@@ -24,19 +24,21 @@ cd "$_SRCDIR/build"
 
 llvmtblgen="$(command -v llvm-tblgen)"
 clangtblgen="$(command -v clang-tblgen)"
+ranlib="$(command -v "$_TARGET-ranlib")"
 case $_CPU in
     (arm64*) ;;
     (arm*)
         # ld64 fails to link when built for thumb, so explicitly specify arm here
-        export CFLAGS="-marm"
-        export CXXFLAGS="$CFLAGS"
+        cflags='-marm'
     ;;
 esac
 
 cmake -GNinja ../clang \
     -DCMAKE_BUILD_TYPE=MinSizeRel \
     -DCMAKE_C_COMPILER="$_TARGET-cc" \
-    -DCMAKE_RANLIB="$(command -v "$_TARGET-ranlib")" \
+    -DCMAKE_C_FLAGS="$cflags" \
+    -DCMAKE_CXX_FLAGS="$cflags" \
+    -DCMAKE_RANLIB="$ranlib" \
     -DCMAKE_SYSTEM_NAME=Darwin \
     -DCMAKE_INSTALL_PREFIX=/var/usr \
     -DCMAKE_FIND_ROOT_PATH_MODE_INCLUDE=ONLY \
@@ -53,7 +55,9 @@ cmake -GNinja ../clang \
 cmake -GNinja ../clang \
     -DCMAKE_BUILD_TYPE=MinSizeRel \
     -DCMAKE_C_COMPILER="$_TARGET-cc" \
-    -DCMAKE_RANLIB="$(command -v "$_TARGET-ranlib")" \
+    -DCMAKE_C_FLAGS="$cflags" \
+    -DCMAKE_CXX_FLAGS="$cflags" \
+    -DCMAKE_RANLIB="$ranlib" \
     -DCMAKE_SYSTEM_NAME=Darwin \
     -DCMAKE_INSTALL_PREFIX=/var/usr \
     -DCMAKE_FIND_ROOT_PATH_MODE_INCLUDE=ONLY \
