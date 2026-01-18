@@ -20,3 +20,28 @@
      else if (Triple.isArm64e())
        CPU = "apple-a12";
      else if (Triple.getArch() == llvm::Triple::aarch64 ||
+--- src/clang/lib/Driver/ToolChains/Arch/X86.cpp.orig
++++ src/clang/lib/Driver/ToolChains/Arch/X86.cpp
+@@ -82,8 +82,20 @@
+     if (Triple.isDriverKit())
+       return "nehalem";
+ 
+-    // The oldest x86_64 Macs have core2/Merom; the oldest x86 Macs have Yonah.
+-    return Is64Bit ? "core2" : "yonah";
++    // The oldest x86_64 Macs have core2/Merom
++    if (Is64Bit)
++      return "core2";
++
++    // The 1st generation Apple TV can run up to Mac OS X 10.6 with some
++    // effort, and has a Pentium M. Everything that can run 10.7 has at
++    // least a Yonah, everything that can run 10.8 has at least a Core 2.
++    if (Triple.isMacOSX()) {
++      if (Triple.isOSVersionLT(10, 7))
++        return "pentium-m";
++      if (!Triple.isOSVersionLT(10, 8))
++        return "core2";
++    }
++    return "yonah";
+   }
+ 
+   // Set up default CPU name for PS4/PS5 compilers.
