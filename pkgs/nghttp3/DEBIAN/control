@@ -2,6 +2,6 @@ Package: iphoneports-nghttp3
 Section: Development
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Architecture: @DPKGARCH@
-Version: 1.14.0
+Version: 1.15.0
 Depends: iphoneports-base
 Description: HTTP/3 library written in C
