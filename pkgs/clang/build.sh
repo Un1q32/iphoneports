@@ -81,6 +81,8 @@ rm -rf share bin/git-clang-format
 for link in clang++ clang-cl clang-cpp cc c++ gcc g++; do
     ln -sf clang "bin/$link"
 done
+ln -sf offload-arch bin/amdgpu-arch
+ln -sf offload-arch bin/nvptx-arch
 for file in bin/* lib/*.dylib; do
     [ -h "$file" ] || strip_and_sign "$file"
 done
