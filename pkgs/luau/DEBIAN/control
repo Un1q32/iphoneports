@@ -4,4 +4,4 @@ Architecture: @DPKGARCH@
 Depends: iphoneports-base, iphoneports-libc++
 Description: A fast, small, safe, gradually typed embeddable scripting language derived from Lua
 Section: Scripting
-Version: 0.703
+Version: 0.706
