@@ -1,8 +1,8 @@
 #!/bin/sh
 rm -rf "$_DESTDIR" "$_SRCDIR"
-ver='685'
+ver='691'
 if [ ! -f "$_DLCACHE/less-$ver.tar.gz" ] ||
-    [ "$(sha256sum "$_DLCACHE/less-$ver.tar.gz" | awk '{print $1}')" != "2701041e767e697ee420ce0825641cedc8f20b51576abe99d92c1666d332e9dc" ]; then
+    [ "$(sha256sum "$_DLCACHE/less-$ver.tar.gz" | awk '{print $1}')" != "88b480eda1bb4f92009f7968b23189eaf1329211f5a3515869e133d286154d25" ]; then
     printf "Downloading source...\n"
     curl -L -# -o "$_DLCACHE/less-$ver.tar.gz" "https://www.greenwoodsoftware.com/less/less-$ver.tar.gz" || exit 1
 fi
