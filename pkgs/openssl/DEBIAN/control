@@ -2,7 +2,7 @@ Package: iphoneports-openssl
 Section: Security
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Architecture: @DPKGARCH@
-Version: 3.6.0-1
+Version: 3.6.1
 Description: The Open Source toolkit for Secure Sockets Layer and Transport Layer Security
 Depends: iphoneports-base, iphoneports-ca-certificates
 Replaces: iphoneports-libressl
