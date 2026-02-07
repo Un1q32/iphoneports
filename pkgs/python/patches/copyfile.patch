@@ -9,7 +9,7 @@
  #  include <copyfile.h>           // fcopyfile()
  #endif
  
-@@ -12062,7 +12062,7 @@
+@@ -12067,7 +12067,7 @@
  #endif /* HAVE_SENDFILE */
  
  
@@ -18,7 +18,7 @@
  /*[clinic input]
  os._fcopyfile
  
-@@ -17833,7 +17833,7 @@
+@@ -17838,7 +17838,7 @@
  #endif
  #endif  /* HAVE_EVENTFD && EFD_CLOEXEC */
  
