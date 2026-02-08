@@ -1,6 +1,6 @@
 --- src/data/tupletable.orig
 +++ src/data/tupletable
-@@ -55,8 +55,8 @@
+@@ -50,8 +50,8 @@
  base-bsd-openbsd-<cpu>		openbsd-<cpu>
  base-bsd-netbsd-<cpu>		netbsd-<cpu>
  base-bsd-darwin-amd64		darwin-amd64
