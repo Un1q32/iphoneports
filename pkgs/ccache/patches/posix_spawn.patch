@@ -1,8 +1,8 @@
 --- src/src/ccache/execute.cpp.orig
 +++ src/src/ccache/execute.cpp
-@@ -287,6 +287,38 @@
- {
-   LOG("Executing {}", util::format_argv_for_logging(argv));
+@@ -297,6 +297,38 @@
+   }
+   DEFER(util::unsetenv("UNCACHED_ERR_FD"));
  
 +#if (defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) && __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ < 1050) || \
 +    (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) && __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ < 20000)
@@ -39,7 +39,7 @@
    util::Fd out(std::move(fd_out));
    util::Fd err(std::move(fd_err));
  
-@@ -335,6 +367,8 @@
+@@ -345,6 +377,8 @@
      return -1;
    }
  
