@@ -10,15 +10,20 @@
  #define POSTRMFILE         "postrm"
 --- src/src/main/unpack.c.orig
 +++ src/src/main/unpack.c
-@@ -1651,6 +1651,11 @@
+@@ -1573,6 +1573,16 @@
  
- 	tar_deferred_extract(newfiles_queue.head, pkg);
+   tar_deferred_extract(newfiles_queue.head, pkg);
  
-+	if (oldversionstatus == PKG_STAT_NOTINSTALLED || oldversionstatus == PKG_STAT_CONFIGFILES)
-+		maintscript_run_new(pkg, EXTRAINSTFILE, "extra-installation", cidir, cidirrest, "install", NULL);
-+	else
-+		maintscript_run_new(pkg, EXTRAINSTFILE, "extra-installation", cidir, cidirrest, "upgrade", versiondescribe(&pkg->installed.version, vdew_nonambig), NULL);
++  if (oldversionstatus == PKG_STAT_NOTINSTALLED || oldversionstatus == PKG_STAT_CONFIGFILES) {
++    maintscript_new(pkg, EXTRAINSTFILE, "extra-installation", cidir, cidirrest,
++                    "install", NULL);
++  } else {
++    maintscript_new(pkg, EXTRAINSTFILE, "extra-installation", cidir, cidirrest,
++                    "upgrade",
++                    versiondescribe(&pkg->installed.version, vdew_nonambig),
++                    NULL);
++  }
 +
- 	if (oldversionstatus == PKG_STAT_HALFINSTALLED ||
- 	    oldversionstatus == PKG_STAT_UNPACKED) {
- 		/* Packages that were in ‘installed’ and ‘postinstfailed’ have
+   if (oldversionstatus == PKG_STAT_HALFINSTALLED ||
+       oldversionstatus == PKG_STAT_UNPACKED) {
+     /* Packages that were in ‘installed’ and ‘postinstfailed’ have been
