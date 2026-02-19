@@ -1,8 +1,8 @@
 #!/bin/sh
 rm -rf "$_DESTDIR" "$_SRCDIR"
-ver='9.9'
+ver='9.10'
 if [ ! -f "$_DLCACHE/coreutils-$ver.tar.xz" ] ||
-    [ "$(sha256sum "$_DLCACHE/coreutils-$ver.tar.xz" | awk '{print $1}')" != "19bcb6ca867183c57d77155eae946c5eced88183143b45ca51ad7d26c628ca75" ]; then
+    [ "$(sha256sum "$_DLCACHE/coreutils-$ver.tar.xz" | awk '{print $1}')" != "16535a9adf0b10037364e2d612aad3d9f4eca3a344949ced74d12faf4bd51d25" ]; then
     printf "Downloading source...\n"
     curl -L -# -o "$_DLCACHE/coreutils-$ver.tar.xz" "https://ftpmirror.gnu.org/gnu/coreutils/coreutils-$ver.tar.xz" || exit 1
 fi

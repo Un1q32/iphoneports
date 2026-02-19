@@ -2,6 +2,6 @@ Package: iphoneports-coreutils
 Section: Utilities
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Architecture: @DPKGARCH@
-Version: 9.9
+Version: 9.10
 Description: The basic file, shell and text manipulation utilities of the GNU operating system
 Depends: iphoneports-base, iphoneports-openssl, iphoneports-gmp
