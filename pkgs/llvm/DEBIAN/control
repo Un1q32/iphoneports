@@ -5,3 +5,4 @@ Architecture: @DPKGARCH@
 Version: 22.1.0
 Description: Compiler infrastructure
 Depends: iphoneports-base, iphoneports-libc++, iphoneports-zlib, iphoneports-zstd
+Replaces: iphoneports-clang
