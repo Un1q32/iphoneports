@@ -1,6 +1,6 @@
 --- src/llvm/include/llvm/TargetParser/Triple.h.orig
 +++ src/llvm/include/llvm/TargetParser/Triple.h
-@@ -1164,7 +1164,15 @@
+@@ -1209,7 +1209,15 @@
    /// Note: Android API level 29 (10) introduced ELF TLS.
    bool hasDefaultEmulatedTLS() const {
      return (isAndroid() && isAndroidVersionLT(29)) || isOSOpenBSD() ||
@@ -19,7 +19,7 @@
    /// True if the target uses TLSDESC by default.
 --- src/llvm/lib/LTO/LTOBackend.cpp.orig
 +++ src/llvm/lib/LTO/LTOBackend.cpp
-@@ -557,6 +557,8 @@
+@@ -565,6 +565,8 @@
      return TOrErr.takeError();
  
    std::unique_ptr<TargetMachine> TM = createTargetMachine(C, *TOrErr, Mod);
@@ -30,7 +30,7 @@
    if (!C.CodeGenOnly) {
 --- src/llvm/lib/LTO/ThinLTOCodeGenerator.cpp.orig
 +++ src/llvm/lib/LTO/ThinLTOCodeGenerator.cpp
-@@ -589,6 +589,8 @@
+@@ -590,6 +590,8 @@
        TheTarget->createTargetMachine(TheTriple, MCpu, FeatureStr, Options,
                                       RelocModel, std::nullopt, CGOptLevel));
    assert(TM && "Cannot create target machine");
@@ -78,7 +78,7 @@
  
 --- src/clang/lib/CodeGen/ItaniumCXXABI.cpp.orig
 +++ src/clang/lib/CodeGen/ItaniumCXXABI.cpp
-@@ -2856,7 +2856,7 @@
+@@ -2926,7 +2926,7 @@
    const char *Name = "__cxa_atexit";
    if (TLS) {
      const llvm::Triple &T = CGF.getTarget().getTriple();

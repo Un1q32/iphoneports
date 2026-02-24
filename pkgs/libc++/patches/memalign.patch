@@ -1,6 +1,54 @@
---- src/libcxx/include/__memory/aligned_alloc.h.orig
-+++ src/libcxx/include/__memory/aligned_alloc.h
-@@ -40,19 +40,29 @@
+--- src/libcxx/src/include/aligned_alloc.h.orig
++++ src/libcxx/src/include/aligned_alloc.h
+@@ -20,6 +20,37 @@
+ 
+ #if _LIBCPP_HAS_LIBRARY_ALIGNED_ALLOCATION
+ 
++// It is not yet possible to use aligned_alloc() on all Apple platforms since
++// 10.15 was the first version to ship an implementation of aligned_alloc().
++#  if defined(__APPLE__)
++#    if (defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) &&                                                     \
++         __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ < 101500) ||                                                    \
++        (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                                                    \
++         __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ < 130000) ||                                                   \
++        (defined(__ENVIRONMENT_WATCH_OS_VERSION_MIN_REQUIRED__) &&                                                     \
++         __ENVIRONMENT_WATCH_OS_VERSION_MIN_REQUIRED__ < 60000) ||                                                     \
++        (defined(__ENVIRONMENT_TV_OS_VERSION_MIN_REQUIRED__) && __ENVIRONMENT_TV_OS_VERSION_MIN_REQUIRED__ < 130000)
++#      define _LIBCPP_HAS_C11_ALIGNED_ALLOC 0
++#    else
++#      define _LIBCPP_HAS_C11_ALIGNED_ALLOC 1
++#    endif
++#  elif defined(__ANDROID__) && __ANDROID_API__ < 28
++// Android only provides aligned_alloc when targeting API 28 or higher.
++#    define _LIBCPP_HAS_C11_ALIGNED_ALLOC 0
++#  else
++#    define _LIBCPP_HAS_C11_ALIGNED_ALLOC 1
++#  endif
++
++#  if defined(__APPLE__) &&                                                                                            \
++      ((defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) &&                                                      \
++        __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ < 1060) ||                                                       \
++       (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                                                     \
++        __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ < 30000))
++#    define _LIBCPP_HAS_POSIX_MEMALIGN 0
++#  else
++#    define _LIBCPP_HAS_POSIX_MEMALIGN 1
++#  endif
++
+ // Low-level helpers to call the aligned allocation and deallocation functions
+ // on the target platform. This is used to implement libc++'s own memory
+ // allocation routines -- if you need to allocate memory inside the library,
+@@ -30,8 +61,7 @@
+ #  if defined(_LIBCPP_MSVCRT_LIKE)
+   return ::_aligned_malloc(__size, __alignment);
+ 
+-// Android only provides aligned_alloc when targeting API 28 or higher.
+-#  elif !defined(__ANDROID__) || __ANDROID_API__ >= 28
++#  elif _LIBCPP_HAS_C11_ALIGNED_ALLOC
+   // aligned_alloc() requires that __size is a multiple of __alignment,
+   // but for C++ [new.delete.general], only states "if the value of an
+   // alignment argument passed to any of these functions is not a valid
+@@ -42,19 +72,29 @@
    // Rounding up could have wrapped around to zero, so we have to add another
    // max() ternary to the actual call site to avoid succeeded in that case.
    return ::aligned_alloc(__alignment, __size > __rounded_size ? __size : __rounded_size);
@@ -24,7 +72,7 @@
  #  if defined(_LIBCPP_MSVCRT_LIKE)
    ::_aligned_free(__ptr);
 -#  else
-+#  elif _LIBCPP_HAS_POSIX_MEMALIGN || (_LIBCPP_STD_VER >= 17 && _LIBCPP_HAS_C11_ALIGNED_ALLOC)
++#  elif _LIBCPP_HAS_C11_ALIGNED_ALLOC || _LIBCPP_HAS_POSIX_MEMALIGN
    ::free(__ptr);
 +#  else
 +  if (__ptr)
@@ -32,25 +80,6 @@
  #  endif
  }
  
---- src/libcxx/include/__config.orig
-+++ src/libcxx/include/__config
-@@ -694,6 +694,16 @@
- #    define _LIBCPP_HAS_C11_ALIGNED_ALLOC 1
- #  endif
- 
-+#  if defined(__APPLE__) &&                                                                                            \
-+      ((defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) &&                                                      \
-+        __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ < 1060) ||                                                       \
-+       (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                                                     \
-+        __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ < 30000))
-+#    define _LIBCPP_HAS_POSIX_MEMALIGN 0
-+#  else
-+#    define _LIBCPP_HAS_POSIX_MEMALIGN 1
-+#  endif
-+
- #  if defined(__APPLE__) || defined(__FreeBSD__)
- #    define _LIBCPP_WCTYPE_IS_MASK
- #  endif
 --- src/libcxx/include/__cxx03/__memory/aligned_alloc.h.orig
 +++ src/libcxx/include/__cxx03/__memory/aligned_alloc.h
 @@ -30,19 +30,29 @@
@@ -87,21 +116,11 @@
  
 --- src/libcxx/include/__cxx03/__config.orig
 +++ src/libcxx/include/__cxx03/__config
-@@ -629,6 +629,24 @@
-          __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ < 101500)
- #      define _LIBCPP_HAS_NO_C11_ALIGNED_ALLOC
- #    endif
-+#    if (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                                                    \
-+         __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ < 130000)
-+#      define _LIBCPP_HAS_NO_C11_ALIGNED_ALLOC
-+#    endif
-+#    if (defined(__ENVIRONMENT_WATCH_OS_VERSION_MIN_REQUIRED__) &&                                                     \
-+         __ENVIRONMENT_WATCH_OS_VERSION_MIN_REQUIRED__ < 60000)
-+#      define _LIBCPP_HAS_NO_C11_ALIGNED_ALLOC
-+#    endif
-+#    if (defined(__ENVIRONMENT_TV_OS_VERSION_MIN_REQUIRED__) && __ENVIRONMENT_TV_OS_VERSION_MIN_REQUIRED__ < 130000)
-+#      define _LIBCPP_HAS_NO_C11_ALIGNED_ALLOC
-+#    endif
+@@ -622,6 +622,16 @@
+ #    define _LIBCPP_HAS_NO_ALIGNED_ALLOCATION
+ #  endif
+ 
++#  if defined(__APPLE__)
 +#    if (defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) && __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ < 1060)
 +#      define _LIBCPP_HAS_NO_POSIX_MEMALIGN
 +#    endif
@@ -109,6 +128,8 @@
 +         __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ < 30000)
 +#      define _LIBCPP_HAS_NO_POSIX_MEMALIGN
 +#    endif
- #  elif defined(__ANDROID__) && __ANDROID_API__ < 28
- // Android only provides aligned_alloc when targeting API 28 or higher.
- #    define _LIBCPP_HAS_NO_C11_ALIGNED_ALLOC
++#  endif
++
+ #  if defined(__APPLE__) || defined(__FreeBSD__)
+ #    define _LIBCPP_HAS_DEFAULTRUNELOCALE
+ #  endif

@@ -6,12 +6,20 @@
  
 -if (LIBCXXABI_ENABLE_THREADS AND (UNIX OR FUCHSIA) AND NOT (APPLE OR CYGWIN)
 +if (LIBCXXABI_ENABLE_THREADS AND (UNIX OR FUCHSIA) AND NOT CYGWIN
-     AND NOT (${CMAKE_SYSTEM_NAME} MATCHES "AIX"))
+     AND NOT ("${CMAKE_SYSTEM_NAME}" MATCHES "AIX"))
    list(APPEND LIBCXXABI_SOURCES
      cxa_thread_atexit.cpp
 --- src/libcxxabi/src/cxa_thread_atexit.cpp.orig
 +++ src/libcxxabi/src/cxa_thread_atexit.cpp
-@@ -112,8 +112,7 @@
+@@ -106,15 +106,14 @@
+ 
+ #endif // HAVE___CXA_THREAD_ATEXIT_IMPL
+ 
+-#if defined(__linux__) || defined(__Fuchsia__)
++#if defined(__linux__) || defined(__Fuchsia__) || defined(__APPLE__)
+ extern "C" {
+ 
+   _LIBCXXABI_FUNC_VIS int __cxa_thread_atexit(Dtor dtor, void* obj, void* dso_symbol) throw() {
  #ifdef HAVE___CXA_THREAD_ATEXIT_IMPL
      return __cxa_thread_atexit_impl(dtor, obj, dso_symbol);
  #else

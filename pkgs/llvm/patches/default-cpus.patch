@@ -1,6 +1,6 @@
 --- src/llvm/lib/LTO/LTO.cpp.orig
 +++ src/llvm/lib/LTO/LTO.cpp
-@@ -1770,7 +1770,7 @@
+@@ -1794,7 +1794,7 @@
    if (TheTriple.getArch() == Triple::x86_64)
      return "core2";
    if (TheTriple.getArch() == Triple::x86)
@@ -11,7 +11,7 @@
    if (TheTriple.getArch() == Triple::aarch64 ||
 --- src/llvm/lib/LTO/LTOModule.cpp.orig
 +++ src/llvm/lib/LTO/LTOModule.cpp
-@@ -216,7 +216,7 @@
+@@ -218,7 +218,7 @@
      if (Triple.getArch() == llvm::Triple::x86_64)
        CPU = "core2";
      else if (Triple.getArch() == llvm::Triple::x86)
@@ -22,7 +22,7 @@
      else if (Triple.getArch() == llvm::Triple::aarch64 ||
 --- src/clang/lib/Driver/ToolChains/Arch/X86.cpp.orig
 +++ src/clang/lib/Driver/ToolChains/Arch/X86.cpp
-@@ -82,8 +82,20 @@
+@@ -84,8 +84,20 @@
      if (Triple.isDriverKit())
        return "nehalem";
  

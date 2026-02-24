@@ -1,6 +1,6 @@
 --- src/llvm/lib/Support/Unix/Signals.inc.orig
 +++ src/llvm/lib/Support/Unix/Signals.inc
-@@ -927,7 +927,7 @@
+@@ -933,7 +933,7 @@
  
    AddSignalHandler(PrintStackTraceSignalHandler, nullptr);
  

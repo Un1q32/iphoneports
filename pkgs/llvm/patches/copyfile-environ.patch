@@ -1,6 +1,6 @@
 --- src/llvm/lib/Support/Unix/Path.inc.orig
 +++ src/llvm/lib/Support/Unix/Path.inc
-@@ -31,7 +31,9 @@
+@@ -34,7 +34,9 @@
  #include <pwd.h>
  
  #ifdef __APPLE__
@@ -10,7 +10,7 @@
  #include <mach-o/dyld.h>
  #include <sys/attr.h>
  #if __has_include(<sys/clonefile.h>)
-@@ -43,7 +45,8 @@
+@@ -46,7 +48,8 @@
  #include <sys/auxv.h>
  #else
  #include <machine/elf.h>
@@ -20,7 +20,7 @@
  #endif
  #elif defined(__DragonFly__)
  #include <sys/mount.h>
-@@ -1483,7 +1486,7 @@
+@@ -1570,7 +1573,7 @@
  
  namespace fs {
  
@@ -29,7 +29,7 @@
  /// This implementation tries to perform an APFS CoW clone of the file,
  /// which can be much faster and uses less space.
  /// Unfortunately fcopyfile(3) does not support COPYFILE_CLONE, so the
-@@ -1492,34 +1495,6 @@
+@@ -1579,34 +1582,6 @@
  std::error_code copy_file(const Twine &From, const Twine &To) {
    std::string FromS = From.str();
    std::string ToS = To.str();
@@ -66,7 +66,7 @@
    return errnoAsErrorCode();
 --- src/llvm/lib/Support/Unix/Program.inc.orig
 +++ src/llvm/lib/Support/Unix/Program.inc
-@@ -42,7 +42,7 @@
+@@ -41,7 +41,7 @@
  #include <TargetConditionals.h>
  #endif
  
@@ -77,7 +77,7 @@
  #define USE_NSGETENVIRON 0
 --- src/llvm/lib/Support/Path.cpp.orig
 +++ src/llvm/lib/Support/Path.cpp
-@@ -1012,7 +1012,7 @@
+@@ -1021,7 +1021,7 @@
    return std::error_code();
  }
  

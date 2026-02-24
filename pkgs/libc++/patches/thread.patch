@@ -11,10 +11,11 @@
  #if defined(__NetBSD__)
  #  pragma weak pthread_create // Do not create libpthread dependency
  #endif
-@@ -77,6 +81,15 @@
-   SYSTEM_INFO info;
-   GetSystemInfo(&info);
-   return info.dwNumberOfProcessors;
+@@ -75,7 +79,16 @@
+   return static_cast<unsigned>(result);
+ #elif defined(_LIBCPP_WIN32API)
+   return static_cast<unsigned>(GetActiveProcessorCount(ALL_PROCESSOR_GROUPS));
+-#else // defined(CTL_HW) && defined(HW_NCPU)
 +#elif defined(CTL_HW) && defined(HW_NCPU)
 +  int mib[2], ncpus = 0;
 +  mib[0]     = CTL_HW;
@@ -24,6 +25,7 @@
 +  if (ncpus < 1)
 +    return 1;
 +  return ncpus;
- #else // defined(CTL_HW) && defined(HW_NCPU)
++#else
    // TODO: grovel through /proc or check cpuid on x86 and similar
    // instructions on other architectures.
+ #  if defined(_LIBCPP_WARNING)
