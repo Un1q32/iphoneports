@@ -2,7 +2,7 @@ Package: iphoneports-gawk
 Section: Utilities
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Architecture: @DPKGARCH@
-Version: 5.3.2
+Version: 5.4.0
 Description: pattern scanning and processing language
 Depends: iphoneports-base, iphoneports-readline
 Replaces: iphoneports-awk
