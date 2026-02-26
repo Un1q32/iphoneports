@@ -1,9 +1,13 @@
 #!/bin/sh
+# shellcheck disable=2086
 . ../../files/lib.sh
 
 (
 cd "$_SRCDIR"
-./configure --host="$_TARGET" --prefix=/var/usr --with-readline
+if [ "$_SUBSYSTEM" = "ios" ] && [ "$_OSVER" -lt 20000 ]; then
+    flags='ac_cv_func_posix_spawn=no ac_cv_func_posix_spawnp=no'
+fi
+./configure --host="$_TARGET" --prefix=/var/usr --with-readline $flags
 make -j"$_JOBS"
 make DESTDIR="$_DESTDIR" install
 )
