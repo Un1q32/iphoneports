@@ -8,7 +8,7 @@ case $_CPU in
     arm*) disableasm='--disable-assembly' ;;
 esac
 ./configure --host="$_TARGET" --prefix=/var/usr --disable-static $disableasm
-make -j"$_JOBS"
+make
 make install DESTDIR="$_DESTDIR"
 )
 

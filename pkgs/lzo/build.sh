@@ -5,7 +5,7 @@
 cd "$_SRCDIR"
 autoreconf -fi
 ./configure --host="$_TARGET" --prefix=/var/usr --disable-static --enable-shared
-make -j"$_JOBS"
+make
 make DESTDIR="$_DESTDIR" install
 )
 

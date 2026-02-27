@@ -4,7 +4,7 @@
 (
 cd "$_SRCDIR"
 ./configure --host="$_TARGET" --prefix=/var/usr --enable-telnet --enable-utmp
-make -j"$_JOBS"
+make
 make DESTDIR="$_DESTDIR" install
 mkdir -p "$_DESTDIR/var/usr/etc"
 cp etc/etcscreenrc "$_DESTDIR/var/usr/etc/screenrc"

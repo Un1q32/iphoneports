@@ -7,7 +7,7 @@ if [ "$_CPU" = "i386" ]; then
     disable=--disable-avx2-support
 fi
 ./configure --host="$_TARGET" --prefix=/var/usr --disable-static --disable-doc --enable-silent-rules $disable
-make -j"$_JOBS"
+make
 make DESTDIR="$_DESTDIR" install
 )
 

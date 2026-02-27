@@ -5,7 +5,7 @@
 cd "$_SRCDIR"
 autoreconf -fi
 ./configure --host="$_TARGET" --prefix=/var/usr --enable-libtls-only --disable-static CFLAGS='-O3 -flto'
-make -j"$_JOBS"
+make
 make DESTDIR="$_DESTDIR" install
 )
 

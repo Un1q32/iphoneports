@@ -50,7 +50,7 @@ esac
     -Dtimesize="$longsize" \
     -Dbyteorder="$byteorder" \
     -Dlddlflags='-shared -undefined dynamic_lookup'
-make -j"$_JOBS"
+make
 make install.perl DESTDIR="$_DESTDIR"
 )
 

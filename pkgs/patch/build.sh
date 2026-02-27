@@ -9,7 +9,7 @@ case $_CPU in
     *) y2038='--disable-year2038' ;;
 esac
 ./configure --host="$_TARGET" --prefix=/var/usr $y2038
-make -j"$_JOBS"
+make
 make DESTDIR="$_DESTDIR" install
 )
 

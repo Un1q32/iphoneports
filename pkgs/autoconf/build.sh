@@ -4,7 +4,7 @@
 (
 cd "$_SRCDIR"
 ./configure --prefix=/var/usr
-make -j"$_JOBS"
+make
 make install DESTDIR="$_DESTDIR"
 )
 

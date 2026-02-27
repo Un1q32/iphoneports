@@ -5,7 +5,7 @@
 cd "$_SRCDIR"
 autoconf
 ./configure --prefix=/var/usr
-make -j"$_JOBS"
+make
 make install DESTDIR="$_DESTDIR"
 )
 

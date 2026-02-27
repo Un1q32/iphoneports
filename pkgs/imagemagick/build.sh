@@ -4,7 +4,7 @@
 (
 cd "$_SRCDIR"
 ./configure --host="$_TARGET" --prefix=/var/usr --disable-static PKG_CONFIG_LIBDIR="$_SDK/var/usr/lib/pkgconfig"
-make -j"$_JOBS"
+make
 make DESTDIR="$_DESTDIR" install
 )
 

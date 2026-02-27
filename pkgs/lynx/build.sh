@@ -10,7 +10,7 @@ else
     ipv6='--enable-ipv6'
 fi
 ./configure --host="$_TARGET" --prefix=/var/usr --with-ssl --with-brotli --with-zlib $ipv6
-make -j"$_JOBS"
+make
 make DESTDIR="$_DESTDIR" install
 )
 

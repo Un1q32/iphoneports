@@ -4,7 +4,7 @@
 (
 cd "$_SRCDIR"
 ./configure --host="$_TARGET" --prefix=/var/usr --disable-md2man --with-included-zlib=no
-make -j"$_JOBS"
+make
 make DESTDIR="$_DESTDIR" install
 )
 

@@ -36,7 +36,7 @@ esac
 [ -z "$cflags" ] && cflags='-O2'
 
 ./Configure "$sys" $noasm --prefix=/var/usr --openssldir=/var/usr/etc/ssl CROSS_COMPILE="$_TARGET"-
-make CNF_CFLAGS= CFLAGS="$cflags" PROGRAMS=apps/openssl -j"$_JOBS"
+make CNF_CFLAGS= CFLAGS="$cflags" PROGRAMS=apps/openssl
 make CNF_CFLAGS= CFLAGS="$cflags" PROGRAMS=apps/openssl DESTDIR="$_DESTDIR" install_sw install_ssldirs
 )
 

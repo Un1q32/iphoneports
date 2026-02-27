@@ -20,7 +20,7 @@ fi
     $y2038 \
     $posix_spawn \
     fu_cv_sys_stat_statvfs=yes
-make -j"$_JOBS"
+make
 make DESTDIR="$_DESTDIR" install
 )
 

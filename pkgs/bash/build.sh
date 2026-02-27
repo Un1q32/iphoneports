@@ -10,7 +10,7 @@ cd "$_SRCDIR"
     CFLAGS="-Wno-parentheses -Wno-format-security -Wno-deprecated-non-prototype -O3" \
     CC_FOR_BUILD='clang' \
     CFLAGS_FOR_BUILD='-std=c99 -O2'
-make -j"$_JOBS"
+make
 mkdir -p "$_DESTDIR/var/usr/bin"
 cp bash "$_DESTDIR/var/usr/bin"
 )

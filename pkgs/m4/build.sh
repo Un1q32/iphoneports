@@ -9,7 +9,7 @@ if [ "$_SUBSYSTEM" = "ios" ] && [ "$_OSVER" -lt 20000 ]; then
     posix_spawn='ac_cv_func_posix_spawn=no'
 fi
 ./configure --host="$_TARGET" --prefix=/var/usr $posix_spawn
-make -j"$_JOBS"
+make
 make DESTDIR="$_DESTDIR" install
 )
 

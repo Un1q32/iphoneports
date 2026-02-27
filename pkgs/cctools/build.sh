@@ -16,7 +16,7 @@ rm include/foreign/machine/_structs.h
     LLVM_LIB_DIR="$_SDK/var/usr/lib" \
     CFLAGS='-O3 -flto' \
     CXXFLAGS='-O3 -flto=thin'
-make -j"$_JOBS"
+make
 make install DESTDIR="$_DESTDIR"
 )
 

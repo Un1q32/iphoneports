@@ -12,7 +12,7 @@ fi
 cd "$_SRCDIR"
 ./autogen.sh
 ./configure --host="$_TARGET" --prefix=/var/usr --disable-unicode --disable-linux-affinity
-make -j"$_JOBS"
+make
 mkdir -p "$_DESTDIR/var/usr/bin"
 cp htop "$_DESTDIR/var/usr/bin"
 )

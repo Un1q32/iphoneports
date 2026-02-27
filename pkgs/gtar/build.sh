@@ -8,7 +8,7 @@ case $_CPU in
     *) y2038='--disable-year2038' ;;
 esac
 ./configure --host="$_TARGET" --prefix=/var/usr --program-prefix=g $y2038 LIBS="-liconv"
-make -j"$_JOBS"
+make
 make DESTDIR="$_DESTDIR" install
 )
 

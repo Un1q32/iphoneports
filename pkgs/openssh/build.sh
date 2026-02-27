@@ -20,7 +20,7 @@ fi
     --with-privsep-user="$privsepuser" \
     --with-sandbox=no \
     $libutil
-make -j"$_JOBS"
+make
 make DESTDIR="$_DESTDIR" install-nokeys STRIP_OPT=
 )
 

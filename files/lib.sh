@@ -43,5 +43,5 @@ installsuid() {
 }
 
 make() {
-    command "$_MAKE" "$@"
+    command "$_MAKE" -j"$_JOBS" "$@"
 }

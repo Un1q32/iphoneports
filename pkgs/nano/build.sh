@@ -4,7 +4,7 @@
 (
 cd "$_SRCDIR"
 ./configure --host="$_TARGET" --prefix=/var/usr PKG_CONFIG_LIBDIR="$_SDK/var/usr/lib/pkgconfig" gl_cv_func_strcasecmp_works=yes
-make -j"$_JOBS"
+make
 make DESTDIR="$_DESTDIR" install
 )
 

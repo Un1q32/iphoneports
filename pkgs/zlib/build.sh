@@ -4,7 +4,7 @@
 (
 cd "$_SRCDIR"
 CHOST="$_TARGET" ./configure --prefix=/var/usr --zlib-compat
-make -j"$_JOBS"
+make
 make DESTDIR="$_DESTDIR" install
 )
 

@@ -17,7 +17,7 @@ cd "$_SRCDIR"
     --enable-zlib \
     --enable-openssl \
     ax_cv_check_cflags___static_libgcc=no
-make -j"$_JOBS"
+make
 fakeroot "$_MAKE" DESTDIR="$_DESTDIR" install
 )
 

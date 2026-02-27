@@ -8,7 +8,7 @@ if [ "$_SUBSYSTEM" = "ios" ] && [ "$_OSVER" -lt 20000 ]; then
     posix_spawn='--disable-posix-spawn'
 fi
 ./configure --host="$_TARGET" --prefix=/var/usr $posix_spawn
-make -j"$_JOBS"
+make
 make DESTDIR="$_DESTDIR" install
 )
 

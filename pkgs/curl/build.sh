@@ -20,7 +20,7 @@ fi
     --with-ca-bundle=/var/usr/etc/ssl/cert.pem \
     $ipv6 \
     PKG_CONFIG_LIBDIR="$_SDK/var/usr/lib/pkgconfig"
-make -j"$_JOBS"
+make
 make DESTDIR="$_DESTDIR" install
 )
 

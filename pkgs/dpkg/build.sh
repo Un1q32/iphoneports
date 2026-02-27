@@ -29,7 +29,7 @@ autoreconf -fi
     --with-deb-compressor=gzip \
     CPPFLAGS='-Wno-incompatible-function-pointer-types' \
     PERL=/usr/bin/perl
-make -j"$_JOBS"
+make
 make DESTDIR="$_DESTDIR" install
 )
 

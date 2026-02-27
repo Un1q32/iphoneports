@@ -13,7 +13,7 @@ export PATH="$PWD/iphoneports-bin:$PATH"
     PKG_CONFIG_LIBDIR="$_SDK/var/usr/lib/pkgconfig" \
     PKG_CONFIG_SYSROOT_DIR="$_SDK/var/usr/lib/pkgconfig" \
     GPGRT_CONFIG="$_SDK/var/usr/bin/gpgrt-config"
-make -j"$_JOBS"
+make
 make DESTDIR="$_DESTDIR" install
 )
 

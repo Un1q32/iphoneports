@@ -6,7 +6,7 @@ cd "$_SRCDIR"
 mkdir tmpbin
 ln -s "$(command -v md5sum)" tmpbin/md5
 export PATH="$PATH:$PWD/tmpbin"
-make CC="$_TARGET-cc" RANLIB="$_TARGET-ranlib" PREFIX=/var/usr UNAME=Darwin -j"$_JOBS"
+make CC="$_TARGET-cc" RANLIB="$_TARGET-ranlib" PREFIX=/var/usr UNAME=Darwin
 make DESTDIR="$_DESTDIR" PREFIX=/var/usr UNAME=Darwin install
 )
 

@@ -4,7 +4,7 @@
 (
 cd "$_SRCDIR"
 ./configure --prefix=/var/usr CXX="$_TARGET-c++"
-make DESTDIR="$_DESTDIR" install -j"$_JOBS"
+make DESTDIR="$_DESTDIR" install
 )
 
 (

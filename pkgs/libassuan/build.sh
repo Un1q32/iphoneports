@@ -9,7 +9,7 @@ cd "$_SRCDIR"
     --disable-static \
     --disable-doc \
     GPGRT_CONFIG="$_SDK/var/usr/bin/gpgrt-config"
-make -j"$_JOBS"
+make
 make DESTDIR="$_DESTDIR" install
 )
 

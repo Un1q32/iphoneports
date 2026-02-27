@@ -23,7 +23,7 @@ fi
     --with-xxhash \
     PKG_CONFIG_LIBDIR="$_SDK/var/usr/lib/pkgconfig" \
     $posix_spawn
-make -j"$_JOBS"
+make
 make install DESTDIR="$_DESTDIR"
 )
 

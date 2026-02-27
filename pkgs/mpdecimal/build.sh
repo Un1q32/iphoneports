@@ -4,7 +4,7 @@
 (
 cd "$_SRCDIR"
 ./configure --host="$_TARGET" --prefix=/var/usr --disable-cxx --disable-static --disable-doc
-make DESTDIR="$_DESTDIR" install -j"$_JOBS"
+make DESTDIR="$_DESTDIR" install
 )
 
 (

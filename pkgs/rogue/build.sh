@@ -4,7 +4,7 @@
 (
 cd "$_SRCDIR"
 ./configure --host="$_TARGET" --prefix=/var/usr --enable-scorefile=/var/usr/share/rogue/scores --enable-setgid
-make -j"$_JOBS"
+make
 make DESTDIR="$_DESTDIR" install
 )
 

@@ -15,7 +15,7 @@ cd "$_SRCDIR"
     --enable-pcre2-16 \
     --enable-pcre2-32 \
     $jit
-make -j"$_JOBS"
+make
 make DESTDIR="$_DESTDIR" install
 )
 

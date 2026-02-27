@@ -15,7 +15,7 @@ cd "$_SRCDIR"
     --enable-pcregrep-libz \
     --disable-cpp \
     $jit
-make -j"$_JOBS"
+make
 make DESTDIR="$_DESTDIR" install
 )
 

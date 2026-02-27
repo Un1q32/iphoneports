@@ -19,7 +19,7 @@ cd "$_SRCDIR"
     LIBS="-lpcre"
 sed -i -e '/^name=zsh\/regex/ s/link=no/link=static/' -e '/^name=zsh\/pcre/ s/link=no/link=static/' config.modules
 make prep
-make -j"$_JOBS"
+make
 make DESTDIR="$_DESTDIR" install
 )
 

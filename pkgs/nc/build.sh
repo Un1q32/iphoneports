@@ -10,7 +10,7 @@ autoreconf -fi
     --enable-libtls-only \
     --disable-static \
     --enable-nc
-make -j"$_JOBS" install DESTDIR="$_DESTDIR"
+make install DESTDIR="$_DESTDIR"
 )
 
 (

@@ -12,7 +12,7 @@ autoreconf -fi
     PKG_CONFIG_LIBDIR="$_SDK/var/usr/lib/pkgconfig" \
     LIBS='-framework Security' \
     CPPFLAGS='-Wno-deprecated-literal-operator'
-make -j"$_JOBS"
+make
 make DESTDIR="$_DESTDIR" install
 )
 

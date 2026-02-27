@@ -5,7 +5,7 @@
 cd "$_SRCDIR"
 ./autogen.sh
 ./configure --host="$_TARGET" --prefix=/var/usr
-make -j"$_JOBS"
+make
 make DESTDIR="$_DESTDIR" install
 )
 

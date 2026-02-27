@@ -14,7 +14,7 @@ autoreconf -fi
 (
 mkdir _buildpython && cd _buildpython || exit 1
 ../configure --prefix="$_SRCDIR/buildpython" --without-ensurepip CC=clang
-make install -j"$_JOBS"
+make install
 )
 
 if [ "$_SUBSYSTEM" = "ios" ] && [ "$_OSVER" -lt 20000 ]; then
@@ -40,7 +40,7 @@ fi
     PKG_CONFIG_LIBDIR="$_SDK/var/usr/lib/pkgconfig" \
     $posix_spawn \
     $remote_debug
-make DESTDIR="$_DESTDIR" install -j"$_JOBS"
+make install DESTDIR="$_DESTDIR"
 )
 
 (

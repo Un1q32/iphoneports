@@ -5,7 +5,7 @@
 cd "$_SRCDIR"
 autoreconf -fi
 ./configure --host="$_TARGET" --prefix=/var/usr --without-libiberty --without-avahi --disable-Werror --enable-rfc2553 --disable-pump-mode rsync_cv_HAVE_C99_VSNPRINTF=yes
-make -j"$_JOBS"
+make
 make DESTDIR="$_DESTDIR" install
 )
 

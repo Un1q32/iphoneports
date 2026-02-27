@@ -15,7 +15,7 @@ cd "$_SRCDIR"
     --with-default-trust-store-file=/var/usr/etc/ssl/cert.pem \
     ac_cv_func_malloc_0_nonnull=yes \
     ac_cv_func_realloc_0_nonnull=yes
-make -j"$_JOBS"
+make
 make DESTDIR="$_DESTDIR" install
 )
 
