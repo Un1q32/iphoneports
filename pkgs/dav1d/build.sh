@@ -52,7 +52,7 @@ meson setup .. --cross-file="$_SRCDIR/iphoneports.meson" --prefix=/var/usr -Dena
 if { [ "$_SUBSYSTEM" = "ios" ] && [ "$_OSVER" -lt 20000 ]; } || { [ "$_SUBSYSTEM" = "macos" ] && [ "$_OSVER" -lt 1050 ]; }; then
     sed -i 's/-Wl,-rpath[^[:space:]]*//g' build.ninja
 fi
-DESTDIR="$_DESTDIR" ninja -j"$_JOBS" install
+DESTDIR="$_DESTDIR" ninja install
 )
 
 (

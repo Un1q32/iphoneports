@@ -15,7 +15,7 @@ cmake -GNinja .. \
     -DBUILD_SHARED_LIBS=ON \
     -DFMT_DOC=OFF \
     -DFMT_TEST=OFF
-DESTDIR="$_DESTDIR" ninja -j"$_JOBS" install
+DESTDIR="$_DESTDIR" ninja install
 )
 
 for lib in "$_DESTDIR/var/usr/lib"/*.dylib; do

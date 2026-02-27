@@ -27,14 +27,12 @@ make amalg \
     PREFIX=/var/usr \
     DESTDIR="$_DESTDIR" \
     MACOSX_DEPLOYMENT_TARGET="$_MACVER" \
-    $cflags \
-    -j"$_JOBS"
+    $cflags
 make install \
     TARGET_SYS="$sys" \
     PREFIX=/var/usr \
     DESTDIR="$_DESTDIR" \
-    $cflags \
-    -j"$_JOBS"
+    $cflags
 )
 
 (

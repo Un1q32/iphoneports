@@ -17,7 +17,7 @@ cmake -GNinja .. \
     -DCMAKE_FIND_ROOT_PATH_MODE_INCLUDE=ONLY \
     -DCMAKE_FIND_ROOT_PATH="$_SDK/var/usr" \
     -DLUAU_BUILD_TESTS=OFF
-DESTDIR="$_DESTDIR" ninja -j"$_JOBS"
+DESTDIR="$_DESTDIR" ninja
 mkdir -p "$_DESTDIR/var/usr/bin"
 mv $bins "$_DESTDIR/var/usr/bin"
 )

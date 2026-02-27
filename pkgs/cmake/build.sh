@@ -21,7 +21,7 @@ cmake -GNinja .. \
     -DCMAKE_USE_SYSTEM_LIBARCHIVE=ON \
     -DHAVE_CoreServices="${hascoreservices:-OFF}" \
     -DBUILD_TESTING=OFF
-DESTDIR="$_DESTDIR" ninja -j"$_JOBS" install
+DESTDIR="$_DESTDIR" ninja install
 )
 
 (

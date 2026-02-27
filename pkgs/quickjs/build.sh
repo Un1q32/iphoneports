@@ -14,8 +14,7 @@ make \
     .obj/repl.o \
     .obj/qjs.o \
     .obj/qjscalc.o \
-    $libqjs_objs \
-    -j"$_JOBS"
+    $libqjs_objs
 "$_TARGET-cc" \
     -funsigned-char \
     -fwrapv \

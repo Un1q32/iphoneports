@@ -15,7 +15,7 @@ cmake -GNinja .. \
     -DCMAKE_SYSTEM_PROCESSOR="$_CPU" \
     -DCMAKE_SKIP_RPATH=ON \
     -DENABLE_STATIC=OFF
-DESTDIR="$_DESTDIR" ninja -j"$_JOBS" install
+DESTDIR="$_DESTDIR" ninja install
 )
 
 (

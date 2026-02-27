@@ -21,7 +21,7 @@ cmake -GNinja ../llvm \
     -DTAPI_REPOSITORY_STRING="$tapiversion" \
     -DCROSS_TOOLCHAIN_FLAGS_NATIVE='-DLLVM_INCLUDE_TESTS=OFF' \
     -DLLVM_ENABLE_LIBCXX=ON
-DESTDIR="$_DESTDIR" ninja -j"$_JOBS" install-libtapi install-tapi-headers
+DESTDIR="$_DESTDIR" ninja install-libtapi install-tapi-headers
 )
 
 (

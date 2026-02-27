@@ -76,7 +76,7 @@ cmake -GNinja ../llvm \
     -DLLVM_ENABLE_LIBCXX=ON \
     -DLLVM_DISTRIBUTION_COMPONENTS="$(_get_distribution_components)"
 
-DESTDIR="$_DESTDIR" ninja -j"$_JOBS" install-distribution
+DESTDIR="$_DESTDIR" ninja install-distribution
 )
 
 (

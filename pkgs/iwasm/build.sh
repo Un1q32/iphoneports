@@ -34,7 +34,7 @@ cmake -GNinja .. \
     -DBUILD_SHARED_LIBS=ON \
     -DWAMR_BUILD_PLATFORM=darwin \
     -DWAMR_BUILD_TARGET="$target"
-DESTDIR="$_DESTDIR" ninja -j"$_JOBS" install
+DESTDIR="$_DESTDIR" ninja install
 )
 
 (

@@ -14,7 +14,7 @@ cmake -GNinja .. \
     -DCMAKE_CXX_COMPILER_AR="$(command -v "$_TARGET-ar")" \
     -DCMAKE_CXX_COMPILER_RANLIB="$(command -v "$_TARGET-ranlib")" \
     -DBUILD_TESTING=OFF
-DESTDIR="$_DESTDIR" ninja -j"$_JOBS" install
+DESTDIR="$_DESTDIR" ninja install
 )
 
 strip_and_sign "$_DESTDIR/var/usr/bin/ninja"

@@ -45,3 +45,7 @@ installsuid() {
 make() {
     command "$_MAKE" -j"$_JOBS" "$@"
 }
+
+ninja() {
+    command ninja -j"$_JOBS" "$@"
+}

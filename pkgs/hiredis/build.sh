@@ -14,7 +14,7 @@ cmake -GNinja .. \
     -DCMAKE_FIND_ROOT_PATH="$_SDK/var/usr" \
     -DDISABLE_TESTS=ON \
     -DENABLE_NUGET=OFF
-DESTDIR="$_DESTDIR" ninja -j"$_JOBS" install
+DESTDIR="$_DESTDIR" ninja install
 )
 
 for lib in "$_DESTDIR/var/usr/lib"/*.dylib; do

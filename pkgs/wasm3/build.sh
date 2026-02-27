@@ -15,7 +15,7 @@ cmake -GNinja .. \
     -DBUILD_NATIVE=OFF \
     -DLIBUV_LIBRARIES= \
     -DLIBUV_INCLUDE_DIR="$_SDK/var/usr/include"
-DESTDIR="$_DESTDIR" ninja -j"$_JOBS" install
+DESTDIR="$_DESTDIR" ninja install
 )
 
 strip_and_sign "$_DESTDIR/var/usr/bin/wasm3"

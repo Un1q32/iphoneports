@@ -15,7 +15,7 @@ cmake -GNinja .. \
     -DCMAKE_FIND_ROOT_PATH="$_SDK/var/usr;$_SDK/usr" \
     -DBUILD_TESTS=OFF \
     -DREGEX_BACKEND=pcre2
-DESTDIR="$_DESTDIR" ninja -j"$_JOBS" install
+DESTDIR="$_DESTDIR" ninja install
 )
 
 strip_and_sign "$_DESTDIR/var/usr/bin/git2" "$(realpath "$_DESTDIR/var/usr/lib/libgit2.dylib")"

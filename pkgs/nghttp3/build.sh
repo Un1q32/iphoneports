@@ -14,7 +14,7 @@ cmake -GNinja .. \
     -DCMAKE_FIND_ROOT_PATH="$_SDK/var/usr" \
     -DENABLE_STATIC_LIB=OFF \
     -DENABLE_LIB_ONLY=ON
-DESTDIR="$_DESTDIR" ninja -j"$_JOBS" install
+DESTDIR="$_DESTDIR" ninja install
 )
 
 (

@@ -88,7 +88,7 @@ cmake -GNinja ../llvm \
     -DCROSS_TOOLCHAIN_FLAGS_NATIVE='-DCMAKE_C_COMPILER=clang;-DCMAKE_CXX_COMPILER=clang++' \
     -DLLVM_DISTRIBUTION_COMPONENTS="$(_get_distribution_components)"
 
-DESTDIR="$_DESTDIR" ninja -j"$_JOBS" install-distribution
+DESTDIR="$_DESTDIR" ninja install-distribution
 )
 
 (

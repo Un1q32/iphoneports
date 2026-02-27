@@ -21,7 +21,7 @@ cmake -GNinja .. \
     -DWEBP_BUILD_DWEBP=OFF \
     -DWEBP_BUILD_GIF2WEBP=OFF \
     -DWEBP_BUILD_IMG2WEBP=OFF
-DESTDIR="$_DESTDIR" ninja -j"$_JOBS" install
+DESTDIR="$_DESTDIR" ninja install
 )
 
 (

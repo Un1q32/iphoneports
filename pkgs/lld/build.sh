@@ -16,7 +16,7 @@ cmake -GNinja ../lld \
     -DLLVM_INCLUDE_TESTS=OFF \
     -DLLVM_TABLEGEN_EXE="$(command -v llvm-tblgen)" \
     -DLLVM_ENABLE_LTO=ON
-DESTDIR="$_DESTDIR" ninja -j"$_JOBS" install
+DESTDIR="$_DESTDIR" ninja install
 )
 
 (
