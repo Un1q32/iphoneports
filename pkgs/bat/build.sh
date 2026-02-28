@@ -22,9 +22,7 @@ SDKROOT="$_SDK" \
     PKG_CONFIG_LIBDIR="$_SDK/var/usr/lib/pkgconfig" \
     PKG_CONFIG_SYSROOT_DIR="$_SDK" \
     LIBGIT2_NO_VENDOR=1 \
-    cargo build --target "$_RUSTTARGET" --release -j "$_JOBS" \
-    --config 'patch.crates-io.cc.git="https://github.com/Un1q32/cc-rs.git"' \
-    --config 'patch.crates-io.cc.branch="1.0.83"'
+    cargo build --target "$_RUSTTARGET" --release -j "$_JOBS"
 mkdir -p "$_DESTDIR/var/usr/bin"
 cp "target/$_RUSTTARGET/release/bat" "$_DESTDIR/var/usr/bin"
 )
