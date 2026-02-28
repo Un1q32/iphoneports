@@ -2,6 +2,6 @@ Package: iphoneports-libgit2
 Section: Development
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Architecture: @DPKGARCH@
-Version: 1.9.1
+Version: 1.9.2
 Depends: iphoneports-base, iphoneports-openssl, iphoneports-zlib, iphoneports-pcre2
 Description: A linkable library for Git

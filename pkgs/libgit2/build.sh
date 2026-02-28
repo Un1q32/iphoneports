@@ -14,7 +14,8 @@ cmake -GNinja .. \
     -DCMAKE_FIND_ROOT_PATH_MODE_INCLUDE=ONLY \
     -DCMAKE_FIND_ROOT_PATH="$_SDK/var/usr;$_SDK/usr" \
     -DBUILD_TESTS=OFF \
-    -DREGEX_BACKEND=pcre2
+    -DREGEX_BACKEND=pcre2 \
+    -DCMAKE_C_FLAGS='-Wno-incompatible-pointer-types'
 DESTDIR="$_DESTDIR" ninja install
 )
 
