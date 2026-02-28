@@ -217,8 +217,10 @@ static inline int pthread_fchdir_np(int fd) {
 
 #endif
 
-#ifdef __i386
-int fstatat(int fd, const char *path, struct stat *statbuf, int flags) __asm("_fstatat$INODE64");
+#if defined(__DARWIN_64_BIT_INO_T) && __DARWIN_64_BIT_INO_T &&                 \
+    (!defined(__DARWIN_ONLY_64_BIT_INO_T) || !__DARWIN_ONLY_64_BIT_INO_T)
+int fstatat(int fd, const char *path, struct stat *statbuf,
+            int flags) __asm("_fstatat$INODE64");
 #endif
 int fstatat(int fd, const char *path, struct stat *statbuf, int flags) {
 
@@ -231,7 +233,8 @@ int fstatat(int fd, const char *path, struct stat *statbuf, int flags) {
   if (!init) {
     func = (int (*)(int, const char *, struct stat *, int))dlsym(RTLD_NEXT,
                                                                  "fstatat"
-#ifdef __i386__
+#if defined(__DARWIN_64_BIT_INO_T) && __DARWIN_64_BIT_INO_T &&                 \
+    (!defined(__DARWIN_ONLY_64_BIT_INO_T) || !__DARWIN_ONLY_64_BIT_INO_T)
                                                                  "$INODE64"
 #endif
     );
