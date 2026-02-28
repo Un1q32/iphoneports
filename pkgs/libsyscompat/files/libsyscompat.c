@@ -1,4 +1,5 @@
 #define realpath __dont_define_realpath
+#define fstatat __dont_define_fstatat
 
 #if (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                \
      __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ < 40300) ||                \
@@ -17,6 +18,7 @@ int open(const char *path, int flags, ...)
 
 #include <stdlib.h>
 #undef realpath
+#undef fstatat
 
 #if ((defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) ||               \
       defined(__ENVIRONMENT_TV_OS_VERSION_MIN_REQUIRED__)) &&                  \
@@ -215,6 +217,9 @@ static inline int pthread_fchdir_np(int fd) {
 
 #endif
 
+#ifdef __i386
+int fstatat(int fd, const char *path, struct stat *statbuf, int flags) __asm("_fstatat$INODE64");
+#endif
 int fstatat(int fd, const char *path, struct stat *statbuf, int flags) {
 
 #if !(defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&               \
@@ -225,7 +230,11 @@ int fstatat(int fd, const char *path, struct stat *statbuf, int flags) {
 
   if (!init) {
     func = (int (*)(int, const char *, struct stat *, int))dlsym(RTLD_NEXT,
-                                                                 "fstatat");
+                                                                 "fstatat"
+#ifdef __i386__
+                                                                 "$INODE64"
+#endif
+    );
     init = true;
   }
 
