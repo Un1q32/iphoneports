@@ -1,0 +1,7 @@
+Package: iphoneports-yash
+Version: 2.61
+Architecture: @DPKGARCH@
+Maintainer: Uniq <joey.t.reinhart@gmail.com>
+Depends: iphoneports-base, iphoneports-ncurses
+Section: Terminal_Support
+Description: Yet another shell
