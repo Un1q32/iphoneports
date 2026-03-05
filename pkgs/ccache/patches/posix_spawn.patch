@@ -1,6 +1,17 @@
 --- src/src/ccache/execute.cpp.orig
 +++ src/src/ccache/execute.cpp
-@@ -297,6 +297,38 @@
+@@ -41,7 +41,9 @@
+ 
+ #include <vector>
+ 
+-#ifndef _WIN32
++#if !((defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) && __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ < 1050) || \
++    (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) && __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ < 20000)) && \
++    !defined(_WIN32)
+ #  include <spawn.h>
+ #endif
+ 
+@@ -297,6 +300,38 @@
    }
    DEFER(util::unsetenv("UNCACHED_ERR_FD"));
  
@@ -39,7 +50,7 @@
    util::Fd out(std::move(fd_out));
    util::Fd err(std::move(fd_err));
  
-@@ -345,6 +377,8 @@
+@@ -345,6 +380,8 @@
      return -1;
    }
  
@@ -50,7 +61,18 @@
      if (errno != EINTR) {
 --- src/src/ccache/util/exec.cpp.orig
 +++ src/src/ccache/util/exec.cpp
-@@ -118,6 +118,30 @@
+@@ -29,7 +29,9 @@
+ #include <ccache/util/string.hpp>
+ #include <ccache/util/wincompat.hpp>
+ 
+-#ifndef _WIN32
++#if !((defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) && __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ < 1050) || \
++    (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) && __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ < 20000)) && \
++    !defined(_WIN32)
+ #  include <spawn.h>
+ #endif
+ 
+@@ -118,6 +120,30 @@
      return tl::unexpected(FMT("Non-zero exit code: {}", exitcode));
    }
  #else
@@ -81,7 +103,7 @@
    int pipefd[2];
    CHECK_LIB_CALL(pipe, pipefd);
  
-@@ -141,6 +165,7 @@
+@@ -141,6 +167,7 @@
      return tl::unexpected(
        FMT("posix_spawnp failed: {}", strerror(saved_errno)));
    }
@@ -89,3 +111,56 @@
  
    auto read_result = read_fd(pipefd[0], [&](auto data) {
      output.append(reinterpret_cast<const char*>(data.data()), data.size());
+--- src/src/ccache/storage/remote/helper.cpp.orig
++++ src/src/ccache/storage/remote/helper.cpp
+@@ -37,9 +37,12 @@
+ #ifndef _WIN32
+ #  include <dirent.h>
+ #  include <fcntl.h>
+-#  include <spawn.h>
+ #  include <sys/stat.h>
+ #  include <unistd.h>
++#  if !((defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) && __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ < 1050) || \
++    (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) && __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ < 20000))
++#  include <spawn.h>
++#  endif
+ #endif
+ 
+ #include <thread>
+@@ -314,6 +317,28 @@
+   }
+   env_ptrs.push_back(nullptr);
+ 
++#if (defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) && __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ < 1050) || \
++    (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) && __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ < 20000)
++  pid_t pid = fork();
++  if (pid == -1) {
++    return tl::unexpected(strerror(errno));
++  } else if (pid == 0) {
++    // Child
++    int nullfd = open("/dev/null", O_RDONLY);
++    close(0);
++    close(1);
++    close(2);
++    dup2(nullfd, 0);
++    dup2(nullfd, 1);
++    dup2(nullfd, 2);
++    for (int fd : get_fds_to_close())
++      close(fd);
++
++    setsid();
++    _exit(execlp(helper_path.c_str(), helper_path.c_str(), NULL));
++    // Never reached
++  }
++#else
+   posix_spawn_file_actions_t actions;
+   CHECK_LIB_CALL(posix_spawn_file_actions_init, &actions);
+   DEFER(posix_spawn_file_actions_destroy(&actions));
+@@ -353,6 +378,7 @@
+   if (result != 0) {
+     return tl::unexpected(strerror(result));
+   }
++#endif
+ 
+   LOG("Spawned helper process with PID {}", pid);
+ #endif
