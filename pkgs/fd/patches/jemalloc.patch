@@ -1,6 +1,6 @@
 --- src/Cargo.toml.orig
 +++ src/Cargo.toml
-@@ -74,7 +74,7 @@
+@@ -67,7 +67,7 @@
  # Catalina. See https://github.com/sharkdp/fd/issues/498 for details.
  # This has to be kept in sync with src/main.rs where the allocator for
  # the program is set.
