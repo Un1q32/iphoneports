@@ -1,8 +1,8 @@
 #!/bin/sh
 rm -rf "$_DESTDIR" "$_SRCDIR"
-ver='4.13'
+ver='4.13.1'
 if [ ! -f "$_DLCACHE/ccache-$ver.tar.gz" ] ||
-    [ "$(sha256sum "$_DLCACHE/ccache-$ver.tar.gz" | awk '{print $1}')" != "927267067ae30dbbbdb3ae30e1e5aca7c20571232b9eb4f409033614095f36ea" ]; then
+    [ "$(sha256sum "$_DLCACHE/ccache-$ver.tar.gz" | awk '{print $1}')" != "28e875010d1d857c36ac83bf830565431b9f478626f1c3743da0cd4bd250452d" ]; then
     printf "Downloading source...\n"
     curl -L -# -o "$_DLCACHE/ccache-$ver.tar.gz" "https://github.com/ccache/ccache/archive/refs/tags/v$ver.tar.gz" || exit 1
 fi
