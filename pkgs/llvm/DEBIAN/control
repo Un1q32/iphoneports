@@ -2,7 +2,7 @@ Package: iphoneports-llvm
 Section: Development
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Architecture: @DPKGARCH@
-Version: 22.1.0
+Version: 22.1.1
 Description: Compiler infrastructure
 Depends: iphoneports-base, iphoneports-libc++, iphoneports-zlib, iphoneports-zstd
 Replaces: iphoneports-clang

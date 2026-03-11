@@ -1,6 +1,6 @@
 --- src/llvm/lib/LTO/LTO.cpp.orig
 +++ src/llvm/lib/LTO/LTO.cpp
-@@ -1794,7 +1794,7 @@
+@@ -1798,7 +1798,7 @@
    if (TheTriple.getArch() == Triple::x86_64)
      return "core2";
    if (TheTriple.getArch() == Triple::x86)
