@@ -1,8 +1,8 @@
 #!/bin/sh
 rm -rf "$_DESTDIR" "$_SRCDIR"
-ver='3510200'
+ver='3520000'
 if [ ! -f "$_DLCACHE/sqlite-$ver.tar.gz" ] ||
-    [ "$(sha256sum "$_DLCACHE/sqlite-$ver.tar.gz" | awk '{print $1}')" != "fbd89f866b1403bb66a143065440089dd76100f2238314d92274a082d4f2b7bb" ]; then
+    [ "$(sha256sum "$_DLCACHE/sqlite-$ver.tar.gz" | awk '{print $1}')" != "f6b50b0c103392af32a8be15b2b9d25959de9a00a70c3979128aafeaa5338b3f" ]; then
     printf "Downloading source...\n"
     curl -L -# -o "$_DLCACHE/sqlite-$ver.tar.gz" "https://sqlite.org/2026/sqlite-autoconf-$ver.tar.gz" || exit 1
 fi
