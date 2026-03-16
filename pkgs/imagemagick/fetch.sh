@@ -1,8 +1,8 @@
 #!/bin/sh
 rm -rf "$_DESTDIR" "$_SRCDIR"
-ver='7.1.2-16'
+ver='7.1.2-17'
 if [ ! -f "$_DLCACHE/imagemagick-$ver.tar.xz" ] ||
-    [ "$(sha256sum "$_DLCACHE/imagemagick-$ver.tar.xz" | awk '{print $1}')" != "bb463666e99145b143de5f4168dc0a8a2d3033ce49ce6aba7915f75076376eaf" ]; then
+    [ "$(sha256sum "$_DLCACHE/imagemagick-$ver.tar.xz" | awk '{print $1}')" != "eb40bb5cf50cc3db5011fa242fa640065d60d61bec2b2b149a7a7891e21c9fbf" ]; then
     printf "Downloading source...\n"
     curl -L -# -o "$_DLCACHE/imagemagick-$ver.tar.xz" "https://imagemagick.org/archive/releases/ImageMagick-$ver.tar.xz" || exit 1
 fi
