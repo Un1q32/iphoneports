@@ -1,8 +1,8 @@
 #!/bin/sh
 rm -rf "$_DESTDIR" "$_SRCDIR"
-ver='1.22.21'
+ver='1.22.22'
 if [ ! -f "$_DLCACHE/dpkg-$ver.tar.bz2" ] ||
-    [ "$(sha256sum "$_DLCACHE/dpkg-$ver.tar.bz2" | awk '{print $1}')" != "0b451c7b21c641b4c048f887f1d841c6c60a2b2a1501f744d6e2ab6b6c5295a2" ]; then
+    [ "$(sha256sum "$_DLCACHE/dpkg-$ver.tar.bz2" | awk '{print $1}')" != "db48ad3a25d2afe11eeefcce0d0b24613ef1121eafa476a838eadabb8f43720e" ]; then
     printf "Downloading source...\n"
     curl -L -# -o "$_DLCACHE/dpkg-$ver.tar.bz2" "https://salsa.debian.org/dpkg-team/dpkg/-/archive/$ver/dpkg-$ver.tar.bz2" || exit 1
 fi
