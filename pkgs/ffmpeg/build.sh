@@ -32,7 +32,8 @@ export PKG_CONFIG_LIBDIR="$_SDK/var/usr/lib/pkgconfig"
     --enable-libwebp \
     --pkg-config='pkg-config' \
     --enable-gpl \
-    --enable-version3
+    --enable-version3 \
+    --extra-cflags='-Wno-incompatible-pointer-types'
 make
 make DESTDIR="$_DESTDIR" install
 )
