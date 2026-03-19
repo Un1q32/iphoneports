@@ -10,7 +10,6 @@ fi
 
 (
 cd "$_SRCDIR"
-cargo update human-panic --precise 2.0.6
 SDKROOT="$_SDK" \
     TARGET_PKG_CONFIG=pkg-config \
     PKG_CONFIG_LIBDIR="$_SDK/var/usr/lib/pkgconfig" \
