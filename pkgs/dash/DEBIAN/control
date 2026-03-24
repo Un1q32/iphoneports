@@ -1,5 +1,5 @@
 Package: iphoneports-dash
-Version: 0.5.12-2
+Version: 0.5.13.2
 Architecture: @DPKGARCH@
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Section: Terminal_Support
