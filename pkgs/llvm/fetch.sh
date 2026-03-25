@@ -1,8 +1,8 @@
 #!/bin/sh
 rm -rf "$_DESTDIR" "$_SRCDIR"
-ver='22.1.1'
+ver='22.1.2'
 if [ ! -f "$_DLCACHE/llvm-$ver.tar.gz" ] ||
-    [ "$(sha256sum "$_DLCACHE/llvm-$ver.tar.gz" | awk '{print $1}')" != "c48878550911a8a8993a749e6118446082656768e62b26456ac7d39c4422b409" ]; then
+    [ "$(sha256sum "$_DLCACHE/llvm-$ver.tar.gz" | awk '{print $1}')" != "a252efd7a4a268d2cc5145b17adcaa82757fdee1d06d748b4c24137807710ecb" ]; then
     printf "Downloading source...\n"
     curl -L -# -o "$_DLCACHE/llvm-$ver.tar.gz" "https://github.com/llvm/llvm-project/archive/refs/tags/llvmorg-$ver.tar.gz" || exit 1
 fi
