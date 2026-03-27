@@ -1,0 +1,7 @@
+Package: iphoneports-wasmi
+Section: Scripting
+Maintainer: Uniq <joey.t.reinhart@gmail.com>
+Architecture: @DPKGARCH@
+Version: 1.0.9
+Description: Efficient and versatile WebAssembly interpreter for embedded systems
+Depends: iphoneports-base
