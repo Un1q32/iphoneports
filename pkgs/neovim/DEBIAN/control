@@ -1,7 +1,0 @@
-Package: iphoneports-neovim
-Version: 0.11.7
-Architecture: @DPKGARCH@
-Maintainer: Uniq <joey.t.reinhart@gmail.com>
-Section: Text_Editors
-Description: Fork of Vim aiming to improve user experience, plugins, and GUIs
-Depends: iphoneports-base, iphoneports-libuv, iphoneports-luajit
