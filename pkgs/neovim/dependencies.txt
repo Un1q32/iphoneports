@@ -1,0 +1,2 @@
+libuv
+lua51-lpeg

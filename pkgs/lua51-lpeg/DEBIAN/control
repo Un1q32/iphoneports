@@ -1,0 +1,7 @@
+Package: iphoneports-lua51-lpeg
+Version: 1.1.0
+Architecture: @DPKGARCH@
+Maintainer: Uniq <joey.t.reinhart@gmail.com>
+Section: Development
+Description: Parsing Expression Grammars For Lua
+Depends: iphoneports-base, iphoneports-luajit
