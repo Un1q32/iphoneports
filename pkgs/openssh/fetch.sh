@@ -1,8 +1,8 @@
 #!/bin/sh
 rm -rf "$_DESTDIR" "$_SRCDIR"
-ver='10.2p1'
+ver='10.3p1'
 if [ ! -f "$_DLCACHE/openssh-$ver.tar.gz" ] ||
-    [ "$(sha256sum "$_DLCACHE/openssh-$ver.tar.gz" | awk '{print $1}')" != "ccc42c0419937959263fa1dbd16dafc18c56b984c03562d2937ce56a60f798b2" ]; then
+    [ "$(sha256sum "$_DLCACHE/openssh-$ver.tar.gz" | awk '{print $1}')" != "56682a36bb92dcf4b4f016fd8ec8e74059b79a8de25c15d670d731e7d18e45f4" ]; then
     printf "Downloading source...\n"
     curl -L -# -o "$_DLCACHE/openssh-$ver.tar.gz" "https://cdn.openbsd.org/pub/OpenBSD/OpenSSH/portable/openssh-$ver.tar.gz" || exit 1
 fi
