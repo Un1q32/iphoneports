@@ -14,7 +14,7 @@ rm include/foreign/machine/_structs.h
     --enable-silent-rules \
     LLVM_INCLUDE_DIR="$_SDK/var/usr/include" \
     LLVM_LIB_DIR="$_SDK/var/usr/lib" \
-    CFLAGS='-O3 -flto' \
+    CFLAGS='-O3 -flto -std=c99' \
     CXXFLAGS='-O3 -flto=thin'
 make
 make install DESTDIR="$_DESTDIR"
