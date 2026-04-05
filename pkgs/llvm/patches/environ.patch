@@ -1,0 +1,11 @@
+--- src/llvm/lib/Support/Unix/Program.inc.orig
++++ src/llvm/lib/Support/Unix/Program.inc
+@@ -41,7 +41,7 @@
+ #include <TargetConditionals.h>
+ #endif
+ 
+-#if defined(__APPLE__) && !(defined(TARGET_OS_IPHONE) && TARGET_OS_IPHONE)
++#if defined(__APPLE__)
+ #define USE_NSGETENVIRON 1
+ #else
+ #define USE_NSGETENVIRON 0
