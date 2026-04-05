@@ -4,7 +4,7 @@
 (
 mkdir -p "$_SRCDIR/src/build"
 cd "$_SRCDIR/src/build"
-tapiversion=1300.6.5
+tapiversion=1600.0.11.8
 export PATH="$_PKGROOT/files:$PATH"
 cmake -GNinja ../llvm \
     -DCMAKE_BUILD_TYPE=Release \
@@ -20,7 +20,9 @@ cmake -GNinja ../llvm \
     -DTAPI_FULL_VERSION="$tapiversion" \
     -DTAPI_REPOSITORY_STRING="$tapiversion" \
     -DCROSS_TOOLCHAIN_FLAGS_NATIVE='-DLLVM_INCLUDE_TESTS=OFF' \
-    -DLLVM_ENABLE_LIBCXX=ON
+    -DLLVM_ENABLE_LIBCXX=ON \
+    -DLLVM_ENABLE_THREADS=OFF
+ninja clangBasic vt_gen
 DESTDIR="$_DESTDIR" ninja install-libtapi install-tapi-headers
 )
 

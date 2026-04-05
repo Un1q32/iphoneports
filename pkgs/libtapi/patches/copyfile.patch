@@ -1,16 +1,16 @@
 --- src/src/llvm/lib/Support/Unix/Path.inc.orig
 +++ src/src/llvm/lib/Support/Unix/Path.inc
-@@ -38,7 +38,9 @@
+@@ -36,7 +36,9 @@
+ #include <sys/file.h>
+ 
  #ifdef __APPLE__
- #include <mach-o/dyld.h>
- #include <sys/attr.h>
 +#if __has_include(<copyfile.h>)
  #include <copyfile.h>
 +#endif
- #elif defined(__FreeBSD__)
- #include <osreldate.h>
- #if __FreeBSD_version >= 1300057
-@@ -1347,7 +1349,7 @@
+ #include <mach-o/dyld.h>
+ #include <sys/attr.h>
+ #if __has_include(<sys/clonefile.h>)
+@@ -1502,7 +1504,7 @@
  
  namespace fs {
  
@@ -19,3 +19,12 @@
  /// This implementation tries to perform an APFS CoW clone of the file,
  /// which can be much faster and uses less space.
  /// Unfortunately fcopyfile(3) does not support COPYFILE_CLONE, so the
+@@ -1511,7 +1513,7 @@
+ std::error_code copy_file(const Twine &From, const Twine &To) {
+   std::string FromS = From.str();
+   std::string ToS = To.str();
+-#if __has_builtin(__builtin_available)
++#if __has_builtin(__builtin_available) && __has_include(<sys/clonefile.h>)
+   if (__builtin_available(macos 10.12, *)) {
+     // Optimistically try to use clonefile() and handle errors, rather than
+     // calling stat() to see if it'll work.

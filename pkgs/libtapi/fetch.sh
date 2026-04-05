@@ -1,8 +1,8 @@
 #!/bin/sh
 rm -rf "$_DESTDIR" "$_SRCDIR"
-ver='aa37c11ad1a817248c9d1578ac99e133875b4eb5'
+ver='593d29141bf176d24021208c75af54a2ef23c38b'
 if [ ! -f "$_DLCACHE/libtapi-$ver.tar.gz" ] ||
-    [ "$(sha256sum "$_DLCACHE/libtapi-$ver.tar.gz" | awk '{print $1}')" != "3ea293da90789055e847af48582a46ff296fc6dfa4ef8ee8db3167599dd93da3" ]; then
+    [ "$(sha256sum "$_DLCACHE/libtapi-$ver.tar.gz" | awk '{print $1}')" != "dbad2a41f2351b052367db1fe251bebe43ee9ca5815e46b725c4bc71c339186f" ]; then
     printf "Downloading source...\n"
     curl -L -# -o "$_DLCACHE/libtapi-$ver.tar.gz" "https://github.com/tpoechtrager/apple-libtapi/archive/$ver.tar.gz" || exit 1
 fi
