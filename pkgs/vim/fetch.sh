@@ -1,8 +1,8 @@
 #!/bin/sh
 rm -rf "$_DESTDIR" "$_SRCDIR"
-ver='6800da6ff115014aa71fdd396cd1496ea0da6509'
+ver='c2734dc03cd9ee437d25a6940e8c37ac7873b01d'
 if [ ! -f "$_DLCACHE/vim-$ver.tar.gz" ] ||
-    [ "$(sha256sum "$_DLCACHE/vim-$ver.tar.gz" | awk '{print $1}')" != "122fee536f1df77a1757526f9c22ab4a5ba8a4dd846cf7f02cc73fc5b60cdb98" ]; then
+    [ "$(sha256sum "$_DLCACHE/vim-$ver.tar.gz" | awk '{print $1}')" != "ac992c44ecd00ea4d62b56ef41efafc9bcd5f83dfb6925b7a6d92bc943d855a9" ]; then
     printf "Downloading source...\n"
     curl -L -# -o "$_DLCACHE/vim-$ver.tar.gz" "https://github.com/vim/vim/archive/$ver.tar.gz" || exit 1
 fi
