@@ -1,8 +1,8 @@
 #!/bin/sh
 rm -rf "$_DESTDIR" "$_SRCDIR"
-ver='1.6.56'
+ver='1.6.57'
 if [ ! -f "$_DLCACHE/libpng-$ver.tar.xz" ] ||
-    [ "$(sha256sum "$_DLCACHE/libpng-$ver.tar.xz" | awk '{print $1}')" != "f7d8bf1601b7804f583a254ab343a6549ca6cf27d255c302c47af2d9d36a6f18" ]; then
+    [ "$(sha256sum "$_DLCACHE/libpng-$ver.tar.xz" | awk '{print $1}')" != "d10c20d7171569804cae8dfc13ba6dcd0662c41ed39d43d4d429314aafb10a80" ]; then
     printf "Downloading source...\n"
     curl -L -# -o "$_DLCACHE/libpng-$ver.tar.xz" "https://download.sourceforge.net/libpng/libpng-$ver.tar.xz" || exit 1
 fi
