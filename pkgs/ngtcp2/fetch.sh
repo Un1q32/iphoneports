@@ -1,8 +1,8 @@
 #!/bin/sh
 rm -rf "$_DESTDIR" "$_SRCDIR"
-ver='1.22.0'
+ver='1.22.1'
 if [ ! -f "$_DLCACHE/ngtcp2-$ver.tar.xz" ] ||
-    [ "$(sha256sum "$_DLCACHE/ngtcp2-$ver.tar.xz" | awk '{print $1}')" != "75c1d6f5c7936b23bfab9c143c8e9f1cca1acf3ab66dba705306ec7dac6fe0f1" ]; then
+    [ "$(sha256sum "$_DLCACHE/ngtcp2-$ver.tar.xz" | awk '{print $1}')" != "dfd2c68bd64b89847c611425b9487105c46e8447b5c21e6aeb00642c8fbe2ca8" ]; then
     printf "Downloading source...\n"
     curl -L -# -o "$_DLCACHE/ngtcp2-$ver.tar.xz" "https://github.com/ngtcp2/ngtcp2/releases/download/v$ver/ngtcp2-$ver.tar.xz" || exit 1
 fi
