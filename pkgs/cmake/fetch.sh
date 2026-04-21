@@ -1,8 +1,8 @@
 #!/bin/sh
 rm -rf "$_DESTDIR" "$_SRCDIR"
-ver='4.3.1'
+ver='4.3.2'
 if [ ! -f "$_DLCACHE/cmake-$ver.tar.gz" ] ||
-    [ "$(sha256sum "$_DLCACHE/cmake-$ver.tar.gz" | awk '{print $1}')" != "d602411de1cfeee3bdeea2e6722cf0b47e740280503b70d15e3c99812904beea" ]; then
+    [ "$(sha256sum "$_DLCACHE/cmake-$ver.tar.gz" | awk '{print $1}')" != "5e5ddea1fcdc28c4e447f767e3f6fa971a7f853ddd262b884871b889715bc96a" ]; then
     printf "Downloading source...\n"
     curl -L -# -o "$_DLCACHE/cmake-$ver.tar.gz" "https://github.com/Kitware/CMake/archive/refs/tags/v$ver.tar.gz" || exit 1
 fi
