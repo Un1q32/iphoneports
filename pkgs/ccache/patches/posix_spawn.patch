@@ -127,7 +127,7 @@
  #endif
  
  #include <thread>
-@@ -314,6 +317,28 @@
+@@ -315,6 +318,28 @@
    }
    env_ptrs.push_back(nullptr);
  
@@ -156,7 +156,7 @@
    posix_spawn_file_actions_t actions;
    CHECK_LIB_CALL(posix_spawn_file_actions_init, &actions);
    DEFER(posix_spawn_file_actions_destroy(&actions));
-@@ -353,6 +378,7 @@
+@@ -354,6 +379,7 @@
    if (result != 0) {
      return tl::unexpected(strerror(result));
    }
