@@ -514,21 +514,23 @@ main() {
                             else
                                 deppkgs="$deppkgs ${pkg##*/}"
                             fi
-                            [ -f "$pkg/DEBIAN/control" ] && "$EDITOR" "$pkg/DEBIAN/control"
                         fi
                     done < "$pkg/dependencies.txt"
                 fi
             done
-            rm -rf "$pkgdir/$2"/pkg-* "$pkgdir/$2"/src-*
-            build "$2" || error "Failed to build package: $2"
-            cp -f "$pkgdir/$2"/*.deb "$bsroot/debs" 2> /dev/null
             for pkg in $deppkgs; do
-                rm -rf "$pkgdir/$pkg"/pkg-* "$pkgdir/$pkg"/src-* "$pkgdir/$pkg"/*.deb &
+                [ -f "$pkgdir/$pkg/DEBIAN/control" ] && "$EDITOR" "$pkgdir/$pkg/DEBIAN/control"
+            done
+            rm -rf "$pkgdir/$2/pkg-$_TARGET" "$pkgdir/$2/src-$_TARGET"
+            build "$2" || error "Failed to build package: $2"
+            cp -f "$pkgdir/$2/"*"-$_TARGET.deb" "$bsroot/debs" 2> /dev/null
+            for pkg in $deppkgs; do
+                rm -rf "$pkgdir/$pkg/pkg-$_TARGET" "$pkgdir/$pkg/src-$_TARGET" "$pkgdir/$pkg/"*"-$_TARGET.deb" &
             done
             wait
             for pkg in $deppkgs; do
                 build "$pkg" || error "Failed to build package: $pkg"
-                cp -f "$pkgdir/$pkg"/*.deb debs 2> /dev/null
+                cp -f "$pkgdir/$pkg/"*"-$_TARGET.deb" debs 2> /dev/null
             done
         ;;
 
