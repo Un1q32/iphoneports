@@ -1,6 +1,6 @@
 --- src/gnulib-m4/intlmacosx.m4.orig
 +++ src/gnulib-m4/intlmacosx.m4
-@@ -64,7 +64,7 @@
+@@ -65,7 +65,7 @@
      dnl and we have to link it in explicitly, otherwise an exception
      dnl NSInvalidArgumentException "unrecognized selector sent to instance"
      dnl occurs.

@@ -3,7 +3,7 @@
 
 (
 cd "$_SRCDIR"
-autoreconf -fi
+autoreconf -f
 ./configure --host="$_TARGET" --prefix=/var/usr --disable-static --enable-silent-rules
 make
 make DESTDIR="$_DESTDIR" install

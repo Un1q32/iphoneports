@@ -1,5 +1,5 @@
 Package: iphoneports-libunistring
-Version: 1.3
+Version: 1.4.2
 Architecture: @DPKGARCH@
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Section: Development
