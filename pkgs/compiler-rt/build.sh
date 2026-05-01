@@ -6,10 +6,12 @@ read -r llvmver < "$_SRCDIR/iphoneports-llvmversion.txt"
 mkdir -p "$_SRCDIR/compiler-rt/build" "$_DESTDIR/var/usr/lib/clang/$llvmver/lib/darwin"
 cd "$_SRCDIR/compiler-rt/build"
 
-x64srcs="emutls.c eprintf.c int_util.c extendhfsf2.c truncsfhf2.c truncdfhf2.c truncxfhf2.c"
+macarm64srcs="emutls.c"
+x64srcs="$macarm64srcs eprintf.c int_util.c extendhfsf2.c truncsfhf2.c truncdfhf2.c truncxfhf2.c"
 x32srcs="$x64srcs atomic.c"
 
-arm64srcs="emutls.c"
+arm64esrcs="emutls.c"
+arm64srcs="$arm64esrcs"
 armv7ssrcs="$arm64srcs atomic.c extendhfsf2.c truncsfhf2.c truncdfhf2.c"
 armv7srcs="$armv7ssrcs"
 armv6srcs="$armv7srcs floatundisf.c floatundidf.c"
@@ -35,7 +37,9 @@ done
 for src in $arm64srcs; do
     cc -o "arm64-${src%\.c}.o" -target arm64-apple-ios7 "../lib/builtins/$src" -c -O3 &
 done
-cc -o nothing.o -target arm64e-apple-ios14 -xc /dev/null -c &
+for src in $arm64esrcs; do
+    cc -o "arm64e-${src%\.c}.o" -target arm64e-apple-ios14 "../lib/builtins/$src" -c -O3 &
+done
 wait
 
 "$_TARGET-libtool" -static -o libclang_rt.ios.a ./*.o 2>/dev/null
@@ -47,7 +51,9 @@ done
 for src in $x64srcs; do
     cc -o "x86_64-${src%\.c}.o" -target x86_64-apple-macos10.4 "../lib/builtins/$src" -c -O3 &
 done
-cc -o nothing.o -target arm64-apple-macos11.0 -arch arm64 -arch arm64e -xc /dev/null -c &
+for src in $macarm64srcs; do
+    cc -o "arm64-${src%\.c}.o" -target arm64-apple-macos11.0 -arch arm64 -arch arm64e "../lib/builtins/$src" -c -O3 &
+done
 wait
 
 "$_TARGET-libtool" -static -o libclang_rt.osx.a ./*.o 2>/dev/null
