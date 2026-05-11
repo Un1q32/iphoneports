@@ -11,7 +11,7 @@ make DESTDIR="$_DESTDIR" install
 (
 cd "$_DESTDIR/var/usr"
 rm -rf share
-strip_and_sign bin/* lib/libnettle.8.*.dylib lib/libhogweed.6.*.dylib
+strip_and_sign bin/* lib/libnettle.9.*.dylib lib/libhogweed.7.*.dylib
 )
 
 installlicense "$_SRCDIR/COPYING.LESSERv3"
