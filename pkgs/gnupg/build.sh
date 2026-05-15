@@ -21,9 +21,8 @@ make DESTDIR="$_DESTDIR" install
 (
 cd "$_DESTDIR/var/usr"
 rm -rf share/doc
-strip_and_sign bin/*
-for bin in libexec/*; do
-    [ "$bin" != "libexec/gpg-wks-client" ] && strip_and_sign "$bin"
+for bin in bin/* libexec/*; do
+    [ "$bin" != "libexec/gpg-wks-client" ] && [ "$bin" != "bin/gpg-authcode-sign.sh" ] && strip_and_sign "$bin"
 done
 )
 
