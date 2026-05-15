@@ -1,8 +1,8 @@
 #!/bin/sh
 rm -rf "$_DESTDIR" "$_SRCDIR"
-ver='1.3.15'
+ver='1.3.16'
 if [ ! -f "$_DLCACHE/tinyxxd-$ver.tar.gz" ] ||
-    [ "$(sha256sum "$_DLCACHE/tinyxxd-$ver.tar.gz" | awk '{print $1}')" != "4a0103c8a386443e9c6c893d7f01c0c8b3f5f92c3dc4bcbb0ae6570ac6289c1d" ]; then
+    [ "$(sha256sum "$_DLCACHE/tinyxxd-$ver.tar.gz" | awk '{print $1}')" != "f74a3cbcdd3166f0f966f97ad483a60a34b53a09abd9ba63783c0958640ca9d9" ]; then
     printf "Downloading source...\n"
     curl -L -# -o "$_DLCACHE/tinyxxd-$ver.tar.gz" "https://github.com/xyproto/tinyxxd/archive/refs/tags/v$ver.tar.gz" || exit 1
 fi
