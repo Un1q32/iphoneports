@@ -1,0 +1,18 @@
+--- src/syscall.c.orig
++++ src/syscall.c
+@@ -535,7 +535,14 @@
+ */
+ int do_mknod_at(const char *pathname, mode_t mode, dev_t dev)
+ {
+-#ifdef AT_FDCWD
++#if ((defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) ||               \
++      defined(__ENVIRONMENT_TV_OS_VERSION_MIN_REQUIRED__)) &&                  \
++     __ENVIRONMENT_OS_VERSION_MIN_REQUIRED__ >= 160000) ||                     \
++    (defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) &&                 \
++     __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ >= 130000) ||               \
++    (defined(__ENVIRONMENT_WATCH_OS_VERSION_MIN_REQUIRED__) &&                 \
++     __ENVIRONMENT_WATCH_OS_VERSION_MIN_REQUIRED__ >= 90000) ||                \
++	   (!defined(__APPLE__) && defined(AT_FDCWD))
+ 	extern int am_daemon, am_chrooted;
+ 	char dirpath[MAXPATHLEN];
+ 	const char *bname;

@@ -2,6 +2,6 @@ Package: iphoneports-rsync
 Section: Networking
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Architecture: @DPKGARCH@
-Version: 3.4.1-2
+Version: 3.4.3
 Description: A fast and versatile file copying tool for remote and local files
 Depends: iphoneports-base, iphoneports-openssl, iphoneports-lz4, iphoneports-zstd, iphoneports-zlib, iphoneports-xxhash, iphoneports-popt, iphoneports-bash
