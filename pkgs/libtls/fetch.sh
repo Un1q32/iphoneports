@@ -1,8 +1,8 @@
 #!/bin/sh
 rm -rf "$_DESTDIR" "$_SRCDIR"
-ver='4.2.1'
+ver='4.3.2'
 if [ ! -f "$_DLCACHE/libressl-$ver.tar.gz" ] ||
-    [ "$(sha256sum "$_DLCACHE/libressl-$ver.tar.gz" | awk '{print $1}')" != "6d5c2f58583588ea791f4c8645004071d00dfa554a5bf788a006ca1eb5abd70b" ]; then
+    [ "$(sha256sum "$_DLCACHE/libressl-$ver.tar.gz" | awk '{print $1}')" != "edf01aee24c65d69e6a9efcb9d44bcda682ff9d4f3bbbd95e794e1dfa90847b5" ]; then
     printf "Downloading source...\n"
     curl -L -# -o "$_DLCACHE/libressl-$ver.tar.gz" "https://cdn.openbsd.org/pub/OpenBSD/LibreSSL/libressl-$ver.tar.gz" || exit 1
 fi
