@@ -9,3 +9,4 @@ fi
 printf "Unpacking source...\n"
 tar -C "$_TMP" -xf "$_DLCACHE/xar-$ver.tar.gz"
 mv "$_TMP"/xar-* "$_SRCDIR"
+cp "$_BSROOT/files/gnu-config/"* "$_SRCDIR"
