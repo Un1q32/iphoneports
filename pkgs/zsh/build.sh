@@ -15,8 +15,8 @@ cd "$_SRCDIR"
     --enable-zsh-secure-free \
     --enable-multibyte \
     --enable-pcre \
-    PCRECONF=true \
-    LIBS="-lpcre"
+    PCRE_CONFIG=true \
+    LIBS='-lpcre2-8'
 sed -i -e '/^name=zsh\/regex/ s/link=no/link=static/' -e '/^name=zsh\/pcre/ s/link=no/link=static/' config.modules
 make prep
 make
