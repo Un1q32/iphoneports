@@ -9,3 +9,4 @@ fi
 printf "Unpacking source...\n"
 tar -C "$_TMP" -xf "$_DLCACHE/zsh-$ver.tar.gz"
 mv "$_TMP"/zsh-* "$_SRCDIR"
+cp "$_BSROOT/files/gnu-config/"* "$_SRCDIR"

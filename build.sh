@@ -326,6 +326,7 @@ build() {
     else
         export _DESTDIR="$_PKGROOT/pkg-$_TARGET"
         export _SRCDIR="$_PKGROOT/src-$_TARGET"
+        export _BSROOT="$bsroot"
         if [ -f fetch.sh ]; then
             ./fetch.sh || {
                 rm -rf "$_SRCDIR" "$_SDK"
