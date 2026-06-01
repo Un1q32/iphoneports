@@ -1,11 +1,11 @@
 #!/bin/sh
 rm -rf "$_DESTDIR" "$_SRCDIR"
-printf "Downloading source...\n"
-curl -L -# -o src.tar.gz https://github.com/apple-oss-distributions/xar/archive/refs/tags/xar-501.tar.gz
+ver='501'
+if [ ! -f "$_DLCACHE/xar-$ver.tar.gz" ] ||
+    [ "$(sha256sum "$_DLCACHE/xar-$ver.tar.gz" | awk '{print $1}')" != "a83aa4984467bfecad6938b3659e71cc56d1a360a36bb8cd9025f276d6a27eda" ]; then
+    printf "Downloading source...\n"
+    curl -L -# -o "$_DLCACHE/xar-$ver.tar.gz" "https://github.com/apple-oss-distributions/xar/archive/refs/tags/xar-$ver.tar.gz" || exit 1
+fi
 printf "Unpacking source...\n"
-tar -C "$_TMP" -xf src.tar.gz
-rm src.tar.gz
-mv "$_TMP"/xar-xar-* "$_SRCDIR"
-curl -L -s -o "$_SRCDIR/xar/config.guess" https://raw.githubusercontent.com/tianon/mirror-gnu-config/a2287c3041a3f2a204eb942e09c015eab00dc7dd/config.guess &
-curl -L -s -o "$_SRCDIR/xar/config.sub" https://raw.githubusercontent.com/tianon/mirror-gnu-config/a2287c3041a3f2a204eb942e09c015eab00dc7dd/config.sub
-wait
+tar -C "$_TMP" -xf "$_DLCACHE/xar-$ver.tar.gz"
+mv "$_TMP"/xar-* "$_SRCDIR"
