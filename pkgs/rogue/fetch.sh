@@ -1,11 +1,12 @@
 #!/bin/sh
 rm -rf "$_DESTDIR" "$_SRCDIR"
-printf "Downloading source...\n"
-curl -L -# -o src.tar.gz https://github.com/Davidslv/rogue/archive/refs/tags/5.4.4.tar.gz
+ver='5.4.4'
+if [ ! -f "$_DLCACHE/rogue-$ver.tar.gz" ] ||
+    [ "$(sha256sum "$_DLCACHE/rogue-$ver.tar.gz" | awk '{print $1}')" != "259cd9152fec3d9c5aa48975e6ee1a14b2f3aeb84fd31df57566cbb3c776d2b7" ]; then
+    printf "Downloading source...\n"
+    curl -L -# -o "$_DLCACHE/rogue-$ver.tar.gz" "https://github.com/Davidslv/rogue/archive/refs/tags/$ver.tar.gz" || exit 1
+fi
 printf "Unpacking source...\n"
-tar -C "$_TMP" -xf src.tar.gz
-rm src.tar.gz
+tar -C "$_TMP" -xf "$_DLCACHE/rogue-$ver.tar.gz"
 mv "$_TMP"/rogue-* "$_SRCDIR"
-curl -L -s -o "$_SRCDIR/config.guess" https://raw.githubusercontent.com/tianon/mirror-gnu-config/a2287c3041a3f2a204eb942e09c015eab00dc7dd/config.guess &
-curl -L -s -o "$_SRCDIR/config.sub" https://raw.githubusercontent.com/tianon/mirror-gnu-config/a2287c3041a3f2a204eb942e09c015eab00dc7dd/config.sub
-wait
+cp "$_BSROOT/files/gnu-config/"* "$_SRCDIR"
