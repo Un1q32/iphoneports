@@ -13,10 +13,70 @@ index 1fee988..3026c5f 100644
      }
    else
      nr = zmapfd (fd, &string, 0);
+diff --git a/builtins/mapfile.def b/builtins/mapfile.def
+index 31528fa..71fb819 100644
+--- a/builtins/mapfile.def
++++ b/builtins/mapfile.def
+@@ -153,9 +153,7 @@ mapfile (int fd, long line_count_goal, long origin, long nskip, long callback_qu
+   line_length = 0;
+   unbuffered_read = 0;
+ 
+-  /* The following check should be done before reading any lines.  Doing it
+-     here allows us to call bind_array_element instead of bind_array_variable
+-     and skip the variable lookup on every call. */
++  /* The following check should be done before reading any lines. */
+   entry = builtin_find_indexed_array (array_name, flags & MAPF_CLEARARRAY);
+   if (entry == 0)
+     return EXECUTION_FAILURE;
+@@ -201,8 +199,13 @@ mapfile (int fd, long line_count_goal, long origin, long nskip, long callback_qu
+ 	  run_callback (callback, array_index, line);
+ 	}
+ 
+-      /* XXX - bad things can happen if the callback modifies ENTRY, e.g.,
+-	 unsetting it or changing it to a non-indexed-array type. */
++      /* Bad things can happen if the callback modifies ENTRY, e.g.,
++	 unsetting it or changing it to a non-indexed-array type, so we
++	 look it up again every time we need to assign something */
++      entry = bind_array_variable (array_name, array_index, line, 0);
++      if (entry == 0 || ASSIGN_DISALLOWED (entry, 0))
++	return EXECUTION_FAILURE;
++
+       bind_array_element (entry, array_index, line, 0);
+ 
+       /* Have we exceeded # of lines to store? */
+diff --git a/execute_cmd.c b/execute_cmd.c
+index 070f511..6a22395 100644
+--- a/execute_cmd.c
++++ b/execute_cmd.c
+@@ -1643,13 +1643,13 @@ execute_in_subshell (COMMAND *command, int asynchronous, int pipe_in, int pipe_o
+ 
+   if (user_subshell)
+     {
+-      subshell_environment = SUBSHELL_PAREN;	/* XXX */
++      subshell_environment = SUBSHELL_PAREN|SUBSHELL_IGNTRAP;	/* XXX */
+       if (asynchronous)
+ 	subshell_environment |= SUBSHELL_ASYNC;
+     }
+   else
+     {
+-      subshell_environment = 0;			/* XXX */
++      subshell_environment = SUBSHELL_IGNTRAP;			/* XXX */
+       if (asynchronous)
+ 	subshell_environment |= SUBSHELL_ASYNC;
+       if (pipe_in != NO_PIPE || pipe_out != NO_PIPE)
 diff --git a/jobs.c b/jobs.c
-index 528c90f..cbcc2c1 100644
+index 528c90f..0f32ebb 100644
 --- a/jobs.c
 +++ b/jobs.c
+@@ -2839,7 +2839,7 @@ wait_for_background_pids (struct procstat *ps)
+ 	  ps->pid = pid;
+ 	  ps->status = (r < 0 || r > 256) ? 127 : r;
+ 	}
+-      if (r == -1 && errno == ECHILD)
++      if ((r < 0 || r > 256) && errno == ECHILD)
+ 	{
+ 	  /* If we're mistaken about job state, compensate. */
+ 	  check_async = 0;
 @@ -3538,7 +3538,7 @@ return_procsub:
    /* There aren't any dead jobs in the jobs table, but let's see if there's
       one in bgpids. We can do this in posix mode because we'll remove any
@@ -311,7 +371,7 @@ index af75dcf..e3d67b6 100644
  #endif
        if (ISPRINT (c) == 0)
 diff --git a/patchlevel.h b/patchlevel.h
-index 4075274..32c0c45 100644
+index 4075274..8020b32 100644
 --- a/patchlevel.h
 +++ b/patchlevel.h
 @@ -25,6 +25,6 @@
@@ -319,9 +379,25 @@ index 4075274..32c0c45 100644
     looks for to find the patch level (for the sccs version string). */
  
 -#define PATCHLEVEL 0
-+#define PATCHLEVEL 9
++#define PATCHLEVEL 12
  
  #endif /* _PATCHLEVEL_H_ */
+diff --git a/sig.c b/sig.c
+index 6de1325..d82027e 100644
+--- a/sig.c
++++ b/sig.c
+@@ -638,7 +638,10 @@ termsig_handler (int sig)
+   interrupt_execution = retain_fifos = executing_funsub = 0;
+   comsub_ignore_return = return_catch_flag = wait_intr_flag = 0;
+ 
+-  run_exit_trap ();	/* XXX - run exit trap possibly in signal context? */
++  /* Don't run the exit trap if we're supposed to be ignoring traps in a
++     subshell environment. */
++  if ((subshell_environment & SUBSHELL_IGNTRAP) == 0)
++    run_exit_trap ();	/* XXX - run exit trap possibly in signal context? */
+ 
+   kill_shell (sig);
+ }
 diff --git a/subst.c b/subst.c
 index e9d3e75..dd5d57b 100644
 --- a/subst.c
