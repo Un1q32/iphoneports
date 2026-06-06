@@ -77,7 +77,8 @@ static int clock_gettime(clockid_t clockid, struct timespec *ts) {
   static int (*func)(clockid_t, struct timespec *);
 
   if (!init) {
-    func = (int (*)(clockid_t, struct timespec *))dlsym(RTLD_NEXT, "clock_gettime");
+    func = (int (*)(clockid_t, struct timespec *))dlsym(RTLD_NEXT,
+                                                        "clock_gettime");
     init = true;
   }
 
@@ -85,6 +86,16 @@ static int clock_gettime(clockid_t clockid, struct timespec *ts) {
     return func(clockid, ts);
 
 #endif
+
+  if (mach_time_factor == 0.0) {
+    mach_timebase_info_data_t machinfo;
+    if (mach_timebase_info(&machinfo) != KERN_SUCCESS)
+      return -1;
+    if (machinfo.numer == machinfo.denom)
+      mach_time_factor = 1.0;
+    else
+      mach_time_factor = (double)machinfo.numer / machinfo.denom;
+  }
 
   uint64_t mach_time;
 
@@ -150,15 +161,6 @@ static int clock_gettime(clockid_t clockid, struct timespec *ts) {
     return -1;
   }
 
-  if (mach_time_factor == 0.0) {
-    mach_timebase_info_data_t machinfo;
-    if (mach_timebase_info(&machinfo) != KERN_SUCCESS)
-      return -1;
-    if (machinfo.numer == machinfo.denom)
-      mach_time_factor = 1.0;
-    else
-      mach_time_factor = (double)machinfo.numer / machinfo.denom;
-  }
   uint64_t nsec = mach_time * mach_time_factor;
 
   ts->tv_sec = nsec / 1000000000;
