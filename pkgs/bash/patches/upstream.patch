@@ -14,7 +14,7 @@ index 1fee988..3026c5f 100644
    else
      nr = zmapfd (fd, &string, 0);
 diff --git a/builtins/mapfile.def b/builtins/mapfile.def
-index 31528fa..71fb819 100644
+index 31528fa..662dba2 100644
 --- a/builtins/mapfile.def
 +++ b/builtins/mapfile.def
 @@ -153,9 +153,7 @@ mapfile (int fd, long line_count_goal, long origin, long nskip, long callback_qu
@@ -28,22 +28,74 @@ index 31528fa..71fb819 100644
    entry = builtin_find_indexed_array (array_name, flags & MAPF_CLEARARRAY);
    if (entry == 0)
      return EXECUTION_FAILURE;
-@@ -201,8 +199,13 @@ mapfile (int fd, long line_count_goal, long origin, long nskip, long callback_qu
+@@ -199,11 +197,16 @@ mapfile (int fd, long line_count_goal, long origin, long nskip, long callback_qu
+ 	    zsyncfd (fd);
+ 
  	  run_callback (callback, array_index, line);
- 	}
+-	}
  
 -      /* XXX - bad things can happen if the callback modifies ENTRY, e.g.,
 -	 unsetting it or changing it to a non-indexed-array type. */
-+      /* Bad things can happen if the callback modifies ENTRY, e.g.,
-+	 unsetting it or changing it to a non-indexed-array type, so we
-+	 look it up again every time we need to assign something */
-+      entry = bind_array_variable (array_name, array_index, line, 0);
-+      if (entry == 0 || ASSIGN_DISALLOWED (entry, 0))
-+	return EXECUTION_FAILURE;
-+
-       bind_array_element (entry, array_index, line, 0);
+-      bind_array_element (entry, array_index, line, 0);
++	  /* Bad things can happen if the callback modifies ENTRY, e.g.,
++	     unsetting it or changing it to a non-indexed-array type, so we
++	     look it up again every time we need to assign something */
++	  entry = bind_array_variable (array_name, array_index, line, 0);
++	  if (entry == 0 || ASSIGN_DISALLOWED (entry, 0))
++	    return EXECUTION_FAILURE;
++	}
++      else
++	bind_array_element (entry, array_index, line, 0);
  
        /* Have we exceeded # of lines to store? */
+       line_count++;
+diff --git a/builtins/read.def b/builtins/read.def
+index 5135e2b..6189daf 100644
+--- a/builtins/read.def
++++ b/builtins/read.def
+@@ -538,7 +538,8 @@ read_builtin (WORD_LIST *list)
+ 	     so we have to save input_string temporarily, run the unwind-
+ 	     protects, then restore input_string so we can use it later */
+ 	  orig_input_string = 0;
+-	  input_string[i] = '\0';	/* make sure it's terminated */
++	  if (i >= 0)
++	    input_string[i] = '\0';	/* make sure it's terminated */
+ 	  if (i == 0)
+ 	    {
+ 	      t = (char *)xmalloc (1);
+@@ -592,8 +593,7 @@ read_builtin (WORD_LIST *list)
+ 	  termsave.attrs = ttattrs;
+ 
+ 	  ttset = ttattrs;	  
+-	  i = silent ? ttfd_cbreak (fd, &ttset) : ttfd_onechar (fd, &ttset);
+-	  if (i < 0)
++	  if ((silent ? ttfd_cbreak (fd, &ttset) : ttfd_onechar (fd, &ttset)) < 0)
+ 	    sh_ttyerror (1);
+ 	  tty_modified = 1;
+ 	  add_unwind_protect (uw_ttyrestore, &termsave);
+@@ -609,8 +609,7 @@ read_builtin (WORD_LIST *list)
+       termsave.attrs = ttattrs;
+ 
+       ttset = ttattrs;
+-      i = ttfd_noecho (fd, &ttset);			/* ttnoecho (); */
+-      if (i < 0)
++      if (ttfd_noecho (fd, &ttset) < 0)
+ 	sh_ttyerror (1);
+ 
+       tty_modified = 1;
+@@ -788,8 +787,11 @@ read_builtin (WORD_LIST *list)
+ 	  char *x;
+ 	  x = (char *)xrealloc (input_string, size += 128);
+ 
+-	  /* Only need to change unwind-protect if input_string changes */
++#if 0
++	  /* This is, in theory, undefined behavior, since input_string may
++	     have been freed. */
+ 	  if (x != input_string)
++#endif
+ 	    {
+ 	      input_string = x;
+ 	      remove_unwind_protect ();
 diff --git a/execute_cmd.c b/execute_cmd.c
 index 070f511..6a22395 100644
 --- a/execute_cmd.c
@@ -371,7 +423,7 @@ index af75dcf..e3d67b6 100644
  #endif
        if (ISPRINT (c) == 0)
 diff --git a/patchlevel.h b/patchlevel.h
-index 4075274..8020b32 100644
+index 4075274..13c6c07 100644
 --- a/patchlevel.h
 +++ b/patchlevel.h
 @@ -25,6 +25,6 @@
@@ -379,7 +431,7 @@ index 4075274..8020b32 100644
     looks for to find the patch level (for the sccs version string). */
  
 -#define PATCHLEVEL 0
-+#define PATCHLEVEL 12
++#define PATCHLEVEL 15
  
  #endif /* _PATCHLEVEL_H_ */
 diff --git a/sig.c b/sig.c
