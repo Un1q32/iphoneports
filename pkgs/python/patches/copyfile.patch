@@ -9,7 +9,7 @@
  #  include <copyfile.h>           // fcopyfile()
  #endif
  
-@@ -12080,7 +12080,7 @@
+@@ -12090,7 +12090,7 @@
  #endif /* HAVE_SENDFILE */
  
  
@@ -18,7 +18,7 @@
  /*[clinic input]
  os._fcopyfile
  
-@@ -17852,7 +17852,7 @@
+@@ -17874,7 +17874,7 @@
  #endif
  #endif  /* HAVE_EVENTFD && EFD_CLOEXEC */
  
@@ -29,7 +29,7 @@
      if (PyModule_AddIntConstant(m, "_COPYFILE_ACL", COPYFILE_ACL)) return -1;
 --- src/Modules/clinic/posixmodule.c.h.orig
 +++ src/Modules/clinic/posixmodule.c.h
-@@ -8284,7 +8284,7 @@
+@@ -8303,7 +8303,7 @@
  
  #endif /* defined(HAVE_SENDFILE) && !defined(__APPLE__) && !(defined(__FreeBSD__) || defined(__DragonFly__)) */
  
