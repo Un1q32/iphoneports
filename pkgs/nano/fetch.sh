@@ -1,8 +1,8 @@
 #!/bin/sh
 rm -rf "$_DESTDIR" "$_SRCDIR"
-ver='9.0'
+ver='9.1'
 if [ ! -f "$_DLCACHE/nano-$ver.tar.gz" ] ||
-    [ "$(sha256sum "$_DLCACHE/nano-$ver.tar.gz" | awk '{print $1}')" != "48a9cf0d021ddaf9d7b567ed30396147d4d2e3f7a32644f83257a7efead2b380" ]; then
+    [ "$(sha256sum "$_DLCACHE/nano-$ver.tar.gz" | awk '{print $1}')" != "2647a33f3c2ff3dc45168aeccff61abc7eae8bf99ac1d35574175c23bde6050b" ]; then
     printf "Downloading source...\n"
     curl -L -# -o "$_DLCACHE/nano-$ver.tar.gz" "https://ftpmirror.gnu.org/gnu/nano/nano-$ver.tar.gz" || exit 1
 fi
