@@ -14,7 +14,16 @@ cd "$_SRCDIR"
     ac_cv_snprintf_returns_bogus=no \
     ac_cv_iconv_omits_bom=no \
     ac_cv_fread_reads_directories=yes
-make install DESTDIR="$_DESTDIR" INSTALL_SYMLINKS=y CSPRNG_METHOD=openssl uname_M="$_CPU" uname_R= uname_S= uname_O= uname_V=
+make install \
+    DESTDIR="$_DESTDIR" \
+    INSTALL_SYMLINKS=y \
+    CSPRNG_METHOD=openssl \
+    uname_M="$_CPU" \
+    uname_R= \
+    uname_S= \
+    uname_O= \
+    uname_V= \
+    NO_RUST=1
 )
 
 (
