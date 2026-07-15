@@ -1,8 +1,8 @@
 #!/bin/sh
 rm -rf "$_DESTDIR" "$_SRCDIR"
-ver='5.9.1'
+ver='5.9.2'
 if [ ! -f "$_DLCACHE/zsh-$ver.tar.gz" ] ||
-    [ "$(sha256sum "$_DLCACHE/zsh-$ver.tar.gz" | awk '{print $1}')" != "5d20bec03f981dc4e9a09ec245e7415388ff641f79c5c5c416b5042e58d8280d" ]; then
+    [ "$(sha256sum "$_DLCACHE/zsh-$ver.tar.gz" | awk '{print $1}')" != "36fa734374b44783582cec09bcd67822e2f992c779ec1624ab5596df078d2f81" ]; then
     printf "Downloading source...\n"
     curl -L -# -o "$_DLCACHE/zsh-$ver.tar.gz" "https://downloads.sourceforge.net/project/zsh/zsh/$ver/zsh-$ver.tar.xz" || exit 1
 fi
