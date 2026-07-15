@@ -1,8 +1,8 @@
 #!/bin/sh
 rm -rf "$_DESTDIR" "$_SRCDIR"
-ver='5.4.0'
+ver='5.4.1'
 if [ ! -f "$_DLCACHE/gawk-$ver.tar.xz" ] ||
-    [ "$(sha256sum "$_DLCACHE/gawk-$ver.tar.xz" | awk '{print $1}')" != "3dd430f0cd3b4428c6c3f6afc021b9cd3c1f8c93f7a688dc268ca428a90b4ac1" ]; then
+    [ "$(sha256sum "$_DLCACHE/gawk-$ver.tar.xz" | awk '{print $1}')" != "07f6f7342b7febe4313fc2c2542ad93d64fe20ad8717200109f105a826f5fd37" ]; then
     printf "Downloading source...\n"
     curl -L -# -o "$_DLCACHE/gawk-$ver.tar.xz" "https://ftpmirror.gnu.org/gnu/gawk/gawk-$ver.tar.xz" || exit 1
 fi
