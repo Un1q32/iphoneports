@@ -1,8 +1,8 @@
 #!/bin/sh
 rm -rf "$_DESTDIR" "$_SRCDIR"
-ver='15.1.0'
+ver='15.2.0'
 if [ ! -f "$_DLCACHE/ripgrep-$ver.tar.gz" ] ||
-    [ "$(sha256sum "$_DLCACHE/ripgrep-$ver.tar.gz" | awk '{print $1}')" != "e6b2d35ff79c3327edc0c92a29dc4bb74e82d8ee4b8156fb98e767678716be7a" ]; then
+    [ "$(sha256sum "$_DLCACHE/ripgrep-$ver.tar.gz" | awk '{print $1}')" != "7605249d3eb0d5f170e3414498e3344e26b1e7a147aec518b57090b80036a562" ]; then
     printf "Downloading source...\n"
     curl -L -# -o "$_DLCACHE/ripgrep-$ver.tar.gz" "https://github.com/BurntSushi/ripgrep/archive/refs/tags/$ver.tar.gz" || exit 1
 fi
