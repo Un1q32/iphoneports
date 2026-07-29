@@ -2,6 +2,6 @@ Package: iphoneports-iwasm
 Section: Scripting
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Architecture: @DPKGARCH@
-Version: 2.4.4
+Version: 2.4.5
 Description: WebAssembly Micro Runtime frontend
 Depends: iphoneports-base

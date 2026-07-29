@@ -1,8 +1,8 @@
 #!/bin/sh
 rm -rf "$_DESTDIR" "$_SRCDIR"
-ver='2.4.4'
+ver='2.4.5'
 if [ ! -f "$_DLCACHE/wamr-$ver.tar.gz" ] ||
-    [ "$(sha256sum "$_DLCACHE/wamr-$ver.tar.gz" | awk '{print $1}')" != "03ad51037f06235577b765ee042a462326d8919300107af4546719c35525b298" ]; then
+    [ "$(sha256sum "$_DLCACHE/wamr-$ver.tar.gz" | awk '{print $1}')" != "1ab09d51099f276ca4a1d6629f6b589aab2bd0caa01445e05031a4bed22c199b" ]; then
     printf "Downloading source...\n"
     curl -L -# -o "$_DLCACHE/wamr-$ver.tar.gz" "https://github.com/bytecodealliance/wasm-micro-runtime/archive/refs/tags/WAMR-$ver.tar.gz" || exit 1
 fi
