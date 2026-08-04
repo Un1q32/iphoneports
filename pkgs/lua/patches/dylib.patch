@@ -41,7 +41,7 @@
 +INSTALL_LIB= $(INSTALL_TOP)/lib
 +
  CC= gcc -std=gnu99
- CFLAGS= -O2 -Wall -Wextra -DLUA_COMPAT_5_3 $(SYSCFLAGS) $(MYCFLAGS)
+ CFLAGS= -O2 -Wall -Wextra $(SYSCFLAGS) $(MYCFLAGS)
  LDFLAGS= $(SYSLDFLAGS) $(MYLDFLAGS)
 @@ -33,6 +36,7 @@
  PLATS= guess aix bsd c89 freebsd generic ios linux linux-readline macosx mingw posix solaris
@@ -72,7 +72,7 @@
 +	$(CC) -o $@ -dynamiclib -install_name $(INSTALL_LIB)/liblua.$(V).dylib -compatibility_version $(V) -current_version $(R) $^
 +
 +$(LUA_T): $(LUA_O) $(LUA_DYLIB)
-+	$(CC) -fno-common -o $@ $(LDFLAGS) $(LUA_O) $(LUA_DYLIB) $(LIBS)
++	$(CC) -o $@ $(LDFLAGS) $(LUA_O) $(LUA_DYLIB) $(LIBS)
  
 -$(LUAC_T): $(LUAC_O) $(LUA_A)
 -	$(CC) -o $@ $(LDFLAGS) $(LUAC_O) $(LUA_A) $(LIBS)
@@ -81,12 +81,3 @@
  
  test:
  	./$(LUA_T) -v
-@@ -129,7 +136,7 @@
- 	$(MAKE) $(ALL) SYSCFLAGS="-DLUA_USE_LINUX -DLUA_USE_READLINE" SYSLIBS="-Wl,-E -ldl -lreadline"
- 
- Darwin macos macosx:
--	$(MAKE) $(ALL) SYSCFLAGS="-DLUA_USE_MACOSX -DLUA_USE_READLINE" SYSLIBS="-lreadline"
-+	$(MAKE) $(ALL) SYSCFLAGS="-fno-common -DLUA_USE_MACOSX -DLUA_USE_READLINE" SYSLIBS="-lreadline"
- 
- mingw:
- 	$(MAKE) "LUA_A=lua54.dll" "LUA_T=lua.exe" \

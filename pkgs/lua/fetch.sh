@@ -1,8 +1,8 @@
 #!/bin/sh
 rm -rf "$_DESTDIR" "$_SRCDIR"
-ver='5.4.8'
+ver='5.5.1'
 if [ ! -f "$_DLCACHE/lua-$ver.tar.gz" ] ||
-    [ "$(sha256sum "$_DLCACHE/lua-$ver.tar.gz" | awk '{print $1}')" != "4f18ddae154e793e46eeab727c59ef1c0c0c2b744e7b94219710d76f530629ae" ]; then
+    [ "$(sha256sum "$_DLCACHE/lua-$ver.tar.gz" | awk '{print $1}')" != "1c4b4068d67061f2a2231ad2b5422e77acea1487ea9890f6320af614f4373dce" ]; then
     printf "Downloading source...\n"
     curl -L -# -o "$_DLCACHE/lua-$ver.tar.gz" "https://www.lua.org/ftp/lua-$ver.tar.gz" || exit 1
 fi

@@ -4,4 +4,4 @@ Architecture: @DPKGARCH@
 Depends: iphoneports-base, iphoneports-readline
 Description: A powerful, efficient, lightweight, embeddable scripting language.
 Section: Scripting
-Version: 5.4.8
+Version: 5.5.1

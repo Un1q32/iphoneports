@@ -1,6 +1,6 @@
 --- src/src/luaconf.h.orig
 +++ src/src/luaconf.h
-@@ -223,7 +223,7 @@
+@@ -241,7 +241,7 @@
  
  #else			/* }{ */
  
