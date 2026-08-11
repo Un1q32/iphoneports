@@ -19,9 +19,6 @@ armv6srcs="$armv7srcs floatundisf.c floatundidf.c"
 cc() {
     printf " \033[1;32mCC\033[0m %s\n" "$2"
     command -v ccache >/dev/null && ccache=ccache
-    case $2 in
-        (*.mm|*.cc|*.cpp) cc=clang++ ;;
-    esac
     $ccache "${cc:-clang}" -isysroot "$_PKGROOT/sysroot" "$@"
 }
 
@@ -59,6 +56,17 @@ wait
 "$_TARGET-libtool" -static -o libclang_rt.osx.a ./*.o 2>/dev/null
 rm ./*.o
 
+for src in $arm64srcs; do
+    cc -o "arm64-${src%\.c}.o" -target arm64-apple-tvos9 "../lib/builtins/$src" -c -O3 &
+done
+for src in $arm64esrcs; do
+    cc -o "arm64e-${src%\.c}.o" -target arm64e-apple-tvos14 "../lib/builtins/$src" -c -O3 &
+done
+wait
+
+"$_TARGET-libtool" -static -o libclang_rt.tvos.a ./*.o 2>/dev/null
+rm ./*.o
+
 cc \
     -o ubsan_minimal_ios.o \
     -target unknown-apple-ios \
@@ -81,6 +89,14 @@ cc \
     -O3 -c -I../lib &
 
 cc \
+    -o ubsan_minimal_tvos.o \
+    -target unknown-apple-tvos \
+    -arch arm64 -Xarch_arm64 -mtvos-version-min=9.0 \
+    -arch arm64e -Xarch_arm64e -mtvos-version-min=14.0 \
+    ../lib/ubsan_minimal/ubsan_minimal_handlers.cpp \
+    -O3 -c -I../lib &
+
+cc \
     -o ubsan_ios.o \
     -target unknown-apple-ios \
     -arch armv6 -Xarch_armv6 -mios-version-min=1.0 \
@@ -99,14 +115,24 @@ cc \
     -arch arm64 -Xarch_arm64 -mmacos-version-min=11.0 \
     -arch arm64e -Xarch_arm64e -mmacos-version-min=11.0 \
     ../ubsan.c \
-    -O3 -c
+    -O3 -c &
+
+cc \
+    -o ubsan_tvos.o \
+    -target unknown-apple-tvos \
+    -arch arm64 -Xarch_arm64 -mtvos-version-min=9.0 \
+    -arch arm64e -Xarch_arm64e -mtvos-version-min=14.0 \
+    ../ubsan.c \
+    -O3 -c &
 
 wait
 
 "$_TARGET-libtool" -static -o libclang_rt.ubsan_minimal_ios.a ubsan_minimal_ios.o
 "$_TARGET-libtool" -static -o libclang_rt.ubsan_minimal_osx.a ubsan_minimal_osx.o
+"$_TARGET-libtool" -static -o libclang_rt.ubsan_minimal_tvos.a ubsan_minimal_tvos.o
 "$_TARGET-libtool" -static -o libclang_rt.ubsan_ios.a ubsan_ios.o
 "$_TARGET-libtool" -static -o libclang_rt.ubsan_osx.a ubsan_osx.o
+"$_TARGET-libtool" -static -o libclang_rt.ubsan_tvos.a ubsan_tvos.o
 rm ./*.o
 
 cp ./*.a "$_DESTDIR/var/usr/lib/clang/$llvmver/lib/darwin"
