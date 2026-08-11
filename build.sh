@@ -290,7 +290,7 @@ _OSVER=__ENVIRONMENT_OS_VERSION_MIN_REQUIRED__
             rustcpu="$_CPU"
         fi
     else
-        rustsys='ios'
+        rustsys="$_SUBSYSTEM"
         rustcpu="$_CPU"
     fi
     [ "$rustcpu" = 'arm64' ] && rustcpu='aarch64'
