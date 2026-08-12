@@ -6,7 +6,6 @@ pkg-*
 /sysroot-*
 /defaulttarget.txt
 /dlcache
-/targets.txt
 /uploaddebs.sh
 /toolchain/*
 !/toolchain/toolchainver
