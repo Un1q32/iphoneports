@@ -78,9 +78,14 @@ if [ ! -d "$_DLCACHE" ]; then
     mkdir -p "$_DLCACHE"
 fi
 
+cleanup() {
+    rm -rf "$bsroot/files/pkglock-$_TRIPLE" "$_TMP"
+    [ -n "$_TARGET" ] && rm -rf "$bsroot/toolchain/target-bin/$_TRIPLE"
+}
+
 error() {
     printf '\033[1;31mError:\033[0m %s\n' "$1"
-    rm -rf "$bsroot/files/pkglock-$_TRIPLE" "$_TMP"
+    cleanup
     exit 1
 }
 
@@ -635,4 +640,4 @@ Usage: build.sh [options] <command>
 }
 
 main "$@"
-rm -rf "$bsroot/files/pkglock-$_TRIPLE" "$_TMP"
+cleanup
