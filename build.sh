@@ -102,7 +102,6 @@ depcheck() {
     for dep in \
         sha256sum \
         awk \
-        ldid \
         dpkg-deb \
         fakeroot \
         automake \
