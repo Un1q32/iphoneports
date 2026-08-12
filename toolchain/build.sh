@@ -179,13 +179,19 @@ make CXX="$scriptroot/bin/clang++"
 cp ldid "$scriptroot/bin"
 )
 
-#printf "Building compiler-rt\n\n"
-#(
-#_DONT_REBUILD_TOOLCHAIN=1 _DONT_COPY_DEB=1 ../build.sh --target=armv6-apple-darwin9 compiler-rt
-#llvmshortver="$(cd "$pwd/lib/clang" && echo *)"
-#mkdir -p "$pwd/lib/clang/$llvmshortver/lib/darwin"
-#cp ../pkgs/compiler-rt/pkg-*/ "$pwd/lib/clang/$llvmshortver/lib/darwin"
-#)
+printf "Building compiler-rt\n\n"
+defaulttarget='armv6-apple-ios2'
+if ! [ -d "../../sdks/$defaulttarget" ]; then
+    nodefaultsdk=1
+    mkdir "../../sdks/$defaulttarget"
+fi
+_DONT_REBUILD_TOOLCHAIN=1 _DONT_COPY_DEB=1 ../../build.sh --target=armv6-apple-ios2 compiler-rt
+llvmshortver="$(cd "$scriptroot/lib/clang" && echo *)"
+mkdir -p "$scriptroot/lib/clang/$llvmshortver/lib/darwin"
+cp "../../pkgs/compiler-rt/pkg-$defaulttarget/var/usr/lib/clang/$llvmshortver/lib/darwin/"* "$scriptroot/lib/clang/$llvmshortver/lib/darwin"
+if [ -n "$nodefaultsdk" ]; then
+    rm -r "../../sdks/$defaulttarget"
+fi
 
 printf "Building rust\n\n"
 rustver="1.97.1"
@@ -222,9 +228,6 @@ ln -s "../../../$(readlink "$scriptroot/lib/libLLVM.so")" "$scriptroot/lib/rustl
 )
 
 (
-#for target in share/iphoneports/sdks/*; do
-#    [ "$target" != "share/iphoneports/sdks/*" ] && ./bin/iphoneports-add-target "${target##*/}"
-#done
 for bin in cctools-bin/*; do
     [ -h "$bin" ] || "$STRIP" "$bin"
 done

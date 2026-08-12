@@ -88,7 +88,9 @@ export ZERO_AR_DATE=1
 
 if [ "$(cat toolchain/toolchainver 2>/dev/null)" != "$(cat toolchain/currenttoolchainver 2>/dev/null)" ] &&
     [ -z "$_DONT_REBUILD_TOOLCHAIN" ]; then
-    ./toolchain/build.sh
+    mv "$bsroot/files/pkglock-$_TRIPLE" "$bsroot/files/pkglock-$_TRIPLE.disabled"
+    ./toolchain/build.sh || error "Failed to build toolchain!"
+    mv "$bsroot/files/pkglock-$_TRIPLE.disabled" "$bsroot/files/pkglock-$_TRIPLE"
 fi
 
 depcheck() {
