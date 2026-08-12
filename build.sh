@@ -1,7 +1,7 @@
 #!/bin/sh
 # shellcheck disable=2030,2031,2034
 
-defaulttarget='armv6-apple-darwin9'
+defaulttarget='armv6-apple-ios2'
 
 [ -f defaulttarget.txt ] && IFS= read -r defaulttarget < defaulttarget.txt
 
@@ -20,12 +20,12 @@ if ! command -v "$EDITOR" >/dev/null 2>&1; then
 fi
 
 case "$*" in
-    (*--target=*) _TARGET="$*" ; _TARGET="${_TARGET#*--target=}" ; export _TARGET="${_TARGET%% *}" ;;
-    (*) export _TARGET="$defaulttarget" ;;
+    (*--target=*) _TRIPLE="$*" ; _TRIPLE="${_TRIPLE#*--target=}" ; export _TRIPLE="${_TRIPLE%% *}" ;;
+    (*) export _TRIPLE="$defaulttarget" ;;
 esac
 
-if [ -f "files/pkglock-$_TARGET" ]; then
-    read -r lockpid < "files/pkglock-$_TARGET"
+if [ -f "files/pkglock-$_TRIPLE" ]; then
+    read -r lockpid < "files/pkglock-$_TRIPLE"
     if kill -0 "$lockpid" 2> /dev/null; then
         printf '%s\n' "Waiting for PID $lockpid to finish..."
         while kill -0 "$lockpid" 2> /dev/null; do
@@ -34,14 +34,14 @@ if [ -f "files/pkglock-$_TARGET" ]; then
     fi
 fi
 
-printf '%s' "$$" > "files/pkglock-$_TARGET"
+printf '%s' "$$" > "files/pkglock-$_TRIPLE"
 
 pkgdir="$bsroot/pkgs"
 export TERM="xterm-256color"
 
 case "$*" in
-    (*--no-tmpfs*) export _TMP="$bsroot/files/iphoneports-tmp-$_TARGET" ;;
-    (*) export _TMP="/tmp/iphoneports-tmp-$_TARGET" ;;
+    (*--no-tmpfs*) export _TMP="$bsroot/files/iphoneports-tmp-$_TRIPLE" ;;
+    (*) export _TMP="/tmp/iphoneports-tmp-$_TRIPLE" ;;
 esac
 case "$*" in
     (*--keepsrc*) keepsrc=1 ;;
@@ -80,16 +80,19 @@ fi
 
 error() {
     printf '\033[1;31mError:\033[0m %s\n' "$1"
-    rm -rf "$bsroot/files/pkglock-$_TARGET" "$_TMP"
+    rm -rf "$bsroot/files/pkglock-$_TRIPLE" "$_TMP"
     exit 1
 }
 
 export ZERO_AR_DATE=1
 
+if [ "$(cat toolchain/toolchainver 2>/dev/null)" != "$(cat toolchain/currenttoolchainver 2>/dev/null)" ] &&
+    [ -z "$_DONT_REBUILD_TOOLCHAIN" ]; then
+    ./toolchain/build.sh
+fi
+
 depcheck() {
     for dep in \
-        "$_TARGET-cc" \
-        "$_TARGET-sdkpath" \
         sha256sum \
         awk \
         ldid \
@@ -114,21 +117,14 @@ depcheck() {
         curl \
         git \
         pkg-config \
-        perl; do
+        perl \
+        nasm; do
         if ! command -v "$dep" > /dev/null; then
             error "Missing dependency: $dep"
         fi
     done
 
-    _CPU="${_TARGET%%-*}"
-
-    case $_CPU in
-        (x86_64*|i386)
-            if ! command -v nasm > /dev/null; then
-                error "Missing dependency: nasm"
-            fi
-        ;;
-    esac
+    export _CPU="${_TRIPLE%%-*}"
 
     if command -v gmake > /dev/null; then
         _MAKE="gmake"
@@ -166,9 +162,17 @@ depcheck() {
         error "Missing dependency: GNU tar"
     fi
 
-    sdk="$("$_TARGET-sdkpath")"
+    sdk="$bsroot/sdks/$_TRIPLE"
+    if ! [ -d "$sdk" ]; then
+        error "No SDK found at $sdk"
+    fi
+    export _SDK="$sdk"
 
-    _OSVER=
+    export PATH="$bsroot/toolchain/target-bin/$_TRIPLE:$bsroot/toolchain/bin:$PATH"
+
+    export _TARGET="$(target-symlinks.sh \"$_TRIPLE\")"
+
+    export _OSVER=1050
     eval "$(printf '%s' '\
 if [ TARGET_OS_IOS = 1 ]; then
     _SUBSYSTEM=ios
@@ -258,9 +262,6 @@ _OSVER=__ENVIRONMENT_OS_VERSION_MIN_REQUIRED__
             else
                 _DPKGARCH=darwin-arm64
             fi
-            if "$_TARGET-cc" -dM -E - < /dev/null | grep -q __arm64e__; then
-                export _CPU=arm64e
-            fi
         ;;
 
         (arm*)
@@ -303,11 +304,7 @@ _OSVER=__ENVIRONMENT_OS_VERSION_MIN_REQUIRED__
 
     export CARGO_HOME="$bsroot/files/cargo"
 
-    iphoneportspath="$(command -v "$_TARGET-sdkpath")"
-    iphoneportspath="${iphoneportspath%/*}/../share/iphoneports/bin"
-    PATH="$iphoneportspath:$PATH"
-
-    export _MAKE _SUBSYSTEM _SUBSYSTEMVER _CPU _DPKGARCH _MACVER _ENTITLEMENTS _OSVER PATH
+    export _MAKE _SUBSYSTEM _SUBSYSTEMVER _CPU _DPKGARCH _MACVER _ENTITLEMENTS _OSVER
 }
 
 build() {
@@ -324,8 +321,8 @@ build() {
     if [ -n "$dryrun" ]; then
         printf '%s\n' "Building $1"
     else
-        export _DESTDIR="$_PKGROOT/pkg-$_TARGET"
-        export _SRCDIR="$_PKGROOT/src-$_TARGET"
+        export _DESTDIR="$_PKGROOT/pkg-$_TRIPLE"
+        export _SRCDIR="$_PKGROOT/src-$_TRIPLE"
         export _BSROOT="$bsroot"
         if [ -f fetch.sh ]; then
             ./fetch.sh || {
@@ -360,7 +357,7 @@ hasbeenbuilt() {
                 return 0
             fi
         done < "$_TMP/.builtpkgs"
-    elif [ -d "$pkgdir/$1/pkg-$_TARGET" ]; then
+    elif [ -d "$pkgdir/$1/pkg-$_TRIPLE" ]; then
         return 0
     fi
     return 1
@@ -396,7 +393,7 @@ _includedeps() {
                     fi
                 fi
                 printf '%s\n' "Including dependency $dep"
-                [ -z "$dryrun" ] && cp -a "$pkgdir/$dep/pkg-$_TARGET/"* "$_SDK"
+                [ -z "$dryrun" ] && cp -a "$pkgdir/$dep/pkg-$_TRIPLE/"* "$_SDK"
                 if [ -n "$recursivedeps" ]; then
                     includeddeps="$includeddeps $dep "
                     _includedeps "../$dep/dependencies.txt"
@@ -430,13 +427,13 @@ includedeps() {
 }
 
 sysroot() {
-    [ -d "$pkgdir/$1/pkg-$_TARGET" ] || build "$1" || error "Failed to build package: $1"
+    [ -d "$pkgdir/$1/pkg-$_TRIPLE" ] || build "$1" || error "Failed to build package: $1"
     if [ -f "$pkgdir/$1/dependencies.txt" ]; then
         while IFS= read -r dep; do
             sysroot "$dep"
         done < "$pkgdir/$1/dependencies.txt"
     fi
-    cp -a "$pkgdir/$1/pkg-$_TARGET"/* "sysroot-$_TARGET"
+    cp -a "$pkgdir/$1/pkg-$_TRIPLE"/* "sysroot-$_TRIPLE"
 }
 
 main() {
@@ -459,14 +456,14 @@ main() {
                 fi
 
                 if [ "$kind" != "all-noclean" ]; then
-                    rm -rf "$pkg/pkg-$_TARGET" "$pkg/src-$_TARGET" "$pkg/$pkg-$_TARGET.deb" &
+                    rm -rf "$pkg/pkg-$_TRIPLE" "$pkg/src-$_TRIPLE" "$pkg/$pkg-$_TRIPLE.deb" &
                 fi
             done
             wait
 
             for pkg in $pkglist; do
                 build "$pkg" || error "Failed to build package: $pkg"
-                cp -f "$pkgdir/$pkg"/*-"$_TARGET.deb" debs 2> /dev/null
+                cp -f "$pkgdir/$pkg"/*-"$_TRIPLE.deb" debs 2> /dev/null
             done
         ;;
 
@@ -522,16 +519,16 @@ main() {
             for pkg in $deppkgs; do
                 [ -f "$pkgdir/$pkg/DEBIAN/control" ] && "$EDITOR" "$pkgdir/$pkg/DEBIAN/control"
             done
-            rm -rf "$pkgdir/$2/pkg-$_TARGET" "$pkgdir/$2/src-$_TARGET"
+            rm -rf "$pkgdir/$2/pkg-$_TRIPLE" "$pkgdir/$2/src-$_TRIPLE"
             build "$2" || error "Failed to build package: $2"
-            cp -f "$pkgdir/$2/"*"-$_TARGET.deb" "$bsroot/debs" 2> /dev/null
+            cp -f "$pkgdir/$2/"*"-$_TRIPLE.deb" "$bsroot/debs" 2> /dev/null
             for pkg in $deppkgs; do
-                rm -rf "$pkgdir/$pkg/pkg-$_TARGET" "$pkgdir/$pkg/src-$_TARGET" "$pkgdir/$pkg/"*"-$_TARGET.deb" &
+                rm -rf "$pkgdir/$pkg/pkg-$_TRIPLE" "$pkgdir/$pkg/src-$_TRIPLE" "$pkgdir/$pkg/"*"-$_TRIPLE.deb" &
             done
             wait
             for pkg in $deppkgs; do
                 build "$pkg" || error "Failed to build package: $pkg"
-                cp -f "$pkgdir/$pkg/"*"-$_TARGET.deb" debs 2> /dev/null
+                cp -f "$pkgdir/$pkg/"*"-$_TRIPLE.deb" debs 2> /dev/null
             done
         ;;
 
@@ -545,16 +542,16 @@ main() {
             for pkg in "$@"; do
                 build "$pkg" || error "Failed to build package: $pkg"
             done
-            rm -rf "sysroot-$_TARGET"
-            mkdir "sysroot-$_TARGET"
+            rm -rf "sysroot-$_TRIPLE"
+            mkdir "sysroot-$_TRIPLE"
             printf 'Building sysroot...\n'
             for pkg in "$@"; do
                 sysroot "$pkg"
             done
-            rm -rf "sysroot-$_TARGET/DEBIAN"
+            rm -rf "sysroot-$_TRIPLE/DEBIAN"
             printf 'Making tarball...\n'
             (
-            cd "sysroot-$_TARGET" || exit 1
+            cd "sysroot-$_TRIPLE" || exit 1
             "$gtar" --owner 0 --group 0 -czf sysroot.tar.gz ./*
             ) || error "Failed to build sysroot tarball"
             printf 'Done!\n'
@@ -566,22 +563,22 @@ main() {
             for pkg in $pkgs; do
                 build "$pkg" || error "Failed to build package: $pkg"
             done
-            rm -rf "sysroot-$_TARGET"
-            mkdir "sysroot-$_TARGET"
+            rm -rf "sysroot-$_TRIPLE"
+            mkdir "sysroot-$_TRIPLE"
             printf 'Building sysroot...\n'
             for pkg in $pkgs; do
                 sysroot "$pkg"
-                cp -f "$pkgdir/$pkg"/*"-$_TARGET.deb" debs 2> /dev/null
+                cp -f "$pkgdir/$pkg"/*"-$_TRIPLE.deb" debs 2> /dev/null
             done
-            rm -rf "sysroot-$_TARGET/DEBIAN"
+            rm -rf "sysroot-$_TRIPLE/DEBIAN"
             printf 'Making tarballs...\n'
             (
-            cd "sysroot-$_TARGET" || exit 1
+            cd "sysroot-$_TRIPLE" || exit 1
             "$gtar" --owner 0 --group 0 -czf bootstrap.tar.gz ./*
             ) || error "Failed to build bootstrap tarball"
             (
             cd debs || exit 1
-            "$gtar" --owner 0 --group 0 -czf "../sysroot-$_TARGET/debs.tar.gz" ./*
+            "$gtar" --owner 0 --group 0 -czf "../sysroot-$_TRIPLE/debs.tar.gz" ./*
             ) || error "Failed to build debs tarball"
             printf 'Done!\n'
         ;;
@@ -624,16 +621,16 @@ Usage: build.sh [options] <command>
                 [ -d "$pkgdir/$pkg" ] || error "Package not found: $pkg"
             done
             for pkg in "$@"; do
-                rm -rf "$pkgdir/$pkg/pkg-$_TARGET" "$pkgdir/$pkg/src-$_TARGET" "$pkgdir/$pkg/$pkg-$_TARGET.deb" &
+                rm -rf "$pkgdir/$pkg/pkg-$_TRIPLE" "$pkgdir/$pkg/src-$_TRIPLE" "$pkgdir/$pkg/$pkg-$_TRIPLE.deb" &
             done
             wait
             for pkg in "$@"; do
                 build "$pkg" || error "Failed to build package: $pkg"
-                cp -f "$pkgdir/$pkg"/*-"$_TARGET.deb" "$bsroot/debs" 2> /dev/null
+                [ -z "$_DONT_COPY_DEB" ] && cp -f "$pkgdir/$pkg"/*-"$_TRIPLE.deb" "$bsroot/debs" 2> /dev/null
             done
         ;;
     esac
 }
 
 main "$@"
-rm -rf "$bsroot/files/pkglock-$_TARGET" "$_TMP"
+rm -rf "$bsroot/files/pkglock-$_TRIPLE" "$_TMP"

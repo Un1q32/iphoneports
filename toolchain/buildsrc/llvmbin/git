@@ -1,0 +1,3 @@
+#!/bin/sh
+# this exists to prevent the git repo info from showing in clang -v
+exit 1

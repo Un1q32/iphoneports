@@ -8,3 +8,7 @@ pkg-*
 /dlcache
 /targets.txt
 /uploaddebs.sh
+/toolchain/*
+!/toolchain/toolchainver
+!/toolchain/buildsrc
+!/toolchain/build.sh

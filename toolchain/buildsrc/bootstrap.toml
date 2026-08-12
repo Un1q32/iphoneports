@@ -1,0 +1,46 @@
+# see src/bootstrap/defaults/
+profile = "dist"
+
+# see src/bootstrap/src/utils/change_tracker.rs
+change-id = 154587
+
+[llvm]
+link-shared = true
+
+[build]
+target = [
+  "@HOST@",
+  "x86_64-apple-darwin",
+  "i686-apple-darwin",
+  "aarch64-apple-darwin",
+  # "arm64e-apple-darwin",
+  "armv6-apple-ios",
+  "armv7-apple-ios",
+  "armv7s-apple-ios",
+  "aarch64-apple-ios",
+  # "arm64e-apple-ios",
+]
+locked-deps = true
+vendor = true
+tools = [
+  "cargo",
+]
+
+docs = false
+
+[install]
+prefix = "@PREFIX@"
+sysconfdir = "@PREFIX@/etc"
+
+[rust]
+codegen-units-std = 1
+channel = "stable"
+lld = false
+use-lld = false
+
+[dist]
+compression-formats = ["gz"]
+compression-profile = "fast"
+
+[target.@HOST@]
+llvm-config = '@LLVMCONFIG@'

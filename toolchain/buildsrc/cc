@@ -1,0 +1,44 @@
+#!/bin/sh
+
+if [ -z "$_SDK" ]; then
+    printf "Don't run this directly!\n"
+    exit 1
+fi
+
+case $0 in
+    *++) cc=clang++ ;;
+    *)   cc=clang   ;;
+esac
+
+[ -d "$_SDK/var/usr/lib" ] && libflags="-L$_SDK/var/usr/lib"
+
+stdlib=libc++
+if [ -f "$_SDK/var/usr/lib/libc++.dylib" ]; then
+    includeflags="-stdlib++-isystem$_SDK/var/usr/include/c++/v1"
+elif [ -f "$_SDK/usr/lib/libstdc++.6.dylib" ] || [ -f "$_SDK/usr/lib/libstdc++.6.tbd" ]; then
+    stdlib=libstdc++
+fi
+
+command -v ccache > /dev/null 2>&1 && ccache='ccache'
+
+if [ "$_OSVER" -lt 1050 ]; then
+    case $* in
+        (*-fstack-protector*)
+            echo 'Stack protection not supported on Tiger'
+            exit 1
+        ;;
+    esac
+fi
+
+exec $ccache "$cc" \
+    -isysroot "$_SDK" \
+    -stdlib="$stdlib" \
+    -isystem "$_SDK/var/usr/include" \
+    "$includeflags" \
+    "$libflags" \
+    -fuse-ld=ld64 \
+    -mlinker-version=956.6 \
+    "$@" \
+    -target "$_TRIPLE" \
+    -Wno-unused-command-line-argument \
+    -Wno-ignored-optimization-argument
