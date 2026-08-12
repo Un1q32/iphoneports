@@ -1,21 +1,19 @@
 --- src/packaging/RedHat/conf/commands.allow.sh.orig
 +++ src/packaging/RedHat/conf/commands.allow.sh
-@@ -30,14 +30,12 @@
- 
- numwords=1
- allowed_compilers="
--  /usr/bin/cc
--  /usr/bin/c++
--  /usr/bin/c89
--  /usr/bin/c99
-+  /var/usr/bin/clang
-+  /var/usr/bin/clang++
+@@ -38,6 +38,16 @@
+   /usr/bin/g++
+   /usr/bin/*gcc-*
+   /usr/bin/*g++-*
++  /usr/bin/arm-apple-darwin9-gcc
++  /usr/bin/arm-apple-darwin9-g++
 +  /usr/bin/clang
 +  /usr/bin/clang++
-   /usr/bin/gcc
-   /usr/bin/g++
--  /usr/bin/*gcc-*
--  /usr/bin/*g++-*
++  /var/usr/bin/clang
++  /var/usr/bin/clang++
++  /var/usr/bin/cc
++  /var/usr/bin/c++
++  /var/usr/bin/gcc
++  /var/usr/bin/g++
  "
  
  # You shouldn't need to alter anything below here.
