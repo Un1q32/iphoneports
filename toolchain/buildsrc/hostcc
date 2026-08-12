@@ -1,0 +1,10 @@
+#!/bin/sh
+
+case $0 in
+    *++) cc=clang++ ;;
+    *)   cc=clang   ;;
+esac
+
+command -v ccache > /dev/null 2>&1 && ccache='ccache'
+
+exec $ccache "$cc" "$@"

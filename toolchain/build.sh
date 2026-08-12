@@ -125,6 +125,8 @@ ninja -j"$JOBS" install-distribution
 ninja -j"$JOBS" FileCheck
 mv bin/FileCheck "$scriptroot/bin"
 )
+ln -s ../buildsrc/hostcc "$scriptroot/bin/hostcc"
+ln -s ../buildsrc/hostcc "$scriptroot/bin/hostc++"
 
 printf "Building libtapi\n\n"
 tapiver="1600.0.11.8"
@@ -134,8 +136,8 @@ rm -f "${tapiver}.tar.gz"
 (
 cd "apple-libtapi-$tapiver"
 INSTALLPREFIX="$scriptroot" \
-    CC="$scriptroot/bin/clang" \
-    CXX="$scriptroot/bin/clang++" \
+    CC="$scriptroot/bin/hostcc" \
+    CXX="$scriptroot/bin/hostc++" \
     NINJA=1 \
     ./build.sh
 ./install.sh
@@ -155,8 +157,8 @@ cd "cctools-port-$cctoolsver/cctools"
     --with-libtapi="$scriptroot" \
     --with-llvm-config="$scriptroot/bin/llvm-config" \
     --enable-silent-rules \
-    CC="$scriptroot/bin/clang" \
-    CXX="$scriptroot/bin/clang++"
+    CC="$scriptroot/bin/hostcc" \
+    CXX="$scriptroot/bin/hostc++"
 make -j"$JOBS"
 make install
 ln -s ../cctools-bin/lipo "$scriptroot/bin"
@@ -173,7 +175,7 @@ tar xzf "${ldidver}.tar.gz"
 rm -f "${ldidver}.tar.gz"
 (
 cd "ldid-$ldidver"
-make CXX="$scriptroot/bin/clang++"
+make CXX="$scriptroot/bin/hostc++"
 "$STRIP" ldid
 cp ldid "$scriptroot/bin"
 )
@@ -216,7 +218,7 @@ patch -p1 < "$scriptroot/buildsrc/rust-legacy-darwin.patch"
 PATH="$scriptroot/bin:$PATH" \
     SDKROOT="$scriptroot/buildsrc/sysroot" \
     LD_LIBRARY_PATH="$LD_LIBRARY_PATH:$scriptroot/lib" \
-    CC=clang \
+    CC=hostcc \
     AR=llvm-ar \
     BOOTSTRAP_SKIP_TARGET_SANITY=1 \
     ./x install -j "$JOBS"

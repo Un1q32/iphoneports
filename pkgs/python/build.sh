@@ -13,7 +13,7 @@ autoreconf -fi
 
 (
 mkdir _buildpython && cd _buildpython || exit 1
-../configure --prefix="$_SRCDIR/buildpython" --without-ensurepip CC=clang
+../configure --prefix="$_SRCDIR/buildpython" --without-ensurepip CC=hostcc
 make install
 )
 
@@ -25,7 +25,7 @@ fi
 ./configure \
     --host="$_TARGET" \
     --prefix=/var/usr \
-    --build="$(clang -dumpmachine)" \
+    --build="$(hostcc -dumpmachine)" \
     --with-build-python="$_SRCDIR/buildpython/bin/python3" \
     --without-mimalloc \
     --with-lto=full \

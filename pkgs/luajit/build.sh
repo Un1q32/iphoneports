@@ -20,7 +20,7 @@ cd "$_SRCDIR"
 "$_TARGET-cc" -dM -E - < /dev/null | grep -q __LP64__ && arg=-m64
 make amalg \
     TARGET_SYS="$sys" \
-    HOST_CC="clang ${arg:--m32}" \
+    HOST_CC="hostcc ${arg:--m32}" \
     CROSS="$_TARGET-" \
     BUILDMODE=dynamic \
     CCOPT=-O3 \

@@ -19,7 +19,7 @@ armv6srcs="$armv7srcs floatundisf.c floatundidf.c"
 cc() {
     printf " \033[1;32mCC\033[0m %s\n" "$2"
     command -v ccache >/dev/null && ccache=ccache
-    $ccache "${cc:-clang}" -isysroot "$_PKGROOT/../../toolchain/buildsrc/sysroot" "$@"
+    $ccache clang -isysroot "$_PKGROOT/../../toolchain/buildsrc/sysroot" "$@"
 }
 
 for src in $armv6srcs; do
