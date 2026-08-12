@@ -162,7 +162,6 @@ make install
 ln -s ../cctools-bin/lipo "$scriptroot/bin"
 ln -s ../cctools-bin/otool "$scriptroot/bin"
 ln -s ../cctools-bin/install_name_tool "$scriptroot/bin"
-ln -s ../cctools-bin/ld "$scriptroot/bin/ld64.ld64"
 )
 ln -s ../buildsrc/cc "$scriptroot/cctools-bin"
 ln -s ../buildsrc/target-symlinks.sh "$scriptroot/bin"

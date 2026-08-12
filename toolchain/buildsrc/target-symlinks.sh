@@ -14,4 +14,5 @@ done
 for cc in c++ gcc g++ clang clang++; do
 	ln -s "$target-cc" "target-bin/$_TRIPLE/$target-$cc"
 done
+ln -s "$target-ld" "target-bin/$_TRIPLE/$_TRIPLE-ld"
 printf '%s\n' "$target"

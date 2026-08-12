@@ -36,7 +36,6 @@ exec $ccache "$cc" \
     -isystem "$_SDK/var/usr/include" \
     "$includeflags" \
     "$libflags" \
-    -fuse-ld=ld64 \
     -mlinker-version=956.6 \
     "$@" \
     -target "$_TRIPLE" \
