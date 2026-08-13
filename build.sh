@@ -277,6 +277,8 @@ _OSVER=__ENVIRONMENT_OS_VERSION_MIN_REQUIRED__
         (arm64*|aarch64*)
             if [ "$_SUBSYSTEM" = "ios" ]; then
                 _DPKGARCH=all # new jailbreaks require iphoneos-arm64, old ones only know iphoneos-arm
+            elif [ "$_SUBSYSTEM" = "tvos" ]; then
+                _DPKGARCH=appletvos-arm64
             else
                 _DPKGARCH=darwin-arm64
             fi
