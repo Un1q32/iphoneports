@@ -3,6 +3,7 @@
 
 (
 cd "$_SRCDIR"
+./autogen.sh
 if [ "$_CPU" = "i386" ]; then
     disable=--disable-avx2-support
 fi
