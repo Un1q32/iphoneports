@@ -462,7 +462,7 @@ main() {
             shift
             for pkg in "$pkgdir"/*; do
                 unset dontbuild
-                for exclude in "$@"; do
+                for exclude in "$@" toolchain-shell; do
                     [ "${pkg##*/}" = "$exclude" ] && dontbuild=1
                 done
                 [ -n "$dontbuild" ] && continue
