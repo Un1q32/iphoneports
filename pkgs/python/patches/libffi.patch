@@ -1,6 +1,6 @@
 --- src/configure.ac.orig
 +++ src/configure.ac
-@@ -4102,19 +4102,6 @@
+@@ -4155,19 +4155,6 @@
  
  dnl detect libffi
  have_libffi=missing
@@ -20,7 +20,7 @@
  AS_VAR_IF([have_libffi], [missing], [
    PKG_CHECK_MODULES([LIBFFI], [libffi], [have_libffi=yes], [
      WITH_SAVE_ENV([
-@@ -4134,13 +4121,6 @@
+@@ -4187,13 +4174,6 @@
  AS_VAR_IF([have_libffi], [yes], [
    ctypes_malloc_closure=no
    AS_CASE([$ac_sys_system],
