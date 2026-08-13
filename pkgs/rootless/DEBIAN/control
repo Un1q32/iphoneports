@@ -1,0 +1,6 @@
+Package: iphoneports-rootless
+Version: 1
+Architecture: @DPKGARCH@
+Maintainer: Uniq <joey.t.reinhart@gmail.com>
+Section: System
+Description: iPhonePorts rootless support, install before base

@@ -1,3 +1,5 @@
 #!/bin/sh
 [ -d /var/jb/usr/bin ] && ln -sf /var/usr/libexec/iphoneports-shell /var/jb/usr/bin
-mkdir -p /usr/local/bin 2>/dev/null && ln -sf /var/usr/libexec/iphoneports-shell /usr/local/bin/iphoneports-shell 2>/dev/null || true
+mkdir -p /usr/local/bin 2>/dev/null && ln -sf /var/usr/libexec/iphoneports-shell /usr/local/bin/iphoneports-shell 2>/dev/null || {
+    [ -h /var/usr ] || printf "!!!WARNING!!!: the iphoneports-rootless package isn't installed, but /usr/local isn't writable, if you're installing this on a rootless jailbreak you should probably uninstall this and install iphoneports-rootless first, and then reinstall this, or iphoneports might not work!"
+}
