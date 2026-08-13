@@ -12,7 +12,7 @@ index d2c82280ad2..4cb85509215 100644
          "armv7s" => "armv7s",
          "arm64" => "arm64",
 diff --git a/compiler/rustc_target/src/spec/base/apple/mod.rs b/compiler/rustc_target/src/spec/base/apple/mod.rs
-index d1d91cbd378..69bbdca27e9 100644
+index d1d91cbd378..42fdba1240c 100644
 --- a/compiler/rustc_target/src/spec/base/apple/mod.rs
 +++ b/compiler/rustc_target/src/spec/base/apple/mod.rs
 @@ -14,6 +14,8 @@
@@ -116,12 +116,12 @@ index d1d91cbd378..69bbdca27e9 100644
 -            Os::WatchOs => (5, 0, 0),
 +            Os::MacOs => (10, 5, 0),
 +            Os::IOs => (2, 0, 0),
-+            Os::TvOs => (8, 0, 0),
++            Os::TvOs => (9, 0, 0),
 +            Os::WatchOs => (2, 0, 0),
              Os::VisionOs => (1, 0, 0),
              other => {
                  unreachable!("tried to get deployment target for non-Apple platform: {:?}", other)
-@@ -330,9 +326,13 @@ pub fn os_minimum_deployment_target(os: &Os) -> Self {
+@@ -330,12 +326,17 @@ pub fn os_minimum_deployment_target(os: &Os) -> Self {
      pub fn minimum_deployment_target(target: &Target) -> Self {
          let (major, minor, patch) = match (&target.os, &target.arch, &target.env) {
              (Os::MacOs, crate::spec::Arch::AArch64, _) => (11, 0, 0),
@@ -135,6 +135,10 @@ index d1d91cbd378..69bbdca27e9 100644
              // Mac Catalyst defaults to 13.1 in Clang.
              (Os::IOs, _, Env::MacAbi) => (13, 1, 0),
              (Os::TvOs, crate::spec::Arch::AArch64, Env::Sim) => (14, 0, 0),
++            (Os::TvOs, _, _) if target.llvm_target.starts_with("arm64e") => (14, 0, 0),
+             (Os::WatchOs, crate::spec::Arch::AArch64, Env::Sim) => (7, 0, 0),
+             // True Aarch64 on watchOS (instead of their Aarch64 Ilp32 called `arm64_32`) has been
+             // available since Xcode 14, but it's only actually used more recently in watchOS 26.
 diff --git a/compiler/rustc_target/src/spec/mod.rs b/compiler/rustc_target/src/spec/mod.rs
 index d6a9e27c465..6c8a4719de0 100644
 --- a/compiler/rustc_target/src/spec/mod.rs
@@ -164,6 +168,25 @@ index 4b8356cc71c..9945494012e 100644
                  | SanitizerSet::THREAD
                  | SanitizerSet::REALTIME,
 +            has_thread_local: false,
++            late_link_args: TargetOptions::link_args(LinkerFlavor::Darwin(Cc::Yes, Lld::No), &["-lsyscompat"]),
+             ..opts
+         },
+     }
+diff --git a/compiler/rustc_target/src/spec/targets/aarch64_apple_tvos.rs b/compiler/rustc_target/src/spec/targets/aarch64_apple_tvos.rs
+index 513a022adec..f3ae6a547ba 100644
+--- a/compiler/rustc_target/src/spec/targets/aarch64_apple_tvos.rs
++++ b/compiler/rustc_target/src/spec/targets/aarch64_apple_tvos.rs
+@@ -1,5 +1,5 @@
+ use crate::spec::base::apple::{Arch, TargetEnv, base};
+-use crate::spec::{Os, Target, TargetMetadata, TargetOptions};
++use crate::spec::{Cc, LinkerFlavor, Lld, Os, Target, TargetMetadata, TargetOptions};
+ 
+ pub(crate) fn target() -> Target {
+     let (opts, llvm_target, arch) = base(Os::TvOs, Arch::Arm64, TargetEnv::Normal);
+@@ -18,6 +18,7 @@ pub(crate) fn target() -> Target {
+         options: TargetOptions {
+             features: "+neon,+apple-a7".into(),
+             max_atomic_width: Some(128),
 +            late_link_args: TargetOptions::link_args(LinkerFlavor::Darwin(Cc::Yes, Lld::No), &["-lsyscompat"]),
              ..opts
          },
