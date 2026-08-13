@@ -168,6 +168,18 @@ depcheck() {
         error "Missing dependency: GNU tar"
     fi
 
+    if command -v grealpath > /dev/null; then
+        _REALPATH="grealpath"
+    elif command -v realpath > /dev/null; then
+        _realpath_version="$(realpath --version 2>/dev/null)"
+        case "$_realpath_version" in
+            (*GNU*) _REALPATH="realpath" ;;
+            (*) error "Missing dependency: GNU realpath" ;;
+        esac
+    else
+        error "Missing dependency: GNU realpath"
+    fi
+
     sdk="$bsroot/sdks/$_TRIPLE"
     if ! [ -d "$sdk" ]; then
         error "No SDK found at $sdk"
@@ -310,7 +322,7 @@ _OSVER=__ENVIRONMENT_OS_VERSION_MIN_REQUIRED__
 
     export CARGO_HOME="$bsroot/files/cargo"
 
-    export _MAKE _SUBSYSTEM _SUBSYSTEMVER _CPU _DPKGARCH _MACVER _ENTITLEMENTS _OSVER
+    export _MAKE _REALPATH _SUBSYSTEM _SUBSYSTEMVER _CPU _DPKGARCH _MACVER _ENTITLEMENTS _OSVER
 }
 
 build() {
