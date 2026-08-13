@@ -3,6 +3,7 @@
 
 (
 cd "$_SRCDIR"
+./autogen.sh
 ./configure --host="$_TARGET" --prefix=/var/usr --disable-static --disable-doc --enable-silent-rules GPGRT_CONFIG="$_SDK/var/usr/bin/gpgrt-config"
 make
 make DESTDIR="$_DESTDIR" install

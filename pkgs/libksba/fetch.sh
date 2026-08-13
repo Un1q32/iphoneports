@@ -1,8 +1,11 @@
 #!/bin/sh
 rm -rf "$_DESTDIR" "$_SRCDIR"
-printf "Downloading source...\n"
-curl -L -# -o src.tar.bz2 https://gnupg.org/ftp/gcrypt/libksba/libksba-1.6.7.tar.bz2
+ver='1.8.0'
+if [ ! -f "$_DLCACHE/libksba-$ver.tar.gz" ] ||
+    [ "$(sha256sum "$_DLCACHE/libksba-$ver.tar.gz" | awk '{print $1}')" != "1ad54e817b85d5a4b0f846a55a762cb086f40681e96e41f410ca88d62148fd3c" ]; then
+    printf "Downloading source...\n"
+    curl -L -# -o "$_DLCACHE/libksba-$ver.tar.gz" "https://github.com/gpg/libksba/archive/refs/tags/libksba-$ver.tar.gz" || exit 1
+fi
 printf "Unpacking source...\n"
-tar -C "$_TMP" -xf src.tar.bz2
-rm src.tar.bz2
+tar -C "$_TMP" -xf "$_DLCACHE/libksba-$ver.tar.gz"
 mv "$_TMP"/libksba-* "$_SRCDIR"
