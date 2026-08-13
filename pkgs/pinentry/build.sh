@@ -6,6 +6,7 @@ cd "$_SRCDIR"
 mkdir iphoneports-bin
 ln -s "$(command -v "$_TARGET-ar")" iphoneports-bin/ar
 export PATH="$PWD/iphoneports-bin:$PATH"
+./autogen.sh
 ./configure \
     --host="$_TARGET" \
     --prefix=/var/usr \

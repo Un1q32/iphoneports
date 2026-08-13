@@ -2,6 +2,6 @@ Package: iphoneports-pinentry
 Section: Security
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Architecture: @DPKGARCH@
-Version: 1.3.2
+Version: 1.3.3
 Description: Collection of simple PIN or passphrase entry dialogs which utilize the Assuan protocol
 Depends: iphoneports-base, iphoneports-ncurses, iphoneports-libgpg-error, iphoneports-libassuan
