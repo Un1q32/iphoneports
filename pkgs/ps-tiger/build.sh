@@ -11,7 +11,7 @@ fi
 (
 cd "$_SRCDIR"
 for src in ps.c print.c nlist.c tasks.c keyword.c; do
-    "$_TARGET-cc" -Os -flto -c "$src" -D'__FBSDID(x)=' -w -Wno-implicit-int &
+    "$_TARGET-cc" -Os -flto -c "$src" -D'__FBSDID(x)=' -w -Wno-implicit-int -Wno-incompatible-pointer-types &
 done
 wait
 "$_TARGET-cc" -o ps -Os -flto ./*.o
