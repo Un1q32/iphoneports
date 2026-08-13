@@ -13,7 +13,7 @@ ln -s . pam
     --enable-sconfigdir=/var/usr/etc/pam \
     --disable-libcrack \
     ac_cv_header_features_h=no
-make CC="$_TARGET-cc" AR="$_TARGET-ar" RANLIB="$_TARGET-ranlib" LD="$_TARGET-ld"
+make -j1 CC="$_TARGET-cc" AR="$_TARGET-ar" RANLIB="$_TARGET-ranlib" LD="$_TARGET-ld"
 make install
 )
 
