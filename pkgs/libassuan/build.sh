@@ -3,6 +3,7 @@
 
 (
 cd "$_SRCDIR"
+./autogen.sh
 ./configure \
     --host="$_TARGET" \
     --prefix=/var/usr \
