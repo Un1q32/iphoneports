@@ -276,7 +276,7 @@ _OSVER=__ENVIRONMENT_OS_VERSION_MIN_REQUIRED__
     case $_CPU in
         (arm64*|aarch64*)
             if [ "$_SUBSYSTEM" = "ios" ]; then
-                _DPKGARCH=any # new jailbreaks require iphoneos-arm64, old ones only know iphoneos-arm
+                _DPKGARCH=all # new jailbreaks require iphoneos-arm64, old ones only know iphoneos-arm
             else
                 _DPKGARCH=darwin-arm64
             fi
