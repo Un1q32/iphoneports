@@ -11,6 +11,8 @@ if [ "$_SUBSYSTEM" = "ios" ]; then
         cflags='TARGET_FLAGS=-mios-version-min=3.0'
     fi
     sys='iOS'
+elif [ "$_SUBSYSTEM" != "macos" ]; then
+    sys='iOS'
 else
     sys='Darwin'
 fi

@@ -19,6 +19,8 @@ target = [
   "armv7s-apple-ios",
   "aarch64-apple-ios",
   # "arm64e-apple-ios",
+  "aarch64-apple-tvos",
+  # "arm64e-apple-tvos",
 ]
 locked-deps = true
 vendor = true
