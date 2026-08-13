@@ -1,10 +1,8 @@
-export PATH='/var/usr/sbin:/var/usr/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/bin/X11:/usr/games'
-if [ -d /opt/local/bin ]; then
-    export PATH="$PATH:/opt/local/bin"
-fi
-if [ -d /opt/homebrew/bin ]; then
-    export PATH="$PATH:/opt/homebrew/bin:/opt/homebrew/sbin"
-fi
+PATH='/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+[ -d /var/jb/bin ] && PATH="/var/jb/bin:/var/jb/sbin:/var/jb/usr/bin:/var/jb/usr/sbin:$PATH"
+[ -d /opt/local/bin ] && PATH="$PATH:/opt/local/bin"
+[ -d /opt/homebrew/bin ] && PATH="$PATH:/opt/homebrew/bin:/opt/homebrew/sbin"
+export PATH="/var/usr/sbin:/var/usr/bin:$PATH"
 umask 022
 
 eval "$(dircolors -b)"
