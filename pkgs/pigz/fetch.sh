@@ -1,8 +1,11 @@
 #!/bin/sh
 rm -rf "$_DESTDIR" "$_SRCDIR"
-printf "Downloading source...\n"
-curl -L -# -o src.tar.gz https://www.zlib.net/pigz/pigz-2.8.tar.gz
+ver='2.8'
+if [ ! -f "$_DLCACHE/pigz-$ver.tar.gz" ] ||
+    [ "$(sha256sum "$_DLCACHE/pigz-$ver.tar.gz" | awk '{print $1}')" != "" ]; then
+    printf "Downloading source...\n"
+    curl -L -# -o "$_DLCACHE/pigz-$ver.tar.gz" "https://github.com/madler/pigz/archive/refs/tags/v$ver.tar.gz" || exit 1
+fi
 printf "Unpacking source...\n"
-tar -C "$_TMP" -xf src.tar.gz
-rm src.tar.gz
-mv "$_TMP"/pigz-2.8 "$_SRCDIR"
+tar -C "$_TMP" -xf "$_DLCACHE/pigz-$ver.tar.gz"
+mv "$_TMP"/pigz-* "$_SRCDIR"
