@@ -1,3 +1,3 @@
 #!/bin/sh
-[ -d /var/jb/usr/bin ] && ln -s /var/usr/libexec/iphoneports-shell /var/jb/usr/bin
-ln -s /var/usr/libexec/iphoneports-shell /usr/local/bin/iphoneports-shell 2>/dev/null || true
+[ -d /var/jb/usr/bin ] && ln -sf /var/usr/libexec/iphoneports-shell /var/jb/usr/bin
+mkdir -p /usr/local/bin 2>/dev/null && ln -sf /var/usr/libexec/iphoneports-shell /usr/local/bin/iphoneports-shell || true
