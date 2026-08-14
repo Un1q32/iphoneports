@@ -14,12 +14,6 @@ if { [ "$_SUBSYSTEM" = "ios" ] && [ "$_OSVER" -lt 20000 ]; } ||
     exit 0
 fi
 
-if [ "$_SUBSYSTEM" = "tvos" ]; then
-    printf "wasmi doesn't work on tvOS right now."
-    mkdir "$_DESTDIR"
-    exit 0
-fi
-
 (
 cd "$_SRCDIR"
 SDKROOT="$_SDK" cargo build -p wasmi_cli --target "$_RUSTTARGET" --release -j "$_JOBS"
