@@ -4,4 +4,3 @@ Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Architecture: @DPKGARCH@
 Version: 3.0.5
 Description: Package compiler and linker metadata toolkit
-Depends: iphoneports-base

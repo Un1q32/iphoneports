@@ -4,4 +4,3 @@ Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Architecture: @DPKGARCH@
 Version: 4.4.1-4
 Description: Standard tool to compile source trees
-Depends: iphoneports-base

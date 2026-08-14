@@ -4,4 +4,4 @@ Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Architecture: @DPKGARCH@
 Version: 336-1
 Description: log into the computer
-Depends: iphoneports-base, iphoneports-pam
+Depends: iphoneports-pam

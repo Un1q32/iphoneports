@@ -4,5 +4,4 @@ Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Architecture: all
 Version: 2026-08-13
 Description: Common CA certificates
-Depends: iphoneports-base
 Replaces: iphoneports-libressl

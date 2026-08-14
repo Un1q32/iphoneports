@@ -1,7 +1,7 @@
 Package: iphoneports-xz
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Architecture: @DPKGARCH@
-Depends: iphoneports-base, iphoneports-grep, iphoneports-sed
+Depends: iphoneports-grep, iphoneports-sed
 Description: XZ-format compression utilities
 Section: Archiving
 Version: 5.8.3

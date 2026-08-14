@@ -4,4 +4,4 @@ Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Architecture: @DPKGARCH@
 Version: 2.21.0
 Description: A tool for static C/C++ code analysis
-Depends: iphoneports-base, iphoneports-libc++, iphoneports-pcre, iphoneports-python
+Depends: iphoneports-libc++, iphoneports-pcre, iphoneports-python

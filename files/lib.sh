@@ -38,6 +38,7 @@ strip_and_sign() {
 builddeb() {
     cp -r DEBIAN "$_DESTDIR"
     sed -e "s|@DPKGARCH@|$_DPKGARCH|" DEBIAN/control > "$_DESTDIR/DEBIAN/control"
+    printf 'Pre-depends: iphoneports-base\n' >> "$_DESTDIR/DEBIAN/control"
 
     # SUID binaries must be moved outside of /var to work, except on rootless jailbreaks or macOS
     if [ "$_SUBSYSTEM" != 'macos' ] && [ -f "$_TMP/suidbinaries" ]; then

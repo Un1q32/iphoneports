@@ -4,4 +4,4 @@ Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Architecture: @DPKGARCH@
 Version: 116-8
 Description: substitute user
-Depends: iphoneports-base, iphoneports-pam
+Depends: iphoneports-pam

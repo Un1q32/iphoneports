@@ -4,4 +4,4 @@ Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Architecture: @DPKGARCH@
 Version: 1.13.2
 Description: Small build system with a focus on speed
-Depends: iphoneports-base, iphoneports-libc++
+Depends: iphoneports-libc++

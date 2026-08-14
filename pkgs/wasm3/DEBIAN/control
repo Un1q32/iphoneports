@@ -4,4 +4,4 @@ Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Architecture: @DPKGARCH@
 Version: 0.5.0-7
 Description: A fast WebAssembly interpreter and the most universal WASM runtime
-Depends: iphoneports-base, iphoneports-libuv
+Depends: iphoneports-libuv

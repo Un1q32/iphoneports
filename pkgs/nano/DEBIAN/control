@@ -3,5 +3,5 @@ Section: Text_Editors
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Architecture: @DPKGARCH@
 Version: 9.1
-Depends: iphoneports-base, iphoneports-ncurses
+Depends: iphoneports-ncurses
 Description: completely free, modern clone of Pico

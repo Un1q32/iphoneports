@@ -4,5 +4,5 @@ Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Architecture: @DPKGARCH@
 Version: 5.4.1
 Description: pattern scanning and processing language
-Depends: iphoneports-base, iphoneports-readline
+Depends: iphoneports-readline
 Replaces: iphoneports-awk

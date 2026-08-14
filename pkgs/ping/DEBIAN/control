@@ -3,5 +3,4 @@ Version: 325-9
 Architecture: @DPKGARCH@
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Section: Utilities
-Depends: iphoneports-base
 Description: A utility for sending ICMP ECHO_REQUEST packets to network hosts

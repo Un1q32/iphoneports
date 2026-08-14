@@ -2,6 +2,6 @@ Package: iphoneports-libpng
 Version: 1.6.57
 Architecture: @DPKGARCH@
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
-Depends: iphoneports-base, iphoneports-zlib
+Depends: iphoneports-zlib
 Section: Development
 Description: A collection of routines used to create PNG format graphics files

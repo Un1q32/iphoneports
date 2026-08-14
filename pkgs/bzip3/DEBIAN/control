@@ -4,4 +4,3 @@ Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Architecture: @DPKGARCH@
 Version: 1.5.3
 Description: A better and stronger spiritual successor to BZip2.
-Depends: iphoneports-base

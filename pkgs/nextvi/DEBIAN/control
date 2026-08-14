@@ -4,4 +4,3 @@ Architecture: @DPKGARCH@
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Section: Text_Editors
 Description: a small vi/ex editor for editing bidirectional UTF-8 text
-Depends: iphoneports-base

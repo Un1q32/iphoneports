@@ -3,5 +3,4 @@ Version: 980
 Architecture: @DPKGARCH@
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Section: Utilities
-Depends: iphoneports-base
 Description: A utility for retrieving and setting kernel parameters

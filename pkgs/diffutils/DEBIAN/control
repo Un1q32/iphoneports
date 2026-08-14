@@ -4,4 +4,3 @@ Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Architecture: @DPKGARCH@
 Version: 3.12
 Description: compare two files for differences
-Depends: iphoneports-base

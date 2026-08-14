@@ -3,5 +3,5 @@ Section: Archiving
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Architecture: @DPKGARCH@
 Version: 1.5.7
-Depends: iphoneports-base, iphoneports-lz4, iphoneports-xz, iphoneports-zlib
+Depends: iphoneports-lz4, iphoneports-xz, iphoneports-zlib
 Description: Zstandard - Fast real-time compression algorithm

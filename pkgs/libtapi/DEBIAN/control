@@ -4,4 +4,4 @@ Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Architecture: @DPKGARCH@
 Version: 1600.0.11.8
 Description: Text-based Application Programming Interface frontend
-Depends: iphoneports-base, iphoneports-libc++, iphoneports-ncurses
+Depends: iphoneports-libc++, iphoneports-ncurses

@@ -4,4 +4,3 @@ Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Architecture: all
 Version: 22.1.8-2
 Description: Compiler runtime libraries for clang
-Depends: iphoneports-base

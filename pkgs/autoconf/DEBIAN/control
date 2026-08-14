@@ -4,4 +4,4 @@ Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Architecture: all
 Version: 2.73
 Description: A GNU tool for automatically configuring source code
-Depends: iphoneports-base, iphoneports-perl, iphoneports-m4, iphoneports-automake
+Depends: iphoneports-perl, iphoneports-m4, iphoneports-automake

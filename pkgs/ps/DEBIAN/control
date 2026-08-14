@@ -3,5 +3,4 @@ Section: Utilities
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Architecture: @DPKGARCH@
 Version: 172-7
-Depends: iphoneports-base
 Description: report a snapshot of the current processes

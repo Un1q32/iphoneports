@@ -4,4 +4,3 @@ Architecture: @DPKGARCH@
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Section: Utilities
 Description: An arbitrary-precision decimal arithmetic language and calculator
-Depends: iphoneports-base

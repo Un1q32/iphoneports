@@ -4,4 +4,3 @@ Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Architecture: @DPKGARCH@
 Version: 32.1
 Description: Pluggable authentication modules
-Depends: iphoneports-base

@@ -2,6 +2,6 @@ Package: iphoneports-bash-completion
 Version: 2.18.0
 Architecture: all
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
-Depends: iphoneports-base, iphoneports-bash
+Depends: iphoneports-bash
 Section: Terminal_Support
 Description: a collection of command line command completions for the Bash shell

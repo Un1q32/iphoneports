@@ -4,5 +4,5 @@ Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Architecture: @DPKGARCH@
 Version: 3.6.3
 Description: The Open Source toolkit for Secure Sockets Layer and Transport Layer Security
-Depends: iphoneports-base, iphoneports-ca-certificates
+Depends: iphoneports-ca-certificates
 Replaces: iphoneports-libressl

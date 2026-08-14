@@ -3,5 +3,4 @@ Version: 325-3
 Architecture: @DPKGARCH@
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Section: Utilities
-Depends: iphoneports-base
 Description: A utility for configuring network interface parameters

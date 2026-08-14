@@ -3,5 +3,5 @@ Section: Utilities
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Architecture: @DPKGARCH@
 Version: 704
-Depends: iphoneports-base, iphoneports-ncurses, iphoneports-pcre2
+Depends: iphoneports-ncurses, iphoneports-pcre2
 Description: provides less information than more does

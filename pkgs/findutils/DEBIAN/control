@@ -3,6 +3,6 @@ Section: Utilities
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Architecture: @DPKGARCH@
 Version: 4.11.0
-Depends: iphoneports-base, iphoneports-bash, iphoneports-sed
+Depends: iphoneports-bash, iphoneports-sed
 Description: indexes and searches filesystems
 Homepage: http://www.gnu.org/software/findutils/

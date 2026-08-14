@@ -3,5 +3,4 @@ Version: 498.0.10-6
 Architecture: @DPKGARCH@
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Section: Utilities
-Depends: iphoneports-base
 Description: A utility for displaying Mach virtual memory statistics

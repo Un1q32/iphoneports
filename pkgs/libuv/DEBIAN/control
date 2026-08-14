@@ -3,5 +3,4 @@ Version: 1.49.1-6
 Architecture: @DPKGARCH@
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Section: Development
-Depends: iphoneports-base
 Description: Cross-platform asynchronous I/O

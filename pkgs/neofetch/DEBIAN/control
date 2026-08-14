@@ -3,5 +3,5 @@ Section: Utilities
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Architecture: all
 Version: 8.1.0
-Depends: iphoneports-base, iphoneports-bash, iphoneports-gawk, iphoneports-sed, iphoneports-grep, iphoneports-coreutils, iphoneports-sysctl, iphoneports-getusedmem
+Depends: iphoneports-bash, iphoneports-gawk, iphoneports-sed, iphoneports-grep, iphoneports-coreutils, iphoneports-sysctl, iphoneports-getusedmem
 Description: A command line system information tool
