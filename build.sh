@@ -188,7 +188,7 @@ depcheck() {
 
     export PATH="$bsroot/toolchain/target-bin/$_TRIPLE:$bsroot/toolchain/bin:$PATH"
 
-    export _TARGET="$(target-symlinks.sh "$_TRIPLE")"
+    export _TARGET="$(target-symlinks.sh)"
 
     export _OSVER=1050
     eval "$(printf '%s' '\

@@ -4,6 +4,11 @@ set -e
 [ "${0%/*}" = "$0" ] && scriptroot="." || scriptroot="${0%/*}"
 cd "$scriptroot/.." || exit 1
 
+if [ -z "$_TRIPLE" ]; then
+	printf 'Do not run this directly!\n'
+	exit 1
+fi
+
 rm -rf "target-bin/$_TRIPLE"
 mkdir -p "target-bin/$_TRIPLE"
 
