@@ -42,18 +42,21 @@ builddeb() {
 
     # SUID binaries must be moved outside of /var to work, except on rootless jailbreaks or macOS
     if [ "$_SUBSYSTEM" != 'macos' ] && [ -f "$_TMP/suidbinaries" ]; then
-        cd "$_DESTDIR"
         if ! [ -f "$_DESTDIR/DEBIAN/postinst" ]; then
             printf '#!/var/usr/bin/sh\n' > "$_DESTDIR/DEBIAN/postinst"
             chmod +x "$_DESTDIR/DEBIAN/postinst"
+        fi
+        if ! [ -f "$_DESTDIR/DEBIAN/postrm" ]; then
+            printf '#!/var/usr/bin/sh\n' > "$_DESTDIR/DEBIAN/postrm"
+            chmod +x "$_DESTDIR/DEBIAN/postrm"
         fi
         printf '/var/usr/bin/mkdir -p /usr/local/libexec/iphoneports 2>/dev/null || exit 0\n' >> "$_DESTDIR/DEBIAN/postinst"
         while IFS= read -r bin; do
             printf "/var/usr/bin/mv \"$bin\" /usr/local/libexec/iphoneports\n" >> "$_DESTDIR/DEBIAN/postinst"
             printf "/var/usr/bin/ln -s \"/usr/local/libexec/iphoneports/${bin##*/}\" \"$bin\"\n" >> "$_DESTDIR/DEBIAN/postinst"
+            printf "/var/usr/bin/rm -f \"/usr/local/libexec/iphoneports/${bin##*/}\"\n" >> "$_DESTDIR/DEBIAN/postrm"
         done < "$_TMP/suidbinaries"
         rm "$_TMP/suidbinaries"
-        cd ..
     fi
 
     dpkg-deb -b --root-owner-group -Zgzip "$_DESTDIR" "$_PKGNAME-$_TRIPLE.deb"
