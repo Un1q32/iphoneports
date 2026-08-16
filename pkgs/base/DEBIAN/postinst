@@ -4,7 +4,7 @@ mkdir -p /usr/local/bin 2>/dev/null && ln -sf /var/usr/libexec/iphoneports-shell
     if ! [ -h /var/usr ]; then
         if [ -d /var/jb ]; then
             mkdir -p /var/jb/iphoneports
-            mv /var/usr.bak/* /var/jb/iphoneports
+            mv /var/usr/* /var/jb/iphoneports
             rm -r /var/usr
             ln -s /var/jb/iphoneports /var/usr
         else
