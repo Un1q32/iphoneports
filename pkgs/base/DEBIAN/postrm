@@ -1,0 +1,4 @@
+#!/bin/sh
+rm -rf /var/usr 2>/dev/null
+rm -rf /var/jb/iphoneports 2>/dev/null
+rm -rf /usr/local/libexec/iphoneports 2>/dev/null
