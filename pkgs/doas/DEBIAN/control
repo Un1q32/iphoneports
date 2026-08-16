@@ -2,6 +2,6 @@ Package: iphoneports-doas
 Section: Administration
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Architecture: @DPKGARCH@
-Version: 6.3p12-4
+Version: 6.3p12-5
 Description: a minimal replacement for sudo
 Depends: iphoneports-pam

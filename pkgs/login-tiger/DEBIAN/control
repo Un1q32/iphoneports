@@ -2,6 +2,6 @@ Package: iphoneports-login
 Section: Administration
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Architecture: @DPKGARCH@
-Version: 336-1
+Version: 336-2
 Description: log into the computer
 Depends: iphoneports-pam
