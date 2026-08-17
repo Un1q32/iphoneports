@@ -186,10 +186,10 @@ if ! [ -d "../../sdks/$defaulttarget" ]; then
     nodefaultsdk=1
     mkdir "../../sdks/$defaulttarget"
 fi
-_DONT_REBUILD_TOOLCHAIN=1 _DONT_COPY_DEB=1 ../../build.sh --target=armv6-apple-ios2 compiler-rt
+_DONT_REBUILD_TOOLCHAIN=1 _DONT_COPY_DEB=1 ../../build.sh --target="$defaulttarget" compiler-rt
 llvmshortver="$(cd "$scriptroot/lib/clang" && echo *)"
 mkdir -p "$scriptroot/lib/clang/$llvmshortver/lib/darwin"
-cp "../../pkgs/compiler-rt/pkg-$defaulttarget/var/usr/lib/clang/$llvmshortver/lib/darwin/"* "$scriptroot/lib/clang/$llvmshortver/lib/darwin"
+cp "../../pkgs/compiler-rt/pkg-$defaulttarget/var/usr/lib/clang"/*/lib/darwin/* "$scriptroot/lib/clang/$llvmshortver/lib/darwin"
 if [ -n "$nodefaultsdk" ]; then
     rm -r "../../sdks/$defaulttarget"
 fi
