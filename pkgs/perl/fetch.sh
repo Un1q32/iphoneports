@@ -1,14 +1,14 @@
 #!/bin/sh
 rm -rf "$_DESTDIR" "$_SRCDIR"
-ver='5.42.0'
+ver='5.44.0'
 if [ ! -f "$_DLCACHE/perl-$ver.tar.gz" ] ||
-    [ "$(sha256sum "$_DLCACHE/perl-$ver.tar.gz" | awk '{print $1}')" != "e2bb05cea46921009b7902b927b58110949c4f8e51b0583f57e3e1eeff5306d8" ]; then
+    [ "$(sha256sum "$_DLCACHE/perl-$ver.tar.gz" | awk '{print $1}')" != "b9a53d539af95412ecce2bdd548eac9beaf559ea48ace5dd8427504c25b01b46" ]; then
     printf "Downloading source...\n"
     curl -L -# -o "$_DLCACHE/perl-$ver.tar.gz" "https://github.com/Perl/perl5/archive/refs/tags/v$ver.tar.gz" || exit 1
 fi
-crossver='1.6.4'
+crossver='1.6.5'
 if [ ! -f "$_DLCACHE/perl-cross-$crossver.tar.gz" ] ||
-    [ "$(sha256sum "$_DLCACHE/perl-cross-$crossver.tar.gz" | awk '{print $1}')" != "b176522bceb1fc3533eb85e4435e5ab06f7473633979122a8f5b18a2b4fc865a" ]; then
+    [ "$(sha256sum "$_DLCACHE/perl-cross-$crossver.tar.gz" | awk '{print $1}')" != "24cccde966c79cec3064c661df519a8d9f710b0b1bb3e2f44c30c1c29e7afbc5" ]; then
     curl -L -# -o "$_DLCACHE/perl-cross-$crossver.tar.gz" "https://github.com/arsv/perl-cross/archive/refs/tags/$crossver.tar.gz" || exit 1
 fi
 printf "Unpacking source...\n"

@@ -3,4 +3,4 @@ Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Architecture: @DPKGARCH@
 Description: A highly capable, feature-rich programming language
 Section: Scripting
-Version: 5.42.0-2
+Version: 5.44.0

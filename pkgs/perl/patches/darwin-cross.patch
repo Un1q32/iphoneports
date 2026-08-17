@@ -56,7 +56,7 @@
  			result "BSD"
 --- src/cnf/configure_func.sh.orig
 +++ src/cnf/configure_func.sh
-@@ -191,6 +191,7 @@
+@@ -192,6 +192,7 @@
  checkfunc d_msgsnd 'msgsnd' '0,NULL,0,0' 'sys/msg.h'
  checkfunc d_msync 'msync' 'NULL,0,0' 'sys/mman.h'
  checkfunc d_munmap 'munmap' 'NULL,0' 'sys/mman.h'
