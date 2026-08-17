@@ -1,8 +1,8 @@
 #!/bin/sh
 rm -rf "$_DESTDIR" "$_SRCDIR"
-ver='0.23.1'
+ver='0.23.3'
 if [ ! -f "$_DLCACHE/libpsl-$ver.tar.gz" ] ||
-    [ "$(sha256sum "$_DLCACHE/libpsl-$ver.tar.gz" | awk '{print $1}')" != "8fbb03054556498ba9c4cc48fcaa36a4483748c6504a65bdb9ba348f555b0e56" ]; then
+    [ "$(sha256sum "$_DLCACHE/libpsl-$ver.tar.gz" | awk '{print $1}')" != "93941f85a1e7bd593fa94f299233cb5dfc91cd144fd9a78a6ceb75001c5b03be" ]; then
     printf "Downloading source...\n"
     curl -L -# -o "$_DLCACHE/libpsl-$ver.tar.gz" "https://github.com/rockdaboot/libpsl/releases/download/$ver/libpsl-$ver.tar.gz" || exit 1
 fi
