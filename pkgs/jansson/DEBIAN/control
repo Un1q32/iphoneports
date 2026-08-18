@@ -4,3 +4,4 @@ Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Architecture: @DPKGARCH@
 Version: 2.15.1
 Description: C library for encoding, decoding and manipulating JSON data
+Depends: iphoneports-base

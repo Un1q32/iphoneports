@@ -4,3 +4,4 @@ Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Architecture: @DPKGARCH@
 Version: 1.5.2
 Description: AV1 cross-platform decoder focused on speed and correctness
+Depends: iphoneports-base

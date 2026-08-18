@@ -4,3 +4,4 @@ Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Architecture: @DPKGARCH@
 Version: 1.0.3
 Description: 2048 in your terminal
+Depends: iphoneports-base

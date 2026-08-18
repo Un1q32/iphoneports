@@ -4,4 +4,4 @@ Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Architecture: @DPKGARCH@
 Version: 4.0
 Description: A low-level cryptographic library
-Depends: iphoneports-gmp
+Depends: iphoneports-base, iphoneports-gmp

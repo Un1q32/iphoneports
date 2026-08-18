@@ -3,5 +3,5 @@ Section: Archiving
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Architecture: @DPKGARCH@
 Version: 2.8
-Depends: iphoneports-zlib
+Depends: iphoneports-base, iphoneports-zlib
 Description: A parallel implementation of gzip for modern multi-processor, multi-core machines

@@ -3,5 +3,5 @@ Version: 0.23.3
 Architecture: @DPKGARCH@
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Section: Development
-Depends: iphoneports-libunistring, iphoneports-libidn2
+Depends: iphoneports-base, iphoneports-libunistring, iphoneports-libidn2
 Description: Public Suffix List library

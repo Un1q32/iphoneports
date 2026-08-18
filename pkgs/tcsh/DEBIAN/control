@@ -3,5 +3,5 @@ Section: Terminal_Support
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Architecture: @DPKGARCH@
 Version: 6.24.16
-Depends: iphoneports-ncurses
+Depends: iphoneports-base, iphoneports-ncurses
 Description: enhanced version of the BSD C Shell

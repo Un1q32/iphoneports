@@ -4,4 +4,4 @@ Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Architecture: @DPKGARCH@
 Version: 9.11
 Description: The basic file, shell and text manipulation utilities of the GNU operating system
-Depends: iphoneports-openssl, iphoneports-gmp
+Depends: iphoneports-base, iphoneports-openssl, iphoneports-gmp

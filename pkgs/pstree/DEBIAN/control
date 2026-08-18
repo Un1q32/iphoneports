@@ -3,5 +3,5 @@ Section: Utilities
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Architecture: @DPKGARCH@
 Version: 2.40-2
-Depends: iphoneports-ps
+Depends: iphoneports-base, iphoneports-ps
 Description: Show ps output as a tree

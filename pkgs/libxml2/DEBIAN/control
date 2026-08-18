@@ -4,4 +4,4 @@ Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Architecture: @DPKGARCH@
 Version: 2.15.2
 Description: XML C parser and toolkit
-Depends: iphoneports-zlib, iphoneports-xz
+Depends: iphoneports-base, iphoneports-zlib, iphoneports-xz

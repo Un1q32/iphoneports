@@ -4,3 +4,4 @@ Architecture: @DPKGARCH@
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Section: Development
 Description: iPhonePorts SDK
+Depends: iphoneports-base

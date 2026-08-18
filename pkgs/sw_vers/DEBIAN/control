@@ -3,4 +3,5 @@ Version: 1-1
 Architecture: @DPKGARCH@
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Section: Utilities
+Depends: iphoneports-base
 Description: print system version information

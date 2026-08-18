@@ -4,4 +4,4 @@ Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Architecture: @DPKGARCH@
 Version: 3.8.2
 Description: The GNU general-purpose parser generator
-Depends: iphoneports-m4
+Depends: iphoneports-base, iphoneports-m4

@@ -4,4 +4,4 @@ Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Architecture: @DPKGARCH@
 Version: 12.1.0
 Description: Open-source formatting library for C++
-Depends: iphoneports-libc++
+Depends: iphoneports-base, iphoneports-libc++

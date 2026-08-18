@@ -3,5 +3,5 @@ Section: Utilities
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Architecture: @DPKGARCH@
 Version: 1.22
-Depends: iphoneports-ncurses
+Depends: iphoneports-base, iphoneports-ncurses
 Description: Disk usage analyzer with an ncurses interface

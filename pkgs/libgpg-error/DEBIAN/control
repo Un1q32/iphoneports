@@ -4,3 +4,4 @@ Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Architecture: @DPKGARCH@
 Version: 1.61
 Description: Support library for libgcrypt
+Depends: iphoneports-base

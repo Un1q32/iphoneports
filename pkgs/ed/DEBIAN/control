@@ -4,3 +4,4 @@ Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Architecture: @DPKGARCH@
 Version: 154-2
 Description: A line-oriented text editor
+Depends: iphoneports-base

@@ -3,5 +3,5 @@ Section: Development
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Architecture: @DPKGARCH@
 Version: 8.3.3
-Depends: iphoneports-ncurses
+Depends: iphoneports-base, iphoneports-ncurses
 Description: command-line history management

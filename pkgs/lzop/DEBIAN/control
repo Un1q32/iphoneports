@@ -4,4 +4,4 @@ Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Architecture: @DPKGARCH@
 Version: 1.0.4-1
 Description: File compressor using lzo lib
-Depends: iphoneports-lzo
+Depends: iphoneports-base, iphoneports-lzo

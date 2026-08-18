@@ -2,6 +2,6 @@ Package: iphoneports-ideviceinstaller
 Version: 1.1.1-6
 Architecture: @DPKGARCH@
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
-Depends: iphoneports-libimobiledevice, iphoneports-libplist, iphoneports-libzip
+Depends: iphoneports-base, iphoneports-libimobiledevice, iphoneports-libplist, iphoneports-libzip
 Section: Utilities
 Description: Manage apps of iOS devices

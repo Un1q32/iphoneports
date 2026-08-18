@@ -4,4 +4,4 @@ Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Architecture: @DPKGARCH@
 Version: 1.12.2
 Description: General purpose cryptographic library based on the code from GnuPG
-Depends: iphoneports-libgpg-error
+Depends: iphoneports-base, iphoneports-libgpg-error

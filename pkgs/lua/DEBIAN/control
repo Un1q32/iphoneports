@@ -1,7 +1,7 @@
 Package: iphoneports-lua
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Architecture: @DPKGARCH@
-Depends: iphoneports-readline
+Depends: iphoneports-base, iphoneports-readline
 Description: A powerful, efficient, lightweight, embeddable scripting language.
 Section: Scripting
 Version: 5.5.1

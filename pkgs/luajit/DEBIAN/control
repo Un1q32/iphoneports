@@ -4,3 +4,4 @@ Architecture: @DPKGARCH@
 Description: a Just-In-Time (JIT) compiler for the Lua programming language
 Section: Scripting
 Version: 2.1.1781341259
+Depends: iphoneports-base

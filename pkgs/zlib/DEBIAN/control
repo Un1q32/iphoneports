@@ -4,3 +4,4 @@ Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Architecture: @DPKGARCH@
 Version: 2.3.3
 Description: zlib replacement with optimizations for "next generation" systems
+Depends: iphoneports-base

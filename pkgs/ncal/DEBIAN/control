@@ -3,4 +3,5 @@ Version: 44-1
 Architecture: @DPKGARCH@
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Section: Utilities
+Depends: iphoneports-base
 Description: A program for calculating and printing calendars

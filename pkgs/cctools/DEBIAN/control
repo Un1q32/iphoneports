@@ -4,4 +4,4 @@ Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Architecture: @DPKGARCH@
 Version: 1030.6.3-ld64-762-5
 Description: Mach-O binary utilities
-Depends: iphoneports-libc++, iphoneports-llvm, iphoneports-libtapi, iphoneports-xar
+Depends: iphoneports-base, iphoneports-libc++, iphoneports-llvm, iphoneports-libtapi, iphoneports-xar

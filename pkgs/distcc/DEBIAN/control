@@ -4,4 +4,4 @@ Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Architecture: @DPKGARCH@
 Version: 3.4-3
 Description: Distributed compilation service for C, C++ and Objective-C
-Depends: iphoneports-popt, iphoneports-clang
+Depends: iphoneports-base, iphoneports-popt, iphoneports-clang

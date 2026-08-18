@@ -4,4 +4,4 @@ Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Architecture: @DPKGARCH@
 Version: 1.8.2
 Description: Command-line JSON processor
-Depends: iphoneports-oniguruma
+Depends: iphoneports-base, iphoneports-oniguruma

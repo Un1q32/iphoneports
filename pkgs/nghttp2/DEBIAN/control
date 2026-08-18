@@ -3,4 +3,5 @@ Section: Development
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Architecture: @DPKGARCH@
 Version: 1.70.0
+Depends: iphoneports-base
 Description: An implementation of HTTP/2 and its header compression algorithm HPACK in C.
