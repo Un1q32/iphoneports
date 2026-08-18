@@ -3,7 +3,8 @@
 #include_next <math.h>
 
 #if defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                 \
-    __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ < 30200
+    __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ < 30200 &&                  \
+    __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ >= 20000
 
 /* Taken from openlibm */
 
