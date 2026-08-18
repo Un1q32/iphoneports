@@ -54,7 +54,7 @@ redundant_download() {
         fi
     done
     if [ -z "$success" ]; then
-        printf 'Failed to download rust sources after 5 tries\n'
+        printf 'Failed to download file after 5 tries\n'
         exit 1
     fi
     success=
