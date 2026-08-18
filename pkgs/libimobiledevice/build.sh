@@ -17,7 +17,6 @@ strip_and_sign lib/libimobiledevice-1.0.6.dylib bin/*
 
 installlicense "$_SRCDIR/COPYING"
 
-cp -r DEBIAN "$_DESTDIR"
-sed -e "s|@DPKGARCH@|$_DPKGARCH|" DEBIAN/control > "$_DESTDIR/DEBIAN/control"
-[ "$_SUBSYSTEM" = "macos" ] && sed -i -e 's|iphoneports-usbmuxd, ||' "$_DESTDIR/DEBIAN/control"
-dpkg-deb -b --root-owner-group -Zgzip "$_DESTDIR" "$_PKGNAME.deb"
+cp -r DEBIAN "$_SRCDIR"
+[ "$_SUBSYSTEM" = "macos" ] && sed -i -e 's|iphoneports-usbmuxd, ||' "$_SRCDIR/DEBIAN/control"
+debian="$_SRCDIR/DEBIAN" builddeb
