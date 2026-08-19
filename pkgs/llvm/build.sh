@@ -5,7 +5,7 @@ _get_distribution_components() {
     ninja -t targets | grep -Po 'install-\K.*(?=-stripped:)' | while read -r target; do
         case $target in
             llvm-libraries|distribution) continue ;;
-            LLVM|LLVMgold|LLVMDemangle|LLVMSupport|LLVMTableGen|LLVMDebuginfod|LLVMTestingAnnotations|LLVMTestingSupport) ;;
+            LLVM|LLVMgold|LLVMDemangle|LLVMSupport|LLVMTableGen|LLVMDebuginfod|LLVMHTTP|LLVMTestingAnnotations|LLVMTestingSupport) ;;
             llvm-exegesis|LLVM*) continue ;;
         esac
         printf '%s;' "$target"
