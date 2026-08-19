@@ -298,10 +298,10 @@ _OSVER=__ENVIRONMENT_OS_VERSION_MIN_REQUIRED__
         (ppc|powerpc) _DPKGARCH=darwin-powerpc ;;
     esac
 
-    case $_DPKGARCH in
-        (iphoneos-*) _ENTITLEMENTS="$bsroot/files/ios-entitlements.xml" ;;
-        (*) _ENTITLEMENTS= ;;
-    esac
+    # TODO: find out if any tvOS jailbreaks require certain entitlements
+    if [ "$_SUBSYSTEM" = 'ios' ]; then
+        _ENTITLEMENTS="$bsroot/files/ios-entitlements.xml"
+    fi
 
     if [ "$_SUBSYSTEM" = "macos" ]; then
         rustsys='darwin'
