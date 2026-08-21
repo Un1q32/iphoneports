@@ -1,8 +1,8 @@
 diff --git a/compiler/rustc_codegen_ssa/src/back/link.rs b/compiler/rustc_codegen_ssa/src/back/link.rs
-index d2c82280ad2..4cb85509215 100644
+index 3d09b7aab88..58aa5563695 100644
 --- a/compiler/rustc_codegen_ssa/src/back/link.rs
 +++ b/compiler/rustc_codegen_ssa/src/back/link.rs
-@@ -3303,6 +3303,8 @@ fn add_apple_link_args(cmd: &mut dyn Linker, sess: &Session, flavor: LinkerFlavo
+@@ -3488,6 +3488,8 @@ fn add_apple_link_args(cmd: &mut dyn Linker, sess: &Session, flavor: LinkerFlavo
      // Intentionally verbose to ensure that the list always matches correctly
      // with the list in the source above.
      let ld64_arch = match llvm_arch {
@@ -140,10 +140,10 @@ index d1d91cbd378..42fdba1240c 100644
              // True Aarch64 on watchOS (instead of their Aarch64 Ilp32 called `arm64_32`) has been
              // available since Xcode 14, but it's only actually used more recently in watchOS 26.
 diff --git a/compiler/rustc_target/src/spec/mod.rs b/compiler/rustc_target/src/spec/mod.rs
-index d6a9e27c465..6c8a4719de0 100644
+index 5c19b35e160..c0de9d80aa5 100644
 --- a/compiler/rustc_target/src/spec/mod.rs
 +++ b/compiler/rustc_target/src/spec/mod.rs
-@@ -1599,6 +1599,8 @@ fn $module() {
+@@ -1584,6 +1584,8 @@ fn $module() {
      ("aarch64-apple-ios", aarch64_apple_ios),
      ("arm64e-apple-ios", arm64e_apple_ios),
      ("armv7s-apple-ios", armv7s_apple_ios),
@@ -379,7 +379,7 @@ index 4c433d4970c..bb87cd14f0a 100644
  [dependencies]
  alloc = { path = "../alloc", public = true }
 diff --git a/library/std/src/sys/process/unix/unix.rs b/library/std/src/sys/process/unix/unix.rs
-index d476072a644..9928f4e5566 100644
+index 55906ed2854..782f86173bb 100644
 --- a/library/std/src/sys/process/unix/unix.rs
 +++ b/library/std/src/sys/process/unix/unix.rs
 @@ -5,8 +5,6 @@
@@ -391,7 +391,7 @@ index d476072a644..9928f4e5566 100644
  )))]
  use libc::{gid_t, uid_t};
  
-@@ -164,26 +162,9 @@ pub fn spawn(
+@@ -164,28 +162,9 @@ pub fn spawn(
          }
      }
  
@@ -414,12 +414,13 @@ index d476072a644..9928f4e5566 100644
 -
      // Attempts to fork the process. If successful, returns Ok((0, -1))
      // in the child, and Ok((child_pid, -1)) in the parent.
--    #[cfg(not(any(target_os = "watchos", target_os = "tvos", target_os = "nto")))]
-+    #[cfg(not(target_os = "nto"))]
-     unsafe fn do_fork(&mut self) -> Result<pid_t, io::Error> {
-         cvt(libc::fork())
-     }
-@@ -274,7 +255,6 @@ pub fn exec(&mut self, default: Stdio) -> io::Error {
+     #[cfg(not(any(
+-        target_os = "watchos",
+-        target_os = "tvos",
+         target_os = "nto",
+         target_os = "qnx"
+     )))]
+@@ -279,7 +258,6 @@ pub fn exec(&mut self, default: Stdio) -> io::Error {
      // allocation). Instead we just close it manually. This will never
      // have the drop glue anyway because this code never returns (the
      // child will either exec() or invoke libc::exit)
@@ -427,7 +428,7 @@ index d476072a644..9928f4e5566 100644
      unsafe fn do_exec(
          &mut self,
          stdio: ChildPipes,
-@@ -409,15 +389,6 @@ fn drop(&mut self) {
+@@ -414,15 +392,6 @@ fn drop(&mut self) {
          Err(io::Error::last_os_error())
      }
  
