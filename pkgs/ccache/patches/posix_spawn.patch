@@ -103,9 +103,9 @@
    int pipefd[2];
    CHECK_LIB_CALL(pipe, pipefd);
  
-@@ -141,6 +167,7 @@
+@@ -140,6 +166,7 @@
      return tl::unexpected(
-       FMT("posix_spawnp failed: {}", strerror(saved_errno)));
+       FMT("posix_spawnp failed: {}", strerror(spawn_result)));
    }
 +#endif
  
@@ -113,7 +113,7 @@
      output.append(reinterpret_cast<const char*>(data.data()), data.size());
 --- src/src/ccache/storage/remote/helper.cpp.orig
 +++ src/src/ccache/storage/remote/helper.cpp
-@@ -37,9 +37,12 @@
+@@ -40,9 +40,12 @@
  #ifndef _WIN32
  #  include <dirent.h>
  #  include <fcntl.h>
@@ -127,7 +127,7 @@
  #endif
  
  #include <thread>
-@@ -315,6 +318,28 @@
+@@ -318,6 +321,28 @@
    }
    env_ptrs.push_back(nullptr);
  
@@ -156,7 +156,7 @@
    posix_spawn_file_actions_t actions;
    CHECK_LIB_CALL(posix_spawn_file_actions_init, &actions);
    DEFER(posix_spawn_file_actions_destroy(&actions));
-@@ -354,6 +379,7 @@
+@@ -357,6 +382,7 @@
    if (result != 0) {
      return tl::unexpected(strerror(result));
    }
