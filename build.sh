@@ -357,6 +357,8 @@ build() {
             return 2
         }
         [ -z "$keepsrc" ] && rm -rf "$_SRCDIR"
+        # the 'sdk' package is very big and not a build dependency for anything
+        [ "$_PKGNAME" = 'sdk' ] && rm -rf "$_DESTDIR"
     fi
     rm -rf "$_SDK"
     )
