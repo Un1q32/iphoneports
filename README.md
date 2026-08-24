@@ -22,7 +22,7 @@ Usage: build.sh [options] <command>
     sysroot <pkg> [pkgs...] - Copy specified package's files and dependencies to sysroot directory
                               Useful for installing packages in environments without dpkg
     bootstrap               - Make a sysroot with base, dpkg, and all their dependencies
-    --target                - Specify a target (default: armv6-apple-darwin9)
+    --target                - Specify a target (default: armv6-apple-ios2)
     --no-tmp                - Do not use /tmp for anything, use the current directory instead
     --keepsrc               - Do not delete sources after successful build (useful for debugging)
     -jN                     - Set the number of jobs passed to programs like make and ninja
@@ -40,7 +40,7 @@ Usage: build.sh [options] <command>
 ./build.sh ed bash
 ```
 
-#### Build gzip for i386-apple-darwin9
+#### Build gzip for i386-apple-macos10.4
 ```sh
-./build.sh --target=i386-apple-darwin9 gzip
+./build.sh --target=i386-apple-macos10.4 gzip
 ```
