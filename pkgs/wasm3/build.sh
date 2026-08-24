@@ -2,6 +2,8 @@
 . ../../files/lib.sh
 
 (
+export PKG_CONFIG_LIBDIR="$_SDK/var/usr/lib/pkgconfig"
+export PKG_CONFIG_SYSROOT_DIR="$_SDK"
 mkdir -p "$_SRCDIR/build"
 cd "$_SRCDIR/build"
 cmake -GNinja .. \
@@ -11,10 +13,8 @@ cmake -GNinja .. \
     -DCMAKE_INSTALL_PREFIX=/var/usr \
     -DCMAKE_FIND_ROOT_PATH_MODE_INCLUDE=ONLY \
     -DCMAKE_SYSTEM_PROCESSOR="$_CPU" \
-    -DWITH_SYSTEM_LIBUV=ON \
     -DBUILD_NATIVE=OFF \
-    -DLIBUV_LIBRARIES= \
-    -DLIBUV_INCLUDE_DIR="$_SDK/var/usr/include"
+    -DCMAKE_MODULE_PATH="$_PKGROOT/files"
 DESTDIR="$_DESTDIR" ninja install
 )
 

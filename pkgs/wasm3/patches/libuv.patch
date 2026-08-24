@@ -1,11 +1,25 @@
 --- src/CMakeLists.txt.orig
 +++ src/CMakeLists.txt
-@@ -209,7 +209,7 @@
-     add_subdirectory(${uvwasi_SOURCE_DIR} ${uvwasi_BINARY_DIR} EXCLUDE_FROM_ALL)
-   endif()
+@@ -206,20 +206,15 @@
+   set(INSTALL_UVWASI OFF CACHE BOOL "" FORCE)
+ 
+   FetchContent_Declare(
+-    libuv
+-    GIT_REPOSITORY https://github.com/libuv/libuv.git
+-    GIT_TAG        v1.52.1
+-  )
+-  FetchContent_Declare(
+     uvwasi
+     GIT_REPOSITORY  https://github.com/nodejs/uvwasi.git
+     GIT_TAG         main
+   )
+-  FetchContent_MakeAvailable(libuv)
++  find_package(LIBUV REQUIRED)
+   FetchContent_MakeAvailable(uvwasi)
+   include_directories("${uvwasi_SOURCE_DIR}/include")
    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Dd_m3HasUVWASI")
 -  target_link_libraries(${OUT_FILE} uvwasi_a uv_a)
-+  target_link_libraries(${OUT_FILE} uvwasi_a uv)
++  target_link_libraries(${OUT_FILE} uvwasi_a ${LIBUV_LIBRARIES})
  endif()
  
  check_ipo_supported(RESULT result)

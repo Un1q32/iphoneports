@@ -1,0 +1,15 @@
+find_package(PkgConfig REQUIRED)
+pkg_check_modules(PKGC_LIBUV REQUIRED libuv)
+
+find_path(LIBUV_INCLUDE_DIR NAMES uv.h
+    HINTS ${PKGC_LIBUV_INCLUDEDIR} ${PKGC_LIBUV_INCLUDE_DIRS}
+    NO_DEFAULT_PATH)
+find_library(LIBUV_LIBRARY NAMES uv
+    HINTS ${PKGC_LIBUV_LIBDIR} ${PKGC_LIBUV_LIBRARY_DIRS}
+    NO_DEFAULT_PATH)
+
+include(FindPackageHandleStandardArgs)
+find_package_handle_standard_args(LIBUV REQUIRED_VARS LIBUV_LIBRARY LIBUV_INCLUDE_DIR)
+
+set(LIBUV_LIBRARIES "${LIBUV_LIBRARY}")
+mark_as_advanced(LIBUV_INCLUDE_DIR LIBUV_LIBRARY)
