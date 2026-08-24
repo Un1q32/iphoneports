@@ -2,10 +2,6 @@
 
 > Build scripts for the packages at http://cydia.uniq.gay/
 
-## Setup
-
-You will need an up-to-date iPhonePorts toolchain to use the build scripts in this repo, you can build one with https://github.com/Un1q32/iphoneports-toolchain-builder.
-
 ## Usage
 
 ```
