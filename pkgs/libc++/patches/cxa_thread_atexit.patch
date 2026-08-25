@@ -31,7 +31,7 @@
        // one-time initialization and __cxa_atexit() for destruction)
 --- src/libcxxabi/include/cxxabi.h.orig
 +++ src/libcxxabi/include/cxxabi.h
-@@ -180,7 +180,7 @@
+@@ -179,7 +179,7 @@
  extern _LIBCXXABI_FUNC_VIS bool __cxa_uncaught_exception() _LIBCXXABI_NOEXCEPT;
  extern _LIBCXXABI_FUNC_VIS unsigned int __cxa_uncaught_exceptions() _LIBCXXABI_NOEXCEPT;
  

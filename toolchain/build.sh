@@ -64,7 +64,7 @@ redundant_download() {
 mkdir "$scriptroot/build" && cd "$scriptroot/build"
 
 printf "Building LLVM+Clang\n\n"
-llvmver="22.1.8"
+llvmver="23.1.0"
 redundant_download "https://github.com/llvm/llvm-project/archive/refs/tags/llvmorg-$llvmver.tar.gz"
 tar xzf "llvmorg-$llvmver.tar.gz"
 mv "llvmorg-$llvmver.tar.gz" "../../dlcache/llvm-$llvmver.tar.gz"
@@ -221,7 +221,7 @@ PATH="$scriptroot/bin:$PATH" \
     CC=hostcc \
     AR=llvm-ar \
     BOOTSTRAP_SKIP_TARGET_SANITY=1 \
-    ./x install -j "$JOBS"
+    ./x install -j "$JOBS" || exit 1
 ln -s "../../../$(readlink "$scriptroot/lib/libLLVM.so")" "$scriptroot/lib/rustlib/$rusthost/lib"
 ) || {
     printf 'Warning! this toolchain was built without rust support\n'

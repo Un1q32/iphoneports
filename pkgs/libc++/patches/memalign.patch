@@ -116,7 +116,7 @@
  
 --- src/libcxx/include/__cxx03/__config.orig
 +++ src/libcxx/include/__cxx03/__config
-@@ -622,6 +622,16 @@
+@@ -615,6 +615,16 @@
  #    define _LIBCPP_HAS_NO_ALIGNED_ALLOCATION
  #  endif
  

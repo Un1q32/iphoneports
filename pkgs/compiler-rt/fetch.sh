@@ -1,1 +1,1 @@
-../llvm/fetch.sh
+../libc++/fetch.sh

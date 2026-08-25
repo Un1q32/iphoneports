@@ -11,7 +11,7 @@
  #if defined(__NetBSD__)
  #  pragma weak pthread_create // Do not create libpthread dependency
  #endif
-@@ -75,7 +79,16 @@
+@@ -76,7 +80,16 @@
    return static_cast<unsigned>(result);
  #elif defined(_LIBCPP_WIN32API)
    return static_cast<unsigned>(GetActiveProcessorCount(ALL_PROCESSOR_GROUPS));

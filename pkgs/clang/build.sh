@@ -22,7 +22,6 @@ export PATH="$_SRCDIR/iphoneports-fakebin:$PATH"
 mkdir -p "$_SRCDIR/build"
 cd "$_SRCDIR/build"
 
-llvmtblgen="$(command -v llvm-tblgen)"
 ranlib="$(command -v "$_TARGET-ranlib")"
 case $_CPU in
     (arm64*) ;;
@@ -31,6 +30,7 @@ case $_CPU in
         cflags='-marm'
     ;;
 esac
+cflags="$cflags -w"
 defaulttarget="$_CPU-apple-$_SUBSYSTEM$_SUBSYSTEMVER"
 
 cmake -GNinja ../llvm \
@@ -49,7 +49,6 @@ cmake -GNinja ../llvm \
     -DLLVM_LINK_LLVM_DYLIB=ON \
     -DLLVM_ENABLE_THREADS=OFF \
     -DLLVM_INCLUDE_TESTS=OFF \
-    -DLLVM_TABLEGEN="$llvmtblgen" \
     -DLLVM_ENABLE_LTO=Thin \
     -DLLVM_ENABLE_LIBCXX=ON \
     -DLLVM_NO_INSTALL_NAME_DIR_FOR_BUILD_TREE=ON \
@@ -76,7 +75,6 @@ cmake -GNinja ../llvm \
     -DLLVM_LINK_LLVM_DYLIB=ON \
     -DLLVM_ENABLE_THREADS=OFF \
     -DLLVM_INCLUDE_TESTS=OFF \
-    -DLLVM_TABLEGEN="$llvmtblgen" \
     -DLLVM_ENABLE_LTO=Thin \
     -DLLVM_ENABLE_LIBCXX=ON \
     -DLLVM_NO_INSTALL_NAME_DIR_FOR_BUILD_TREE=ON \

@@ -22,20 +22,21 @@ export PATH="$_SRCDIR/iphoneports-fakebin:$PATH"
 mkdir -p "$_SRCDIR/build"
 cd "$_SRCDIR/build"
 
-tblgen="$(command -v llvm-tblgen)"
 case $_CPU in
     (arm64*) ;;
     (arm*)
         # ld64 fails to link when built for thumb, so explicitly specify arm here
-        export CFLAGS="-marm"
-        export CXXFLAGS="$CFLAGS"
+        cflags="-marm"
     ;;
 esac
+cflags="$CFLAGS -w"
 defaulttarget="$_CPU-apple-$_SUBSYSTEM$_SUBSYSTEMVER"
 
 cmake -GNinja ../llvm \
     -DCMAKE_BUILD_TYPE=MinSizeRel \
     -DCMAKE_C_COMPILER="$_TARGET-cc" \
+    -DCMAKE_C_FLAGS="$cflags" \
+    -DCMAKE_CXX_FLAGS="$cflags" \
     -DCMAKE_SYSTEM_NAME=Darwin \
     -DCMAKE_INSTALL_PREFIX=/var/usr \
     -DCMAKE_FIND_ROOT_PATH_MODE_INCLUDE=ONLY \
@@ -50,13 +51,15 @@ cmake -GNinja ../llvm \
     -DLLVM_ENABLE_ZLIB=ON \
     -DLLVM_ENABLE_ZSTD=ON \
     -DLLVM_TARGETS_TO_BUILD='X86;ARM;AArch64' \
-    -DLLVM_TABLEGEN="$tblgen" \
     -DLLVM_ENABLE_LTO=Thin \
+    -DCROSS_TOOLCHAIN_FLAGS_NATIVE='-DCMAKE_C_COMPILER=hostcc;-DCMAKE_CXX_COMPILER=hostc++' \
     -DLLVM_ENABLE_LIBCXX=ON
 
 cmake -GNinja ../llvm \
     -DCMAKE_BUILD_TYPE=MinSizeRel \
     -DCMAKE_C_COMPILER="$_TARGET-cc" \
+    -DCMAKE_C_FLAGS="$cflags" \
+    -DCMAKE_CXX_FLAGS="$cflags" \
     -DCMAKE_SYSTEM_NAME=Darwin \
     -DCMAKE_INSTALL_PREFIX=/var/usr \
     -DCMAKE_FIND_ROOT_PATH_MODE_INCLUDE=ONLY \
@@ -71,8 +74,8 @@ cmake -GNinja ../llvm \
     -DLLVM_ENABLE_ZLIB=ON \
     -DLLVM_ENABLE_ZSTD=ON \
     -DLLVM_TARGETS_TO_BUILD='X86;ARM;AArch64' \
-    -DLLVM_TABLEGEN="$tblgen" \
     -DLLVM_ENABLE_LTO=Thin \
+    -DCROSS_TOOLCHAIN_FLAGS_NATIVE='-DCMAKE_C_COMPILER=hostcc;-DCMAKE_CXX_COMPILER=hostc++' \
     -DLLVM_ENABLE_LIBCXX=ON \
     -DLLVM_DISTRIBUTION_COMPONENTS="$(_get_distribution_components)"
 
