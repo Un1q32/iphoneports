@@ -1,6 +1,6 @@
 --- src/llvm/lib/LTO/LTO.cpp.orig
 +++ src/llvm/lib/LTO/LTO.cpp
-@@ -1798,7 +1798,7 @@
+@@ -1921,7 +1921,7 @@
    if (TheTriple.getArch() == Triple::x86_64)
      return "core2";
    if (TheTriple.getArch() == Triple::x86)
@@ -22,7 +22,7 @@
      else if (Triple.getArch() == llvm::Triple::aarch64 ||
 --- src/clang/lib/Driver/ToolChains/Arch/X86.cpp.orig
 +++ src/clang/lib/Driver/ToolChains/Arch/X86.cpp
-@@ -84,8 +84,20 @@
+@@ -86,8 +86,20 @@
      if (Triple.isDriverKit())
        return "nehalem";
  

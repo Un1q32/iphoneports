@@ -1,6 +1,6 @@
 --- src/llvm/cmake/modules/AddLLVM.cmake.orig
 +++ src/llvm/cmake/modules/AddLLVM.cmake
-@@ -2554,7 +2554,7 @@
+@@ -2694,7 +2694,7 @@
    endif()
  
    if (APPLE)
