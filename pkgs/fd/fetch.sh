@@ -1,8 +1,8 @@
 #!/bin/sh
 rm -rf "$_DESTDIR" "$_SRCDIR"
-ver='10.4.2'
+ver='10.5.0'
 if [ ! -f "$_DLCACHE/fd-$ver.tar.gz" ] ||
-    [ "$(sha256sum "$_DLCACHE/fd-$ver.tar.gz" | awk '{print $1}')" != "3a7e027af8c8e91c196ac259c703d78cd55c364706ddafbc66d02c326e57a456" ]; then
+    [ "$(sha256sum "$_DLCACHE/fd-$ver.tar.gz" | awk '{print $1}')" != "e6d9e90730bf316101691e49d59cc02565278dc3779d33a77423801569484851" ]; then
     printf "Downloading source...\n"
     curl -L -# -o "$_DLCACHE/fd-$ver.tar.gz" "https://github.com/sharkdp/fd/archive/refs/tags/v$ver.tar.gz" || exit 1
 fi
