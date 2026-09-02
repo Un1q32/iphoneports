@@ -18,10 +18,10 @@ fi
 cd "$_SRCDIR"
 SDKROOT="$_SDK" cargo build -p wasmi_cli --target "$_RUSTTARGET" --release -j "$_JOBS"
 mkdir -p "$_DESTDIR/var/usr/bin"
-cp "target/$_RUSTTARGET/release/wasmi_cli" "$_DESTDIR/var/usr/bin"
+cp "target/$_RUSTTARGET/release/wasmi" "$_DESTDIR/var/usr/bin"
 )
 
-strip_and_sign "$_DESTDIR/var/usr/bin/wasmi_cli"
+strip_and_sign "$_DESTDIR/var/usr/bin/wasmi"
 
 installlicense "$_SRCDIR/LICENSE-MIT"
 
