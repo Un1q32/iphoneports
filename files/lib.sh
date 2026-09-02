@@ -41,6 +41,9 @@ builddeb() {
     cp -r "$debian" "$_DESTDIR/DEBIAN"
     sed -e "s|@DPKGARCH@|$_DPKGARCH|" "$debian/control" > "$_DESTDIR/DEBIAN/control"
 
+    size=$(du -sk "$_DESTDIR" | sed 's/[[:space:]].*//')
+    sed -i "/^Package:/a Installed-Size: $size" "$_DESTDIR/DEBIAN/control"
+
     # SUID binaries must be moved outside of /var to work, except on rootless jailbreaks or macOS
     if [ "$_SUBSYSTEM" != 'macos' ] && [ -f "$_TMP/suidbinaries" ]; then
         if ! [ -f "$_DESTDIR/DEBIAN/postinst" ]; then
