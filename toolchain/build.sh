@@ -35,7 +35,7 @@ fi
 [ "${0%/*}" = "$0" ] && scriptroot="." || scriptroot="${0%/*}"
 cd "$scriptroot" || exit 1
 scriptroot="$PWD"
-rm -rf build bin cctools-bin lib
+rm -rf build bin cctools-bin lib currenttoolchainver
 
 if ! cc -dumpmachine > /dev/null 2>&1; then
     printf 'Toolchain requires cc to be gcc compatible\n'
