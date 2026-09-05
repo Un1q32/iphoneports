@@ -1,8 +1,8 @@
 #!/bin/sh
 rm -rf "$_DESTDIR" "$_SRCDIR"
-ver='f72f83b4cadd4b6b4f49cdd8eb4c5168dec684e8'
+ver='7fd998dc82fbbae5674706f08b02b22742debbfb'
 if [ ! -f "$_DLCACHE/nextvi-$ver.tar.gz" ] ||
-    [ "$(sha256sum "$_DLCACHE/nextvi-$ver.tar.gz" | awk '{print $1}')" != "7a53f2edfc117aac96fe01137559a56bec43c40b58b19cde27faa5f39510f55a" ]; then
+    [ "$(sha256sum "$_DLCACHE/nextvi-$ver.tar.gz" | awk '{print $1}')" != "0df6bc3f84b28e7e4663d93f7a67b5ed0bd2803ca741132250d76716129b2163" ]; then
     printf "Downloading source...\n"
     curl -L -# -o "$_DLCACHE/nextvi-$ver.tar.gz" "https://github.com/Un1q32/nextvi/archive/$ver.tar.gz" || exit 1
 fi
