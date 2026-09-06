@@ -1,3 +1,13 @@
 #!/var/usr/bin/sh
 # wrapper to be used for programs that break when $PATH contains iphoneports stuff
-PATH='/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/bin/X11:/usr/games' exec "${0##*/}" "$@"
+PATH="/usr/local/sbin"
+if [ -d /var/jb ]; then
+    PATH="$PATH:/var/jb/usr/local/sbin"
+    varjb=1
+fi
+for p in /usr/local/bin /usr/sbin /usr/bin /sbin /bin /usr/bin/X11 /usr/games; do
+	PATH="$PATH:$p"
+	[ -n "$varjb" ] && PATH="$PATH:/var/jb$p"
+done
+export PATH
+exec "${0##*/}" "$@"
