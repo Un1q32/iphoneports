@@ -1,8 +1,8 @@
 #!/bin/sh
 rm -rf "$_DESTDIR" "$_SRCDIR"
-ver='a4a838dea856217560d39c0cc898c12a204e3cf3'
+ver='db5f7bad6e3a8e26936bc91e69791bc7b5ef6407'
 if [ ! -f "$_DLCACHE/cctools-$ver.tar.gz" ] ||
-    [ "$(sha256sum "$_DLCACHE/cctools-$ver.tar.gz" | awk '{print $1}')" != "dc77aa31d961736fa6ab6a65644245de3a0938cfa350560f83ea53f953427db2" ]; then
+    [ "$(sha256sum "$_DLCACHE/cctools-$ver.tar.gz" | awk '{print $1}')" != "4a84b917391a42be69d7e1beb93ee608396aaecf59f3c51ae1f18839b7f8c478" ]; then
     printf "Downloading source...\n"
     curl -L -# -o "$_DLCACHE/cctools-$ver.tar.gz" "https://github.com/Un1q32/cctools-port/archive/$ver.tar.gz" || exit 1
 fi
