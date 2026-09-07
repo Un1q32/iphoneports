@@ -16,7 +16,8 @@ cmake -GNinja .. \
     -DCMAKE_INSTALL_NAME_DIR=/var/usr/lib \
     -DCMAKE_FIND_ROOT_PATH_MODE_INCLUDE=ONLY \
     -DCMAKE_FIND_ROOT_PATH="$_SDK/var/usr" \
-    -DLUAU_BUILD_TESTS=OFF
+    -DLUAU_BUILD_TESTS=OFF \
+    -DCMAKE_CXX_FLAGS='-D_LIBCPP_KEEP_TRANSITIVE_INCLUDES_LLVM23'
 DESTDIR="$_DESTDIR" ninja
 mkdir -p "$_DESTDIR/var/usr/bin"
 mv $bins "$_DESTDIR/var/usr/bin"
