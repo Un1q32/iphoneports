@@ -1,0 +1,9 @@
+--- src/src/common.h.orig
++++ src/src/common.h
+@@ -98,4 +98,6 @@
+ #  include <sys/types.h>
+ #endif
+ 
++#include <iterator>
++
+ #endif // D_COMMON_H
