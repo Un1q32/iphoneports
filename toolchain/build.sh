@@ -67,7 +67,7 @@ printf "Building LLVM+Clang\n\n"
 llvmver="22.1.8"
 redundant_download "https://github.com/llvm/llvm-project/archive/refs/tags/llvmorg-$llvmver.tar.gz"
 tar xzf "llvmorg-$llvmver.tar.gz"
-mv "llvmorg-$llvmver.tar.gz" "../../dlcache/llvm-$llvmver.tar.gz"
+rm "llvmorg-$llvmver.tar.gz"
 mkdir "llvm-project-llvmorg-$llvmver/build"
 (
 cd "llvm-project-llvmorg-$llvmver"
