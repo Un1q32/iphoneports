@@ -67,6 +67,11 @@ builddeb() {
     dpkg-deb -b --root-owner-group -Zgzip "$_DESTDIR" "$_PKGNAME-$_TRIPLE.deb"
 }
 
+targethack() {
+    export _TARGETHACK="$1"
+    ln -s "$_TARGET-ld" "$_PKGROOT/../../toolchain/target-bin/$_TRIPLE/$1-ld"
+}
+
 installlicense() {
     mkdir -p "$_DESTDIR/var/usr/share/licenses/$_PKGNAME"
     cp "$@" "$_DESTDIR/var/usr/share/licenses/$_PKGNAME"

@@ -8,7 +8,7 @@ if [ "$_SUBSYSTEM" = "ios" ]; then
         mkdir "$_DESTDIR"
         exit 0
     elif [ "$_OSVER" -lt 30000 ] && [ "$_CPU" = "armv6" ]; then
-        cflags='TARGET_FLAGS=-mios-version-min=3.0'
+        targethack armv6-apple-ios3
     fi
     sys='iOS'
 elif [ "$_SUBSYSTEM" != "macos" ]; then
@@ -28,13 +28,11 @@ make amalg \
     CCOPT=-O3 \
     PREFIX=/var/usr \
     DESTDIR="$_DESTDIR" \
-    MACOSX_DEPLOYMENT_TARGET="$_MACVER" \
-    $cflags
+    MACOSX_DEPLOYMENT_TARGET="$_MACVER"
 make install \
     TARGET_SYS="$sys" \
     PREFIX=/var/usr \
-    DESTDIR="$_DESTDIR" \
-    $cflags
+    DESTDIR="$_DESTDIR"
 )
 
 (

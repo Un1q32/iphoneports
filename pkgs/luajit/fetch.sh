@@ -1,8 +1,8 @@
 #!/bin/sh
 rm -rf "$_DESTDIR" "$_SRCDIR"
-ver='194d7f2d635a11193177f0ed820ae419148f0b70'
+ver='c6ffc141a8762b41703f9287d63d93622a13dd8f'
 if [ ! -f "$_DLCACHE/luajit-$ver.tar.gz" ] ||
-    [ "$(sha256sum "$_DLCACHE/luajit-$ver.tar.gz" | awk '{print $1}')" != "6a9c168d002f698bd8c76d5bb2e3ee3615297c9c8e4cf00992a04a4e5baaac56" ]; then
+    [ "$(sha256sum "$_DLCACHE/luajit-$ver.tar.gz" | awk '{print $1}')" != "6e5fec07750add912e7c3eae0c194d24cd6d023714e1f04a0298a5b4819e4457" ]; then
     printf "Downloading source...\n"
     curl -L -# -o "$_DLCACHE/luajit-$ver.tar.gz" "https://github.com/LuaJIT/LuaJIT/archive/$ver.tar.gz" || exit 1
 fi

@@ -38,6 +38,6 @@ exec $ccache "$cc" \
     "$libflags" \
     -mlinker-version=956.6 \
     "$@" \
-    -target "$_TRIPLE" \
+    -target "${_TARGETHACK:-$_TRIPLE}" \
     -Wno-unused-command-line-argument \
     -Wno-ignored-optimization-argument
