@@ -1,8 +1,8 @@
 #!/bin/sh
 rm -rf "$_DESTDIR" "$_SRCDIR"
-ver='5.8.3'
+ver='5.8.4'
 if [ ! -f "$_DLCACHE/xz-$ver.tar.xz" ] ||
-    [ "$(sha256sum "$_DLCACHE/xz-$ver.tar.xz" | awk '{print $1}')" != "fff1ffcf2b0da84d308a14de513a1aa23d4e9aa3464d17e64b9714bfdd0bbfb6" ]; then
+    [ "$(sha256sum "$_DLCACHE/xz-$ver.tar.xz" | awk '{print $1}')" != "4ce24038fd4221e0d13bc1a2de7a4db56e90b92b3bf75321f6c14be73f65de4b" ]; then
     printf "Downloading source...\n"
     curl -L -# -o "$_DLCACHE/xz-$ver.tar.xz" "https://github.com/tukaani-project/xz/releases/download/v$ver/xz-$ver.tar.xz" || exit 1
 fi
