@@ -1,8 +1,8 @@
 #!/bin/sh
 rm -rf "$_DESTDIR" "$_SRCDIR"
-ver='0.9.0'
+ver='0.9.1'
 if [ ! -f "$_DLCACHE/wasm3-$ver.tar.gz" ] ||
-    [ "$(sha256sum "$_DLCACHE/wasm3-$ver.tar.gz" | awk '{print $1}')" != "cab79ce74bcac25bbf80b5ebe14af9795b9bac30b05ee8f620a3bc8002f3b8e6" ]; then
+    [ "$(sha256sum "$_DLCACHE/wasm3-$ver.tar.gz" | awk '{print $1}')" != "50a6b26b46648f037d58ba5ed7f1d1c48b67506cbb12e1fbe222e6c1b64a6a6e" ]; then
     printf "Downloading source...\n"
     curl -L -# -o "$_DLCACHE/wasm3-$ver.tar.gz" "https://github.com/wasm3/wasm3/archive/refs/tags/v$ver.tar.gz" || exit 1
 fi

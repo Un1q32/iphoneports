@@ -1,6 +1,6 @@
 --- src/CMakeLists.txt.orig
 +++ src/CMakeLists.txt
-@@ -206,20 +206,15 @@
+@@ -270,21 +270,16 @@
    set(INSTALL_UVWASI OFF CACHE BOOL "" FORCE)
  
    FetchContent_Declare(
@@ -19,7 +19,9 @@
    include_directories("${uvwasi_SOURCE_DIR}/include")
    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Dd_m3HasUVWASI")
 -  target_link_libraries(${OUT_FILE} uvwasi_a uv_a)
+-  set(M3_WASI_LIBS uvwasi_a uv_a)   # ...and so do the internal tests
 +  target_link_libraries(${OUT_FILE} uvwasi_a ${LIBUV_LIBRARIES})
++  set(M3_WASI_LIBS uvwasi_a ${LIBUV_LIBRARIES})   # ...and so do the internal tests
  endif()
  
  check_ipo_supported(RESULT result)
