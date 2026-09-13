@@ -254,7 +254,7 @@
 #if defined(__has_attribute)
   #if __has_attribute(availability)
     #define __IOS_UNAVAILABLE                    __OS_AVAILABILITY(ios,unavailable)
-    #define __IOS_PROHIBITED                     __OS_AVAILABILITY(ios,unavailable)
+    #define __IOS_PROHIBITED
     #define __IOS_AVAILABLE(_vers)               __OS_AVAILABILITY(ios,introduced=_vers)
     #define __IOS_DEPRECATED(_start, _dep, _msg) __IOS_AVAILABLE(_start) __OS_AVAILABILITY_MSG(ios,deprecated=_dep,_msg)
   #endif
@@ -281,7 +281,7 @@
 #if defined(__has_feature)
   #if __has_feature(attribute_availability_tvos)
     #define __TVOS_UNAVAILABLE                    __OS_AVAILABILITY(tvos,unavailable)
-    #define __TVOS_PROHIBITED                     __OS_AVAILABILITY(tvos,unavailable)
+    #define __TVOS_PROHIBITED
     #define __TVOS_AVAILABLE(_vers)               __OS_AVAILABILITY(tvos,introduced=_vers)
     #define __TVOS_DEPRECATED(_start, _dep, _msg) __TVOS_AVAILABLE(_start) __OS_AVAILABILITY_MSG(tvos,deprecated=_dep,_msg)
   #endif
