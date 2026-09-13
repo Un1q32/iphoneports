@@ -78,7 +78,11 @@ int	 strcmp(const char *__s1, const char *__s2);
 int	 strcoll(const char *__s1, const char *__s2);
 char	*strcpy(char *__dst, const char *__src);
 size_t	 strcspn(const char *__s, const char *__charset);
+#if defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) && __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ < 1050
+char	*strerror(int __errnum);
+#else
 char	*strerror(int __errnum) __DARWIN_ALIAS(strerror);
+#endif
 size_t	 strlen(const char *__s);
 char	*strncat(char *__s1, const char *__s2, size_t __n);
 int	 strncmp(const char *__s1, const char *__s2, size_t __n);
