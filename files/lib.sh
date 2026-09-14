@@ -57,9 +57,9 @@ builddeb() {
         printf '/var/usr/bin/mkdir -p /usr/local/libexec/iphoneports 2>/dev/null || exit 0\n' >> "$_DESTDIR/DEBIAN/postinst"
         printf "[ -e /var/usr/bin/rm ] && __iphoneports_rm=/var/usr/bin/rm || __iphoneports_rm=rm\n" >> "$_DESTDIR/DEBIAN/postrm"
         while IFS= read -r bin; do
-            printf "/var/usr/bin/mv \"$bin\" /usr/local/libexec/iphoneports\n" >> "$_DESTDIR/DEBIAN/postinst"
-            printf "/var/usr/bin/ln -s \"/usr/local/libexec/iphoneports/${bin##*/}\" \"$bin\"\n" >> "$_DESTDIR/DEBIAN/postinst"
-            printf "\"\$__iphoneports_rm\" -f \"/usr/local/libexec/iphoneports/${bin##*/}\"\n" >> "$_DESTDIR/DEBIAN/postrm"
+            printf '%s\n' "/var/usr/bin/mv \"$bin\" /usr/local/libexec/iphoneports" >> "$_DESTDIR/DEBIAN/postinst"
+            printf '%s\n' "/var/usr/bin/ln -s \"/usr/local/libexec/iphoneports/${bin##*/}\" \"$bin\"" >> "$_DESTDIR/DEBIAN/postinst"
+            printf '%s\n' "\"\$__iphoneports_rm\" -f \"/usr/local/libexec/iphoneports/${bin##*/}\"" >> "$_DESTDIR/DEBIAN/postrm"
         done < "$_TMP/suidbinaries"
         rm "$_TMP/suidbinaries"
     fi
