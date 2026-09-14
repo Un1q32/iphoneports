@@ -97,9 +97,9 @@ ios-cc -o ubsan_minimal_ios.o ../lib/ubsan_minimal/ubsan_minimal_handlers.cpp -I
 macos-cc -o ubsan_minimal_osx.o ../lib/ubsan_minimal/ubsan_minimal_handlers.cpp -I../lib -c &
 tvos-cc -o ubsan_minimal_tvos.o ../lib/ubsan_minimal/ubsan_minimal_handlers.cpp -I../lib -c &
 
-ios-cc -o ubsan_ios.o ../ubsan.c -c &
-macos-cc -o ubsan_osx.o ../ubsan.c -c &
-tvos-cc -o ubsan_tvos.o ../ubsan.c -c &
+ios-cc -o ubsan_ios.o ../ubsan/ubsan.c -c &
+macos-cc -o ubsan_osx.o ../ubsan/ubsan.c -c &
+tvos-cc -o ubsan_tvos.o ../ubsan/ubsan.c -c &
 
 wait
 

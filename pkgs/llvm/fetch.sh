@@ -1,18 +1,19 @@
 #!/bin/sh
-rm -rf "$_DESTDIR" "$_SRCDIR"
+. ../../files/dllib.sh
 ver='23.1.1'
-if [ ! -f "$_DLCACHE/llvm-$ver.tar.gz" ] ||
-    [ "$(sha256sum "$_DLCACHE/llvm-$ver.tar.gz" | awk '{print $1}')" != "851b3d701a4fbdd9f69536d4acda578469e810ca7056687d6556443f5fd39557" ]; then
-    printf "Downloading source...\n"
-    curl -L -# -o "$_DLCACHE/llvm-$ver.tar.gz" "https://github.com/llvm/llvm-project/archive/refs/tags/llvmorg-$ver.tar.gz" || exit 1
-fi
-printf "Unpacking source...\n"
-tar -C "$_TMP" -xf "$_DLCACHE/llvm-$ver.tar.gz"
-mv "$_TMP"/llvm-project-llvmorg-* "$_SRCDIR"
+dlsrc \
+    "https://github.com/llvm/llvm-project/archive/refs/tags/llvmorg-$ver.tar.gz" \
+    "llvm-$ver.tar.gz" \
+    851b3d701a4fbdd9f69536d4acda578469e810ca7056687d6556443f5fd39557 \
+    "llvm-project-llvmorg-$ver"
+
 if [ "$_PKGNAME" = 'compiler-rt' ]; then
-    printf '%s\n' "${ver%%.*}" > "$_SRCDIR/iphoneports-llvmversion.txt"
     ubsanver='4cede088a39199155ba8f7cb1844c46cbd912823'
-    curl -L -s -o "$_SRCDIR/compiler-rt/ubsan.c" "https://raw.githubusercontent.com/Un1q32/ubsan/$ubsanver/ubsan.c" &
-    curl -L -s -o "$_SRCDIR/compiler-rt/UBSAN-LICENSE" "https://raw.githubusercontent.com/Un1q32/ubsan/$ubsanver/LICENSE"
-    wait
+    _SRCDIR="$_SRCDIR/compiler-rt/ubsan" dlsrc \
+        "https://github.com/Un1q32/ubsan/archive/$ubsanver.tar.gz" \
+        "ubsan-$ver.tar.gz" \
+        b8fe297433d6c62f305fb073a4f4d5c7c776dc7c5edd8ea2a2c98068b5f15b9b \
+        "ubsan-$ubsanver"
+
+    printf '%s\n' "${ver%%.*}" > "$_SRCDIR/iphoneports-llvmversion.txt"
 fi
