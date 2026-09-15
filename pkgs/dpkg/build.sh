@@ -17,7 +17,12 @@ export TAR=gtar
 for script in src/dpkg-maintscript-helper.sh src/dpkg-db-backup.sh src/dpkg-db-keeper.sh; do
     sed -i -e 's|^#!/bin/sh$|#!/var/usr/bin/sh|' "$script"
 done
-sed -i -e "s|@DPKGARCH@|$_DPKGARCH|g" data/tupletable
+if [ "$_DPKGARCH" = 'any' ]; then
+    dpkgarch=iphoneos-arm
+else
+    dpkgarch="$_DPKGARCH"
+fi
+sed -i -e "s|@DPKGARCH@|$dpkgarch|g" data/tupletable
 
 autoreconf -fi
 ./configure \
