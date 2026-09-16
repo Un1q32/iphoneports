@@ -82,3 +82,12 @@ installsuid() {
         printf '/%s\n' "$(realpath --relative-to="$_DESTDIR" "$bin")" >> "$_TMP/suidbinaries"
     done
 }
+
+supportsrust() {
+    if { [ "$_SUBSYSTEM" = "ios" ] && [ "$_OSVER" -lt 20000 ]; } ||
+        { [ "$_SUBSYSTEM" = "macos" ] && [ "$_OSVER" -lt 1050 ]; }; then
+        printf 'Rust requires at least Mac OS X 10.5 or iPhone OS 2.0\n'
+        return 1
+    fi
+    return 0
+}

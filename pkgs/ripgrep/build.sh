@@ -7,9 +7,7 @@ printf '#!/bin/sh\nexit 1\n' > "$_SRCDIR/iphoneports-fakebin/git"
 chmod +x "$_SRCDIR/iphoneports-fakebin/git"
 export PATH="$_SRCDIR/iphoneports-fakebin:$PATH"
 
-if { [ "$_SUBSYSTEM" = "ios" ] && [ "$_OSVER" -lt 20000 ]; } ||
-    { [ "$_SUBSYSTEM" = "macos" ] && [ "$_OSVER" -lt 1050 ]; }; then
-    printf 'Rust requires at least Mac OS X 10.5 or iPhone OS 2.0\n'
+if ! supportsrust; then
     mkdir "$_DESTDIR"
     exit 0
 fi
