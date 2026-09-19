@@ -1,8 +1,8 @@
 #!/bin/sh
-rm -rf "$_DESTDIR" "$_SRCDIR"
-printf "Downloading source...\n"
-curl -L -# -o src.tar.gz https://github.com/Cyan4973/xxHash/archive/refs/tags/v0.8.3.tar.gz
-printf "Unpacking source...\n"
-tar -C "$_TMP" -xf src.tar.gz
-rm src.tar.gz
-mv "$_TMP"/xxHash-* "$_SRCDIR"
+. ../../files/dllib.sh
+ver='0.8.4'
+dlsrc \
+    "https://github.com/Cyan4973/xxHash/archive/refs/tags/v$ver.tar.gz" \
+    "xxhash-$ver.tar.gz" \
+    5738270935e7c3d38a79b3adf7c9692566ce7895a25f67de43ad52ab504acd32 \
+    "xxHash-$ver"
