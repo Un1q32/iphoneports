@@ -96,6 +96,32 @@ index 5135e2b..6189daf 100644
  	    {
  	      input_string = x;
  	      remove_unwind_protect ();
+diff --git a/configure b/configure
+index a28a3fc..a0ff916 100755
+--- a/configure
++++ b/configure
+@@ -23133,7 +23133,7 @@ hpux*)		LOCAL_CFLAGS="-DHPUX -DTGETENT_BROKEN -DTGETFLAG_BROKEN" ;;
+ dgux*)		LOCAL_CFLAGS=-D_DGUX_SOURCE; LOCAL_LIBS=-ldgc ;;
+ isc*)		LOCAL_CFLAGS=-Disc386 ;;
+ rhapsody*)	LOCAL_CFLAGS=-DRHAPSODY ;;
+-darwin*)	LOCAL_CFLAGS=-DMACOSX ;;
++darwin*)	LOCAL_CFLAGS="-DMACOSX -DPIPESIZE_DYNAMIC" ;;
+ sco3.2v5*)	LOCAL_CFLAGS="-b elf -DWAITPID_BROKEN -DPATH_MAX=1024" ;;
+ sco3.2v4*)	LOCAL_CFLAGS="-DMUST_UNBLOCK_CHLD -DPATH_MAX=1024" ;;
+ sco3.2*)	LOCAL_CFLAGS=-DMUST_UNBLOCK_CHLD ;;
+diff --git a/configure.ac b/configure.ac
+index 5a76267..146f5d6 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -1209,7 +1209,7 @@ hpux*)		LOCAL_CFLAGS="-DHPUX -DTGETENT_BROKEN -DTGETFLAG_BROKEN" ;;
+ dgux*)		LOCAL_CFLAGS=-D_DGUX_SOURCE; LOCAL_LIBS=-ldgc ;;
+ isc*)		LOCAL_CFLAGS=-Disc386 ;;
+ rhapsody*)	LOCAL_CFLAGS=-DRHAPSODY ;;
+-darwin*)	LOCAL_CFLAGS=-DMACOSX ;;
++darwin*)	LOCAL_CFLAGS="-DMACOSX -DPIPESIZE_DYNAMIC" ;;
+ sco3.2v5*)	LOCAL_CFLAGS="-b elf -DWAITPID_BROKEN -DPATH_MAX=1024" ;;
+ sco3.2v4*)	LOCAL_CFLAGS="-DMUST_UNBLOCK_CHLD -DPATH_MAX=1024" ;;
+ sco3.2*)	LOCAL_CFLAGS=-DMUST_UNBLOCK_CHLD ;;
 diff --git a/execute_cmd.c b/execute_cmd.c
 index 070f511..6a22395 100644
 --- a/execute_cmd.c
@@ -116,6 +142,66 @@ index 070f511..6a22395 100644
        if (asynchronous)
  	subshell_environment |= SUBSHELL_ASYNC;
        if (pipe_in != NO_PIPE || pipe_out != NO_PIPE)
+diff --git a/general.c b/general.c
+index aeffda5..c8442ef 100644
+--- a/general.c
++++ b/general.c
+@@ -595,6 +595,27 @@ sh_unset_nodelay_mode (int fd)
+   return 0;
+ }
+ 
++int
++sh_setnodelay (int fd)
++{
++  int flags;
++
++  if ((flags = fcntl (fd, F_GETFL, 0)) < 0)
++    return -1;
++
++  /* This is defined to O_NDELAY in filecntl.h if O_NONBLOCK is not present
++     and O_NDELAY is defined. */
++#ifdef O_NONBLOCK
++  flags |= O_NONBLOCK;
++#endif
++
++#ifdef O_NDELAY
++  flags |= O_NDELAY;
++#endif
++
++  return (fcntl (fd, F_SETFL, flags));
++}
++
+ /* Just a wrapper for the define in include/filecntl.h */
+ int
+ sh_setclexec (int fd)
+diff --git a/general.h b/general.h
+index 5b1eac0..8471a34 100644
+--- a/general.h
++++ b/general.h
+@@ -110,8 +110,13 @@ extern char *strcpy (char *, const char *);
+ #define INT_BUFSIZE_BOUND(t) (INT_STRLEN_BOUND (t) + 1)
+ 
+ /* Define exactly what a legal shell identifier consists of. */
+-#define legal_variable_starter(c) (ISALPHA(c) || (c == '_'))
+-#define legal_variable_char(c)	(ISALNUM(c) || c == '_')
++#if 0
++#define legal_variable_starter(c) (c < 128 && (ISALPHA(c) || c == '_'))
++#define legal_variable_char(c)	(c < 128 && (ISALNUM(c) || c == '_'))
++#else
++#define legal_variable_starter(c) (sh_syntaxtab[c] & CNAMESTART)
++#define legal_variable_char(c)	(sh_syntaxtab[c] & CNAME)
++#endif
+ 
+ /* Definitions used in subst.c and by the `read' builtin for field
+    splitting. */
+@@ -317,6 +322,7 @@ extern int line_isblank (const char *);
+ extern int assignment (const char *, int);
+ 
+ extern int sh_unset_nodelay_mode (int);
++extern int sh_setnodelay (int);
+ extern int sh_setclexec (int);
+ extern int sh_validfd (int);
+ extern int fd_ispipe (int);
 diff --git a/jobs.c b/jobs.c
 index 528c90f..0f32ebb 100644
 --- a/jobs.c
@@ -151,6 +237,66 @@ index e42b8fc..af3856a 100644
      return ((int)(c1 - c2));
  
    s1[0] = c1;
+diff --git a/lib/readline/display.c b/lib/readline/display.c
+index 9aa8c7b..6378a50 100644
+--- a/lib/readline/display.c
++++ b/lib/readline/display.c
+@@ -1024,6 +1024,7 @@ rl_redisplay (void)
+       while (local_prompt_newlines[newlines+1] != -1)
+ 	{
+ 	  temp = local_prompt_newlines[newlines+1];
++	  CHECK_INV_LBREAKS ();
+ 	  inv_lbreaks[++newlines] = temp;
+ 	}  
+ 
+@@ -1497,7 +1498,6 @@ rl_redisplay (void)
+ 	     the characters from the current cursor position.  But we
+ 	     only need to reprint it if the cursor is before the last
+ 	     invisible character in the prompt string. */
+-	  /* XXX - why not use local_prompt_len? */
+ 	  nleft = prompt_visible_length + wrap_offset;
+ 	  if (cursor_linenum == prompt_last_screen_line)
+ 	    {
+@@ -1509,11 +1509,7 @@ rl_redisplay (void)
+ 	         on the current screen line begins in the buffer. It is a
+ 	         buffer position, an index into curline
+ 	         (local_prompt + pmt_offset) */
+-	      cursor_bufpos = pmt_offset;
+-	      if (mb_cur_max == 1 || rl_byte_oriented)
+-		cursor_bufpos += _rl_last_c_pos;
+-	      else
+-		cursor_bufpos += _rl_last_c_pos + curline_invchars;
++	      cursor_bufpos = pmt_offset + local_prompt_len;
+ 
+ 	      if (local_prompt && local_prompt_invis_chars[cursor_linenum] &&
+ 		    _rl_last_c_pos > 0 &&
+@@ -2266,11 +2262,12 @@ update_line (char *old, char *old_face, char *new, char *new_face, int current_l
+   od = ofd - old;	/* index of first difference in visible line */
+   nd = nfd - new;	/* nd, od are buffer indexes */
+   if (current_line == 0 && !_rl_horizontal_scroll_mode &&
+-      _rl_term_cr && lendiff > prompt_visible_length && _rl_last_c_pos > 0 &&
++      _rl_term_cr && lendiff > prompt_visible_length && _rl_last_c_pos >= 0 &&
+       (((od > 0 || nd > 0) && (od <= prompt_last_invisible || nd <= prompt_last_invisible)) ||
+ 		((od >= lendiff) && _rl_last_c_pos < PROMPT_ENDING_INDEX)))
+     {
+-      _rl_cr ();
++      if (_rl_last_c_pos > 0)
++	_rl_cr ();
+       if (modmark)
+ 	_rl_output_some_chars ("*", 1);
+       _rl_output_some_chars (local_prompt, lendiff);
+@@ -3525,8 +3522,9 @@ _rl_redisplay_after_sigwinch (void)
+   else
+     rl_crlf ();
+ 
+-  if (_rl_screenwidth < prompt_visible_length)
+-    _rl_reset_prompt ();		/* update local_prompt_newlines array */
++  /* Let expand_prompt() update local_prompt_newlines and local_prompt_invis_chars
++    arrays */
++  _rl_reset_prompt ();
+ 
+   /* Redraw only the last line of a multi-line prompt. */
+   t = strrchr (rl_display_prompt, '\n');
 diff --git a/lib/readline/input.c b/lib/readline/input.c
 index e6a39e2..d0a32f6 100644
 --- a/lib/readline/input.c
@@ -422,8 +568,76 @@ index af75dcf..e3d67b6 100644
  	return (ansic_wshouldquote (s));
  #endif
        if (ISPRINT (c) == 0)
+diff --git a/mksyntax.c b/mksyntax.c
+index 5a64c8f..66fbbfd 100644
+--- a/mksyntax.c
++++ b/mksyntax.c
+@@ -60,6 +60,8 @@ struct wordflag {
+ 	{ CSPECVAR,	"CSPECVAR" },
+ 	{ CSUBSTOP,	"CSUBSTOP" },
+ 	{ CBLANK,	"CBLANK" },
++	{ CNAME,	"CNAME" },
++	{ CNAMESTART,	"CNAMESTART" }
+ };
+ 	
+ #define N_WFLAGS	(sizeof (wordflags) / sizeof (wordflags[0]))
+@@ -198,6 +200,45 @@ addblanks (void)
+     }
+ }
+ 
++static void
++setnamechars(void)
++{
++  lsyntax['_'] |= CNAME|CNAMESTART;
++
++  lsyntax['0'] |= CNAME; lsyntax['1'] |= CNAME; lsyntax['2'] |= CNAME;
++  lsyntax['3'] |= CNAME; lsyntax['4'] |= CNAME; lsyntax['5'] |= CNAME;
++  lsyntax['6'] |= CNAME; lsyntax['7'] |= CNAME; lsyntax['8'] |= CNAME;
++  lsyntax['9'] |= CNAME;
++
++  lsyntax['a'] |= CNAME|CNAMESTART; lsyntax['b'] |= CNAME|CNAMESTART;
++  lsyntax['c'] |= CNAME|CNAMESTART; lsyntax['d'] |= CNAME|CNAMESTART;
++  lsyntax['e'] |= CNAME|CNAMESTART; lsyntax['f'] |= CNAME|CNAMESTART;
++  lsyntax['g'] |= CNAME|CNAMESTART; lsyntax['h'] |= CNAME|CNAMESTART;
++  lsyntax['i'] |= CNAME|CNAMESTART; lsyntax['j'] |= CNAME|CNAMESTART;
++  lsyntax['k'] |= CNAME|CNAMESTART; lsyntax['l'] |= CNAME|CNAMESTART;
++  lsyntax['m'] |= CNAME|CNAMESTART; lsyntax['n'] |= CNAME|CNAMESTART;
++  lsyntax['o'] |= CNAME|CNAMESTART; lsyntax['p'] |= CNAME|CNAMESTART;
++  lsyntax['q'] |= CNAME|CNAMESTART; lsyntax['r'] |= CNAME|CNAMESTART;
++  lsyntax['s'] |= CNAME|CNAMESTART; lsyntax['t'] |= CNAME|CNAMESTART;
++  lsyntax['u'] |= CNAME|CNAMESTART; lsyntax['v'] |= CNAME|CNAMESTART;
++  lsyntax['w'] |= CNAME|CNAMESTART; lsyntax['x'] |= CNAME|CNAMESTART;
++  lsyntax['y'] |= CNAME|CNAMESTART; lsyntax['z'] |= CNAME|CNAMESTART;
++
++  lsyntax['A'] |= CNAME|CNAMESTART; lsyntax['B'] |= CNAME|CNAMESTART;
++  lsyntax['C'] |= CNAME|CNAMESTART; lsyntax['D'] |= CNAME|CNAMESTART;
++  lsyntax['E'] |= CNAME|CNAMESTART; lsyntax['F'] |= CNAME|CNAMESTART;
++  lsyntax['G'] |= CNAME|CNAMESTART; lsyntax['H'] |= CNAME|CNAMESTART;
++  lsyntax['I'] |= CNAME|CNAMESTART; lsyntax['J'] |= CNAME|CNAMESTART;
++  lsyntax['K'] |= CNAME|CNAMESTART; lsyntax['L'] |= CNAME|CNAMESTART;
++  lsyntax['M'] |= CNAME|CNAMESTART; lsyntax['N'] |= CNAME|CNAMESTART;
++  lsyntax['O'] |= CNAME|CNAMESTART; lsyntax['P'] |= CNAME|CNAMESTART;
++  lsyntax['Q'] |= CNAME|CNAMESTART; lsyntax['R'] |= CNAME|CNAMESTART;
++  lsyntax['S'] |= CNAME|CNAMESTART; lsyntax['T'] |= CNAME|CNAMESTART;
++  lsyntax['U'] |= CNAME|CNAMESTART; lsyntax['V'] |= CNAME|CNAMESTART;
++  lsyntax['W'] |= CNAME|CNAMESTART; lsyntax['X'] |= CNAME|CNAMESTART;
++  lsyntax['Y'] |= CNAME|CNAMESTART; lsyntax['Z'] |= CNAME|CNAMESTART;
++}
++
+ /* load up the correct flag values in lsyntax */
+ static void
+ load_lsyntax (void)
+@@ -234,6 +275,8 @@ load_lsyntax (void)
+   addcstr ("-=?+", CSUBSTOP);		/* OP in ${paramOPword} */
+ 
+   addblanks ();
++
++  setnamechars ();
+ }
+ 
+ static void
 diff --git a/patchlevel.h b/patchlevel.h
-index 4075274..13c6c07 100644
+index 4075274..c4e7649 100644
 --- a/patchlevel.h
 +++ b/patchlevel.h
 @@ -25,6 +25,6 @@
@@ -431,9 +645,44 @@ index 4075274..13c6c07 100644
     looks for to find the patch level (for the sccs version string). */
  
 -#define PATCHLEVEL 0
-+#define PATCHLEVEL 15
++#define PATCHLEVEL 20
  
  #endif /* _PATCHLEVEL_H_ */
+diff --git a/redir.c b/redir.c
+index 343536b..08d92fc 100644
+--- a/redir.c
++++ b/redir.c
+@@ -472,7 +472,30 @@ here_document_to_fd (WORD_DESC *redirectee, enum r_instruction ri)
+ 	}
+ #endif
+ 
++#if defined (PIPESIZE_DYNAMIC)
++      /* If we can't count on the pipe size determined at compile time to be
++	 constant across systems, define PIPESIZE_DYNAMIC in configure.ac.
++	 We set the pipe's write end to be non-blocking, try to write, and
++	 fall back to a temp file on error. */
++      if (sh_setnodelay (herepipe[1]) < 0)
++	{
++	  close (herepipe[0]);
++	  close (herepipe[1]);
++	  goto use_tempfile;
++	}
++#endif
++      
+       r = heredoc_write (herepipe[1], document, document_len);
++
++#if defined (PIPESIZE_DYNAMIC)
++      if (r == ENOSPC || r == EAGAIN)
++	{
++	  close (herepipe[0]);
++	  close (herepipe[1]);
++	  goto use_tempfile;
++	}
++#endif
++	  
+       if (document != redirectee->word)
+ 	free (document);
+       close (herepipe[1]);
 diff --git a/sig.c b/sig.c
 index 6de1325..d82027e 100644
 --- a/sig.c
@@ -503,6 +752,19 @@ index e9d3e75..dd5d57b 100644
  	  if (((quoted & (Q_HERE_DOCUMENT|Q_DOUBLE_QUOTES)) || dquote) && (sh_syntaxtab[c] & CBSDQUOTE) == 0)
  	    *r++ = '\\';
  	  /* FALLTHROUGH */
+diff --git a/syntax.h b/syntax.h
+index 34f5496..eb6f467 100644
+--- a/syntax.h
++++ b/syntax.h
+@@ -63,6 +63,8 @@
+ #define CSPECVAR	0x0800	/* single-character shell variable name */
+ #define CSUBSTOP	0x1000	/* values of OP for ${word[:]OPstuff} */
+ #define CBLANK		0x2000	/* whitespace (blank) character */
++#define CNAME		0x4000	/* POSIX name character ([_0-9a-zA-Z]) */
++#define CNAMESTART	0x8000	/* POSIX name start character ([_a-zA-Z]) */
+ 
+ /* Defines for use by the rest of the shell. */
+ extern int sh_syntaxtab[];
 diff --git a/tests/quotearray.right b/tests/quotearray.right
 index a3cc93a..a75ef52 100644
 --- a/tests/quotearray.right
