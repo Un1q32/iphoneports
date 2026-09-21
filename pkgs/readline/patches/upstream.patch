@@ -1,5 +1,5 @@
 diff --git a/display.c b/display.c
-index 9aa8c7b..edb525d 100644
+index 9aa8c7b..2ddcf85 100644
 --- a/display.c
 +++ b/display.c
 @@ -783,7 +783,7 @@ _rl_optimize_redisplay (void)
@@ -11,6 +11,62 @@ index 9aa8c7b..edb525d 100644
  
  #define W_OFFSET(line, offset) ((line) == 0 ? offset : 0)
  #define VIS_LLEN(l)	((l) > _rl_vis_botlin ? 0 : (vis_lbreaks[l+1] - vis_lbreaks[l]))
+@@ -1024,6 +1024,7 @@ rl_redisplay (void)
+       while (local_prompt_newlines[newlines+1] != -1)
+ 	{
+ 	  temp = local_prompt_newlines[newlines+1];
++	  CHECK_INV_LBREAKS ();
+ 	  inv_lbreaks[++newlines] = temp;
+ 	}  
+ 
+@@ -1497,7 +1498,6 @@ rl_redisplay (void)
+ 	     the characters from the current cursor position.  But we
+ 	     only need to reprint it if the cursor is before the last
+ 	     invisible character in the prompt string. */
+-	  /* XXX - why not use local_prompt_len? */
+ 	  nleft = prompt_visible_length + wrap_offset;
+ 	  if (cursor_linenum == prompt_last_screen_line)
+ 	    {
+@@ -1509,11 +1509,7 @@ rl_redisplay (void)
+ 	         on the current screen line begins in the buffer. It is a
+ 	         buffer position, an index into curline
+ 	         (local_prompt + pmt_offset) */
+-	      cursor_bufpos = pmt_offset;
+-	      if (mb_cur_max == 1 || rl_byte_oriented)
+-		cursor_bufpos += _rl_last_c_pos;
+-	      else
+-		cursor_bufpos += _rl_last_c_pos + curline_invchars;
++	      cursor_bufpos = pmt_offset + local_prompt_len;
+ 
+ 	      if (local_prompt && local_prompt_invis_chars[cursor_linenum] &&
+ 		    _rl_last_c_pos > 0 &&
+@@ -2266,11 +2262,12 @@ update_line (char *old, char *old_face, char *new, char *new_face, int current_l
+   od = ofd - old;	/* index of first difference in visible line */
+   nd = nfd - new;	/* nd, od are buffer indexes */
+   if (current_line == 0 && !_rl_horizontal_scroll_mode &&
+-      _rl_term_cr && lendiff > prompt_visible_length && _rl_last_c_pos > 0 &&
++      _rl_term_cr && lendiff > prompt_visible_length && _rl_last_c_pos >= 0 &&
+       (((od > 0 || nd > 0) && (od <= prompt_last_invisible || nd <= prompt_last_invisible)) ||
+ 		((od >= lendiff) && _rl_last_c_pos < PROMPT_ENDING_INDEX)))
+     {
+-      _rl_cr ();
++      if (_rl_last_c_pos > 0)
++	_rl_cr ();
+       if (modmark)
+ 	_rl_output_some_chars ("*", 1);
+       _rl_output_some_chars (local_prompt, lendiff);
+@@ -3525,8 +3522,9 @@ _rl_redisplay_after_sigwinch (void)
+   else
+     rl_crlf ();
+ 
+-  if (_rl_screenwidth < prompt_visible_length)
+-    _rl_reset_prompt ();		/* update local_prompt_newlines array */
++  /* Let expand_prompt() update local_prompt_newlines and local_prompt_invis_chars
++    arrays */
++  _rl_reset_prompt ();
+ 
+   /* Redraw only the last line of a multi-line prompt. */
+   t = strrchr (rl_display_prompt, '\n');
 diff --git a/input.c b/input.c
 index e6a39e2..838692a 100644
 --- a/input.c
@@ -79,11 +135,11 @@ index 7b845c2..6cb1879 100644
    return (r != 0);
  }
 diff --git a/patchlevel b/patchlevel
-index d8c9df7..ce3e355 100644
+index d8c9df7..6ebd6a5 100644
 --- a/patchlevel
 +++ b/patchlevel
 @@ -1,3 +1,3 @@
  # Do not edit -- exists only for use by patch
  
 -0
-+3
++6
