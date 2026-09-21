@@ -11,7 +11,7 @@ make DESTDIR="$_DESTDIR" install
 (
 cd "$_DESTDIR/var/usr"
 rm -rf share
-strip_and_sign bin/less bin/lesskey libexec/lessecho
+strip_and_sign bin/less libexec/lessecho
 )
 
 installlicense "$_SRCDIR/COPYING"
