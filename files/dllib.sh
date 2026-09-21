@@ -21,11 +21,10 @@ dlsrc() {
             if curl -L -# -o "$_DLCACHE/$cachename" "$link" && hashcheck "$_DLCACHE/$cachename" "$hash"; then
                 break
             else
-                printf 'Failed to download file, tries remaining: %s\n' "$tries"
                 tries=$((tries - 1))
+                printf 'Failed to download file, tries remaining: %s\n' "$tries"
             fi
             if [ "$tries" -le 0 ]; then
-                printf 'Failed to download file!\n'
                 exit 1
             fi
         done
