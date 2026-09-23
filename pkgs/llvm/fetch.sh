@@ -1,10 +1,10 @@
 #!/bin/sh
 . ../../files/dllib.sh
-ver='23.1.1'
+ver='23.1.2'
 dlsrc \
     "https://github.com/llvm/llvm-project/archive/refs/tags/llvmorg-$ver.tar.gz" \
     "llvm-$ver.tar.gz" \
-    851b3d701a4fbdd9f69536d4acda578469e810ca7056687d6556443f5fd39557 \
+    75788d759e6987a910975b902f554dc77c08b076b945b2cebde54116d8e831ca \
     "llvm-project-llvmorg-$ver"
 
 if [ "$_PKGNAME" = 'compiler-rt' ]; then
