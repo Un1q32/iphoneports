@@ -1,8 +1,8 @@
 #!/bin/sh
-rm -rf "$_DESTDIR" "$_SRCDIR"
-printf "Downloading source...\n"
-curl -L -# -o src.tar.bz2 https://downloads.sourceforge.net/project/pcre/pcre/8.45/pcre-8.45.tar.bz2
-printf "Unpacking source...\n"
-tar -C "$_TMP" -xf src.tar.bz2
-rm src.tar.bz2
-mv "$_TMP"/pcre-8.45 "$_SRCDIR"
+. ../../files/dllib.sh
+ver='8.45'
+dlsrc \
+    "https://downloads.sourceforge.net/project/pcre/pcre/$ver/pcre-$ver.tar.bz2" \
+    "pcre-$ver.tar.bz2" \
+    4dae6fdcd2bb0bb6c37b5f97c33c2be954da743985369cddac3546e3218bffb8 \
+    "pcre-$ver"
