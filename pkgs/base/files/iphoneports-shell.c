@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <sys/stat.h>
+#include <sys/wait.h>
 #include <unistd.h>
 
 static bool checkshell(const char *shell, bool fatal) {
@@ -33,6 +34,42 @@ static bool checkshell(const char *shell, bool fatal) {
 }
 
 int main(void) {
+  if (access("/var/usr", F_OK) == -1) {
+    if (access("/var/jb/iphoneports", F_OK) == 0) {
+      pid_t pid = fork();
+      if (pid == -1) {
+        perror("fork");
+        fprintf(stderr, "/var/usr doesn't exist, and /var/jb/iphoneports does, "
+                        "but we couldn't regenerate the symlink.\n"
+                        "Try manually running "
+                        "/var/jb/iphoneports/libexec/iphoneports-fixup before "
+                        "re-running iphoneports-shell.\n");
+        return EXIT_FAILURE;
+      } else if (pid == 0) {
+        execl("/var/jb/iphoneports/libexec/iphoneports-fixup", NULL);
+        perror("exec");
+        fprintf(stderr, "/var/usr doesn't exist, and /var/jb/iphoneports does, "
+                        "but we couldn't regenerate the symlink.\n"
+                        "Try reinstalling iphoneports-base before re-running "
+                        "iphoneports-shell.\n");
+        return EXIT_FAILURE;
+      }
+      int status;
+      wait(&status);
+      if (WEXITSTATUS(status) != EXIT_SUCCESS) {
+        fprintf(stderr, "/var/usr doesn't exist, and /var/jb/iphoneports does, "
+                        "but we couldn't regenerate the symlink.\n"
+                        "Try reinstalling iphoneports-base before re-running "
+                        "iphoneports-shell.\n");
+        return EXIT_FAILURE;
+      }
+    } else {
+      fprintf(
+          stderr,
+          "Couldn't find iPhonePorts, your environment may be corrupted.\n");
+      return EXIT_FAILURE;
+    }
+  }
   char shell[PATH_MAX] = "/var/usr/bin/bash";
   if (access("/var/usr/shell", F_OK) == 0) {
     ssize_t ret = readlink("/var/usr/shell", shell, PATH_MAX);

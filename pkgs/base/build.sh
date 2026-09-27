@@ -7,12 +7,13 @@ cd "$_DESTDIR"
 mkdir -p var/usr/bin var/usr/libexec var/usr/etc/profile.d
 
 "$_TARGET-cc" -Wall -Wextra -pedantic -std=c99 -Os -o var/usr/libexec/iphoneports-shell "$_PKGROOT/files/iphoneports-shell.c"
+"$_TARGET-cc" -Wall -Wextra -pedantic -std=c99 -Os -o var/usr/libexec/iphoneports-fixup "$_PKGROOT/files/iphoneports-fixup.c"
 "$_TARGET-cc" -Wall -Wextra -pedantic -std=c99 -Os -o var/usr/bin/iphoneports-chsh "$_PKGROOT/files/iphoneports-chsh.c"
 
-strip_and_sign var/usr/libexec/iphoneports-shell var/usr/bin/iphoneports-chsh
-chmod 4755 var/usr/bin/iphoneports-chsh
+strip_and_sign var/usr/libexec/iphoneports-shell var/usr/libexec/iphoneports-fixup var/usr/bin/iphoneports-chsh
+chmod 4755 var/usr/bin/iphoneports-chsh var/usr/libexec/iphoneports-fixup
 
-installsuid var/usr/bin/iphoneports-chsh
+installsuid var/usr/bin/iphoneports-chsh var/usr/libexec/iphoneports-fixup
 
 cp "$_PKGROOT/files/profile" var/usr/etc
 cp "$_PKGROOT/files/aliases.sh" var/usr/etc/profile.d
