@@ -303,16 +303,13 @@ _OSVER=__ENVIRONMENT_OS_VERSION_MIN_REQUIRED__
         _ENTITLEMENTS="$bsroot/files/ios-entitlements.xml"
     fi
 
+    rustcpu="$_CPU"
+    rustsys="$_SUBSYSTEM"
     if [ "$_SUBSYSTEM" = "macos" ]; then
         rustsys='darwin'
         if [ "$_CPU" = 'i386' ]; then
             rustcpu='i686'
-        else
-            rustcpu="$_CPU"
         fi
-    else
-        rustsys="$_SUBSYSTEM"
-        rustcpu="$_CPU"
     fi
     [ "$rustcpu" = 'arm64' ] && rustcpu='aarch64'
 
