@@ -47,18 +47,18 @@ builddeb() {
     # SUID binaries must be moved outside of /var to work, except on rootless jailbreaks or macOS
     if [ "$_SUBSYSTEM" != 'macos' ] && [ -f "$_TMP/suidbinaries" ]; then
         if ! [ -f "$_DESTDIR/DEBIAN/postinst" ]; then
-            printf '#!/var/usr/bin/sh\n' > "$_DESTDIR/DEBIAN/postinst"
+            printf '#!%s/bin/sh\n' "$_PREFIX" > "$_DESTDIR/DEBIAN/postinst"
             chmod +x "$_DESTDIR/DEBIAN/postinst"
         fi
         if ! [ -f "$_DESTDIR/DEBIAN/postrm" ]; then
-            printf '#!/var/usr/bin/sh\n' > "$_DESTDIR/DEBIAN/postrm"
+            printf '#!%s/bin/sh\n' "$_PREFIX" > "$_DESTDIR/DEBIAN/postrm"
             chmod +x "$_DESTDIR/DEBIAN/postrm"
         fi
-        printf '/var/usr/bin/mkdir -p /usr/local/libexec/iphoneports 2>/dev/null || exit 0\n' >> "$_DESTDIR/DEBIAN/postinst"
-        printf "[ -e /var/usr/bin/rm ] && __iphoneports_rm=/var/usr/bin/rm || __iphoneports_rm=rm\n" >> "$_DESTDIR/DEBIAN/postrm"
+        printf '%s/bin/mkdir -p /usr/local/libexec/iphoneports 2>/dev/null || exit 0\n' "$_PREFIX" >> "$_DESTDIR/DEBIAN/postinst"
+        printf "[ -e %s/bin/rm ] && __iphoneports_rm=%s/bin/rm || __iphoneports_rm=rm\n" "$_PREFIX" "$_PREFIX" >> "$_DESTDIR/DEBIAN/postrm"
         while IFS= read -r bin; do
-            printf '%s\n' "/var/usr/bin/mv \"$bin\" /usr/local/libexec/iphoneports" >> "$_DESTDIR/DEBIAN/postinst"
-            printf '%s\n' "/var/usr/bin/ln -s \"/usr/local/libexec/iphoneports/${bin##*/}\" \"$bin\"" >> "$_DESTDIR/DEBIAN/postinst"
+            printf '%s\n' "%s/bin/mv \"$bin\" /usr/local/libexec/iphoneports" "$_PREFIX" >> "$_DESTDIR/DEBIAN/postinst"
+            printf '%s\n' "%s/bin/ln -s \"/usr/local/libexec/iphoneports/${bin##*/}\" \"$bin\"" "$_PREFIX" >> "$_DESTDIR/DEBIAN/postinst"
             printf '%s\n' "\"\$__iphoneports_rm\" -f \"/usr/local/libexec/iphoneports/${bin##*/}\"" >> "$_DESTDIR/DEBIAN/postrm"
         done < "$_TMP/suidbinaries"
         rm "$_TMP/suidbinaries"
@@ -73,8 +73,8 @@ targethack() {
 }
 
 installlicense() {
-    mkdir -p "$_DESTDIR/var/usr/share/licenses/$_PKGNAME"
-    cp "$@" "$_DESTDIR/var/usr/share/licenses/$_PKGNAME"
+    mkdir -p "${_DESTDIR}${_PREFIX}/share/licenses/$_PKGNAME"
+    cp "$@" "${_DESTDIR}${_PREFIX}/share/licenses/$_PKGNAME"
 }
 
 installsuid() {

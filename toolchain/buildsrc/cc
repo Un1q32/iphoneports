@@ -10,11 +10,11 @@ case $0 in
     *)   cc=clang   ;;
 esac
 
-[ -d "$_SDK/var/usr/lib" ] && libflags="-L$_SDK/var/usr/lib"
+[ -d "${_SDK}${_PREFIX}/lib" ] && libflags="-L${_SDK}${_PREFIX}/lib"
 
 stdlib=libc++
-if [ -f "$_SDK/var/usr/lib/libc++.dylib" ]; then
-    includeflags="-stdlib++-isystem$_SDK/var/usr/include/c++/v1"
+if [ -f "${_SDK}${_PREFIX}/lib/libc++.dylib" ]; then
+    includeflags="-stdlib++-isystem${_SDK}${_PREFIX}/include/c++/v1"
 elif [ -f "$_SDK/usr/lib/libstdc++.6.dylib" ] || [ -f "$_SDK/usr/lib/libstdc++.6.tbd" ]; then
     stdlib=libstdc++
 fi
@@ -33,7 +33,7 @@ fi
 exec $ccache "$cc" \
     -isysroot "$_SDK" \
     -stdlib="$stdlib" \
-    -isystem "$_SDK/var/usr/include" \
+    -isystem "${_SDK}${_PREFIX}/include" \
     "$includeflags" \
     "$libflags" \
     -mlinker-version=956.6 \
