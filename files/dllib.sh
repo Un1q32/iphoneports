@@ -8,12 +8,10 @@ hashcheck() {
     return $ret
 }
 
-dlsrc() {
+dlfile() {
     link="$1"
     cachename="$2"
     hash="$3"
-    folder="$4"
-    rm -rf "$_DESTDIR" "$_SRCDIR"
     if ! hashcheck "$_DLCACHE/$cachename" "$hash"; then
         printf "Downloading source...\n"
         tries=5
@@ -29,7 +27,12 @@ dlsrc() {
             fi
         done
     fi
+}
+
+dlsrc() {
+    rm -rf "$_DESTDIR" "$_SRCDIR"
+    dlfile "$@"
     printf "Unpacking source...\n"
-    tar -C "$_TMP" -xf "$_DLCACHE/$cachename"
-    mv "$_TMP/$folder" "$_SRCDIR"
+    tar -C "$_TMP" -xf "$_DLCACHE/$2"
+    mv "$_TMP/$4" "$_SRCDIR"
 }
