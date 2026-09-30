@@ -11,7 +11,7 @@ make install DESTDIR="$_DESTDIR"
 (
 cd "$_DESTDIR/var/usr"
 rm -rf share
-strip_and_sign bin/plistutil lib/libplist-2.0.4.dylib lib/libplist++-2.0.4.dylib
+strip_and_sign bin/plistutil lib/libplist-2.0.*.dylib lib/libplist++-2.0.*.dylib
 )
 
 installlicense "$_SRCDIR/COPYING"
