@@ -1,1 +1,1 @@
-{"Version":"@VERSION@","MaximumDeploymentTarget":"@VERSION@.99","CanonicalName":"@SUBSYSTEM@@VERSION@","CustomProperties":{}}
+{"Version":"@VERSION@","DefaultDeploymentTarget":"@VERSION@","MaximumDeploymentTarget":"@VERSION@.99","CanonicalName":"@SUBSYSTEM@@VERSION@"}
