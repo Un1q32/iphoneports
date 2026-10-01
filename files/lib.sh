@@ -84,6 +84,10 @@ installsuid() {
 }
 
 supportsrust() {
+    if ! [ -f "$_BSROOT/toolchain/bin/rustc" ]; then
+        printf 'The toolchain was built without rust support.\n'
+        return 1
+    fi
     if { [ "$_SUBSYSTEM" = "ios" ] && [ "$_OSVER" -lt 20000 ]; } ||
         { [ "$_SUBSYSTEM" = "macos" ] && [ "$_OSVER" -lt 1050 ]; }; then
         printf 'Rust requires at least Mac OS X 10.5 or iPhone OS 2.0\n'
