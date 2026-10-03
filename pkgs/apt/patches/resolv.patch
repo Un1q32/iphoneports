@@ -13,7 +13,7 @@ diff -urN a/apt-pkg/contrib/srvrec.cc b/apt-pkg/contrib/srvrec.cc
 diff -urN a/CMakeLists.txt b/CMakeLists.txt
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -198,7 +198,10 @@
+@@ -180,7 +180,10 @@
  if(HAVE_LIBC_RESOLV)
      set(RESOLV_LIBRARIES)
  else()
