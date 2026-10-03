@@ -1,0 +1,11 @@
+--- src/apt-pkg/deb/dpkgpm.cc.orig
++++ src/apt-pkg/deb/dpkgpm.cc
+@@ -61,6 +61,8 @@
+ #include <apti18n.h>
+ 									/*}}}*/
+ 
++extern "C" char ***_NSGetEnviron(void);
++#define environ (*_NSGetEnviron())
+ extern char **environ;
+ 
+ using namespace std;

@@ -1,0 +1,15 @@
+diff -urN a/apt-pkg/contrib/mmap.cc b/apt-pkg/contrib/mmap.cc
+--- a/apt-pkg/contrib/mmap.cc
++++ b/apt-pkg/contrib/mmap.cc
+@@ -306,7 +306,11 @@
+       if (validData() == false)
+ 	 return;
+ #ifdef _POSIX_MAPPED_FILES
++   if ((this->Flags & Fallback) != Fallback) {
+       munmap(Base, WorkSpace);
++   } else {
++      free(Base);
++   }
+ #else
+       free(Base);
+ #endif

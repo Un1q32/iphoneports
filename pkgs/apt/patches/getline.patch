@@ -1,0 +1,10 @@
+--- src/apt-private/private-output.cc.orig
++++ src/apt-private/private-output.cc
+@@ -32,6 +32,7 @@
+ #include <sstream>
+ 
+ #include <apti18n.h>
++#undef getline
+ 									/*}}}*/
+ 
+ using namespace std;

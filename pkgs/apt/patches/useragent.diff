@@ -1,0 +1,21 @@
+diff -urN a/methods/http.cc b/methods/http.cc
+--- a/methods/http.cc
++++ b/methods/http.cc
+@@ -341,7 +341,7 @@
+       Req << "Proxy-Authorization: Basic "
+ 	  << Base64Encode(Proxy.User + ":" + Proxy.Password) << "\r\n";
+ 
+-   Req << "User-Agent: " << Owner->ConfigFind("User-Agent", "Debian APT-HTTP/1.3 (" PACKAGE_VERSION ")") << "\r\n";
++   Req << "User-Agent: " << Owner->ConfigFind("User-Agent", "iPhonePorts APT-HTTP/1.3 (" PACKAGE_VERSION ")") << "\r\n";
+ 
+    Req << "\r\n";
+ 
+@@ -957,7 +957,7 @@
+ 	 << Base64Encode(Uri.User + ":" + Uri.Password) << "\r\n";
+ 
+    Req << "User-Agent: " << ConfigFind("User-Agent",
+-		"Debian APT-HTTP/1.3 (" PACKAGE_VERSION ")");
++		"iPhonePorts APT-HTTP/1.3 (" PACKAGE_VERSION ")");
+ 
+ #ifdef HAVE_SYSTEMD
+    if (ConfigFindB("User-Agent-Non-Interactive", false))

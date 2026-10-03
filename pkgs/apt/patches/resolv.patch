@@ -1,0 +1,27 @@
+diff -urN a/apt-pkg/contrib/srvrec.cc b/apt-pkg/contrib/srvrec.cc
+--- a/apt-pkg/contrib/srvrec.cc
++++ b/apt-pkg/contrib/srvrec.cc
+@@ -63,7 +63,7 @@
+    unsigned char answer[PACKETSZ];
+    int answer_len, compressed_name_len;
+    int answer_count;
+-#if __RES >= 19991006
++#if __RES >= 19991006 && (!defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) || __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ >= 20000)
+    struct __res_state res;
+ 
+    if (res_ninit(&res) != 0)
+diff -urN a/CMakeLists.txt b/CMakeLists.txt
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -198,7 +198,10 @@
+ if(HAVE_LIBC_RESOLV)
+     set(RESOLV_LIBRARIES)
+ else()
+-    set(RESOLV_LIBRARIES -lresolv)
++    find_library(RESOLV_LIBRARIES resolv)
++    if(NOT RESOLV_LIBRARIES)
++        set(RESOLV_LIBRARIES "")
++    endif()
+ endif()
+ 
+ # Configure some variables like package, version and architecture.

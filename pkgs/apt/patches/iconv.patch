@@ -1,0 +1,17 @@
+diff -urN a/apt-pkg/contrib/strutl.cc b/apt-pkg/contrib/strutl.cc
+--- a/apt-pkg/contrib/strutl.cc
++++ b/apt-pkg/contrib/strutl.cc
+@@ -185,7 +185,13 @@
+   {
+      char *outptr = outbuf;
+      size_t outsize = bufsize;
++#ifdef iconv
++     // old GNU libiconv headers (Tiger SDK) #define iconv to libiconv,
++     // whose prototype takes a const second parameter
++     size_t const err = iconv(cd, (const char **)&inptr, &insize, &outptr, &outsize);
++#else
+      size_t const err = iconv(cd, &inptr, &insize, &outptr, &outsize);
++#endif
+      dest->append(outbuf, outptr - outbuf);
+      if (err == (size_t)(-1))
+      {

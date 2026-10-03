@@ -1,0 +1,9 @@
+berkeleydb
+lz4
+openssl
+xxhash
+xz
+zstd
+bzip2
+zlib
+libc++

@@ -1,0 +1,22 @@
+diff -urN a/apt-pkg/contrib/fileutl.h b/apt-pkg/contrib/fileutl.h
+--- a/apt-pkg/contrib/fileutl.h
++++ b/apt-pkg/contrib/fileutl.h
+@@ -33,6 +33,7 @@
+ #include <string>
+ #include <string_view>
+ #include <vector>
++#include <sys/types.h>
+ #include <sys/stat.h>
+ 
+ /* Define this for python-apt */
+diff -urN a/apt-pkg/deb/debsystem.h b/apt-pkg/deb/debsystem.h
+--- a/apt-pkg/deb/debsystem.h
++++ b/apt-pkg/deb/debsystem.h
+@@ -12,6 +12,7 @@
+ #include <apt-pkg/pkgcache.h>
+ #include <apt-pkg/pkgsystem.h>
+ 
++#include <sys/types.h>
+ #include <vector>
+ class Configuration;
+ class pkgIndexFile;

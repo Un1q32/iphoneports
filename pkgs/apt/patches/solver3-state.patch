@@ -1,0 +1,55 @@
+diff -urN a/apt-pkg/solver3.h b/apt-pkg/solver3.h
+--- a/apt-pkg/solver3.h
++++ b/apt-pkg/solver3.h
+@@ -307,24 +307,12 @@
+    ContiguousCacheMap<pkgCache::Version, State> verStates;
+ 
+    // \brief Helper function for safe access to package state.
+-   constexpr State &operator[](const pkgCache::Package *P) noexcept
+-   {
+-      return pkgStates[P];
+-   }
+-   constexpr const State &operator[](const pkgCache::Package *P) const noexcept
+-   {
+-      return pkgStates[P];
+-   }
++   constexpr State &operator[](const pkgCache::Package *P) noexcept;
++   constexpr const State &operator[](const pkgCache::Package *P) const noexcept;
+ 
+    // \brief Helper function for safe access to version state.
+-   constexpr State &operator[](const pkgCache::Version *V) noexcept
+-   {
+-      return verStates[V];
+-   }
+-   constexpr const State &operator[](const pkgCache::Version *V) const noexcept
+-   {
+-      return verStates[V];
+-   }
++   constexpr State &operator[](const pkgCache::Version *V) noexcept;
++   constexpr const State &operator[](const pkgCache::Version *V) const noexcept;
+    // \brief Helper function for safe access to either state.
+    constexpr State &operator[](Var r) noexcept;
+    constexpr const State &operator[](Var r) const noexcept;
+@@ -583,6 +571,22 @@
+    std::optional<Work> work;
+ };
+ 
++constexpr APT::Solver::Solver::State &APT::Solver::Solver::operator[](const pkgCache::Package *P) noexcept
++{
++   return pkgStates[P];
++}
++constexpr const APT::Solver::Solver::State &APT::Solver::Solver::operator[](const pkgCache::Package *P) const noexcept
++{
++   return pkgStates[P];
++}
++constexpr APT::Solver::Solver::State &APT::Solver::Solver::operator[](const pkgCache::Version *V) noexcept
++{
++   return verStates[V];
++}
++constexpr const APT::Solver::Solver::State &APT::Solver::Solver::operator[](const pkgCache::Version *V) const noexcept
++{
++   return verStates[V];
++}
+ constexpr APT::Solver::Solver::State &APT::Solver::Solver::operator[](APT::Solver::Var r) noexcept
+ {
+    if (auto P = r.Pkg())

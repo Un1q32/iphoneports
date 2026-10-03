@@ -1,0 +1,12 @@
+diff -urN a/apt-pkg/init.cc b/apt-pkg/init.cc
+--- a/apt-pkg/init.cc
++++ b/apt-pkg/init.cc
+@@ -211,7 +211,7 @@
+    Cnf.CndSet("Acquire::Snapshots::URI::Host::ppa.launchpadcontent.net", "https://snapshot.ppa.launchpadcontent.net/@PATH@/@SNAPSHOTID@/");
+    Cnf.CndSet("Acquire::Snapshots::URI::Host::ppa.launchpad.net", "https://snapshot.ppa.launchpadcontent.net/@PATH@/@SNAPSHOTID@/");
+ 
+-   Cnf.CndSet("DPkg::Path", "/usr/sbin:/usr/bin:/sbin:/bin");
++   Cnf.CndSet("DPkg::Path", "/var/usr/sbin:/var/usr/bin:/var/sbin:/var/bin:/usr/sbin:/usr/bin:/sbin:/bin");
+ 
+    // Read an alternate config file
+    _error->PushToStack();
