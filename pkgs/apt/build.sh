@@ -45,6 +45,9 @@ for bin in bin/* lib/*.dylib $(find libexec/apt -type f); do
 done
 )
 
+mkdir -p "$_DESTDIR/var/usr/etc/apt/apt.conf.d"
+cp "$_PKGROOT/files/00sandbox" "$_DESTDIR/var/usr/etc/apt/apt.conf.d"
+
 installlicense "$_SRCDIR/COPYING"
 
 builddeb
