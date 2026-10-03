@@ -16,7 +16,7 @@ make DESTDIR="$_DESTDIR" install
 (
 cd "$_DESTDIR/var/usr"
 rm -rf docs
-chmod u+w bin/*
+chmod u+w bin/* include/*
 strip_and_sign bin/*
 for lib in lib/*.dylib; do
     [ -h "$lib" ] || strip_and_sign "$lib"
