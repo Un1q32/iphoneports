@@ -40,11 +40,8 @@ DESTDIR="$_DESTDIR" ninja install
 
 (
 cd "$_DESTDIR/var/usr"
-find bin lib libexec -type f | while IFS= read -r file; do
-    magic=$(od -An -tx1 -N4 "$file" | tr -d ' \n')
-    case $magic in
-        feedfacf|feedface|cafebaby|cafebabf) strip_and_sign "$file" ;;
-    esac
+for bin in bin/* lib/*.dylib $(find libexec/apt -type f); do
+    [ -h "$bin" ] || strip_and_sign "$bin"
 done
 )
 
