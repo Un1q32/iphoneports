@@ -1,8 +1,8 @@
 #!/bin/sh
-rm -rf "$_DESTDIR" "$_SRCDIR"
-printf "Downloading source...\n"
-curl -L -# -o src.tar.bz2 https://github.com/libimobiledevice/libimobiledevice-glue/releases/download/1.3.2/libimobiledevice-glue-1.3.2.tar.bz2
-printf "Unpacking source...\n"
-tar -C "$_TMP" -xf src.tar.bz2
-rm src.tar.bz2
-mv "$_TMP"/libimobiledevice-glue-* "$_SRCDIR"
+. ../../files/dllib.sh
+ver='1.3.3'
+dlsrc \
+    "https://github.com/libimobiledevice/libimobiledevice-glue/releases/download/$ver/libimobiledevice-glue-$ver.tar.bz2" \
+    "libimobiledevice-glue-$ver.tar.bz2" \
+    920ce01382a32695f49b23292b4979a03f0afd16c58e8755d8b7f41804acc1a9 \
+    "libimobiledevice-glue-$ver"
