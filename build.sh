@@ -46,6 +46,9 @@ esac
 case "$*" in
     (*--keepsrc*) keepsrc=1 ;;
 esac
+case "$*" in
+    (*--debug*) export _DEBUG=1 ;;
+esac
 rm -rf "$_TMP"
 mkdir -p "$_TMP"
 
