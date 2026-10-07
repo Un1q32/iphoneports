@@ -20,7 +20,7 @@ realpath() {
 }
 
 strip_and_sign() {
-    if [ -n "$_DEBUG" ]; then
+    if [ -z "$_DEBUG" ]; then
         for file in "$@"; do
             magic=$(od -An -tx1 -j12 -N4 "$file" | tr -d ' \n')
             if [ "$magic" = "02000000" ]; then
