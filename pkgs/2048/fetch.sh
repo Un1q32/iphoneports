@@ -1,7 +1,8 @@
 #!/bin/sh
-rm -rf "$_DESTDIR" "$_SRCDIR"
-printf "Downloading source...\n"
-mkdir "$_SRCDIR"
-curl -L -s -o "$_SRCDIR/2048.c" https://raw.githubusercontent.com/mevdschee/2048.c/refs/tags/v1.0.3/2048.c &
-curl -L -s -o "$_SRCDIR/LICENSE" https://raw.githubusercontent.com/mevdschee/2048.c/refs/tags/v1.0.3/LICENSE
-wait
+. ../../files/dllib.sh
+ver='1.0.4'
+dlsrc \
+    "https://github.com/mevdschee/2048.c/archive/refs/tags/v$ver.tar.gz" \
+    "2048-$ver.tar.gz" \
+    76db9965bea484a9c076bdc95109860e15cd3f143e2d5a024fd568e24b795eee \
+    "2048.c-$ver"
