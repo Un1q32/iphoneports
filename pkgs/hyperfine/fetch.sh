@@ -1,8 +1,8 @@
 #!/bin/sh
 . ../../files/dllib.sh
-ver='1.21.0'
+ver='2.0.0'
 dlsrc \
     "https://github.com/sharkdp/hyperfine/archive/refs/tags/v$ver.tar.gz" \
     "hyperfine-$ver.tar.gz" \
-    aee01125074fd5a6a556818db7bba0577edae94cbe85165daae0e778aa28348d \
+    f4b71df3c78e4cf752ca6fb6ebc4b025f7ea6a5ca5c48fea75f8a1fdb4c7d721 \
     "hyperfine-$ver"

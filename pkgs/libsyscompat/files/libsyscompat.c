@@ -991,6 +991,27 @@ int CCRandomGenerateBytes(void *buf, size_t size) {
   return 0;
 }
 
+#if (defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) &&                 \
+     __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ < 1090) ||                  \
+    (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                \
+     __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ < 70000)
+
+int proc_pid_rusage(int pid, int flavor, void *buffer) {
+  static bool rusage_init = false;
+  static int (*real_proc_pid_rusage)(int, int, void *) = NULL;
+
+  if (!rusage_init) {
+    real_proc_pid_rusage =
+        (int (*)(int, int, void *))dlsym(RTLD_NEXT, "proc_pid_rusage");
+    rusage_init = true;
+  }
+  if (real_proc_pid_rusage)
+    return real_proc_pid_rusage(pid, flavor, buffer);
+
+  errno = ENOSYS;
+  return -1;
+}
+
 #if (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                \
      __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ < 60000) ||                \
     (defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) &&                 \
@@ -1365,6 +1386,8 @@ _Unwind_Ptr _Unwind_GetIPInfo(struct _Unwind_Context *context, int *ipbefore) {
 
   abort();
 }
+
+#endif
 
 #endif
 

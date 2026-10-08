@@ -1,0 +1,62 @@
+--- src/src/timer/mod.rs.orig
++++ src/src/timer/mod.rs
+@@ -2,7 +2,7 @@
+ 
+ #[cfg(target_os = "linux")]
+ mod linux_counters;
+-#[cfg(target_os = "macos")]
++#[cfg(target_vendor = "apple")]
+ mod macos_counters;
+ 
+ #[cfg(windows)]
+@@ -92,7 +92,7 @@
+         discard(output);
+     }
+ 
+-    #[cfg(target_os = "macos")]
++    #[cfg(target_vendor = "apple")]
+     let (time_wall_clock, hardware_counters) =
+         if _collect_hardware_counters && macos_counters::wait(&mut child).is_ok() {
+             // Stop timing before querying counters, but leave the child available for wait4.
+@@ -104,16 +104,16 @@
+             (None, Default::default())
+         };
+     let (time_user, time_system, memory_peak_resident, exit_status) = cpu_timer.stop(child)?;
+-    #[cfg(target_os = "macos")]
++    #[cfg(target_vendor = "apple")]
+     let time_wall_clock = time_wall_clock.unwrap_or_else(|| wallclock_timer.stop());
+-    #[cfg(not(target_os = "macos"))]
++    #[cfg(not(target_vendor = "apple"))]
+     let time_wall_clock = wallclock_timer.stop();
+ 
+     #[cfg(target_os = "linux")]
+     let hardware_counters = counters
+         .map(linux_counters::CounterGroup::read)
+         .unwrap_or_default();
+-    #[cfg(not(any(target_os = "linux", target_os = "macos")))]
++    #[cfg(not(any(target_os = "linux", target_vendor = "apple")))]
+     let hardware_counters = Default::default();
+ 
+     Ok(Measurement {
+--- src/src/metric.rs.orig
++++ src/src/metric.rs
+@@ -103,7 +103,7 @@
+             );
+             ensure!(
+                 cfg!(any(
+-                    target_os = "macos",
++                    target_vendor = "apple",
+                     all(
+                         target_os = "linux",
+                         target_pointer_width = "64",
+@@ -120,8 +120,8 @@
+                 self.name()
+             );
+             ensure!(
+-                !cfg!(target_os = "macos") || matches!(self, Self::CpuCycles | Self::Instructions),
+-                "Metric '{}' is unavailable on macOS",
++                !cfg!(target_vendor = "apple") || matches!(self, Self::CpuCycles | Self::Instructions),
++                "Metric '{}' is unavailable on Darwin",
+                 self.name()
+             );
+         }
