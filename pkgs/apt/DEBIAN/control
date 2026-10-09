@@ -2,7 +2,7 @@ Package: iphoneports-apt
 Section: Packaging
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Architecture: @DPKGARCH@
-Version: 3.3.3-1
+Version: 3.3.3-2
 Description: Command-line package manager used on Debian-based systems
 Depends: iphoneports-base, iphoneports-dpkg, iphoneports-berkeleydb, iphoneports-lz4, iphoneports-openssl, iphoneports-xxhash, iphoneports-xz, iphoneports-zstd, iphoneports-bzip2, iphoneports-zlib, iphoneports-libc++
 Replaces: iphoneports-base
