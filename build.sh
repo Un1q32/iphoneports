@@ -472,6 +472,7 @@ main() {
                     [ "${pkg##*/}" = "$exclude" ] && dontbuild=1
                 done
                 [ -n "$dontbuild" ] && continue
+                grep -q '^Architecture: all$' "$pkg/DEBIAN/control" 2>/dev/null && continue
 
                 if [ -z "$pkglist" ]; then
                     pkglist="${pkg##*/}"
