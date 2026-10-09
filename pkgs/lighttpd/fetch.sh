@@ -1,8 +1,8 @@
 #!/bin/sh
-rm -rf "$_DESTDIR" "$_SRCDIR"
-printf "Downloading source...\n"
-curl -L -# -o src.tar.xz https://download.lighttpd.net/lighttpd/releases-1.4.x/lighttpd-1.4.79.tar.xz
-printf "Unpacking source...\n"
-tar -C "$_TMP" -xf src.tar.xz
-rm src.tar.xz
-mv "$_TMP"/lighttpd-* "$_SRCDIR"
+. ../../files/dllib.sh
+ver='1.4.85'
+dlsrc \
+    "https://download.lighttpd.net/lighttpd/releases-1.4.x/lighttpd-$ver.tar.xz" \
+    "lighttpd-$ver.tar.gz" \
+    18de51b393bac4a6827879e1a7ff377c169e414bae92cd245091d80fc2601d13 \
+    "lighttpd-$ver"

@@ -21,6 +21,7 @@ fi
     --with-sqlite \
     --with-webdav-props \
     --with-xxhash \
+    CFLAGS='-O2 -DNDEBUG -std=c99' \
     PKG_CONFIG_LIBDIR="$_SDK/var/usr/lib/pkgconfig" \
     $posix_spawn
 make
