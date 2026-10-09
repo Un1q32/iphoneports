@@ -38,7 +38,7 @@ sysconfdir = "@PREFIX@/etc"
 codegen-units-std = 1
 channel = "stable"
 lld = false
-bootstrap-override-lld = true
+bootstrap-override-lld = false
 
 [dist]
 compression-formats = ["gz"]
@@ -46,3 +46,4 @@ compression-profile = "fast"
 
 [target.@HOST@]
 llvm-config = '@LLVMCONFIG@'
+default-linker-linux-override = "off"

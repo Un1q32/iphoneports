@@ -1,6 +1,6 @@
 --- src/clang/lib/Driver/ToolChains/Darwin.h.orig
 +++ src/clang/lib/Driver/ToolChains/Darwin.h
-@@ -694,7 +694,7 @@
+@@ -711,7 +711,7 @@
    void AddLinkSanitizerLibArgs(const llvm::opt::ArgList &Args,
                                 llvm::opt::ArgStringList &CmdArgs,
                                 StringRef Sanitizer,

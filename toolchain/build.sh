@@ -64,7 +64,7 @@ redundant_download() {
 mkdir "$scriptroot/build" && cd "$scriptroot/build"
 
 printf "Building LLVM+Clang\n\n"
-llvmver="22.1.8"
+llvmver="23.1.3"
 redundant_download "https://github.com/llvm/llvm-project/archive/refs/tags/llvmorg-$llvmver.tar.gz"
 tar xzf "llvmorg-$llvmver.tar.gz"
 rm "llvmorg-$llvmver.tar.gz"
@@ -217,7 +217,6 @@ sed -e "s|@PREFIX@|$scriptroot|g" \
 patch -p1 < "$scriptroot/buildsrc/rust-legacy-darwin.patch"
 PATH="$scriptroot/bin:$PATH" \
     SDKROOT="$scriptroot/buildsrc/sysroot" \
-    LD_LIBRARY_PATH="$LD_LIBRARY_PATH:$scriptroot/lib" \
     CC=hostcc \
     AR=llvm-ar \
     BOOTSTRAP_SKIP_TARGET_SANITY=1 \
