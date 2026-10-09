@@ -1,8 +1,8 @@
 #!/bin/sh
-rm -rf "$_DESTDIR" "$_SRCDIR"
-printf "Downloading source...\n"
-curl -L -# -o src.tar.xz https://github.com/nih-at/libzip/releases/download/v1.11.4/libzip-1.11.4.tar.xz
-printf "Unpacking source...\n"
-tar -C "$_TMP" -xf src.tar.xz
-rm src.tar.xz
-mv "$_TMP"/libzip-* "$_SRCDIR"
+. ../../files/dllib.sh
+ver='1.12'
+dlsrc \
+    "https://github.com/nih-at/libzip/releases/download/v$ver/libzip-$ver.tar.xz" \
+    "libzip-$ver.tar.gz" \
+    376908d0f0fda13180a19fdc4f7062a1abfb59e09ca07a392d361253b8e60c2b \
+    "libzip-$ver"

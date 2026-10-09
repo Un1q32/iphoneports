@@ -20,7 +20,7 @@ DESTDIR="$_DESTDIR" ninja install
 (
 cd "$_DESTDIR/var/usr"
 rm -rf share
-strip_and_sign lib/libzip.5.5.dylib bin/*
+strip_and_sign lib/libzip.5.*.dylib bin/*
 )
 
 installlicense "$_SRCDIR/LICENSE"
