@@ -1,11 +1,8 @@
 #!/bin/sh
-rm -rf "$_DESTDIR" "$_SRCDIR"
-ver='3.0.7'
-if [ ! -f "$_DLCACHE/pkgconf-$ver.tar.gz" ] ||
-    [ "$(sha256sum "$_DLCACHE/pkgconf-$ver.tar.gz" | awk '{print $1}')" != "a9ae678879771fcf15247ac2435e7ad8308be8a5921898e6720b3b8949410f73" ]; then
-    printf "Downloading source...\n"
-    curl -L -# -o "$_DLCACHE/pkgconf-$ver.tar.gz" "https://github.com/pkgconf/pkgconf/archive/refs/tags/pkgconf-$ver.tar.gz" || exit 1
-fi
-printf "Unpacking source...\n"
-tar -C "$_TMP" -xf "$_DLCACHE/pkgconf-$ver.tar.gz"
-mv "$_TMP"/pkgconf-* "$_SRCDIR"
+. ../../files/dllib.sh
+ver='3.0.8'
+dlsrc \
+    "https://github.com/pkgconf/pkgconf/archive/refs/tags/pkgconf-$ver.tar.gz" \
+    "pkgconf-$ver.tar.gz" \
+    44f67cdda8192efecd9be9f8df2fe54f087f8c84062ddff0027133f94543bf8a \
+    "pkgconf-pkgconf-$ver"
