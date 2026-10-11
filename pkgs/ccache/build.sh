@@ -4,8 +4,10 @@
 (
 mkdir -p "$_SRCDIR/build"
 cd "$_SRCDIR/build"
+type=Release
+[ -n "$_DEBUG" ] && type=Debug
 cmake -GNinja .. \
-  -DCMAKE_BUILD_TYPE=Release \
+  -DCMAKE_BUILD_TYPE="$type" \
   -DCMAKE_C_COMPILER="$_TARGET-cc" \
   -DCMAKE_SYSTEM_NAME=Darwin \
   -DCMAKE_INSTALL_PREFIX=/var/usr \
