@@ -1,8 +1,8 @@
 #!/bin/sh
 . ../../files/dllib.sh
-ver='1.12'
+ver='1.12.1'
 dlsrc \
     "https://github.com/nih-at/libzip/releases/download/v$ver/libzip-$ver.tar.xz" \
     "libzip-$ver.tar.gz" \
-    376908d0f0fda13180a19fdc4f7062a1abfb59e09ca07a392d361253b8e60c2b \
+    c40062022a1963c80573d48f6070792297cecd7c6bffe3aefcac0d8b9bee8913 \
     "libzip-$ver"
