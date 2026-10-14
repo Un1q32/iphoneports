@@ -1,0 +1,14 @@
+--- src/libarchive/archive_write_disk_posix.c.orig
++++ src/libarchive/archive_write_disk_posix.c
+@@ -4358,7 +4358,11 @@
+ 		 * with at least a writing mode(O_RDWR or O_WRONLY). it
+ 		 * makes the data fork uncompressed.
+ 		 */
++#ifdef O_SYMLINK
+ 		dffd = open(datafork, O_SYMLINK);
++#else
++		dffd = open(datafork, O_RDONLY | O_NOFOLLOW);
++#endif
+ 		if (dffd == -1) {
+ 			archive_set_error(&a->archive, errno,
+ 			    "Failed to open the data fork for metadata");
