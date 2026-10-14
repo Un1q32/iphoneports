@@ -1,11 +1,8 @@
 #!/bin/sh
-rm -rf "$_DESTDIR" "$_SRCDIR"
-ver='8.22.0'
-if [ ! -f "$_DLCACHE/curl-$ver.tar.xz" ] ||
-    [ "$(sha256sum "$_DLCACHE/curl-$ver.tar.xz" | awk '{print $1}')" != "f7ef3ae8a22e521f289803fe93543eb64c329b58aa73a9e224dfd915a2a5f4f7" ]; then
-    printf "Downloading source...\n"
-    curl -L -# -o "$_DLCACHE/curl-$ver.tar.xz" "https://curl.se/download/curl-$ver.tar.xz" || exit 1
-fi
-printf "Unpacking source...\n"
-tar -C "$_TMP" -xf "$_DLCACHE/curl-$ver.tar.xz"
-mv "$_TMP"/curl-* "$_SRCDIR"
+. ../../files/dllib.sh
+ver='8.23.0'
+dlsrc \
+    "https://curl.se/download/curl-$ver.tar.xz" \
+    "curl-$ver.tar.xz" \
+    8dadd7d2536a314f982ad05a651b713f426bf7d02cc2c76cffb9796f2218e6c5 \
+    "curl-$ver"
