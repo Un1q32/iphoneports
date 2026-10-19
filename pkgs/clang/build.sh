@@ -30,12 +30,15 @@ case $_CPU in
         cflags='-marm'
     ;;
 esac
+lto=Thin
+build=MinSizeRel
+[ -n "$_DEBUG" ] && lto=OFF && build=Debug
 cflags="$cflags -w"
 defaulttarget="$_CPU-apple-$_SUBSYSTEM$_SUBSYSTEMVER"
 
 cmake -GNinja ../llvm \
     -DLLVM_ENABLE_PROJECTS='clang' \
-    -DCMAKE_BUILD_TYPE=MinSizeRel \
+    -DCMAKE_BUILD_TYPE="$build" \
     -DCMAKE_C_COMPILER="$_TARGET-cc" \
     -DCMAKE_C_FLAGS="$cflags" \
     -DCMAKE_CXX_FLAGS="$cflags" \
@@ -49,7 +52,7 @@ cmake -GNinja ../llvm \
     -DLLVM_LINK_LLVM_DYLIB=ON \
     -DLLVM_ENABLE_THREADS=OFF \
     -DLLVM_INCLUDE_TESTS=OFF \
-    -DLLVM_ENABLE_LTO=Thin \
+    -DLLVM_ENABLE_LTO="$lto" \
     -DLLVM_ENABLE_LIBCXX=ON \
     -DLLVM_NO_INSTALL_NAME_DIR_FOR_BUILD_TREE=ON \
     -DLLVM_DEFAULT_TARGET_TRIPLE="$defaulttarget" \
@@ -61,7 +64,7 @@ cmake -GNinja ../llvm \
 
 cmake -GNinja ../llvm \
     -DLLVM_ENABLE_PROJECTS='clang' \
-    -DCMAKE_BUILD_TYPE=MinSizeRel \
+    -DCMAKE_BUILD_TYPE="$build" \
     -DCMAKE_C_COMPILER="$_TARGET-cc" \
     -DCMAKE_C_FLAGS="$cflags" \
     -DCMAKE_CXX_FLAGS="$cflags" \
@@ -75,7 +78,7 @@ cmake -GNinja ../llvm \
     -DLLVM_LINK_LLVM_DYLIB=ON \
     -DLLVM_ENABLE_THREADS=OFF \
     -DLLVM_INCLUDE_TESTS=OFF \
-    -DLLVM_ENABLE_LTO=Thin \
+    -DLLVM_ENABLE_LTO="$lto" \
     -DLLVM_ENABLE_LIBCXX=ON \
     -DLLVM_NO_INSTALL_NAME_DIR_FOR_BUILD_TREE=ON \
     -DLLVM_DEFAULT_TARGET_TRIPLE="$defaulttarget" \
