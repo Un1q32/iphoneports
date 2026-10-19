@@ -4,16 +4,19 @@
 (
 mkdir -p "$_SRCDIR/build"
 cd "$_SRCDIR/build"
+lto=ON
+build=Release
+[ -n "$_DEBUG" ] && lto=OFF && build=Debug
 cmake -GNinja ../runtimes \
     -DLLVM_ENABLE_RUNTIMES='libcxx;libcxxabi' \
-    -DCMAKE_BUILD_TYPE=Release \
+    -DCMAKE_BUILD_TYPE="$build" \
     -DCMAKE_C_COMPILER="$_TARGET-cc" \
     -DCMAKE_SYSTEM_NAME=Darwin \
     -DCMAKE_INSTALL_PREFIX=/var/usr \
     -DCMAKE_INSTALL_NAME_DIR=/var/usr/lib \
     -DCMAKE_FIND_ROOT_PATH_MODE_INCLUDE=ONLY \
     -DCMAKE_FIND_ROOT_PATH="$_SDK/var/usr" \
-    -DLLVM_ENABLE_LTO=ON \
+    -DLLVM_ENABLE_LTO="$lto" \
     -DLIBCXX_INCLUDE_BENCHMARKS=OFF \
     -DLIBCXXABI_USE_LLVM_UNWINDER=OFF \
     -DLIBCXX_ENABLE_STATIC=OFF \
