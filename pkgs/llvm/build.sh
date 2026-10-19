@@ -29,11 +29,14 @@ case $_CPU in
         cflags="-marm"
     ;;
 esac
+lto=Thin
+build=MinSizeRel
+[ -n "$_DEBUG" ] && lto=OFF && build=Debug
 cflags="$CFLAGS -w"
 defaulttarget="$_CPU-apple-$_SUBSYSTEM$_SUBSYSTEMVER"
 
 cmake -GNinja ../llvm \
-    -DCMAKE_BUILD_TYPE=MinSizeRel \
+    -DCMAKE_BUILD_TYPE="$build" \
     -DCMAKE_C_COMPILER="$_TARGET-cc" \
     -DCMAKE_C_FLAGS="$cflags" \
     -DCMAKE_CXX_FLAGS="$cflags" \
@@ -51,12 +54,12 @@ cmake -GNinja ../llvm \
     -DLLVM_ENABLE_ZLIB=ON \
     -DLLVM_ENABLE_ZSTD=ON \
     -DLLVM_TARGETS_TO_BUILD='X86;ARM;AArch64' \
-    -DLLVM_ENABLE_LTO=Thin \
+    -DLLVM_ENABLE_LTO="$lto" \
     -DCROSS_TOOLCHAIN_FLAGS_NATIVE='-DCMAKE_C_COMPILER=hostcc;-DCMAKE_CXX_COMPILER=hostc++' \
     -DLLVM_ENABLE_LIBCXX=ON
 
 cmake -GNinja ../llvm \
-    -DCMAKE_BUILD_TYPE=MinSizeRel \
+    -DCMAKE_BUILD_TYPE="$build" \
     -DCMAKE_C_COMPILER="$_TARGET-cc" \
     -DCMAKE_C_FLAGS="$cflags" \
     -DCMAKE_CXX_FLAGS="$cflags" \
@@ -74,7 +77,7 @@ cmake -GNinja ../llvm \
     -DLLVM_ENABLE_ZLIB=ON \
     -DLLVM_ENABLE_ZSTD=ON \
     -DLLVM_TARGETS_TO_BUILD='X86;ARM;AArch64' \
-    -DLLVM_ENABLE_LTO=Thin \
+    -DLLVM_ENABLE_LTO="$lto" \
     -DCROSS_TOOLCHAIN_FLAGS_NATIVE='-DCMAKE_C_COMPILER=hostcc;-DCMAKE_CXX_COMPILER=hostc++' \
     -DLLVM_ENABLE_LIBCXX=ON \
     -DLLVM_DISTRIBUTION_COMPONENTS="$(_get_distribution_components)"
