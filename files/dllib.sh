@@ -30,7 +30,7 @@ dlfile() {
 }
 
 dlsrc() {
-    rm -rf "$_DESTDIR" "$_SRCDIR"
+    [ -z "$noremove" ] && rm -rf "$_DESTDIR" "$_SRCDIR"
     dlfile "$@"
     printf "Unpacking source...\n"
     tar -C "$_TMP" -xf "$_DLCACHE/$2"
