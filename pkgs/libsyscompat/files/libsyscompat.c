@@ -979,11 +979,17 @@ DIR *fdopendir(int fd) {
 
 #endif
 
-  char fdpath[PATH_MAX];
-  if (fcntl(fd, F_GETPATH, fdpath) == -1)
+  DIR *ret = opendir("/");
+  if (!ret)
     return NULL;
 
-  return opendir(fdpath);
+  close(*(int *)ret);
+  *(int *)ret = fd;
+
+  lseek(fd, 0, SEEK_SET);
+  fcntl(fd, F_SETFD, FD_CLOEXEC);
+
+  return ret;
 }
 
 int CCRandomGenerateBytes(void *buf, size_t size) {

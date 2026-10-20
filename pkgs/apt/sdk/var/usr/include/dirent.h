@@ -8,21 +8,22 @@
      __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ < 101000)
 
 #include <fcntl.h>
-#include <limits.h>
-#include <stdlib.h>
-
-#ifndef F_GETPATH
-#define F_GETPATH 50
-#endif
+#include <unistd.h>
 
 #define fdopendir __iphoneports_fdopendir
 
 static inline DIR *fdopendir(int fd) {
-  char fdpath[PATH_MAX];
-  if (fcntl(fd, F_GETPATH, fdpath) == -1)
+  DIR *ret = opendir("/");
+  if (!ret)
     return NULL;
 
-  return opendir(fdpath);
+  close(*(int *)ret);
+  *(int *)ret = fd;
+
+  lseek(fd, 0, SEEK_SET);
+  fcntl(fd, F_SETFD, FD_CLOEXEC);
+
+  return ret;
 }
 
 #endif
