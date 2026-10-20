@@ -2,6 +2,6 @@ Package: iphoneports-pkgconf
 Section: Development
 Maintainer: Uniq <joey.t.reinhart@gmail.com>
 Architecture: @DPKGARCH@
-Version: 3.0.8
+Version: 3.0.10
 Description: Package compiler and linker metadata toolkit
 Depends: iphoneports-base
