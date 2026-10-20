@@ -185,6 +185,7 @@ defaulttarget='armv6-apple-ios2'
 if ! [ -d "../../sdks/$defaulttarget" ]; then
     nodefaultsdk=1
     mkdir "../../sdks/$defaulttarget"
+    touch "../../sdks/$defaulttarget/nothing"
 fi
 _DONT_REBUILD_TOOLCHAIN=1 _DONT_COPY_DEB=1 ../../build.sh --target="$defaulttarget" compiler-rt
 llvmshortver="$(cd "$scriptroot/lib/clang" && echo *)"
