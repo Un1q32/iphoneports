@@ -64,7 +64,7 @@ redundant_download() {
 mkdir "$scriptroot/build" && cd "$scriptroot/build"
 
 printf "Building LLVM+Clang\n\n"
-llvmver="23.1.3"
+llvmver="23.1.4"
 redundant_download "https://github.com/llvm/llvm-project/archive/refs/tags/llvmorg-$llvmver.tar.gz"
 tar xzf "llvmorg-$llvmver.tar.gz"
 rm "llvmorg-$llvmver.tar.gz"
@@ -196,7 +196,7 @@ if [ -n "$nodefaultsdk" ]; then
 fi
 
 printf "Building rust\n\n"
-rustver="1.99.0"
+rustver="1.99.1"
 redundant_download "https://static.rust-lang.org/dist/rustc-${rustver}-src.tar.xz"
 tar xJf "rustc-${rustver}-src.tar.xz"
 rm -f "rustc-${rustver}-src.tar.xz"
