@@ -1,3 +1,3 @@
 __BEGIN_DECLS
-DIR *fdopendir(int fd);
+DIR *fdopendir(int);
 __END_DECLS
