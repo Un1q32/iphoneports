@@ -8,6 +8,8 @@
 #undef realpath
 
 #include <dlfcn.h>
+#include <limits.h>
+#include <string.h>
 
 char *realpath(const char *restrict path,
                char *restrict resolved_path) __asm("_realpath");

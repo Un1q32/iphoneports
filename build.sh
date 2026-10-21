@@ -439,6 +439,7 @@ _includefuncs() {
         while IFS= read -r func; do
             if [ -d "$bsroot/compat/$func" ]; then
                 for header in "$(cd "$bsroot/compat/$func/headers" 2>/dev/null && find . -type f)"; do
+                    [ -e "$bsroot/compat/$func/headers/$header" ] || continue
                     if ! [ -f "$_SDK/var/usr/include/$header" ]; then
                         mkdir -p "$_SDK/var/usr/include/${header%/*}"
                         printf '%s\n%s\n' \
