@@ -11,15 +11,8 @@
 #include <limits.h>
 #include <string.h>
 
-char *realpath(const char *restrict path,
-               char *restrict resolved_path) __asm("_realpath");
-char *realpath(const char *restrict path, char *restrict resolved_path) {
-  static char *(*func)(const char *restrict, char *restrict) = NULL;
-
-  if (!func)
-    func = (char *(*)(const char *restrict, char *restrict))dlsym(RTLD_NEXT,
-                                                                  "realpath");
-
+static char *_realpath(const char *restrict path, char *restrict resolved_path,
+                       char *(*func)(const char *restrict, char *restrict)) {
   if (!resolved_path) {
     char buf[PATH_MAX];
     char *ret = func(path, buf);
@@ -30,24 +23,27 @@ char *realpath(const char *restrict path, char *restrict resolved_path) {
   return func(path, resolved_path);
 }
 
+char *realpath(const char *restrict path,
+               char *restrict resolved_path) __asm("_realpath");
+char *realpath(const char *restrict path, char *restrict resolved_path) {
+  static char *(*func)(const char *restrict, char *restrict) = NULL;
+  if (!func)
+    func = (char *(*)(const char *restrict, char *restrict))dlsym(RTLD_NEXT,
+                                                                  "realpath");
+
+  return _realpath(path, resolved_path, func);
+}
+
 char *
 realpath_extsn(const char *restrict path,
                char *restrict resolved_path) __asm("_realpath$DARWIN_EXTSN");
 char *realpath_extsn(const char *restrict path, char *restrict resolved_path) {
   static char *(*func)(const char *restrict, char *restrict) = NULL;
-
   if (!func)
     func = (char *(*)(const char *restrict, char *restrict))dlsym(
         RTLD_NEXT, "realpath$DARWIN_EXTSN");
 
-  if (!resolved_path) {
-    char buf[PATH_MAX];
-    char *ret = func(path, buf);
-    if (!ret)
-      return NULL;
-    return strdup(ret);
-  }
-  return func(path, resolved_path);
+  return _realpath(path, resolved_path, func);
 }
 
 #if defined(__i386__) || defined(__ppc__)
@@ -56,19 +52,11 @@ char *realpath_unix03(const char *restrict path,
                       char *restrict resolved_path) __asm("_realpath$UNIX2003");
 char *realpath_unix03(const char *restrict path, char *restrict resolved_path) {
   static char *(*func)(const char *restrict, char *restrict) = NULL;
-
   if (!func)
     func = (char *(*)(const char *restrict, char *restrict))dlsym(
         RTLD_NEXT, "realpath$UNIX2003");
 
-  if (!resolved_path) {
-    char buf[PATH_MAX];
-    char *ret = func(path, buf);
-    if (!ret)
-      return NULL;
-    return strdup(ret);
-  }
-  return func(path, resolved_path);
+  return _realpath(path, resolved_path, func);
 }
 
 #endif
