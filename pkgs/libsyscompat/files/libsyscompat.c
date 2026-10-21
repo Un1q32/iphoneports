@@ -41,182 +41,6 @@ int open(const char *path, int flags, ...)
     (defined(__ENVIRONMENT_WATCH_OS_VERSION_MIN_REQUIRED__) &&                 \
      __ENVIRONMENT_WATCH_OS_VERSION_MIN_REQUIRED__ < 30000)
 
-#include <dlfcn.h>
-#include <errno.h>
-#include <mach/mach_init.h>
-#include <mach/mach_port.h>
-#include <mach/mach_time.h>
-#include <mach/thread_act.h>
-#include <stdbool.h>
-#include <sys/resource.h>
-#include <sys/time.h>
-
-#ifndef CLOCK_REALTIME
-#define CLOCK_REALTIME 0
-#endif
-#ifndef CLOCK_MONOTONIC_RAW
-#define CLOCK_MONOTONIC_RAW 4
-#endif
-#ifndef CLOCK_MONOTONIC_RAW_APPROX
-#define CLOCK_MONOTONIC_RAW_APPROX 5
-#endif
-#ifndef CLOCK_MONOTONIC
-#define CLOCK_MONOTONIC 6
-#endif
-#ifndef CLOCK_UPTIME_RAW
-#define CLOCK_UPTIME_RAW 8
-#endif
-#ifndef CLOCK_UPTIME_RAW_APPROX
-#define CLOCK_UPTIME_RAW_APPROX 9
-#endif
-#ifndef CLOCK_PROCESS_CPUTIME_ID
-#define CLOCK_PROCESS_CPUTIME_ID 12
-#endif
-#ifndef CLOCK_THREAD_CPUTIME_ID
-#define CLOCK_THREAD_CPUTIME_ID 16
-#endif
-
-extern uint64_t __thread_selfusage(void);
-
-static double mach_time_factor = 0.0;
-
-#if (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                \
-     __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ >= 80000) ||               \
-    (defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) &&                 \
-     __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ >= 101000) ||               \
-    defined(__ENVIRONMENT_TV_OS_VERSION_MIN_REQUIRED__) ||                     \
-    defined(__ENVIRONMENT_WATCH_OS_VERSION_MIN_REQUIRED__)
-
-#define HIRES_THREAD_TIME
-
-#endif
-
-int clock_gettime(int clockid, struct timespec *ts) {
-
-#if !(defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&               \
-      __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ < 20000)
-
-  static bool init = false;
-  static int (*func)(int, struct timespec *);
-
-  if (!init) {
-    func = (int (*)(int, struct timespec *))dlsym(RTLD_NEXT, "clock_gettime");
-    init = true;
-  }
-
-  if (func)
-    return func(clockid, ts);
-
-#endif
-
-  if (mach_time_factor == 0.0) {
-    mach_timebase_info_data_t machinfo;
-    if (mach_timebase_info(&machinfo) != KERN_SUCCESS)
-      return -1;
-    if (machinfo.numer == machinfo.denom)
-      mach_time_factor = 1.0;
-    else
-      mach_time_factor = (double)machinfo.numer / machinfo.denom;
-  }
-
-  uint64_t mach_time;
-
-  switch (clockid) {
-  case CLOCK_REALTIME: {
-    struct timeval tv;
-    int ret = gettimeofday(&tv, NULL);
-    if (ret == -1)
-      return -1;
-    ts->tv_sec = tv.tv_sec;
-    ts->tv_nsec = tv.tv_usec * 1000;
-    return 0;
-  }
-  case CLOCK_PROCESS_CPUTIME_ID: {
-    struct rusage ru;
-    int ret = getrusage(RUSAGE_SELF, &ru);
-    timeradd(&ru.ru_utime, &ru.ru_stime, &ru.ru_utime);
-    ts->tv_sec = ru.ru_utime.tv_sec;
-    ts->tv_nsec = ru.ru_utime.tv_usec * 1000;
-    return ret;
-  }
-#ifdef HIRES_THREAD_TIME
-  case CLOCK_THREAD_CPUTIME_ID:
-    mach_time = __thread_selfusage();
-    break;
-  case CLOCK_MONOTONIC_RAW_APPROX:
-  case CLOCK_UPTIME_RAW_APPROX:
-    mach_time = mach_approximate_time();
-    break;
-#else
-  case CLOCK_THREAD_CPUTIME_ID: {
-    thread_basic_info_data_t info;
-    mach_msg_type_number_t count = THREAD_BASIC_INFO_COUNT;
-    thread_port_t thread = mach_thread_self();
-    int thread_info_ret =
-        thread_info(thread, THREAD_BASIC_INFO, (thread_info_t)(&info), &count);
-    mach_port_deallocate(mach_task_self(), thread);
-    if (thread_info_ret != 0)
-      return -1;
-
-    ts->tv_sec = info.user_time.seconds + info.system_time.seconds;
-    ts->tv_nsec =
-        (info.user_time.microseconds + info.system_time.microseconds) * 1000;
-    if (ts->tv_nsec >= 1000000000) {
-      ts->tv_sec += 1;
-      ts->tv_nsec -= 1000000000;
-    }
-    if (ts->tv_sec == 0 && ts->tv_nsec == 0)
-      ts->tv_nsec = 1;
-
-    return 0;
-  }
-  case CLOCK_MONOTONIC_RAW_APPROX:
-  case CLOCK_UPTIME_RAW_APPROX:
-#endif
-  case CLOCK_MONOTONIC:
-  case CLOCK_MONOTONIC_RAW:
-  case CLOCK_UPTIME_RAW:
-    mach_time = mach_absolute_time();
-    break;
-  default:
-    errno = EINVAL;
-    return -1;
-  }
-
-  uint64_t nsec = mach_time * mach_time_factor;
-
-  ts->tv_sec = nsec / 1000000000;
-  ts->tv_nsec = nsec % 1000000000;
-  return 0;
-}
-
-int clock_getres(int clockid, struct timespec *res) {
-  switch (clockid) {
-  case CLOCK_REALTIME:
-  case CLOCK_PROCESS_CPUTIME_ID:
-#ifndef HIRES_THREAD_TIME
-  case CLOCK_THREAD_CPUTIME_ID:
-#endif
-    res->tv_sec = 0;
-    res->tv_nsec = 1000;
-    return 0;
-
-  case CLOCK_MONOTONIC_RAW:
-  case CLOCK_MONOTONIC_RAW_APPROX:
-  case CLOCK_UPTIME_RAW:
-  case CLOCK_UPTIME_RAW_APPROX:
-#ifdef HIRES_THREAD_TIME
-  case CLOCK_THREAD_CPUTIME_ID:
-#endif
-    res->tv_sec = 0;
-    res->tv_nsec = mach_time_factor;
-    return 0;
-  default:
-    errno = EINVAL;
-    return -1;
-  }
-}
-
 void arc4random_buf(void *, size_t);
 
 int getentropy(void *buf, size_t size) {
@@ -229,6 +53,10 @@ int getentropy(void *buf, size_t size) {
     (defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) &&                 \
      __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ < 101000)
 
+#include <string.h>
+#include <dlfcn.h>
+#include <errno.h>
+#include <stdbool.h>
 #include <limits.h>
 #include <stdio.h>
 #include <sys/stat.h>
@@ -534,160 +362,6 @@ int mkdirat(int fd, const char *path, mode_t mode) {
 #endif
 }
 
-int openat(int fd, const char *path, int flags, ...) {
-  int mode = mode;
-  if (flags & O_CREAT) {
-    va_list va_args;
-    va_start(va_args, flags);
-    mode = va_arg(va_args, int);
-    va_end(va_args);
-  }
-
-#if (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                \
-     __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ >= 20000) ||               \
-    !defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__)
-
-  static bool init = false;
-  static int (*func)(int, const char *, int, ...);
-
-  if (!init) {
-    func = (int (*)(int, const char *, int, ...))dlsym(RTLD_NEXT, "openat");
-    init = true;
-  }
-
-  if (func)
-    return func(fd, path, flags, mode);
-
-#endif
-
-  if (fd == AT_FDCWD || path[0] == '/')
-    return open(path, flags, mode);
-
-#if (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                \
-     __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ < 20000) ||                \
-    (defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) &&                 \
-     __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ < 1050)
-
-  /* the Mac OS X 10.4 / iPhone OS 1 version has a race condition */
-
-  struct stat st;
-  if (fstat(fd, &st) == -1)
-    return -1;
-  if (!S_ISDIR(st.st_mode)) {
-    errno = ENOTDIR;
-    return -1;
-  }
-
-  char fdpath[PATH_MAX + strlen(path) + 2];
-  fcntl(fd, F_GETPATH, fdpath);
-  strcat(fdpath, "/");
-  strcat(fdpath, path);
-
-  return open(fdpath, flags, mode);
-
-#else
-
-  int cwd = open(".", O_RDONLY);
-  if (pthread_fchdir_np(-1) < 0 && cwd != -1) {
-    close(cwd);
-    cwd = -1;
-  }
-  if (pthread_fchdir_np(fd) < 0) {
-    pthread_fchdir_np(cwd);
-    if (cwd != -1)
-      close(cwd);
-    return -1;
-  }
-
-  int ret = open(path, flags, mode);
-
-  pthread_fchdir_np(cwd);
-  if (cwd != -1)
-    close(cwd);
-
-  return ret;
-
-#endif
-}
-
-int unlinkat(int fd, const char *path, int flags) {
-
-#if (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                \
-     __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ >= 20000) ||               \
-    !defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__)
-
-  static bool init = false;
-  static int (*func)(int, const char *, int);
-
-  if (!init) {
-    func = (int (*)(int, const char *, int))dlsym(RTLD_NEXT, "unlinkat");
-    init = true;
-  }
-
-  if (func)
-    return func(fd, path, flags);
-
-#endif
-
-  if (fd == AT_FDCWD || path[0] == '/') {
-    if (flags & AT_REMOVEDIR)
-      return rmdir(path);
-    return unlink(path);
-  }
-
-#if (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                \
-     __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ < 20000) ||                \
-    (defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) &&                 \
-     __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ < 1050)
-
-  /* the Mac OS X 10.4 / iPhone OS 1 version has a race condition */
-
-  struct stat st;
-  if (fstat(fd, &st) == -1)
-    return -1;
-  if (!S_ISDIR(st.st_mode)) {
-    errno = ENOTDIR;
-    return -1;
-  }
-
-  char fdpath[PATH_MAX + strlen(path) + 2];
-  fcntl(fd, F_GETPATH, fdpath);
-  strcat(fdpath, "/");
-  strcat(fdpath, path);
-
-  if (flags & AT_REMOVEDIR)
-    return rmdir(fdpath);
-  return unlink(fdpath);
-
-#else
-
-  int cwd = open(".", O_RDONLY);
-  if (pthread_fchdir_np(-1) < 0 && cwd != -1) {
-    close(cwd);
-    cwd = -1;
-  }
-  if (pthread_fchdir_np(fd) < 0) {
-    pthread_fchdir_np(cwd);
-    if (cwd != -1)
-      close(cwd);
-    return -1;
-  }
-
-  int ret;
-  if (flags & AT_REMOVEDIR)
-    ret = rmdir(path);
-  else
-    ret = unlink(path);
-
-  pthread_fchdir_np(cwd);
-  if (cwd != -1)
-    close(cwd);
-
-  return ret;
-
-#endif
-}
-
 int symlinkat(const char *target, int fd, const char *path) {
 
 #if !(defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&               \
@@ -945,53 +619,6 @@ int faccessat(int fd, const char *path, int mode, int flags) {
 #endif
 }
 
-#if defined(__DARWIN_64_BIT_INO_T) && __DARWIN_64_BIT_INO_T &&                 \
-    (!defined(__DARWIN_ONLY_64_BIT_INO_T) || !__DARWIN_ONLY_64_BIT_INO_T)
-DIR *fdopendir(int fd) __asm("_fdopendir$INODE64"
-#ifdef __i386__
-                             "$UNIX2003"
-#endif
-);
-#endif
-DIR *fdopendir(int fd) {
-
-#if !(defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&               \
-      __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ < 20000)
-
-  static bool init = false;
-  static DIR *(*func)(int);
-
-  if (!init) {
-    func = (DIR * (*)(int)) dlsym(RTLD_NEXT, "fdopendir"
-#if defined(__DARWIN_64_BIT_INO_T) && __DARWIN_64_BIT_INO_T &&                 \
-    (!defined(__DARWIN_ONLY_64_BIT_INO_T) || !__DARWIN_ONLY_64_BIT_INO_T)
-                                             "$INODE64"
-#endif
-#ifdef __i386__
-                                             "$UNIX2003"
-#endif
-    );
-    init = true;
-  }
-
-  if (func)
-    return func(fd);
-
-#endif
-
-  DIR *ret = opendir("/");
-  if (!ret)
-    return NULL;
-
-  close(*(int *)ret);
-  *(int *)ret = fd;
-
-  lseek(fd, 0, SEEK_SET);
-  fcntl(fd, F_SETFD, FD_CLOEXEC);
-
-  return ret;
-}
-
 int CCRandomGenerateBytes(void *buf, size_t size) {
   arc4random_buf(buf, size);
   return 0;
@@ -1044,6 +671,8 @@ int dirfd(DIR *dirp) {
     (defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) &&                 \
      __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ < 1070)
 
+#include <stdint.h>
+
 #if (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                \
      __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ < 12000) ||                \
     defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__)
@@ -1092,40 +721,6 @@ int SecRandomCopyBytes(void *rnd, size_t size, void *buf) {
 }
 
 #endif
-
-#include <string.h>
-
-#ifndef O_CLOEXEC
-#define O_CLOEXEC 0x1000000
-#endif
-
-int open(const char *path, int flags, ...) {
-  static int (*func)(const char *, int, ...) = NULL;
-
-  if (!func)
-    func = (int (*)(const char *, int, ...))dlsym(RTLD_NEXT, "open"
-#ifdef __i386__
-                                                             "$UNIX2003"
-#endif
-    );
-
-  int mode = mode;
-  if (flags & O_CREAT) {
-    va_list va_args;
-    va_start(va_args, flags);
-    mode = va_arg(va_args, int);
-    va_end(va_args);
-  }
-  bool cloexec = false;
-  if (flags & O_CLOEXEC) {
-    flags &= ~O_CLOEXEC;
-    cloexec = true;
-  }
-  int fd = func(path, flags, mode);
-  if (cloexec && fd != -1)
-    fcntl(fd, F_SETFD, FD_CLOEXEC);
-  return fd;
-}
 
 void arc4random_buf(void *buf, size_t size) {
 
@@ -1198,81 +793,11 @@ int pthread_threadid_np(pthread_t thread, uint64_t *tid) {
   return 0;
 }
 
-int pthread_setname_np(const char *name) {
-
-#if !(defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&               \
-      __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ < 20000)
-
-  static bool init = false;
-  static int (*func)(const char *);
-
-  if (!init) {
-    func = (int (*)(const char *))dlsym(RTLD_NEXT, "pthread_setname_np");
-    init = true;
-  }
-
-  if (func)
-    return func(name);
-
-#else
-
-  (void)name;
-
-#endif
-
-  return 0;
-}
-
-#include <limits.h>
-
-#ifdef __i386__
-char *realpath(const char *restrict path,
-               char *restrict resolved_path) __asm("_realpath$UNIX2003");
-#endif
-char *realpath(const char *restrict path, char *restrict resolved_path) {
-  static char *(*func)(const char *, char *) = NULL;
-
-  if (!func)
-    func = (char *(*)(const char *, char *))dlsym(RTLD_NEXT, "realpath"
-#ifdef __i386__
-                                                             "$UNIX2003"
-#endif
-    );
-
-  if (!resolved_path) {
-    char buf[PATH_MAX];
-    char *ret = func(path, buf);
-    if (!ret)
-      return NULL;
-    return strdup(ret);
-  }
-  return func(path, resolved_path);
-}
-
-char *
-realpath_extsn(const char *restrict path,
-               char *restrict resolved_path) __asm("_realpath$DARWIN_EXTSN");
-char *realpath_extsn(const char *restrict path, char *restrict resolved_path) {
-  static char *(*func)(const char *, char *) = NULL;
-
-  if (!func)
-    func = (char *(*)(const char *, char *))dlsym(RTLD_NEXT,
-                                                  "realpath$DARWIN_EXTSN");
-
-  if (!resolved_path) {
-    char buf[PATH_MAX];
-    char *ret = func(path, buf);
-    if (!ret)
-      return NULL;
-    return strdup(ret);
-  }
-  return func(path, resolved_path);
-}
-
 #if (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                \
      __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ < 30000) ||                \
     defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__)
 
+#include <limits.h>
 #include <mach/mach_host.h>
 #include <sys/attr.h>
 

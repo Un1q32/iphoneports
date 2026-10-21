@@ -432,9 +432,18 @@ _includedeps() {
 }
 
 _includefuncs() {
-    if [ -f "$1" ]; then
+    file="$1"
+    if [ -f "$file" ]; then
         optflags='-O3 -flto'
         [ -n "$_DEBUG" ] && optflags='-O0 -g'
+        IFS= read -r firstline < "$file"
+        if [ "$firstline" = 'all' ]; then
+            (
+            cd "$bsroot/compat"
+            printf '%s\n' * > "$_TMP/.funcs"
+            )
+            file="$_TMP/.funcs"
+        fi
         mkdir "$_TMP/libcompat"
         while IFS= read -r func; do
             if [ -d "$bsroot/compat/$func" ]; then
@@ -461,11 +470,12 @@ _includefuncs() {
             else
                 error "compatability function not found: $func"
             fi
-        done < "$1"
+        done < "$file"
         wait
         [ -e "$_TMP/libcompat/fail" ] && error "failed to build compatability functions"
         "$_TARGET-ar" rcs "$libcompat" "$_TMP/libcompat"/*.o 2>/dev/null
         export _IPHONEPORTS_LIBCOMPAT="$libcompat"
+        export CARGO_ENCODED_RUSTFLAGS="-Clink-arg=$libcompat"
         rm -rf "$_TMP/libcompat"
     fi
 }
