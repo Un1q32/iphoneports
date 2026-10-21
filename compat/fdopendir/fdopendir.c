@@ -8,7 +8,9 @@
 #include <dirent.h>
 #undef fdopendir
 #undef opendir
+#include <dlfcn.h>
 #include <fcntl.h>
+#include <stdbool.h>
 #include <unistd.h>
 
 static DIR *_fdopendir(int fd, DIR *(*func)(const char *)) {
