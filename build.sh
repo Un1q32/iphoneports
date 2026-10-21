@@ -431,6 +431,43 @@ _includedeps() {
     fi
 }
 
+_buildfunc() {
+    func="$1"
+    if [ -d "$bsroot/compat/$func" ]; then
+        if [ -f "$bsroot/compat/$func/dependencies.txt" ]; then
+            while IFS= read -r dep; do
+                (
+                _buildfunc "$dep"
+                ) || exit $?
+            done < "$bsroot/compat/$func/dependencies.txt"
+        fi
+        for header in $(cd "$bsroot/compat/$func/headers" 2>/dev/null && find . -type f); do
+            [ -e "$bsroot/compat/$func/headers/$header" ] || continue
+            if ! [ -f "$_SDK/var/usr/include/$header" ]; then
+                mkdir -p "$_SDK/var/usr/include/${header%/*}"
+                printf '%s\n' \
+                    '#pragma once' \
+                    "#if __has_include_next(<${header#./}>)" \
+                    "#include_next <${header#./}>" \
+                    '#endif' \
+                    > "$_SDK/var/usr/include/$header"
+            fi
+            cat "$bsroot/compat/$func/headers/$header" >> "$_SDK/var/usr/include/$header"
+        done
+        for src in "$bsroot/compat/$func"/*.c; do
+            (
+            "$_TARGET-cc" -Wall -Wextra -pedantic -Wno-empty-translation-unit -std=gnu99 $optflags \
+                -c "$src" -o "$_TMP/libcompat/${src##*/}.o" || {
+                touch "$_TMP/libcompat/fail"
+                nocleanup=1 error "failed to build compatability function $func, source file ${src##*/}"
+            }
+            ) &
+        done
+    else
+        error "compatability function not found: $func"
+    fi
+}
+
 _includefuncs() {
     file="$1"
     if [ -f "$file" ]; then
@@ -446,32 +483,7 @@ _includefuncs() {
         fi
         mkdir "$_TMP/libcompat"
         while IFS= read -r func; do
-            if [ -d "$bsroot/compat/$func" ]; then
-                for header in $(cd "$bsroot/compat/$func/headers" 2>/dev/null && find . -type f); do
-                    [ -e "$bsroot/compat/$func/headers/$header" ] || continue
-                    if ! [ -f "$_SDK/var/usr/include/$header" ]; then
-                        mkdir -p "$_SDK/var/usr/include/${header%/*}"
-                        printf '%s\n' \
-                            '#pragma once' \
-                            "#if __has_include_next(<${header#./}>)" \
-                            "#include_next <${header#./}>" \
-                            '#endif' \
-                            > "$_SDK/var/usr/include/$header"
-                    fi
-                    cat "$bsroot/compat/$func/headers/$header" >> "$_SDK/var/usr/include/$header"
-                done
-                for src in "$bsroot/compat/$func"/*.c; do
-                    (
-                    "$_TARGET-cc" -Wall -Wextra -pedantic -Wno-empty-translation-unit -std=gnu99 $optflags \
-                        -c "$src" -o "$_TMP/libcompat/${src##*/}.o" || {
-                        touch "$_TMP/libcompat/fail"
-                        nocleanup=1 error "failed to build compatability function $func, source file ${src##*/}"
-                    }
-                    ) &
-                done
-            else
-                error "compatability function not found: $func"
-            fi
+            _buildfunc "$func"
         done < "$file"
         wait
         [ -e "$_TMP/libcompat/fail" ] && error "failed to build compatability functions"

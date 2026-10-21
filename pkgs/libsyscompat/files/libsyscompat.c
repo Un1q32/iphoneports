@@ -16,21 +16,6 @@ pid_t wait4_unix2003(pid_t pid, int *stat_loc, int options,
 #include <stdlib.h>
 #undef fstatat
 
-#if ((defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) ||               \
-      defined(__ENVIRONMENT_TV_OS_VERSION_MIN_REQUIRED__)) &&                  \
-     __ENVIRONMENT_OS_VERSION_MIN_REQUIRED__ < 100000) ||                      \
-    (defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) &&                 \
-     __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ < 101200) ||                \
-    (defined(__ENVIRONMENT_WATCH_OS_VERSION_MIN_REQUIRED__) &&                 \
-     __ENVIRONMENT_WATCH_OS_VERSION_MIN_REQUIRED__ < 30000)
-
-void arc4random_buf(void *, size_t);
-
-int getentropy(void *buf, size_t size) {
-  arc4random_buf(buf, size);
-  return 0;
-}
-
 #if (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                \
      __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ < 80000) ||                \
     (defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) &&                 \
@@ -602,6 +587,8 @@ int faccessat(int fd, const char *path, int mode, int flags) {
 #endif
 }
 
+void arc4random_buf(void *, size_t);
+
 int CCRandomGenerateBytes(void *buf, size_t size) {
   arc4random_buf(buf, size);
   return 0;
@@ -774,8 +761,6 @@ kern_return_t host_statistics64(host_t host_priv, host_flavor_t flavor,
   return host_statistics(host_priv, flavor, host_info64_out,
                          host_info64_outCnt);
 }
-
-#endif
 
 #endif
 
