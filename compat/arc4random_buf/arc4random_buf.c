@@ -1,7 +1,3 @@
-#pragma once
-
-#include_next <stdlib.h>
-
 #if (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                \
      __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ < 40300) ||                \
     (defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) &&                 \
@@ -9,11 +5,10 @@
 
 #include <dlfcn.h>
 #include <stdbool.h>
+#include <stdlib.h>
 #include <string.h>
 
-#define arc4random_buf __iphoneports_arc4random_buf
-
-static void arc4random_buf(void *buf, size_t size) {
+void arc4random_buf(void *buf, size_t size) {
 
 #if !(defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&               \
       __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ < 20000)
@@ -33,7 +28,7 @@ static void arc4random_buf(void *buf, size_t size) {
 
 #endif
 
-  uint32_t *cbuf = (uint32_t *)buf;
+  uint32_t *cbuf = buf;
   while (size >= sizeof(uint32_t)) {
     *cbuf++ = arc4random();
     size -= sizeof(uint32_t);
