@@ -10,6 +10,7 @@
 #include <dlfcn.h>
 #include <errno.h>
 #include <stdarg.h>
+#include <stdbool.h>
 #include <stdlib.h>
 #include <sys/utsname.h>
 
@@ -17,7 +18,7 @@ enum version { VERSION_UNSET, VERSION_TIGER, VERSION_LEOPARD, VERSION_LION };
 
 static int _open(const char *path, int flags, int mode,
                  int (*func)(const char *, int, ...)) {
-#if defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                \
+#if defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                 \
     __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ < 20000
   enum version ver = VERSION_TIGER;
 #else
@@ -75,8 +76,8 @@ int open(const char *path, int flags, ...) {
 
 #if defined(__i386__) || defined(__ppc__)
 
-int open(const char *path, int flags, ...) __asm("_open$UNIX2003");
-int open(const char *path, int flags, ...) {
+int open_unix03(const char *path, int flags, ...) __asm("_open$UNIX2003");
+int open_unix03(const char *path, int flags, ...) {
   static int (*func)(const char *, int, ...) = NULL;
 
   if (!func)
