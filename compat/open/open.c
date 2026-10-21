@@ -17,6 +17,10 @@ enum version { VERSION_UNSET, VERSION_TIGER, VERSION_LEOPARD, VERSION_LION };
 
 static int _open(const char *path, int flags, int mode,
                  int (*func)(const char *, int, ...)) {
+#if defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                \
+    __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ < 20000
+  enum version ver = VERSION_TIGER;
+#else
   static enum version ver = VERSION_UNSET;
   if (ver == VERSION_UNSET) {
     struct utsname u;
@@ -35,6 +39,7 @@ static int _open(const char *path, int flags, int mode,
         ver = VERSION_TIGER;
     }
   }
+#endif
   bool cloexec = false;
   if (ver < VERSION_LION && flags & O_CLOEXEC) {
     flags &= ~O_CLOEXEC;
