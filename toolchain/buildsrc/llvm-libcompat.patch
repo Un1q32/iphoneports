@@ -1,0 +1,12 @@
+--- src/clang/lib/Driver/ToolChains/Darwin.cpp.orig	2026-10-20 21:36:32.337249738 -0400
++++ src/clang/lib/Driver/ToolChains/Darwin.cpp	2026-10-20 21:53:09.235174456 -0400
+@@ -1816,6 +1816,9 @@
+        (isTargetMacOSBased() && isMacosxVersionLT(10, 6))))
+     CmdArgs.push_back("-lgcc_s.1");
+   AddLinkRuntimeLib(Args, CmdArgs, "builtins");
++  const char *libcompat = getenv("_IPHONEPORTS_LIBCOMPAT");
++  if (libcompat)
++    CmdArgs.push_back(libcompat);
+ }
+ 
+ /// Returns the most appropriate macOS target version for the current process.

@@ -51,6 +51,7 @@ case "$*" in
 esac
 rm -rf "$_TMP"
 mkdir -p "$_TMP"
+libcompat="$_TMP/libcompat.a"
 
 case "$*" in
     (*-j*)
@@ -362,7 +363,7 @@ build() {
         # the 'sdk' package is very big and not a build dependency for anything
         [ "$_PKGNAME" = 'sdk' ] && rm -rf "$_DESTDIR"
     fi
-    rm -rf "$_SDK"
+    rm -rf "$_SDK" "$libcompat"
     )
 
     case $? in
@@ -430,6 +431,44 @@ _includedeps() {
     fi
 }
 
+_includefuncs() {
+    if [ -f "$1" ]; then
+        optflags='-O3 -flto'
+        [ -n "$_DEBUG" ] && optflags='-O0 -g'
+        mkdir "$_TMP/libcompat"
+        while IFS= read -r func; do
+            if [ -d "$bsroot/compat/$func" ]; then
+                for src in "$bsroot/compat/$func"/*.c; do
+                    (
+                    "$_TARGET-cc" -Wall -Wextra -pedantic -Wno-empty-translation-unit -std=gnu99 $optflags \
+                        -c "$src" -o "$_TMP/libcompat/${src##*/}.o" || {
+                        touch "$_TMP/libcompat/fail"
+                        error "failed to build compatability function $func, source file ${src##*/}"
+                    }
+                    ) &
+                done
+                for header in "$(cd "$bsroot/compat/$func/headers" 2>/dev/null && find . -type f)"; do
+                    if ! [ -f "$_SDK/var/usr/include/$header" ]; then
+                        mkdir -p "$_SDK/var/usr/include/${header%/*}"
+                        printf '%s\n%s\n' \
+                            '#pragma once' \
+                            "#include_next <${header#./}>" \
+                            > "$_SDK/var/usr/include/$header"
+                    fi
+                    cat "$bsroot/compat/$func/headers/$header" >> "$_SDK/var/usr/include/$header"
+                done
+            else
+                error "compatability function not found: $func"
+            fi
+        done < "$1"
+        wait
+        [ -e "$_TMP/libcompat/fail" ] && error "failed to build compatability functions"
+        "$_TARGET-ar" rcs "$libcompat" "$_TMP/libcompat"/*.o 2>/dev/null
+        export _IPHONEPORTS_LIBCOMPAT="$libcompat"
+        rm -rf "$_TMP/libcompat"
+    fi
+}
+
 includedeps() {
     unset includeddeps
     if [ -z "$dryrun" ]; then
@@ -449,6 +488,8 @@ includedeps() {
             cp -a sdk/* "$_SDK"
         fi
     fi
+
+    _includefuncs compatfuncs.txt
 }
 
 sysroot() {
