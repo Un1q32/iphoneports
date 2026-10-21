@@ -89,7 +89,7 @@ cleanup() {
 
 error() {
     printf '\033[1;31mError:\033[0m %s\n' "$1"
-    cleanup
+    [ -z "$nocleanup" ] && cleanup
     exit 1
 }
 
@@ -454,7 +454,7 @@ _includefuncs() {
                     "$_TARGET-cc" -Wall -Wextra -pedantic -Wno-empty-translation-unit -std=gnu99 $optflags \
                         -c "$src" -o "$_TMP/libcompat/${src##*/}.o" || {
                         touch "$_TMP/libcompat/fail"
-                        error "failed to build compatability function $func, source file ${src##*/}"
+                        nocleanup=1 error "failed to build compatability function $func, source file ${src##*/}"
                     }
                     ) &
                 done
