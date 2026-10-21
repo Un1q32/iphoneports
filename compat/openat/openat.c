@@ -1,7 +1,3 @@
-#pragma once
-
-#include_next <unistd.h>
-
 #if (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                \
      __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ < 80000) ||                \
     (defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) &&                 \
@@ -9,7 +5,9 @@
 
 #include <dlfcn.h>
 #include <fcntl.h>
+#include <stdarg.h>
 #include <stdbool.h>
+#include <unistd.h>
 
 #if (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                \
      __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ < 20000) ||                \
@@ -22,36 +20,38 @@
 
 #else
 
-#include <iphoneports/pthread_chdir.h>
+#include "pthread_chdir.h"
 
 #endif
 
-#define unlinkat __iphoneports_unlinkat
-
-static int unlinkat(int fd, const char *path, int flags) {
+int openat(int fd, const char *path, int flags, ...) {
+  int mode = mode;
+  if (flags & O_CREAT) {
+    va_list va_args;
+    va_start(va_args, flags);
+    mode = va_arg(va_args, int);
+    va_end(va_args);
+  }
 
 #if (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                \
      __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ >= 20000) ||               \
     !defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__)
 
   static bool init = false;
-  static int (*func)(int, const char *, int);
+  static int (*func)(int, const char *, int, ...);
 
   if (!init) {
-    func = (int (*)(int, const char *, int))dlsym(RTLD_NEXT, "unlinkat");
+    func = (int (*)(int, const char *, int, ...))dlsym(RTLD_NEXT, "openat");
     init = true;
   }
 
   if (func)
-    return func(fd, path, flags);
+    return func(fd, path, flags, mode);
 
 #endif
 
-  if (fd == AT_FDCWD || path[0] == '/') {
-    if (flags & AT_REMOVEDIR)
-      return rmdir(path);
-    return unlink(path);
-  }
+  if (fd == AT_FDCWD || path[0] == '/')
+    return open(path, flags, mode);
 
 #if (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                \
      __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ < 20000) ||                \
@@ -73,9 +73,10 @@ static int unlinkat(int fd, const char *path, int flags) {
   strcat(fdpath, "/");
   strcat(fdpath, path);
 
-  if (flags & AT_REMOVEDIR)
-    return rmdir(fdpath);
-  return unlink(fdpath);
+  int ret = open(fdpath, flags, mode);
+  if (cloexec && ret != -1)
+    fcntl(ret, F_SETFD, FD_CLOEXEC);
+  return ret;
 
 #else
 
@@ -91,11 +92,7 @@ static int unlinkat(int fd, const char *path, int flags) {
     return -1;
   }
 
-  int ret;
-  if (flags & AT_REMOVEDIR)
-    ret = rmdir(path);
-  else
-    ret = unlink(path);
+  int ret = open(path, flags, mode);
 
   pthread_fchdir_np(cwd);
   if (cwd != -1)

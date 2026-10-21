@@ -1,3 +1,6 @@
 fdopendir
 clock_gettime
 realpath
+openat
+unlinkat
+open
