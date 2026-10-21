@@ -1,7 +1,3 @@
-#pragma once
-
-#include_next <unistd.h>
-
 #if (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                \
      __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ < 80000) ||                \
     (defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) &&                 \
@@ -12,6 +8,7 @@
 #include <limits.h>
 #include <stdbool.h>
 #include <string.h>
+#include <unistd.h>
 
 #if (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                \
      __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ < 20000) ||                \
@@ -23,13 +20,11 @@
 
 #else
 
-#include <iphoneports/pthread_chdir.h>
+#include "pthread_chdir.h"
 
 #endif
 
-#define readlinkat __iphoneports_readlinkat
-
-static ssize_t readlinkat(int fd, const char *path, char *buf, size_t bufsize) {
+ssize_t readlinkat(int fd, const char *path, char *buf, size_t bufsize) {
 
 #if (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                \
      __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ >= 20000) ||               \
@@ -52,6 +47,11 @@ static ssize_t readlinkat(int fd, const char *path, char *buf, size_t bufsize) {
   if (fd == AT_FDCWD || path[0] == '/')
     return readlink(path, buf, bufsize);
 
+  /*
+   * This is a linux extension not currently implemented by darwin afaik,
+   * but otherwise weird shit happens when path is empty and I wanna fix the
+   * undefined behaviour by doing something.
+   */
   if (path[0] == '\0') {
     /* there is a race condition here between the fcntl and readlink calls */
     char fdpath[PATH_MAX + strlen(path) + 2];
@@ -77,10 +77,8 @@ static ssize_t readlinkat(int fd, const char *path, char *buf, size_t bufsize) {
 
   char fdpath[PATH_MAX + strlen(path) + 2];
   fcntl(fd, F_GETPATH, fdpath);
-  if (path[0] != '\0') {
-    strcat(fdpath, "/");
-    strcat(fdpath, path);
-  }
+  strcat(fdpath, "/");
+  strcat(fdpath, path);
   return readlink(fdpath, buf, bufsize);
 
 #else
