@@ -14,19 +14,6 @@ pid_t wait4_unix2003(pid_t pid, int *stat_loc, int options, struct rusage *rusag
 #include <dirent.h>
 #undef __dd_fd
 
-#if (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                \
-     __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ < 40300) ||                \
-    (defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) &&                 \
-     __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ < 1070)
-#define open __dont_define_open
-#include <fcntl.h>
-#undef open
-int open(const char *path, int flags, ...)
-#ifdef __i386__
-    __asm("_open$UNIX2003")
-#endif
-        ;
-#endif
 #include <fcntl.h>
 
 #include <stdlib.h>
@@ -646,27 +633,6 @@ int proc_pid_rusage(int pid, int flavor, void *buffer) {
 }
 
 #if (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                \
-     __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ < 60000) ||                \
-    (defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) &&                 \
-     __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ < 1080)
-
-/*
- * dirfd exists on old darwins as a macro function, the symbol
- * wasn't added until later, but rust expects the symbol
- */
-
-#undef dirfd
-
-int dirfd(DIR *dirp) {
-  int ret = -1;
-  if (!dirp || dirp->dd_fd < 0)
-    errno = EINVAL;
-  else
-    ret = dirp->dd_fd;
-  return ret;
-}
-
-#if (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                \
      __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ < 40300) ||                \
     (defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) &&                 \
      __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ < 1070)
@@ -917,8 +883,6 @@ _Unwind_Ptr _Unwind_GetIPInfo(struct _Unwind_Context *context, int *ipbefore) {
 
   abort();
 }
-
-#endif
 
 #endif
 
