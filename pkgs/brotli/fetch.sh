@@ -1,11 +1,8 @@
 #!/bin/sh
-rm -rf "$_DESTDIR" "$_SRCDIR"
-ver='1.2.0'
-if [ ! -f "$_DLCACHE/brotli-$ver.tar.gz" ] ||
-    [ "$(sha256sum "$_DLCACHE/brotli-$ver.tar.gz" | awk '{print $1}')" != "816c96e8e8f193b40151dad7e8ff37b1221d019dbcb9c35cd3fadbfe6477dfec" ]; then
-    printf "Downloading source...\n"
-    curl -L -# -o "$_DLCACHE/brotli-$ver.tar.gz" "https://github.com/google/brotli/archive/refs/tags/v$ver.tar.gz" || exit 1
-fi
-printf "Unpacking source...\n"
-tar -C "$_TMP" -xf "$_DLCACHE/brotli-$ver.tar.gz"
-mv "$_TMP"/brotli-* "$_SRCDIR"
+. ../../files/dllib.sh
+ver='1.2.1'
+dlsrc \
+    "https://github.com/google/brotli/archive/refs/tags/v$ver.tar.gz" \
+    "brotli-$ver.tar.gz" \
+    98d35d11a78dc453aebb7d10c3748f3f73ff78c8267c0dc697b8631f67bf7e8f \
+    "brotli-$ver"
