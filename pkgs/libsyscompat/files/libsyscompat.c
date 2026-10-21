@@ -1,8 +1,11 @@
 #ifdef __i386__
 #include <sys/wait.h>
-// AFAIK wait4 never actually had a UNIX2003 variant, but hyperfine fails to link without it so oh well.
-pid_t wait4_unix2003(pid_t pid, int *stat_loc, int options, struct rusage *rusage) __asm("_wait4$UNIX2003");
-pid_t wait4_unix2003(pid_t pid, int *stat_loc, int options, struct rusage *rusage) {
+// AFAIK wait4 never actually had a UNIX2003 variant, but hyperfine fails to
+// link without it so oh well.
+pid_t wait4_unix2003(pid_t pid, int *stat_loc, int options,
+                     struct rusage *rusage) __asm("_wait4$UNIX2003");
+pid_t wait4_unix2003(pid_t pid, int *stat_loc, int options,
+                     struct rusage *rusage) {
   return wait4(pid, stat_loc, options, rusage);
 }
 #endif
@@ -33,12 +36,12 @@ int getentropy(void *buf, size_t size) {
     (defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) &&                 \
      __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ < 101000)
 
-#include <string.h>
 #include <dlfcn.h>
 #include <errno.h>
-#include <stdbool.h>
 #include <limits.h>
+#include <stdbool.h>
 #include <stdio.h>
+#include <string.h>
 #include <sys/stat.h>
 #include <sys/syscall.h>
 #include <unistd.h>
@@ -626,67 +629,12 @@ int proc_pid_rusage(int pid, int flavor, void *buffer) {
 }
 
 #if (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                \
-     __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ < 40300) ||                \
-    (defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) &&                 \
-     __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ < 1070)
-
-#include <stdint.h>
-
-#if (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                \
-     __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ < 12000) ||                \
-    defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__)
-
-int SecRandomCopyBytes(void *rnd, size_t size, void *buf) {
-
-#ifndef __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__
-
-  static bool init = false;
-  static int (*func)(void *, size_t, void *);
-
-  if (!init) {
-    func =
-        (int (*)(void *, size_t, void *))dlsym(RTLD_NEXT, "SecRandomCopyBytes");
-    if (!func) {
-      void *handle = dlopen(
-          "/System/Library/Frameworks/Security.framework/Security", RTLD_LAZY);
-      if (handle)
-        func = (int (*)(void *, size_t, void *))dlsym(handle,
-                                                      "SecRandomCopyBytes");
-      if (!func)
-        dlclose(handle);
-    }
-    init = true;
-  }
-
-  if (func)
-    return func(rnd, size, buf);
-
-#else
-
-  (void)rnd;
-
-#endif
-
-  uint32_t *cbuf = buf;
-  while (size >= sizeof(uint32_t)) {
-    *cbuf++ = arc4random();
-    size -= sizeof(uint32_t);
-  }
-  if (size != 0) {
-    uint32_t random = arc4random();
-    memcpy(cbuf, &random, size);
-  }
-  return 0;
-}
-
-#endif
-
-#if (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                \
      __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ < 30200) ||                \
     (defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) &&                 \
      __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ < 1060)
 
 #include <pthread.h>
+#include <stdint.h>
 
 int pthread_threadid_np(pthread_t thread, uint64_t *tid) {
 
@@ -845,8 +793,6 @@ _Unwind_Ptr _Unwind_GetIPInfo(struct _Unwind_Context *context, int *ipbefore) {
 
   abort();
 }
-
-#endif
 
 #endif
 

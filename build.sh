@@ -451,9 +451,11 @@ _includefuncs() {
                     [ -e "$bsroot/compat/$func/headers/$header" ] || continue
                     if ! [ -f "$_SDK/var/usr/include/$header" ]; then
                         mkdir -p "$_SDK/var/usr/include/${header%/*}"
-                        printf '%s\n%s\n' \
+                        printf '%s\n' \
                             '#pragma once' \
+                            "#if __has_include_next(<${header#./}>)" \
                             "#include_next <${header#./}>" \
+                            '#endif' \
                             > "$_SDK/var/usr/include/$header"
                     fi
                     cat "$bsroot/compat/$func/headers/$header" >> "$_SDK/var/usr/include/$header"
