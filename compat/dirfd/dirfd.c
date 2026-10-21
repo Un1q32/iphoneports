@@ -8,10 +8,10 @@
 
 int dirfd(DIR *dirp) {
   int ret = -1;
-  if (!dirp || dirp->dd_fd < 0)
+  if (!dirp || *(int *)dirp < 0)
     errno = EINVAL;
   else
-    ret = dirp->dd_fd;
+    ret = *(int *)dirp;
   return ret;
 }
 
