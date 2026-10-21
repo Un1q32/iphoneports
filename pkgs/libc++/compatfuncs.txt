@@ -1,1 +1,2 @@
 fdopendir
+clock_gettime

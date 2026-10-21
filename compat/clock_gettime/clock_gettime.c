@@ -1,7 +1,3 @@
-#pragma once
-
-#include_next <time.h>
-
 #if ((defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) ||               \
       defined(__ENVIRONMENT_TV_OS_VERSION_MIN_REQUIRED__)) &&                  \
      __ENVIRONMENT_OS_VERSION_MIN_REQUIRED__ < 100000) ||                      \
@@ -19,40 +15,7 @@
 #include <stdbool.h>
 #include <sys/resource.h>
 #include <sys/time.h>
-
-#ifndef CLOCK_REALTIME
-typedef int clockid_t;
-#endif
-
-#ifndef CLOCK_REALTIME
-#define CLOCK_REALTIME 0
-#endif
-#ifndef CLOCK_MONOTONIC_RAW
-#define CLOCK_MONOTONIC_RAW 4
-#endif
-#ifndef CLOCK_MONOTONIC_RAW_APPROX
-#define CLOCK_MONOTONIC_RAW_APPROX 5
-#endif
-#ifndef CLOCK_MONOTONIC
-#define CLOCK_MONOTONIC 6
-#endif
-#ifndef CLOCK_UPTIME_RAW
-#define CLOCK_UPTIME_RAW 8
-#endif
-#ifndef CLOCK_UPTIME_RAW_APPROX
-#define CLOCK_UPTIME_RAW_APPROX 9
-#endif
-#ifndef CLOCK_PROCESS_CPUTIME_ID
-#define CLOCK_PROCESS_CPUTIME_ID 12
-#endif
-#ifndef CLOCK_THREAD_CPUTIME_ID
-#define CLOCK_THREAD_CPUTIME_ID 16
-#endif
-
-#define clock_gettime __iphoneports_clock_gettime
-#define mach_time_factor __iphoneports_mach_time_factor
-
-extern uint64_t __thread_selfusage(void);
+#include <time.h>
 
 static double mach_time_factor = 0.0;
 
@@ -65,9 +28,11 @@ static double mach_time_factor = 0.0;
 
 #define HIRES_THREAD_TIME
 
+extern uint64_t __thread_selfusage(void);
+
 #endif
 
-static int clock_gettime(clockid_t clockid, struct timespec *ts) {
+int clock_gettime(clockid_t clockid, struct timespec *ts) {
 
 #if (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                \
      __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ >= 20000) ||               \
@@ -168,6 +133,50 @@ static int clock_gettime(clockid_t clockid, struct timespec *ts) {
   return 0;
 }
 
-#undef mach_time_factor
+int clock_getres(clockid_t clockid, struct timespec *res) {
+
+#if (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                \
+     __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ >= 20000) ||               \
+    !defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__)
+
+  static bool init = false;
+  static int (*func)(clockid_t, struct timespec *);
+
+  if (!init) {
+    func =
+        (int (*)(clockid_t, struct timespec *))dlsym(RTLD_NEXT, "clock_getres");
+    init = true;
+  }
+
+  if (func)
+    return func(clockid, ts);
+
+#endif
+
+  switch (clockid) {
+  case CLOCK_REALTIME:
+  case CLOCK_PROCESS_CPUTIME_ID:
+#ifndef HIRES_THREAD_TIME
+  case CLOCK_THREAD_CPUTIME_ID:
+#endif
+    res->tv_sec = 0;
+    res->tv_nsec = 1000;
+    return 0;
+
+  case CLOCK_MONOTONIC_RAW:
+  case CLOCK_MONOTONIC_RAW_APPROX:
+  case CLOCK_UPTIME_RAW:
+  case CLOCK_UPTIME_RAW_APPROX:
+#ifdef HIRES_THREAD_TIME
+  case CLOCK_THREAD_CPUTIME_ID:
+#endif
+    res->tv_sec = 0;
+    res->tv_nsec = mach_time_factor;
+    return 0;
+  default:
+    errno = EINVAL;
+    return -1;
+  }
+}
 
 #endif

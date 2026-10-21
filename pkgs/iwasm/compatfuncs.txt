@@ -1,2 +1,3 @@
 strnlen
 fdopendir
+clock_gettime
