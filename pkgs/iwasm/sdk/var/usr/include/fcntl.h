@@ -14,18 +14,6 @@
 #ifndef AT_SYMLINK_FOLLOW
 #define AT_SYMLINK_FOLLOW 0x0040
 #endif
-#ifndef O_CLOEXEC
-#define O_CLOEXEC 0x1000000
-#endif
-
-#if (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                \
-     __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ < 40300) ||                \
-    (defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) &&                 \
-     __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ < 1070)
-
-#define __NO_O_CLOEXEC
-
-#endif
 
 #if (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                \
      __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ < 80000) ||                \
@@ -80,22 +68,8 @@ static int openat(int fd, const char *path, int flags, ...) {
 
 #endif
 
-#ifdef __NO_O_CLOEXEC
-  bool cloexec = false;
-  if (flags & O_CLOEXEC) {
-    flags &= ~O_CLOEXEC;
-    cloexec = true;
-  }
-#endif
-
-  if (fd == AT_FDCWD || path[0] == '/') {
-    int ret = open(path, flags, mode);
-#ifdef __NO_O_CLOEXEC
-    if (cloexec && ret != -1)
-      fcntl(ret, F_SETFD, FD_CLOEXEC);
-#endif
-    return ret;
-  }
+  if (fd == AT_FDCWD || path[0] == '/')
+    return open(path, flags, mode);
 
 #if (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                \
      __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ < 20000) ||                \
@@ -117,10 +91,7 @@ static int openat(int fd, const char *path, int flags, ...) {
   strcat(fdpath, "/");
   strcat(fdpath, path);
 
-  int ret = open(fdpath, flags, mode);
-  if (cloexec && ret != -1)
-    fcntl(ret, F_SETFD, FD_CLOEXEC);
-  return ret;
+  return open(fdpath, flags, mode);
 
 #else
 
@@ -137,10 +108,6 @@ static int openat(int fd, const char *path, int flags, ...) {
   }
 
   int ret = open(path, flags, mode);
-#ifdef __NO_O_CLOEXEC
-  if (cloexec && ret != -1)
-    fcntl(ret, F_SETFD, FD_CLOEXEC);
-#endif
 
   pthread_fchdir_np(cwd);
   if (cwd != -1)
@@ -150,7 +117,5 @@ static int openat(int fd, const char *path, int flags, ...) {
 
 #endif
 }
-
-#undef __NO_O_CLOEXEC
 
 #endif
