@@ -149,7 +149,7 @@ int clock_getres(clockid_t clockid, struct timespec *res) {
   }
 
   if (func)
-    return func(clockid, ts);
+    return func(clockid, res);
 
 #endif
 
