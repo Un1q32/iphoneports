@@ -73,10 +73,7 @@ int openat(int fd, const char *path, int flags, ...) {
   strcat(fdpath, "/");
   strcat(fdpath, path);
 
-  int ret = open(fdpath, flags, mode);
-  if (cloexec && ret != -1)
-    fcntl(ret, F_SETFD, FD_CLOEXEC);
-  return ret;
+  return open(fdpath, flags, mode);
 
 #else
 
