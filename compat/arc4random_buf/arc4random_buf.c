@@ -1,7 +1,4 @@
-#if (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                \
-     __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ < 40300) ||                \
-    (defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) &&                 \
-     __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ < 1070)
+#if MINVER_LT(1070, 40300, 0)
 
 #include <dlfcn.h>
 #include <stdbool.h>
@@ -11,8 +8,7 @@
 
 void arc4random_buf(void *buf, size_t size) {
 
-#if !(defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&               \
-      __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ < 20000)
+#if MAXVER_GE(1070, 40300, 0)
 
   static bool init = false;
   static void (*func)(void *, size_t);
