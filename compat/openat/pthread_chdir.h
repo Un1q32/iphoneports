@@ -3,6 +3,7 @@
 #if MINVER_LT(101200, 100000, 30000)
 
 #include <sys/syscall.h>
+#include <unistd.h>
 
 #define pthread_fchdir_np __iphoneports_pthread_fchdir_np
 
