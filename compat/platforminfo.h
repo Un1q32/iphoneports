@@ -38,14 +38,17 @@
 
 #if defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__)
 #define MINVER_LT(mac,ios,watch) (MINVER < mac)
+#define MAXVER_LT(mac,ios,watch) (MAXVER < mac)
 #define MINVER_GE(mac,ios,watch) (MINVER >= mac)
 #define MAXVER_GE(mac,ios,watch) (MAXVER >= mac)
 #elif defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) || defined(__ENVIRONMENT_TV_OS_VERSION_MIN_REQUIRED__)
 #define MINVER_LT(mac,ios,watch) (MINVER < ios)
+#define MAXVER_LT(mac,ios,watch) (MAXVER < ios)
 #define MINVER_GE(mac,ios,watch) (MINVER >= ios)
 #define MAXVER_GE(mac,ios,watch) (MAXVER >= ios)
 #elif defined(__ENVIRONMENT_WATCH_OS_VERSION_MIN_REQUIRED__)
 #define MINVER_LT(mac,ios,watch) (MINVER < watch)
+#define MAXVER_LT(mac,ios,watch) (MAXVER < watch)
 #define MINVER_GE(mac,ios,watch) (MINVER >= watch)
 #define MAXVER_GE(mac,ios,watch) (MAXVER >= watch)
 #else

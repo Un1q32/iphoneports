@@ -485,10 +485,9 @@ _includefuncs() {
     if [ -f "$file" ]; then
         IFS= read -r firstline < "$file"
         if [ "$firstline" = 'all' ]; then
-            (
-            cd "$bsroot/compat" || exit 1
-            printf '%s\n' * > "$_TMP/.funcs"
-            )
+            for func in "$bsroot/compat"/*; do
+                [ -d "$func" ] && printf '%s\n' "${func##*/}" >> "$_TMP/.funcs"
+            done
             file="$_TMP/.funcs"
         fi
         mkdir "$_TMP/libcompat"
