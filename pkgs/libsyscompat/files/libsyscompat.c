@@ -26,47 +26,6 @@ int proc_pid_rusage(int pid, int flavor, void *buffer) {
 }
 
 #if (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                \
-     __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ < 30200) ||                \
-    (defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) &&                 \
-     __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ < 1060)
-
-#include <pthread.h>
-#include <stdint.h>
-
-int pthread_threadid_np(pthread_t thread, uint64_t *tid) {
-
-#if !(defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&               \
-      __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ < 20000)
-
-  static bool init = false;
-  static int (*func)(pthread_t, uint64_t *);
-
-  if (!init) {
-    func =
-        (int (*)(pthread_t, uint64_t *))dlsym(RTLD_NEXT, "pthread_threadid_np");
-    init = true;
-  }
-
-  if (func)
-    return func(thread, tid);
-
-#endif
-
-  if (!tid)
-    return EINVAL;
-
-  if (!thread)
-    thread = pthread_self();
-
-  mach_port_t native_id = pthread_mach_thread_np(thread);
-  if (!native_id)
-    return ESRCH;
-
-  *tid = native_id;
-  return 0;
-}
-
-#if (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                \
      __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ < 30000) ||                \
     defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__)
 
@@ -99,8 +58,6 @@ kern_return_t host_statistics64(host_t host_priv, host_flavor_t flavor,
   return host_statistics(host_priv, flavor, host_info64_out,
                          host_info64_outCnt);
 }
-
-#endif
 
 #endif
 
