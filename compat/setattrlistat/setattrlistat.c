@@ -10,6 +10,7 @@
 #include <errno.h>
 #include <limits.h>
 #include <string.h>
+#include <sys/stat.h>
 
 #else
 

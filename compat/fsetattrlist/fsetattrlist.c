@@ -5,6 +5,7 @@
 #include <limits.h>
 #include <stdbool.h>
 #include <unistd.h>
+#include <sys/attr.h>
 
 #ifdef __LP64__
 #define FLAGSTYPE int
