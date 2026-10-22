@@ -3,6 +3,8 @@
     (defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) &&                 \
      __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ < 1070)
 
+#include <stddef.h>
+
 char *stpncpy(char *s1, const char *s2, size_t n) {
   char *s = s1;
   const char *p = s2;
