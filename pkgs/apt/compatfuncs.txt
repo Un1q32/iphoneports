@@ -9,3 +9,4 @@ openat
 fstatat
 faccessat
 unlinkat
+getservbyport_r

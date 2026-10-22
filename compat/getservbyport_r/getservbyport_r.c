@@ -1,17 +1,13 @@
-#pragma once
-
-#include_next <netdb.h>
-
 #include <errno.h>
+#include <netdb.h>
 #include <netinet/in.h>
 #include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
 #include <sys/socket.h>
 
-static inline int getservbyport_r(int port, const char *prots,
-                                  struct servent *se, char *buf, size_t buflen,
-                                  struct servent **res) {
+int getservbyport_r(int port, const char *prots, struct servent *se, char *buf,
+                    size_t buflen, struct servent **res) {
   int i;
   struct sockaddr_in sin = {
       .sin_family = AF_INET,
