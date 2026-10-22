@@ -521,9 +521,9 @@ includedeps() {
         if [ -d sdk ]; then
             cp -a sdk/* "$_SDK"
         fi
+        cp "$bsroot/compat/platforminfo.h" "${_SDK}${_PREFIX}/include"
+        _includefuncs compatfuncs.txt
     fi
-
-    _includefuncs compatfuncs.txt
 }
 
 sysroot() {
