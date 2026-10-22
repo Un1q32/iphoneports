@@ -1,7 +1,4 @@
-#if (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                \
-     __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ < 80000) ||                \
-    (defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) &&                 \
-     __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ < 101000)
+#if MINVER_LT(101000,80000,0)
 
 #define fdopendir __dont_define_fdopendir
 #define opendir __dont_define_opendir
@@ -31,10 +28,7 @@ DIR *opendir(const char *) __asm("_opendir");
 DIR *fdopendir(int fd) __asm("_fdopendir");
 DIR *fdopendir(int fd) {
 
-#if (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                \
-     __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ >= 20000) ||               \
-    !defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                \
-        !defined(__ppc__) && !defined(__ppc64__)
+#if MAXVER_GE(101000,80000,0)
 
   static bool init = false;
   static DIR *(*func)(int);
@@ -47,21 +41,18 @@ DIR *fdopendir(int fd) {
   if (func)
     return func(fd);
 
-#endif
+#endif /* MAXVER_GE(101000,80000,0) */
 
   return _fdopendir(fd, opendir);
 }
 
-#if defined(__i386__) || defined(__ppc__)
+#ifdef HAS_UNIX03_SYMBOLS
 
 DIR *opendir_unix03(const char *) __asm("_opendir$UNIX2003");
 DIR *fdopendir_unix03(int fd) __asm("_fdopendir$UNIX2003");
 DIR *fdopendir_unix03(int fd) {
 
-#if (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                \
-     __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ >= 20000) ||               \
-    !defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                \
-        !defined(__ppc__) && !defined(__ppc64__)
+#if MAXVER_GE(101000,80000,0)
 
   static bool init = false;
   static DIR *(*func)(int);
@@ -74,55 +65,20 @@ DIR *fdopendir_unix03(int fd) {
   if (func)
     return func(fd);
 
-#endif
+#endif /* MAXVER_GE(101000,80000,0) */
 
   return _fdopendir(fd, opendir_unix03);
 }
 
-#endif
+#endif /* HAS_UNIX03_SYMBOLS */
 
-#if defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) &&                  \
-    __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ >= 1050
-
-#if defined(__i386__) || defined(__ppc__)
-
-DIR *opendir_ino64_unix03(const char *) __asm("_opendir$INODE64$UNIX2003");
-DIR *fdopendir_ino64_unix03(int fd) __asm("_fdopendir$INODE64$UNIX2003");
-DIR *fdopendir_ino64_unix03(int fd) {
-
-#if (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                \
-     __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ >= 20000) ||               \
-    !defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                \
-        !defined(__ppc__) && !defined(__ppc64__)
-
-  static bool init = false;
-  static DIR *(*func)(int);
-
-  if (!init) {
-    func = (DIR * (*)(int)) dlsym(RTLD_NEXT, "fdopendir$INODE64$UNIX2003");
-    init = true;
-  }
-
-  if (func)
-    return func(fd);
-
-#endif
-
-  return _fdopendir(fd, opendir_ino64_unix03);
-}
-
-#endif
-
-#if defined(__x86_64__) || defined(__ppc64__)
+#ifdef HAS_INODE64_SYMBOLS
 
 DIR *opendir_ino64(const char *) __asm("_opendir$INODE64");
 DIR *fdopendir_ino64(int fd) __asm("_fdopendir$INODE64");
 DIR *fdopendir_ino64(int fd) {
 
-#if (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                \
-     __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ >= 20000) ||               \
-    !defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                \
-        !defined(__ppc__) && !defined(__ppc64__)
+#if MAXVER_GE(101000,80000,0)
 
   static bool init = false;
   static DIR *(*func)(int);
@@ -135,13 +91,37 @@ DIR *fdopendir_ino64(int fd) {
   if (func)
     return func(fd);
 
-#endif
+#endif /* MAXVER_GE(101000,80000,0) */
 
   return _fdopendir(fd, opendir_ino64);
 }
 
-#endif
+#ifdef HAS_UNIX03_SYMBOLS
 
-#endif
+DIR *opendir_ino64_unix03(const char *) __asm("_opendir$INODE64$UNIX2003");
+DIR *fdopendir_ino64_unix03(int fd) __asm("_fdopendir$INODE64$UNIX2003");
+DIR *fdopendir_ino64_unix03(int fd) {
 
-#endif
+#if MAXVER_GE(101000,80000,0)
+
+  static bool init = false;
+  static DIR *(*func)(int);
+
+  if (!init) {
+    func = (DIR * (*)(int)) dlsym(RTLD_NEXT, "fdopendir$INODE64$UNIX2003");
+    init = true;
+  }
+
+  if (func)
+    return func(fd);
+
+#endif /* MAXVER_GE(101000,80000,0) */
+
+  return _fdopendir(fd, opendir_ino64_unix03);
+}
+
+#endif /* HAS_UNIX03_SYMBOLS */
+
+#endif /* HAS_INODE64_SYMBOLS */
+
+#endif /* MINVER_LT(101000,80000,0) */
