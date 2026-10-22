@@ -4,3 +4,4 @@ clock_gettime
 arc4random_buf
 getline
 sys_icache_invalidate
+__sigreturn
