@@ -1,7 +1,4 @@
-#if (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                \
-     __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ < 40300) ||                \
-    (defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) &&                 \
-     __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ < 1070)
+#if MINVER_LT(1070, 40300, 0)
 
 #include <dlfcn.h>
 #include <errno.h>
@@ -12,9 +9,7 @@
 
 ssize_t getdelim(char **buf, size_t *bufsiz, int delim, FILE *file) {
 
-#if (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                \
-     __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ >= 20000) ||               \
-    !defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__)
+#if MAXVER_GE(1070, 40300, 0)
 
   static bool init = false;
   static ssize_t (*func)(char **, size_t *, int, FILE *);
