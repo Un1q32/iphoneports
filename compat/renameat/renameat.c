@@ -1,7 +1,10 @@
 #if MINVER_LT(101000, 80000, 0)
 
+#include <dlfcn.h>
 #include <errno.h>
 #include <fcntl.h>
+#include <limits.h>
+#include <stdbool.h>
 #include <stdio.h>
 #include <string.h>
 #include <sys/stat.h>
