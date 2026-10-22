@@ -434,6 +434,7 @@ _includedeps() {
 _buildfunc() {
     func="$1"
     if [ -d "$bsroot/compat/$func" ]; then
+        mkdir "$_TMP/libcompat/$func.building" 2>/dev/null || return 0 # prevent funcs from being built twice
         if [ -f "$bsroot/compat/$func/dependencies.txt" ]; then
             while IFS= read -r dep; do
                 (
@@ -458,13 +459,21 @@ _buildfunc() {
         done
         for src in "$bsroot/compat/$func"/*.c; do
             (
-            "$_TARGET-cc" -Wall -Wextra -pedantic -Wno-empty-translation-unit -std=gnu99 $optflags \
+            if [ -n "$_DEBUG" ]; then
+                set -- -O0 -g
+            else
+                set -- -O3 -flto
+            fi
+            "$_TARGET-cc" -Wall -Wextra -pedantic -Wno-empty-translation-unit -std=gnu99 "$@" \
                 -c "$src" -o "$_TMP/libcompat/${src##*/}.o" || {
                 touch "$_TMP/libcompat/fail"
                 nocleanup=1 error "failed to build compatability function $func, source file ${src##*/}"
             }
             ) &
         done
+        if [ -f "$bsroot/compat/$func/LICENSE" ]; then
+            cp "$bsroot/compat/$func/LICENSE" "$_TMP/LICENSE.$func"
+        fi
     else
         error "compatability function not found: $func"
     fi
@@ -473,12 +482,10 @@ _buildfunc() {
 _includefuncs() {
     file="$1"
     if [ -f "$file" ]; then
-        optflags='-O3 -flto'
-        [ -n "$_DEBUG" ] && optflags='-O0 -g'
         IFS= read -r firstline < "$file"
         if [ "$firstline" = 'all' ]; then
             (
-            cd "$bsroot/compat"
+            cd "$bsroot/compat" || exit 1
             printf '%s\n' * > "$_TMP/.funcs"
             )
             file="$_TMP/.funcs"

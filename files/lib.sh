@@ -63,6 +63,10 @@ builddeb() {
         rm "$_TMP/suidbinaries"
     fi
 
+    for license in "$_TMP"/LICENSE*; do
+        [ -f "$license" ] && installlicense "$license"
+    done
+
     size=$(du -sk "$_DESTDIR" | sed 's/[[:space:]].*//')
     printf 'Installed-Size: %s\n' "$size" >> "$_DESTDIR/DEBIAN/control"
 
