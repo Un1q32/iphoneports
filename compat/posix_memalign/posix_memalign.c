@@ -12,7 +12,8 @@
 int posix_memalign(void **memptr, size_t align, size_t size) {
 
 #if !(defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&               \
-      __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ < 20000)
+      __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ < 20000) &&               \
+    !defined(__ppc64__)
 
   static bool init = false;
   static int (*func)(void **, size_t, size_t);
