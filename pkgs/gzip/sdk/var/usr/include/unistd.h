@@ -14,7 +14,6 @@
 #include <sys/fcntl.h>
 
 #define fgetattrlist __iphoneports_fgetattrlist
-#define fsetattrlist __iphoneports_fsetattrlist
 
 #ifdef __LP64__
 #define FLAGSTYPE int
@@ -51,34 +50,6 @@ static inline int fgetattrlist(int fd, struct attrlist *attrList, void *attrBuf,
     return -1;
 
   return getattrlist(fdpath, attrList, attrBuf, attrBufSize, flags | FSOPT_NOFOLLOW);
-}
-
-static inline int fsetattrlist(int fd, struct attrlist *attrList, void *attrBuf,
-                               size_t attrBufSize, unsigned FLAGSTYPE flags) {
-
-#if (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                \
-     __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ >= 20000) ||               \
-    !defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__)
-
-  static bool init = false;
-  static int (*func)(int, struct attrlist *, void *, size_t,
-                     unsigned FLAGSTYPE);
-  if (!init) {
-    func = (int (*)(int, struct attrlist *, void *, size_t,
-                    unsigned FLAGSTYPE))dlsym(RTLD_NEXT, "fsetattrlist");
-    init = true;
-  }
-
-  if (func)
-    return func(fd, attrList, attrBuf, attrBufSize, flags);
-
-#endif
-
-  char fdpath[PATH_MAX];
-  if (fcntl(fd, F_GETPATH, fdpath) == -1)
-    return -1;
-
-  return setattrlist(fdpath, attrList, attrBuf, attrBufSize, flags | FSOPT_NOFOLLOW);
 }
 
 #endif
