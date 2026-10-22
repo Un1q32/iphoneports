@@ -33,7 +33,7 @@
 #endif
 
 #ifndef MAXVER
-#define MAXVER 9999999
+#define MAXVER 999999
 #endif
 
 #if defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__)
@@ -53,4 +53,11 @@
 #define MAXVER_GE(mac,ios,watch) (MAXVER >= watch)
 #else
 #error unknown darwin subsystem
+#endif
+
+#if (defined(__i386__) || defined(__ppc__)) && MINVER_GE(1040,999999,999999)
+#define HAS_UNIX03_SYMBOLS
+#endif
+#if (defined(__i386__) || defined(__ppc__) || defined(__x86_64__) || defined(__ppc64__)) && MINVER_GE(1050,999999,999999)
+#define HAS_INODE64_SYMBOLS
 #endif
