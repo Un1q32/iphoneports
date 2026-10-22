@@ -16,6 +16,15 @@
 
 enum version { VERSION_UNSET, VERSION_TIGER, VERSION_LEOPARD, VERSION_LION };
 
+#if (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                \
+     __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ < 20000) ||                \
+    (defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) &&                 \
+     __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ < 1050)
+#define MINVER VERSION_TIGER
+#else
+#define MINVER VERSION_LEOPARD
+#endif
+
 static int _open(const char *path, int flags, int mode,
                  int (*func)(const char *, int, ...)) {
 #if defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                 \
@@ -33,15 +42,19 @@ static int _open(const char *path, int flags, int mode,
     int ret = uname(&u);
     errno = tmp;
     if (ret == -1)
-      ver = VERSION_TIGER;
+      ver = MINVER;
     else {
       long ver = strtol(u.release, NULL, 10);
+#if defined(__ppc__) || defined(__ppc64__)
+      if (ver > 10)
+        ver = 10;
+#endif
       if (ver >= 11)
         ver = VERSION_LION;
       else if (ver >= 9)
         ver = VERSION_LEOPARD;
       else
-        ver = VERSION_TIGER;
+        ver = MINVER;
     }
   }
 #endif
