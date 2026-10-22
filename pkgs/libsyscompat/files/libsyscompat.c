@@ -95,46 +95,7 @@ int pthread_threadid_np(pthread_t thread, uint64_t *tid) {
      __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ < 30000) ||                \
     defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__)
 
-#include <fcntl.h>
-#include <limits.h>
 #include <mach/mach_host.h>
-#include <sys/attr.h>
-#include <unistd.h>
-
-#ifdef __LP64__
-#define FLAGSTYPE int
-#else
-#define FLAGSTYPE long
-#endif
-
-int fsetattrlist(int fd, struct attrlist *attrList, void *attrBuf,
-                 size_t attrBufSize, unsigned FLAGSTYPE flags) {
-
-#if (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                \
-     __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ >= 20000) ||               \
-    !defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__)
-
-  static bool init = false;
-  static int (*func)(int, struct attrlist *, void *, size_t,
-                     unsigned FLAGSTYPE);
-  if (!init) {
-    func = (int (*)(int, struct attrlist *, void *, size_t,
-                    unsigned FLAGSTYPE))dlsym(RTLD_NEXT, "fsetattrlist");
-    init = true;
-  }
-
-  if (func)
-    return func(fd, attrList, attrBuf, attrBufSize, flags);
-
-#endif
-
-  char fdpath[PATH_MAX];
-  if (fcntl(fd, F_GETPATH, fdpath) == -1)
-    return -1;
-
-  return setattrlist(fdpath, attrList, attrBuf, attrBufSize,
-                     flags | FSOPT_NOFOLLOW);
-}
 
 kern_return_t host_statistics64(host_t host_priv, host_flavor_t flavor,
                                 host_info_t host_info64_out,
