@@ -43,9 +43,6 @@ builddeb() {
     cp -r "$debian" "$_DESTDIR/DEBIAN"
     sed -e "s|@DPKGARCH@|$_DPKGARCH|" "$debian/control" > "$_DESTDIR/DEBIAN/control"
 
-    size=$(du -sk "$_DESTDIR" | sed 's/[[:space:]].*//')
-    printf 'Installed-Size: %s\n' "$size" >> "$_DESTDIR/DEBIAN/control"
-
     # SUID binaries must be moved outside of /var to work, except on rootless jailbreaks or macOS
     if [ "$_SUBSYSTEM" != 'macos' ] && [ -f "$_TMP/suidbinaries" ]; then
         if ! [ -f "$_DESTDIR/DEBIAN/postinst" ]; then
@@ -65,6 +62,9 @@ builddeb() {
         done < "$_TMP/suidbinaries"
         rm "$_TMP/suidbinaries"
     fi
+
+    size=$(du -sk "$_DESTDIR" | sed 's/[[:space:]].*//')
+    printf 'Installed-Size: %s\n' "$size" >> "$_DESTDIR/DEBIAN/control"
 
     dpkg-deb -b --root-owner-group -Zgzip "$_DESTDIR" "$_PKGNAME-$_TRIPLE.deb"
 }
