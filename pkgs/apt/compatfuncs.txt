@@ -4,3 +4,4 @@ open
 getline
 strndup
 memrchr
+strchrnul
