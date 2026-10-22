@@ -1,17 +1,7 @@
-#pragma once
-
-#include_next <sys/time.h>
-
 #if (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                \
      __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ < 20000) ||                \
     (defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) &&                 \
      __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ < 1050)
-
-#include <sys/attr.h>
-#include <sys/stat.h>
-#include <unistd.h>
-
-#define lutimes __iphoneports_lutimes
 
 /*
  * Copyright (c) 2006 Apple Computer, Inc. All rights reserved.
@@ -46,7 +36,18 @@
  * Version 2.0.
  */
 
-static inline int lutimes(const char *path, const struct timeval *times) {
+/*
+ * NOTICE: This file was modified in October 2026 to be a regular
+ * source file rather than a header. This notice is included in
+ * support of clause 2.2 (b) of the Apple Public License, Version 2.0.
+ */
+
+#include <sys/attr.h>
+#include <sys/stat.h>
+#include <sys/time.h>
+#include <unistd.h>
+
+int lutimes(const char *path, const struct timeval *times) {
   struct stat s;
   struct attrlist a;
   struct {
