@@ -2,3 +2,4 @@ fdopendir
 realpath
 open
 getline
+strndup
