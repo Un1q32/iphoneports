@@ -1,5 +1,4 @@
-#if !(defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&               \
-      __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ < 30000)
+#if MINVER_LT(0, 30000, 0)
 
 #include <dlfcn.h>
 #include <stdbool.h>

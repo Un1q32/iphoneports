@@ -1,7 +1,4 @@
-#if (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                \
-     __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ < 80000) ||                \
-    (defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) &&                 \
-     __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ < 101000)
+#if MINVER_LT(101000, 80000, 0)
 
 #include <dlfcn.h>
 #include <fcntl.h>
@@ -10,10 +7,7 @@
 #include <string.h>
 #include <unistd.h>
 
-#if (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                \
-     __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ < 20000) ||                \
-    (defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) &&                 \
-     __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ < 1050)
+#if MINVER_LT(1050, 20000, 0)
 
 #include <errno.h>
 #include <sys/stat.h>
@@ -26,9 +20,7 @@
 
 ssize_t readlinkat(int fd, const char *path, char *buf, size_t bufsize) {
 
-#if (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                \
-     __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ >= 20000) ||               \
-    !defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__)
+#if MAXVER_GE(101000, 80000, 0)
 
   static bool init = false;
   static ssize_t (*func)(int, const char *, char *, size_t);
@@ -60,10 +52,7 @@ ssize_t readlinkat(int fd, const char *path, char *buf, size_t bufsize) {
     return readlink(fdpath, buf, bufsize);
   }
 
-#if (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                \
-     __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ < 20000) ||                \
-    (defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) &&                 \
-     __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ < 1050)
+#if MINVER_LT(1050, 20000, 0)
 
   /* the Mac OS X 10.4 / iPhone OS 1 version has a race condition */
 

@@ -1,5 +1,4 @@
-#if defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) &&                  \
-    __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ < 1050
+#if MINVER_LT(1050, 0, 0)
 
 #include <dlfcn.h>
 #include <stdbool.h>

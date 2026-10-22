@@ -1,6 +1,4 @@
-#if defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                 \
-    __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ < 30200 &&                  \
-    __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ >= 20000
+#if MINVER_LT(0, 30200, 0) && MINVER_GE(0, 20000, 0)
 
 /* Taken from openlibm */
 
