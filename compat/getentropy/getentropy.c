@@ -1,4 +1,4 @@
-#if MINVER_LT(101200,100000,30000)
+#if MINVER_LT(101200, 100000, 30000)
 
 #include <dlfcn.h>
 #include <stdbool.h>
@@ -6,7 +6,7 @@
 
 int getentropy(void *buf, size_t size) {
 
-#if MAXVER_GE(101200,100000,30000)
+#if MAXVER_GE(101200, 100000, 30000)
 
   static bool init = false;
   static int (*func)(void *, size_t);

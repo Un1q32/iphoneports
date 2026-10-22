@@ -1,4 +1,4 @@
-#if MINVER_LT(1070,40300,0)
+#if MINVER_LT(1070, 40300, 0)
 
 #define open __dont_define_open
 #include <fcntl.h>
@@ -15,9 +15,9 @@ enum version { VERSION_UNSET, VERSION_TIGER, VERSION_LEOPARD, VERSION_LION };
 
 static int _open(const char *path, int flags, int mode,
                  int (*func)(const char *, int, ...)) {
-#if MAXVER_LT(1050,20000,0)
+#if MAXVER_LT(1050, 20000, 0)
   enum version ver = VERSION_TIGER;
-#elif MAXVER_LT(1070,40300,0) && MINVER_GE(1050,20000,0)
+#elif MAXVER_LT(1070, 40300, 0) && MINVER_GE(1050, 20000, 0)
   enum version ver = VERSION_LEOPARD;
 #else
   static enum version ver = VERSION_UNSET;
@@ -30,10 +30,10 @@ static int _open(const char *path, int flags, int mode,
       ver = MINVER;
     else {
       long ver = strtol(u.release, NULL, 10);
-#if MAXVER_LT(1070,40300,0)
+#if MAXVER_LT(1070, 40300, 0)
       if (ver >= 11)
         ver = 10;
-#elif MINVER_GE(1050,20000,0)
+#elif MINVER_GE(1050, 20000, 0)
       if (ver < 9)
         ver = 9;
 #endif
@@ -79,7 +79,7 @@ int open(const char *path, int flags, ...) {
   return _open(path, flags, mode, func);
 }
 
-#if defined(HAS_UNIX03_SYMBOLS) && MINVER_GE(1050,0,0)
+#if defined(HAS_UNIX03_SYMBOLS) && MINVER_GE(1050, 0, 0)
 
 int open_unix03(const char *path, int flags, ...) __asm("_open$UNIX2003");
 int open_unix03(const char *path, int flags, ...) {

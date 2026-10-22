@@ -3,10 +3,10 @@
     (defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) &&                 \
      __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ < 101000)
 
-#include <unistd.h>
 #include <dlfcn.h>
 #include <fcntl.h>
 #include <stdbool.h>
+#include <unistd.h>
 
 #if (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                \
      __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ < 20000) ||                \
