@@ -33,7 +33,8 @@ DIR *fdopendir(int fd) {
 
 #if (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                \
      __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ >= 20000) ||               \
-    !defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__)
+    !defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                \
+        !defined(__ppc__) && !defined(__ppc64__)
 
   static bool init = false;
   static DIR *(*func)(int);
@@ -59,7 +60,8 @@ DIR *fdopendir_unix03(int fd) {
 
 #if (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                \
      __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ >= 20000) ||               \
-    !defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__)
+    !defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                \
+        !defined(__ppc__) && !defined(__ppc64__)
 
   static bool init = false;
   static DIR *(*func)(int);
@@ -90,7 +92,8 @@ DIR *fdopendir_ino64_unix03(int fd) {
 
 #if (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                \
      __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ >= 20000) ||               \
-    !defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__)
+    !defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                \
+        !defined(__ppc__) && !defined(__ppc64__)
 
   static bool init = false;
   static DIR *(*func)(int);
@@ -118,7 +121,8 @@ DIR *fdopendir_ino64(int fd) {
 
 #if (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                \
      __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ >= 20000) ||               \
-    !defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__)
+    !defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                \
+        !defined(__ppc__) && !defined(__ppc64__)
 
   static bool init = false;
   static DIR *(*func)(int);
