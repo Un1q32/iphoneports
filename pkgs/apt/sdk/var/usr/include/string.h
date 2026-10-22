@@ -2,25 +2,6 @@
 
 #include_next <string.h>
 
-#include <stdint.h>
-#include <stdlib.h>
-#include <sys/types.h>
-
-#define memrchr __iphoneports_memrchr
-
-static inline void *memrchr(const void *s, int c, size_t n) {
-  const unsigned char *cp;
-
-  if (n != 0) {
-    cp = (unsigned char *)s + n;
-    do {
-      if (*(--cp) == (unsigned char)c)
-        return (void *)cp;
-    } while (--n != 0);
-  }
-  return NULL;
-}
-
 #if ((defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) ||               \
       defined(__ENVIRONMENT_TV_OS_VERSION_MIN_REQUIRED__)) &&                  \
      __ENVIRONMENT_OS_VERSION_MIN_REQUIRED__ < 180400) ||                      \

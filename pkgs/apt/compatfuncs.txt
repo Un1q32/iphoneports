@@ -3,3 +3,4 @@ realpath
 open
 getline
 strndup
+memrchr
