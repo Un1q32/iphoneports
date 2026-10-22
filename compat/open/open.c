@@ -21,6 +21,10 @@ static int _open(const char *path, int flags, int mode,
 #if defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                 \
     __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ < 20000
   enum version ver = VERSION_TIGER;
+#elif defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) &&                \
+    __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ >= 1050 &&                   \
+    (defined(__ppc__) || defined(__ppc64__))
+  enum version ver = VERSION_LEOPARD;
 #else
   static enum version ver = VERSION_UNSET;
   if (ver == VERSION_UNSET) {
