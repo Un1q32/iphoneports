@@ -29,10 +29,6 @@ pid_t wait4_unix2003(pid_t pid, int *stat_loc, int options,
 #include <sys/syscall.h>
 #include <unistd.h>
 
-#ifndef AT_FDCWD
-#define AT_FDCWD -2
-#endif
-
 #if !((defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&              \
        __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ < 20000) ||              \
       (defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) &&               \
@@ -43,72 +39,6 @@ static inline int pthread_fchdir_np(int fd) {
 }
 
 #endif
-
-int symlinkat(const char *target, int fd, const char *path) {
-
-#if !(defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&               \
-      __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ < 20000)
-
-  static bool init = false;
-  static int (*func)(const char *, int, const char *);
-
-  if (!init) {
-    func =
-        (int (*)(const char *, int, const char *))dlsym(RTLD_NEXT, "symlinkat");
-    init = true;
-  }
-
-  if (func)
-    return func(target, fd, path);
-
-#endif
-
-#if (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                \
-     __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ < 20000) ||                \
-    (defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) &&                 \
-     __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ < 1050)
-
-  /* the Mac OS X 10.4 / iPhone OS 1 version has a race condition */
-
-  struct stat st;
-  if (fstat(fd, &st) == -1)
-    return -1;
-  if (!S_ISDIR(st.st_mode)) {
-    errno = ENOTDIR;
-    return -1;
-  }
-
-  char fdpath[PATH_MAX + strlen(path) + 2];
-  fcntl(fd, F_GETPATH, fdpath);
-  strcat(fdpath, "/");
-  strcat(fdpath, path);
-
-  return symlink(target, fdpath);
-
-#else
-
-  int cwd = open(".", O_RDONLY);
-  if (pthread_fchdir_np(-1) < 0 && cwd != -1) {
-    close(cwd);
-    cwd = -1;
-  }
-  if (pthread_fchdir_np(fd) < 0) {
-    pthread_fchdir_np(cwd);
-    if (cwd != -1)
-      close(cwd);
-    return -1;
-  }
-
-  int ret = symlink(target, path);
-
-  pthread_fchdir_np(cwd);
-  if (cwd != -1)
-    close(cwd);
-
-  return ret;
-
-#endif
-}
 
 void arc4random_buf(void *, size_t);
 
