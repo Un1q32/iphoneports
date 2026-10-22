@@ -5,3 +5,7 @@ getline
 strndup
 memrchr
 strchrnul
+openat
+fstatat
+faccessat
+unlinkat
