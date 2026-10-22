@@ -1,7 +1,4 @@
-#if (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                \
-     __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ < 40300) ||                \
-    (defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) &&                 \
-     __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ < 1070)
+#if MINVER_LT(1070,40300,0)
 
 #define open __dont_define_open
 #include <fcntl.h>
@@ -16,23 +13,11 @@
 
 enum version { VERSION_UNSET, VERSION_TIGER, VERSION_LEOPARD, VERSION_LION };
 
-#if (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                \
-     __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ < 20000) ||                \
-    (defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) &&                 \
-     __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ < 1050)
-#define MINVER VERSION_TIGER
-#else
-#define MINVER VERSION_LEOPARD
-#endif
-
 static int _open(const char *path, int flags, int mode,
                  int (*func)(const char *, int, ...)) {
-#if defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                 \
-    __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ < 20000
+#if MAXVER_LT(1050,20000,0)
   enum version ver = VERSION_TIGER;
-#elif defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) &&                \
-    __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ >= 1050 &&                   \
-    (defined(__ppc__) || defined(__ppc64__))
+#elif MAXVER_LT(1070,40300,0) && MINVER_GE(1050,20000,0)
   enum version ver = VERSION_LEOPARD;
 #else
   static enum version ver = VERSION_UNSET;
@@ -45,16 +30,19 @@ static int _open(const char *path, int flags, int mode,
       ver = MINVER;
     else {
       long ver = strtol(u.release, NULL, 10);
-#if defined(__ppc__) || defined(__ppc64__)
-      if (ver > 10)
+#if MAXVER_LT(1070,40300,0)
+      if (ver >= 11)
         ver = 10;
+#elif MINVER_GE(1050,20000,0)
+      if (ver < 9)
+        ver = 9;
 #endif
       if (ver >= 11)
         ver = VERSION_LION;
       else if (ver >= 9)
         ver = VERSION_LEOPARD;
       else
-        ver = MINVER;
+        ver = VERSION_TIGER;
     }
   }
 #endif
@@ -91,9 +79,7 @@ int open(const char *path, int flags, ...) {
   return _open(path, flags, mode, func);
 }
 
-#if (defined(__i386__) || defined(__ppc__)) &&                                 \
-    defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) &&                  \
-    __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ >= 1050
+#if defined(HAS_UNIX03_SYMBOLS) && MINVER_GE(1050,0,0)
 
 int open_unix03(const char *path, int flags, ...) __asm("_open$UNIX2003");
 int open_unix03(const char *path, int flags, ...) {
