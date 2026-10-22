@@ -1,10 +1,4 @@
-#if ((defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) ||               \
-      defined(__ENVIRONMENT_TV_OS_VERSION_MIN_REQUIRED__)) &&                  \
-     __ENVIRONMENT_OS_VERSION_MIN_REQUIRED__ < 100000) ||                      \
-    (defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) &&                 \
-     __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ < 101200) ||                \
-    (defined(__ENVIRONMENT_WATCH_OS_VERSION_MIN_REQUIRED__) &&                 \
-     __ENVIRONMENT_WATCH_OS_VERSION_MIN_REQUIRED__ < 30000)
+#if MINVER_LT(101200,100000,30000)
 
 #include <dlfcn.h>
 #include <errno.h>
@@ -19,12 +13,7 @@
 
 static double mach_time_factor = 0.0;
 
-#if (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                \
-     __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ >= 80000) ||               \
-    (defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) &&                 \
-     __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ >= 101000) ||               \
-    defined(__ENVIRONMENT_TV_OS_VERSION_MIN_REQUIRED__) ||                     \
-    defined(__ENVIRONMENT_WATCH_OS_VERSION_MIN_REQUIRED__)
+#if MINVER_GE(101000,80000,0)
 
 #define HIRES_THREAD_TIME
 
@@ -34,9 +23,7 @@ extern uint64_t __thread_selfusage(void);
 
 int clock_gettime(clockid_t clockid, struct timespec *ts) {
 
-#if (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                \
-     __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ >= 20000) ||               \
-    !defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__)
+#if MAXVER_GE(101200,100000,30000)
 
   static bool init = false;
   static int (*func)(clockid_t, struct timespec *);
@@ -135,9 +122,7 @@ int clock_gettime(clockid_t clockid, struct timespec *ts) {
 
 int clock_getres(clockid_t clockid, struct timespec *res) {
 
-#if (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                \
-     __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ >= 20000) ||               \
-    !defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__)
+#if MAXVER_GE(101200,100000,30000)
 
   static bool init = false;
   static int (*func)(clockid_t, struct timespec *);

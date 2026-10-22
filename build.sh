@@ -466,7 +466,7 @@ _buildfunc() {
                 set -- -O3 -flto
             fi
             "$_TARGET-cc" -Wall -Wextra -pedantic -Wno-empty-translation-unit -std=gnu99 "$@" \
-                -c "$src" -o "$_TMP/libcompat/${src##*/}.o" || {
+                -c "$src" -o "$_TMP/libcompat/${src##*/}.o" -include "$bsroot/compat/platforminfo.h" || {
                 touch "$_TMP/libcompat/fail"
                 nocleanup=1 error "failed to build compatability function $func, source file ${src##*/}"
             }
