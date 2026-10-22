@@ -453,6 +453,7 @@ _buildfunc() {
                     "#if __has_include_next(<${header#./}>)" \
                     "#include_next <${header#./}>" \
                     '#endif' \
+                    '#include <sys/cdefs.h>' \
                     > "${_SDK}${pfx}/include/$header"
             fi
             cat "$bsroot/compat/$func/headers/$header" >> "${_SDK}${pfx}/include/$header"

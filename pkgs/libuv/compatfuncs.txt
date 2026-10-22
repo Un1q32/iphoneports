@@ -1,2 +1,4 @@
 strnlen
 clock_gettime
+pthread_setname_np
+lutimes
