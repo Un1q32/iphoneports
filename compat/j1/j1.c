@@ -1,7 +1,3 @@
-#pragma once
-
-#include_next <math.h>
-
 #if defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                 \
     __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ < 30200 &&                  \
     __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ >= 20000
@@ -21,12 +17,13 @@
  */
 
 #include <assert.h>
+#include <math.h>
 #include <stdint.h>
 
 //__FBSDID("$FreeBSD: src/lib/msun/src/e_j1.c,v 1.9 2008/02/22 02:30:35 das Exp
 //$");
 
-/* __ieee754_j1(x), __ieee754_y1(x)
+/* __ieee754_j1(x)
  * Bessel function of the first and second kinds of order zero.
  * Method -- j1(x):
  *	1. For tiny x, we use j1(x) = x/2 - x^3/16 + x^5/384 - ...
@@ -52,15 +49,6 @@
  *		j1(0) = 0
  *		j1(inf) = 0
  */
-
-#define pone __iphoneports_pone
-#define qone __iphoneports_qone
-#define zero __iphoneports_zero
-#define one __iphoneports_one
-#define invsqrtpi __iphoneports_invsqrtpi
-#define huge __iphoneports_huge
-#define ieee_double_shape_type __iphoneports_ieee_double_shape_type
-#define j1 __iphoneports_j1
 
 typedef union {
   double value;
@@ -99,7 +87,7 @@ static const double huge = 1e300, one = 1.0,
 
 static const double zero = 0.0;
 
-static double j1(double x) {
+double j1(double x) {
   double z, s, c, ss, cc, r, u, v, y;
   int32_t hx, ix;
 
@@ -156,15 +144,6 @@ static double j1(double x) {
  * and
  *	| pone(x)-1-R/S | <= 2  ** ( -60.06)
  */
-
-#define pr8 __iphoneports_pr8
-#define ps8 __iphoneports_ps8
-#define pr5 __iphoneports_pr5
-#define ps5 __iphoneports_ps5
-#define pr3 __iphoneports_pr3
-#define ps3 __iphoneports_ps3
-#define pr2 __iphoneports_pr2
-#define ps2 __iphoneports_ps2
 
 static const double pr8[6] = {
     /* for x in [inf, 8]=1/[0,0.125] */
@@ -270,15 +249,6 @@ static double pone(double x) {
  *	| qone(x)/s -0.375-R/S | <= 2  ** ( -61.13)
  */
 
-#define qr8 __iphoneports_qr8
-#define qs8 __iphoneports_qs8
-#define qr5 __iphoneports_qr5
-#define qs5 __iphoneports_qs5
-#define qr3 __iphoneports_qr3
-#define qs3 __iphoneports_qs3
-#define qr2 __iphoneports_qr2
-#define qs2 __iphoneports_qs2
-
 static const double qr8[6] = {
     /* for x in [inf, 8]=1/[0,0.125] */
     0.00000000000000000000e+00,  /* 0x00000000, 0x00000000 */
@@ -377,32 +347,5 @@ static double qone(double x) {
       z * (q[0] + z * (q[1] + z * (q[2] + z * (q[3] + z * (q[4] + z * q[5])))));
   return (.375 + r / s) / x;
 }
-
-#undef pr8
-#undef ps8
-#undef pr5
-#undef ps5
-#undef pr3
-#undef ps3
-#undef pr2
-#undef ps2
-
-#undef qr8
-#undef qs8
-#undef qr5
-#undef qs5
-#undef qr3
-#undef qs3
-#undef qr2
-#undef qs2
-
-#undef pone
-#undef qone
-#undef zero
-#undef one
-#undef invsqrtpi
-#undef huge
-#undef ieee_double_shape_type
-#undef GET_HIGH_WORD
 
 #endif
