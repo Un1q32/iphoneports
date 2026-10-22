@@ -2,6 +2,7 @@
 
 #include <dlfcn.h>
 #include <stdbool.h>
+#include <stdlib.h>
 #include <unwind.h>
 
 _Unwind_Ptr _Unwind_GetIPInfo(struct _Unwind_Context *context, int *ipbefore) {

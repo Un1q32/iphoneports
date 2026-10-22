@@ -1,4 +1,4 @@
-#if MINVER_LT(1070, 40300)
+#if MINVER_LT(1070, 40300, 0)
 
 #include <stdlib.h>
 #include <string.h>
