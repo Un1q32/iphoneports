@@ -1,17 +1,11 @@
-#if (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                \
-     __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ < 80000) ||                \
-    (defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) &&                 \
-     __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ < 101000)
+#if MINVER_LT(101000, 80000, 0)
 
 #include <dlfcn.h>
 #include <fcntl.h>
 #include <stdbool.h>
 #include <unistd.h>
 
-#if (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                \
-     __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ < 20000) ||                \
-    (defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) &&                 \
-     __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ < 1050)
+#if MINVER_LT(1050, 20000, 0)
 
 #include <errno.h>
 #include <limits.h>
@@ -25,9 +19,7 @@
 
 int unlinkat(int fd, const char *path, int flags) {
 
-#if (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                \
-     __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ >= 20000) ||               \
-    !defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__)
+#if MAXVER_GE(101000, 80000, 0)
 
   static bool init = false;
   static int (*func)(int, const char *, int);
@@ -48,10 +40,7 @@ int unlinkat(int fd, const char *path, int flags) {
     return unlink(path);
   }
 
-#if (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                \
-     __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ < 20000) ||                \
-    (defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) &&                 \
-     __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ < 1050)
+#if MINVER_LT(1050, 20000, 0)
 
   /* the Mac OS X 10.4 / iPhone OS 1 version has a race condition */
 

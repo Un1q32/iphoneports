@@ -1,7 +1,4 @@
-#if (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                \
-     __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ < 10200) ||                \
-    (defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) &&                 \
-     __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ < 1070)
+#if MINVER_LT(1070, 20000, 0)
 
 #include <dlfcn.h>
 #include <stdbool.h>
@@ -11,7 +8,7 @@
 
 int SecRandomCopyBytes(void *rnd, size_t size, void *buf) {
 
-#ifndef __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__
+#if MAXVER_GE(1070, 20000, 0)
 
   static bool init = false;
   static int (*func)(void *, size_t, void *);

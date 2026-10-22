@@ -1,7 +1,4 @@
-#if (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                \
-     __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ < 30000) ||                \
-    (defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) &&                 \
-     __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ < 1060)
+#if MINVER_LT(1060, 30000, 0)
 
 #include <dlfcn.h>
 #include <errno.h>
@@ -11,9 +8,7 @@
 
 int posix_memalign(void **memptr, size_t align, size_t size) {
 
-#if !(defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&               \
-      __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ < 20000) &&               \
-    !defined(__ppc64__)
+#if MAXVER_GE(1060, 30000, 0)
 
   static bool init = false;
   static int (*func)(void **, size_t, size_t);
