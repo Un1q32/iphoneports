@@ -10,35 +10,12 @@ pid_t wait4_unix2003(pid_t pid, int *stat_loc, int options,
 }
 #endif
 
-#include <dirent.h>
-#include <fcntl.h>
 #include <stdlib.h>
 
 #if (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                \
      __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ < 80000) ||                \
     (defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) &&                 \
      __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ < 101000)
-
-#include <dlfcn.h>
-#include <errno.h>
-#include <limits.h>
-#include <stdbool.h>
-#include <stdio.h>
-#include <string.h>
-#include <sys/stat.h>
-#include <sys/syscall.h>
-#include <unistd.h>
-
-#if !((defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&              \
-       __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ < 20000) ||              \
-      (defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) &&               \
-       __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ < 1050))
-
-static inline int pthread_fchdir_np(int fd) {
-  return syscall(SYS___pthread_fchdir, fd);
-}
-
-#endif
 
 void arc4random_buf(void *, size_t);
 
@@ -51,6 +28,11 @@ int CCRandomGenerateBytes(void *buf, size_t size) {
      __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ < 1090) ||                  \
     (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                \
      __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ < 70000)
+
+#include <dlfcn.h>
+#include <errno.h>
+#include <stdbool.h>
+#include <sys/stat.h>
 
 int proc_pid_rusage(int pid, int flavor, void *buffer) {
   static bool rusage_init = false;
@@ -113,9 +95,11 @@ int pthread_threadid_np(pthread_t thread, uint64_t *tid) {
      __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ < 30000) ||                \
     defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__)
 
+#include <fcntl.h>
 #include <limits.h>
 #include <mach/mach_host.h>
 #include <sys/attr.h>
+#include <unistd.h>
 
 #ifdef __LP64__
 #define FLAGSTYPE int
