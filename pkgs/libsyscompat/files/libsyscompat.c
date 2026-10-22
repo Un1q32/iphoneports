@@ -10,11 +10,9 @@ pid_t wait4_unix2003(pid_t pid, int *stat_loc, int options,
 }
 #endif
 
-#define fstatat __dont_define_fstatat
 #include <dirent.h>
 #include <fcntl.h>
 #include <stdlib.h>
-#undef fstatat
 
 #if (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                \
      __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ < 80000) ||                \
@@ -37,14 +35,8 @@ pid_t wait4_unix2003(pid_t pid, int *stat_loc, int options,
 #ifndef AT_EACCESS
 #define AT_EACCESS 0x0010
 #endif
-#ifndef AT_SYMLINK_NOFOLLOW
-#define AT_SYMLINK_NOFOLLOW 0x0020
-#endif
 #ifndef AT_SYMLINK_FOLLOW
 #define AT_SYMLINK_FOLLOW 0x0040
-#endif
-#ifndef AT_REMOVEDIR
-#define AT_REMOVEDIR 0x0080
 #endif
 
 #if !((defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&              \
@@ -307,94 +299,6 @@ int symlinkat(const char *target, int fd, const char *path) {
   }
 
   int ret = symlink(target, path);
-
-  pthread_fchdir_np(cwd);
-  if (cwd != -1)
-    close(cwd);
-
-  return ret;
-
-#endif
-}
-
-#if defined(__DARWIN_64_BIT_INO_T) && __DARWIN_64_BIT_INO_T &&                 \
-    (!defined(__DARWIN_ONLY_64_BIT_INO_T) || !__DARWIN_ONLY_64_BIT_INO_T)
-int fstatat(int fd, const char *path, struct stat *statbuf,
-            int flags) __asm("_fstatat$INODE64");
-#endif
-int fstatat(int fd, const char *path, struct stat *statbuf, int flags) {
-
-#if !(defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&               \
-      __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ < 20000)
-
-  static bool init = false;
-  static int (*func)(int, const char *, struct stat *, int);
-
-  if (!init) {
-    func = (int (*)(int, const char *, struct stat *, int))dlsym(RTLD_NEXT,
-                                                                 "fstatat"
-#if defined(__DARWIN_64_BIT_INO_T) && __DARWIN_64_BIT_INO_T &&                 \
-    (!defined(__DARWIN_ONLY_64_BIT_INO_T) || !__DARWIN_ONLY_64_BIT_INO_T)
-                                                                 "$INODE64"
-#endif
-    );
-    init = true;
-  }
-
-  if (func)
-    return func(fd, path, statbuf, flags);
-
-#endif
-
-  if (fd == AT_FDCWD || path[0] == '/') {
-    if (flags & AT_SYMLINK_NOFOLLOW)
-      return lstat(path, statbuf);
-    return stat(path, statbuf);
-  }
-
-#if (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                \
-     __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ < 20000) ||                \
-    (defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) &&                 \
-     __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ < 1050)
-
-  /* the Mac OS X 10.4 / iPhone OS 1 version has a race condition */
-
-  struct stat st;
-  if (fstat(fd, &st) == -1)
-    return -1;
-  if (!S_ISDIR(st.st_mode)) {
-    errno = ENOTDIR;
-    return -1;
-  }
-
-  char fdpath[PATH_MAX + strlen(path) + 2];
-  fcntl(fd, F_GETPATH, fdpath);
-  strcat(fdpath, "/");
-  strcat(fdpath, path);
-
-  if (flags & AT_SYMLINK_NOFOLLOW)
-    return lstat(fdpath, statbuf);
-  return stat(fdpath, statbuf);
-
-#else
-
-  int cwd = open(".", O_RDONLY);
-  if (pthread_fchdir_np(-1) < 0 && cwd != -1) {
-    close(cwd);
-    cwd = -1;
-  }
-  if (pthread_fchdir_np(fd) < 0) {
-    pthread_fchdir_np(cwd);
-    if (cwd != -1)
-      close(cwd);
-    return -1;
-  }
-
-  int ret;
-  if (flags & AT_SYMLINK_NOFOLLOW)
-    ret = lstat(path, statbuf);
-  else
-    ret = stat(path, statbuf);
 
   pthread_fchdir_np(cwd);
   if (cwd != -1)
