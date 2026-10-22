@@ -42,6 +42,7 @@
  * support of clause 2.2 (b) of the Apple Public License, Version 2.0.
  */
 
+#include <strings.h>
 #include <sys/attr.h>
 #include <sys/stat.h>
 #include <sys/time.h>
