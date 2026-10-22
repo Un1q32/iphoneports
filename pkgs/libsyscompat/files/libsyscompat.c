@@ -1,17 +1,3 @@
-#if (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                \
-     __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ < 80000) ||                \
-    (defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) &&                 \
-     __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ < 101000)
-
-#include <stdlib.h>
-
-void arc4random_buf(void *, size_t);
-
-int CCRandomGenerateBytes(void *buf, size_t size) {
-  arc4random_buf(buf, size);
-  return 0;
-}
-
 #if (defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) &&                 \
      __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ < 1090) ||                  \
     (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                \
@@ -20,6 +6,7 @@ int CCRandomGenerateBytes(void *buf, size_t size) {
 #include <dlfcn.h>
 #include <errno.h>
 #include <stdbool.h>
+#include <stdlib.h>
 #include <sys/stat.h>
 
 int proc_pid_rusage(int pid, int flavor, void *buffer) {
@@ -112,8 +99,6 @@ kern_return_t host_statistics64(host_t host_priv, host_flavor_t flavor,
   return host_statistics(host_priv, flavor, host_info64_out,
                          host_info64_outCnt);
 }
-
-#endif
 
 #endif
 
