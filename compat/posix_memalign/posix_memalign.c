@@ -1,7 +1,3 @@
-#pragma once
-
-#include_next <stdlib.h>
-
 #if (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                \
      __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ < 30000) ||                \
     (defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) &&                 \
@@ -10,16 +6,10 @@
 #include <dlfcn.h>
 #include <errno.h>
 #include <stdbool.h>
+#include <stdlib.h>
+#include <unistd.h>
 
-#define valloc __iphoneports_valloc
-extern void *valloc(size_t) __asm("_valloc"); /* sometimes valloc doesn't get declared */
-#ifndef RTLD_NEXT
-#define RTLD_NEXT ((void *)-1)
-#endif
-
-#define posix_memalign __iphoneports_posix_memalign
-
-static int posix_memalign(void **memptr, size_t align, size_t size) {
+int posix_memalign(void **memptr, size_t align, size_t size) {
 
 #if !(defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&               \
       __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ < 20000)
@@ -41,19 +31,32 @@ static int posix_memalign(void **memptr, size_t align, size_t size) {
     return EINVAL;
 
   void *mem;
+  int err = errno;
   if (align <= 16)
     mem = malloc(size); /* Darwin malloc always aligns to 16 bytes */
-  else
-    mem = valloc(size); /* page aligned allocation */
-
-  if (!mem)
-    return ENOMEM;
   else {
+    static long pagesize = 0;
+    if (pagesize == 0) {
+      pagesize = sysconf(_SC_PAGESIZE);
+      if (pagesize < 1) {
+        pagesize = 0;
+        errno = err;
+        return ENOMEM;
+      }
+    }
+    if (align <= (size_t)pagesize)
+      mem = valloc(size); /* page aligned allocation */
+    else
+      return ENOMEM;
+  }
+
+  if (!mem) {
+    errno = err;
+    return ENOMEM;
+  } else {
     *memptr = mem;
     return 0;
   }
 }
-
-#undef valloc
 
 #endif
