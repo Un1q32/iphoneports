@@ -521,6 +521,7 @@ includedeps() {
         if [ -d sdk ]; then
             cp -a sdk/* "$_SDK"
         fi
+        mkdir -p "${_SDK}${_PREFIX}/include"
         cp "$bsroot/compat/platforminfo.h" "${_SDK}${_PREFIX}/include"
         _includefuncs compatfuncs.txt
     fi
