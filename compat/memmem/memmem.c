@@ -1,16 +1,12 @@
-#pragma once
-
-#include_next <string.h>
-
 #if (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                \
      __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ < 40300) ||                \
     (defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) &&                 \
      __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ < 1070)
 
-#define memmem __iphoneports_memmem
+#include <string.h>
 
-static void *memmem(const void *haystack, size_t haystacklen,
-                    const void *needle, size_t needlelen) {
+void *memmem(const void *haystack, size_t haystacklen, const void *needle,
+             size_t needlelen) {
   if (needlelen > haystacklen)
     return NULL;
 
