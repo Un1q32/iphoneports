@@ -443,16 +443,18 @@ _buildfunc() {
         fi
         for header in $(cd "$bsroot/compat/$func/headers" 2>/dev/null && find . -type f); do
             [ -e "$bsroot/compat/$func/headers/$header" ] || continue
-            if ! [ -f "$_SDK/var/usr/include/$header" ]; then
-                mkdir -p "$_SDK/var/usr/include/${header%/*}"
+            pfx="$_PREFIX"
+            [ "$pfx" = '/usr' ] && pfx='/usr/local'
+            if ! [ -f "${_SDK}${pfx}/include/$header" ]; then
+                mkdir -p "${_SDK}${pfx}/include/${header%/*}"
                 printf '%s\n' \
                     '#pragma once' \
                     "#if __has_include_next(<${header#./}>)" \
                     "#include_next <${header#./}>" \
                     '#endif' \
-                    > "$_SDK/var/usr/include/$header"
+                    > "${_SDK}${pfx}/include/$header"
             fi
-            cat "$bsroot/compat/$func/headers/$header" >> "$_SDK/var/usr/include/$header"
+            cat "$bsroot/compat/$func/headers/$header" >> "${_SDK}${pfx}/include/$header"
         done
         for src in "$bsroot/compat/$func"/*.c; do
             (
