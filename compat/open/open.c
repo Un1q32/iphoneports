@@ -74,7 +74,9 @@ int open(const char *path, int flags, ...) {
   return _open(path, flags, mode, func);
 }
 
-#if defined(__i386__) || defined(__ppc__)
+#if (defined(__i386__) || defined(__ppc__)) &&                                 \
+    defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) &&                  \
+    __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ >= 1050
 
 int open_unix03(const char *path, int flags, ...) __asm("_open$UNIX2003");
 int open_unix03(const char *path, int flags, ...) {
