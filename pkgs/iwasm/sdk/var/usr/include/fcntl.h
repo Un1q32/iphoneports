@@ -11,9 +11,6 @@
 #ifndef AT_SYMLINK_NOFOLLOW
 #define AT_SYMLINK_NOFOLLOW 0x0020
 #endif
-#ifndef AT_SYMLINK_FOLLOW
-#define AT_SYMLINK_FOLLOW 0x0040
-#endif
 
 #if (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                \
      __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ < 80000) ||                \
