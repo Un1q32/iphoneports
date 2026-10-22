@@ -3,5 +3,6 @@ fdopendir
 clock_gettime
 arc4random_buf
 getline
+renameat
 sys_icache_invalidate
 __sigreturn

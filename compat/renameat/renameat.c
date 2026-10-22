@@ -1,25 +1,15 @@
-#pragma once
-
-#include_next <stdio.h>
-
-#if (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                \
-     __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ < 80000) ||                \
-    (defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) &&                 \
-     __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ < 101000)
+#if MINVER_LT(101000, 80000, 0)
 
 #include <errno.h>
 #include <fcntl.h>
+#include <stdio.h>
 #include <string.h>
 #include <sys/stat.h>
 
-#define renameat __iphoneports_renameat
+int renameat(int olddirfd, const char *oldpath, int newdirfd,
+             const char *newpath) {
 
-static int renameat(int olddirfd, const char *oldpath, int newdirfd,
-                    const char *newpath) {
-
-#if (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&                \
-     __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ >= 20000) ||               \
-    !defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__)
+#if MAXVER_GE(101000, 80000, 0)
 
   static bool init = false;
   static int (*func)(int, const char *, int, const char *);
