@@ -1,62 +1,61 @@
 --- src/cctools/m4/llvm.m4.orig
 +++ src/cctools/m4/llvm.m4
-@@ -49,49 +49,34 @@
+@@ -49,55 +49,40 @@
            no)
        fi
  
 -      if test "x$LLVM_CONFIG" != "xno"; then
 -        LLVM_INCLUDE_DIR="`${LLVM_CONFIG} --includedir`"
 -        LLVM_LIB_DIR="`${LLVM_CONFIG} --libdir`"
-+      ORIGLDFLAGS=$LDFLAGS
-+      LDFLAGS="$LDFLAGS -L${LLVM_LIB_DIR}"
- 
+-
 -        ORIGLDFLAGS=$LDFLAGS
 -        LDFLAGS="$LDFLAGS -L${LLVM_LIB_DIR}"
-+      AC_CHECK_LIB([LTO],[lto_get_version], [
- 
+-
 -        AC_CHECK_LIB([LTO],[lto_get_version], [
-+        # DO NOT include the LLVM include dir directly,
-+        # it may cause the build to fail.
- 
+-
 -          # DO NOT include the LLVM include dir directly,
 -          # it may cause the build to fail.
-+        if test -e $LLVM_INCLUDE_DIR/llvm-c/lto.h; then
-+          cp -f $LLVM_INCLUDE_DIR/llvm-c/lto.h `dirname ${0}`/include/llvm-c
- 
+-
 -          if test -e $LLVM_INCLUDE_DIR/llvm-c/lto.h; then
 -            cp -f $LLVM_INCLUDE_DIR/llvm-c/lto.h `dirname ${0}`/include/llvm-c
 -
 -            if test -e $LLVM_INCLUDE_DIR/llvm-c/ExternC.h; then
 -              cp -f $LLVM_INCLUDE_DIR/llvm-c/ExternC.h `dirname ${0}`/include/llvm-c
 -            fi
-+          if test -e $LLVM_INCLUDE_DIR/llvm-c/ExternC.h; then
-+            cp -f $LLVM_INCLUDE_DIR/llvm-c/ExternC.h `dirname ${0}`/include/llvm-c
-+          fi
- 
+-
+-            if test -e $LLVM_INCLUDE_DIR/llvm-c/Visibility.h; then
+-              cp -f $LLVM_INCLUDE_DIR/llvm-c/Visibility.h `dirname ${0}`/include/llvm-c
+-              mkdir -p `dirname ${0}`/include/llvm/Config
+-              cp -f $LLVM_INCLUDE_DIR/llvm/Config/llvm-config.h `dirname ${0}`/include/llvm/Config
+-            fi
+-
 -            LTO_DEF=-DLTO_SUPPORT
 -            LTO_LIB="-L${LLVM_LIB_DIR} -lLTO"
-+          LTO_DEF=-DLTO_SUPPORT
-+          LTO_LIB="-L${LLVM_LIB_DIR} -lLTO"
-+        else
-+          AC_MSG_WARN([<llvm-c/lto.h> header file not found, disabling LTO support])
-+        fi
-+
-+        AC_SUBST([LTO_DEF])
-+        AC_SUBST([LTO_RPATH])
-+        AC_SUBST([LTO_LIB])
- 
+-
 -            if test "x$rpathlink" = "xyes"; then
 -              LTO_RPATH="-Wl,-rpath,$LLVM_LIB_DIR,--enable-new-dtags"
 -            fi
-+      ])
- 
+-
 -            if test "x$isdarwin" = "xyes"; then
 -              LTO_RPATH="-Wl,-rpath,$LLVM_LIB_DIR"
 -            fi
 -          else
 -            AC_MSG_WARN([<llvm-c/lto.h> header file not found, disabling LTO support])
--          fi
--
++      ORIGLDFLAGS=$LDFLAGS
++      LDFLAGS="$LDFLAGS -L${LLVM_LIB_DIR}"
++
++      AC_CHECK_LIB([LTO],[lto_get_version], [
++
++        # DO NOT include the LLVM include dir directly,
++        # it may cause the build to fail.
++
++        if test -e $LLVM_INCLUDE_DIR/llvm-c/lto.h; then
++          cp -f $LLVM_INCLUDE_DIR/llvm-c/lto.h `dirname ${0}`/include/llvm-c
++
++          if test -e $LLVM_INCLUDE_DIR/llvm-c/ExternC.h; then
++            cp -f $LLVM_INCLUDE_DIR/llvm-c/ExternC.h `dirname ${0}`/include/llvm-c
+           fi
+ 
 -          AC_SUBST([LTO_DEF])
 -          AC_SUBST([LTO_RPATH])
 -          AC_SUBST([LTO_LIB])
@@ -67,6 +66,24 @@
 -      else
 -        AC_MSG_WARN([llvm-config not found, disabling LTO support])
 -      fi
++          if test -e $LLVM_INCLUDE_DIR/llvm-c/Visibility.h; then
++            cp -f $LLVM_INCLUDE_DIR/llvm-c/Visibility.h `dirname ${0}`/include/llvm-c
++            mkdir -p `dirname ${0}`/include/llvm/Config
++            cp -f $LLVM_INCLUDE_DIR/llvm/Config/llvm-config.h `dirname ${0}`/include/llvm/Config
++          fi
++
++          LTO_DEF=-DLTO_SUPPORT
++          LTO_LIB="-L${LLVM_LIB_DIR} -lLTO"
++        else
++          AC_MSG_WARN([<llvm-c/lto.h> header file not found, disabling LTO support])
++        fi
++
++        AC_SUBST([LTO_DEF])
++        AC_SUBST([LTO_RPATH])
++        AC_SUBST([LTO_LIB])
++
++      ])
++
 +      LDFLAGS=$ORIGLDFLAGS
      fi
  
