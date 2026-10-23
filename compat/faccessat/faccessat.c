@@ -3,6 +3,7 @@
 #include <dlfcn.h>
 #include <errno.h>
 #include <fcntl.h>
+#include <stdbool.h>
 #include <unistd.h>
 
 #if MINVER_LT(1050, 20000, 0)

@@ -4,8 +4,8 @@
 #include <fcntl.h>
 #include <limits.h>
 #include <stdbool.h>
-#include <unistd.h>
 #include <sys/attr.h>
+#include <unistd.h>
 
 #ifdef __LP64__
 #define FLAGSTYPE int
