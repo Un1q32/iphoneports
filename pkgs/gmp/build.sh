@@ -4,8 +4,8 @@
 (
 cd "$_SRCDIR"
 case $_CPU in
-    arm64*) ;;
-    arm*) disableasm='--disable-assembly' ;;
+    (arm64*) ;;
+    (arm*) disableasm='--disable-assembly' ;;
 esac
 ./configure --host="$_TARGET" --prefix=/var/usr --disable-static $disableasm
 make
