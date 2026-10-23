@@ -27,6 +27,11 @@ case $_CPU in
         asm=true
     ;;
 
+    (ppc*|powerpc*)
+        cpu_family=ppc
+        asm=false
+    ;;
+
     *)
         echo "UNSUPPORTED ARCHITECTURE"
         exit 1

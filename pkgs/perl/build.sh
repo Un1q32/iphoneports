@@ -7,7 +7,10 @@ case $_CPU in
     (*64)
         longsize=8
         longdblsize=16
-        byteorder=12345678
+        case $_CPU in
+            (ppc64|powerpc64) byteorder=87654321 ;;
+            (*)               byteorder=12345678 ;;
+        esac
     ;;
     (arm*)
         longsize=4
@@ -18,6 +21,11 @@ case $_CPU in
         longsize=4
         longdblsize=16
         byteorder=1234
+    ;;
+    (ppc*|powerpc*)
+        longsize=4
+        longdblsize=16
+        byteorder=4321
     ;;
     (*)
         printf 'Unsupported architecture!\n'

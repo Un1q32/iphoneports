@@ -27,6 +27,20 @@ case $_CPU in
     (x86_64*)
         sys=darwin64-x86_64
     ;;
+    (ppc64|powerpc64)
+        if [ "$_OSVER" -lt 1050 ]; then
+            sys=darwin8-ppc64-cc
+        else
+            sys=darwin-ppc64-cc
+        fi
+    ;;
+    (ppc*|powerpc*)
+        if [ "$_OSVER" -lt 1050 ]; then
+            sys=darwin8-ppc-cc
+        else
+            sys=darwin-ppc-cc
+        fi
+    ;;
 
     (*)
         echo "UNSUPPORTED ARCHITECTURE"
