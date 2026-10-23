@@ -1,7 +1,7 @@
 --- src/src/ccache/execute.cpp.orig
 +++ src/src/ccache/execute.cpp
-@@ -41,7 +41,9 @@
- 
+@@ -42,7 +42,9 @@
+ #include <optional>
  #include <vector>
  
 -#ifndef _WIN32
@@ -11,54 +11,62 @@
  #  include <spawn.h>
  #endif
  
-@@ -294,6 +296,38 @@
-   }
-   DEFER(util::unsetenv("UNCACHED_ERR_FD"));
- 
-+#if (defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) && __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ < 1050) || \
-+    (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) && __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ < 20000)
-+  {
-+    SignalHandlerBlocker signal_handler_blocker;
-+    ctx.compiler_pid = fork();
-+  }
-+
-+  if (ctx.compiler_pid == -1) {
-+    throw core::Fatal(FMT("Failed to fork: {}", strerror(errno)));
-+  }
-+
-+  if (ctx.compiler_pid == 0) {
-+    // Child.
-+    dup2(*fd_out, STDOUT_FILENO);
-+    fd_out.close();
-+    dup2(*fd_err, STDERR_FILENO);
-+    fd_err.close();
-+    sigset_t sigmask;
-+    sigemptyset(&sigmask);
-+    sigprocmask(SIG_SETMASK, &sigmask, NULL);
-+    for (int signum : SignalHandler::get_handled_signals()) {
-+      signal(signum, SIG_DFL);
-+    }
-+
-+    exit(execv(argv[0], const_cast<char* const*>(argv)));
-+  }
-+
-+  fd_out.close();
-+  fd_err.close();
-+
-+#else
-+
+@@ -290,6 +292,47 @@
    util::Fd out(std::move(fd_out));
    util::Fd err(std::move(fd_err));
  
-@@ -342,6 +376,8 @@
++#if (defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) && __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ < 1050) || \
++    (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) && __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ < 20000)
++  sigset_t sigmask;
++  const bool reset_signals = SignalHandler::is_active();
++  if (reset_signals) {
++    CHECK_LIB_CALL(sigprocmask, SIG_BLOCK, nullptr, &sigmask);
++  }
++
++  pid_t pid;
++  {
++    SignalHandlerBlocker signal_handler_blocker;
++    pid = fork();
++
++    if (pid > 0)
++      ctx.compiler_pid = pid;
++    else if (pid == 0) {
++      if (reset_signals) {
++        const sigset_t& signals_to_reset =
++          SignalHandler::get_signals_to_reset();
++        for (int signum = 1; signum < NSIG; ++signum)
++          if (sigismember(&signals_to_reset, signum) == 1)
++            signal(signum, SIG_DFL);
++        sigprocmask(SIG_SETMASK, &sigmask, nullptr);
++      }
++
++      dup2(*out, STDOUT_FILENO);
++      out.close();
++      dup2(*err, STDERR_FILENO);
++      err.close();
++
++      execv(argv[0], const_cast<char* const*>(argv));
++      _exit(127);
++    }
++  }
++
++  out.close();
++  err.close();
++
++  if (pid == -1)
++    return -1;
++#else
+   posix_spawn_file_actions_t fa;
+ 
+   CHECK_LIB_CALL(posix_spawn_file_actions_init, &fa);
+@@ -334,6 +377,7 @@
+   if (result != 0) {
      return -1;
    }
- 
 +#endif
-+
+ 
    int status;
    while (waitpid(ctx.compiler_pid, &status, 0) == -1) {
-     if (errno != EINTR) {
 --- src/src/ccache/util/exec.cpp.orig
 +++ src/src/ccache/util/exec.cpp
 @@ -29,7 +29,9 @@
@@ -72,38 +80,33 @@
  #  include <spawn.h>
  #endif
  
-@@ -118,6 +120,30 @@
-     return tl::unexpected(FMT("Non-zero exit code: {}", exitcode));
-   }
- #else
+@@ -121,6 +123,25 @@
+   int pipefd[2];
+   CHECK_LIB_CALL(pipe, pipefd);
+ 
 +#if (defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) && __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ < 1050) || \
 +    (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) && __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ < 20000)
-+  int pipefd[2];
-+  if (pipe(pipefd) == -1) {
-+    return tl::unexpected(FMT("pipe failed: {}", strerror(errno)));
-+  }
-+
 +  pid_t pid = fork();
-+  if (pid == -1) {
-+    return tl::unexpected(FMT("fork failed: {}", strerror(errno)));
-+  }
 +
 +  if (pid == 0) {
-+    // Child.
 +    close(pipefd[0]);
 +    close(0);
 +    dup2(pipefd[1], 1);
 +    dup2(pipefd[1], 2);
 +    _exit(execvp(argv[0], const_cast<char* const*>(argv.data())));
-+    // Never reached.
 +  }
-+  // Parent
++
 +  close(pipefd[1]);
++
++  if (pid == -1) {
++    close(pipefd[0]);
++    return tl::unexpected(FMT("fork failed: {}", strerror(errno)));
++  }
 +#else
-   int pipefd[2];
-   CHECK_LIB_CALL(pipe, pipefd);
- 
-@@ -140,6 +166,7 @@
+   posix_spawn_file_actions_t fa;
+   CHECK_LIB_CALL(posix_spawn_file_actions_init, &fa);
+   CHECK_LIB_CALL(posix_spawn_file_actions_addclose, &fa, pipefd[0]);
+@@ -140,6 +161,7 @@
      return tl::unexpected(
        FMT("posix_spawnp failed: {}", strerror(spawn_result)));
    }
@@ -113,50 +116,64 @@
      output.append(reinterpret_cast<const char*>(data.data()), data.size());
 --- src/src/ccache/storage/remote/helper.cpp.orig
 +++ src/src/ccache/storage/remote/helper.cpp
-@@ -40,9 +40,12 @@
+@@ -37,7 +37,10 @@
  #ifndef _WIN32
  #  include <dirent.h>
  #  include <fcntl.h>
--#  include <spawn.h>
- #  include <sys/stat.h>
- #  include <unistd.h>
 +#  if !((defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) && __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ < 1050) || \
 +    (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) && __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ < 20000))
-+#  include <spawn.h>
+ #  include <spawn.h>
 +#  endif
+ #  include <sys/stat.h>
+ #  include <unistd.h>
  #endif
- 
- #include <thread>
-@@ -318,6 +321,28 @@
-   }
-   env_ptrs.push_back(nullptr);
- 
+@@ -249,6 +252,45 @@
+   CloseHandle(pi.hThread);
+   CloseHandle(pi.hProcess);
+ #else
 +#if (defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) && __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ < 1050) || \
 +    (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) && __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ < 20000)
 +  pid_t pid = fork();
-+  if (pid == -1) {
++  if (pid == -1)
 +    return tl::unexpected(strerror(errno));
-+  } else if (pid == 0) {
-+    // Child
++  else if (pid == 0) {
 +    int nullfd = open("/dev/null", O_RDONLY);
++    if (nullfd == -1)
++      _exit(127);
 +    close(0);
 +    close(1);
 +    close(2);
 +    dup2(nullfd, 0);
 +    dup2(nullfd, 1);
 +    dup2(nullfd, 2);
++    close(nullfd);
++
 +    for (int fd : get_fds_to_close())
 +      close(fd);
 +
 +    setsid();
++    for (char** env = environ; *env != nullptr; ++env) {
++      if (is_ccache_crsh_var(*env)) {
++        char *nameend = strchr(*env, '=');
++        size_t namelen;
++        if (!nameend)
++          namelen = strlen(*env);
++        else
++          namelen = nameend - *env;
++        char *envname = new char[namelen + 1];
++        memcpy(envname, *env, namelen);
++        envname[namelen] = '\0';
++        unsetenv(envname);
++        delete[] envname;
++      }
++    }
 +    _exit(execlp(helper_path.c_str(), helper_path.c_str(), NULL));
-+    // Never reached
 +  }
 +#else
-   posix_spawn_file_actions_t actions;
-   CHECK_LIB_CALL(posix_spawn_file_actions_init, &actions);
-   DEFER(posix_spawn_file_actions_destroy(&actions));
-@@ -357,6 +382,7 @@
+   std::vector<std::string> env_strings;
+   for (char** env = environ; *env != nullptr; ++env) {
+     if (!is_ccache_crsh_var(*env)) {
+@@ -303,6 +345,7 @@
    if (result != 0) {
      return tl::unexpected(strerror(result));
    }
