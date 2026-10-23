@@ -1,4 +1,3 @@
-libsyscompat
 zlib
 libgit2
 openssl
