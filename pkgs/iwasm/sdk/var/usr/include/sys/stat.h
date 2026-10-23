@@ -22,7 +22,6 @@
 #include <sys/attr.h>
 #include <unistd.h>
 
-#define futimens __iphoneports_futimens
 #define utimensat __iphoneports_utimensat
 
 #define prepare_times_array_and_attrs                                          \
@@ -65,22 +64,6 @@ static int prepare_times_array_and_attrs(struct timespec times_in[2],
     *times_out_size += sizeof(struct timespec);
   }
   return attrs;
-}
-
-static int futimens(int fd, const struct timespec times[2]) {
-  struct timespec times_in[2];
-  if (times)
-    memcpy(&times_in, times, sizeof(times_in));
-  else
-    memcpy(&times_in, times_now, sizeof(times_in));
-
-  size_t attrbuf_size = 0;
-  struct timespec times_out[2];
-  struct attrlist a = {.bitmapcount = ATTR_BIT_MAP_COUNT};
-  a.commonattr =
-      prepare_times_array_and_attrs(times_in, times_out, &attrbuf_size);
-
-  return fsetattrlist(fd, &a, &times_out, attrbuf_size, 0);
 }
 
 static int utimensat(int fd, const char *path, const struct timespec times[2],

@@ -23,7 +23,6 @@ fi
     LIBS='-framework CoreFoundation' \
     PKG_CONFIG_LIBDIR="$_SDK/var/usr/lib/pkgconfig" \
     PKG_CONFIG_SYSROOT_DIR="$_SDK" \
-    gl_cv_onwards_func_futimens=yes \
     $posix_spawn
 make
 make DESTDIR="$_DESTDIR" install

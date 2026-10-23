@@ -1,6 +1,6 @@
 --- src/gzip.c.orig
 +++ src/gzip.c
-@@ -76,9 +76,10 @@
+@@ -76,7 +76,9 @@
  
  #ifdef __APPLE__
  #include <sys/attr.h>
@@ -8,11 +8,9 @@
  #include <copyfile.h>
 +#endif
  #include <get_compat.h>
--int futimens(int fd, const struct timespec times[2]);
+ int futimens(int fd, const struct timespec times[2]);
  
- #define	st_atim	st_atimespec
- #define	st_mtim	st_mtimespec
-@@ -1503,14 +1504,14 @@
+@@ -1503,14 +1505,14 @@
  		goto bad_outfile;
  	}
  
