@@ -1,11 +1,8 @@
 #!/bin/sh
-rm -rf "$_DESTDIR" "$_SRCDIR"
-ver='2.8'
-if [ ! -f "$_DLCACHE/patch-$ver.tar.xz" ] ||
-    [ "$(sha256sum "$_DLCACHE/patch-$ver.tar.xz" | awk '{print $1}')" != "f87cee69eec2b4fcbf60a396b030ad6aa3415f192aa5f7ee84cad5e11f7f5ae3" ]; then
-    printf "Downloading source...\n"
-    curl -L -# -o "$_DLCACHE/patch-$ver.tar.xz" "https://ftpmirror.gnu.org/gnu/patch/patch-$ver.tar.xz" || exit 1
-fi
-printf "Unpacking source...\n"
-tar -C "$_TMP" -xf "$_DLCACHE/patch-$ver.tar.xz"
-mv "$_TMP"/patch-* "$_SRCDIR"
+. ../../files/dllib.sh
+ver='2.8.1'
+dlsrc \
+    "https://ftpmirror.gnu.org/gnu/patch/patch-$ver.tar.xz" \
+    "patch-$ver.tar.gz" \
+    3240c7959c5347c8ed347e3c4201c0337bf4240d5cf09d68889e58eeaba30e17 \
+    "patch-$ver"
