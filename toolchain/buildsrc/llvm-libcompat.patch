@@ -1,12 +1,14 @@
 --- src/clang/lib/Driver/ToolChains/Darwin.cpp.orig
 +++ src/clang/lib/Driver/ToolChains/Darwin.cpp
-@@ -1796,6 +1796,10 @@
+@@ -1796,6 +1796,12 @@
      CmdArgs.push_back("DriverKit");
    }
  
 +  const char *libcompat = getenv("_IPHONEPORTS_LIBCOMPAT");
-+  if (libcompat)
++  if (libcompat) {
++    CmdArgs.push_back("-force_load");
 +    CmdArgs.push_back(libcompat);
++  }
 +
    // Otherwise link libSystem, then the dynamic runtime library, and finally any
    // target specific static runtime library.
