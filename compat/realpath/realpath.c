@@ -5,11 +5,20 @@
 #undef realpath
 
 #include <dlfcn.h>
+#include <errno.h>
 #include <limits.h>
 #include <string.h>
 
 static char *_realpath(const char *restrict path, char *restrict resolved_path,
                        char *(*func)(const char *restrict, char *restrict)) {
+  if (!path) {
+    errno = EINVAL;
+    return NULL;
+  }
+  if (path[0] == '\0') {
+    errno = ENOENT;
+    return NULL;
+  }
   if (!resolved_path) {
     char buf[PATH_MAX];
     char *ret = func(path, buf);
