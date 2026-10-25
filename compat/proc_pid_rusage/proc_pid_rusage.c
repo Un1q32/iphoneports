@@ -21,6 +21,8 @@ int proc_pid_rusage(int pid, int flavor, void *buffer) {
 
 #endif
 
+  (void)pid, (void)flavor, (void)buffer;
+
   errno = ENOSYS;
   return -1;
 }
