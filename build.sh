@@ -459,6 +459,7 @@ _buildfunc() {
             cat "$bsroot/compat/$func/headers/$header" >> "${_SDK}${pfx}/include/$header"
         done
         for src in "$bsroot/compat/$func"/*.c; do
+            [ -f "$src" ] || continue
             (
             if [ -n "$_DEBUG" ]; then
                 set -- -O0 -g
