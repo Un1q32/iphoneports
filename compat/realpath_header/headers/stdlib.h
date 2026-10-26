@@ -7,9 +7,11 @@
 #if MINVER_LT(1060, 30200, 0)
 
 #include <errno.h>
+#include <limits.h>
 #include <string.h>
 
-static inline __iphoneports_realpath(const char *__restrict path, char *__restrict resolved_path) {
+static inline char *__iphoneports_realpath(const char *__restrict path,
+                                           char *__restrict resolved_path) {
   if (!path) {
     errno = EINVAL;
     return NULL;
