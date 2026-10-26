@@ -14,8 +14,13 @@ case $_CPU in
     (arm64*)  target=AARCH64 ;;
     (armv7*)  target=ARMV7   ;;
     (armv6*)  target=ARMV6   ;;
+    (ppc*|powerpc*)
+        printf "iwasm doesn't support powerpc\n"
+        mkdir "$_DESTDIR"
+        exit 0
+    ;;
     (*)
-        echo "Unsupported architecture"
+        printf "Unsupported architecture\n"
         exit 1
     ;;
 esac
