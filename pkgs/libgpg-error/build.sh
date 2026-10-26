@@ -5,9 +5,14 @@
 cd "$_SRCDIR"
 
 case $_CPU in
-    (arm64*) cpu=aarch64 ;;
-    (arm*)   cpu=arm     ;;
-    (*)      cpu=$_CPU   ;;
+    (arm64*)        cpu=aarch64 ;;
+    (arm*)          cpu=arm     ;;
+    (ppc*|powerpc*) cpu=i386    ;;
+    (x86_64*)       cpu=x86_64  ;;
+    (*)
+        printf 'Unknown architecture\n'
+        exit 1
+    ;;
 esac
 
 cp "src/syscfg/lock-obj-pub.$cpu-apple-darwin.h" src/syscfg/lock-obj-pub.cross-os.h
