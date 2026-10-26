@@ -35,6 +35,27 @@ fi
 [ "${0%/*}" = "$0" ] && scriptroot="." || scriptroot="${0%/*}"
 cd "$scriptroot" || exit 1
 scriptroot="$PWD"
+
+lockfile="$scriptroot/toolchainlock"
+if [ -f "$lockfile" ]; then
+    read -r lockpid < "$lockfile" || lockpid=
+    if [ -n "$lockpid" ] && kill -0 "$lockpid" 2> /dev/null; then
+        printf '%s\n' "Waiting for PID $lockpid to finish..."
+        while kill -0 "$lockpid" 2> /dev/null; do
+            sleep 1
+        done
+    fi
+fi
+
+printf '%s' "$$" > "$lockfile"
+
+if [ "$1" != '--force' ] &&
+    [ "$(cat toolchainver 2>/dev/null)" = "$(cat currenttoolchainver 2>/dev/null)" ]; then
+    printf 'Toolchain %s is already built, skipping (use --force to rebuild)\n' "$(cat toolchainver)"
+    rm -f "$lockfile"
+    exit 0
+fi
+
 rm -rf build bin cctools-bin lib currenttoolchainver
 
 if ! cc -dumpmachine > /dev/null 2>&1; then
@@ -260,3 +281,4 @@ done
 )
 cp toolchainver currenttoolchainver
 rm -rf build
+rm -f "$lockfile"
