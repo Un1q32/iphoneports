@@ -7,6 +7,14 @@ if [ "$_SUBSYSTEM" != "macos" ]; then
     exit 0
 fi
 
+case $_CPU in
+    (ppc*|powerpc*)
+        printf "iwasm doesn't support powerpc\n"
+        mkdir "$_DESTDIR"
+        exit 0
+    ;;
+esac
+
 (
 case $_CPU in
     (x86_64*) target=X86_64  ;;
@@ -14,11 +22,6 @@ case $_CPU in
     (arm64*)  target=AARCH64 ;;
     (armv7*)  target=ARMV7   ;;
     (armv6*)  target=ARMV6   ;;
-    (ppc*|powerpc*)
-        printf "iwasm doesn't support powerpc\n"
-        mkdir "$_DESTDIR"
-        exit 0
-    ;;
     (*)
         printf "Unsupported architecture\n"
         exit 1
