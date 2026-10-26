@@ -1,5 +1,6 @@
 #!/bin/sh
 set -e
+ln -sf /var/usr/libexec/iphoneports-shell /usr/bin/iphoneports-shell 2>/dev/null || true
 mkdir -p /usr/local/bin 2>/dev/null && ln -sf /var/usr/libexec/iphoneports-shell /usr/local/bin/iphoneports-shell 2>/dev/null || {
     if ! [ -h /var/usr ]; then
         if [ -d /var/jb ]; then
