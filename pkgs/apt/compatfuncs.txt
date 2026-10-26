@@ -1,5 +1,5 @@
 fdopendir
-realpath
+realpath_header
 open
 getline
 strndup
