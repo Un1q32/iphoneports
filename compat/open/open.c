@@ -61,7 +61,6 @@ static int _open(const char *path, int flags, int mode,
   return fd;
 }
 
-int open(const char *path, int flags, ...) __asm("_open");
 int open(const char *path, int flags, ...) {
   static int (*func)(const char *, int, ...) = NULL;
 
