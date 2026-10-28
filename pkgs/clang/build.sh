@@ -68,6 +68,7 @@ cmake -GNinja ../clang \
     -DCMAKE_SKIP_RPATH=ON \
     -DCLANG_LINK_CLANG_DYLIB=ON \
     -DLLVM_LINK_LLVM_DYLIB=ON \
+    -DLLVM_BUILD_UTILS=ON \
     -DLLVM_INCLUDE_TESTS=OFF \
     -DLLVM_TABLEGEN_EXE="$llvmtblgen" \
     -DCLANG_TABLEGEN="$clangtblgen" \
@@ -89,6 +90,7 @@ cmake -GNinja ../clang \
     -DCMAKE_SKIP_RPATH=ON \
     -DCLANG_LINK_CLANG_DYLIB=ON \
     -DLLVM_LINK_LLVM_DYLIB=ON \
+    -DLLVM_BUILD_UTILS=ON \
     -DLLVM_INCLUDE_TESTS=OFF \
     -DLLVM_TABLEGEN_EXE="$llvmtblgen" \
     -DCLANG_TABLEGEN="$clangtblgen" \
