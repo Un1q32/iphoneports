@@ -1,8 +1,8 @@
 #!/bin/sh
 . ../../files/dllib.sh
-ver='4.4.4'
+ver='4.4.5'
 dlsrc \
     "https://github.com/Kitware/CMake/archive/refs/tags/v$ver.tar.gz" \
     "cmake-$ver.tar.gz" \
-    4f6917fcdbd07517917acff9e9ce20d597a6477bdab1aab00210790620b17848 \
+    ae0619a14240d5685c2fc81475a38b45e2bd4efeb594c928d9e635185f3c6338 \
     "CMake-$ver"
