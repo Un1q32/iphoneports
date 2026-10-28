@@ -64,7 +64,7 @@ builddeb() {
     fi
 
     for license in "$_TMP"/LICENSE*; do
-        [ -f "$license" ] && installlicense "$license"
+        [ -f "$license" ] && installlicense "$license" && rm -f "$license"
     done
 
     size=$(du -sk "$_DESTDIR" | sed 's/[[:space:]].*//')
