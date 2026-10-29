@@ -3,6 +3,9 @@
 
 (
 unset SUDO_PROMPT
+if [ "$_OSVER" -lt 1050 ]; then
+    setreuid='ac_cv_func_setreuid=no'
+fi
 cd "$_SRCDIR"
 ./configure \
     --host="$_TARGET" \
@@ -16,6 +19,7 @@ cd "$_SRCDIR"
     --with-editor='nano:vim:vi' \
     --enable-zlib \
     --enable-openssl \
+    $setreuid \
     ax_cv_check_cflags___static_libgcc=no
 make
 fakeroot "$_MAKE" DESTDIR="$_DESTDIR" install
