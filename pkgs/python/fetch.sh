@@ -1,8 +1,8 @@
 #!/bin/sh
 . ../../files/dllib.sh
-ver='3.14.8'
+ver='3.14.10'
 dlsrc \
     "https://www.python.org/ftp/python/$ver/Python-$ver.tar.xz" \
     "python-$ver.tar.xz" \
-    c2215904f02b175596dc49351585104f4bc20341e1c47378b26a2c274360ce73 \
+    de414a57119abef52784d8993e341d53aed635fc2b05c2607d9f98a2c5b72032 \
     "Python-$ver"

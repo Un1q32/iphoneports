@@ -1,6 +1,6 @@
 --- src/configure.ac.orig
 +++ src/configure.ac
-@@ -4159,19 +4159,6 @@
+@@ -4163,19 +4163,6 @@
  
  dnl detect libffi
  have_libffi=missing
@@ -11,8 +11,8 @@
 -      AC_CHECK_LIB([ffi], [ffi_call], [
 -        dnl use ffi from SDK root
 -        have_libffi=yes
--        LIBFFI_CFLAGS="-I${SDKROOT}/usr/include/ffi -DUSING_APPLE_OS_LIBFFI=1"
--        LIBFFI_LIBS="-lffi"
+-        LIBFFI_CFLAGS=${LIBFFI_CFLAGS-"-I${SDKROOT}/usr/include/ffi -DUSING_APPLE_OS_LIBFFI=1"}
+-        LIBFFI_LIBS=${LIBFFI_LIBS-"-lffi"}
 -      ])
 -    ])
 -  ])
@@ -20,7 +20,7 @@
  AS_VAR_IF([have_libffi], [missing], [
    PKG_CHECK_MODULES([LIBFFI], [libffi], [have_libffi=yes], [
      WITH_SAVE_ENV([
-@@ -4191,13 +4178,6 @@
+@@ -4195,13 +4182,6 @@
  AS_VAR_IF([have_libffi], [yes], [
    ctypes_malloc_closure=no
    AS_CASE([$ac_sys_system],

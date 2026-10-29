@@ -1,6 +1,6 @@
 --- src/Modules/posixmodule.c.orig
 +++ src/Modules/posixmodule.c
-@@ -114,7 +114,7 @@
+@@ -116,7 +116,7 @@
  #  include <sys/sendfile.h>       // sendfile()
  #endif
  
@@ -9,7 +9,7 @@
  #  include <copyfile.h>           // fcopyfile()
  #endif
  
-@@ -12148,7 +12148,7 @@
+@@ -12155,7 +12155,7 @@
  #endif /* HAVE_SENDFILE */
  
  
@@ -18,7 +18,7 @@
  /*[clinic input]
  os._fcopyfile
  
-@@ -17964,7 +17964,7 @@
+@@ -18048,7 +18048,7 @@
  #endif
  #endif  /* HAVE_EVENTFD && EFD_CLOEXEC */
  

@@ -10,7 +10,7 @@
  #include "Python.h"
  
  #ifdef __VXWORKS__
-@@ -451,11 +454,6 @@
+@@ -453,11 +456,6 @@
  
  #include <mach/mach.h>
  
@@ -22,7 +22,7 @@
  
  #ifdef HAVE_BUILTIN_AVAILABLE
  #  define HAVE_FSTATAT_RUNTIME __builtin_available(macOS 10.10, iOS 8.0, *)
-@@ -13481,7 +13479,6 @@
+@@ -13482,7 +13480,6 @@
          flags |= ST_NOSUID;
      }
  
