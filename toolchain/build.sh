@@ -47,7 +47,7 @@ if [ -f "$lockfile" ]; then
     fi
 fi
 
-printf '%s' "$$" > "$lockfile"
+printf '%s\n' "$$" > "$lockfile"
 
 if [ "$1" != '--force' ] &&
     [ "$(cat toolchainver 2>/dev/null)" = "$(cat currenttoolchainver 2>/dev/null)" ]; then
