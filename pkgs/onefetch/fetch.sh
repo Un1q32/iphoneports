@@ -1,8 +1,8 @@
 #!/bin/sh
 . ../../files/dllib.sh
-ver='3.1.0'
+ver='3.2.0'
 dlsrc \
     "https://github.com/o2sh/onefetch/archive/refs/tags/$ver.tar.gz" \
     "onefetch-$ver.tar.gz" \
-    7381912c62ed1c8a3b1a443afac2fa22d8a10db8414cd44198c5d4997fab0d54 \
+    6cd2822a8f118dc2799cefd4afe04f98933687695f1ffa39284d30cb58c909f2 \
     "onefetch-$ver"
