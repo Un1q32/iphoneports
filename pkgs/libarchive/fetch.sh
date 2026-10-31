@@ -1,8 +1,8 @@
 #!/bin/sh
 . ../../files/dllib.sh
-ver='3.8.10'
+ver='3.8.11'
 dlsrc \
     "https://www.libarchive.org/downloads/libarchive-$ver.tar.xz" \
     "libarchive-$ver.tar.xz" \
-    56cad765459d5ee25a3b761f90c47d99379d28297fbfb72d908880d6b875fb96 \
+    a3dc0872b1b39da34dc18ef1b944f0f11ffd37425d70ae04be679279f1cf43d2 \
     "libarchive-$ver"
