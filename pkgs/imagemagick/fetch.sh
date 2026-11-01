@@ -1,8 +1,8 @@
 #!/bin/sh
 . ../../files/dllib.sh
-ver='7.1.2-34'
+ver='7.1.2-35'
 dlsrc \
     "https://github.com/ImageMagick/ImageMagick/archive/refs/tags/$ver.tar.gz" \
     "imagemagick-$ver.tar.gz" \
-    f5163a573a1c1bff16358d0a592b2fb168ad0fd3b9dc5ff57dc7820eebc5cf79 \
+    40b6fefa88fe16ca5a4b3d3db5133eaebfb0157f21f98530bde8aec5dd5b0776 \
     "ImageMagick-$ver"
