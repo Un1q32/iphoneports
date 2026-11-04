@@ -107,7 +107,6 @@ llvm_components() {
     clang \
     llvm-headers \
     clang-resource-headers \
-    llvm-tblgen \
     dsymutil \
     llvm-config \
     llvm-objcopy \
@@ -271,6 +270,7 @@ rm -rf \
     bin/llvm-objdump \
     bin/llvm-dis \
     bin/llvm-cov \
+    bin/llvm-tblgen \
     bin/FileCheck \
     bin/rust-*
 for bin in bin/* lib/*; do
