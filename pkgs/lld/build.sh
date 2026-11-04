@@ -2,8 +2,21 @@
 . ../../files/lib.sh
 
 (
-mkdir -p "$_SRCDIR/build"
-cd "$_SRCDIR/build"
+mkdir -p "$_SRCDIR/build" "$_SRCDIR/build-native"
+
+cd "$_SRCDIR/build-native"
+cmake -GNinja ../llvm \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DCMAKE_C_COMPILER=hostcc \
+    -DCMAKE_CXX_COMPILER=hostc++ \
+    -DLLVM_INCLUDE_TESTS=OFF \
+    -DLLVM_INCLUDE_BENCHMARKS=OFF \
+    -DLLVM_ENABLE_ZLIB=OFF \
+    -DLLVM_ENABLE_ZSTD=OFF \
+    -DLLVM_ENABLE_LIBXML2=OFF
+ninja llvm-tblgen
+
+cd ../build
 cmake -GNinja ../lld \
     -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_C_COMPILER="$_TARGET-cc" \
@@ -14,7 +27,7 @@ cmake -GNinja ../lld \
     -DCMAKE_FIND_ROOT_PATH="$_SDK/var/usr" \
     -DCMAKE_SKIP_RPATH=ON \
     -DLLVM_INCLUDE_TESTS=OFF \
-    -DLLVM_TABLEGEN_EXE="$(command -v llvm-tblgen)" \
+    -DLLVM_TABLEGEN_EXE="$PWD/../build-native/bin/llvm-tblgen" \
     -DLLVM_ENABLE_LTO=ON
 DESTDIR="$_DESTDIR" ninja install
 )
