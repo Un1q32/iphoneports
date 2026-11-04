@@ -85,7 +85,7 @@ redundant_download() {
 mkdir "$scriptroot/build" && cd "$scriptroot/build"
 
 printf "Building LLVM+Clang\n\n"
-llvmver="23.1.4"
+llvmver="23.1.5"
 redundant_download "https://github.com/llvm/llvm-project/archive/refs/tags/llvmorg-$llvmver.tar.gz"
 tar xzf "llvmorg-$llvmver.tar.gz"
 rm "llvmorg-$llvmver.tar.gz"
