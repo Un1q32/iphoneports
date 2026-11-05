@@ -1,5 +1,5 @@
 #!/bin/sh
-ver=2.1.0
+ver=2.1.1
 rm -rf "$_DESTDIR" "$_SRCDIR"
 printf "Downloading source...\n"
 mkdir -p "$_SRCDIR"
