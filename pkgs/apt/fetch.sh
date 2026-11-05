@@ -1,10 +1,10 @@
 #!/bin/sh
 . ../../files/dllib.sh
-ver='3.3.4'
+ver='3.3.6'
 dlsrc \
     "https://salsa.debian.org/apt-team/apt/-/archive/$ver/apt-$ver.tar.bz2" \
     "apt-$ver.tar.bz2" \
-    4d3c5f6e290dd8622f455acfd5fa1e1c42a9ddaf725ec0e576b683525a571608 \
+    e1b70db67b35f1415b5f225e5b708e2a96cd6b1fc90f9124e4aa7ac87834dc42 \
     "apt-$ver"
 mkdir -p "$_SRCDIR/iphoneports-bin"
 dlfile \

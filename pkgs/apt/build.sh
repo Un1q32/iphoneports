@@ -13,6 +13,7 @@ else
 fi
 cmake -GNinja .. \
     -DCMAKE_BUILD_TYPE=Release \
+    -DCMAKE_CXX_SCAN_FOR_MODULES=OFF \
     -DCMAKE_C_COMPILER="$_TARGET-cc" \
     -DCMAKE_CXX_COMPILER="$_TARGET-c++" \
     -DCMAKE_SYSTEM_NAME=Darwin \

@@ -1,10 +1,10 @@
 diff -urN a/apt-pkg/CMakeLists.txt b/apt-pkg/CMakeLists.txt
 --- a/apt-pkg/CMakeLists.txt
 +++ b/apt-pkg/CMakeLists.txt
-@@ -77,7 +77,6 @@
+@@ -90,7 +90,6 @@
+ target_link_libraries(apt-pkg PRIVATE apt-pkg-object)
  set_target_properties(apt-pkg PROPERTIES VERSION ${MAJOR}.${MINOR})
  set_target_properties(apt-pkg PROPERTIES SOVERSION ${MAJOR})
- set_target_properties(apt-pkg PROPERTIES CXX_VISIBILITY_PRESET hidden)
 -target_link_libraries(apt-pkg PRIVATE -Wl,-version-script="${CMAKE_CURRENT_BINARY_DIR}/versionscript")
  
  # Install the library and the header files
