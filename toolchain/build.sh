@@ -164,7 +164,7 @@ INSTALLPREFIX="$scriptroot" \
 )
 
 printf "Building cctools-port\n\n"
-cctoolsver="1030.6.3-ld64-956.6"
+cctoolsver="1035.1.102-ld64-957.1"
 redundant_download "https://github.com/Un1q32/cctools-port/archive/refs/heads/$cctoolsver.tar.gz"
 tar xzf "${cctoolsver}.tar.gz"
 rm -f "${cctoolsver}.tar.gz"
