@@ -7,6 +7,6 @@
 +#elif defined(__i386__)
 +  T.setArch(Triple::x86);
 +  T.setArchName("i386");
- #elif defined(__powerpc__)
-   T.setArch(Triple::ppc);
-   T.setArchName("powerpc");
+ #elif defined(__ppc64__)
+   T.setArch(Triple::ppc64);
+   T.setArchName("powerpc64");
