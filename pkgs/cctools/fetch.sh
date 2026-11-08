@@ -1,8 +1,8 @@
 #!/bin/sh
 . ../../files/dllib.sh
-ver='f022a8428752c7a424e596a7339d6dcb3592e82a'
+ver='4bba17227f8bd9db905a16a14ce5c01d9d2c9fa7'
 dlsrc \
     "https://github.com/Un1q32/cctools-port/archive/$ver.tar.gz" \
     "cctools-$ver.tar.gz" \
-    acd4c87a4f9f6a989d7473f2a298d91b97998b2c70ab62d02065210baa0a2489 \
+    d0ef8b1e2c9a9332eef878306376b9fb615c12bcc4de85f64ac0f792989b5a42 \
     "cctools-port-$ver"
