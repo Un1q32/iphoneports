@@ -216,7 +216,7 @@ if [ -n "$nodefaultsdk" ]; then
 fi
 
 printf "Building rust\n\n"
-rustver="1.99.1"
+rustver="1.100.0"
 redundant_download "https://static.rust-lang.org/dist/rustc-${rustver}-src.tar.xz"
 tar xJf "rustc-${rustver}-src.tar.xz"
 rm -f "rustc-${rustver}-src.tar.xz"
