@@ -189,7 +189,7 @@ ln -s ../buildsrc/cc "$scriptroot/cctools-bin"
 ln -s ../buildsrc/target-symlinks.sh "$scriptroot/bin"
 
 printf "Building ldid\n\n"
-ldidver="c50e84e18532044b23ec5e971d55ab0cdd4b6685"
+ldidver="18255c55405ab1702d8677bf42018eadc76e0b87"
 redundant_download "https://github.com/ProcursusTeam/ldid/archive/${ldidver}.tar.gz"
 tar xzf "${ldidver}.tar.gz"
 rm -f "${ldidver}.tar.gz"
