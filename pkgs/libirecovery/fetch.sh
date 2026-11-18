@@ -1,8 +1,8 @@
 #!/bin/sh
-rm -rf "$_DESTDIR" "$_SRCDIR"
-printf "Downloading source...\n"
-curl -L -# -o src.tar.bz2 https://github.com/libimobiledevice/libirecovery/releases/download/1.2.1/libirecovery-1.2.1.tar.bz2
-printf "Unpacking source...\n"
-tar -C "$_TMP" -xf src.tar.bz2
-rm src.tar.bz2
-mv "$_TMP"/libirecovery-* "$_SRCDIR"
+. ../../files/dllib.sh
+ver='1.4.0'
+dlsrc \
+    "https://github.com/libimobiledevice/libirecovery/releases/download/$ver/libirecovery-$ver.tar.bz2" \
+    "libirecovery-$ver.tar.gz" \
+    ea358430fdcedc00ae7d5764b3d03737f7345c91364fb91271bc6ceeee5d9cac \
+    "libirecovery-$ver"
