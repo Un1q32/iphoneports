@@ -1,6 +1,5 @@
-diff -urN a/CMake/apti18n.h.in b/CMake/apti18n.h.in
---- a/CMake/apti18n.h.in
-+++ b/CMake/apti18n.h.in
+--- src/CMake/apti18n.h.in.orig
++++ src/CMake/apti18n.h.in
 @@ -22,6 +22,8 @@
  # define N_(x) x
  #else

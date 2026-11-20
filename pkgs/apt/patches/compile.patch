@@ -1,6 +1,5 @@
-diff -urN a/apt-pkg/CMakeLists.txt b/apt-pkg/CMakeLists.txt
---- a/apt-pkg/CMakeLists.txt
-+++ b/apt-pkg/CMakeLists.txt
+--- src/apt-pkg/CMakeLists.txt.orig
++++ src/apt-pkg/CMakeLists.txt
 @@ -90,7 +90,6 @@
  target_link_libraries(apt-pkg PRIVATE apt-pkg-object)
  set_target_properties(apt-pkg PROPERTIES VERSION ${MAJOR}.${MINOR})
@@ -9,9 +8,8 @@ diff -urN a/apt-pkg/CMakeLists.txt b/apt-pkg/CMakeLists.txt
  
  # Install the library and the header files
  install(TARGETS apt-pkg LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR})
-diff -urN a/apt-pkg/contrib/fileutl.cc b/apt-pkg/contrib/fileutl.cc
---- a/apt-pkg/contrib/fileutl.cc
-+++ b/apt-pkg/contrib/fileutl.cc
+--- src/apt-pkg/contrib/fileutl.cc.orig
++++ src/apt-pkg/contrib/fileutl.cc
 @@ -1869,12 +1869,12 @@
  	 // Drain compressed buffer as far as possible.
  	 ZSTD_inBuffer in = {
@@ -36,9 +34,8 @@ diff -urN a/apt-pkg/contrib/fileutl.cc b/apt-pkg/contrib/fileutl.cc
  	 .pos = 0,
        };
  
-diff -urN a/apt-pkg/deb/dpkgpm.cc b/apt-pkg/deb/dpkgpm.cc
---- a/apt-pkg/deb/dpkgpm.cc
-+++ b/apt-pkg/deb/dpkgpm.cc
+--- src/apt-pkg/deb/dpkgpm.cc.orig
++++ src/apt-pkg/deb/dpkgpm.cc
 @@ -1772,8 +1772,6 @@
     bool dpkgMultiArch = _system->MultiArchSupported();
     bool dpkgProtectedField = debSystem::AssertFeature("protected-field");
@@ -56,10 +53,9 @@ diff -urN a/apt-pkg/deb/dpkgpm.cc b/apt-pkg/deb/dpkgpm.cc
     CloseLog();
  
     if (d->dpkg_error.empty() == false)
-diff -urN a/CMakeLists.txt b/CMakeLists.txt
---- a/CMakeLists.txt
-+++ b/CMakeLists.txt
-@@ -27,10 +27,6 @@
+--- src/CMakeLists.txt.orig
++++ src/CMakeLists.txt
+@@ -28,10 +28,6 @@
  set(CMAKE_EXE_LINKER_FLAGS_COVERAGE "-lgcov")
  set(CMAKE_SHARED_LINKER_FLAGS_COVERAGE "-lgcov")
  
@@ -70,7 +66,7 @@ diff -urN a/CMakeLists.txt b/CMakeLists.txt
  
  # Include stuff
  include(Misc)
-@@ -87,6 +83,7 @@
+@@ -88,6 +84,7 @@
  add_optional_compile_options(Werror=suggest-override)
  add_optional_compile_options(Werror=return-type)
  add_optional_compile_options(Wp,-D_GLIBCXX_ASSERTIONS)
@@ -78,7 +74,7 @@ diff -urN a/CMakeLists.txt b/CMakeLists.txt
  # apt-ftparchive dependencies
  find_package(Berkeley REQUIRED)
  if (BERKELEY_FOUND)
-@@ -124,21 +121,6 @@
+@@ -125,21 +122,6 @@
  endif()
  
  
@@ -100,7 +96,7 @@ diff -urN a/CMakeLists.txt b/CMakeLists.txt
  find_package(XXHASH REQUIRED)
  
  # Mount()ing and stat()ing and friends
-@@ -255,7 +237,6 @@
+@@ -256,7 +238,6 @@
  add_subdirectory(dselect)
  add_subdirectory(ftparchive)
  add_subdirectory(methods)
@@ -108,9 +104,8 @@ diff -urN a/CMakeLists.txt b/CMakeLists.txt
  
  if (USE_NLS)
  add_subdirectory(po)
-diff -urN a/ftparchive/byhash.cc b/ftparchive/byhash.cc
---- a/ftparchive/byhash.cc
-+++ b/ftparchive/byhash.cc
+--- src/ftparchive/byhash.cc.orig
++++ src/ftparchive/byhash.cc
 @@ -15,6 +15,8 @@
  #include <string>
  
@@ -120,10 +115,9 @@ diff -urN a/ftparchive/byhash.cc b/ftparchive/byhash.cc
  #include <unistd.h>
  
  #include "byhash.h"
-diff -urN a/methods/connect.cc b/methods/connect.cc
---- a/methods/connect.cc
-+++ b/methods/connect.cc
-@@ -277,7 +277,7 @@
+--- src/methods/connect.cc.orig
++++ src/methods/connect.cc
+@@ -286,7 +286,7 @@
     struct timeval tv = {
        // Split our millisecond timeout into seconds and microseconds
        .tv_sec = TimeoutMsec / 1000,

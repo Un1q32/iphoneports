@@ -1,6 +1,5 @@
-diff -urN a/apt-pkg/contrib/strutl.cc b/apt-pkg/contrib/strutl.cc
---- a/apt-pkg/contrib/strutl.cc
-+++ b/apt-pkg/contrib/strutl.cc
+--- src/apt-pkg/contrib/strutl.cc.orig
++++ src/apt-pkg/contrib/strutl.cc
 @@ -185,7 +185,13 @@
    {
       char *outptr = outbuf;

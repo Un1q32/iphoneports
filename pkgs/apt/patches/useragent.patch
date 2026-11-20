@@ -1,6 +1,5 @@
-diff -urN a/methods/http.cc b/methods/http.cc
---- a/methods/http.cc
-+++ b/methods/http.cc
+--- src/methods/http.cc.orig
++++ src/methods/http.cc
 @@ -341,7 +341,7 @@
        Req << "Proxy-Authorization: Basic "
  	  << Base64Encode(Proxy.User + ":" + Proxy.Password) << "\r\n";

@@ -1,6 +1,5 @@
-diff -urN a/apt-pkg/init.cc b/apt-pkg/init.cc
---- a/apt-pkg/init.cc
-+++ b/apt-pkg/init.cc
+--- src/apt-pkg/init.cc.orig
++++ src/apt-pkg/init.cc
 @@ -211,7 +211,7 @@
     Cnf.CndSet("Acquire::Snapshots::URI::Host::ppa.launchpadcontent.net", "https://snapshot.ppa.launchpadcontent.net/@PATH@/@SNAPSHOTID@/");
     Cnf.CndSet("Acquire::Snapshots::URI::Host::ppa.launchpad.net", "https://snapshot.ppa.launchpadcontent.net/@PATH@/@SNAPSHOTID@/");

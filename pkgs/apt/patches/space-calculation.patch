@@ -1,6 +1,5 @@
-diff -urN a/apt-private/private-install.cc b/apt-private/private-install.cc
---- a/apt-private/private-install.cc
-+++ b/apt-private/private-install.cc
+--- src/apt-private/private-install.cc.orig
++++ src/apt-private/private-install.cc
 @@ -427,15 +427,15 @@
  	    // TRANSLATOR: The required space between number and unit is already included
  	    //  in the replacement string, so %sB will be correctly translate in e.g. 1,5 MB

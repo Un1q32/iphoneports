@@ -1,6 +1,5 @@
-diff -urN a/apt-pkg/contrib/mmap.cc b/apt-pkg/contrib/mmap.cc
---- a/apt-pkg/contrib/mmap.cc
-+++ b/apt-pkg/contrib/mmap.cc
+--- src/apt-pkg/contrib/mmap.cc.orig
++++ src/apt-pkg/contrib/mmap.cc
 @@ -306,7 +306,11 @@
        if (validData() == false)
  	 return;

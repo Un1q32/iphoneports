@@ -1,6 +1,5 @@
-diff -urN a/apt-pkg/contrib/srvrec.cc b/apt-pkg/contrib/srvrec.cc
---- a/apt-pkg/contrib/srvrec.cc
-+++ b/apt-pkg/contrib/srvrec.cc
+--- src/apt-pkg/contrib/srvrec.cc.orig
++++ src/apt-pkg/contrib/srvrec.cc
 @@ -63,7 +63,7 @@
     unsigned char answer[PACKETSZ];
     int answer_len, compressed_name_len;
@@ -10,10 +9,9 @@ diff -urN a/apt-pkg/contrib/srvrec.cc b/apt-pkg/contrib/srvrec.cc
     struct __res_state res;
  
     if (res_ninit(&res) != 0)
-diff -urN a/CMakeLists.txt b/CMakeLists.txt
---- a/CMakeLists.txt
-+++ b/CMakeLists.txt
-@@ -180,7 +180,10 @@
+--- src/CMakeLists.txt.orig
++++ src/CMakeLists.txt
+@@ -181,7 +181,10 @@
  if(HAVE_LIBC_RESOLV)
      set(RESOLV_LIBRARIES)
  else()
