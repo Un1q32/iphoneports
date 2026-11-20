@@ -11,7 +11,7 @@ make DESTDIR="$_DESTDIR" install
 
 (
 cd "$_DESTDIR/var/usr"
-strip_and_sign lib/libyaml-0.2.dylib
+strip_and_sign lib/libyaml-*.dylib
 )
 
 installlicense "$_SRCDIR/License"

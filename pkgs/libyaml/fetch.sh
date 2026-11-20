@@ -1,8 +1,8 @@
 #!/bin/sh
-rm -rf "$_DESTDIR" "$_SRCDIR"
-printf "Downloading source...\n"
-curl -L -# -o src.tar.gz https://github.com/yaml/libyaml/releases/download/0.2.5/yaml-0.2.5.tar.gz
-printf "Unpacking source...\n"
-tar -C "$_TMP" -xf src.tar.gz
-rm src.tar.gz
-mv "$_TMP"/yaml-* "$_SRCDIR"
+. ../../files/dllib.sh
+ver='0.2.6'
+dlsrc \
+    "https://github.com/yaml/libyaml/releases/download/$ver/yaml-$ver.tar.gz" \
+    "libyaml-$ver.tar.gz" \
+    43b393a117bd4fe39812fddc94e3d654359a3ae05653dcf0110a1122d1747e61 \
+    "yaml-$ver"
