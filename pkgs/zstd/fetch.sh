@@ -1,8 +1,8 @@
 #!/bin/sh
-rm -rf "$_DESTDIR" "$_SRCDIR"
-printf "Downloading source...\n"
-curl -L -# -o src.tar.gz https://github.com/facebook/zstd/releases/download/v1.5.7/zstd-1.5.7.tar.gz
-printf "Unpacking source...\n"
-tar -C "$_TMP" -xf src.tar.gz
-rm src.tar.gz
-mv "$_TMP"/zstd-* "$_SRCDIR"
+. ../../files/dllib.sh
+ver='1.6.0'
+dlsrc \
+    "https://github.com/meta/zstd/releases/download/v1.6.0/zstd-1.6.0.tar.zst" \
+    "zstd-$ver.tar.zst" \
+    2ca30d45c7a61f255e17024373f7fe75b6403b2ade6b21220c1472964d8a466a \
+    "zstd-$ver"
