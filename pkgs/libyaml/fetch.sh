@@ -1,8 +1,8 @@
 #!/bin/sh
 . ../../files/dllib.sh
-ver='0.2.6'
+ver='0.2.7'
 dlsrc \
     "https://github.com/yaml/libyaml/releases/download/$ver/yaml-$ver.tar.gz" \
     "libyaml-$ver.tar.gz" \
-    43b393a117bd4fe39812fddc94e3d654359a3ae05653dcf0110a1122d1747e61 \
+    0c39256b8be0fc689f5c7bfdea1bc9f3fb1fd648468fd3cc6fd375e09ffb6f13 \
     "yaml-$ver"
